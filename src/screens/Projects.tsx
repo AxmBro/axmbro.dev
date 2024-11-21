@@ -7,7 +7,8 @@ import "../components/Button.css";
 
 function Projects() {
   return (
-    <div className="projects screen">
+    <div className="projects screenContainer">
+      <div className="screenContent">
       <ScreenSection
         style={{ padding: "1rem 0 0 0", border: "none" }}
         title="Projects"
@@ -72,6 +73,7 @@ function Projects() {
           </>
         }
       ></ScreenSection>
+      </div>
     </div>
   );
 }

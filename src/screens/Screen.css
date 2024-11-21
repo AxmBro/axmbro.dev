@@ -1,4 +1,11 @@
-.screen {
+.screenContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.screenContent {
+  max-width: var(--max-website-width);
+  width: 100%;
   padding: 0 1rem;
   box-sizing: border-box;
 }

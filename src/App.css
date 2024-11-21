@@ -7,8 +7,6 @@ body {
 }
 
 .App {
-  max-width: var(--max-website-width);
-  margin: 0 auto;
   box-sizing: content-box;
 }
 
@@ -48,4 +46,21 @@ h1 {
 
 h2 {
   font-size: 1rem;
+}
+
+
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 1024px) {
+  html {
+    font-size: 18px;
+  }
 }
