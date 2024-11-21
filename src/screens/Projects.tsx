@@ -9,70 +9,70 @@ function Projects() {
   return (
     <div className="projects screenContainer">
       <div className="screenContent">
-      <ScreenSection
-        style={{ padding: "1rem 0 0 0", border: "none" }}
-        title="Projects"
-        description1="Here is a list of all the projects I've worked on or contributed to! Most of them are detailed with videos and screenshots for a closer look at my work."
-        children={
-          <>
-            <ProjectsGrid
-              items={[
-                {
-                  title: "Better Bedrock",
-                  description: "The Better Bedrock is project of Texture Pack for MCBE Edition, Website and Mobile App available only for Android. The Main goal is to improve the default Minecraft gameplay to a whole new level with many new features!",
-                  tags: ["JSON", "MCBE JsonUI", "Flutter", "Supabase", "Windows API"],
-                  imgScr: "bbReleaseThumbnail",
-                  logoSrc: "bbLogo",
-                  star: true,
-                  downloadLink: "https://betterbedrock.com/#/downloads"
-                },
-                {
-                  title: "Murder Detector - Texture Pack",
-                  description: "Simple let us say... shhhh... CHEAT by just Texture Pack. Models system provided by MCBE allows to check what item player is holding, or with additional info, held. Using this user is able to see which person is murderer or sheriff by icon above head or optionally by extra xray!",
-                  tags: ["JSON", "MCBE Models"],
-                  imgScr: "murderDetector1",
-                  logoSrc: "mdLogo",
-                  star: true,
-                  downloadLink: "https://betterbedrock.com/#/downloads"
-                },
-                {
-                  title: "Shop UI - Server Form",
-                  description: "Custom server form UI created for personal use, but also to test custom tabs in vanilla style, many texts in each button and search feature!",
-                  tags: ["JSON", "MCBE JsonUI"],
-                  imgScr: "shop_form1"
-                },
-                {
-                  title: "Hometree UI - Server Form",
-                  description: "Custom server form UI created for customer. It's pretty colorful and simple grid UI used in gamemodes selector and extra information form!",
-                  tags: ["JSON", "MCBE JsonUI"],
-                  imgScr: "hometree1"
-                },
-                {
-                  title: "Simple UI - Server Form",
-                  description: "Custom server form UI created for personal use, but also to test custom buttons layout!",
-                  tags: ["JSON", "MCBE JsonUI"],
-                  imgScr: "simple_server_form1"
-                },
-                {
-                  title: "This Website",
-                  description: "TODO",
-                  tags: ["HTML", "CSS", "JavaScript", "TypeScript", "React"],
-                  imgScr: "thisweb"
-                },
-                {
-                  title: "One Block Slime Block Adventure - HUD, Server Form",
-                  description: "TODO",
-                  tags: ["JSON", "MCBE JsonUI"],
-                  imgScr: "obsba",
-                  star: true,
-                  downloadLink: "https://www.mushco.games/games"
-                }
-              ]}>
+        <ScreenSection
+          style={{ padding: "1rem 0 0 0", border: "none" }}
+          title="Projects"
+          description1="Here is a list of all the projects I've worked on or contributed to! Most of them are detailed with videos and screenshots for a closer look at my work."
+          children={
+            <>
+              <ProjectsGrid
+                items={[
+                  {
+                    title: "Better Bedrock",
+                    description: "The Better Bedrock is project of Texture Pack for MCBE Edition, Website and Mobile App available only for Android. The Main goal is to improve the default Minecraft gameplay to a whole new level with many new features!",
+                    tags: ["JSON", "MCBE JsonUI", "Flutter", "Supabase", "Windows API"],
+                    imgScr: "bbReleaseThumbnail",
+                    logoSrc: "bbLogo",
+                    star: true,
+                    downloadLink: "https://betterbedrock.com/#/downloads"
+                  },
+                  {
+                    title: "Murder Detector - Texture Pack",
+                    description: "Simple let us say... shhhh... CHEAT by just Texture Pack. Models system provided by MCBE allows to check what item player is holding, or with additional info, held. Using this user is able to see which person is murderer or sheriff by icon above head or optionally by extra xray!",
+                    tags: ["JSON", "MCBE Models"],
+                    imgScr: "murderDetector1",
+                    logoSrc: "mdLogo",
+                    star: true,
+                    downloadLink: "https://betterbedrock.com/#/downloads"
+                  },
+                  {
+                    title: "Shop UI - Server Form",
+                    description: "Custom server form UI created for personal use, but also to test custom tabs in vanilla style, many texts in each button and search feature!",
+                    tags: ["JSON", "MCBE JsonUI"],
+                    imgScr: "shop_form1"
+                  },
+                  {
+                    title: "Hometree UI - Server Form",
+                    description: "Custom server form UI created for customer. It's pretty colorful and simple grid UI used in gamemodes selector and extra information form!",
+                    tags: ["JSON", "MCBE JsonUI"],
+                    imgScr: "hometree1"
+                  },
+                  {
+                    title: "Simple UI - Server Form",
+                    description: "Custom server form UI created for personal use, but also to test custom buttons layout!",
+                    tags: ["JSON", "MCBE JsonUI"],
+                    imgScr: "simple_server_form1"
+                  },
+                  {
+                    title: "This Website",
+                    description: "TODO",
+                    tags: ["HTML", "CSS", "JavaScript", "TypeScript", "React"],
+                    imgScr: "thisweb"
+                  },
+                  {
+                    title: "One Block Slime Block Adventure - HUD, Server Form",
+                    description: "TODO",
+                    tags: ["JSON", "MCBE JsonUI"],
+                    imgScr: "obsba",
+                    star: true,
+                    downloadLink: "https://www.mushco.games/games"
+                  }
+                ]}>
 
-            </ProjectsGrid>
-          </>
-        }
-      ></ScreenSection>
+              </ProjectsGrid>
+            </>
+          }
+        ></ScreenSection>
       </div>
     </div>
   );
@@ -110,11 +110,9 @@ const ProjectsGrid: React.FC<ProjectsGridProps> = ({ items }) => {
         </div>) : null
 
       const renderDownloadButton = item.downloadLink ? (
-        <div className="DownloadContainer">
-          <a href={item.downloadLink} className="Button DownloadButton" rel="noopener noreferrer" target="_blank">Download
-            <img className="OpenInNew" src={require("../assets/arrow_outward_24dp_FFFFFF_FILL0_wght400_GRAD-25_opsz24.png")} alt="" />
-          </a>
-        </div>) : null
+        <a href={item.downloadLink} className="Button DownloadButton" rel="noopener noreferrer" target="_blank">Download
+          <img className="OpenInNew" src={require("../assets/arrow_outward_24dp_FFFFFF_FILL0_wght400_GRAD-25_opsz24.png")} alt="" />
+        </a>) : null
 
       return <div key={`ProjectsGridKey${index}`} className="ProjectsGridItem">
         {renderStar}
@@ -128,11 +126,16 @@ const ProjectsGrid: React.FC<ProjectsGridProps> = ({ items }) => {
                 {renderLogo}
                 <h1 className="Title">{item.title}</h1>
               </div>
-              {renderDownloadButton}
+              <div className="DownloadContainer">
+                {renderDownloadButton}
+              </div>
             </div>
             <h2 className="Description">{item.description}</h2>
           </div>
           {renderTags}
+        </div>
+        <div className="DownloadButtonMobile" style={{marginTop: renderDownloadButton ? "1rem" : 0}}>
+          {renderDownloadButton}
         </div>
       </div>
     })}

@@ -46,7 +46,7 @@
   justify-content: space-between;
 }
 
-.ProjectsGridItem .TitleContainer .OpenInNew {
+.ProjectsGridItem .OpenInNew {
   top: 4px;
   left: 0px;
   position: relative;
@@ -58,6 +58,11 @@
 }
 
 .ProjectsGridItem .DownloadContainer:hover .OpenInNew {
+  top: 2px;
+  left: 2px;
+}
+
+.ProjectsGridItem .DownloadButtonMobile a:hover .OpenInNew {
   top: 2px;
   left: 2px;
 }
@@ -101,9 +106,12 @@
   align-self: flex-start;
 }
 
-.ProjectsGridItem .DownloadContainer .DownloadButton {
+.ProjectsGridItem .DownloadButton {
   display: flex;
   flex-direction: row;
+}
+
+.ProjectsGridItem .DownloadButton {
   text-decoration: none;
 }
 
@@ -126,6 +134,10 @@
   border-radius: 0.5rem;
 }
 
+.DownloadButtonMobile {
+  display: none;
+}
+
 @media (max-width: 1000px) {
   .ProjectsGridItem {
     flex-direction: column;
@@ -146,5 +158,9 @@
 @media (max-width: 500px) {
   .ProjectsGridItem .DownloadContainer {
     display: none;
+  }
+
+  .ProjectsGridItem .DownloadButtonMobile {
+    display: flex;
   }
 }
