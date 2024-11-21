@@ -27,8 +27,8 @@ function Projects() {
                     downloadLink: "https://betterbedrock.com/#/downloads"
                   },
                   {
-                    title: "Murder Detector - Texture Pack",
-                    description: "Simple let us say... shhhh... CHEAT by just Texture Pack. Models system provided by MCBE allows to check what item player is holding, or with additional info, held. Using this user is able to see which person is murderer or sheriff by icon above head or optionally by extra xray!",
+                    title: "Murder Detector",
+                    description: "Simple let us say... shhhh... CHEAT by just TEXTURE PACK. Models system provided by MCBE allows to check what item player is holding, or with additional info, held. Using this user is able to see which person is murderer or sheriff by icon above head or optionally by extra xray!",
                     tags: ["JSON", "MCBE Models"],
                     imgScr: "murderDetector1",
                     logoSrc: "mdLogo",
@@ -36,33 +36,33 @@ function Projects() {
                     downloadLink: "https://betterbedrock.com/#/downloads"
                   },
                   {
-                    title: "Shop UI - Server Form",
-                    description: "Custom server form UI created for personal use, but also to test custom tabs in vanilla style, many texts in each button and search feature!",
-                    tags: ["JSON", "MCBE JsonUI"],
+                    title: "Shop UI",
+                    description: "CUSTOM SERVER FORM UI created for personal use, but also to test custom tabs in vanilla style, many texts in each button and search feature!",
+                    tags: ["JSON", "MCBE JsonUI", "MCBE Server Form"],
                     imgScr: "shop_form1"
                   },
                   {
-                    title: "Hometree UI - Server Form",
-                    description: "Custom server form UI created for customer. It's pretty colorful and simple grid UI used in gamemodes selector and extra information form!",
-                    tags: ["JSON", "MCBE JsonUI"],
+                    title: "Hometree UI",
+                    description: "CUSTOM SERVER FORM UI created for customer. It's pretty colorful and simple grid UI used in gamemodes selector and extra information form!",
+                    tags: ["JSON", "MCBE JsonUI", "MCBE Server Form"],
                     imgScr: "hometree1"
                   },
                   {
-                    title: "Simple UI - Server Form",
-                    description: "Custom server form UI created for personal use, but also to test custom buttons layout!",
-                    tags: ["JSON", "MCBE JsonUI"],
+                    title: "Simple UI",
+                    description: "CUSTOM SERVER FORM UI created for personal use, but also to test custom buttons layout!",
+                    tags: ["JSON", "MCBE JsonUI", "MCBE Server Form"],
                     imgScr: "simple_server_form1"
                   },
                   {
                     title: "This Website",
-                    description: "TODO",
+                    description: "Currently created by mainly using JS, TS and React. Simple website with needed info separated by routes. General style is minimalistic and it's in portfolio theme. Previously this website was created using only HTML, JS, CSS - it was pain when implementing routes manually...",
                     tags: ["HTML", "CSS", "JavaScript", "TypeScript", "React"],
                     imgScr: "thisweb"
                   },
                   {
-                    title: "One Block Slime Block Adventure - HUD, Server Form",
-                    description: "TODO",
-                    tags: ["JSON", "MCBE JsonUI"],
+                    title: "One Block Slime Block Adventure",
+                    description: "I was part of creating custom HUD elements with custom server from! TODO: more info",
+                    tags: ["JSON", "MCBE JsonUI", "MCBE Server Form"],
                     imgScr: "obsba",
                     star: true,
                     downloadLink: "https://www.mushco.games/games"
