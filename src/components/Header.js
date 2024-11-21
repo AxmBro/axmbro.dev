@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 
 function Header() {
   return (
+    <div className="headerScreen">
       <div className="header">
         <div className="headerContainer">
           <div className="firstSection">
