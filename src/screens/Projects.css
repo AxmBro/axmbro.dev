@@ -14,8 +14,8 @@
   position: relative;
   height: 1.5rem;
   width: 1.5rem;
-  right: 29px;
-  bottom: 31px;
+  right: 1.81rem;
+  bottom: 1.94rem;
   transition: transform 0.5s ease;
 }
 
@@ -124,4 +124,27 @@
   background-color: var(--secondary-description-text-color);
   display: inline;
   border-radius: 0.5rem;
+}
+
+@media (max-width: 1000px) {
+  .ProjectsGridItem {
+    flex-direction: column;
+  }
+
+  .ProjectsGridItem .ImageWrapper {
+    width: 100%;
+    flex-basis: 0px;
+    flex-shrink: 1;
+    margin-bottom: 1rem;
+  }
+
+  .ProjectsGridItem .Container {
+    padding-left: 0;
+  }
+}
+
+@media (max-width: 500px) {
+  .ProjectsGridItem .DownloadContainer {
+    display: none;
+  }
 }
