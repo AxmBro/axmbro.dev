@@ -125,30 +125,25 @@ function Home() {
           description1="I am learning web technologies with plans to become a web developer. I also create custom UIs for Minecraft Bedrock Edition, from sleek HUDs to wild forms. Check out my projects!"
           children={<h2>TODO - something like linkedin experience tree</h2>}
         ></ScreenSection>
-        <ScreenSection
-          title="Get In Touch"
-          description1="Whether you have a project in mind or just want to reach out, I would love to hear from you! Let us make something amazing together!"
-          children={
-            <>
-              <ScreenSectionList
-                style={{ padding: 0, border: 0 }}
-                items={[
-                  { name: "Email", value: "axmbro@gmail.com" },
-                  { name: "Discord", value: "AxmBro" },
-                  { name: "Discord Server", value: "discord.gg/wJhH86c2wb" },
-                  { name: "YouTube", value: "@axmbro" },
-                ]}
-              ></ScreenSectionList>
-              <a
-                className="Button"
-                style={{ textDecoration: 0, marginTop: "1rem" }}
-                href="mailto:axmbro@gmail.com?subject=Contact%20request!"
-              >
-                Send Email
-              </a>
-            </>
-          }
-        ></ScreenSection>
+        <div id="contact">
+          <ScreenSection
+            title="Contact"
+            description1="Whether you have a project in mind or just want to reach out, I would love to hear from you! Let us make something amazing together!"
+            children={
+              <>
+                <ScreenSectionList
+                  style={{ padding: 0, border: 0 }}
+                  items={[
+                    { name: "Email", value: "axmbro@gmail.com" },
+                    { name: "Discord", value: "AxmBro" },
+                    { name: "Discord Server", value: "discord.gg/wJhH86c2wb" },
+                    { name: "YouTube", value: "@axmbro" },
+                  ]}
+                ></ScreenSectionList>
+              </>
+            }
+          ></ScreenSection>
+        </div>
       </div>
     </div>
   );

@@ -15,10 +15,14 @@
   box-sizing: border-box;
 }
 
-.header .logo{
+.header .logo {
   color: var(--primary-text-color);
   text-decoration: none;
   font-size: 2rem;
+}
+
+.header .logo:hover {
+  cursor: pointer;
 }
 
 .headerContainer {
@@ -33,12 +37,12 @@
   overflow: hidden;
   box-sizing: border-box;
 }
-
+/* 
 .headerContainer .secondSection .desktopButtons a {
   color: var(--primary-text-color);
   text-decoration: none;
   font-size: 1rem;
-}
+} */
 
 .headerContainer .secondSection .desktopButtons {
   gap: 1rem;
@@ -47,15 +51,24 @@
   justify-content: center;
 }
 
+.headerContainer .headerLink {
+  color: var(--primary-text-color);
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.headerContainer .headerLink:hover {
+  cursor: pointer;
+  color: var(--secondary-text-color);
+}
+
 .headerContainer .headerLinkActive {
+  color: var(--primary-text-color);
   text-decoration: underline;
 }
 
 .headerContainer .headerLinkActive:hover {
-  color: var(--secondary-text-color);
-}
-
-.headerContainer .headerLink:hover {
+  cursor: pointer;
   color: var(--secondary-text-color);
 }
 
@@ -71,11 +84,10 @@
   display: none;
 }
 
-.headerContainer .secondSection .mobileButtons  button{
+.headerContainer .secondSection .mobileButtons button {
   background-color: transparent;
   font-size: 1rem;
 }
-
 
 .headerContainer .mobileButtons .menu {
   z-index: 12;
@@ -94,7 +106,8 @@
   border-radius: var(--border-radius);
 }
 
-.headerContainer .mobileButtons .menuContainer a {
+.headerContainer .mobileButtons .menuContainer a,
+.headerContainer .mobileButtons .menuContainer h2 {
   color: var(--primary-text-color);
   text-decoration: none;
 }
