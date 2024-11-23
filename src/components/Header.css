@@ -1,6 +1,6 @@
 .headerScreen {
   top: 0;
-  z-index: 20;
+  z-index: 10;
   position: sticky;
   display: flex;
   justify-content: center;
@@ -15,11 +15,10 @@
   box-sizing: border-box;
 }
 
-.header h1,
-.header a {
-  color: rgb(255, 255, 255);
-  font-size: 2rem;
+.header .logo{
+  color: var(--primary-text-color);
   text-decoration: none;
+  font-size: 2rem;
 }
 
 .headerContainer {
@@ -35,11 +34,13 @@
   box-sizing: border-box;
 }
 
-.headerContainer .secondSection a {
+.headerContainer .secondSection .desktopButtons a {
+  color: var(--primary-text-color);
+  text-decoration: none;
   font-size: 1rem;
 }
 
-.headerContainer .secondSection {
+.headerContainer .secondSection .desktopButtons {
   gap: 1rem;
   display: flex;
   align-items: center;
@@ -64,4 +65,56 @@
 
 .headerContainer .logo:hover {
   color: var(--secondary-text-color);
+}
+
+.headerContainer .secondSection .mobileButtons {
+  display: none;
+}
+
+.headerContainer .secondSection .mobileButtons  button{
+  background-color: transparent;
+  font-size: 1rem;
+}
+
+
+.headerContainer .mobileButtons .menu {
+  z-index: 12;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.headerContainer .mobileButtons .menuContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  gap: 1rem;
+  background-color: var(--website-background-color);
+  border: 1px solid var(--line-break-color);
+  border-radius: var(--border-radius);
+}
+
+.headerContainer .mobileButtons .menuContainer a {
+  color: var(--primary-text-color);
+  text-decoration: none;
+}
+
+.headerContainer .mobileButtons .menu .overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: black;
+  opacity: 0.6;
+  z-index: -1;
+}
+
+@media (max-width: 400px) {
+  .headerContainer .secondSection .desktopButtons {
+    display: none;
+  }
+  .headerContainer .secondSection .mobileButtons {
+    display: flex;
+  }
 }
