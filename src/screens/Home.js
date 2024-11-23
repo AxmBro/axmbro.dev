@@ -26,25 +26,15 @@ function Home() {
                   background: "var(--secondary-text-color)",
                   color: "var(--website-background-color)",
                 }}
-                to="/contact"
-              >
-                Contact Page
-              </Link>
-              <Link
-                className="Button"
-                style={{
-                  textDecoration: 0,
-                  marginLeft: "1rem",
-                }}
                 to="/projects"
               >
-                My Projects
+                My projects
               </Link>
             </>
           }
         ></ScreenSection>
         <ScreenSection
-          title="My Skills"
+          title="Skills"
           description1="Here is a list of my skills, rated out of 10 based on my own knowledge and experience."
           children={
             <div className="SkillsSection">
