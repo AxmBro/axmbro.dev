@@ -131,11 +131,11 @@ function Header() {
                           onClick={() => {
                             if (location.pathname === "/") {
                               scrollToElement("contact");
-                              // runContactAnimation();
+                              runContactAnimation();
                             } else {
                               handleNavigation("/");
                               setOpenHomeRoute(true);
-                              // runContactAnimation();
+                              runContactAnimation();
                             }
                           }}
                         >
