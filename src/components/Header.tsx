@@ -22,16 +22,30 @@ function Header() {
   };
 
   const location = useLocation();
-
   const [openHomeRoute, setOpenHomeRoute] = useState(false);
   useEffect(() => {
     if (location.pathname === "/" && openHomeRoute) {
-      setTimeout(()=>{
+      setTimeout(() => {
         scrollToElement("contact");
       }, 100)
       setOpenHomeRoute(!openHomeRoute);
     }
   }, [location.pathname, openHomeRoute]);
+
+
+  const runContactAnimation = () => {
+    setTimeout(() => {
+      const element = document.getElementById("contact");
+
+      if (element) {
+        element.style.animation = 'none';
+
+        setTimeout(() => {
+          element.style.animation = 'fadeInOut 0.5s ease-in-out forwards';
+        }, 200);
+      }
+    }, 10)
+  };
 
   return (
     <div className="headerScreen">
@@ -70,9 +84,11 @@ function Header() {
                 onClick={() => {
                   if (location.pathname === "/") {
                     scrollToElement("contact");
+                    runContactAnimation();
                   } else {
                     handleNavigation("/");
                     setOpenHomeRoute(true);
+                    runContactAnimation();
                   }
                 }}
               >
@@ -115,9 +131,11 @@ function Header() {
                           onClick={() => {
                             if (location.pathname === "/") {
                               scrollToElement("contact");
+                              // runContactAnimation();
                             } else {
                               handleNavigation("/");
                               setOpenHomeRoute(true);
+                              // runContactAnimation();
                             }
                           }}
                         >

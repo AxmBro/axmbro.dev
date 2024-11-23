@@ -123,6 +123,18 @@
   z-index: -1;
 }
 
+@keyframes fadeInOut {
+  0% {
+    background-color: rgba(127, 127, 127, 0);
+  }
+  50% {
+    background-color: rgba(127, 127, 127, 0.25);
+  }
+  100% {
+    background-color: rgba(127, 127, 127, 0);
+  }
+}
+
 @media (max-width: 400px) {
   .headerContainer .secondSection .desktopButtons {
     display: none;
