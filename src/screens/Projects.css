@@ -31,10 +31,6 @@
   min-height: 100px;
 }
 
-.ProjectsGridItem:hover {
-  cursor: pointer;
-}
-
 .ProjectsGridItem .Title {
   line-height: 2.5rem;
 }
@@ -57,7 +53,7 @@
   transition: top 0.075s ease, left 0.075s ease;
 }
 
-.ProjectsGridItem .DownloadContainer:hover .OpenInNew {
+.ProjectsGridItem .DownloadContainer a:hover .OpenInNew {
   top: 2px;
   left: 2px;
 }

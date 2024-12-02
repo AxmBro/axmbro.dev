@@ -52,6 +52,7 @@
 }
 
 .headerContainer .headerLink {
+  font-weight: 500;
   color: var(--primary-text-color);
   text-decoration: none;
   font-size: 1rem;
@@ -63,6 +64,7 @@
 }
 
 .headerContainer .headerLinkActive {
+  font-weight: 500;
   color: var(--primary-text-color);
   text-decoration: underline;
 }
