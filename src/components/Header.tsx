@@ -73,6 +73,7 @@ function Header() {
             <div className="desktopButtons">
               <NavLink
                 to="/projects"
+                end
                 className={({ isActive }) =>
                   isActive ? "headerLinkActive" : "headerLink"
                 }
@@ -114,6 +115,7 @@ function Header() {
                       children={
                         <NavLink
                           to="/projects"
+                          end
                           className={({ isActive }) =>
                             isActive ? "headerLinkActive" : "headerLink"
                           }
