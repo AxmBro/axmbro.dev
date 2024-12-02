@@ -45,7 +45,7 @@ function Home() {
                     style={{ padding: 0, border: 0 }}
                     items={[
                       { name: "HTML", value: "7/10" },
-                      { name: "CSS", value: "5/10" },
+                      { name: "CSS", value: "6/10" },
                       { name: "JAVASCRIPT", value: "6/10" },
                     ]}
                   ></ScreenSectionList>
@@ -65,22 +65,7 @@ function Home() {
                 children={
                   <ScreenSectionList
                     style={{ padding: 0, border: 0 }}
-                    items={[
-                      { name: "Visual Studio Code", value: "7/10" },
-                      { name: "BlockBench", value: "5/10" },
-                    ]}
-                  ></ScreenSectionList>
-                }
-              ></Card>
-              <Card
-                title="Learning"
-                children={
-                  <ScreenSectionList
-                    style={{ padding: 0, border: 0 }}
-                    items={[
-                      { name: "Python", value: "4/10" },
-                      { name: "React", value: "4/10" },
-                    ]}
+                    items={[{ name: "Visual Studio Code", value: "7/10" }]}
                   ></ScreenSectionList>
                 }
               ></Card>
@@ -91,6 +76,18 @@ function Home() {
                     style={{ padding: 0, border: 0 }}
                     items={[
                       { name: "Minecraft Bedrock JsonUI", value: "10/10" },
+                    ]}
+                  ></ScreenSectionList>
+                }
+              ></Card>
+              <Card
+                title="Learning"
+                children={
+                  <ScreenSectionList
+                    style={{ padding: 0, border: 0 }}
+                    items={[
+                      { name: "React", value: "4/10" },
+                      { name: "Python", value: "4/10" },
                     ]}
                   ></ScreenSectionList>
                 }
