@@ -4,6 +4,7 @@ import "./Screen.css";
 import { ScreenSection } from "../components/ScreenSection.tsx";
 import starImg from "../assets/star.png"
 import "../components/Button.css";
+import { useNavigate } from 'react-router-dom';
 
 function Projects() {
   return (
@@ -25,7 +26,8 @@ function Projects() {
                     imgScr: "bbReleaseThumbnail",
                     logoSrc: "bbLogo",
                     star: true,
-                    downloadLink: "https://betterbedrock.com/#/downloads"
+                    downloadLink: "https://betterbedrock.com/#/downloads",
+                    url: "better_bedrock"
                   },
                   {
                     title: "Murder Detector",
@@ -34,7 +36,8 @@ function Projects() {
                     imgScr: "murderDetector1",
                     logoSrc: "mdLogo",
                     star: true,
-                    downloadLink: "https://betterbedrock.com/#/downloads"
+                    downloadLink: "https://betterbedrock.com/#/downloads",
+                    url: "murder_detector"
                   },
                   {
                     title: "Shop UI",
@@ -80,10 +83,18 @@ function Projects() {
 }
 
 interface ProjectsGridProps {
-  items: { title: string, description: string, tags?: string[], imgScr?: string, logoSrc?: string, star?: boolean, downloadLink?: string }[]
+  items: { title: string, description: string, tags?: string[], imgScr?: string, logoSrc?: string, star?: boolean, downloadLink?: string, url?: string }[]
 }
 
 const ProjectsGrid: React.FC<ProjectsGridProps> = ({ items }) => {
+  const navigate = useNavigate();
+
+  const handleProjectClick = (object) => {
+    if (!object.url) {
+      return
+    }
+    navigate(`/projects/${object.url}`);
+  };
 
   return <div className="ProjectsGrid">
     {items.map((item, index) => {
@@ -115,7 +126,7 @@ const ProjectsGrid: React.FC<ProjectsGridProps> = ({ items }) => {
           <img className="OpenInNew" src={require("../assets/arrow_outward_24dp_FFFFFF_FILL0_wght400_GRAD-25_opsz24.png")} alt="" />
         </a>) : null
 
-      return <div key={`ProjectsGridKey${index}`} className="ProjectsGridItem">
+      return <div key={`ProjectsGridKey${index}`} className="ProjectsGridItem" onClick={()=>{handleProjectClick(item)}} style={{cursor: item.url ? "pointer" : undefined}}>
         {renderStar}
         <div className="ImageWrapper">
           <img src={imageSrc} alt={imageAlt} className="Image"></img>
@@ -125,7 +136,7 @@ const ProjectsGrid: React.FC<ProjectsGridProps> = ({ items }) => {
             <div className="TitleContainer">
               <div className="TitleAndLogoContainer">
                 {renderLogo}
-                <h1 className="Title">{item.title}</h1>
+                <h1 className="Title" style={{color: !item.url ? "var(--primary-text-color)" : undefined}}>{item.title}</h1>
               </div>
               <div className="DownloadContainer">
                 {renderDownloadButton}
@@ -135,7 +146,7 @@ const ProjectsGrid: React.FC<ProjectsGridProps> = ({ items }) => {
           </div>
           {renderTags}
         </div>
-        <div className="DownloadButtonMobile" style={{marginTop: renderDownloadButton ? "1rem" : 0}}>
+        <div className="DownloadButtonMobile" style={{ marginTop: renderDownloadButton ? "1rem" : 0 }}>
           {renderDownloadButton}
         </div>
       </div>

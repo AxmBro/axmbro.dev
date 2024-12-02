@@ -6,6 +6,7 @@ import Header from "./components/Header.tsx";
 import { Projects } from "./screens/Projects.tsx";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop.tsx";
+import ProjectsItems from "./screens/subscreens/ProjectsItems.tsx";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/projects" element={<Projects />} />
+          <Route path="/projects/:projectId" element={<ProjectsItems />} />
         </Routes>
         <Footer></Footer>
       </Router>
