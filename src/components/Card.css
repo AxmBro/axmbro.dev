@@ -8,6 +8,15 @@
   line-height: 2.5rem;
 }
 
+.Card > * {
+  word-wrap: break-word;
+}
+
+.Card {
+  min-width: 0;
+  min-height: 0;
+}
+
 .Card .ProjectsGridItem:hover .Title {
   color: var(--secondary-text-color);
 }
