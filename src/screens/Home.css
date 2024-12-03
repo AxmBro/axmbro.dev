@@ -4,6 +4,15 @@
   gap: 1rem;
 }
 
+.link {
+  color: var(--secondary-text-color);
+  text-decoration: none;
+}
+
+.link:hover {
+  color: var(--secondary-text-color);
+  text-decoration: underline;
+}
 
 @media (max-width: 700px) {
   .SkillsSection {

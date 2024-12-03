@@ -116,21 +116,49 @@ function Home() {
           <ScreenSection
             title="Contact"
             description1="Whether you have a project in mind or just want to reach out, I would love to hear from you! Let us make something amazing together!"
-            children={
-              <>
-                <ScreenSectionList
-                  style={{ padding: 0, border: 0 }}
-                  items={[
-                    { name: "Email", value: "axmbro@gmail.com" },
-                    { name: "Discord", value: "AxmBro" },
-                    { name: "Discord Server", value: "discord.gg/wJhH86c2wb" },
-                    { name: "YouTube", value: "@axmbro" },
-                  ]}
-                ></ScreenSectionList>
-              </>
-            }
+            children={<ContactSection />}
           ></ScreenSection>
         </div>
+      </div>
+    </div>
+  );
+}
+
+function ContactSection() {
+  return (
+    <div>
+      <div className="ScreenSectionList" style={{ padding: 0, border: 0 }}>
+        <ul>
+          <li key={`contact1`}>
+            Email:{" "}
+            <span key={`spancontact1`}>
+              axmbro@gmail.com
+            </span>
+          </li>
+          <li key={`contact2`}>
+            Discord: <span key={`spancontact2`}>AxmBro</span>
+          </li>
+          <li key={`contact3`}>
+            Discord Server:{" "}
+            <a
+              href="https://discord.gg/ZGK5WYXnEY"
+              key={`spancontact3`}
+              className="link"
+            >
+              discord.gg/wJhH86c2wb
+            </a>
+          </li>
+          <li key={`contact4`}>
+            YouTube:{" "}
+            <a
+              href="https://www.youtube.com/@axmbro"
+              key={`spancontact4`}
+              className="link"
+            >
+              @axmbro
+            </a>
+          </li>
+        </ul>
       </div>
     </div>
   );
