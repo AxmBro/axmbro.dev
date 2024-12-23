@@ -18,7 +18,7 @@
   word-wrap: break-word;
 }
 
-@media (max-width: 700px) {
+@media screen and (max-width: 700px) {
   .SkillsSection {
     grid-template-columns: 1fr;
   }
