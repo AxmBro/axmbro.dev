@@ -4,16 +4,6 @@
   gap: 1rem;
 }
 
-.link {
-  color: var(--secondary-text-color);
-  text-decoration: none;
-}
-
-.link:hover {
-  color: var(--secondary-text-color);
-  text-decoration: underline;
-}
-
 #contact .ScreenSection .ScreenSectionList ul > li * {
   word-wrap: break-word;
 }
