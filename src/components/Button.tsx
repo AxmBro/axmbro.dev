@@ -20,8 +20,10 @@ const Button: React.FC<ButtonProps> = ({
 }) => {
 
   return <div className="button" data-color={buttonColor}>
-    {text ? text : null}
-    {children}
+    <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "100%" }}>
+      {text ? text : null}
+      {children}
+    </div>
   </div>
 }
 

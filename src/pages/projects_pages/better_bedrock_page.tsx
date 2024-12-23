@@ -12,7 +12,7 @@ function BetterBedrockPage() {
           title="Better Bedrock"
           description1="The Better Bedrock is project of Texture Pack for MCBE Edition, Website and Mobile App available only for Android. The Main goal is to improve the default Minecraft gameplay to a whole new level with many new features!"
           children={
-            <div style={{ display: "flex", gap: "1rem" }}>
+            <div className="ScreenSectionButtons" style={{ display: "flex", gap: "1rem" }}>
               <Button buttonColor={ButtonColor.blue}>
                 <Link useUnderline={false} textColor="var(--website-background-color)" text="Download" href="https://betterbedrock.com"></Link>
               </Button>
