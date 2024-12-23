@@ -55,6 +55,9 @@
   font-weight: 500;
   color: var(--primary-text-color);
   text-decoration: none;
+}
+
+.headerContainer .desktopButtons > * {
   font-size: 1rem;
 }
 
@@ -65,7 +68,7 @@
 
 .headerContainer .headerLinkActive {
   font-weight: 500;
-  color: var(--primary-text-color);
+  color: var(--secondary-text-color);
   text-decoration: underline;
 }
 

@@ -7,22 +7,10 @@ import { scrollToElement } from "../utils/utils.tsx";
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
-
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
-  };
-
-  const closeMenu = () => {
-    setMenuOpen(false);
-  };
-
-  const navigate = useNavigate();
-  const handleNavigation = (to: string) => {
-    navigate(to);
-  };
-
-  const location = useLocation();
   const [openHomeRoute, setOpenHomeRoute] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (location.pathname === "/" && openHomeRoute) {
       setTimeout(() => {
@@ -32,19 +20,16 @@ function Header() {
     }
   }, [location.pathname, openHomeRoute]);
 
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
 
-  const runContactAnimation = () => {
-    setTimeout(() => {
-      const element = document.getElementById("contact");
+  const closeMenu = () => {
+    setMenuOpen(false);
+  };
 
-      if (element) {
-        element.style.animation = 'none';
-
-        setTimeout(() => {
-          element.style.animation = 'fadeInOut 0.5s ease-in-out forwards';
-        }, 200);
-      }
-    }, 10)
+  const handleNavigation = (to: string) => {
+    navigate(to);
   };
 
   return (
@@ -52,8 +37,30 @@ function Header() {
       <div className="header" id="header">
         <div className="headerContainer">
           <div className="firstSection">
-            <h1
-              className="logo"
+            <NavLink
+              onClick={() => {
+                if (location.pathname === "/") {
+                  window.scrollTo({
+                    top: 0,
+                    behavior: "smooth",
+                  });
+                } else {
+                  handleNavigation("/");
+                }
+              }}
+              to="/"
+              end
+              className={({ isActive }) =>
+                isActive ? "logo" : "headerLink logo"
+              }
+            >
+              Axmbro
+            </NavLink>
+            {/* <h1
+              // className="logo"
+              // className={({ isActive }) =>
+              //   isActive ? "headerLinkActive logo" : "headerLink logo"
+              // }
               onClick={() => {
                 if (location.pathname === "/") {
                   window.scrollTo({
@@ -66,7 +73,7 @@ function Header() {
               }}
             >
               Axmbro
-            </h1>
+            </h1> */}
           </div>
 
           <div className="secondSection">
@@ -98,11 +105,10 @@ function Header() {
             </div>
             <div className="mobileButtons">
               <div
-                className="Button"
                 onClick={toggleMenu}
                 style={{ display: menuOpen ? "none" : "inline-block" }}
               >
-                Menu
+                <Button text="Menu"></Button>
               </div>
               <div
                 className="menu"
@@ -111,40 +117,26 @@ function Header() {
                 <div className="overlay" onClick={closeMenu}></div>
                 <div className="menuContainer">
                   <div onClick={toggleMenu}>
-                    <Button
-                      children={
-                        <NavLink
-                          to="/projects"
-                          end
-                          className={({ isActive }) =>
-                            isActive ? "headerLinkActive" : "headerLink"
-                          }
-                        >
-                          Projects
-                        </NavLink>
-                      }
-                    ></Button>
+                    <NavLink
+                      to="/projects"
+                      end
+                    >
+                      <Button text="Projects"></Button>
+                    </NavLink>
                   </div>
-                  <div onClick={toggleMenu}>
-                    <Button
-                      children={
-                        <h2
-                          className="headerLink"
-                          onClick={() => {
-                            if (location.pathname === "/") {
-                              scrollToElement("contact");
-                              runContactAnimation();
-                            } else {
-                              handleNavigation("/");
-                              setOpenHomeRoute(true);
-                              runContactAnimation();
-                            }
-                          }}
-                        >
-                          Contact
-                        </h2>
-                      }
-                    ></Button>
+                  <div onClick={() => {
+                    toggleMenu();
+                    if (location.pathname === "/") {
+                      scrollToElement("contact");
+                      runContactAnimation();
+                    } else {
+                      handleNavigation("/");
+                      setOpenHomeRoute(true);
+                      runContactAnimation();
+                    }
+                  }}>
+
+                    <Button text="Contact"></Button>
                   </div>
                 </div>
               </div>
@@ -156,4 +148,18 @@ function Header() {
   );
 }
 
-export default Header;
+function runContactAnimation() {
+  setTimeout(() => {
+    const element = document.getElementById("contact");
+
+    if (element) {
+      element.style.animation = 'none';
+
+      setTimeout(() => {
+        element.style.animation = 'fadeInOut 0.5s ease-in-out forwards';
+      }, 200);
+    }
+  }, 10)
+};
+
+export { Header, runContactAnimation };

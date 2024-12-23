@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 import Home from "./pages/Home.tsx";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Header from "./components/Header.tsx";
+import { Header } from "./components/Header.tsx";
 import { Projects } from "./pages/Projects.tsx";
 import Footer from "./components/Footer.tsx";
 import ScrollToTop from "./components/ScrollToTop.tsx";
