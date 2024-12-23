@@ -2,6 +2,7 @@ import React, { ReactNode } from "react";
 import "./ScreenSection.css";
 
 interface ScreenSectionProp {
+  ignoreChildrenPadding?: boolean;
   children?: ReactNode;
   title?: string
   description1?: string
@@ -10,6 +11,7 @@ interface ScreenSectionProp {
 }
 
 const ScreenSection: React.FC<ScreenSectionProp> = ({
+  ignoreChildrenPadding = false,
   children,
   title,
   description1,
@@ -23,7 +25,7 @@ const ScreenSection: React.FC<ScreenSectionProp> = ({
       {description2 ? <h2>{description2}</h2> : null}
       <div
         style={{
-          paddingTop: ((children && (title || description1 || description2)) ? "1rem" : 0)
+          paddingTop: (ignoreChildrenPadding ? 0 : ((children && (title || description1 || description2)) ? "1rem" : 0))
         }}>
         {children}
       </div>
