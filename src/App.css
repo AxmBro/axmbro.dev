@@ -36,7 +36,10 @@ code {
   --primary-padding-size: 2.4rem;
   --secondary-padding-size: 1rem;
 
-  --border-radius: 8px
+  --border-radius: 8px;
+
+  --button-white-background-color: rgb(223, 223, 223);
+  --button-blue-background-color: rgb(24, 146, 255);
 }
 
 h1,
@@ -65,9 +68,3 @@ html {
     font-size: 16px;
   }
 }
-
-/* @media (min-width: 1024px) {
-  html {
-    font-size: 18px;
-  }
-} */
