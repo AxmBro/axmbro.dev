@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { ScreenSection } from "../../components/ScreenSection.tsx";
+import { ScreenSection } from "./ScreenSection.tsx";
 
 function ProjectsItems() {
   const { projectId } = useParams();
