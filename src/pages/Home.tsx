@@ -8,6 +8,7 @@ import {
 import { Link } from "react-router-dom";
 import "../components/Button.css";
 import { Card } from "../components/Card.tsx";
+import { Button, ButtonColor } from "../components/Button.tsx";
 
 function Home() {
   return (
@@ -18,19 +19,14 @@ function Home() {
           description1="Hey! I am Axmbro, because Ambro was taken everywhere! I am a guy from Poland who wants to create fancy and cool things in computer!"
           description2="I play a lot Minecraft Bedrock and in this game I started to create random stuff related with user interface - UI. Then moved to entity models, animations, general entity logic, and by combining all of these elements Better Bedrock was created!"
           children={
-            <>
+            <div style={{ display: "flex", gap: "0.5rem" }}>
               <Link
-                className="Button ButtonNoBorder"
-                style={{
-                  textDecoration: 0,
-                  background: "var(--secondary-text-color)",
-                  color: "var(--website-background-color)",
-                }}
-                to="/projects"
-              >
-                My projects
+                to="/projects" >
+                <Button buttonColor={ButtonColor.blue} text="Projects" />
               </Link>
-            </>
+              <Button buttonColor={ButtonColor.default} text="Contact" />
+              <Button buttonColor={ButtonColor.defaultEmpty} text="Discord Server" />
+            </div>
           }
         ></ScreenSection>
         <ScreenSection
