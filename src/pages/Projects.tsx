@@ -18,7 +18,7 @@ function Projects() {
                   {
                     title: "Better Bedrock",
                     description: "The Better Bedrock is project of Texture Pack for MCBE Edition, Website and Mobile App available only for Android. The Main goal is to improve the default Minecraft gameplay to a whole new level with many new features!",
-                    tags: ["JSON", "MCBE JsonUI", "Flutter", "Supabase", "Windows API"],
+                    tags: ["JSON", "MCBE JsonUI", "React", "Flutter", "Supabase", "Windows API", "Android API"],
                     imgSrc: "bbReleaseThumbnail",
                     logoSrc: "bbLogo",
                     star: true,
@@ -65,7 +65,8 @@ function Projects() {
                     tags: ["JSON", "MCBE JsonUI", "MCBE Server Form"],
                     imgSrc: "obsba",
                     star: true,
-                    downloadLink: "https://www.mushco.games/games"
+                    downloadLink: "https://www.mushco.games/games",
+                    url: "one_block_slime_block_adventure_page"
                   }
                 ]}>
 
