@@ -5,10 +5,13 @@ import {
   ScreenSection,
   ScreenSectionList,
 } from "../components/ScreenSection.tsx";
-import { Link } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 import "../components/Button.css";
 import { Card } from "../components/Card.tsx";
 import { Button, ButtonColor } from "../components/Button.tsx";
+import { scrollToElement } from "../utils/utils.tsx";
+import { runContactAnimation } from "../components/Header.tsx";
+import { Link } from "../components/Link.tsx";
 
 function Home() {
   return (
@@ -19,13 +22,15 @@ function Home() {
           description1="Hey! I am Axmbro, because Ambro was taken everywhere! I am a guy from Poland who wants to create fancy and cool things in computer!"
           description2="I play a lot Minecraft Bedrock and in this game I started to create random stuff related with user interface - UI. Then moved to entity models, animations, general entity logic, and by combining all of these elements Better Bedrock was created!"
           children={
-            <div style={{ display: "flex", gap: "0.5rem" }}>
-              <Link
+            <div style={{ display: "flex", gap: "1rem" }}>
+              <RouterLink
                 to="/projects" >
-                <Button buttonColor={ButtonColor.blue} text="Projects" />
-              </Link>
-              <Button buttonColor={ButtonColor.default} text="Contact" />
-              <Button buttonColor={ButtonColor.defaultEmpty} text="Discord Server" />
+                <Button buttonColor={ButtonColor.blue} text="My Projects" />
+              </RouterLink>
+              <div onClick={() => {
+                scrollToElement("contact");
+                runContactAnimation();
+              }}><Button buttonColor={ButtonColor.default} text="Contact" /></div>
             </div>
           }
         ></ScreenSection>
@@ -106,7 +111,7 @@ function Home() {
         <ScreenSection
           title="Experience"
           description1="I am learning web technologies with plans to become a web developer. I also create custom UIs for Minecraft Bedrock Edition, from sleek HUDs to wild forms. Check out my projects!"
-          children={<h2>TODO - something like linkedin experience tree</h2>}
+          // children={<h2>TODO - something like linkedin experience tree</h2>}
         ></ScreenSection>
         <div id="contact">
           <ScreenSection
@@ -127,32 +132,23 @@ function ContactSection() {
         <ul>
           <li key={`contact1`}>
             Email:{" "}
-            <span key={`spancontact1`}>
-              axmbro@gmail.com
-            </span>
+            <Link href="mailto:axmbro@gmail.com?subject=Contact%20Request" text="axmbro@gmail.com" ></Link>
           </li>
           <li key={`contact2`}>
-            Discord: <span key={`spancontact2`}>AxmBro</span>
+            Discord:{" "}
+            <Link href="https://discord.com/users/679603350236299266" text="AxmBro" ></Link>
           </li>
           <li key={`contact3`}>
             Discord Server:{" "}
-            <a
-              href="https://discord.gg/ZGK5WYXnEY"
-              key={`spancontact3`}
-              className="link"
-            >
-              discord.gg/wJhH86c2wb
-            </a>
+            <Link href="https://discord.gg/ZGK5WYXnEY" text="discord.gg/wJhH86c2wb" ></Link>
           </li>
           <li key={`contact4`}>
-            YouTube:{" "}
-            <a
-              href="https://www.youtube.com/@axmbro"
-              key={`spancontact4`}
-              className="link"
-            >
-              @axmbro
-            </a>
+            YouTube Channel:{" "}
+            <Link href="https://www.youtube.com/@axmbro" text="@axmbro" ></Link>
+          </li>
+          <li key={`contact5`}>
+            Second YouTube Channel:{" "}
+            <Link href="https://www.youtube.com/@axmbro2" text="@axmbro2" ></Link>
           </li>
         </ul>
       </div>
