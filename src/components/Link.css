@@ -1,9 +1,11 @@
 .link {
-  color: var(--secondary-text-color);
   text-decoration: none;
 }
 
 .link:hover {
-  color: var(--secondary-text-color);
   text-decoration: underline;
+}
+
+.link-without-underline {
+  text-decoration: none;
 }
