@@ -6,7 +6,7 @@ import { Header } from "./components/Header.tsx";
 import { Projects } from "./pages/Projects.tsx";
 import Footer from "./components/Footer.tsx";
 import ScrollToTop from "./components/ScrollToTop.tsx";
-import ProjectsItems from "./components/ProjectsItems.tsx";
+import ProjectsItems from "./pages/ProjectsSubpage.tsx";
 
 function App() {
   return (
