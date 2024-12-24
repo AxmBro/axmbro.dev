@@ -3,6 +3,7 @@ import { ScreenSection } from "../../components/ScreenSection.tsx";
 import { Button, ButtonColor } from "../../components/Button.tsx";
 import { Link } from "../../components/Link.tsx";
 import "./project_pages_global.css";
+import { scrollToElement } from "../../utils/utils.tsx";
 
 function BetterBedrockPage() {
   return (
@@ -17,9 +18,9 @@ function BetterBedrockPage() {
               <Button buttonColor={ButtonColor.blue}>
                 <Link useUnderline={false} textColor="var(--website-background-color)" text="Download" href="https://betterbedrock.com"></Link>
               </Button>
-              <Button buttonColor={ButtonColor.default}>
-                <Link useUnderline={false} textColor="var(--website-background-color)" text="Watch Trailer" href="https://www.youtube.com/watch?v=v5O-AG9P1Ag"></Link>
-              </Button>
+              <div onClick={() => { scrollToElement("trailer-container") }}>
+                <Button buttonColor={ButtonColor.default} text="Watch Trailer"></Button>
+              </div>
               <Button buttonColor={ButtonColor.defaultEmpty}>
                 <Link useUnderline={false} textColor="var(--primary-text-color)" text="Discord Server" href="https://discord.gg/ZGK5WYXnEY"></Link>
               </Button>
@@ -73,15 +74,17 @@ function BetterBedrockPage() {
             </div>
           }
         ></ScreenSection>
-        <ScreenSection
-          title="Latest Version Trailer"
-          description1="Take a look at this showcase trailer, which shows in details all key elements for Better Bedrock v7.0+ These are texture pack, mobile client and website."
-          children={
-            <div className="iframe-container">
-              <iframe src="https://www.youtube.com/embed/v5O-AG9P1Ag?si=mhlCWsULlzvv94Yg" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
-            </div>
-          }
-        ></ScreenSection>
+        <div id="trailer-container">
+          <ScreenSection
+            title="Latest Version Trailer"
+            description1="Take a look at this showcase trailer, which shows in details all key elements for Better Bedrock v7.0+ These are texture pack, mobile client and website."
+            children={
+              <div className="iframe-container">
+                <iframe src="https://www.youtube.com/embed/v5O-AG9P1Ag?si=mhlCWsULlzvv94Yg" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+              </div>
+            }
+          ></ScreenSection>
+        </div>
         <ScreenSection
           title="Texture Pack v7.2"
           description1="Here is a list of featues with brief description and the actual in-game screenshot!"
