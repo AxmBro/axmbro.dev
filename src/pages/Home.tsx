@@ -9,7 +9,6 @@ import "../components/Button.css";
 import { Card } from "../components/Card.tsx";
 import { Button, ButtonColor } from "../components/Button.tsx";
 import { scrollToElement } from "../utils/utils.tsx";
-import { runContactAnimation } from "../components/Header.tsx";
 import { Link } from "../components/Link.tsx";
 
 function Home() {
@@ -29,7 +28,6 @@ function Home() {
               </RouterLink>
               <div onClick={() => {
                 scrollToElement("contact");
-                runContactAnimation();
               }}><Button buttonColor={ButtonColor.default} text="Contact" /></div>
             </div>
           }

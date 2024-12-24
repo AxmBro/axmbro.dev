@@ -56,24 +56,6 @@ function Header() {
             >
               Axmbro
             </NavLink>
-            {/* <h1
-              // className="logo"
-              // className={({ isActive }) =>
-              //   isActive ? "headerLinkActive logo" : "headerLink logo"
-              // }
-              onClick={() => {
-                if (location.pathname === "/") {
-                  window.scrollTo({
-                    top: 0,
-                    behavior: "smooth",
-                  });
-                } else {
-                  handleNavigation("/");
-                }
-              }}
-            >
-              Axmbro
-            </h1> */}
           </div>
 
           <div className="secondSection">
@@ -92,11 +74,9 @@ function Header() {
                 onClick={() => {
                   if (location.pathname === "/") {
                     scrollToElement("contact");
-                    runContactAnimation();
                   } else {
                     handleNavigation("/");
                     setOpenHomeRoute(true);
-                    runContactAnimation();
                   }
                 }}
               >
@@ -128,11 +108,9 @@ function Header() {
                     toggleMenu();
                     if (location.pathname === "/") {
                       scrollToElement("contact");
-                      runContactAnimation();
                     } else {
                       handleNavigation("/");
                       setOpenHomeRoute(true);
-                      runContactAnimation();
                     }
                   }}>
 
@@ -147,19 +125,4 @@ function Header() {
     </div>
   );
 }
-
-function runContactAnimation() {
-  setTimeout(() => {
-    const element = document.getElementById("contact");
-
-    if (element) {
-      element.style.animation = 'none';
-
-      setTimeout(() => {
-        element.style.animation = 'fadeInOut 0.5s ease-in-out forwards';
-      }, 200);
-    }
-  }, 10)
-};
-
-export { Header, runContactAnimation };
+export { Header };
