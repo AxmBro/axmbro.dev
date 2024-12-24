@@ -9,6 +9,7 @@ function MurderDetectorPage() {
     <div className="murder_detector_page projects_pages screenContainer">
       <div className="screenContent">
         <ScreenSection
+          style={{ padding: "1rem 0 2rem 0" }}
           title="Murder Detector"
           description1="Simple let us say... shhhh... CHEAT by just TEXTURE PACK. Models system provided by MCBE allows to check what item player is holding, or with additional info, held. Using this user is able to see which person is murderer or sheriff by icon above head or optionally by extra xray!"
           children={

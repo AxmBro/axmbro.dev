@@ -17,6 +17,7 @@ function Home() {
     <div className="home screenContainer">
       <div className="screenContent">
         <ScreenSection
+          style={{ padding: "1rem 0 2rem 0"}}
           title="About Me"
           description1="Hey! I am Axmbro, because Ambro was taken everywhere! I am a guy from Poland who wants to create fancy and cool things in computer!"
           description2="I play a lot Minecraft Bedrock and in this game I started to create random stuff related with user interface - UI. Then moved to entity models, animations, general entity logic, and by combining all of these elements Better Bedrock was created!"

@@ -9,6 +9,7 @@ function BetterBedrockPage() {
     <div className="projects better_bedrock_page projects_pages screenContainer">
       <div className="screenContent">
         <ScreenSection
+          style={{ padding: "1rem 0 2rem 0" }}
           title="Better Bedrock"
           description1="The Better Bedrock is project of Texture Pack for MCBE Edition, Website and Mobile App available only for Android. The Main goal is to improve the default Minecraft gameplay to a whole new level with many new features!"
           children={

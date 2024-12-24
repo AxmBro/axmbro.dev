@@ -8,7 +8,7 @@ function Projects() {
       <div className="screenContent">
         {/* wyjebac caly element z a taga, dac ten tag ta gdzie trzeba */}
         <ScreenSection
-          style={{ padding: "1rem 0 0 0", border: "none" }}
+          style={{ padding: "1rem 0 2rem 0" }}
           title="Projects"
           description1="Here is a list of all the projects I've worked on or contributed to! Most of them are detailed with videos and screenshots for a closer look at my work."
           children={

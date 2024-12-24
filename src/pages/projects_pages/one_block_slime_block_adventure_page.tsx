@@ -8,6 +8,7 @@ function OneBlockSlimeBlockAdventurePage() {
     <div className="projects screenContainer">
       <div className="screenContent">
         <ScreenSection
+          style={{ padding: "1rem 0 2rem 0" }}
           title="One Block Slime Block Adventure"
           description1="I was part of creating custom HUD elements with custom server from!"
           children={
