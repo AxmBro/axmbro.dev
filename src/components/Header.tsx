@@ -61,6 +61,15 @@ function Header() {
           <div className="secondSection">
             <div className="desktopButtons">
               <NavLink
+                to="/"
+                end
+                className={({ isActive }) =>
+                  isActive ? "headerLinkActive" : "headerLink"
+                }
+              >
+                Home
+              </NavLink>
+              <NavLink
                 to="/projects"
                 end
                 className={({ isActive }) =>
@@ -98,10 +107,20 @@ function Header() {
                 <div className="menuContainer">
                   <div onClick={toggleMenu}>
                     <NavLink
+                      to="/"
+                      end
+                    >
+                      <Button text="Home" style={{ width: "100%", boxSizing: "border-box" }}>
+
+                      </Button>
+                    </NavLink>
+                  </div>
+                  <div onClick={toggleMenu}>
+                    <NavLink
                       to="/projects"
                       end
                     >
-                      <Button text="Projects"></Button>
+                      <Button text="Projects" style={{ width: "100%", boxSizing: "border-box" }}></Button>
                     </NavLink>
                   </div>
                   <div onClick={() => {
@@ -114,7 +133,7 @@ function Header() {
                     }
                   }}>
 
-                    <Button text="Contact"></Button>
+                    <Button text="Contact" style={{ width: "100%", boxSizing: "border-box" }}></Button>
                   </div>
                 </div>
               </div>
