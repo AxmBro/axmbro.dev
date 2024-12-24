@@ -19,8 +19,8 @@ function Home() {
         <ScreenSection
           style={{ padding: "1rem 0 2rem 0"}}
           title="About Me"
-          description1="Hey! I am Axmbro, because Ambro was taken everywhere! I am a guy from Poland who wants to create fancy and cool things in computer!"
-          description2="I play a lot Minecraft Bedrock and in this game I started to create random stuff related with user interface - UI. Then moved to entity models, animations, general entity logic, and by combining all of these elements Better Bedrock was created!"
+          description1="Hey! I'm Axmbro because Ambro was taken everywhere... I'm a guy from Poland who loves creating fancy and cool things on the computer!"
+          description2="I play a lot of Minecraft Bedrock, and in this game, I started creating random stuff related to user interface (UI). Later, I moved on to entity models, animations, and general entity logic. By combining all these elements, Better Bedrock was born!"
           children={
             <div style={{ display: "flex", gap: "1rem" }}>
               <RouterLink
@@ -110,7 +110,7 @@ function Home() {
         ></ScreenSection>
         <ScreenSection
           title="Experience"
-          description1="I am learning web technologies with plans to become a web developer. I also create custom UIs for Minecraft Bedrock Edition, from sleek HUDs to wild forms. Check out my projects!"
+          description1="I am learning web technologies with plans to become a web developer. I also create custom UIs for Minecraft Bedrock Edition, from sleek HUDs to wild forms that are available in projects page!"
           // children={<h2>TODO - something like linkedin experience tree</h2>}
         ></ScreenSection>
         <div id="contact">
