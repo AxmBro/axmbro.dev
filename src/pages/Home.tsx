@@ -130,24 +130,24 @@ function ContactSection() {
     <div>
       <div className="ScreenSectionList" style={{ padding: 0, border: 0 }}>
         <ul>
-          <li key={`contact1`}>
+          <li key={`1`}>
+            Github:{" "}
+            <Link href="https://github.com/AxmBro" text="AxmBro" ></Link>
+          </li>
+          <li key={`2`}>
             Email:{" "}
             <Link href="mailto:axmbro@gmail.com?subject=Contact%20Request" text="axmbro@gmail.com" ></Link>
           </li>
-          <li key={`contact2`}>
+          <li key={`3`}>
             Discord:{" "}
             <Link href="https://discord.com/users/679603350236299266" text="AxmBro" ></Link>
-          </li>
-          <li key={`contact3`}>
-            Discord Server:{" "}
+            {", "}
             <Link href="https://discord.gg/ZGK5WYXnEY" text="discord.gg/wJhH86c2wb" ></Link>
           </li>
-          <li key={`contact4`}>
-            YouTube Channel:{" "}
+          <li key={`4`}>
+            YouTube Channels:{" "}
             <Link href="https://www.youtube.com/@axmbro" text="@axmbro" ></Link>
-          </li>
-          <li key={`contact5`}>
-            Second YouTube Channel:{" "}
+            {", "}
             <Link href="https://www.youtube.com/@axmbro2" text="@axmbro2" ></Link>
           </li>
         </ul>
