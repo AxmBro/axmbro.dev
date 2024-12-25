@@ -38,7 +38,8 @@ function Projects() {
                     title: "Shop UI",
                     description: "CUSTOM SERVER FORM UI created for personal use, but also to test custom tabs in vanilla style, many texts in each button and search feature!",
                     tags: ["JSON", "MCBE JsonUI", "MCBE Server Form"],
-                    imgSrc: "shop_form1"
+                    imgSrc: "shop_form1",
+                    url: "shop_ui"
                   },
                   {
                     title: "Hometree UI",
