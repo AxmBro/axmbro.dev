@@ -1,9 +1,9 @@
 import React from "react";
-import { ScreenSection } from "../../components/ScreenSection.tsx";
-import { Button, ButtonColor } from "../../components/Button.tsx";
-import { Link } from "../../components/Link.tsx";
+import { ScreenSection } from "../../components/ScreenSection";
+import { Button, ButtonColor } from "../../components/Button";
+import { Link } from "../../components/Link";
 import "./project_pages_global.css";
-import { scrollToElement } from "../../utils/utils.tsx";
+import { scrollToElement } from "../../utils/utils";
 
 function BetterBedrockPage() {
   return (

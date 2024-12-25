@@ -3,13 +3,13 @@ import "./Home.css";
 import {
   ScreenSection,
   ScreenSectionList,
-} from "../components/ScreenSection.tsx";
+} from "../components/ScreenSection";
 import { Link as RouterLink } from "react-router-dom";
 import "../components/Button.css";
-import { Card } from "../components/Card.tsx";
-import { Button, ButtonColor } from "../components/Button.tsx";
-import { scrollToElement } from "../utils/utils.tsx";
-import { Link } from "../components/Link.tsx";
+import { Card } from "../components/Card";
+import { Button, ButtonColor } from "../components/Button";
+import { scrollToElement } from "../utils/utils";
+import { Link } from "../components/Link";
 
 function Home() {
   return (

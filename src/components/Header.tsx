@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import "./Header.css";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import "./Button.css";
-import { Button } from "./Button.tsx";
-import { scrollToElement } from "../utils/utils.tsx";
+import { Button } from "./Button";
+import { scrollToElement } from "../utils/utils";
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);

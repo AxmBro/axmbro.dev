@@ -1,8 +1,7 @@
 import React from "react";
 import "./ProjectsGrid.css";
 import { useNavigate } from "react-router-dom";
-import starImg from "../assets/star.png";
-import { Button, ButtonColor } from "./Button.tsx";
+import { Button, ButtonColor } from "./Button";
 
 interface ProjectItem {
   title: string;
@@ -17,6 +16,7 @@ interface ProjectItem {
 
 interface ProjectsGridProps {
   items: ProjectItem[];
+  children?: React.ReactNode;
 }
 
 const ProjectsGrid: React.FC<ProjectsGridProps> = ({ items }) => {
@@ -48,7 +48,7 @@ const ProjectsGrid: React.FC<ProjectsGridProps> = ({ items }) => {
           >
             {item.star && (
               <div className="StarContainer">
-                <img className="Star" src={starImg} alt="starImg" />
+                <img className="Star" src={require("../assets/star.png")} alt="starImg" />
               </div>
             )}
             {item.imgSrc && (

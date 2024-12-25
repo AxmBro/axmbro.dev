@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import "./App.css";
-import Home from "./pages/Home.tsx";
+import Home from "./pages/Home";
 import { BrowserRouter as Router, Route, Routes, useLocation } from "react-router-dom";
-import { Header } from "./components/Header.tsx";
-import { Projects } from "./pages/Projects.tsx";
-import Footer from "./components/Footer.tsx";
-import ProjectsItems from "./pages/ProjectsSubpage.tsx";
+import { Header } from "./components/Header";
+import { Projects } from "./pages/Projects";
+import Footer from "./components/Footer";
+import ProjectsItems from "./pages/ProjectsSubpage";
 
 
 function ScrollToTop() {
@@ -14,7 +14,7 @@ function ScrollToTop() {
   useEffect(() => {
     window.scrollTo({
       top: 0,
-      behavior: "instant",
+      behavior: "smooth",
     });
   }, [location]);
 

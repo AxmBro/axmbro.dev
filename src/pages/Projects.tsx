@@ -1,6 +1,6 @@
 import React from "react";
-import { ScreenSection } from "../components/ScreenSection.tsx";
-import { ProjectsGrid } from "../components/ProjectsGrid.tsx";
+import { ScreenSection } from "../components/ScreenSection";
+import { ProjectsGrid } from "../components/ProjectsGrid";
 
 function Projects() {
   return (
