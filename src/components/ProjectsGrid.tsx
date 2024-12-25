@@ -17,9 +17,10 @@ interface ProjectItem {
 interface ProjectsGridProps {
   items: ProjectItem[];
   children?: React.ReactNode;
+  hideTags?: boolean;
 }
 
-const ProjectsGrid: React.FC<ProjectsGridProps> = ({ items }) => {
+const ProjectsGrid: React.FC<ProjectsGridProps> = ({ items, hideTags }) => {
   const navigate = useNavigate();
 
   const handleProjectClick = (project: ProjectItem) => {
@@ -88,7 +89,7 @@ const ProjectsGrid: React.FC<ProjectsGridProps> = ({ items }) => {
                 </div>
                 <h2 className="Description">{item.description}</h2>
               </div>
-              {item.tags && (
+              {(item.tags && hideTags) && (
                 <div className="TagsContainer">
                   {item.tags.map((tag, index) => (
                     <h2 key={`TagKey${index}`} className="Tag">
