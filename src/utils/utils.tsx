@@ -1,5 +1,9 @@
-const scrollToElement = (id: string, offset = 86) => {
+const scrollToElement = (id: string) => {
   const element = document.getElementById(id);
+  const header = document.getElementById('header');
+  const offset = header ? header.offsetHeight : 0;
+  console.log(offset)
+
   if (element) {
     const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
     const offsetPosition = elementPosition - offset;
@@ -10,12 +14,5 @@ const scrollToElement = (id: string, offset = 86) => {
     });
   }
 };
-
-// const scrollToElement = (elementId: string) => {
-//   const element = document.getElementById(elementId);
-//   if (element) {
-//     element.scrollIntoView({ behavior: 'smooth', block: "start" });
-//   }
-// };
 
 export { scrollToElement };
