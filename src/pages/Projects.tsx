@@ -45,7 +45,8 @@ function Projects() {
                     title: "Hometree UI",
                     description: "CUSTOM SERVER FORM UI created for customer. It's pretty colorful and simple grid UI used in gamemodes selector and extra information form! General appearance was designed by customer and slighly by me. In-game UI is fully created by me.",
                     tags: ["JSON", "MCBE JsonUI", "MCBE Server Form"],
-                    imgSrc: "hometree1"
+                    imgSrc: "hometree1",
+                    url: "hometree_ui"
                   },
                   {
                     title: "Simple UI",

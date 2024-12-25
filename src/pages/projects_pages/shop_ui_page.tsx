@@ -6,12 +6,12 @@ import { Button, ButtonColor } from "../../components/Button";
 import { scrollToElement } from "../../utils/utils";
 import { useNavigate, useLocation } from "react-router-dom";
 
-interface ShopUIpageProps {
+interface ShopUIPageProps {
   openHomeRouteByContactButton: boolean;
   setOpenHomeRouteByContactButton: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function ShopUIpage({ openHomeRouteByContactButton, setOpenHomeRouteByContactButton }: ShopUIpageProps) {
+function ShopUIPage({ openHomeRouteByContactButton, setOpenHomeRouteByContactButton }: ShopUIPageProps) {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -124,4 +124,4 @@ function ShopUIpage({ openHomeRouteByContactButton, setOpenHomeRouteByContactBut
   )
 }
 
-export { ShopUIpage }
+export { ShopUIPage }
