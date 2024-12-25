@@ -6,7 +6,6 @@ function Projects() {
   return (
     <div className="projects screenContainer">
       <div className="screenContent">
-        {/* wyjebac caly element z a taga, dac ten tag ta gdzie trzeba */}
         <ScreenSection
           style={{ padding: "1rem 0 2rem 0" }}
           title="Projects"
