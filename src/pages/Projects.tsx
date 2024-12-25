@@ -36,20 +36,20 @@ function Projects() {
                   },
                   {
                     title: "Shop UI",
-                    description: "CUSTOM SERVER FORM UI created for personal use, but also to test custom tabs in vanilla style, many texts in each button and search feature!",
+                    description: "CUSTOM SERVER FORM UI created for personal use, but also to test custom tabs in vanilla style, many texts in each button and search feature! General appearance and in-game UI was fully created by me",
                     tags: ["JSON", "MCBE JsonUI", "MCBE Server Form"],
                     imgSrc: "shop_form1",
                     url: "shop_ui"
                   },
                   {
                     title: "Hometree UI",
-                    description: "CUSTOM SERVER FORM UI created for customer. It's pretty colorful and simple grid UI used in gamemodes selector and extra information form!",
+                    description: "CUSTOM SERVER FORM UI created for customer. It's pretty colorful and simple grid UI used in gamemodes selector and extra information form! General appearance was designed by customer and slighly by me. In-game UI is fully created by me.",
                     tags: ["JSON", "MCBE JsonUI", "MCBE Server Form"],
                     imgSrc: "hometree1"
                   },
                   {
                     title: "Simple UI",
-                    description: "CUSTOM SERVER FORM UI created for personal use, but also to test custom buttons layout!",
+                    description: "CUSTOM SERVER FORM UI created for personal use, but also to test custom buttons layout! General appearance and in-game UI was fully created by me.",
                     tags: ["JSON", "MCBE JsonUI", "MCBE Server Form"],
                     imgSrc: "simple_server_form1"
                   },

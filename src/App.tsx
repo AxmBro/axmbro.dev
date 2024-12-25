@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import Home from "./pages/Home";
 import { BrowserRouter as Router, Route, Routes, useLocation } from "react-router-dom";
@@ -22,15 +22,17 @@ function ScrollToTop() {
 }
 
 function App() {
+  const [openHomeRouteByContactButton, setOpenHomeRouteByContactButton] = useState(false);
+
   return (
     <Router>
       <div className="App">
         <ScrollToTop />
-        <Header />
+        <Header openHomeRouteByContactButton={openHomeRouteByContactButton} setOpenHomeRouteByContactButton={setOpenHomeRouteByContactButton} />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/projects" element={<Projects />} />
-          <Route path="/projects/:projectId" element={<ProjectsItems />} />
+          <Route path="/projects/:projectId" element={<ProjectsItems openHomeRouteByContactButton={openHomeRouteByContactButton} setOpenHomeRouteByContactButton={setOpenHomeRouteByContactButton} />} />
         </Routes>
         <Footer></Footer>
       </div>
