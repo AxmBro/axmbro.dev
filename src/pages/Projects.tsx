@@ -80,7 +80,7 @@ function Projects() {
   ]
 
   items = items.filter(item => {
-    return item.title.toLowerCase().includes(search.toLowerCase()) || item.description.toLowerCase().includes(search.toLowerCase())
+    return item.title.toLowerCase().includes(search.toLowerCase()) || item.description.toLowerCase().includes(search.toLowerCase()) || item.tags.join(" ").toLowerCase().includes(search.toLowerCase());
   });
 
 
@@ -95,7 +95,7 @@ function Projects() {
           children={
             <>
               <div className="searchbar-container" style={{ marginBottom: items.length === 0 ? 0 : "2rem" }}>
-                <input type="text" className="projects-search-bar" placeholder="Search by title or description" value={search} onChange={handleChangeInput} />
+                <input type="text" className="projects-search-bar" placeholder="Search by title, description or tags" value={search} onChange={handleChangeInput} />
                 <div className="searchbar-buttons-container">
                   <div onClick={() => setHideTags(!hideTags)}>
                     <Button text={hideTags ? "Show Tags" : "Hide Tags"} style={{ height: "100%", boxSizing: "border-box" }} buttonColor={ButtonColor.blue}></Button>
