@@ -2,8 +2,9 @@ import React from "react";
 import { ScreenSection } from "../../components/ScreenSection";
 import { Button, ButtonColor } from "../../components/Button";
 import { Link } from "../../components/Link";
-import "./project_pages_global.css";
+import "../../components/ProjectsPagesGlobalElements.css";
 import { scrollToElement } from "../../utils/utils";
+import { ImageSection } from "../../components/ProjectsPagesGlobalElements";
 
 function BetterBedrockPage() {
   return (
@@ -85,22 +86,44 @@ function BetterBedrockPage() {
             }
           ></ScreenSection>
         </div>
-        <ScreenSection
+        <ImageSection
+          title={"Texture Pack v7.2"}
+          sectionDescription={"Here is a list of featues with brief description and the actual in-game view!"}
+          items={[
+            {
+              title: "Title",
+              description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.",
+              imageSrc: "shop_form1"
+            },
+            {
+              title: "aaaaaaaa",
+              description: "sssssssssss",
+              // imageSrc: "shop_form1"
+            },
+            {
+              title: "dddddddddddddd",
+              description: "33333333333333",
+              // imageSrc: "shop_form1"
+            }
+          ]}>
+
+        </ImageSection>
+        {/* <ScreenSection
           title="Texture Pack v7.2"
-          description1="Here is a list of featues with brief description and the actual in-game screenshot!"
+          description1="Here is a list of featues with brief description and the actual in-game view!"
         ></ScreenSection>
         <ScreenSection
           title="Mobile App v1.1.1"
-          description1="Here is a list of featues with brief description and the actual screenshot on device!"
+          description1="Here is a list of featues with brief description and the actual view on device!"
         ></ScreenSection>
         <ScreenSection
           title="Website"
-          description1="Here is a list of desktop website screenshots with short description!"
+          description1="Here is a list of desktop website views with short description!"
         ></ScreenSection>
         <ScreenSection
           title="Client v1"
-          description1="Here is a list of featues with brief description and the actual in-game screenshot!"
-        ></ScreenSection>
+          description1="Here is a list of featues with brief description and the actual in-game view!"
+        ></ScreenSection> */}
       </div>
     </div>
   )

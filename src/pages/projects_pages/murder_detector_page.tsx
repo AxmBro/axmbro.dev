@@ -2,7 +2,8 @@ import React from "react";
 import { ScreenSection } from "../../components/ScreenSection";
 import { Button, ButtonColor } from "../../components/Button";
 import { Link } from "../../components/Link";
-import "./project_pages_global.css";
+import "../../components/ProjectsPagesGlobalElements.css";
+import { scrollToElement } from "../../utils/utils";
 
 function MurderDetectorPage() {
   return (
@@ -17,9 +18,9 @@ function MurderDetectorPage() {
               <Button buttonColor={ButtonColor.blue}>
                 <Link useUnderline={false} textColor="var(--website-background-color)" text="Download" href="https://betterbedrock.com"></Link>
               </Button>
-              <Button buttonColor={ButtonColor.default}>
-                <Link useUnderline={false} textColor="var(--website-background-color)" text="Watch Trailer" href="https://www.youtube.com/watch?v=CijS2JXf7BI"></Link>
-              </Button>
+              <div onClick={() => { scrollToElement("trailer-container") }}>
+                <Button buttonColor={ButtonColor.default} text="Watch Trailer"></Button>
+              </div>
               <Button buttonColor={ButtonColor.defaultEmpty}>
                 <Link useUnderline={false} textColor="var(--primary-text-color)" text="Discord Server" href="https://discord.gg/ZGK5WYXnEY"></Link>
               </Button>
@@ -60,18 +61,20 @@ function MurderDetectorPage() {
             </div>
           }
         ></ScreenSection>
-        <ScreenSection
-          title="Trailer"
-          description1="Take a look at this showcase trailer, which shows in details all key elements for Better Bedrock v7.0+ These are texture pack, mobile client and website."
-          children={
-            <div className="iframe-container">
-              <iframe src="https://www.youtube.com/embed/CijS2JXf7BI" title="Murder Detector+ | MCBE Texture Pack | RELEASE Trailer" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
-            </div>
-          }
-        ></ScreenSection>
+        <div id="trailer-container">
+          <ScreenSection
+            title="Trailer"
+            description1="Take a look at this showcase trailer, which shows in details all key elements for Better Bedrock v7.0+ These are texture pack, mobile client and website."
+            children={
+              <div className="iframe-container">
+                <iframe src="https://www.youtube.com/embed/CijS2JXf7BI" title="Murder Detector+ | MCBE Texture Pack | RELEASE Trailer" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+              </div>
+            }
+          ></ScreenSection>
+        </div>
         <ScreenSection
           title="Texture Pack v3.1"
-          description1="Here is a list of featues with brief description and the actual in-game screenshot!"
+          description1="Here is a list of featues with brief description and the actual in-game view!"
         ></ScreenSection>
       </div>
     </div>

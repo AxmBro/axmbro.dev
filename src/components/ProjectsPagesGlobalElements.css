@@ -17,3 +17,25 @@
 .projects_pages .ScreenSectionButtons {
   flex-wrap: wrap;
 }
+
+.image-section {
+  padding: 1rem 0;
+}
+
+.image-section .image-section-title {
+  font-size: 1.8rem;
+
+}
+
+/* .image-section .image-section-description {
+} */
+
+.image-section .image-section-img-container {
+  padding-top: 1rem;
+  width: 100%;
+  display: flex;
+}
+
+.image-section .image-section-img {
+  width: 100%;
+}
