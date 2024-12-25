@@ -67,8 +67,7 @@ const ProjectsGrid: React.FC<ProjectsGridProps> = ({ items }) => {
                       />
                     )}
                     <h1
-                      className="Title"
-                      style={{ color: !item.url ? "var(--primary-text-color)" : undefined }}
+                      className={item.url ? "TitleUrl" : "Title"}
                     >
                       {item.title}
                     </h1>
@@ -82,7 +81,7 @@ const ProjectsGrid: React.FC<ProjectsGridProps> = ({ items }) => {
                         rel="noopener noreferrer"
                         target="_blank"
                       >
-                        <Button buttonColor={ButtonColor.blue} text="Download" />
+                        <Button buttonColor={ButtonColor.default} text="Download" />
                       </a>
                     </div>
                   )}
