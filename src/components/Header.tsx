@@ -54,11 +54,12 @@ function Header({ openHomeRouteByContactButton, setOpenHomeRouteByContactButton 
               }}
               to="/"
               end
-              className={({ isActive }) =>
-                isActive ? "logo" : "headerLink logo"
-              }
+              style={{ textDecoration: 0 }}
             >
-              Axmbro
+              <div className="logo-container">
+                <img src={require("../assets/logo192.png")} className="logo-img" alt="" />
+                <h1 className="logo">Axmbro</h1>
+              </div>
             </NavLink>
           </div>
 

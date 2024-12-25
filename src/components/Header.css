@@ -15,14 +15,54 @@
   box-sizing: border-box;
 }
 
-.header .logo {
-  color: var(--primary-text-color);
-  text-decoration: none;
-  font-size: 2.2rem;
+
+.header .logo-container {
+  align-items: center;
+  display: flex;
 }
 
-.header .logo:hover {
+
+.header .logo-container .logo {
+  background-size: 500% auto;
+  text-decoration: none;
+  font-size: 2.2rem;
+  font-weight: 600;
+
+  color: transparent;
+  background: linear-gradient(
+    to right,
+    var(--secondary-text-color) 30%,
+    #01ECA7 40%,
+    #01ECA7 60%,
+    var(--secondary-text-color) 70%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  background-size: 500% auto;
+  animation: textShine 15s ease-in-out infinite reverse;
+}
+
+.header .logo-container:hover .logo {
   cursor: pointer;
+  
+}
+
+@keyframes textShine {
+  0% {
+      background-position: 0% 50%;
+  }
+  50% {
+      background-position: 100% 50%;
+  }
+  100% {
+      background-position: 100% 50%;
+  }
+}
+
+.header .logo-container .logo-img {
+  padding-right: 0.5rem;
+  width: 2.8rem;
+  aspect-ratio: 1 / 1;
 }
 
 .headerContainer {
@@ -37,12 +77,6 @@
   overflow: hidden;
   box-sizing: border-box;
 }
-/* 
-.headerContainer .secondSection .desktopButtons a {
-  color: var(--primary-text-color);
-  text-decoration: none;
-  font-size: 1rem;
-} */
 
 .headerContainer .secondSection .desktopButtons {
   gap: 1rem;
@@ -74,14 +108,6 @@
 
 .headerContainer .headerLinkActive:hover {
   cursor: pointer;
-  color: var(--secondary-text-color);
-}
-
-.headerContainer .logo {
-  font-weight: 600;
-}
-
-.headerContainer .logo:hover {
   color: var(--secondary-text-color);
 }
 
