@@ -91,19 +91,34 @@ function BetterBedrockPage() {
           sectionDescription={"Here is a list of featues with brief description and the actual in-game view!"}
           items={[
             {
-              title: "Title",
-              description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.",
-              imageSrc: "shop_form1"
+              title: "Gameplay on Another Level",
+              description: "Improved experience with HUD mods, making gameplay more immersive and strategic!",
+              imageSrc: ""
             },
             {
-              title: "aaaaaaaa",
-              description: "sssssssssss",
-              // imageSrc: "shop_form1"
+              title: "Mod Menu",
+              description: "Fully customizable mods and adjustable HUD elements that provide essential information!",
+              imageSrc: ""
             },
             {
-              title: "dddddddddddddd",
-              description: "33333333333333",
-              // imageSrc: "shop_form1"
+              title: "Custom UIs",
+              description: "Revamped custom UIs offer a refreshed design, giving Minecraft's main screens a sleek and updated look!",
+              imageSrc: ""
+            },
+            {
+              title: "Many Extension Packs",
+              description: "Extra packs like Waypoints, Better Fogs, and Dark Mode are designed to improve your Minecraft experience!",
+              imageSrc: ""
+            },
+            {
+              title: "Config System",
+              description: "After you figure out mods, you are able to save all their states and edit some extra global options!",
+              imageSrc: ""
+            },
+            {
+              title: "Platform Support",
+              description: "And at the end of the day, you can use this Texture Pack on computer, later on your phone and finally on a friend's Console!",
+              imageSrc: ""
             }
           ]}>
 
