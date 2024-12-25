@@ -15,7 +15,7 @@ function HometreeUIPage() {
           children={
             <div style={{ display: "flex", gap: "1rem" }}>
               <Button buttonColor={ButtonColor.blue}>
-                <Link useUnderline={false} textColor="var(--website-background-color)" text="Download" href="https://www.mushco.games/games"></Link>
+                <Link useUnderline={false} textColor="var(--website-background-color)" text="Discord Server" href="https://discord.gg/ZGK5WYXnEY"></Link>
               </Button>
             </div>
           }
