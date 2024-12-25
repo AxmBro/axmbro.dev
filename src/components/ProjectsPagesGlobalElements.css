@@ -20,15 +20,20 @@
 
 .image-section {
   padding: 1rem 0;
+  flex: 1 0 200px;
 }
 
 .image-section .image-section-title {
-  font-size: 1.8rem;
-
+  font-size: 1.6rem;
 }
 
-/* .image-section .image-section-description {
-} */
+.image-section-row {
+  padding-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 2rem;
+}
 
 .image-section .image-section-img-container {
   padding-top: 1rem;

@@ -93,35 +93,88 @@ function BetterBedrockPage() {
             {
               title: "Gameplay on Another Level",
               description: "Improved experience with HUD mods, making gameplay more immersive and strategic!",
-              imageSrc: ""
+              imageSrc: "bb1"
             },
             {
               title: "Mod Menu",
               description: "Fully customizable mods and adjustable HUD elements that provide essential information!",
-              imageSrc: ""
+              imageSrc: "bb2"
             },
             {
               title: "Custom UIs",
               description: "Revamped custom UIs offer a refreshed design, giving Minecraft's main screens a sleek and updated look!",
-              imageSrc: ""
+              imageSrc: "bb3"
             },
             {
               title: "Many Extension Packs",
               description: "Extra packs like Waypoints, Better Fogs, and Dark Mode are designed to improve your Minecraft experience!",
-              imageSrc: ""
+              imageSrc: "bb4"
             },
             {
               title: "Config System",
               description: "After you figure out mods, you are able to save all their states and edit some extra global options!",
-              imageSrc: ""
+              imageSrc: "bb5"
             },
             {
               title: "Platform Support",
               description: "And at the end of the day, you can use this Texture Pack on computer, later on your phone and finally on a friend's Console!",
-              imageSrc: ""
+              imageSrc: "bb6"
             }
           ]}>
-
+        </ImageSection>
+        <ImageSection
+          title={"Mobile App"}
+          sectionDescription={"Here is a list of desktop website views with short description!"}
+          rowStyle={true} 
+          items={[
+            {
+              title: "Home",
+              description: "General information about new videos, mobile app news and our goals.",
+              imageSrc: "mobile1"
+            },
+            {
+              title: "Config",
+              description: "Main section of App, you can edit config here without any 3rd party text editors!",
+              imageSrc: "mobile2"
+            },
+            {
+              title: "Cape Editor",
+              description: "Extra feature that allows you to configure BB Cape, which is visible for all BB users!",
+              imageSrc: "mobile3"
+            },
+          ]}>
+        </ImageSection>
+        <ImageSection
+          title={"Website"}
+          sectionDescription={"Here is a list of desktop website views with short description!"}
+          items={[
+            {
+              title: "Home",
+              description: "Simple section with just important info, in my opinion still lacks of some elements :S",
+              imageSrc: "web1"
+            },
+            {
+              title: "Downloads",
+              description: "Section where you can download latest BB content, Extensions for Texture Pack, Side Projects, Archived versions.",
+              imageSrc: "web2"
+            },
+            {
+              title: "Faq",
+              description: "Here is list of frequently asked questions!",
+              imageSrc: "web3"
+            },
+          ]}>
+        </ImageSection>
+        <ImageSection
+          title={"Windows Client v1"}
+          sectionDescription={"Here is a list of featues with brief description and the actual in-game view!"}
+          items={[
+            {
+              title: "Client Application",
+              description: "Mod Menu in Better Bedrock style, currently with simple modules!",
+              imageSrc: "client1"
+            },
+          ]}>
         </ImageSection>
         {/* <ScreenSection
           title="Texture Pack v7.2"

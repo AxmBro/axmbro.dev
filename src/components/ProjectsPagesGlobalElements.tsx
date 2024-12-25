@@ -10,6 +10,7 @@ interface ImageSectionItemsProps {
 
 interface ImageSectionProps {
   title: string;
+  rowStyle?: boolean;
   sectionDescription: string;
   items: ImageSectionItemsProps[];
   children?: ReactNode;
@@ -17,20 +18,29 @@ interface ImageSectionProps {
 
 }
 
-const ImageSection: React.FC<ImageSectionProps> = ({ title, sectionDescription, items }) => {
+const ImageSection: React.FC<ImageSectionProps> = ({ title, sectionDescription, items, rowStyle }) => {
   return (
     <ScreenSection
+      style={{ padding: rowStyle ? "2rem 0 2rem 0" : "2rem 0 1rem 0"  }}
       ignoreChildrenPadding={true}
       title={title}
       description1={sectionDescription}>
-      <ul style={{ padding: 0, margin: 0 }}>
+      <ul style={{ padding: rowStyle ? "1rem 0 0 0" : 0, margin: 0 }} className={rowStyle ? "image-section-row" : ""}>
         {items.map((item, index) => {
-          return <li key={`li${index}`} className="image-section">
-            <h1 className="image-section-title">{item.title}</h1>
-            <h2 className="image-section-description">{item.description}</h2>
-            {item.imageSrc && <div className="image-section-img-container">
+          return <li key={`li${index}`} className="image-section" style={{paddingTop: rowStyle ? 0 : "1rem", paddingBottom: rowStyle ? 0 : "1rem"}}>
+            {!rowStyle &&
+              <div>
+                <h1 className="image-section-title">{`${index + 1}. ${item.title}`}</h1>
+                <h2 className="image-section-description">{item.description}</h2>
+              </div>}
+            {item.imageSrc && <div className="image-section-img-container" style={{paddingBottom: rowStyle ? "1rem" : 0, paddingTop: rowStyle ? 0 : "1rem"}}>
               <img src={require(`../assets/${item.imageSrc}.png`)} alt="" className="image-section-img" />
             </div>}
+            {rowStyle &&
+              <div>
+                <h1 className="image-section-title">{`${index + 1}. ${item.title}`}</h1>
+                <h2 className="image-section-description">{item.description}</h2>
+              </div>}
           </li>
         })}
       </ul>

@@ -4,6 +4,7 @@ import { Button, ButtonColor } from "../../components/Button";
 import { Link } from "../../components/Link";
 import "../../components/ProjectsPagesGlobalElements.css";
 import { scrollToElement } from "../../utils/utils";
+import { ImageSection } from "../../components/ProjectsPagesGlobalElements";
 
 function MurderDetectorPage() {
   return (
@@ -72,10 +73,37 @@ function MurderDetectorPage() {
             }
           ></ScreenSection>
         </div>
-        <ScreenSection
-          title="Texture Pack v3.1"
-          description1="Here is a list of featues with brief description and the actual in-game view!"
-        ></ScreenSection>
+        <ImageSection
+          title={"Texture Pack v3.1"}
+          sectionDescription={"Here is a list of featues with brief description and the actual in-game view!"}
+          items={[
+            {
+              title: "Visible Sheriffs",
+              description: "Once player in gave is going to take bow or arrow to hand, bow icon will be instantly visible above his name.",
+              imageSrc: "mm4"
+            },
+            {
+              title: "Visible Murderers too!",
+              description: "You are able to see sword icon above murderer, by same logic like above, but detection list is larger than just bow or arrow: all types of swords, mace and nether_star.",
+              imageSrc: "mm5"
+            },
+            {
+              title: "Witness a murder!",
+              description: "See how exactly you are able to see these both roles of game! Take a look on overlay effect once you are close enough.",
+              imageSrc: "mm6"
+            },
+            {
+              title: "Toggleable options",
+              description: "If you don't like current options you can change them in subpacks and use: 1. Only Icon 2. Default without colors 3. Default (icon + color)",
+              imageSrc: "mm7"
+            },
+            {
+              title: "IMPORTANT!",
+              description: "Why this pack is better than other packs of this type? Because of double check with cooldown to make SURE that player is murderer or sheriff, this trick bypasses simple wEaPoN against such packs from server - they give everybody sword at the start, then in packs all players would have icon above their heads, this issue is fixed in this pack! And it's available on every possible platform that can import texture packs!",
+              imageSrc: "mm8"
+            },
+          ]}>
+        </ImageSection>
       </div>
     </div>
   )
