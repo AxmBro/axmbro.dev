@@ -16,20 +16,32 @@ function Home() {
     <div className="home screenContainer">
       <div className="screenContent">
         <ScreenSection
-          style={{ padding: "1rem 0 2rem 0"}}
+          style={{ padding: "1rem 0 2rem 0" }}
+          ignoreChildrenPadding={true}
           title="About Me"
-          description1="Hey! I'm Axmbro because Ambro was taken everywhere... I'm a guy from Poland who loves creating fancy and cool things on the computer!"
-          description2="I play a lot of Minecraft Bedrock, and in this game, I started creating random stuff related to user interface (UI). Later, I moved on to entity models, animations, and general entity logic. By combining all these elements, Better Bedrock was born!"
           children={
-            <div style={{ display: "flex", gap: "1rem" }}>
-              <RouterLink
-                to="/projects" >
-                <Button buttonColor={ButtonColor.blue} text="My Projects" />
-              </RouterLink>
-              <div onClick={() => {
-                scrollToElement("contact");
-              }}><Button buttonColor={ButtonColor.default} text="Contact" /></div>
-            </div>
+            <>
+              <h2 style={{ paddingBottom: "1rem" }}>Hey I'm <span className="hero-text">Axmbro</span>! I like creating fancy and cool things on the computer! I'm currently learning web technologies with plans to become a web developer. I also create custom UIs in Minecraft Bedrock Edition that are available in projects page!</h2>
+              <h2>I started to play Minecraft Bedrock Edition when I was young and in this game, I started to create random stuff related to user interface (UI). Later, I moved on to entity models, animations, and general entity logic. By combining all these elements I created...</h2>
+              <h2 style={{ paddingBottom: "1rem" }}>
+                <RouterLink
+                className="hero-text-bb-router"
+                  to="/projects/better_bedrock" ><span className="hero-text hero-text-bb">Better Bedrock - the project I'm most proud of!</span>
+                </RouterLink> Started from nothing by just me, that evoled to the most advanced let's say addon in MCBE!</h2>
+              <div style={{ display: "flex", gap: "1rem" }}>
+                <RouterLink
+                  to="/projects" >
+                  <Button buttonColor={ButtonColor.blue} text="My Projects" />
+                </RouterLink>
+                <div onClick={() => {
+                  scrollToElement("contact");
+                }}><Button buttonColor={ButtonColor.default} text="Contact" /></div>
+                <RouterLink
+                  to="/projects/better_bedrock" >
+                  <Button buttonColor={ButtonColor.defaultEmpty} text="Better Bedrock" />
+                </RouterLink>
+              </div>
+            </>
           }
         ></ScreenSection>
         <ScreenSection
@@ -108,8 +120,8 @@ function Home() {
         ></ScreenSection>
         <ScreenSection
           title="Experience"
-          description1="I am learning web technologies with plans to become a web developer. I also create custom UIs for Minecraft Bedrock Edition, from sleek HUDs to wild forms that are available in projects page!"
-          // children={<h2>TODO - something like linkedin experience tree</h2>}
+          description1="I'm currently learning web technologies with plans to become a web developer. I also create custom UIs for Minecraft Bedrock Edition, from sleek HUDs to wild forms that are available in projects page!"
+        // children={<h2>TODO - something like linkedin experience tree</h2>}
         ></ScreenSection>
         <div id="contact">
           <ScreenSection

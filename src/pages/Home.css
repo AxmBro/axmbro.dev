@@ -24,9 +24,43 @@
   color: rgb(255, 255, 255);
 }
 
-
 @media screen and (max-width: 700px) {
   .SkillsSection {
     grid-template-columns: 1fr;
+  }
+}
+
+.hero-text {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: transparent;
+  background-size: 500% auto;
+  background: linear-gradient(
+    to right,
+    var(--secondary-text-color) 30%,
+    #01eca7 40%,
+    #01eca7 60%,
+    var(--secondary-text-color) 70%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  background-size: 500% auto;
+  animation: textShine 6s ease-in-out infinite reverse;
+}
+
+.hero-text-bb-router {
+  text-decoration: none;
+}
+
+.hero-text-bb:hover {
+  cursor: pointer;
+}
+
+@keyframes textShine {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
   }
 }
