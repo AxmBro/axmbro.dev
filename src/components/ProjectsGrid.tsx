@@ -17,9 +17,10 @@ interface ProjectItem {
 interface ProjectsGridProps {
   items: ProjectItem[];
   children?: React.ReactNode;
+  hideTags?: boolean;
 }
 
-const ProjectsGrid: React.FC<ProjectsGridProps> = ({ items }) => {
+const ProjectsGrid: React.FC<ProjectsGridProps> = ({ items, hideTags }) => {
   const navigate = useNavigate();
 
   const handleProjectClick = (project: ProjectItem) => {
@@ -67,8 +68,7 @@ const ProjectsGrid: React.FC<ProjectsGridProps> = ({ items }) => {
                       />
                     )}
                     <h1
-                      className="Title"
-                      style={{ color: !item.url ? "var(--primary-text-color)" : undefined }}
+                      className={item.url ? "TitleUrl" : "Title"}
                     >
                       {item.title}
                     </h1>
@@ -82,14 +82,14 @@ const ProjectsGrid: React.FC<ProjectsGridProps> = ({ items }) => {
                         rel="noopener noreferrer"
                         target="_blank"
                       >
-                        <Button buttonColor={ButtonColor.blue} text="Download" />
+                        <Button buttonColor={ButtonColor.default} text="Download" />
                       </a>
                     </div>
                   )}
                 </div>
                 <h2 className="Description">{item.description}</h2>
               </div>
-              {item.tags && (
+              {(item.tags && hideTags) && (
                 <div className="TagsContainer">
                   {item.tags.map((tag, index) => (
                     <h2 key={`TagKey${index}`} className="Tag">
@@ -108,7 +108,7 @@ const ProjectsGrid: React.FC<ProjectsGridProps> = ({ items }) => {
                   rel="noopener noreferrer"
                   target="_blank"
                 >
-                  <Button buttonColor={ButtonColor.blue} text="Download" />
+                  <Button buttonColor={ButtonColor.default} text="Download" />
                 </a>
               </div>
             )}

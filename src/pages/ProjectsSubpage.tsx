@@ -4,14 +4,25 @@ import { ScreenSection } from "../components/ScreenSection";
 import { BetterBedrockPage } from "./projects_pages/better_bedrock_page";
 import { MurderDetectorPage } from "./projects_pages/murder_detector_page";
 import { OneBlockSlimeBlockAdventurePage } from "./projects_pages/one_block_slime_block_adventure_page";
+import { ShopUIPage } from "./projects_pages/shop_ui_page";
+import { HometreeUIPage } from "./projects_pages/hometree_ui_page";
+import { SimpleUIPage } from "./projects_pages/simple_ui_page";
 
-function ProjectsSubPage() {
+interface ProjectsSubPageProps {
+  openHomeRouteByContactButton: boolean;
+  setOpenHomeRouteByContactButton: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+function ProjectsSubPage({ openHomeRouteByContactButton, setOpenHomeRouteByContactButton }: ProjectsSubPageProps) {
   const { projectId } = useParams();
 
   const projectLayouts: { [key: string]: JSX.Element } = {
     better_bedrock: <BetterBedrockPage />,
     murder_detector: <MurderDetectorPage />,
     one_block_slime_block_adventure_page: <OneBlockSlimeBlockAdventurePage />,
+    shop_ui: <ShopUIPage openHomeRouteByContactButton={openHomeRouteByContactButton} setOpenHomeRouteByContactButton={setOpenHomeRouteByContactButton} />,
+    hometree_ui: <HometreeUIPage />,
+    simple_ui: <SimpleUIPage openHomeRouteByContactButton={openHomeRouteByContactButton} setOpenHomeRouteByContactButton={setOpenHomeRouteByContactButton} />,
   };
 
   if (!projectId || !projectLayouts[projectId as string]) {

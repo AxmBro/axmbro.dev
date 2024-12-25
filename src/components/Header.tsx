@@ -5,20 +5,24 @@ import "./Button.css";
 import { Button } from "./Button";
 import { scrollToElement } from "../utils/utils";
 
-function Header() {
+interface HeaderProps {
+  openHomeRouteByContactButton: boolean;
+  setOpenHomeRouteByContactButton: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+function Header({ openHomeRouteByContactButton, setOpenHomeRouteByContactButton }: HeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [openHomeRoute, setOpenHomeRoute] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (location.pathname === "/" && openHomeRoute) {
+    if (location.pathname === "/" && openHomeRouteByContactButton) {
       setTimeout(() => {
         scrollToElement("contact");
       }, 100)
-      setOpenHomeRoute(!openHomeRoute);
+      setOpenHomeRouteByContactButton(!openHomeRouteByContactButton);
     }
-  }, [location.pathname, openHomeRoute]);
+  }, [location.pathname, openHomeRouteByContactButton, setOpenHomeRouteByContactButton]);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -85,7 +89,7 @@ function Header() {
                     scrollToElement("contact");
                   } else {
                     handleNavigation("/");
-                    setOpenHomeRoute(true);
+                    setOpenHomeRouteByContactButton(true);
                   }
                 }}
               >
@@ -129,7 +133,7 @@ function Header() {
                       scrollToElement("contact");
                     } else {
                       handleNavigation("/");
-                      setOpenHomeRoute(true);
+                      setOpenHomeRouteByContactButton(true);
                     }
                   }}>
 

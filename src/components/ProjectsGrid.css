@@ -32,8 +32,19 @@
 }
 
 .ProjectsGridItem .Title {
-  font-size: 1.8rem;
+  color: var(--primary-text-color);
+  font-size: 1.6rem;
 }
+
+.ProjectsGridItem .TitleUrl {
+  color: var(--secondary-text-color);
+  font-size: 1.6rem;
+}
+
+.ProjectsGridItem:hover .TitleUrl {
+  text-decoration: underline;
+}
+
 
 .ProjectsGridItem .TitleContainer {
   margin-bottom: 0.5rem;
@@ -90,9 +101,6 @@
   text-decoration: none;
 }
 
-.ProjectsGridItem:hover .Title {
-  color: var(--secondary-text-color);
-}
 
 .TagsContainer {
   display: flex;
