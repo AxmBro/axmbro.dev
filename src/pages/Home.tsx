@@ -57,7 +57,8 @@ function Home() {
                     items={[
                       { name: "HTML", value: "7/10" },
                       { name: "CSS", value: "6/10" },
-                      { name: "JAVASCRIPT", value: "6/10" },
+                      { name: "JAVASCRIPT", value: "7/10" },
+                      { name: "TYPESCRIPT", value: "5/10" },
                     ]}
                   ></ScreenSectionList>
                 }
@@ -98,7 +99,7 @@ function Home() {
                     style={{ padding: 0, border: 0 }}
                     items={[
                       { name: "React", value: "4/10" },
-                      { name: "Python", value: "4/10" },
+                      { name: "Python", value: "3/10" },
                     ]}
                   ></ScreenSectionList>
                 }
