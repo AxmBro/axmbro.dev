@@ -15,47 +15,41 @@
   box-sizing: border-box;
 }
 
-
 .header .logo-container {
   align-items: center;
   display: flex;
 }
 
-
 .header .logo-container .logo {
-  background-size: 500% auto;
   text-decoration: none;
   font-size: 2.2rem;
   font-weight: 600;
+  color: var(--primary-text-color);
+}
 
+.header .logo-container:hover .logo {
+  cursor: pointer;
   color: transparent;
+  background-size: 500% auto;
   background: linear-gradient(
     to right,
     var(--secondary-text-color) 30%,
-    #01ECA7 40%,
-    #01ECA7 60%,
+    #01eca7 40%,
+    #01eca7 60%,
     var(--secondary-text-color) 70%
   );
   -webkit-background-clip: text;
   background-clip: text;
   background-size: 500% auto;
-  animation: textShine 15s ease-in-out infinite reverse;
-}
-
-.header .logo-container:hover .logo {
-  cursor: pointer;
-  
+  animation: textShine 3s ease-in-out infinite reverse;
 }
 
 @keyframes textShine {
   0% {
-      background-position: 0% 50%;
-  }
-  50% {
-      background-position: 100% 50%;
+    background-position: 0% 50%;
   }
   100% {
-      background-position: 100% 50%;
+    background-position: 100% 50%;
   }
 }
 
