@@ -52,7 +52,8 @@ function Projects() {
                     title: "Simple UI",
                     description: "CUSTOM SERVER FORM UI created for personal use, but also to test custom buttons layout! General appearance and in-game UI was fully created by me.",
                     tags: ["JSON", "MCBE JsonUI", "MCBE Server Form"],
-                    imgSrc: "simple_server_form1"
+                    imgSrc: "simple_server_form1",
+                    url: "simple_ui"
                   },
                   {
                     title: "This Website",
