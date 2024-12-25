@@ -19,58 +19,11 @@ function BetterBedrockPage() {
               <Button buttonColor={ButtonColor.blue}>
                 <Link useUnderline={false} textColor="var(--website-background-color)" text="Download" href="https://betterbedrock.com"></Link>
               </Button>
-              <div onClick={() => { scrollToElement("trailer-container") }}>
-                <Button buttonColor={ButtonColor.default} text="Watch Trailer"></Button>
-              </div>
-              <Button buttonColor={ButtonColor.defaultEmpty}>
-                <Link useUnderline={false} textColor="var(--primary-text-color)" text="Discord Server" href="https://discord.gg/ZGK5WYXnEY"></Link>
+              <Button buttonColor={ButtonColor.default}>
+                <Link useUnderline={false} textColor="var(--website-background-color)" text="Discord Server" href="https://discord.gg/ZGK5WYXnEY"></Link>
               </Button>
-            </div>
-          }
-        ></ScreenSection>
-        <ScreenSection
-          ignoreChildrenPadding={true}
-          title="Creators"
-          children={
-            <div>
-              <div className="ScreenSectionList" style={{ padding: 0, border: 0 }}>
-                <ul>
-                  <li key={`1`}>
-                    Texture Pack, Discord:{" "}
-                    <Link href="https://github.com/AxmBro" text="AxmBro" ></Link>
-                  </li>
-                  <li key={`2`}>
-                    Mobile App, Website, Android Client, Windows Client:{" "}
-                    <Link href="https://github.com/idarkQ" text="iDarkQ" ></Link>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          }
-        ></ScreenSection>
-        <ScreenSection
-          ignoreChildrenPadding={true}
-          title="Technology"
-          children={
-            <div>
-              <div className="ScreenSectionList" style={{ padding: 0, border: 0 }}>
-                <ul>
-                  <li key={`1`}>
-                    Texture Pack:{" "}
-                    <Link href="https://www.json.org/json-en.html" text="JSON" ></Link>
-                    {", "}
-                    <Link href="https://wiki.bedrock.dev/json-ui/json-ui-documentation.html" text="Minecraft Bedrock JsonUI" ></Link>
-                  </li>
-                  <li key={`2`}>
-                    Website, Android Client, Windows Client:{" "}
-                    <Link href="https://flutter.dev/" text="Flutter" ></Link>
-                    {", "}
-                    <Link href="https://react.dev/" text="React" ></Link>
-                    {", "}
-                    <Link href="https://supabase.com/" text="Supabase" ></Link>
-                    {", Platform APIs"}
-                  </li>
-                </ul>
+              <div onClick={() => { scrollToElement("credits") }}>
+                <Button buttonColor={ButtonColor.defaultEmpty} text="Credits"></Button>
               </div>
             </div>
           }
@@ -125,7 +78,7 @@ function BetterBedrockPage() {
         <ImageSection
           title={"Mobile App"}
           sectionDescription={"Here is a list of desktop website views with short description!"}
-          rowStyle={true} 
+          rowStyle={true}
           items={[
             {
               title: "Home",
@@ -176,22 +129,55 @@ function BetterBedrockPage() {
             },
           ]}>
         </ImageSection>
-        {/* <ScreenSection
-          title="Texture Pack v7.2"
-          description1="Here is a list of featues with brief description and the actual in-game view!"
-        ></ScreenSection>
-        <ScreenSection
-          title="Mobile App v1.1.1"
-          description1="Here is a list of featues with brief description and the actual view on device!"
-        ></ScreenSection>
-        <ScreenSection
-          title="Website"
-          description1="Here is a list of desktop website views with short description!"
-        ></ScreenSection>
-        <ScreenSection
-          title="Client v1"
-          description1="Here is a list of featues with brief description and the actual in-game view!"
-        ></ScreenSection> */}
+        <div id="credits">
+          <ScreenSection
+            ignoreChildrenPadding={true}
+            title="Creators"
+            children={
+              <div>
+                <div className="ScreenSectionList" style={{ padding: 0, border: 0 }}>
+                  <ul>
+                    <li key={`1`}>
+                      Texture Pack, Discord:{" "}
+                      <Link href="https://github.com/AxmBro" text="AxmBro" ></Link>
+                    </li>
+                    <li key={`2`}>
+                      Mobile App, Website, Android Client, Windows Client:{" "}
+                      <Link href="https://github.com/idarkQ" text="iDarkQ" ></Link>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            }
+          ></ScreenSection>
+          <ScreenSection
+            ignoreChildrenPadding={true}
+            title="Technology"
+            children={
+              <div>
+                <div className="ScreenSectionList" style={{ padding: 0, border: 0 }}>
+                  <ul>
+                    <li key={`1`}>
+                      Texture Pack:{" "}
+                      <Link href="https://www.json.org/json-en.html" text="JSON" ></Link>
+                      {", "}
+                      <Link href="https://wiki.bedrock.dev/json-ui/json-ui-documentation.html" text="Minecraft Bedrock JsonUI" ></Link>
+                    </li>
+                    <li key={`2`}>
+                      Website, Android Client, Windows Client:{" "}
+                      <Link href="https://flutter.dev/" text="Flutter" ></Link>
+                      {", "}
+                      <Link href="https://react.dev/" text="React" ></Link>
+                      {", "}
+                      <Link href="https://supabase.com/" text="Supabase" ></Link>
+                      {", Platform APIs"}
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            }
+          ></ScreenSection>
+        </div>
       </div>
     </div>
   )

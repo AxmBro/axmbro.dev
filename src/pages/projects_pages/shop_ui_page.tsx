@@ -41,39 +41,8 @@ function ShopUIPage({ openHomeRouteByContactButton, setOpenHomeRouteByContactBut
               <Button buttonColor={ButtonColor.default}>
                 <Link useUnderline={false} textColor="var(--website-background-color)" text="Discord Server" href="https://discord.gg/ZGK5WYXnEY"></Link>
               </Button>
-            </div>
-          }
-        ></ScreenSection>
-        <ScreenSection
-          ignoreChildrenPadding={true}
-          title="Creators"
-          children={
-            <div>
-              <div className="ScreenSectionList" style={{ padding: 0, border: 0 }}>
-                <ul>
-                  <li key={`1`}>
-                    Texture Pack:{" "}
-                    <Link href="https://github.com/AxmBro" text="AxmBro" ></Link>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          }
-        ></ScreenSection>
-        <ScreenSection
-          ignoreChildrenPadding={true}
-          title="Technology"
-          children={
-            <div>
-              <div className="ScreenSectionList" style={{ padding: 0, border: 0 }}>
-                <ul>
-                  <li key={`1`}>
-                    Texture Pack:{" "}
-                    <Link href="https://www.json.org/json-en.html" text="JSON" ></Link>
-                    {", "}
-                    <Link href="https://wiki.bedrock.dev/json-ui/json-ui-documentation.html" text="Minecraft Bedrock JsonUI" ></Link>
-                  </li>
-                </ul>
+              <div onClick={() => { scrollToElement("credits") }}>
+                <Button buttonColor={ButtonColor.defaultEmpty} text="Credits"></Button>
               </div>
             </div>
           }
@@ -119,6 +88,42 @@ function ShopUIPage({ openHomeRouteByContactButton, setOpenHomeRouteByContactBut
             },
           ]}>
         </ImageSection>
+        <div id="credits">
+          <ScreenSection
+            ignoreChildrenPadding={true}
+            title="Creators"
+            children={
+              <div>
+                <div className="ScreenSectionList" style={{ padding: 0, border: 0 }}>
+                  <ul>
+                    <li key={`1`}>
+                      Texture Pack:{" "}
+                      <Link href="https://github.com/AxmBro" text="AxmBro" ></Link>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            }
+          ></ScreenSection>
+          <ScreenSection
+            ignoreChildrenPadding={true}
+            title="Technology"
+            children={
+              <div>
+                <div className="ScreenSectionList" style={{ padding: 0, border: 0 }}>
+                  <ul>
+                    <li key={`1`}>
+                      Texture Pack:{" "}
+                      <Link href="https://www.json.org/json-en.html" text="JSON" ></Link>
+                      {", "}
+                      <Link href="https://wiki.bedrock.dev/json-ui/json-ui-documentation.html" text="Minecraft Bedrock JsonUI" ></Link>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            }
+          ></ScreenSection>
+        </div>
       </div>
     </div>
   )
