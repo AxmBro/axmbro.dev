@@ -31,7 +31,7 @@ function Home() {
               <div style={{ display: "flex", gap: "0.5rem" }}>
                 <RouterLink
                   to="/projects" >
-                  <Button buttonColor={ButtonColor.blue} text="My Projects" />
+                  <Button buttonColor={ButtonColor.blue} text="Projects" />
                 </RouterLink>
                 <div onClick={() => {
                   scrollToElement("contact");
