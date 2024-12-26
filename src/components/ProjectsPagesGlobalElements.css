@@ -20,7 +20,7 @@
 
 .image-section {
   padding: 1rem 0;
-  flex: 1 0 200px;
+  flex: 1 0 80px;
 }
 
 .image-section .image-section-title {
@@ -31,7 +31,7 @@
   padding-top: 1rem;
   display: flex;
   flex-wrap: wrap;
-  align-items: flex-end;
+  align-items: flex-start;
   gap: 2rem;
 }
 
