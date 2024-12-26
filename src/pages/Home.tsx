@@ -28,7 +28,7 @@ function Home() {
                 className="hero-text-bb-router"
                   to="/projects/better_bedrock" ><span className="hero-text hero-text-bb">Better Bedrock - the project I'm most proud of!</span>
                 </RouterLink> Started from nothing by just me, that evoled to the most advanced let's say addon in MCBE!</h2>
-              <div style={{ display: "flex", gap: "0.5rem" }}>
+              <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
                 <RouterLink
                   to="/projects" >
                   <Button buttonColor={ButtonColor.blue} text="Projects" />

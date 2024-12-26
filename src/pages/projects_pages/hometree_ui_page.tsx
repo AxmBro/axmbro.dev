@@ -14,7 +14,7 @@ function HometreeUIPage() {
           title="Hometree UI"
           description1="CUSTOM SERVER FORM UI created for customer. It's pretty colorful and simple grid UI used in gamemodes selector and extra information form! General appearance was designed by customer and slighly by me. In-game UI is fully created by me."
           children={
-            <div style={{ display: "flex", gap: "0.5rem" }}>
+            <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
               <Button buttonColor={ButtonColor.blue}>
                 <Link useUnderline={false} textColor="var(--website-background-color)" text="Discord Server" href="https://discord.gg/ZGK5WYXnEY"></Link>
               </Button>
