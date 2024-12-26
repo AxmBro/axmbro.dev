@@ -21,13 +21,13 @@ function ShopUIPage({ openHomeRouteByContactButton, setOpenHomeRouteByContactBut
 
   return (
     <div className="projects screenContainer">
-      <div className="screenContent">
+      <div className="screenContent projects_pages">
         <ScreenSection
           style={{ padding: "1rem 0 2rem 0" }}
           title="Shop UI"
           description1="CUSTOM SERVER FORM UI created for personal use, but also to test custom tabs in vanilla style, many texts in each button and search feature! General appearance and in-game UI was fully created by me."
           children={
-            <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
+            <div className="ScreenSectionButtons">
               <div onClick={() => {
                 if (location.pathname === "/") {
                   scrollToElement("contact");
