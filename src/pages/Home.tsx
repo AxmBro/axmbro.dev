@@ -28,7 +28,7 @@ function Home() {
                 className="hero-text-bb-router"
                   to="/projects/better_bedrock" ><span className="hero-text hero-text-bb">Better Bedrock - the project I'm most proud of!</span>
                 </RouterLink> Started from nothing by just me, that evoled to the most advanced let's say addon in MCBE!</h2>
-              <div style={{ display: "flex", gap: "1rem" }}>
+              <div style={{ display: "flex", gap: "0.5rem" }}>
                 <RouterLink
                   to="/projects" >
                   <Button buttonColor={ButtonColor.blue} text="My Projects" />
@@ -59,16 +59,8 @@ function Home() {
                       { name: "CSS", value: "6/10" },
                       { name: "JAVASCRIPT", value: "7/10" },
                       { name: "TYPESCRIPT", value: "5/10" },
+                      { name: "Minecraft Bedrock JsonUI", value: "10/10" },
                     ]}
-                  ></ScreenSectionList>
-                }
-              ></Card>
-              <Card
-                title="Version Control"
-                children={
-                  <ScreenSectionList
-                    style={{ padding: 0, border: 0 }}
-                    items={[{ name: "Github", value: "6/10" }]}
                   ></ScreenSectionList>
                 }
               ></Card>
@@ -77,18 +69,7 @@ function Home() {
                 children={
                   <ScreenSectionList
                     style={{ padding: 0, border: 0 }}
-                    items={[{ name: "Visual Studio Code", value: "7/10" }]}
-                  ></ScreenSectionList>
-                }
-              ></Card>
-              <Card
-                title="Other"
-                children={
-                  <ScreenSectionList
-                    style={{ padding: 0, border: 0 }}
-                    items={[
-                      { name: "Minecraft Bedrock JsonUI", value: "10/10" },
-                    ]}
+                    items={[{ name: "Github (Version Control)", value: "6/10" }, { name: "Visual Studio Code", value: "7/10" }]}
                   ></ScreenSectionList>
                 }
               ></Card>

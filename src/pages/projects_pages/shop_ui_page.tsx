@@ -27,7 +27,7 @@ function ShopUIPage({ openHomeRouteByContactButton, setOpenHomeRouteByContactBut
           title="Shop UI"
           description1="CUSTOM SERVER FORM UI created for personal use, but also to test custom tabs in vanilla style, many texts in each button and search feature! General appearance and in-game UI was fully created by me."
           children={
-            <div style={{ display: "flex", gap: "1rem" }}>
+            <div style={{ display: "flex", gap: "0.5rem" }}>
               <div onClick={() => {
                 if (location.pathname === "/") {
                   scrollToElement("contact");
