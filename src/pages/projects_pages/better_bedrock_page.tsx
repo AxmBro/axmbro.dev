@@ -160,17 +160,17 @@ function BetterBedrockPage() {
                     <li key={`1`}>
                       Texture Pack:{" "}
                       <Link href="https://www.json.org/json-en.html" text="JSON" ></Link>
-                      {", "}
+                      {" | "}
                       <Link href="https://wiki.bedrock.dev/json-ui/json-ui-documentation.html" text="Minecraft Bedrock JsonUI" ></Link>
                     </li>
                     <li key={`2`}>
                       Website, Android Client, Windows Client:{" "}
                       <Link href="https://flutter.dev/" text="Flutter" ></Link>
-                      {", "}
+                      {" | "}
                       <Link href="https://react.dev/" text="React" ></Link>
-                      {", "}
+                      {" | "}
                       <Link href="https://supabase.com/" text="Supabase" ></Link>
-                      {", Platform APIs"}
+                      {" | Platform APIs"}
                     </li>
                   </ul>
                 </div>
