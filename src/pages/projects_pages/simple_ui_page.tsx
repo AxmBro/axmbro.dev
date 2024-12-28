@@ -95,7 +95,7 @@ function SimpleUIPage({ openHomeRouteByContactButton, setOpenHomeRouteByContactB
                     <li key={`1`}>
                       Texture Pack:{" "}
                       <Link href="https://www.json.org/json-en.html" text="JSON" ></Link>
-                      {", "}
+                      {" | "}
                       <Link href="https://wiki.bedrock.dev/json-ui/json-ui-documentation.html" text="Minecraft Bedrock JsonUI" ></Link>
                     </li>
                   </ul>

@@ -133,13 +133,13 @@ function ContactSection() {
           <li key={`3`}>
             Discord:{" "}
             <Link href="https://discord.com/users/679603350236299266" text="AxmBro" ></Link>
-            {", "}
+            {" | "}
             <Link href="https://discord.gg/ZGK5WYXnEY" text="discord.gg/wJhH86c2wb" ></Link>
           </li>
           <li key={`4`}>
             YouTube Channels:{" "}
             <Link href="https://www.youtube.com/@axmbro" text="@axmbro" ></Link>
-            {", "}
+            {" | "}
             <Link href="https://www.youtube.com/@axmbro2" text="@axmbro2" ></Link>
           </li>
         </ul>
