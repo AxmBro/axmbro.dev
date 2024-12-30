@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import styles from "./custom_card.module.css";
+import styles from "./card.module.css";
 
 interface CardProps {
   title?: string

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
-import { Button } from "../buttons/custom_button";
+import { Button } from "../buttons/button";
 import { scrollToElement } from "../../utils/scroll";
 import styles from "./header.module.css";
 
