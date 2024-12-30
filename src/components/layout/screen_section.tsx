@@ -1,12 +1,12 @@
 import React, { ReactNode } from "react";
-import "./ScreenSection.css";
+import "./screen_section.css";
 
 interface ScreenSectionProp {
   ignoreChildrenPadding?: boolean;
   children?: ReactNode;
-  title?: string
-  description1?: string
-  description2?: string
+  title?: string;
+  description1?: string;
+  description2?: string;
   style?: React.CSSProperties;
 }
 
@@ -30,12 +30,12 @@ const ScreenSection: React.FC<ScreenSectionProp> = ({
         {children}
       </div>
     </div>
-  )
+  );
 }
 
 interface ScreenSectionListProps {
-  title?: string
-  items: { name: string, value: string }[]
+  title?: string;
+  items: { name: string, value: string }[];
   style?: React.CSSProperties;
 }
 
@@ -53,7 +53,7 @@ const ScreenSectionList: React.FC<ScreenSectionListProps> = ({
         })}
       </ul>
     </div>
-  )
+  );
 }
 
 export { ScreenSection, ScreenSectionList };

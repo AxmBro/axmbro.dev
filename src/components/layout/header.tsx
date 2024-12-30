@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import "./Header.css";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
-import "./Button.css";
-import { Button } from "./Button";
-import { scrollToElement } from "../utils/utils";
+import { Button } from "../buttons/custom_button";
+import { scrollToElement } from "../../utils/scroll";
+import styles from "./header.module.css";
 
 interface HeaderProps {
   openHomeRouteByContactButton: boolean;
@@ -37,10 +36,10 @@ function Header({ openHomeRouteByContactButton, setOpenHomeRouteByContactButton 
   };
 
   return (
-    <div className="headerScreen">
-      <div className="header" id="header">
-        <div className="headerContainer">
-          <div className="firstSection">
+    <div className={styles.headerScreen}>
+      <div className={styles.header} id="header">
+        <div className={styles.headerContainer}>
+          <div className={styles.firstSection}>
             <NavLink
               onClick={() => {
                 if (location.pathname === "/") {
@@ -56,20 +55,20 @@ function Header({ openHomeRouteByContactButton, setOpenHomeRouteByContactButton 
               end
               style={{ textDecoration: 0 }}
             >
-              <div className="logo-container">
-                <img src={require("../assets/logo192.png")} className="logo-img" alt="" />
+              <div className={styles.logoContainer}>
+                <img src={require("../../assets/logo192.png")} className={styles.logoImg} alt="" />
                 <h1 className="logo">Axmbro</h1>
               </div>
             </NavLink>
           </div>
 
-          <div className="secondSection">
-            <div className="desktopButtons">
+          <div className={styles.secondSection}>
+            <div className={styles.desktopButtons}>
               <NavLink
                 to="/"
                 end
                 className={({ isActive }) =>
-                  isActive ? "headerLinkActive" : "headerLink"
+                  isActive ? `${styles.headerLinkActive}` : `${styles.headerLink}`
                 }
               >
                 Home
@@ -78,13 +77,13 @@ function Header({ openHomeRouteByContactButton, setOpenHomeRouteByContactButton 
                 to="/projects"
                 end
                 className={({ isActive }) =>
-                  isActive ? "headerLinkActive" : "headerLink"
+                  isActive ? `${styles.headerLinkActive}` : `${styles.headerLink}`
                 }
               >
                 Projects
               </NavLink>
               <h2
-                className="headerLink"
+                className={styles.headerLink}
                 onClick={() => {
                   if (location.pathname === "/") {
                     scrollToElement("contact");
@@ -97,7 +96,7 @@ function Header({ openHomeRouteByContactButton, setOpenHomeRouteByContactButton 
                 Contact
               </h2>
             </div>
-            <div className="mobileButtons">
+            <div className={styles.mobileButtons}>
               <div
                 onClick={toggleMenu}
                 style={{ display: menuOpen ? "none" : "inline-block" }}
@@ -105,11 +104,11 @@ function Header({ openHomeRouteByContactButton, setOpenHomeRouteByContactButton 
                 <Button text="Menu"></Button>
               </div>
               <div
-                className="menu"
+                className={styles.menu}
                 style={{ display: menuOpen ? "block" : "none" }}
               >
-                <div className="overlay" onClick={closeMenu}></div>
-                <div className="menuContainer">
+                <div className={styles.overlay} onClick={closeMenu}></div>
+                <div className={styles.menuContainer}>
                   <div onClick={toggleMenu}>
                     <NavLink
                       to="/"

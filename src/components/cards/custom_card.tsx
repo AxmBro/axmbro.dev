@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import "./Card.css";
+import styles from "./custom_card.module.css";
 
 interface CardProps {
   title?: string
@@ -15,9 +15,9 @@ const Card: React.FC<CardProps> = ({
   children
 }) => {
   return (
-    <div className="Card" style={style}>
-      <h1 className="Title">{title}</h1>
-      <h2 className="Description">{description}</h2>
+    <div className={styles.card} style={style}>
+      <h1 className={styles.title}>{title}</h1>
+      <h2 className={styles.description}>{description}</h2>
       {children}
     </div>
   )

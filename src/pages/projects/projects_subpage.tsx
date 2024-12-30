@@ -1,12 +1,13 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { ScreenSection } from "../components/ScreenSection";
-import { BetterBedrockPage } from "./projects_pages/better_bedrock_page";
-import { MurderDetectorPage } from "./projects_pages/murder_detector_page";
-import { OneBlockSlimeBlockAdventurePage } from "./projects_pages/one_block_slime_block_adventure_page";
-import { ShopUIPage } from "./projects_pages/shop_ui_page";
-import { HometreeUIPage } from "./projects_pages/hometree_ui_page";
-import { SimpleUIPage } from "./projects_pages/simple_ui_page";
+import { ScreenSection } from "../../components/layout/screen_section";
+import { BetterBedrockPage } from "./project_id/better_bedrock_page";
+import { MurderDetectorPage } from "./project_id/murder_detector_page";
+import { OneBlockSlimeBlockAdventurePage } from "./project_id/one_block_slime_block_adventure_page";
+import { ShopUIPage } from "./project_id/shop_ui_page";
+import { HometreeUIPage } from "./project_id/hometree_ui_page";
+import { SimpleUIPage } from "./project_id/simple_ui_page";
+import { ScreenContainer } from "../../components/layout/screen_container";
 
 interface ProjectsSubPageProps {
   openHomeRouteByContactButton: boolean;
@@ -30,22 +31,20 @@ function ProjectsSubPage({ openHomeRouteByContactButton, setOpenHomeRouteByConta
   }
 
   return (
-    <div>
+    <ScreenContainer>
       {projectLayouts[projectId]}
-    </div>
+    </ScreenContainer>
   );
 }
 
 function Error404() {
   return (
-    <div className="projects screenContainer">
-      <div className="screenContent">
-        <ScreenSection
-          title="Project not found"
-          description1="..."
-        ></ScreenSection>
-      </div>
-    </div>
+    <ScreenContainer>
+      <ScreenSection
+        title="Project not found"
+        description1="..."
+      ></ScreenSection>
+    </ScreenContainer>
   )
 }
 

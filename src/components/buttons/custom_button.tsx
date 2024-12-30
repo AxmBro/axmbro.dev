@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import "./Button.css";
+import styles from "./custom_button.module.css";
 
 interface ButtonProps {
   buttonColor?: ButtonColor,
@@ -21,7 +21,7 @@ const Button: React.FC<ButtonProps> = ({
   style
 }) => {
 
-  return <div className="button" data-color={buttonColor} style={style}>
+  return <div className={styles.button} data-color={buttonColor} style={style}>
     <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "100%" }}>
       {text ? text : null}
       {children}
