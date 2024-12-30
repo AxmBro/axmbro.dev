@@ -5,8 +5,8 @@ import {
   ScreenSectionList,
 } from "../../components/layout/screen_section";
 import { Link as RouterLink } from "react-router-dom";
-import { Card } from "../../components/cards/custom_card";
-import { Button, ButtonColor } from "../../components/buttons/custom_button";
+import { Card } from "../../components/cards/card";
+import { Button, ButtonColor } from "../../components/buttons/button";
 import { scrollToElement } from "../../utils/scroll";
 import { Link } from "../../components/links/custom_link";
 import { ScreenContainer } from "../../components/layout/screen_container";

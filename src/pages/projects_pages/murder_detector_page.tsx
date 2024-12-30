@@ -1,10 +1,10 @@
 import React from "react";
-import { ScreenSection } from "../../../components/layout/screen_section";
-import { Button, ButtonColor } from "../../../components/buttons/button";
-import { Link } from "../../../components/links/custom_link";
-import "../../../components/global/projects_pages_global.css";
-import { scrollToElement } from "../../../utils/scroll";
-import { ImageSection } from "../../../components/global/projects_pages_global";
+import { ScreenSection } from "../../components/layout/screen_section";
+import { Button, ButtonColor } from "../../components/buttons/button";
+import { Link } from "../../components/links/custom_link";
+import "../../components/global/projects_pages_global.css";
+import { scrollToElement } from "../../utils/scroll";
+import { ImageSection } from "../../components/global/projects_pages_global";
 
 function MurderDetectorPage() {
   return (

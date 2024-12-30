@@ -1,9 +1,9 @@
 import React from "react";
-import { ScreenSection } from "../../../components/layout/screen_section";
-import { Link } from "../../../components/links/custom_link";
-import { ImageSection } from "../../../components/global/projects_pages_global";
-import { Button, ButtonColor } from "../../../components/buttons/button";
-import { scrollToElement } from "../../../utils/scroll";
+import { ScreenSection } from "../../components/layout/screen_section";
+import { Link } from "../../components/links/custom_link";
+import { ImageSection } from "../../components/global/projects_pages_global";
+import { Button, ButtonColor } from "../../components/buttons/button";
+import { scrollToElement } from "../../utils/scroll";
 
 interface ShopUIPageProps {
   openHomeRouteByContactButton: boolean;
