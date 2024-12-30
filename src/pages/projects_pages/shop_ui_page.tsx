@@ -28,21 +28,11 @@ function ShopUIPage({ openHomeRouteByContactButton, setOpenHomeRouteByContactBut
           description1="CUSTOM SERVER FORM UI created for personal use, but also to test custom tabs in vanilla style, many texts in each button and search feature! General appearance and in-game UI was fully created by me."
           children={
             <div className="ScreenSectionButtons">
-              <div onClick={() => {
-                if (location.pathname === "/") {
-                  scrollToElement("contact");
-                } else {
-                  handleNavigation("/");
-                  setOpenHomeRouteByContactButton(true);
-                }
-              }}>
-                <Button buttonColor={ButtonColor.blue} text="Want this UI? Contact Me"></Button>
-              </div>
-              <Button buttonColor={ButtonColor.default}>
+              <Button buttonColor={ButtonColor.blue}>
                 <Link useUnderline={false} textColor="var(--website-background-color)" text="Discord Server" href="https://discord.gg/ZGK5WYXnEY"></Link>
               </Button>
               <div onClick={() => { scrollToElement("credits") }}>
-                <Button buttonColor={ButtonColor.defaultEmpty} text="Credits"></Button>
+                <Button buttonColor={ButtonColor.default} text="Credits"></Button>
               </div>
             </div>
           }
