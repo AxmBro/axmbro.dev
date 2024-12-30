@@ -15,19 +15,19 @@
   box-sizing: border-box;
 }
 
-.header .logo-container {
+.header .logoContainer {
   align-items: center;
   display: flex;
 }
 
-.header .logo-container .logo {
+.header .logoContainer .logo {
   text-decoration: none;
   font-size: 2.2rem;
   font-weight: 600;
   color: var(--primary-text-color);
 }
 
-.header .logo-container:hover .logo {
+.header .logoContainer:hover .logo {
   cursor: pointer;
   color: transparent;
   background-size: 500% auto;
@@ -53,7 +53,7 @@
   }
 }
 
-.header .logo-container .logo-img {
+.header .logoContainer .logoImg {
   padding-right: 0.5rem;
   width: 2.8rem;
   aspect-ratio: 1 / 1;

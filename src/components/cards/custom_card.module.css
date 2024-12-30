@@ -1,22 +1,22 @@
-.Card {
+.card {
   padding: 1rem;
   border: 1px solid var(--line-break-color);
   border-radius: var(--border-radius);
 }
 
-.Card .Title {
+.card .title {
   font-size: 1.6rem;
 }
 
-.Card > * {
+.card > * {
   word-wrap: break-word;
 }
 
-.Card {
+.card {
   min-width: 0;
   min-height: 0;
 }
 
-.Card .ProjectsGridItem:hover .Title {
+.card .ProjectsGridItem:hover .title {
   color: var(--secondary-text-color);
 }

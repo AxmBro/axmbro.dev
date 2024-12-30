@@ -8,18 +8,6 @@
   word-wrap: break-word;
 }
 
-.screenContainer {
-  display: flex;
-  justify-content: center;
-}
-
-.screenContent {
-  max-width: var(--max-website-width);
-  width: 100%;
-  padding: 0 1rem;
-  box-sizing: border-box;
-}
-
 .screen h1 {
   color: rgb(255, 255, 255);
 }
@@ -30,7 +18,7 @@
   }
 }
 
-.hero-text {
+.heroText {
   font-size: 1.2rem;
   font-weight: 700;
   color: transparent;
@@ -48,11 +36,11 @@
   animation: textShine 6s ease-in-out infinite reverse;
 }
 
-.hero-text-bb-router {
+.heroTextBBRouter {
   text-decoration: none;
 }
 
-.hero-text-bb:hover {
+.heroTextBB:hover {
   cursor: pointer;
 }
 

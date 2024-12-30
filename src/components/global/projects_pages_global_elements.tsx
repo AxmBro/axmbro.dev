@@ -1,6 +1,5 @@
 import React, { ReactNode } from "react";
-import "./ScreenSection.css";
-import { ScreenSection } from "./ScreenSection";
+import { ScreenSection } from "../layout/screen_section";
 
 interface ImageSectionItemsProps {
   title: string;
@@ -34,7 +33,7 @@ const ImageSection: React.FC<ImageSectionProps> = ({ title, sectionDescription, 
                 <h2 className="image-section-description">{item.description}</h2>
               </div>}
             {item.imageSrc && <div className="image-section-img-container" style={{paddingBottom: rowStyle ? "1rem" : 0, paddingTop: rowStyle ? 0 : "1rem"}}>
-              <img src={require(`../assets/${item.imageSrc}.png`)} alt="" className="image-section-img" />
+              <img src={require(`../../assets/${item.imageSrc}.png`)} alt="" className="image-section-img" />
             </div>}
             {rowStyle &&
               <div>

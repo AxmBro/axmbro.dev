@@ -1,5 +1,5 @@
 import React from "react";
-import "./Link.css";
+import styles from "./custom_link.module.css";
 
 interface LinkProps {
   useUnderline?: boolean,
@@ -19,7 +19,7 @@ const Link: React.FC<LinkProps> = ({
 
   return <a
     style={{ color: textColor }}
-    className={useUnderline ? "link" : "link-without-underline"}
+    className={useUnderline ? `${styles.link}` : `${styles.linkWithoutUnderline}`}
     href={href}
     rel="noopener noreferrer"
     target={openInNewTab ? "_blank" : undefined}
