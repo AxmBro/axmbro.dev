@@ -20,13 +20,13 @@ function Home() {
         title="About Me"
         children={
           <>
-            <h2 style={{ paddingBottom: "1rem" }}>Hey I'm <span className={styles.heroText}>Axmbro</span>! I like creating fancy and cool things on the computer! I'm currently learning web technologies with plans to become a web developer. I also create custom UIs in Minecraft Bedrock Edition that are available in projects page!</h2>
-            <h2>I started to play Minecraft Bedrock Edition when I was young and in this game, I started to create random stuff related to user interface (UI). Later, I moved on to entity models, animations, and general entity logic. By combining all these elements I created...</h2>
+            <h2 style={{ paddingBottom: "1rem" }}>Hey I'm <span className={styles.heroText}>Axmbro</span>! I like creating fancy and cool things on the computer, experiment with code, develop small programs and in the process learn how these amazing machines work!</h2>
+            {/* <h2>I started to play Minecraft Bedrock Edition when I was young and in this game, I started to create random stuff related to user interface (UI). Later, I moved on to entity models, animations, and general entity logic. By combining all these elements I created...</h2> */}
             <h2 style={{ paddingBottom: "1rem" }}>
               <RouterLink
                 className={styles.heroTextBBRouter}
                 to="/projects/better_bedrock" ><span className={`${styles.heroText} ${styles.heroTextBB}`}>Better Bedrock - the project I'm most proud of!</span>
-              </RouterLink> Started from nothing by just me, that evoled to the most advanced let's say addon in MCBE!</h2>
+              </RouterLink> Started from nothing by just me, that evoled to the most advanced let's say addon in MCBE! - I started to play Minecraft Bedrock Edition when I was young and in this game, I began to create random stuff related to user interface - UI. Later, I moved on to entity models, animations, and general entity logic. By combining all these elements I created this project!</h2>
             <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
               <RouterLink
                 to="/projects" >
@@ -57,7 +57,7 @@ function Home() {
                     { name: "HTML", value: "7/10" },
                     { name: "CSS", value: "6/10" },
                     { name: "JAVASCRIPT", value: "7/10" },
-                    { name: "TYPESCRIPT", value: "5/10" },
+                    { name: "TYPESCRIPT", value: "4/10" },
                     { name: "Minecraft Bedrock JsonUI", value: "10/10" },
                   ]}
                 ></ScreenSectionList>
@@ -68,7 +68,7 @@ function Home() {
               children={
                 <ScreenSectionList
                   style={{ padding: 0, border: 0 }}
-                  items={[{ name: "Github (Version Control)", value: "6/10" }, { name: "Visual Studio Code", value: "7/10" }]}
+                  items={[{ name: "Github (Version Control)", value: "6/10" }, { name: "Visual Studio Code (IDE)", value: "7/10" }]}
                 ></ScreenSectionList>
               }
             ></Card>
@@ -78,7 +78,7 @@ function Home() {
                 <ScreenSectionList
                   style={{ padding: 0, border: 0 }}
                   items={[
-                    { name: "React", value: "4/10" },
+                    { name: "React", value: "5/10" },
                     { name: "Python", value: "3/10" },
                   ]}
                 ></ScreenSectionList>
@@ -102,8 +102,22 @@ function Home() {
       <ScreenSection
         title="Experience"
         description1="I'm currently learning web technologies with plans to become a web developer. I also create custom UIs for Minecraft Bedrock Edition, from sleek HUDs to wild forms that are available in projects page!"
+        children={
+          <RouterLink
+            to="/projects" >
+            <Button buttonColor={ButtonColor.blue} text="Navigate to Projects" />
+          </RouterLink>}
       // children={<h2>TODO - something like linkedin experience tree</h2>}
       ></ScreenSection>
+      {/* <ScreenSection
+        title="Projects"
+        description1=""
+        children={
+          <RouterLink
+            to="/projects" >
+            <Button buttonColor={ButtonColor.blue} text="Navigate to Projects" />
+          </RouterLink>}
+      ></ScreenSection> */}
       <div id="contact">
         <ScreenSection
           title="Contact"
