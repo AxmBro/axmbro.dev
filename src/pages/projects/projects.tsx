@@ -89,7 +89,7 @@ function Projects() {
       <ScreenSection
         style={{ padding: "1rem 0 2rem 0" }}
         title="Projects"
-        description1="Here is a list of all the projects I've worked on or contributed to! Most of them are detailed with videos and screenshots for a closer look at my work."
+        description1="Here is a list of all the projects I've been involved in! Most of them include videos and screenshots for a closer look at my work. Each project shows the skills and techniques I've learned over time."
         children={
           <>
             <div className={styles.searchbarContainer} style={{ marginBottom: items.length === 0 ? 0 : "2rem" }}>
