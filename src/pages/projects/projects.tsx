@@ -108,14 +108,13 @@ function Projects() {
               <div className={styles.searchbarButtonsContainer}>
                 <div onClick={() => setHideTags(!hideTags)}>
                   <Button
-                  text={hideTags ? "Show Tags" : "Hide Tags"} style={{ height: "100%", boxSizing: "border-box" }} buttonColor={ButtonColor.blue}></Button>
+                    text={hideTags ? "Show Tags" : "Hide Tags"} style={{ height: "100%", boxSizing: "border-box" }} buttonColor={ButtonColor.blue}></Button>
                 </div>
               </div>
             </div>
             <ProjectsGrid
               hideTags={!hideTags}
-              items={items}>
-            </ProjectsGrid>
+              items={items} />
           </>
         }
       ></ScreenSection>
