@@ -5,18 +5,34 @@ import { useNavigate } from "react-router-dom";
 import styles from "./projects.module.css"
 import { ScreenContainer } from "../../components/layout/screen_container";
 
+interface ProjectItem {
+  title: string;
+  description: string;
+  tags?: string[];
+  imgSrc?: string;
+  logoSrc?: string;
+  star?: boolean;
+  downloadLink?: string;
+  url?: string;
+}
+
 function Projects() {
   const [search, setSearch] = useState("");
   const [hideTags, setHideTags] = useState(() => {
-    const savedLocalValue = localStorage.getItem("hideTags");
-    return savedLocalValue ? JSON.parse(savedLocalValue) : false;
+    try {
+      const savedLocalValue = localStorage.getItem("hideTags");
+      return savedLocalValue ? JSON.parse(savedLocalValue) : false;
+    } catch (error) {
+      console.log(error)
+      return false;
+    }
   });
 
   useEffect(() => {
     localStorage.setItem("hideTags", JSON.stringify(hideTags));
   }, [hideTags]);
 
-  let items = [
+  let items: ProjectItem[] = [
     {
       title: "Better Bedrock",
       description: "The Better Bedrock is project of Texture Pack for MCBE Edition, Website and Mobile App available only for Android. The Main goal is to improve the default Minecraft gameplay to a whole new level with many new features!",
@@ -76,7 +92,7 @@ function Projects() {
   ]
 
   items = items.filter(item => {
-    return item.title.toLowerCase().includes(search.toLowerCase()) || item.description.toLowerCase().includes(search.toLowerCase()) || item.tags.join(" ").toLowerCase().includes(search.toLowerCase());
+    return item.title.toLowerCase().includes(search.toLowerCase()) || item.description.toLowerCase().includes(search.toLowerCase()) || (item.tags && item.tags.join(" ").toLowerCase().includes(search.toLowerCase()));
   });
 
   return (
@@ -91,7 +107,8 @@ function Projects() {
               <SearchbarGrid search={search} setSearch={setSearch} />
               <div className={styles.searchbarButtonsContainer}>
                 <div onClick={() => setHideTags(!hideTags)}>
-                  <Button text={hideTags ? "Show Tags" : "Hide Tags"} style={{ height: "100%", boxSizing: "border-box" }} buttonColor={ButtonColor.blue}></Button>
+                  <Button
+                  text={hideTags ? "Show Tags" : "Hide Tags"} style={{ height: "100%", boxSizing: "border-box" }} buttonColor={ButtonColor.blue}></Button>
                 </div>
               </div>
             </div>
@@ -106,20 +123,8 @@ function Projects() {
   );
 }
 
-interface ProjectItem {
-  title: string;
-  description: string;
-  tags?: string[];
-  imgSrc?: string;
-  logoSrc?: string;
-  star?: boolean;
-  downloadLink?: string;
-  url?: string;
-}
-
 interface ProjectsGridProps {
   items: ProjectItem[];
-  children?: React.ReactNode;
   hideTags?: boolean;
 }
 
@@ -216,7 +221,12 @@ const ProjectsGrid: React.FC<ProjectsGridProps> = ({ items, hideTags }) => {
   );
 };
 
-const SearchbarGrid: React.FC<{ search: string; setSearch: React.Dispatch<React.SetStateAction<string>> }> = ({ search, setSearch }) => {
+interface SearchbarGridProps {
+  search: string;
+  setSearch: (value: string) => void;
+}
+
+const SearchbarGrid: React.FC<SearchbarGridProps> = ({ search, setSearch }) => {
   const [animatedPlaceholder, setAnimatedPlaceholder] = useState("title");
 
   const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
