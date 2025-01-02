@@ -241,10 +241,16 @@ const SearchbarGrid: React.FC<{ search: string; setSearch: React.Dispatch<React.
     }, 5000);
 
     return () => clearInterval(intervalId);
+    // eslint-disable-next-line
   }, []);
 
   return (
-    <input type="text" className={styles.projectsSearchBar} placeholder={`Search by: ${animatedPlaceholder}`} value={search} onChange={handleChangeInput} />
+    <div className={styles.projectsSearchBarWrapper}>
+      <input type="text" className={styles.projectsSearchBar} placeholder={`Search by: ${animatedPlaceholder}`} value={search} onChange={handleChangeInput} />
+      {search && (<div onClick={() => setSearch("")}>
+        <Button style={{ width: "3rem" }} text="X"></Button>
+      </div>)}
+    </div>
   )
 }
 
