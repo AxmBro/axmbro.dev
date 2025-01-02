@@ -83,7 +83,7 @@ function Projects() {
     <ScreenContainer>
       <ScreenSection
         style={{ padding: "1rem 0 2rem 0" }}
-        title="Projects"
+        title={`Projects: ${items.length}`}
         description1="Here is a list of all the projects I've been involved in! Most of them include videos and screenshots for a closer look at my work. Each project shows the skills and techniques I've learned over time."
         children={
           <>
@@ -133,10 +133,6 @@ const ProjectsGrid: React.FC<ProjectsGridProps> = ({ items, hideTags }) => {
     navigate(`/projects/${project.url}`);
   };
 
-  const handleDownloadButtonClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.stopPropagation();
-  };
-
   return (
     <div className={styles.ProjectsGrid}>
       {items.map((item, index) => {
@@ -147,8 +143,6 @@ const ProjectsGrid: React.FC<ProjectsGridProps> = ({ items, hideTags }) => {
           <div
             key={`ProjectsGridKey${index}`}
             className={styles.ProjectsGridItem}
-            onClick={() => handleProjectClick(item)}
-            style={{ cursor: item.url ? "pointer" : undefined }}
           >
             {item.star && (
               <div className={styles.StarContainer}>
@@ -171,7 +165,9 @@ const ProjectsGrid: React.FC<ProjectsGridProps> = ({ items, hideTags }) => {
                       />
                     )}
                     <h1
+                      onClick={() => handleProjectClick(item)}
                       className={item.url ? `${styles.TitleUrl}` : `${styles.Title}`}
+                      style={{ cursor: item.url ? "pointer" : undefined }}
                     >
                       {item.title}
                     </h1>
@@ -179,7 +175,6 @@ const ProjectsGrid: React.FC<ProjectsGridProps> = ({ items, hideTags }) => {
                   {item.downloadLink && (
                     <div className={styles.DownloadContainer}>
                       <a
-                        onClick={handleDownloadButtonClick}
                         href={item.downloadLink}
                         className={`${styles.Button} ${styles.DownloadButton}`}
                         rel="noopener noreferrer"
@@ -205,7 +200,6 @@ const ProjectsGrid: React.FC<ProjectsGridProps> = ({ items, hideTags }) => {
             {item.downloadLink && (
               <div className={styles.DownloadButtonMobile} style={{ marginTop: "1rem" }}>
                 <a
-                  onClick={handleDownloadButtonClick}
                   href={item.downloadLink}
                   className={`${styles.Button} ${styles.DownloadButton}`}
                   rel="noopener noreferrer"
