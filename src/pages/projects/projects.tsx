@@ -16,11 +16,6 @@ function Projects() {
     localStorage.setItem("hideTags", JSON.stringify(hideTags));
   }, [hideTags]);
 
-  const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { target } = event;
-    setSearch(target.value);
-  }
-
   let items = [
     {
       title: "Better Bedrock",
@@ -93,7 +88,7 @@ function Projects() {
         children={
           <>
             <div className={styles.searchbarContainer} style={{ marginBottom: items.length === 0 ? 0 : "2rem" }}>
-              <input type="text" className={styles.projectsSearchBar} placeholder="Search by title, description or tags" value={search} onChange={handleChangeInput} />
+              <SearchbarGrid search={search} setSearch={setSearch} />
               <div className={styles.searchbarButtonsContainer}>
                 <div onClick={() => setHideTags(!hideTags)}>
                   <Button text={hideTags ? "Show Tags" : "Hide Tags"} style={{ height: "100%", boxSizing: "border-box" }} buttonColor={ButtonColor.blue}></Button>
@@ -226,5 +221,31 @@ const ProjectsGrid: React.FC<ProjectsGridProps> = ({ items, hideTags }) => {
     </div>
   );
 };
+
+const SearchbarGrid: React.FC<{ search: string; setSearch: React.Dispatch<React.SetStateAction<string>> }> = ({ search, setSearch }) => {
+  const [animatedPlaceholder, setAnimatedPlaceholder] = useState("title");
+
+  const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { target } = event;
+    setSearch(target.value);
+  }
+
+  const texts = ["title", "description", "tags"];
+
+  useEffect(() => {
+    let currentIndex = 0;
+
+    const intervalId = setInterval(() => {
+      setAnimatedPlaceholder(texts[currentIndex]);
+      currentIndex = (currentIndex + 1) % texts.length;
+    }, 5000);
+
+    return () => clearInterval(intervalId);
+  }, []);
+
+  return (
+    <input type="text" className={styles.projectsSearchBar} placeholder={`Search by: ${animatedPlaceholder}`} value={search} onChange={handleChangeInput} />
+  )
+}
 
 export { Projects };
