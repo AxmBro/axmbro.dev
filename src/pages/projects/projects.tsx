@@ -90,7 +90,7 @@ function Projects() {
       imgSrc: "thisweb"
     },
   ]
-  
+
   const projectsLength = items.length;
 
   items = items.filter(item => {
@@ -105,21 +105,22 @@ function Projects() {
         style={{ padding: "1rem 0 2rem 0" }}
         title={`Projects: ${projectsLength}`}
         description1="Here is a list of all the projects I've been involved in! Most of them include videos and screenshots for a closer look at my work. Each project shows the skills and techniques I've learned over time.">
-        <div>
-          <div className={styles.searchbarContainer} style={{ marginBottom: items.length === 0 ? 0 : "2rem" }}>
-            <SearchbarGrid search={search} setSearch={setSearch} />
-            <div className={styles.searchbarButtonsContainer}>
-              <Button
-                onClick={() => setHideTags(!hideTags)}
-                text={hideTags ? "Show Tags" : "Hide Tags"}
-                buttonColor={ButtonColor.blue} />
-            </div>
+        <>
+          <SearchbarGrid search={search} setSearch={setSearch} />
+          <div className={styles.searchbarButtonsContainer}>
+            <Button
+              onClick={() => setHideTags(!hideTags)}
+              text={hideTags ? "Show Tags" : "Hide Tags"}
+              buttonColor={ButtonColor.blue} />
           </div>
+        </>
+      </ScreenSection>
+      {(items.length > 0) &&
+        <ScreenSection>
           <ProjectsGrid
             hideTags={!hideTags}
             items={items} />
-        </div>
-      </ScreenSection>
+        </ScreenSection>}
     </ScreenContainer>
   );
 }
