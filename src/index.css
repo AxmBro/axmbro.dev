@@ -26,8 +26,8 @@ code {
   --primary-description-text-color: rgb(161 161 170);
   --secondary-description-text-color: rgb(128, 128, 128);
 
-  --website-background-color: rgb(10, 10, 10);
-  --website-background-color2: rgb(14, 14, 14);
+  --website-background-color: rgb(8, 8, 8);
+  --website-background-color2: rgb(16, 16, 16);
   --navbar-dropdown-background-color: rgb(43, 43, 43);
   --line-break-color: rgba(40, 40, 40, 1);
   --max-website-width: 70rem;
