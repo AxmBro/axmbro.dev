@@ -5,6 +5,7 @@ import {
   ScreenSectionList,
 } from "../../components/layout/screen_section";
 import { Link as RouterLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Card } from "../../components/cards/card";
 import { Button, ButtonColor } from "../../components/buttons/button";
 import { scrollToElement } from "../../utils/scroll";
@@ -13,9 +14,14 @@ import { ScreenContainer } from "../../components/layout/screen_container";
 import { ExperienceTree, ExperienceTreeContainer } from "../../components/experience_tree";
 
 const Home = () => {
+  const navigate = useNavigate();
   const ScreenSectionListStyle = {
     padding: 0,
     border: 0
+  };
+
+  const handleExampleProjectsClick = () => {
+    navigate("/projects", { state: { search: "mcbe jsonui" } });
   };
 
   return (
@@ -102,10 +108,7 @@ const Home = () => {
               { name: "Well... to become Web Developer I need more knowledge and experience :D" },
             ]}>
             <div style={{ paddingTop: "1rem" }}>
-              <RouterLink
-                to="/projects" >
-                <Button buttonColor={ButtonColor.blue} text="Example JsonUI Projects" />
-              </RouterLink>
+              <Button buttonColor={ButtonColor.blue} text="Example JsonUI Projects" onClick={handleExampleProjectsClick} />
             </div>
           </ExperienceTree>
           <ExperienceTree

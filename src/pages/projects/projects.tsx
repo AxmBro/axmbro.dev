@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ScreenSection } from "../../components/layout/screen_section";
 import { Button, ButtonColor } from "../../components/buttons/button";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./projects.module.css"
 import { ScreenContainer } from "../../components/layout/screen_container";
 
@@ -17,7 +17,9 @@ interface ProjectItem {
 }
 
 function Projects() {
-  const [search, setSearch] = useState("");
+  const location = useLocation();
+  const initialSearch = location.state?.search || "";
+  const [search, setSearch] = useState(initialSearch);
   const [hideTags, setHideTags] = useState(() => {
     try {
       const savedLocalValue = localStorage.getItem("hideTags");
