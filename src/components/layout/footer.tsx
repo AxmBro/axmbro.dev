@@ -66,4 +66,4 @@ function Footer({ openHomeRouteByContactButton, setOpenHomeRouteByContactButton 
   );
 }
 
-export default Footer;
+export { Footer };
