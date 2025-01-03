@@ -1,4 +1,11 @@
-.searchbarContainer .projectsSearchBar {
+.searchBarWrapper {
+  display: flex;
+  height: 100%;
+  gap: 0.5rem;
+}
+
+.searchBar {
+  flex: 1 1;
   width: 100%;
   height: 3rem;
   border: 1px solid var(--line-break-color);
@@ -14,20 +21,11 @@
   font-weight: 500;
 }
 
-.searchbarContainer .projectsSearchBarWrapper {
-  display: flex;
-  height: 100%;
-  gap: 0.5rem;
-}
-
 .searchbarButtonsContainer {
   padding-top: 1rem;
   flex-direction: row;
   display: flex;
   gap: 1rem;
-}
-.searchbarContainer input {
-  flex: 1 1;
 }
 
 .ProjectsGrid {

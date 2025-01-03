@@ -92,7 +92,9 @@ function Projects() {
   ]
 
   items = items.filter(item => {
-    return item.title.toLowerCase().includes(search.toLowerCase()) || item.description.toLowerCase().includes(search.toLowerCase()) || (item.tags && item.tags.join(" ").toLowerCase().includes(search.toLowerCase()));
+    return item.title.toLowerCase().includes(search.toLowerCase()) ||
+      item.description.toLowerCase().includes(search.toLowerCase()) ||
+      (item.tags && item.tags.join(" ").toLowerCase().includes(search.toLowerCase()));
   });
 
   return (
@@ -100,24 +102,22 @@ function Projects() {
       <ScreenSection
         style={{ padding: "1rem 0 2rem 0" }}
         title={`Projects: ${items.length}`}
-        description1="Here is a list of all the projects I've been involved in! Most of them include videos and screenshots for a closer look at my work. Each project shows the skills and techniques I've learned over time."
-        children={
-          <>
-            <div className={styles.searchbarContainer} style={{ marginBottom: items.length === 0 ? 0 : "2rem" }}>
-              <SearchbarGrid search={search} setSearch={setSearch} />
-              <div className={styles.searchbarButtonsContainer}>
-                <div onClick={() => setHideTags(!hideTags)}>
-                  <Button
-                    text={hideTags ? "Show Tags" : "Hide Tags"} style={{ height: "100%", boxSizing: "border-box" }} buttonColor={ButtonColor.blue}></Button>
-                </div>
-              </div>
+        description1="Here is a list of all the projects I've been involved in! Most of them include videos and screenshots for a closer look at my work. Each project shows the skills and techniques I've learned over time.">
+        <div>
+          <div className={styles.searchbarContainer} style={{ marginBottom: items.length === 0 ? 0 : "2rem" }}>
+            <SearchbarGrid search={search} setSearch={setSearch} />
+            <div className={styles.searchbarButtonsContainer}>
+              <Button
+                onClick={() => setHideTags(!hideTags)}
+                text={hideTags ? "Show Tags" : "Hide Tags"}
+                buttonColor={ButtonColor.blue} />
             </div>
-            <ProjectsGrid
-              hideTags={!hideTags}
-              items={items} />
-          </>
-        }
-      ></ScreenSection>
+          </div>
+          <ProjectsGrid
+            hideTags={!hideTags}
+            items={items} />
+        </div>
+      </ScreenSection>
     </ScreenContainer>
   );
 }
@@ -139,13 +139,14 @@ const ProjectsGrid: React.FC<ProjectsGridProps> = ({ items, hideTags }) => {
 
   return (
     <div className={styles.ProjectsGrid}>
-      {items.map((item, index) => {
+      {items.map((item) => {
         const imageSrc = item.imgSrc ? require(`../../assets/${item.imgSrc}.png`) : null;
+        const logoImageSrc = item.logoSrc ? require(`../../assets/${item.logoSrc}.png`) : null;
         const imageAlt = item.imgSrc || "";
 
         return (
           <div
-            key={`ProjectsGridKey${index}`}
+            key={`item${item}`}
             className={styles.ProjectsGridItem}
           >
             {item.star && (
@@ -164,7 +165,7 @@ const ProjectsGrid: React.FC<ProjectsGridProps> = ({ items, hideTags }) => {
                   <div className={styles.TitleAndLogoContainer}>
                     {item.logoSrc && (
                       <img
-                        src={require(`../../assets/${item.logoSrc}.png`)}
+                        src={logoImageSrc}
                         alt={item.logoSrc}
                       />
                     )}
@@ -193,8 +194,8 @@ const ProjectsGrid: React.FC<ProjectsGridProps> = ({ items, hideTags }) => {
               </div>
               {(item.tags && hideTags) && (
                 <div className={styles.TagsContainer}>
-                  {item.tags.map((tag, index) => (
-                    <h2 key={`TagKey${index}`} className={styles.Tag}>
+                  {item.tags.map((tag) => (
+                    <h2 key={`TagKey${tag}`} className={styles.Tag}>
                       {tag}
                     </h2>
                   ))}
@@ -233,7 +234,7 @@ const SearchbarGrid: React.FC<SearchbarGridProps> = ({ search, setSearch }) => {
     setSearch(target.value);
   }
 
-  const texts = ["title", "description", "tags"];
+  const texts = ["Title", "Description", "Tags"];
 
   useEffect(() => {
     let currentIndex = 0;
@@ -248,8 +249,8 @@ const SearchbarGrid: React.FC<SearchbarGridProps> = ({ search, setSearch }) => {
   }, []);
 
   return (
-    <div className={styles.projectsSearchBarWrapper}>
-      <input type="text" className={styles.projectsSearchBar} placeholder={`Search by: ${animatedPlaceholder}`} value={search} onChange={handleChangeInput} />
+    <div className={styles.searchBarWrapper}>
+      <input type="text" className={styles.searchBar} placeholder={`Search by: ${animatedPlaceholder}`} value={search} onChange={handleChangeInput} />
       {search && (<div onClick={() => setSearch("")}>
         <Button style={{ width: "3rem" }} text="X"></Button>
       </div>)}
