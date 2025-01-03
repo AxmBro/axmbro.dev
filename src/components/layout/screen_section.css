@@ -18,6 +18,6 @@
   color: var(--primary-description-text-color);
 }
 
-.ScreenSectionList ul li span {
+.ScreenSectionList ul li .highlight {
   color: var(--secondary-text-color);
 }
