@@ -2,6 +2,7 @@
   padding: 1rem;
   border: 1px solid var(--line-break-color);
   border-radius: var(--border-radius);
+  background-color: var(--website-background-color2);
 }
 
 .card .title {
