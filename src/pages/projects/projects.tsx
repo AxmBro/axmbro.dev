@@ -104,7 +104,7 @@ function Projects() {
   return (
     <ScreenContainer>
       <ScreenSection
-        style={{ padding: "1rem 0 2rem 0", borderBottom: items.length > 0 ? "1px solid var(--line-break-color)" : 0 }}
+        style={{ padding: "1rem 0 0 0", border: 0 }}
         title={`Projects: ${projectsLength}`}
         description1="Here is a list of all the projects I've been involved in! Most of them include videos and screenshots for a closer look at my work. Each project shows the skills and techniques I've learned over time.">
         <>
@@ -124,6 +124,9 @@ function Projects() {
             hideTags={!hideTags}
             items={items} />
         </ScreenSection>}
+        {(items.length === 0) && (
+          <h2 style={{marginTop: "2rem"}}>{`There are no results for: ${search}`}</h2>
+        )}
     </ScreenContainer>
   );
 }
