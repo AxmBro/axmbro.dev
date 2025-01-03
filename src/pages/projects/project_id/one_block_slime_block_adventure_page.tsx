@@ -22,6 +22,7 @@ function OneBlockSlimeBlockAdventurePage() {
         }
       ></ScreenSection>
       <ScreenSection
+        style={{ borderBottom: 0 }}
         title="Soon"
         description1="..."
       ></ScreenSection>

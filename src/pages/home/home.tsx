@@ -109,6 +109,7 @@ const Home = () => {
       </ScreenSection>
 
       <ScreenSection
+        style={{ borderBottom: 0 }}
         id="contact"
         title="Contact"
         description1="Whether you have a project in mind or just want to reach out, I would love to hear from you! Let us make something amazing together!" >
