@@ -11,7 +11,7 @@ import {
 import { Header } from "./components/layout/header";
 import { Projects } from "./pages/projects/projects";
 import Footer from "./components/layout/footer";
-import ProjectsItems from "./pages/projects/projects_subpage";
+import { ProjectsSubPage } from "./pages/projects/projects_subpage";
 
 const rootElement = document.getElementById("root");
 if (rootElement) {
@@ -41,7 +41,7 @@ function App() {
           <Route
             path="/projects/:projectId"
             element={
-              <ProjectsItems
+              <ProjectsSubPage
                 openHomeRouteByContactButton={openHomeRouteByContactButton}
                 setOpenHomeRouteByContactButton={
                   setOpenHomeRouteByContactButton

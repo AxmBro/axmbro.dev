@@ -14,8 +14,8 @@ interface ProjectsSubPageProps {
   setOpenHomeRouteByContactButton: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function ProjectsSubPage({ openHomeRouteByContactButton, setOpenHomeRouteByContactButton }: ProjectsSubPageProps) {
-  const { projectId } = useParams();
+const ProjectsSubPage: React.FC<ProjectsSubPageProps> = ({ openHomeRouteByContactButton, setOpenHomeRouteByContactButton }) => {
+  const { projectId } = useParams<{ projectId: string }>();
 
   const projectLayouts: { [key: string]: JSX.Element } = {
     better_bedrock: <BetterBedrockPage />,
@@ -26,8 +26,15 @@ function ProjectsSubPage({ openHomeRouteByContactButton, setOpenHomeRouteByConta
     simple_ui: <SimpleUIPage openHomeRouteByContactButton={openHomeRouteByContactButton} setOpenHomeRouteByContactButton={setOpenHomeRouteByContactButton} />,
   };
 
-  if (!projectId || !projectLayouts[projectId as string]) {
-    return <Error404 />;
+  if (!projectId || !projectLayouts[projectId]) {
+    return (
+      <ScreenContainer>
+        <ScreenSection
+          title="Project not found"
+          description1="The project you are looking for does not exist. Please check the URL and try again."
+        ></ScreenSection>
+      </ScreenContainer>
+    )
   }
 
   return (
@@ -37,15 +44,4 @@ function ProjectsSubPage({ openHomeRouteByContactButton, setOpenHomeRouteByConta
   );
 }
 
-function Error404() {
-  return (
-    <ScreenContainer>
-      <ScreenSection
-        title="Project not found"
-        description1="..."
-      ></ScreenSection>
-    </ScreenContainer>
-  )
-}
-
-export default ProjectsSubPage;
+export { ProjectsSubPage };
