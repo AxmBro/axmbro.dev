@@ -7,6 +7,7 @@ import { Header } from "./components/layout/header";
 import { Projects } from "./pages/projects/projects";
 import { Footer } from "./components/layout/footer";
 import { ProjectsSubPage } from "./pages/projects/projects_subpage";
+import { Info } from "./pages/info/info";
 
 const rootElement = document.getElementById("root");
 if (rootElement) {
@@ -43,6 +44,7 @@ function App() {
               />
             }
           />
+          <Route path="/info" element={<Info />} />
         </Routes>
         <Footer
           openHomeRouteByContactButton={openHomeRouteByContactButton}
