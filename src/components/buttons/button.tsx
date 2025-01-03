@@ -11,6 +11,7 @@ interface ButtonProps {
 
 enum ButtonColor {
   defaultEmpty = "defaultEmpty",
+  defaultEmpty2 = "defaultEmpty2",
   default = "default",
   blue = "blue",
 }

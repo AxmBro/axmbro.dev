@@ -25,6 +25,17 @@
   border: 1px solid var(--line-break-color);
 }
 
+.button[data-color="defaultEmpty2"] {
+  background-color: var(--website-background-color2);
+  color: var(--primary-text-color);
+  border: 1px solid var(--line-break-color);
+}
+
+.button[data-color="defaultEmpty2"]:hover {
+  background-color: var(--line-break-color);
+  border: 1px solid var(--line-break-color);
+}
+
 .button[data-color="default"] {
   color: var(--website-background-color);
   background-color: var(--primary-text-color);
