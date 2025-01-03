@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import Home from "./pages/home/home";
+import { Home } from "./pages/home/home";
 import {
   BrowserRouter as Router,
   Route,

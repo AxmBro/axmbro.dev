@@ -8,6 +8,7 @@ interface ScreenSectionProp {
   description1?: string;
   description2?: string;
   style?: React.CSSProperties;
+  id?: string;
 }
 
 const ScreenSection: React.FC<ScreenSectionProp> = ({
@@ -16,10 +17,11 @@ const ScreenSection: React.FC<ScreenSectionProp> = ({
   title,
   description1,
   description2,
-  style
+  style,
+  id
 }) => {
   return (
-    <div className="ScreenSection" style={style}>
+    <div className="ScreenSection" style={style} id={id}>
       {title ? <h1>{title}</h1> : null}
       {description1 ? <h2 style={{ paddingBottom: description2 ? "1rem" : 0 }}>{description1}</h2> : null}
       {description2 ? <h2>{description2}</h2> : null}
