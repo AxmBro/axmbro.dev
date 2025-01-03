@@ -37,7 +37,7 @@ const ScreenSection: React.FC<ScreenSectionProp> = ({
 
 interface ScreenSectionListProps {
   title?: string;
-  items: { name: string, value: string }[];
+  items: { name: string, value?: string }[];
   style?: React.CSSProperties;
 }
 
@@ -51,7 +51,11 @@ const ScreenSectionList: React.FC<ScreenSectionListProps> = ({
       {title ? <h1>{title}</h1> : null}
       <ul>
         {items.map((item, index) => {
-          return <li key={`li${index}`}>{item.name}: <span key={`span${index}`}>{item.value}</span></li>
+          return (
+            <li key={`li${index}`}>
+              {item.name}{item.value && (<span>: </span> )}<span className="highlight" key={`span${index}`}>{item.value}</span>
+            </li>
+          )
         })}
       </ul>
     </div>
