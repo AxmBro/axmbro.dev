@@ -102,7 +102,7 @@ function Projects() {
   return (
     <ScreenContainer>
       <ScreenSection
-        style={{ padding: "1rem 0 2rem 0" }}
+        style={{ padding: "1rem 0 2rem 0", borderBottom: items.length > 0 ? "1px solid var(--line-break-color)" : 0 }}
         title={`Projects: ${projectsLength}`}
         description1="Here is a list of all the projects I've been involved in! Most of them include videos and screenshots for a closer look at my work. Each project shows the skills and techniques I've learned over time.">
         <>
@@ -116,7 +116,8 @@ function Projects() {
         </>
       </ScreenSection>
       {(items.length > 0) &&
-        <ScreenSection>
+        <ScreenSection
+          style={{ borderBottom: 0 }}>
           <ProjectsGrid
             hideTags={!hideTags}
             items={items} />
@@ -149,7 +150,7 @@ const ProjectsGrid: React.FC<ProjectsGridProps> = ({ items, hideTags }) => {
 
         return (
           <div
-            key={`item${item}`}
+            key={`item${item.title}`}
             className={styles.ProjectsGridItem}
           >
             {item.star && (
@@ -255,7 +256,7 @@ const SearchbarGrid: React.FC<SearchbarGridProps> = ({ search, setSearch }) => {
     <div className={styles.searchBarWrapper}>
       <input type="text" className={styles.searchBar} placeholder={`Search by: ${animatedPlaceholder}`} value={search} onChange={handleChangeInput} />
       {search && (<div onClick={() => setSearch("")}>
-        <Button style={{ width: "3rem", minWidth: "0" }} text="X"></Button>
+        <Button style={{ width: "3rem", minWidth: "0" }} text="X" buttonColor={ButtonColor.defaultEmpty2}></Button>
       </div>)}
     </div>
   )
