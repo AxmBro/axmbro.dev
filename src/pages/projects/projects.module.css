@@ -9,7 +9,7 @@
   height: 3rem;
   border: 1px solid var(--line-break-color);
   border-radius: var(--border-radius);
-  background-color: var(--website-background-color);
+  background-color: var(--website-background-color2);
   color: var(--primary-text-color);
   font-size: 1rem;
   font-family: "Poppins", "Arial", -apple-system, BlinkMacSystemFont, "Segoe UI",
@@ -53,6 +53,7 @@
 }
 
 .ProjectsGridItem {
+  background-color: var(--website-background-color2);
   display: flex;
   padding: 1rem;
   border: 1px solid var(--line-break-color);
