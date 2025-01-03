@@ -16,6 +16,7 @@
 }
 
 .button[data-color="defaultEmpty"] {
+  background-color: var(--website-background-color);
   color: var(--primary-text-color);
   border: 1px solid var(--line-break-color);
 }
