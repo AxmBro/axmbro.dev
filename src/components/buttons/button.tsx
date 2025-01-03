@@ -6,6 +6,7 @@ interface ButtonProps {
   text?: string,
   children?: ReactNode,
   style?: React.CSSProperties;
+  onClick?: () => void;
 }
 
 enum ButtonColor {
@@ -18,15 +19,17 @@ const Button: React.FC<ButtonProps> = ({
   buttonColor = ButtonColor.defaultEmpty,
   text,
   children,
-  style
+  style,
+  onClick
 }) => {
-
-  return <div className={styles.button} data-color={buttonColor} style={style}>
-    <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "100%" }}>
-      {text ? text : null}
-      {children}
+  return (
+    <div className={styles.button} data-color={buttonColor} style={style} onClick={onClick}>
+      <div className={styles.buttonInner}>
+        {text && text}
+        {children}
+      </div>
     </div>
-  </div>
+  )
 }
 
 export { Button, ButtonColor };

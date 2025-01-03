@@ -46,3 +46,10 @@
   border: 1px solid var(--button-blue-background-color);
   background-color: var(--button-blue-background-color);
 }
+
+.buttonInner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
