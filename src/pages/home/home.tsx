@@ -11,7 +11,8 @@ import { Button, ButtonColor } from "../../components/buttons/button";
 import { scrollToElement } from "../../utils/scroll";
 import { Link } from "../../components/links/custom_link";
 import { ScreenContainer } from "../../components/layout/screen_container";
-import { ExperienceTree, ExperienceTreeContainer } from "../../components/experience_tree";
+import { ExperienceTree, ExperienceTreeContainer } from "../../components/layout/experience_tree";
+import { EXPERIENCE_TREE, SKILLS_CARDS } from "../../components/global/constants";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -51,46 +52,17 @@ const Home = () => {
         title="Skills"
         description1="Here is a list of my skills, rated out of 10 based on my own knowledge and experience.">
         <div className={styles.SkillsSection}>
-          <Card
-            title="Programming">
-            <ScreenSectionList
-              style={ScreenSectionListStyle}
-              items={[
-                { name: "HTML", value: "7/10" },
-                { name: "CSS", value: "6/10" },
-                { name: "JAVASCRIPT", value: "7/10" },
-                { name: "TYPESCRIPT", value: "4/10" },
-                { name: "Minecraft Bedrock JsonUI", value: "10/10" },
-              ]}
-            />
-          </Card>
-          <Card
-            title="Tools">
-            <ScreenSectionList
-              style={ScreenSectionListStyle}
-              items={[{ name: "Github (Version Control)", value: "6/10" }, { name: "Visual Studio Code (IDE)", value: "7/10" }]}
-            />
-          </Card>
-          <Card
-            title="Learning">
-            <ScreenSectionList
-              style={ScreenSectionListStyle}
-              items={[
-                { name: "React", value: "5/10" },
-                { name: "Python", value: "3/10" },
-              ]}
-            />
-          </Card>
-          <Card
-            title="Languages">
-            <ScreenSectionList
-              style={ScreenSectionListStyle}
-              items={[
-                { name: "Polish", value: "Native" },
-                { name: "English", value: "B2, Learning" },
-              ]}
-            />
-          </Card>
+          {SKILLS_CARDS.map((card, index) => {
+            return (
+              <Card
+                title={SKILLS_CARDS[index].title}>
+                <ScreenSectionList
+                  style={ScreenSectionListStyle}
+                  items={SKILLS_CARDS[index].items}
+                />
+              </Card>
+            )
+          })}
         </div>
       </ScreenSection>
 
@@ -100,27 +72,19 @@ const Home = () => {
         description1="I'm currently learning web technologies with plans to become a web developer. I also create custom UIs for Minecraft Bedrock Edition, from sleek HUDs to wild forms that are available in projects page!">
         <ExperienceTreeContainer>
           <ExperienceTree
-            role="Freelancer"
-            date="NOW"
-            company="MCBE UI Developer, Web Developer"
-            items={[
-              { name: "Creating custom UI projects. Mainly custom elements for HUD and Server Forms. With my knowledge and experience I am able to create almost everything you want! If you are looking for someone who is able to bring your wildest ideas related to UI, feel free to contact me!" },
-              { name: "Well... to become Web Developer I need more knowledge and experience :D" },
-            ]}>
+            role={EXPERIENCE_TREE[0].role}
+            date={EXPERIENCE_TREE[0].date}
+            company={EXPERIENCE_TREE[0].company}
+            items={EXPERIENCE_TREE[0].items}>
             <div style={{ paddingTop: "1rem" }}>
               <Button buttonColor={ButtonColor.blue} text="Example JsonUI Projects" onClick={handleExampleProjectsClick} />
             </div>
           </ExperienceTree>
           <ExperienceTree
-            role="Owner, Lead Developer"
-            date="01.01.2022 - NOW"
-            company="Better Bedrock"
-            items={[
-              { name: "Designing and creating new features using JSON in Minecraft Bedrock JsonUI system" },
-              { name: "Creating basic models and simple animations using BlockBench and Minecraft Entity components etc." },
-              { name: "Recording trailers for new version, mostly quick videos, but more recently longer ones called showcase trailers" },
-              { name: "Managing discord comunnity server, in most cases helping and announcing important information" },
-            ]}>
+            role={EXPERIENCE_TREE[1].role}
+            date={EXPERIENCE_TREE[1].date}
+            company={EXPERIENCE_TREE[1].company}
+            items={EXPERIENCE_TREE[1].items}>
             <h2 style={{ padding: "1rem 0" }}>
               <RouterLink
                 className={styles.heroTextBBRouter}
