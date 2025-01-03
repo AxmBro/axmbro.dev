@@ -255,7 +255,7 @@ const SearchbarGrid: React.FC<SearchbarGridProps> = ({ search, setSearch }) => {
     <div className={styles.searchBarWrapper}>
       <input type="text" className={styles.searchBar} placeholder={`Search by: ${animatedPlaceholder}`} value={search} onChange={handleChangeInput} />
       {search && (<div onClick={() => setSearch("")}>
-        <Button style={{ width: "3rem" }} text="X"></Button>
+        <Button style={{ width: "3rem", minWidth: "0" }} text="X"></Button>
       </div>)}
     </div>
   )
