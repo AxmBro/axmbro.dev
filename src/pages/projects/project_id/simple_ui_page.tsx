@@ -85,6 +85,7 @@ function SimpleUIPage({ openHomeRouteByContactButton, setOpenHomeRouteByContactB
           }
         ></ScreenSection>
         <ScreenSection
+          style={{ borderBottom: 0 }}
           ignoreChildrenPadding={true}
           title="Technology"
           children={
