@@ -101,7 +101,7 @@ function Header({ openHomeRouteByContactButton, setOpenHomeRouteByContactButton 
                 onClick={toggleMenu}
                 style={{ display: menuOpen ? "none" : "inline-block" }}
               >
-                <Button text="Menu"></Button>
+                <Button text="Menu" style={{minWidth: 0}}></Button>
               </div>
               <div
                 className={styles.menu}
