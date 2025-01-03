@@ -90,6 +90,8 @@ function Projects() {
       imgSrc: "thisweb"
     },
   ]
+  
+  const projectsLength = items.length;
 
   items = items.filter(item => {
     return item.title.toLowerCase().includes(search.toLowerCase()) ||
@@ -101,7 +103,7 @@ function Projects() {
     <ScreenContainer>
       <ScreenSection
         style={{ padding: "1rem 0 2rem 0" }}
-        title={`Projects: ${items.length}`}
+        title={`Projects: ${projectsLength}`}
         description1="Here is a list of all the projects I've been involved in! Most of them include videos and screenshots for a closer look at my work. Each project shows the skills and techniques I've learned over time.">
         <div>
           <div className={styles.searchbarContainer} style={{ marginBottom: items.length === 0 ? 0 : "2rem" }}>
