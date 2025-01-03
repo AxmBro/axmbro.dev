@@ -7,9 +7,10 @@ interface ScreenContainerProps {
   style?: React.CSSProperties
   useMinHeight?: boolean,
   id?: string
+  className?: string
 }
 
-const ScreenContainer: React.FC<ScreenContainerProps> = ({ children, style, useMinHeight = true, id }) => {
+const ScreenContainer: React.FC<ScreenContainerProps> = ({ children, style, useMinHeight = true, id, className }) => {
   const [minHeight, setMinHeight] = useState("0");
 
   const location = useLocation();
@@ -42,7 +43,7 @@ const ScreenContainer: React.FC<ScreenContainerProps> = ({ children, style, useM
   }, [useMinHeight]);
 
   return (
-    <div id={id} style={{ minHeight: minHeight }}>
+    <div id={id} style={{ minHeight: minHeight }} className={className}>
       <div className={styles.screenContainer} style={style}>
         <div className={styles.screenContent}>
           {children}
