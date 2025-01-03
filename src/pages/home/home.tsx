@@ -10,6 +10,7 @@ import { Button, ButtonColor } from "../../components/buttons/button";
 import { scrollToElement } from "../../utils/scroll";
 import { Link } from "../../components/links/custom_link";
 import { ScreenContainer } from "../../components/layout/screen_container";
+import { ExperienceTree, ExperienceTreeContainer } from "../../components/experience_tree";
 
 const Home = () => {
   const ScreenSectionListStyle = {
@@ -91,21 +92,45 @@ const Home = () => {
         id="experience"
         title="Experience"
         description1="I'm currently learning web technologies with plans to become a web developer. I also create custom UIs for Minecraft Bedrock Edition, from sleek HUDs to wild forms that are available in projects page!">
-        <h2 style={{ paddingBottom: "1rem" }}>
-          <RouterLink
-            className={styles.heroTextBBRouter}
-            to="/projects/better_bedrock" ><span className={`${styles.heroText} ${styles.heroTextBB}`}>Better Bedrock - the project I'm most proud of!</span>
-          </RouterLink> Started from nothing by just me, that evoled to the most advanced let's say addon in MCBE! - I started to play Minecraft Bedrock Edition when I was young and in this game, I began to create random stuff related to user interface - UI. Later, I moved on to entity models, animations, and general entity logic. By combining all these elements I created this project!</h2>
-        <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
-          <RouterLink
-            to="/projects" >
-            <Button buttonColor={ButtonColor.blue} text="Navigate to Projects" />
-          </RouterLink>
-          <RouterLink
-            to="/projects/better_bedrock" >
-            <Button buttonColor={ButtonColor.default} text="Better Bedrock" />
-          </RouterLink>
-        </div>
+        <ExperienceTreeContainer>
+          <ExperienceTree
+            role="Freelancer"
+            date="Now"
+            company="MCBE UI Developer, Web Developer"
+            items={[
+              { name: "Creating custom UI projects. Mainly custom elements for HUD and Server Forms. With my knowledge and experience I am able to create almost everything you want! If you are looking for someone who is able to bring your wildest ideas related to UI, feel free to contact me!" },
+              { name: "Well... to become Web Developer I need more knowledge and experience :D" },
+            ]}>
+            <div style={{ paddingTop: "1rem" }}>
+              <RouterLink
+                to="/projects" >
+                <Button buttonColor={ButtonColor.blue} text="Example JsonUI Projects" />
+              </RouterLink>
+            </div>
+          </ExperienceTree>
+          <ExperienceTree
+            role="Owner, Lead Developer"
+            date="01.01.2022 - Now"
+            company="Better Bedrock"
+            items={[
+              { name: "Designing and creating new features using JSON in Minecraft Bedrock JsonUI system" },
+              { name: "Creating basic models and simple animations using BlockBench and Minecraft Entity components etc." },
+              { name: "Recording trailers for new version, mostly quick videos, but more recently longer ones called showcase trailers" },
+              { name: "Managing discord comunnity server, in most cases helping and announcing important information" },
+            ]}>
+            <h2 style={{ padding: "1rem 0" }}>
+              <RouterLink
+                className={styles.heroTextBBRouter}
+                to="/projects/better_bedrock" ><span className={`${styles.heroText} ${styles.heroTextBB}`}>Better Bedrock - the project I'm most proud of!</span>
+              </RouterLink> Started from nothing by just me, that evoled to the most advanced let's say addon in MCBE! - I started to play Minecraft Bedrock Edition when I was young and in this game, I began to create random stuff related to user interface - UI. Later, I moved on to entity models, animations, and general entity logic. By combining all these elements I created this project!</h2>
+            <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+              <RouterLink
+                to="/projects/better_bedrock" >
+                <Button buttonColor={ButtonColor.blue} text="Better Bedrock Showcase" />
+              </RouterLink>
+            </div>
+          </ExperienceTree>
+        </ExperienceTreeContainer>
       </ScreenSection>
 
       <ScreenSection
