@@ -57,7 +57,7 @@ function Header({ openHomeRouteByContactButton, setOpenHomeRouteByContactButton 
             >
               <div className={styles.logoContainer}>
                 <img src={require("../../assets/logo192.png")} className={styles.logoImg} alt="" />
-                <h1 className="logo">Axmbro</h1>
+                <h1 className={styles.logo}>Axmbro</h1>
               </div>
             </NavLink>
           </div>
