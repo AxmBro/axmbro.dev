@@ -60,6 +60,8 @@
 }
 
 .headerContainer {
+  gap: 1rem;
+  flex-wrap: wrap;
   display: flex;
   background-color: var(--website-background-color);
   align-items: center;
@@ -160,7 +162,7 @@
   }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 468px) {
   .headerContainer .secondSection .desktopButtons {
     display: none;
   }
