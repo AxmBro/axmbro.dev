@@ -4,7 +4,8 @@
   position: sticky;
   display: flex;
   justify-content: center;
-  background-color: var(--website-background-color);
+  background-color: var(--website-background-color2);
+  border-bottom: 1px solid var(--line-break-color);
 }
 
 .header {
@@ -63,13 +64,12 @@
   gap: 1rem;
   flex-wrap: wrap;
   display: flex;
-  background-color: var(--website-background-color);
   align-items: center;
   justify-content: space-between;
   min-width: 0px;
   width: calc(100%);
   padding: 1rem 0;
-  border-bottom: 1px solid var(--line-break-color);
+  /* border-bottom: 1px solid var(--line-break-color); */
   overflow: hidden;
   box-sizing: border-box;
 }
@@ -168,5 +168,11 @@
   }
   .headerContainer .secondSection .mobileButtons {
     display: flex;
+  }
+}
+
+@media screen and (max-width: 250px) {
+  .header .logoContainer .logo {
+    display: none;
   }
 }
