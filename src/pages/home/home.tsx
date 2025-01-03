@@ -101,7 +101,7 @@ const Home = () => {
         <ExperienceTreeContainer>
           <ExperienceTree
             role="Freelancer"
-            date="Now"
+            date="NOW"
             company="MCBE UI Developer, Web Developer"
             items={[
               { name: "Creating custom UI projects. Mainly custom elements for HUD and Server Forms. With my knowledge and experience I am able to create almost everything you want! If you are looking for someone who is able to bring your wildest ideas related to UI, feel free to contact me!" },
@@ -113,7 +113,7 @@ const Home = () => {
           </ExperienceTree>
           <ExperienceTree
             role="Owner, Lead Developer"
-            date="01.01.2022 - Now"
+            date="01.01.2022 - NOW"
             company="Better Bedrock"
             items={[
               { name: "Designing and creating new features using JSON in Minecraft Bedrock JsonUI system" },

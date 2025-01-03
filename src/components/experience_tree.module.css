@@ -11,28 +11,14 @@
   background-color: var(--website-background-color2);
 }
 
-.roleDateContainer {
-  /* flex-wrap: wrap; */
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-}
-
 .role {
   font-size: 1.6rem;
 }
 
 .date {
-  text-align: right;
   font-size: 1rem;
 }
 
 .company {
   margin-bottom: 1rem;
-}
-
-@media screen and (max-width: 500px) {
-  .roleDateContainer {
-    flex-direction: column;
-  }
 }
