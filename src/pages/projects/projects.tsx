@@ -231,7 +231,7 @@ interface SearchbarGridProps {
 }
 
 const SearchbarGrid: React.FC<SearchbarGridProps> = ({ search, setSearch }) => {
-  const [animatedPlaceholder, setAnimatedPlaceholder] = useState("title");
+  const [animatedPlaceholder, setAnimatedPlaceholder] = useState("");
 
   const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { target } = event;
@@ -241,8 +241,9 @@ const SearchbarGrid: React.FC<SearchbarGridProps> = ({ search, setSearch }) => {
   const texts = ["Title", "Description", "Tags"];
 
   useEffect(() => {
-    let currentIndex = 0;
+    let currentIndex = 1;
 
+    setAnimatedPlaceholder(texts[0]);
     const intervalId = setInterval(() => {
       setAnimatedPlaceholder(texts[currentIndex]);
       currentIndex = (currentIndex + 1) % texts.length;
