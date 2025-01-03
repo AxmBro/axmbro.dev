@@ -189,7 +189,7 @@ const ProjectsGrid: React.FC<ProjectsGridProps> = ({ items, hideTags }) => {
                         rel="noopener noreferrer"
                         target="_blank"
                       >
-                        <Button buttonColor={ButtonColor.default} text="Download" />
+                        <Button buttonColor={ButtonColor.blue} text="Download" />
                       </a>
                     </div>
                   )}

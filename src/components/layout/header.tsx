@@ -101,13 +101,13 @@ function Header({ openHomeRouteByContactButton, setOpenHomeRouteByContactButton 
                 onClick={toggleMenu}
                 style={{ display: menuOpen ? "none" : "inline-block" }}
               >
-                <Button text="Menu" style={{minWidth: 0}}></Button>
+                <h2 className={styles.headerLinkMobile}>Menu</h2>
+                {/* <Button text="Menu" style={{ minWidth: 0 }}></Button> */}
               </div>
               <div
                 className={styles.menu}
                 style={{ display: menuOpen ? "block" : "none" }}
               >
-                <div className={styles.overlay} onClick={closeMenu}></div>
                 <div className={styles.menuContainer}>
                   <div onClick={toggleMenu}>
                     <NavLink
@@ -140,6 +140,7 @@ function Header({ openHomeRouteByContactButton, setOpenHomeRouteByContactButton 
                     <Button text="Contact" style={{ width: "100%", boxSizing: "border-box" }}></Button>
                   </div>
                 </div>
+                <div className={styles.overlay} onClick={closeMenu}></div>
               </div>
             </div>
           </div>

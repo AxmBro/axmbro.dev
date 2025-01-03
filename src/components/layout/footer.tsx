@@ -21,6 +21,7 @@ function Footer({ openHomeRouteByContactButton, setOpenHomeRouteByContactButton 
   return (
     <ScreenContainer
       id="footer"
+      className={styles.footerScreenContainer}
       useMinHeight={false}
       style={{ backgroundColor: "var(--website-background-color2)", borderTop: "1px solid var(--line-break-color)" }}>
       <div className={styles.footer}>

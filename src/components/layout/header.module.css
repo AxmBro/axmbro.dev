@@ -117,10 +117,12 @@
 }
 
 .headerContainer .mobileButtons .menu {
+  width: calc(100% - 2rem);
   z-index: 12;
   position: absolute;
   top: 1rem;
   right: 1rem;
+  left: 1rem;
 }
 
 .headerContainer .mobileButtons .menuContainer {
@@ -128,7 +130,7 @@
   flex-direction: column;
   padding: 1rem;
   gap: 1rem;
-  background-color: var(--website-background-color);
+  background-color: var(--website-background-color2);
   border: 1px solid var(--line-break-color);
   border-radius: var(--border-radius);
 }
@@ -148,6 +150,16 @@
   background-color: black;
   opacity: 0.6;
   z-index: -1;
+}
+
+.headerLinkMobile {
+  font-weight: 500;
+  color: var(--primary-text-color);
+  text-decoration: none;
+}
+
+.headerLinkMobile:hover {
+  cursor: pointer;
 }
 
 @keyframes fadeInOut {
@@ -171,7 +183,7 @@
   }
 }
 
-@media screen and (max-width: 250px) {
+@media screen and (max-width: 240px) {
   .header .logoContainer .logo {
     display: none;
   }
