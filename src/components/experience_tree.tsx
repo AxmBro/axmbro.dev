@@ -30,10 +30,8 @@ const ExperienceTree: React.FC<ExperienceTreeProps> = ({ role, date, company, it
 
   return (
     <div className={styles.container}>
-      <div className={styles.roleDateContainer}>
-        <h1 className={styles.role}>{role}</h1>
-        <h2 className={styles.date}>{date}</h2>
-      </div>
+      <h1 className={styles.role}>{role}</h1>
+      <h2 className={styles.date}>{date}</h2>
       <h2 className={styles.company} style={{ color: "var(--secondary-text-color)" }}>{company}</h2>
       <ScreenSectionList
         style={ScreenSectionListStyle}
