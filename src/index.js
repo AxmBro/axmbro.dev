@@ -1,13 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import { Home } from "./pages/home/home";
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  useLocation,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Header } from "./components/layout/header";
 import { Projects } from "./pages/projects/projects";
 import Footer from "./components/layout/footer";
@@ -30,7 +25,6 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <ScrollToTop />
         <Header
           openHomeRouteByContactButton={openHomeRouteByContactButton}
           setOpenHomeRouteByContactButton={setOpenHomeRouteByContactButton}
@@ -50,21 +44,11 @@ function App() {
             }
           />
         </Routes>
-        <Footer></Footer>
+        <Footer
+          openHomeRouteByContactButton={openHomeRouteByContactButton}
+          setOpenHomeRouteByContactButton={setOpenHomeRouteByContactButton}
+        />
       </div>
     </Router>
   );
-}
-
-function ScrollToTop() {
-  const location = useLocation();
-
-  useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      behavior: "auto",
-    });
-  }, [location]);
-
-  return null;
 }
