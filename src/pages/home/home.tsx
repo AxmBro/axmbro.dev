@@ -13,6 +13,7 @@ import { Link } from "../../components/links/custom_link";
 import { ScreenContainer } from "../../components/layout/screen_container";
 import { ExperienceTree, ExperienceTreeContainer } from "../../components/layout/experience_tree";
 import { EXPERIENCE_TREE, SKILLS_CARDS } from "../../components/global/constants";
+import { RouteLink } from "../../components/links/route_link";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -109,8 +110,13 @@ const Home = () => {
           <ul>
             <li key={`1`}> Github:{" "} <Link href="https://github.com/AxmBro" text="AxmBro" ></Link> </li>
             <li key={`2`}> Email:{" "}  <Link href="mailto:axmbro@gmail.com?subject=Contact%20Request" text="axmbro@gmail.com" ></Link> </li>
-            <li key={`3`}> Discord:{" "} <Link href="https://discord.com/users/679603350236299266" text="AxmBro" ></Link> {" | "} <Link href="https://discord.gg/ZGK5WYXnEY" text="discord.gg/wJhH86c2wb" ></Link> </li>
+            <li key={`3`}> Discord:{" "} <Link href="https://discord.com/users/679603350236299266" text="AxmBro" ></Link> {" | "} <Link href="https://discord.gg/wJhH86c2wb" text="discord.gg/wJhH86c2wb" ></Link> {" | "} <Link href="https://discord.gg/ZGK5WYXnEY" text="discord.gg/ZGK5WYXnEY" ></Link> </li>
             <li key={`4`}> YouTube Channels:{" "} <Link href="https://www.youtube.com/@axmbro" text="@axmbro" ></Link> {" | "} <Link href="https://www.youtube.com/@axmbro2" text="@axmbro2" ></Link> </li>
+            <li key={`5`}>
+              More:{" "}<RouteLink
+                to="/info"
+                text="/info" />
+            </li>
           </ul>
         </div>
       </ScreenSection>
