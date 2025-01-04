@@ -1,0 +1,60 @@
+import React, { ReactNode, useState } from "react";
+import styles from "./custom_button.module.css";
+
+interface CustomButtonProps {
+  text: string,
+  textContant?: string,
+  textColor?: string,
+  border: { r: number, g: number, b: number },
+  children?: ReactNode,
+  style?: React.CSSProperties;
+  onClick?: () => void;
+}
+const CustomButton: React.FC<CustomButtonProps> = ({
+  text,
+  textContant,
+  textColor = "var(--primary-text-color)",
+  border,
+  children,
+  style,
+  onClick
+}) => {
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleMouseEnter = () => setIsHovered(true);
+  const handleMouseLeave = () => setIsHovered(false);
+
+  const stylesToApply = {
+    color: textColor,
+    backgroundColor: `rgba(${border.r}, ${border.g}, ${border.b}, 0.1)`,
+    border: `1px solid rgba(${border.r}, ${border.g}, ${border.b}, 0.5)`,
+  }
+
+  const stylesToApplyHover = {
+    color: textColor,
+    backgroundColor: `rgba(${border.r}, ${border.g}, ${border.b}, 0.1)`,
+    border: `1px solid rgba(${border.r}, ${border.g}, ${border.b}, 1)`,
+  }
+
+  console.log(border)
+  return (
+    <div
+      className={styles.customButton}
+      style={{ ...style, ...(isHovered ? stylesToApplyHover : stylesToApply) }}
+      onClick={onClick}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}>
+      <div className={styles.customButtonInner}>
+        <h2 style={{ color: "var(--primary-text-color)" }}>
+          {text}
+          {textContant && (<span>: <span style={{
+            color: `rgb(${border.r}, ${border.g}, ${border.b})`
+          }}>{`${textContant}`}</span></span>)}
+        </h2>
+        {children}
+      </div>
+    </div>
+  )
+}
+
+export { CustomButton };
