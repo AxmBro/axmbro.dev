@@ -24,15 +24,13 @@ const CustomButton: React.FC<CustomButtonProps> = ({
   const handleMouseEnter = () => setIsHovered(true);
   const handleMouseLeave = () => setIsHovered(false);
 
-  const stylesToApply = {
+  const defaultStyles = {
     color: textColor,
     backgroundColor: `rgba(${border.r}, ${border.g}, ${border.b}, 0.1)`,
     border: `1px solid rgba(${border.r}, ${border.g}, ${border.b}, 0.5)`,
   }
 
-  const stylesToApplyHover = {
-    color: textColor,
-    backgroundColor: `rgba(${border.r}, ${border.g}, ${border.b}, 0.1)`,
+  const hoverStyles = {
     border: `1px solid rgba(${border.r}, ${border.g}, ${border.b}, 1)`,
   }
 
@@ -40,7 +38,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({
   return (
     <div
       className={styles.customButton}
-      style={{ ...style, ...(isHovered ? stylesToApplyHover : stylesToApply) }}
+      style={{ ...style, ...defaultStyles, ...(isHovered && hoverStyles) }}
       onClick={onClick}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}>
