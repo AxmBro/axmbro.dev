@@ -56,7 +56,7 @@ const Info = () => {
             href="https://www.youtube.com/@axmbro"
             openInNewTab={true}
             useChildrenInsteadOfText={true}>
-            <CustomButton style={{ height: height, width: width }} border={{ r: 255, g: 1, b: 51 }} text="First YouTube Channel" textContant="@axmbro" />
+            <CustomButton style={{ height: height, width: width }} border={{ r: 255, g: 1, b: 51 }} text="Main YouTube Channel" textContant="@axmbro" />
           </Link>
           <Link
             href="https://www.youtube.com/@axmbro2"
