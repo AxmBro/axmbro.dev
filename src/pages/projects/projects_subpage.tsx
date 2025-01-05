@@ -9,21 +9,16 @@ import { HometreeUIPage } from "./project_id/hometree_ui_page";
 import { SimpleUIPage } from "./project_id/simple_ui_page";
 import { ScreenContainer } from "../../components/layout/screen_container";
 
-interface ProjectsSubPageProps {
-  openHomeRouteByContactButton: boolean;
-  setOpenHomeRouteByContactButton: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-const ProjectsSubPage: React.FC<ProjectsSubPageProps> = ({ openHomeRouteByContactButton, setOpenHomeRouteByContactButton }) => {
+const ProjectsSubPage: React.FC = () => {
   const { projectId } = useParams<{ projectId: string }>();
 
   const projectLayouts: { [key: string]: JSX.Element } = {
     better_bedrock: <BetterBedrockPage />,
     murder_detector: <MurderDetectorPage />,
     one_block_slime_block_adventure_page: <OneBlockSlimeBlockAdventurePage />,
-    shop_ui: <ShopUIPage openHomeRouteByContactButton={openHomeRouteByContactButton} setOpenHomeRouteByContactButton={setOpenHomeRouteByContactButton} />,
+    shop_ui: <ShopUIPage />,
     hometree_ui: <HometreeUIPage />,
-    simple_ui: <SimpleUIPage openHomeRouteByContactButton={openHomeRouteByContactButton} setOpenHomeRouteByContactButton={setOpenHomeRouteByContactButton} />,
+    simple_ui: <SimpleUIPage />,
   };
 
   if (!projectId || !projectLayouts[projectId]) {
