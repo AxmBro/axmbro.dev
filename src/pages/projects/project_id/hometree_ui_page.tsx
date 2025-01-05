@@ -1,7 +1,7 @@
 import React from "react";
 import { ScreenSection } from "../../../components/layout/screen_section";
-import { Button, ButtonColor } from "../../../components/buttons/button";
-import { Link } from "../../../components/links/custom_link";
+import { Button, ButtonColor } from "../../../components/button/button";
+import { Link } from "../../../components/link/custom_link";
 import { ImageSection } from "../../../components/global/projects_pages_global";
 import { scrollToElement } from "../../../utils/scroll";
 

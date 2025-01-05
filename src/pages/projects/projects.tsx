@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { ScreenSection } from "../../components/layout/screen_section";
-import { Button, ButtonColor } from "../../components/buttons/button";
+import { Button, ButtonColor } from "../../components/button/button";
 import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./projects.module.css"
 import { ScreenContainer } from "../../components/layout/screen_container";

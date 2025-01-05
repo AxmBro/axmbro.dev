@@ -1,16 +1,11 @@
 import React from "react";
 import { ScreenSection } from "../../../components/layout/screen_section";
-import { Link } from "../../../components/links/custom_link";
+import { Link } from "../../../components/link/custom_link";
 import { ImageSection } from "../../../components/global/projects_pages_global";
-import { Button, ButtonColor } from "../../../components/buttons/button";
+import { Button, ButtonColor } from "../../../components/button/button";
 import { scrollToElement } from "../../../utils/scroll";
 
-interface ShopUIPageProps {
-  openHomeRouteByContactButton: boolean;
-  setOpenHomeRouteByContactButton: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-function ShopUIPage({ openHomeRouteByContactButton, setOpenHomeRouteByContactButton }: ShopUIPageProps) {
+const ShopUIPage: React.FC = () => {
   return (
     <div className="projects_pages">
       <ScreenSection

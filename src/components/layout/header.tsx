@@ -1,27 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
-import { Button } from "../buttons/button";
+import { Button } from "../button/button";
 import { scrollToElement } from "../../utils/scroll";
 import styles from "./header.module.css";
+import { useHomeRoute } from "../contexts/NavigateToContactContext";
 
-interface HeaderProps {
-  openHomeRouteByContactButton: boolean;
-  setOpenHomeRouteByContactButton: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-function Header({ openHomeRouteByContactButton, setOpenHomeRouteByContactButton }: HeaderProps) {
+const Header: React.FC = () => {
+  const { navigateToContact, setNavigateToContact } = useHomeRoute();
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (location.pathname === "/" && openHomeRouteByContactButton) {
+    if (location.pathname === "/" && navigateToContact) {
       setTimeout(() => {
         scrollToElement("contact");
       }, 100)
-      setOpenHomeRouteByContactButton(!openHomeRouteByContactButton);
+      setNavigateToContact(false);
     }
-  }, [location.pathname, openHomeRouteByContactButton, setOpenHomeRouteByContactButton]);
+  }, [location.pathname, navigateToContact, setNavigateToContact]);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -89,7 +86,7 @@ function Header({ openHomeRouteByContactButton, setOpenHomeRouteByContactButton 
                     scrollToElement("contact");
                   } else {
                     handleNavigation("/");
-                    setOpenHomeRouteByContactButton(true);
+                    setNavigateToContact(true);
                   }
                 }}
               >
@@ -133,7 +130,7 @@ function Header({ openHomeRouteByContactButton, setOpenHomeRouteByContactButton 
                       scrollToElement("contact");
                     } else {
                       handleNavigation("/");
-                      setOpenHomeRouteByContactButton(true);
+                      setNavigateToContact(true);
                     }
                   }}>
 
