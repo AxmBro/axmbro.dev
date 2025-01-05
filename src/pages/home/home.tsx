@@ -6,14 +6,14 @@ import {
 } from "../../components/layout/screen_section";
 import { Link as RouterLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { Card } from "../../components/cards/card";
-import { Button, ButtonColor } from "../../components/buttons/button";
+import { Card } from "../../components/card/card";
+import { Button, ButtonColor } from "../../components/button/button";
 import { scrollToElement } from "../../utils/scroll";
-import { Link } from "../../components/links/custom_link";
+import { Link } from "../../components/link/custom_link";
 import { ScreenContainer } from "../../components/layout/screen_container";
 import { ExperienceTree, ExperienceTreeContainer } from "../../components/layout/experience_tree";
 import { EXPERIENCE_TREE, SKILLS_CARDS } from "../../components/global/constants";
-import { RouteLink } from "../../components/links/route_link";
+import { RouteLink } from "../../components/link/route_link";
 
 const Home = () => {
   const navigate = useNavigate();

@@ -2,9 +2,9 @@ import React from "react";
 import { ScreenSection } from "../../components/layout/screen_section";
 import { ScreenContainer } from "../../components/layout/screen_container";
 import styles from "./info.module.css";
-import { CustomButton } from "../../components/buttons/custom_button";
-import { RouteLink } from "../../components/links/route_link";
-import { Link } from "../../components/links/custom_link";
+import { CustomButton } from "../../components/button/custom_button";
+import { RouteLink } from "../../components/link/route_link";
+import { Link } from "../../components/link/custom_link";
 
 const Info = () => {
   const height = "3.5rem";

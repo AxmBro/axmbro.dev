@@ -3,20 +3,16 @@ import styles from "./footer.module.css";
 import { ScreenContainer } from "./screen_container";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { scrollToElement } from "../../utils/scroll";
+import { useHomeRoute } from "../contexts/NavigateToContactContext";
 
-interface FooterProps {
-  openHomeRouteByContactButton: boolean;
-  setOpenHomeRouteByContactButton: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-function Footer({ openHomeRouteByContactButton, setOpenHomeRouteByContactButton }: FooterProps) {
+const Footer: React.FC = () => {
+  const { setNavigateToContact } = useHomeRoute();
   const navigate = useNavigate();
   const location = useLocation();
 
   const handleNavigation = (to: string) => {
     navigate(to);
   };
-
 
   return (
     <ScreenContainer
@@ -52,7 +48,7 @@ function Footer({ openHomeRouteByContactButton, setOpenHomeRouteByContactButton 
                 scrollToElement("contact");
               } else {
                 handleNavigation("/");
-                setOpenHomeRouteByContactButton(true);
+                setNavigateToContact(true);
               }
             }}
           >
