@@ -99,7 +99,6 @@ const Header: React.FC = () => {
                 style={{ display: menuOpen ? "none" : "inline-block" }}
               >
                 <h2 className={styles.headerLinkMobile}>Menu</h2>
-                {/* <Button text="Menu" style={{ minWidth: 0 }}></Button> */}
               </div>
               <div
                 className={styles.menu}
@@ -110,6 +109,7 @@ const Header: React.FC = () => {
                     <NavLink
                       to="/"
                       end
+                      style={{ width: "100%"}}
                     >
                       <Button text="Home" style={{ width: "100%", boxSizing: "border-box" }}>
 
@@ -120,6 +120,7 @@ const Header: React.FC = () => {
                     <NavLink
                       to="/projects"
                       end
+                      style={{ width: "100%"}}
                     >
                       <Button text="Projects" style={{ width: "100%", boxSizing: "border-box" }}></Button>
                     </NavLink>
