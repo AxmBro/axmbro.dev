@@ -9,6 +9,7 @@ import { Info } from "./pages/info/info";
 import { NavigateToContactProvider } from "./components/contexts/NavigateToContactContext";
 
 import "./index.css";
+import { NotFound } from "./pages/notFound/notFound";
 
 const App: FC = () => {
   return (
@@ -21,6 +22,7 @@ const App: FC = () => {
             <Route path="/projects" element={<Projects />} />
             <Route path="/projects/:projectId" element={<ProjectsSubPage />} />
             <Route path="/info" element={<Info />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
           <Footer />
         </main>
