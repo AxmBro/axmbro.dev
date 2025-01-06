@@ -34,7 +34,6 @@ const CustomButton: React.FC<CustomButtonProps> = ({
     border: `1px solid rgba(${border.r}, ${border.g}, ${border.b}, 1)`,
   }
 
-  console.log(border)
   return (
     <div
       className={styles.customButton}

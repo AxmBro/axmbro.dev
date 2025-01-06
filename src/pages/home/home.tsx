@@ -56,6 +56,7 @@ const Home = () => {
           {SKILLS_CARDS.map((card, index) => {
             return (
               <Card
+                key={index}
                 title={SKILLS_CARDS[index].title}>
                 <ScreenSectionList
                   style={ScreenSectionListStyle}
