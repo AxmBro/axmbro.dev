@@ -12,6 +12,7 @@ interface ScreenContainerProps {
 
 const ScreenContainer: React.FC<ScreenContainerProps> = ({ children, style, useMinHeight = true, id, className }) => {
   const [minHeight, setMinHeight] = useState("0");
+  const [locationChange, setLocationChange] = useState(false);
 
   const location = useLocation();
 
@@ -20,6 +21,7 @@ const ScreenContainer: React.FC<ScreenContainerProps> = ({ children, style, useM
       top: 0,
       behavior: "auto",
     });
+    setLocationChange(true)
   }, [location]);
 
   useEffect(() => {
@@ -34,13 +36,13 @@ const ScreenContainer: React.FC<ScreenContainerProps> = ({ children, style, useM
     }
 
     handleResize();
+    setLocationChange(false)
     window.addEventListener('resize', handleResize);
-    console.log("xd")
 
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, [useMinHeight]);
+  }, [useMinHeight, locationChange]);
 
   return (
     <div id={id} style={{ minHeight: minHeight }} className={className}>
