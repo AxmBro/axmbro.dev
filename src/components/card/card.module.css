@@ -1,12 +1,12 @@
 .card {
   padding: 1rem;
-  border: 1px solid var(--line-break-color);
+  border: var(--border-width) solid var(--line-break-color);
   border-radius: var(--border-radius);
   background-color: var(--website-background-color2);
 }
 
 .card .title {
-  font-size: 1.6rem;
+  font-size: 1.5rem;
 }
 
 .card > * {

@@ -27,11 +27,11 @@ const CustomButton: React.FC<CustomButtonProps> = ({
   const defaultStyles = {
     color: textColor,
     backgroundColor: `rgba(${border.r}, ${border.g}, ${border.b}, 0.1)`,
-    border: `1px solid rgba(${border.r}, ${border.g}, ${border.b}, 0.5)`,
+    border: `1px var(--border-width) rgba(${border.r}, ${border.g}, ${border.b}, 0.5)`,
   }
 
   const hoverStyles = {
-    border: `1px solid rgba(${border.r}, ${border.g}, ${border.b}, 1)`,
+    border: `1px var(--border-width) rgba(${border.r}, ${border.g}, ${border.b}, 1)`,
   }
 
   return (
