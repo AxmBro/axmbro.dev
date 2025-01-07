@@ -1,14 +1,25 @@
-.footer {
+.topFooterContainer {
   gap: 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
-  padding: 2rem 0;
   flex-wrap: wrap;
+  padding: 2rem 0;
 }
 
-.footer h2 {
+.bottomFooterContainer {
+  gap: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 2rem 0;
+  border-top: var(--border-width) solid var(--line-break-color);
+}
+
+.bottomFooterContainer h2 {
   color: var(--secondary-description-text-color);
   text-align: left;
 }
@@ -45,7 +56,12 @@
   aspect-ratio: 1 / 1;
 }
 
-.footerScreenContainer:hover .logoImg {
+.footerScreenContainer {
+  background-color: var(--website-background-color2);
+  border-top: var(--border-width) solid var(--line-break-color);
+}
+
+.topFooterContainer:hover .logoImg {
   cursor: pointer;
   filter: grayscale(0);
 }

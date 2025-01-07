@@ -19,44 +19,62 @@ const Footer: React.FC = () => {
       id="footer"
       className={styles.footerScreenContainer}
       useMinHeight={false}
-      style={{ backgroundColor: "var(--website-background-color2)", borderTop: "var(--border-width) solid var(--line-break-color)", paddingBottom: 0 }}>
+      style={{ paddingBottom: 0 }}>
       <div className={styles.footer}>
-        <div className={styles.routesContainer}>
-          <NavLink
-            to="/"
-            end
-          >
-            <div className={styles.logoContainer}>
-              <img src={require("../../assets/logo192.png")} className={styles.logoImg} alt="" />
-            </div>
-          </NavLink>
-          <NavLink
-            to="/"
-            end
-          >
-            Home
-          </NavLink>
-          <NavLink
-            to="/projects"
-            end
-          >
-            Projects
-          </NavLink>
-          <h2
-            onClick={() => {
-              if (location.pathname === "/") {
-                scrollToElement("contact");
-              } else {
-                handleNavigation("/");
-                setNavigateToContact(true);
-              }
-            }}
-          >
-            Contact
-          </h2>
 
+        <div className={styles.topFooterContainer}>
+          <div className={styles.routesContainer}>
+            <NavLink
+              to="/"
+              end
+            >
+              <div className={styles.logoContainer}>
+                <img src={require("../../assets/logo192.png")} className={styles.logoImg} alt="" />
+              </div>
+            </NavLink>
+            <NavLink
+              to="/"
+              end
+            >
+              Home
+            </NavLink>
+            <NavLink
+              to="/projects"
+              end
+            >
+              Projects
+            </NavLink>
+            <h2
+              onClick={() => {
+                if (location.pathname === "/") {
+                  scrollToElement("contact");
+                } else {
+                  handleNavigation("/");
+                  setNavigateToContact(true);
+                }
+              }}
+            >
+              Contact
+            </h2>
+          </div>
         </div>
-        <h2>Copyright © AxmBro | All rights reserved</h2>
+
+        <div className={styles.bottomFooterContainer}>
+          <h2>Copyright © AxmBro | All rights reserved</h2>
+          <div className={styles.routesContainer}>
+            <NavLink
+              to="/"
+              end>
+              Privacy Policy
+            </NavLink>
+            <NavLink
+              to="/"
+              end>
+              Terms of Use
+            </NavLink>
+          </div>
+        </div>
+
       </div>
     </ScreenContainer>
   );
