@@ -5,7 +5,7 @@
   display: flex;
   justify-content: center;
   background-color: var(--website-background-color2);
-  border-bottom: 1px solid var(--line-break-color);
+  border-bottom: var(--border-width) solid var(--line-break-color);
 }
 
 .header {
@@ -69,7 +69,6 @@
   min-width: 0px;
   width: calc(100%);
   padding: 1rem 0;
-  /* border-bottom: 1px solid var(--line-break-color); */
   overflow: hidden;
   box-sizing: border-box;
 }
@@ -131,7 +130,7 @@
   padding: 1rem;
   gap: 1rem;
   background-color: var(--website-background-color2);
-  border: 1px solid var(--line-break-color);
+  border: var(--border-width) solid var(--line-break-color);
   border-radius: var(--border-radius);
 }
 
