@@ -70,7 +70,7 @@ export const EXPERIENCE_TREE = [
   {
     role: "Owner, Lead Developer",
     date: "07.02.2022 - NOW",
-    company: "Better Bedrock",
+    company: "@Better Bedrock",
     items: [
       { name: "Designing and creating new features using JSON in Minecraft Bedrock JsonUI system" },
       { name: "Creating basic models and simple animations using BlockBench and Minecraft Entity components etc." },

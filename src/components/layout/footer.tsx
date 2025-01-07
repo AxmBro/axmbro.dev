@@ -19,7 +19,7 @@ const Footer: React.FC = () => {
       id="footer"
       className={styles.footerScreenContainer}
       useMinHeight={false}
-      style={{ backgroundColor: "var(--website-background-color2)", borderTop: "var(--border-width) solid var(--line-break-color)" }}>
+      style={{ backgroundColor: "var(--website-background-color2)", borderTop: "var(--border-width) solid var(--line-break-color)", paddingBottom: 0 }}>
       <div className={styles.footer}>
         <div className={styles.routesContainer}>
           <NavLink
