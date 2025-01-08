@@ -109,7 +109,8 @@ const ProjectsGrid: React.FC<ProjectsGridProps> = ({ items, hideTags }) => {
               </div>
             )}
             {item.imgSrc && (
-              <div className={styles.ImageWrapper}>
+              <div onClick={() => handleProjectClick(item)}
+                className={item.url ? `${styles.ImageWrapperUrl}` : `${styles.ImageWrapper}`}>
                 <img src={imageSrc} alt={imageAlt} className={styles.Image} />
               </div>
             )}
