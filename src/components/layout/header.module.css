@@ -31,7 +31,6 @@
 .header .logoContainer:hover .logo {
   cursor: pointer;
   color: transparent;
-  background-size: 500% auto;
   background: linear-gradient(
     to right,
     var(--secondary-text-color) 30%,
