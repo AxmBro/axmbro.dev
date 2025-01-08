@@ -20,61 +20,59 @@ const Footer: React.FC = () => {
       className={styles.footerScreenContainer}
       useMinHeight={false}
       style={{ paddingBottom: 0 }}>
-      <div className={styles.footer}>
-
-        <div className={styles.topFooterContainer}>
-          <div className={styles.routesContainer}>
-            <NavLink
+      <div className={styles.topFooterContainer}>
+        <div className={styles.routesContainer}>
+          <NavLink
               to="/"
               end
+              className={styles.logoNavLink}
             >
               <div className={styles.logoContainer}>
                 <img src={require("../../assets/logo192.png")} className={styles.logoImg} alt="" />
               </div>
             </NavLink>
-            <NavLink
-              to="/"
-              end
-            >
-              Home
-            </NavLink>
-            <NavLink
-              to="/projects"
-              end
-            >
-              Projects
-            </NavLink>
-            <h2
-              onClick={() => {
-                if (location.pathname === "/") {
-                  scrollToElement("contact");
-                } else {
-                  handleNavigation("/");
-                  setNavigateToContact(true);
-                }
-              }}
-            >
-              Contact
-            </h2>
-          </div>
-        </div>
+          <NavLink
+            to="/"
+            end
+          >
+            Home
+          </NavLink>
+          <NavLink
+            to="/projects"
+            end
+          >
+            Projects
+          </NavLink>
+          <h2
+            onClick={() => {
+              if (location.pathname === "/") {
+                scrollToElement("contact");
+              } else {
+                handleNavigation("/");
+                setNavigateToContact(true);
+              }
+            }}
+          >
+            Contact
+          </h2>
 
-        <div className={styles.bottomFooterContainer}>
-          <h2>Copyright © AxmBro | All rights reserved</h2>
-          <div className={styles.routesContainer}>
-            <NavLink
-              to="/"
-              end>
-              Privacy Policy
-            </NavLink>
-            <NavLink
-              to="/"
-              end>
-              Terms of Use
-            </NavLink>
-          </div>
         </div>
+        <div className={styles.routesContainer}>
+          <NavLink
+            to="/"
+            end>
+            Privacy Policy
+          </NavLink>
+          <NavLink
+            to="/"
+            end>
+            Terms of Use
+          </NavLink>
+        </div>
+      </div>
 
+      <div className={styles.bottomFooterContainer}>
+        <h2>Copyright © AxmBro | All rights reserved</h2>
       </div>
     </ScreenContainer>
   );
