@@ -9,6 +9,7 @@
   box-sizing: border-box;
   height: 100%;
   min-width: 7rem;
+  transition: background-color .15s ease;
 }
 
 .button:hover {
