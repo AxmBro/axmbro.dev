@@ -89,17 +89,34 @@
   width: 2rem;
 }
 
-.ProjectsGridItem .ImageWrapper {
+.ImageWrapper {
+  overflow: hidden;
   width: 50%;
   flex-basis: 340px;
   flex-shrink: 0;
 }
 
+.ImageWrapperUrl {
+  overflow: hidden;
+  width: 50%;
+  flex-basis: 340px;
+  flex-shrink: 0;
+}
+
+.ImageWrapperUrl:hover {
+  cursor: pointer;
+}
+
 .ProjectsGridItem .Image {
-  display: block;
+  display: block; 
   width: 100%;
   aspect-ratio: 16 / 9;
   background-color: var(--line-break-color);
+  transition: scale .25s ease;
+}
+
+.ProjectsGridItem .Image:hover {
+  scale: 1.1;
 }
 
 .ProjectsGridItem .Container {
@@ -149,18 +166,21 @@
   flex-wrap: wrap;
 }
 
-/* .DownloadButtonMobile {
-  display: none;
-} */
-
 @media screen and (max-width: 900px) {
   .ProjectsGridItem {
     flex-direction: column;
   }
 
-  .ProjectsGridItem .ImageWrapper {
+  .ImageWrapper {
     width: 100%;
-    flex-basis: 0px;
+    flex-basis: unset;
+    flex-shrink: 1;
+    margin-bottom: 1rem;
+  }
+  
+  .ImageWrapperUrl {
+    width: 100%;
+    flex-basis: unset;
     flex-shrink: 1;
     margin-bottom: 1rem;
   }
@@ -174,8 +194,4 @@
   .ProjectsGridItem .DownloadContainer {
     display: none;
   }
-
-  /* .ProjectsGridItem .DownloadButtonMobile {
-    display: flex;
-  } */
 }
