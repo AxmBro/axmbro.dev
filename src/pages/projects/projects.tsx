@@ -5,6 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./projects.module.css"
 import { ScreenContainer } from "../../components/layout/screen_container";
 import { PROJECTS } from "../../components/global/constants";
+import { RouteLink } from "../../components/link/route_link";
 
 interface ProjectItem {
   title: string;
@@ -68,9 +69,9 @@ function Projects() {
             hideTags={!hideTags}
             items={items} />
         </ScreenSection>}
-        {(items.length === 0) && (
-          <h2 style={{marginTop: "2rem"}}>{`There are no results for: ${search}`}</h2>
-        )}
+      {(items.length === 0) && (
+        <h2 style={{ marginTop: "2rem" }}>{`There are no results for: ${search}`}</h2>
+      )}
     </ScreenContainer>
   );
 }
@@ -113,60 +114,46 @@ const ProjectsGrid: React.FC<ProjectsGridProps> = ({ items, hideTags }) => {
               </div>
             )}
             <div className={styles.Container}>
-              <div className={styles.Texts}>
-                <div className={styles.TitleContainer}>
-                  <div className={styles.TitleAndLogoContainer}>
-                    {item.logoSrc && (
-                      <img
-                        src={logoImageSrc}
-                        alt={item.logoSrc}
-                      />
-                    )}
-                    <h1
-                      onClick={() => handleProjectClick(item)}
-                      className={item.url ? `${styles.TitleUrl}` : `${styles.Title}`}
-                      style={{ cursor: item.url ? "pointer" : undefined }}
-                    >
-                      {item.title}
-                    </h1>
-                  </div>
-                  {item.downloadLink && (
-                    <div className={styles.DownloadContainer}>
-                      <a
-                        href={item.downloadLink}
-                        className={`${styles.Button} ${styles.DownloadButton}`}
-                        rel="noopener noreferrer"
-                        target="_blank"
-                      >
-                        <Button buttonColor={ButtonColor.blue} text="Download" />
-                      </a>
-                    </div>
+              <div>
+                <div className={styles.TitleAndLogoContainer}>
+                  {item.logoSrc && (
+                    <img
+                      src={logoImageSrc}
+                      alt={item.logoSrc}
+                    />
                   )}
+                  <h1
+                    onClick={() => handleProjectClick(item)}
+                    className={item.url ? `${styles.TitleUrl}` : `${styles.Title}`}
+                    style={{ cursor: item.url ? "pointer" : undefined }}
+                  >
+                    {item.title}
+                  </h1>
                 </div>
                 <h2 className={styles.Description}>{item.description}</h2>
+                {(item.tags && hideTags) && (
+                  <div className={styles.TagsContainer}>
+                    {item.tags.map((tag) => (
+                      <h2 key={`TagKey${tag}`} className={styles.Tag}>
+                        {tag}
+                      </h2>
+                    ))}
+                  </div>
+                )}
               </div>
-              {(item.tags && hideTags) && (
-                <div className={styles.TagsContainer}>
-                  {item.tags.map((tag) => (
-                    <h2 key={`TagKey${tag}`} className={styles.Tag}>
-                      {tag}
-                    </h2>
-                  ))}
-                </div>
-              )}
-            </div>
-            {item.downloadLink && (
-              <div className={styles.DownloadButtonMobile} style={{ marginTop: "1rem" }}>
-                <a
-                  href={item.downloadLink}
-                  className={`${styles.Button} ${styles.DownloadButton}`}
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
+              <div className={styles.navButtonsContainer}>
+                {item.url && (<RouteLink
+                  to={item.url!}
+                  useChildrenInsteadOfText={true}>
+                  <Button buttonColor={ButtonColor.blue} text="See showcase" />
+                </RouteLink>)}
+                {item.downloadLink && (<RouteLink
+                  to={item.url!}
+                  useChildrenInsteadOfText={true}>
                   <Button buttonColor={ButtonColor.default} text="Download" />
-                </a>
+                </RouteLink>)}
               </div>
-            )}
+            </div>
           </div>
         );
       })}
