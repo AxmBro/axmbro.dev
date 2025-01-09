@@ -5,6 +5,7 @@ import { Button, ButtonColor } from "../../components/button/button";
 import { RouteLink } from "../../components/link/route_link";
 
 const NotFound = () => {
+  document.title = "AxmBro | Not found"
   return (
     <ScreenContainer>
 

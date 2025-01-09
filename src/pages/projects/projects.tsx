@@ -19,6 +19,7 @@ interface ProjectItem {
 }
 
 function Projects() {
+  document.title = "AxmBro | Projects"
   const location = useLocation();
   const initialSearch = location.state?.search || "";
   const [search, setSearch] = useState(initialSearch);

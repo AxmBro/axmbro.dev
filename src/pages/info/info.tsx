@@ -7,6 +7,7 @@ import { RouteLink } from "../../components/link/route_link";
 import { Link } from "../../components/link/custom_link";
 
 const Info = () => {
+  document.title = "AxmBro | Info"
   const height = "3.5rem";
   const width = "100%";
   return (

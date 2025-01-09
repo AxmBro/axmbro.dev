@@ -11,6 +11,7 @@ import { ScreenContainer } from "../../components/layout/screen_container";
 
 const ProjectsSubPage: React.FC = () => {
   const { projectId } = useParams<{ projectId: string }>();
+  document.title = `AxmBro | Projects | ${projectId}`
 
   const projectLayouts: { [key: string]: JSX.Element } = {
     better_bedrock: <BetterBedrockPage />,
