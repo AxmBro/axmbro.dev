@@ -16,6 +16,7 @@ import { EXPERIENCE_TREE, SKILLS_CARDS } from "../../components/global/constants
 import { RouteLink } from "../../components/link/route_link";
 
 const Home = () => {
+  document.title = "AxmBro | Home"
   const navigate = useNavigate();
   const ScreenSectionListStyle = {
     padding: 0,
@@ -25,6 +26,7 @@ const Home = () => {
   const handleExampleProjectsClick = () => {
     navigate("/projects", { state: { search: "mcbe jsonui" } });
   };
+
 
   return (
     <ScreenContainer>
