@@ -6,6 +6,7 @@ import styles from "./projects.module.css"
 import { ScreenContainer } from "../../components/layout/screen_container";
 import { PROJECTS } from "../../components/global/constants";
 import { RouteLink } from "../../components/link/route_link";
+import starImage from "../../assets/star.png";
 
 interface ProjectItem {
   title: string;
@@ -95,8 +96,10 @@ const ProjectsGrid: React.FC<ProjectsGridProps> = ({ items, hideTags }) => {
   return (
     <div className={styles.ProjectsGrid}>
       {items.map((item) => {
-        const imageSrc = item.imgSrc ? require(`../../assets/${item.imgSrc}.png`) : null;
-        const logoImageSrc = item.logoSrc ? require(`../../assets/${item.logoSrc}.png`) : null;
+        const images = import.meta.glob('../../assets/*.png');
+
+        const imageSrc = item.imgSrc ? images[`../../assets/${item.imgSrc}.png`] : "";
+        const logoImageSrc = item.logoSrc ? images[`../../assets/${item.logoSrc}.png`] : "";
         const imageAlt = item.imgSrc || "";
 
         return (
@@ -106,7 +109,7 @@ const ProjectsGrid: React.FC<ProjectsGridProps> = ({ items, hideTags }) => {
           >
             {item.star && (
               <div className={styles.StarContainer}>
-                <img className={styles.Star} src={require("../../assets/star.png")} alt="starImg" />
+                <img className={styles.Star} src={starImage} alt="starImg" />
               </div>
             )}
             {item.imgSrc && (
