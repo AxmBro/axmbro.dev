@@ -4,6 +4,7 @@ import { Button } from "../button/button";
 import { scrollToElement } from "../../utils/scroll";
 import styles from "./header.module.css";
 import { useHomeRoute } from "../contexts/NavigateToContactContext";
+import logo from "../../assets/logo192.png";
 
 const Header: React.FC = () => {
   const { navigateToContact, setNavigateToContact } = useHomeRoute();
@@ -53,7 +54,7 @@ const Header: React.FC = () => {
               style={{ textDecoration: 0 }}
             >
               <div className={styles.logoContainer}>
-                <img src={require("../../assets/logo192.png")} className={styles.logoImg} alt="" />
+                <img src={logo} className={styles.logoImg} alt="" />
                 <h1 className={styles.logo}>Axmbro</h1>
               </div>
             </NavLink>

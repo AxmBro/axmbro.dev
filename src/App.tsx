@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { Home } from "./pages/home/home";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Header } from "./components/layout/header";

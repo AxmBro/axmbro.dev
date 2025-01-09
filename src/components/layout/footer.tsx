@@ -4,6 +4,7 @@ import { ScreenContainer } from "./screen_container";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { scrollToElement } from "../../utils/scroll";
 import { useHomeRoute } from "../contexts/NavigateToContactContext";
+import logo from "../../assets/logo192.png";
 
 const Footer: React.FC = () => {
   const { setNavigateToContact } = useHomeRoute();
@@ -28,7 +29,7 @@ const Footer: React.FC = () => {
               className={styles.logoNavLink}
             >
               <div className={styles.logoContainer}>
-                <img src={require("../../assets/logo192.png")} className={styles.logoImg} alt="" />
+                <img src={logo} className={styles.logoImg} alt="" />
               </div>
             </NavLink>
           <NavLink
