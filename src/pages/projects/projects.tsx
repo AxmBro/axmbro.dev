@@ -96,10 +96,16 @@ const ProjectsGrid: React.FC<ProjectsGridProps> = ({ items, hideTags }) => {
   return (
     <div className={styles.ProjectsGrid}>
       {items.map((item) => {
-        const images = import.meta.glob('../../assets/*.png');
+        const images = import.meta.glob('../../assets/*.png', { eager: true });
 
-        const imageSrc = item.imgSrc ? images[`../../assets/${item.imgSrc}.png`] : "";
-        const logoImageSrc = item.logoSrc ? images[`../../assets/${item.logoSrc}.png`] : "";
+        const imageSrc = item.imgSrc
+          ? (images[`../../assets/${item.imgSrc}.png`] as { default: string }).default
+          : "";
+
+        const logoImageSrc = item.logoSrc
+          ? (images[`../../assets/${item.logoSrc}.png`] as { default: string }).default
+          : "";
+
         const imageAlt = item.imgSrc || "";
 
         return (
