@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./home.module.css";
 import {
   ScreenSection,
@@ -55,7 +54,7 @@ const Home = () => {
         title="Skills"
         description1="Here is a list of my skills, rated out of 10 based on my own knowledge and experience.">
         <div className={styles.SkillsSection}>
-          {SKILLS_CARDS.map((card, index) => {
+          {SKILLS_CARDS.map((_, index) => {
             return (
               <Card
                 key={index}

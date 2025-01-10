@@ -1,4 +1,3 @@
-import React from "react";
 import { ScreenSection } from "../../components/layout/screen_section";
 import { ScreenContainer } from "../../components/layout/screen_container";
 import styles from "./info.module.css";
