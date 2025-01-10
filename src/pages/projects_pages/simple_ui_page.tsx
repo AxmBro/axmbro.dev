@@ -1,19 +1,15 @@
-import React from "react";
 import { ScreenSection } from "../../components/layout/screen_section";
 import { Button, ButtonColor } from "../../components/button/button";
 import { Link } from "../../components/link/custom_link";
 import { ImageSection } from "../../components/global/projects_pages_global";
 import { scrollToElement } from "../../utils/scroll";
 import { useNavigate, useLocation } from "react-router-dom";
+import { useHomeRoute } from "../../components/contexts/NavigateToContactContext";
 
-interface SimpleUIPageProps {
-  openHomeRouteByContactButton: boolean;
-  setOpenHomeRouteByContactButton: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-function SimpleUIPage({ openHomeRouteByContactButton, setOpenHomeRouteByContactButton }: SimpleUIPageProps) {
+function SimpleUIPage() {
   const navigate = useNavigate();
   const location = useLocation();
+  const { setNavigateToContact } = useHomeRoute();
 
   const handleNavigation = (to: string) => {
     navigate(to);
@@ -32,7 +28,7 @@ function SimpleUIPage({ openHomeRouteByContactButton, setOpenHomeRouteByContactB
                 scrollToElement("contact");
               } else {
                 handleNavigation("/");
-                setOpenHomeRouteByContactButton(true);
+                setNavigateToContact(true);
               }
             }}>
               <Button buttonColor={ButtonColor.blue} text="Want this UI? Contact Me"></Button>
