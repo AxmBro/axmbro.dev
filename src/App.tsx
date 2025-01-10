@@ -8,7 +8,7 @@ import { ProjectsSubPage } from "./pages/projects/projects_subpage";
 import { Info } from "./pages/info/info";
 import { NavigateToContactProvider } from "./components/contexts/NavigateToContactContext";
 
-import "./index.css";
+import "./App.css";
 import { NotFound } from "./pages/notFound/notFound";
 
 const App: FC = () => {
