@@ -1,4 +1,3 @@
-import React from "react";
 import { ScreenSection } from "../../components/layout/screen_section";
 import { ScreenContainer } from "../../components/layout/screen_container";
 import { Button, ButtonColor } from "../../components/button/button";
