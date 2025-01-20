@@ -14,7 +14,7 @@ const Info = () => {
 
       <ScreenSection
         id="info"
-        style={{ padding: "1rem 0 2rem 0", border: 0 }}
+        singleParagraph={true}
         title="Info"
         description1="This is quick info website, where you can directly access my all other social media platforms or just contact me!">
         <div className={styles.buttonsContainer}>
