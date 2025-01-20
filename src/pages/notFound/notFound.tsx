@@ -10,7 +10,7 @@ const NotFound = () => {
 
       <ScreenSection
         id="notFound"
-        style={{ padding: "1rem 0 2rem 0", border: 0 }}
+        singleParagraph={true}
         title="Not found!"
         description1="Seems like this path is not correct.">
         <RouteLink

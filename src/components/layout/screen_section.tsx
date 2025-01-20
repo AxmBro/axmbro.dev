@@ -2,6 +2,7 @@ import React, { ReactNode } from "react";
 import "./screen_section.css";
 
 interface ScreenSectionProp {
+  singleParagraph?: Boolean;
   ignoreChildrenPadding?: boolean;
   children?: ReactNode;
   title?: string;
@@ -12,6 +13,7 @@ interface ScreenSectionProp {
 }
 
 const ScreenSection: React.FC<ScreenSectionProp> = ({
+  singleParagraph = false,
   ignoreChildrenPadding = false,
   children,
   title,
@@ -21,7 +23,7 @@ const ScreenSection: React.FC<ScreenSectionProp> = ({
   id
 }) => {
   return (
-    <div className="ScreenSection" style={style} id={id}>
+    <div className="ScreenSection" style={{ padding: singleParagraph ? "1rem 0 2rem 0" : "", border: singleParagraph ? 0 : "", ...style }} id={id}>
       {title ? <h1>{title}</h1> : null}
       {description1 ? <h2 style={{ paddingBottom: description2 ? "1rem" : 0 }}>{description1}</h2> : null}
       {description2 ? <h2>{description2}</h2> : null}
@@ -53,7 +55,7 @@ const ScreenSectionList: React.FC<ScreenSectionListProps> = ({
         {items.map((item, index) => {
           return (
             <li key={`li${index}`}>
-              {item.name}{item.value && (<span>: </span> )}<span className="highlight" key={`span${index}`}>{item.value}</span>
+              {item.name}{item.value && (<span>: </span>)}<span className="highlight" key={`span${index}`}>{item.value}</span>
             </li>
           )
         })}
