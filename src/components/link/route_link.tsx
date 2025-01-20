@@ -3,7 +3,6 @@ import styles from "./route_link.module.css";
 import { Link as RouterLink } from "react-router-dom";
 
 interface RouteLinkProps {
-  useChildrenInsteadOfText?: boolean,
   to: string,
   useUnderline?: boolean,
   textColor?: string,
@@ -12,7 +11,6 @@ interface RouteLinkProps {
 }
 
 const RouteLink: React.FC<RouteLinkProps> = ({
-  useChildrenInsteadOfText = false,
   to,
   useUnderline = true,
   textColor = "var(--secondary-text-color)",
@@ -23,12 +21,12 @@ const RouteLink: React.FC<RouteLinkProps> = ({
   return (
     <RouterLink
       to={to}>
-      {!useChildrenInsteadOfText && (<h2
+      {!children && (<h2
         style={{ color: textColor }}
         className={useUnderline ? `${styles.link}` : `${styles.linkWithoutUnderline}`}
-      >{text ?? "{text}"}
+      >{text}
       </h2>)}
-      {useChildrenInsteadOfText && (children)}
+      {children && (children)}
     </RouterLink>
   )
 }

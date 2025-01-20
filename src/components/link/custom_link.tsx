@@ -2,7 +2,6 @@ import React from "react";
 import styles from "./custom_link.module.css";
 
 interface LinkProps {
-  useChildrenInsteadOfText?: boolean,
   useUnderline?: boolean,
   textColor?: string,
   text?: string,
@@ -12,7 +11,6 @@ interface LinkProps {
 }
 
 const Link: React.FC<LinkProps> = ({
-  useChildrenInsteadOfText = false,
   useUnderline = true,
   textColor = "var(--secondary-text-color)",
   text,
@@ -23,7 +21,7 @@ const Link: React.FC<LinkProps> = ({
 
   return (
     <>
-      {!useChildrenInsteadOfText && (<a
+      {!children && (<a
         style={{ color: textColor }}
         className={useUnderline ? `${styles.link}` : `${styles.linkWithoutUnderline}`}
         href={href}
@@ -31,7 +29,7 @@ const Link: React.FC<LinkProps> = ({
         target={openInNewTab ? "_blank" : undefined}
       >{text ?? "{text}"}
       </a>)}
-      {useChildrenInsteadOfText && (
+      {children && (
         <a
           href={href}
           rel="noopener noreferrer"
