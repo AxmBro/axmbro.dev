@@ -4,8 +4,18 @@ import styles from "./info.module.css";
 import { CustomButton } from "../../components/button/custom_button";
 import { RouteLink } from "../../components/link/route_link";
 import { Link } from "../../components/link/custom_link";
+import { scrollToElement } from "../../utils/scroll";
+import { useHomeRoute } from "../../components/contexts/NavigateToContactContext";
+import { useNavigate } from "react-router-dom";
 
 const Info = () => {
+  const { setNavigateToContact } = useHomeRoute();
+  const navigate = useNavigate();
+
+  const handleNavigation = (to: string) => {
+    navigate(to);
+  };
+
   document.title = "AxmBro | Info"
   const height = "3.5rem";
   const width = "100%";
@@ -23,10 +33,21 @@ const Info = () => {
             <CustomButton style={{ height: height, width: width }} border={{ r: 255, g: 200, b: 0 }} text="Portfolio Website" textContant="/home" />
           </RouteLink>
           <RouteLink
-
             to="/projects">
             <CustomButton style={{ height: height, width: width }} border={{ r: 255, g: 200, b: 0 }} text="Portfolio Website" textContant="/projects" />
           </RouteLink>
+
+          <div onClick={() => {
+            if (location.pathname === "/") {
+              scrollToElement("contact");
+            } else {
+              handleNavigation("/");
+              setNavigateToContact(true);
+            }
+          }}>
+            <CustomButton style={{ height: height, width: width }} border={{ r: 255, g: 200, b: 0 }} text="Portfolio Website" textContant="/contact" />
+          </div>
+
           <Link
             href="https://github.com/AxmBro"
             openInNewTab={true}
