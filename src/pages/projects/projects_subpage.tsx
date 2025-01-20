@@ -1,12 +1,12 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { ScreenSection } from "../../components/layout/screen_section";
-import { BetterBedrockPage } from "./project_id/better_bedrock_page";
-import { MurderDetectorPage } from "./project_id/murder_detector_page";
-import { OneBlockSlimeBlockAdventurePage } from "./project_id/one_block_slime_block_adventure_page";
-import { ShopUIPage } from "./project_id/shop_ui_page";
-import { HometreeUIPage } from "./project_id/hometree_ui_page";
-import { SimpleUIPage } from "./project_id/simple_ui_page";
+import { BetterBedrockPage } from "./projectId/better_bedrock_page";
+import { MurderDetectorPage } from "./projectId/murder_detector_page";
+import { OneBlockSlimeBlockAdventurePage } from "./projectId/one_block_slime_block_adventure_page";
+import { ShopUIPage } from "./projectId/shop_ui_page";
+import { HometreeUIPage } from "./projectId/hometree_ui_page";
+import { SimpleUIPage } from "./projectId/simple_ui_page";
 import { ScreenContainer } from "../../components/layout/screen_container";
 
 const ProjectsSubPage: React.FC = () => {

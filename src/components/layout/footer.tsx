@@ -58,18 +58,13 @@ const Footer: React.FC = () => {
           </h2>
 
         </div>
-        {/* <div className={styles.routesContainer}>
-          <NavLink
-            to="/"
-            end>
-            Privacy Policy
-          </NavLink>
+        <div className={styles.routesContainer}>
           <NavLink
             to="/"
             end>
             Terms of Use
           </NavLink>
-        </div> */}
+        </div>
       </div>
 
       <div className={styles.bottomFooterContainer}>
