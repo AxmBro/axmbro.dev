@@ -14,7 +14,6 @@ const NotFound = () => {
         title="Not found!"
         description1="Seems like this path is not correct.">
         <RouteLink
-          useChildrenInsteadOfText={true}
           to="/">
           <Button text="Back to Home" buttonColor={ButtonColor.blue}></Button>
         </RouteLink>

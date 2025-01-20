@@ -154,13 +154,11 @@ const ProjectsGrid: React.FC<ProjectsGridProps> = ({ items, hideTags }) => {
               </div>
               <div className={styles.navButtonsContainer}>
                 {item.url && (<RouteLink
-                  to={item.url!}
-                  useChildrenInsteadOfText={true}>
+                  to={item.url!}>
                   <Button buttonColor={ButtonColor.blue} text="See showcase" />
                 </RouteLink>)}
                 {item.downloadLink && (<RouteLink
-                  to={item.url!}
-                  useChildrenInsteadOfText={true}>
+                  to={item.url!}>
                   <Button buttonColor={ButtonColor.default} text="Download" />
                 </RouteLink>)}
               </div>
