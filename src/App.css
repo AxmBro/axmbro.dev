@@ -33,7 +33,7 @@ code {
   --max-website-width: 70rem;
 
   --border-radius: 8px;
-  --border-width: 0.125rem;
+  --border-width: 1px;
   
   --button-white-background-color: rgb(223, 223, 223);
   --button-blue-background-color: rgb(0, 143, 252);

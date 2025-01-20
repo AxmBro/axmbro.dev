@@ -24,14 +24,14 @@ const Footer: React.FC = () => {
       <div className={styles.topFooterContainer}>
         <div className={styles.routesContainer}>
           <NavLink
-              to="/"
-              end
-              className={styles.logoNavLink}
-            >
-              <div className={styles.logoContainer}>
-                <img src={logo} className={styles.logoImg} alt="" />
-              </div>
-            </NavLink>
+            to="/"
+            end
+            className={styles.logoNavLink}
+          >
+            <div className={styles.logoContainer}>
+              <img src={logo} className={styles.logoImg} alt="" />
+            </div>
+          </NavLink>
           <NavLink
             to="/"
             end
@@ -59,11 +59,6 @@ const Footer: React.FC = () => {
 
         </div>
         <div className={styles.routesContainer}>
-          <NavLink
-            to="/"
-            end>
-            Privacy Policy
-          </NavLink>
           <NavLink
             to="/"
             end>
