@@ -4,6 +4,7 @@ import "./screen_section.css";
 interface ScreenSectionProp {
   singleParagraph?: Boolean;
   ignoreChildrenPadding?: boolean;
+  childrenTopDivider?: boolean;
   children?: ReactNode;
   title?: string;
   description1?: string;
@@ -15,6 +16,7 @@ interface ScreenSectionProp {
 const ScreenSection: React.FC<ScreenSectionProp> = ({
   singleParagraph = false,
   ignoreChildrenPadding = false,
+  childrenTopDivider = false,
   children,
   title,
   description1,
@@ -29,7 +31,9 @@ const ScreenSection: React.FC<ScreenSectionProp> = ({
       {description2 ? <h2>{description2}</h2> : null}
       <div
         style={{
-          paddingTop: (ignoreChildrenPadding ? 0 : ((children && (title || description1 || description2)) ? "1rem" : 0))
+          paddingTop: (ignoreChildrenPadding ? 0 : ((children && (title || description1 || description2)) ? "1rem" : 0)),
+          marginTop: childrenTopDivider ? "1rem" : "",
+          borderTop: childrenTopDivider ? "1px var(--line-break-color) solid" : "",
         }}>
         {children}
       </div>

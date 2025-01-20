@@ -9,6 +9,7 @@ interface ImageSectionItemsProps {
 
 interface ImageSectionProps {
   title: string;
+  childrenTopDividerInside?: boolean;
   rowStyle?: boolean;
   sectionDescription: string;
   items: ImageSectionItemsProps[];
@@ -17,11 +18,12 @@ interface ImageSectionProps {
 
 }
 
-const ImageSection: React.FC<ImageSectionProps> = ({ title, sectionDescription, items, rowStyle }) => {
+const ImageSection: React.FC<ImageSectionProps> = ({ title, sectionDescription, items, rowStyle, childrenTopDividerInside = true }) => {
   return (
     <ScreenSection
       style={{ padding: rowStyle ? "2rem 0 2rem 0" : "2rem 0 1rem 0" }}
       ignoreChildrenPadding={true}
+      childrenTopDivider={childrenTopDividerInside}
       title={title}
       description1={sectionDescription}>
       <ul style={{ padding: rowStyle ? "1rem 0 0 0" : 0, margin: 0 }} className={rowStyle ? "image-section-row" : ""}>

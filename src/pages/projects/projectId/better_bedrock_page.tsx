@@ -77,6 +77,7 @@ function BetterBedrockPage() {
         title={"Mobile App"}
         sectionDescription={"Here is a list of desktop website views with short description!"}
         rowStyle={true}
+        childrenTopDividerInside={false}
         items={[
           {
             title: "Home",

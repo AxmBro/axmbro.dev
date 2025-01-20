@@ -7,10 +7,6 @@
   color: var(--primary-description-text-color);
 }
 
-.container {
-  padding-bottom: 0.5rem;
-}
-
 .container .navigateContact {
   color: var(--secondary-text-color);
 }
