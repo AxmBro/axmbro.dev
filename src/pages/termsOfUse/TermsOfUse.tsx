@@ -53,6 +53,7 @@ const TermsOfUse = () => {
       <ScreenSection
         id="termsOfUse"
         singleParagraph={true}
+        childrenTopDivider={true}
         title="Terms of Use"
         description1="By accessing this website (axmbro.dev), you agree to these Terms. If you disagree, do not use the site.">
         <div className={styles.termsOfUse}>
