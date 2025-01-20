@@ -1,0 +1,24 @@
+.termsOfUse ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.termsOfUse ul li {
+  color: var(--primary-description-text-color);
+}
+
+.container {
+  padding-bottom: 0.5rem;
+}
+
+.container .navigateContact {
+  color: var(--secondary-text-color);
+}
+
+.container .navigateContact:hover {
+  cursor: pointer;
+}
+
+.container span {
+  color: var(--primary-text-color);
+}

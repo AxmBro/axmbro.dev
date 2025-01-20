@@ -60,7 +60,7 @@ const Footer: React.FC = () => {
         </div>
         <div className={styles.routesContainer}>
           <NavLink
-            to="/"
+            to="/terms_of_use"
             end>
             Terms of Use
           </NavLink>
