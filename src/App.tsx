@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Home } from "./pages/home/Home";
+import { Home } from "./pages/home/Home.tsx";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Header } from "./components/layout/Header";
 import { Projects } from "./pages/projects/Projects";
