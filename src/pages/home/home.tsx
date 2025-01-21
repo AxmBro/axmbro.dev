@@ -1,18 +1,18 @@
-import styles from "./home.module.css";
+import styles from "./Home.module.css";
 import {
   ScreenSection,
   ScreenSectionList,
-} from "../../components/layout/screen_section";
+} from "../../components/layout/ScreenSection";
 import { Link as RouterLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { Card } from "../../components/card/card";
-import { Button, ButtonColor } from "../../components/button/button";
+import { Card } from "../../components/card/Card";
+import { Button, ButtonColor } from "../../components/button/Button";
 import { scrollToElement } from "../../utils/scroll";
-import { Link } from "../../components/link/custom_link";
-import { ScreenContainer } from "../../components/layout/screen_container";
-import { ExperienceTree, ExperienceTreeContainer } from "../../components/layout/experience_tree";
+import { Link } from "../../components/link/Link";
+import { ScreenContainer } from "../../components/layout/ScreenContainer";
+import { ExperienceTree, ExperienceTreeContainer } from "../../components/layout/ExperienceTree";
 import { EXPERIENCE_TREE, SKILLS_CARDS } from "../../components/global/constants";
-import { RouteLink } from "../../components/link/route_link";
+import { RouteLink } from "../../components/link/RouteLink";
 
 const Home = () => {
   document.title = "AxmBro | Home"

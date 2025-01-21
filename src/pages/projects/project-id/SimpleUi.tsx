@@ -1,8 +1,8 @@
 import React from "react";
-import { ScreenSection } from "../../../components/layout/screen_section";
-import { Button, ButtonColor } from "../../../components/button/button";
-import { Link } from "../../../components/link/custom_link";
-import { ImageSection } from "../../../components/global/projects_pages_global";
+import { ScreenSection } from "../../../components/layout/ScreenSection";
+import { Button, ButtonColor } from "../../../components/button/Button";
+import { Link } from "../../../components/link/Link";
+import { ImageSection } from "../../../components/global/ProjectsPagesGlobal";
 import { scrollToElement } from "../../../utils/scroll";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useHomeRoute } from "../../../components/contexts/NavigateToContactContext";

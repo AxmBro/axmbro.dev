@@ -1,6 +1,6 @@
 import React from "react";
-import styles from "./footer.module.css";
-import { ScreenContainer } from "./screen_container";
+import styles from "./Footer.module.css";
+import { ScreenContainer } from "./ScreenContainer";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { scrollToElement } from "../../utils/scroll";
 import { useHomeRoute } from "../contexts/NavigateToContactContext";

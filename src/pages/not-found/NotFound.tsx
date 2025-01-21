@@ -1,7 +1,7 @@
-import { ScreenSection } from "../../components/layout/screen_section";
-import { ScreenContainer } from "../../components/layout/screen_container";
-import { Button, ButtonColor } from "../../components/button/button";
-import { RouteLink } from "../../components/link/route_link";
+import { ScreenSection } from "../../components/layout/ScreenSection";
+import { ScreenContainer } from "../../components/layout/ScreenContainer";
+import { Button, ButtonColor } from "../../components/button/Button";
+import { RouteLink } from "../../components/link/RouteLink";
 
 const NotFound = () => {
   document.title = "AxmBro | Not found"

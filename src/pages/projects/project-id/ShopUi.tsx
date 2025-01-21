@@ -1,16 +1,17 @@
-import { ScreenSection } from "../../../components/layout/screen_section";
-import { Button, ButtonColor } from "../../../components/button/button";
-import { Link } from "../../../components/link/custom_link";
-import { ImageSection } from "../../../components/global/projects_pages_global";
+import React from "react";
+import { ScreenSection } from "../../../components/layout/ScreenSection";
+import { Link } from "../../../components/link/Link";
+import { ImageSection } from "../../../components/global/ProjectsPagesGlobal";
+import { Button, ButtonColor } from "../../../components/button/Button";
 import { scrollToElement } from "../../../utils/scroll";
 
-function HometreeUIPage() {
+const ShopUIPage: React.FC = () => {
   return (
     <div className="projects_pages">
       <ScreenSection
         style={{ padding: "1rem 0 2rem 0" }}
-        title="Hometree UI"
-        description1="CUSTOM SERVER FORM UI created for customer. It's pretty colorful and simple grid UI used in gamemodes selector and extra information form! General appearance was designed by customer and slighly by me. In-game UI is fully created by me."
+        title="Shop UI"
+        description1="CUSTOM SERVER FORM UI created for personal use, but also to test custom tabs in vanilla style, many texts in each button and search feature! General appearance and in-game UI was fully created by me."
         children={
           <div className="ScreenSectionButtons">
             <Button buttonColor={ButtonColor.blue}>
@@ -27,24 +28,39 @@ function HometreeUIPage() {
         sectionDescription={"Here is a list of in-game screenshots with short description!"}
         items={[
           {
-            title: "Gamemodes Selector",
-            description: "UI with header that contains title logo on left and title with multiline description on right. There are buttons in grid style under, with selectable color and optional '2x XP' text in top right corner.",
-            imageSrc: "hometree1"
+            title: "General Appearance",
+            description: "UI is in vanilla style with many extra buttons on top. Main section is filled with scrollable grid buttons.",
+            imageSrc: "shop_form1"
           },
           {
-            title: "Again Gamemodes Selector",
-            description: "This time with more buttons and visible scroll on right.",
-            imageSrc: "hometree3"
+            title: "Tabs in Vanilla Style",
+            description: "Very informative image based tabs with extra on-hover text. When clicked new form is reloaded.",
+            imageSrc: "shop_form6"
           },
           {
-            title: "Grid Button",
-            description: "This is closer look of grid button. See that the color of the button title matches the outline, which is only visible when the cursor is hovered over.",
-            imageSrc: "hometree4"
+            title: "Button Hover Text",
+            description: "There is option for extra on-hover text on button.",
+            imageSrc: "shop_form2"
           },
           {
-            title: "Advertisement Form",
-            description: "Simple UI that shows only big image in center and continue (basically exit) button under. It's only for information purposes.",
-            imageSrc: "hometree2"
+            title: "Extra Discount Texts",
+            description: "Another extra option to discount current value to new with additional information in percentages.",
+            imageSrc: "shop_form3"
+          },
+          {
+            title: "Search Bar Feature",
+            description: "User can always select this tab and open 'Search Mode' where you are able to search through all given buttons.",
+            imageSrc: "shop_form7"
+          },
+          {
+            title: "Look in Search Mode",
+            description: "Appearance is slightly different, it's in list style, because grid style doesn't allow to dynamically list elements.",
+            imageSrc: "shop_form4"
+          },
+          {
+            title: "Example Search Result",
+            description: "Search bar is really case sensitive and text you write is filtered by even big or small letters. For these more curious, it's client side live result.",
+            imageSrc: "shop_form5"
           },
         ]}>
       </ImageSection>
@@ -89,4 +105,4 @@ function HometreeUIPage() {
   )
 }
 
-export { HometreeUIPage }
+export { ShopUIPage }

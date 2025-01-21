@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
-import { Button } from "../button/button";
+import { Button } from "../button/Button";
 import { scrollToElement } from "../../utils/scroll";
-import styles from "./header.module.css";
+import styles from "./Header.module.css";
 import { useHomeRoute } from "../contexts/NavigateToContactContext";
 import logo from "../../assets/logo192.png";
 

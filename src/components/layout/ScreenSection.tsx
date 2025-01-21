@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import "./screen_section.css";
+import "./ScreenSection.css";
 
 interface ScreenSectionProp {
   singleParagraph?: Boolean;

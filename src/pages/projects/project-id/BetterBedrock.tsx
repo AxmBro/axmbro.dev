@@ -1,9 +1,9 @@
-import { ScreenSection } from "../../../components/layout/screen_section";
-import { Button, ButtonColor } from "../../../components/button/button";
-import { Link } from "../../../components/link/custom_link";
-import "../../../components/global/projects_pages_global.css";
+import { ScreenSection } from "../../../components/layout/ScreenSection";
+import { Button, ButtonColor } from "../../../components/button/Button";
+import { Link } from "../../../components/link/Link";
+import "../../../components/global/ProjectsPagesGlobal.css";
 import { scrollToElement } from "../../../utils/scroll";
-import { ImageSection } from "../../../components/global/projects_pages_global";
+import { ImageSection } from "../../../components/global/ProjectsPagesGlobal";
 
 function BetterBedrockPage() {
   return (

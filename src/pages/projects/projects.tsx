@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { ScreenSection } from "../../components/layout/screen_section";
-import { Button, ButtonColor } from "../../components/button/button";
+import { ScreenSection } from "../../components/layout/ScreenSection";
+import { Button, ButtonColor } from "../../components/button/Button";
 import { useLocation, useNavigate } from "react-router-dom";
-import styles from "./projects.module.css"
-import { ScreenContainer } from "../../components/layout/screen_container";
+import styles from "./Projects.module.css"
+import { ScreenContainer } from "../../components/layout/ScreenContainer";
 import { PROJECTS } from "../../components/global/constants";
-import { RouteLink } from "../../components/link/route_link";
+import { RouteLink } from "../../components/link/RouteLink";
 import starImage from "../../assets/star.png";
 
 interface ProjectItem {
