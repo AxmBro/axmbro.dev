@@ -1,16 +1,16 @@
 import { FC } from "react";
-import { Home } from "./pages/home/home";
+import { Home } from "./pages/home/Home";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { Header } from "./components/layout/header";
-import { Projects } from "./pages/projects/projects";
-import { Footer } from "./components/layout/footer";
-import { ProjectsSubPage } from "./pages/projects/projects_subpage";
-import { Info } from "./pages/info/info";
-import { TermsOfUse } from "./pages/termsOfUse/TermsOfUse";
+import { Header } from "./components/layout/Header";
+import { Projects } from "./pages/projects/Projects";
+import { Footer } from "./components/layout/Footer";
+import { ProjectsSubPage } from "./pages/projects/ProjectsSubpage";
+import { Info } from "./pages/info/Info";
+import { TermsOfUse } from "./pages/terms-of-use/TermsOfUse";
 import { NavigateToContactProvider } from "./components/contexts/NavigateToContactContext";
 
 import "./App.css";
-import { NotFound } from "./pages/notFound/notFound";
+import { NotFound } from "./pages/not-found/NotFound";
 
 const App: FC = () => {
   return (

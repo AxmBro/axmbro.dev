@@ -1,9 +1,9 @@
-import { ScreenSection } from "../../components/layout/screen_section";
-import { ScreenContainer } from "../../components/layout/screen_container";
-import styles from "./info.module.css";
-import { CustomButton } from "../../components/button/custom_button";
-import { RouteLink } from "../../components/link/route_link";
-import { Link } from "../../components/link/custom_link";
+import { ScreenSection } from "../../components/layout/ScreenSection";
+import { ScreenContainer } from "../../components/layout/ScreenContainer";
+import styles from "./Info.module.css";
+import { CustomButton } from "../../components/button/CustomButton";
+import { RouteLink } from "../../components/link/RouteLink";
+import { Link } from "../../components/link/Link";
 import { scrollToElement } from "../../utils/scroll";
 import { useHomeRoute } from "../../components/contexts/NavigateToContactContext";
 import { useNavigate } from "react-router-dom";

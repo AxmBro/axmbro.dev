@@ -1,5 +1,5 @@
-import { ScreenSection } from "../../components/layout/screen_section";
-import { ScreenContainer } from "../../components/layout/screen_container";
+import { ScreenSection } from "../../components/layout/ScreenSection";
+import { ScreenContainer } from "../../components/layout/ScreenContainer";
 import styles from "./TermsOfUse.module.css";
 import { scrollToElement } from "../../utils/scroll";
 import { useHomeRoute } from "../../components/contexts/NavigateToContactContext";

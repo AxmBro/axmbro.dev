@@ -1,5 +1,5 @@
 import React, { ReactNode, useEffect, useState } from "react";
-import styles from "./screen_container.module.css";
+import styles from "./ScreenContainer.module.css";
 import { useLocation } from "react-router-dom";
 
 interface ScreenContainerProps {

@@ -1,5 +1,5 @@
 import React, { ReactNode, useState } from "react";
-import styles from "./custom_button.module.css";
+import styles from "./CustomButton.module.css";
 
 interface CustomButtonProps {
   text: string,

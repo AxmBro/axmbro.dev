@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
-import styles from "./experience_tree.module.css";
-import { ScreenSectionList } from "./screen_section";
+import styles from "./ExperienceTree.module.css";
+import { ScreenSectionList } from "./ScreenSection";
 
 interface ExperienceTreeContainerProps {
   children?: ReactNode;
