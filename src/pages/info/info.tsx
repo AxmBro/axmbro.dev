@@ -20,7 +20,7 @@ const Info = () => {
   const height = "3.5rem";
   const width = "100%";
   return (
-    <ScreenContainer>
+    <ScreenContainer> 
 
       <ScreenSection
         id="info"

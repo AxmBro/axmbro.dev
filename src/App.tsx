@@ -6,7 +6,7 @@ import { Projects } from "./pages/projects/projects";
 import { Footer } from "./components/layout/footer";
 import { ProjectsSubPage } from "./pages/projects/projects_subpage";
 import { Info } from "./pages/info/info";
-import { TermsOfUse } from "./pages/termsOfUse/termsOfUse";
+import { TermsOfUse } from "./pages/termsOfUse/TermsOfUse";
 import { NavigateToContactProvider } from "./components/contexts/NavigateToContactContext";
 
 import "./App.css";
