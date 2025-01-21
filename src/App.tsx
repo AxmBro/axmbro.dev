@@ -1,5 +1,4 @@
 import { FC } from "react";
-import { Home } from "./pages/home/Home.tsx";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Header } from "./components/layout/Header";
 import { Projects } from "./pages/projects/Projects";
@@ -8,6 +7,7 @@ import { ProjectsSubPage } from "./pages/projects/ProjectsSubpage";
 import { Info } from "./pages/info/Info";
 import { TermsOfUse } from "./pages/terms-of-use/TermsOfUse";
 import { NavigateToContactProvider } from "./components/contexts/NavigateToContactContext";
+import { Home } from "./pages/home/Home";
 
 import "./App.css";
 import { NotFound } from "./pages/not-found/NotFound";
