@@ -14,7 +14,7 @@ function HometreeUIPage() {
         children={
           <div className="ScreenSectionButtons">
             <Button buttonColor={ButtonColor.blue}>
-              <Link useUnderline={false} textColor="var(--website-background-color)" text="Discord Server" href="https://discord.gg/ZGK5WYXnEY"></Link>
+              <Link useUnderline={false} textColor="var(--web-bg-color-1)" text="Discord Server" href="https://discord.gg/ZGK5WYXnEY"></Link>
             </Button>
             <div onClick={() => { scrollToElement("credits") }}>
               <Button buttonColor={ButtonColor.default} text="Credits"></Button>

@@ -25,10 +25,10 @@
   background-size: 500% auto;
   background: linear-gradient(
     to right,
-    var(--secondary-text-color) 30%,
+    var(--text-color-2) 30%,
     #01eca7 40%,
     #01eca7 60%,
-    var(--secondary-text-color) 70%
+    var(--text-color-2) 70%
   );
   -webkit-background-clip: text;
   background-clip: text;

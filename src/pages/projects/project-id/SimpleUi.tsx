@@ -36,7 +36,7 @@ const SimpleUIPage: React.FC = () => {
               <Button buttonColor={ButtonColor.blue} text="Want this UI? Contact Me"></Button>
             </div>
             <Button buttonColor={ButtonColor.default}>
-              <Link useUnderline={false} textColor="var(--website-background-color)" text="Discord Server" href="https://discord.gg/ZGK5WYXnEY"></Link>
+              <Link useUnderline={false} textColor="var(--web-bg-color-1)" text="Discord Server" href="https://discord.gg/ZGK5WYXnEY"></Link>
             </Button>
             <div onClick={() => { scrollToElement("credits") }}>
               <Button buttonColor={ButtonColor.defaultEmpty} text="Credits"></Button>

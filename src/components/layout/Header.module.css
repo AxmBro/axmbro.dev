@@ -4,7 +4,7 @@
   position: sticky;
   display: flex;
   justify-content: center;
-  background-color: var(--website-background-color2);
+  background-color: var(--web-bg-color-2);
   border-bottom: var(--border-width) solid var(--line-break-color);
 }
 
@@ -25,7 +25,7 @@
   text-decoration: none;
   font-size: 2.2rem;
   font-weight: 600;
-  color: var(--primary-text-color);
+  color: var(--text-color-1);
 }
 
 .header .logoContainer:hover .logo {
@@ -33,10 +33,10 @@
   color: transparent;
   background: linear-gradient(
     to right,
-    var(--secondary-text-color) 30%,
+    var(--text-color-2) 30%,
     #01eca7 40%,
     #01eca7 60%,
-    var(--secondary-text-color) 70%
+    var(--text-color-2) 70%
   );
   -webkit-background-clip: text;
   background-clip: text;
@@ -81,7 +81,7 @@
 
 .headerContainer .headerLink {
   font-weight: 500;
-  color: var(--primary-text-color);
+  color: var(--text-color-1);
   text-decoration: none;
 }
 
@@ -91,18 +91,18 @@
 
 .headerContainer .headerLink:hover {
   cursor: pointer;
-  color: var(--secondary-text-color);
+  color: var(--text-color-2);
 }
 
 .headerContainer .headerLinkActive {
   font-weight: 500;
-  color: var(--secondary-text-color);
+  color: var(--text-color-2);
   text-decoration: underline;
 }
 
 .headerContainer .headerLinkActive:hover {
   cursor: pointer;
-  color: var(--secondary-text-color);
+  color: var(--text-color-2);
 }
 
 .headerContainer .secondSection .mobileButtons {
@@ -128,14 +128,14 @@
   flex-direction: column;
   padding: 1rem;
   gap: 1rem;
-  background-color: var(--website-background-color2);
+  background-color: var(--web-bg-color-2);
   border: var(--border-width) solid var(--line-break-color);
   border-radius: var(--border-radius);
 }
 
 .headerContainer .mobileButtons .menuContainer a,
 .headerContainer .mobileButtons .menuContainer h2 {
-  color: var(--primary-text-color);
+  color: var(--text-color-1);
   text-decoration: none;
 }
 
@@ -152,7 +152,7 @@
 
 .headerLinkMobile {
   font-weight: 500;
-  color: var(--primary-text-color);
+  color: var(--text-color-1);
   text-decoration: none;
 }
 

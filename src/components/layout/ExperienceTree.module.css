@@ -8,7 +8,7 @@
   padding: 1rem;
   border: var(--border-width) solid var(--line-break-color);
   border-radius: var(--border-radius);
-  background-color: var(--website-background-color2);
+  background-color: var(--web-bg-color-2);
 }
 
 .role {

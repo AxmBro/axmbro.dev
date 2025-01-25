@@ -5,7 +5,7 @@
 }
 
 .ScreenSection h2 {
-  color: var(--primary-description-text-color);
+  color: var(--text-color-3);
 }
 
 .ScreenSectionList ul {
@@ -15,9 +15,9 @@
 }
 
 .ScreenSectionList ul li {
-  color: var(--primary-description-text-color);
+  color: var(--text-color-3);
 }
 
 .ScreenSectionList ul li .highlight {
-  color: var(--secondary-text-color);
+  color: var(--text-color-2);
 }

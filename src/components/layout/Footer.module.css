@@ -1,5 +1,5 @@
 .footerScreenContainer {
-  background-color: var(--website-background-color2);
+  background-color: var(--web-bg-color-2);
   border-top: var(--border-width) solid var(--line-break-color);
 }
 
@@ -25,7 +25,7 @@
 }
 
 .bottomFooterContainer h2 {
-  color: var(--secondary-description-text-color);
+  color: var(--text-color-4);
   text-align: left;
 }
 
@@ -40,14 +40,14 @@
 .routesContainer a,
 .routesContainer h2 {
   text-decoration: none;
-  color: var(--secondary-description-text-color);
+  color: var(--text-color-4);
   text-align: center;
 }
 
 .routesContainer a:hover,
 .routesContainer h2:hover {
   cursor: pointer;
-  color: var(--primary-text-color);
+  color: var(--text-color-1);
 }
 
 .logoContainer {

@@ -13,7 +13,7 @@ interface CustomButtonProps {
 const CustomButton: React.FC<CustomButtonProps> = ({
   text,
   textContant,
-  textColor = "var(--primary-text-color)",
+  textColor = "var(--text-color-1)",
   border,
   children,
   style,
@@ -43,7 +43,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}>
       <div className={styles.customButtonInner}>
-        <h2 style={{ color: "var(--primary-text-color)" }}>
+        <h2 style={{ color: "var(--text-color-1)" }}>
           {text}
           {textContant && (<span>: <span style={{
             color: `rgb(${border.r}, ${border.g}, ${border.b})`
