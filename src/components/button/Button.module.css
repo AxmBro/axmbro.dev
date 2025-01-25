@@ -17,8 +17,8 @@
 }
 
 .button[data-color="defaultEmpty"] {
-  background-color: var(--website-background-color);
-  color: var(--primary-text-color);
+  background-color: var(--web-bg-color-1);
+  color: var(--text-color-1);
   border: var(--border-width) solid var(--line-break-color);
 }
 
@@ -28,8 +28,8 @@
 }
 
 .button[data-color="defaultEmpty2"] {
-  background-color: var(--website-background-color2);
-  color: var(--primary-text-color);
+  background-color: var(--web-bg-color-2);
+  color: var(--text-color-1);
   border: var(--border-width) solid var(--line-break-color);
 }
 
@@ -39,26 +39,26 @@
 }
 
 .button[data-color="default"] {
-  color: var(--website-background-color);
-  background-color: var(--primary-text-color);
-  border: var(--border-width) solid var(--primary-text-color);
+  color: var(--web-bg-color-1);
+  background-color: var(--text-color-1);
+  border: var(--border-width) solid var(--text-color-1);
 }
 
 .button[data-color="default"]:hover {
-  background-color: var(--button-white-background-color);
-  border: var(--border-width) solid var(--button-white-background-color);
+  background-color: var(--button-bg-color-1);
+  border: var(--border-width) solid var(--button-bg-color-1);
 }
 
 .button[data-color="blue"] {
-  color: var(--website-background-color);
-  border: var(--border-width) solid var(--secondary-text-color);
-  background-color: var(--secondary-text-color);
+  color: var(--web-bg-color-1);
+  border: var(--border-width) solid var(--text-color-2);
+  background-color: var(--text-color-2);
 }
 
 .button[data-color="blue"]:hover {
-  color: var(--website-background-color);
-  border: var(--border-width) solid var(--button-blue-background-color);
-  background-color: var(--button-blue-background-color);
+  color: var(--web-bg-color-1);
+  border: var(--border-width) solid var(--button-bg-color-2);
+  background-color: var(--button-bg-color-2);
 }
 
 .buttonInner {

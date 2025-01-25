@@ -13,7 +13,7 @@ interface RouteLinkProps {
 const RouteLink: React.FC<RouteLinkProps> = ({
   to,
   useUnderline = true,
-  textColor = "var(--secondary-text-color)",
+  textColor = "var(--text-color-2)",
   text,
   children
 }) => {

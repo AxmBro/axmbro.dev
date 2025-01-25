@@ -15,10 +15,10 @@ function MurderDetectorPage() {
         children={
           <div className="ScreenSectionButtons">
             <Button buttonColor={ButtonColor.blue}>
-              <Link useUnderline={false} textColor="var(--website-background-color)" text="Download" href="https://betterbedrock.com"></Link>
+              <Link useUnderline={false} textColor="var(--web-bg-color-1)" text="Download" href="https://betterbedrock.com"></Link>
             </Button>
             <Button buttonColor={ButtonColor.default}>
-              <Link useUnderline={false} textColor="var(--website-background-color)" text="Discord Server" href="https://discord.gg/ZGK5WYXnEY"></Link>
+              <Link useUnderline={false} textColor="var(--web-bg-color-1)" text="Discord Server" href="https://discord.gg/ZGK5WYXnEY"></Link>
             </Button>
             <div onClick={() => { scrollToElement("credits") }}>
               <Button buttonColor={ButtonColor.defaultEmpty} text="Credits"></Button>

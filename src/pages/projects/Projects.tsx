@@ -155,7 +155,7 @@ const ProjectsGrid: React.FC<ProjectsGridProps> = ({ items, hideTags }) => {
               <div className={styles.navButtonsContainer}>
                 {item.url && (<RouteLink
                   to={item.url!}>
-                  <Button buttonColor={ButtonColor.blue} text="See showcase" />
+                  <Button buttonColor={ButtonColor.blue} text="Showcase" />
                 </RouteLink>)}
                 {item.downloadLink && (<RouteLink
                   to={item.url!}>

@@ -12,7 +12,7 @@ interface LinkProps {
 
 const Link: React.FC<LinkProps> = ({
   useUnderline = true,
-  textColor = "var(--secondary-text-color)",
+  textColor = "var(--text-color-2)",
   text,
   href,
   openInNewTab = true,

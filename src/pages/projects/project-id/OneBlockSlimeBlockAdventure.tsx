@@ -12,10 +12,10 @@ function OneBlockSlimeBlockAdventurePage() {
         children={
           <div className="ScreenSectionButtons">
             <Button buttonColor={ButtonColor.blue}>
-              <Link useUnderline={false} textColor="var(--website-background-color)" text="Marketplace Download" href="https://www.minecraft.net/en-us/marketplace/creator?name=mush%20co"></Link>
+              <Link useUnderline={false} textColor="var(--web-bg-color-1)" text="Marketplace Download" href="https://www.minecraft.net/en-us/marketplace/creator?name=mush%20co"></Link>
             </Button>
             <Button buttonColor={ButtonColor.default}>
-              <Link useUnderline={false} textColor="var(--website-background-color)" text="Mush Co Website" href="https://www.mushco.games/games"></Link>
+              <Link useUnderline={false} textColor="var(--web-bg-color-1)" text="Mush Co Website" href="https://www.mushco.games/games"></Link>
             </Button>
           </div>
         }

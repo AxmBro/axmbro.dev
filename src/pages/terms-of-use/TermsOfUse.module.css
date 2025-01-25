@@ -4,11 +4,11 @@
 }
 
 .termsOfUse ul li {
-  color: var(--primary-description-text-color);
+  color: var(--text-color-3);
 }
 
 .container .navigateContact {
-  color: var(--secondary-text-color);
+  color: var(--text-color-2);
 }
 
 .container .navigateContact:hover {
@@ -16,5 +16,5 @@
 }
 
 .container span {
-  color: var(--primary-text-color);
+  color: var(--text-color-1);
 }
