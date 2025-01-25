@@ -1,8 +1,8 @@
 import { FC } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { Header } from "./components/layout/Header";
-import { Projects } from "./pages/projects/Projects";
-import { Footer } from "./components/layout/Footer";
+import { Header } from "./components/layout/Header.tsx";
+import { Projects } from "./pages/projects/Projects.tsx";
+import { Footer } from "./components/layout/Footer.tsx";
 import { ProjectsSubPage } from "./pages/projects/ProjectsSubpage";
 import { Info } from "./pages/info/Info";
 import { TermsOfUse } from "./pages/terms-of-use/TermsOfUse";
