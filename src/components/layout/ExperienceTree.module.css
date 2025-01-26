@@ -1,6 +1,6 @@
 .experienceTreeContainer {
   display: flex;
-  gap: 1rem;
+  gap: 1.4rem;
   flex-direction: column;
 }
 
