@@ -3,7 +3,7 @@
   padding-left: 20px;
 }
 
-.termsOfUse ul li {
+.container ul {
   color: var(--text-color-3);
 }
 
@@ -13,4 +13,8 @@
 
 .container .navigateContact:hover {
   cursor: pointer;
+}
+
+.container span {
+  color: var(--text-color-1);
 }
