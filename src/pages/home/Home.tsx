@@ -7,8 +7,6 @@ import { Link as RouterLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { Card } from "../../components/card/Card";
 import { Button, ButtonColor } from "../../components/button/Button";
-import { scrollToElement } from "../../utils/scroll";
-import { Link } from "../../components/link/Link";
 import { ScreenContainer } from "../../components/layout/ScreenContainer";
 import { ExperienceTree, ExperienceTreeContainer } from "../../components/layout/ExperienceTree";
 import { EXPERIENCE_TREE, SKILLS_CARDS } from "../../components/global/constants";
@@ -43,9 +41,12 @@ const Home = () => {
               buttonColor={ButtonColor.blue}
               text="Projects" />
           </RouterLink>
-          <Button
-            buttonColor={ButtonColor.default}
-            text="Contact" onClick={() => scrollToElement("contact")} />
+          <RouterLink
+            to="/contact" >
+            <Button
+              buttonColor={ButtonColor.default}
+              text="Contact" />
+          </RouterLink>
         </div>
       </ScreenSection>
 
@@ -107,19 +108,16 @@ const Home = () => {
         style={{ borderBottom: 0 }}
         id="contact"
         title="Contact"
-        description1="Whether you have a project in mind or just want to reach out, I would love to hear from you! Let us make something amazing together!" >
-        <div className="ScreenSectionList" style={{ padding: 0, border: 0 }}>
-          <ul>
-            <li key={`1`}> Github:{" "} <Link href="https://github.com/AxmBro" text="AxmBro" ></Link> </li>
-            <li key={`2`}> Email:{" "}  <Link href="mailto:axmbro@gmail.com?subject=Contact%20Request" text="axmbro@gmail.com" ></Link> </li>
-            <li key={`3`}> Discord:{" "} <Link href="https://discord.com/users/679603350236299266" text="AxmBro" ></Link> {" | "} <Link href="https://discord.gg/wJhH86c2wb" text="discord.gg/wJhH86c2wb" ></Link> {" | "} <Link href="https://discord.gg/ZGK5WYXnEY" text="discord.gg/ZGK5WYXnEY" ></Link> </li>
-            <li key={`4`}> YouTube Channels:{" "} <Link href="https://www.youtube.com/@axmbro" text="@axmbro" ></Link> {" | "} <Link href="https://www.youtube.com/@axmbro2" text="@axmbro2" ></Link> </li>
-            <li key={`5`}>
-              All:{" "}<RouteLink
-                to="/info"
-                text="/info" />
-            </li>
-          </ul>
+        description1="Whether you have a project in mind or just want to reach out, I would love to hear from you! Let us combine our ideas and make something absolutely amazing together!" >
+        <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+          <RouteLink
+            to="/contact">
+            <Button text="Contact" buttonColor={ButtonColor.blue}></Button>
+          </RouteLink>
+          <RouteLink
+            to="/info">
+            <Button text="All contacts /info" buttonColor={ButtonColor.default}></Button>
+          </RouteLink>
         </div>
       </ScreenSection>
 

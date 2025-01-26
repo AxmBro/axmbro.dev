@@ -4,19 +4,9 @@ import { Button, ButtonColor } from "../../../components/button/Button";
 import { Link } from "../../../components/link/Link";
 import { ImageSection } from "../../../components/global/ProjectsPagesGlobal";
 import { scrollToElement } from "../../../utils/scroll";
-import { useNavigate, useLocation } from "react-router-dom";
-import { useHomeRoute } from "../../../components/contexts/NavigateToContactContext";
+import { RouteLink } from "../../../components/link/RouteLink";
 
 const SimpleUIPage: React.FC = () => {
-  const { setNavigateToContact } = useHomeRoute();
-
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  const handleNavigation = (to: string) => {
-    navigate(to);
-  };
-
   return (
     <div className="projects_pages">
       <ScreenSection
@@ -25,16 +15,10 @@ const SimpleUIPage: React.FC = () => {
         description1="CUSTOM SERVER FORM UI created for personal use, but also to test custom buttons layout! General appearance and in-game UI was fully created by me."
         children={
           <div className="ScreenSectionButtons">
-            <div onClick={() => {
-              if (location.pathname === "/") {
-                scrollToElement("contact");
-              } else {
-                handleNavigation("/");
-                setNavigateToContact(true);
-              }
-            }}>
-              <Button buttonColor={ButtonColor.blue} text="Want this UI? Contact Me"></Button>
-            </div>
+            <RouteLink
+              to="/contact">
+              <Button text="Want this UI? Contact Me" buttonColor={ButtonColor.blue}></Button>
+            </RouteLink>
             <Button buttonColor={ButtonColor.default}>
               <Link useUnderline={false} textColor="var(--web-bg-color-1)" text="Discord Server" href="https://discord.gg/ZGK5WYXnEY"></Link>
             </Button>

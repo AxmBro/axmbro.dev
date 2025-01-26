@@ -1,25 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "../button/Button";
-import { scrollToElement } from "../../utils/scroll";
 import styles from "./Header.module.css";
-import { useHomeRoute } from "../contexts/NavigateToContactContext";
 import logo from "../../assets/logo192.png";
 
 const Header: React.FC = () => {
-  const { navigateToContact, setNavigateToContact } = useHomeRoute();
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (location.pathname === "/" && navigateToContact) {
-      setTimeout(() => {
-        scrollToElement("contact");
-      }, 100)
-      setNavigateToContact(false);
-    }
-  }, [location.pathname, navigateToContact, setNavigateToContact]);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -80,19 +68,15 @@ const Header: React.FC = () => {
               >
                 Projects
               </NavLink>
-              <h2
-                className={styles.headerLink}
-                onClick={() => {
-                  if (location.pathname === "/") {
-                    scrollToElement("contact");
-                  } else {
-                    handleNavigation("/");
-                    setNavigateToContact(true);
-                  }
-                }}
+              <NavLink
+                to="/contact"
+                end
+                className={({ isActive }) =>
+                  isActive ? `${styles.headerLinkActive}` : `${styles.headerLink}`
+                }
               >
                 Contact
-              </h2>
+              </NavLink>
             </div>
             <div className={styles.mobileButtons}>
               <div
@@ -110,7 +94,7 @@ const Header: React.FC = () => {
                     <NavLink
                       to="/"
                       end
-                      style={{ width: "100%"}}
+                      style={{ width: "100%" }}
                     >
                       <Button text="Home" style={{ width: "100%", boxSizing: "border-box" }}>
 
@@ -121,22 +105,19 @@ const Header: React.FC = () => {
                     <NavLink
                       to="/projects"
                       end
-                      style={{ width: "100%"}}
+                      style={{ width: "100%" }}
                     >
                       <Button text="Projects" style={{ width: "100%", boxSizing: "border-box" }}></Button>
                     </NavLink>
                   </div>
-                  <div onClick={() => {
-                    toggleMenu();
-                    if (location.pathname === "/") {
-                      scrollToElement("contact");
-                    } else {
-                      handleNavigation("/");
-                      setNavigateToContact(true);
-                    }
-                  }}>
-
-                    <Button text="Contact" style={{ width: "100%", boxSizing: "border-box" }}></Button>
+                  <div onClick={toggleMenu}>
+                    <NavLink
+                      to="/contact"
+                      end
+                      style={{ width: "100%" }}
+                    >
+                      <Button text="Contact" style={{ width: "100%", boxSizing: "border-box" }}></Button>
+                    </NavLink>
                   </div>
                 </div>
                 <div className={styles.overlay} onClick={closeMenu}></div>
