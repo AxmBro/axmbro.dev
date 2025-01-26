@@ -14,7 +14,3 @@
 .container .navigateContact:hover {
   cursor: pointer;
 }
-
-.container span {
-  color: var(--text-color-1);
-}

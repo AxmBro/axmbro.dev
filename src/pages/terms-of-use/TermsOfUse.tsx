@@ -1,18 +1,9 @@
 import { ScreenSection } from "../../components/layout/ScreenSection";
 import { ScreenContainer } from "../../components/layout/ScreenContainer";
 import styles from "./TermsOfUse.module.css";
-import { scrollToElement } from "../../utils/scroll";
-import { useHomeRoute } from "../../components/contexts/NavigateToContactContext";
-import { useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const TermsOfUse = () => {
-  const { setNavigateToContact } = useHomeRoute();
-  const navigate = useNavigate();
-
-  const handleNavigation = (to: string) => {
-    navigate(to);
-  };
-
   document.title = "AxmBro | Terms of use"
   const lastUpdate = "21.01.2025";
 
@@ -63,19 +54,13 @@ const TermsOfUse = () => {
                 <ul>
                   <li><span>{`${item.title}: `}</span>{item.text}
                     {(item.title === content[content.length - 1].title) && (
-                      <span
+                      <NavLink
                         className={styles.navigateContact}
-                        onClick={() => {
-                          if (location.pathname === "/") {
-                            scrollToElement("contact");
-                          } else {
-                            handleNavigation("/");
-                            setNavigateToContact(true);
-                          }
-                        }}
+                        to="/contact"
+                        end
                       >
                         /contact
-                      </span>
+                      </NavLink>
                     )}
                   </li>
                 </ul>

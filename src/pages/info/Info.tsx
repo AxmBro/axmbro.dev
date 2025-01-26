@@ -4,23 +4,13 @@ import styles from "./Info.module.css";
 import { CustomButton } from "../../components/button/CustomButton";
 import { RouteLink } from "../../components/link/RouteLink";
 import { Link } from "../../components/link/Link";
-import { scrollToElement } from "../../utils/scroll";
-import { useHomeRoute } from "../../components/contexts/NavigateToContactContext";
-import { useNavigate } from "react-router-dom";
 
 const Info = () => {
-  const { setNavigateToContact } = useHomeRoute();
-  const navigate = useNavigate();
-
-  const handleNavigation = (to: string) => {
-    navigate(to);
-  };
-
   document.title = "AxmBro | Info"
   const height = "3.5rem";
   const width = "100%";
   return (
-    <ScreenContainer> 
+    <ScreenContainer>
 
       <ScreenSection
         id="info"
@@ -36,18 +26,10 @@ const Info = () => {
             to="/projects">
             <CustomButton style={{ height: height, width: width }} border={{ r: 255, g: 200, b: 0 }} text="Portfolio Website" textContant="/projects" />
           </RouteLink>
-
-          <div onClick={() => {
-            if (location.pathname === "/") {
-              scrollToElement("contact");
-            } else {
-              handleNavigation("/");
-              setNavigateToContact(true);
-            }
-          }}>
+          <RouteLink
+            to="/contact">
             <CustomButton style={{ height: height, width: width }} border={{ r: 255, g: 200, b: 0 }} text="Portfolio Website" textContant="/contact" />
-          </div>
-
+          </RouteLink>
           <Link
             href="https://github.com/AxmBro"
             openInNewTab={true}

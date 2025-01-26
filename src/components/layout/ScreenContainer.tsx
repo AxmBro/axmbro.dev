@@ -31,7 +31,7 @@ const ScreenContainer: React.FC<ScreenContainerProps> = ({ children, style, useM
       const footer = document.getElementById('footer');
       const footerOffset = footer ? footer.offsetHeight : 0;
       setMinHeight(
-        useMinHeight ? `calc(100vh - ${headerOffset + footerOffset + 2}px)` : "0"
+        useMinHeight ? `calc(100vh - ${headerOffset + footerOffset + 1}px)` : "0"
       );
     }
 
