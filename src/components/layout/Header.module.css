@@ -21,40 +21,8 @@
   display: flex;
 }
 
-.header .logoContainer .logo {
-  text-decoration: none;
-  font-size: 2.2rem;
-  font-weight: 600;
-  color: var(--text-color-1);
-}
-
-.header .logoContainer:hover .logo {
-  cursor: pointer;
-  color: transparent;
-  background: linear-gradient(
-    to right,
-    var(--text-color-2) 30%,
-    #01eca7 40%,
-    #01eca7 60%,
-    var(--text-color-2) 70%
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  background-size: 500% auto;
-  animation: textShine 3s ease-in-out infinite reverse;
-}
-
-@keyframes textShine {
-  0% {
-    background-position: 0% 50%;
-  }
-  100% {
-    background-position: 100% 50%;
-  }
-}
-
 .header .logoContainer .logoImg {
-  padding-right: 0.5rem;
+  padding-right: 1rem;
   width: 2.8rem;
   aspect-ratio: 1 / 1;
 }
@@ -72,37 +40,44 @@
   box-sizing: border-box;
 }
 
-.headerContainer .secondSection .desktopButtons {
+.firstSection {
+  display: inherit;
+}
+
+.secondSectionContactButton {
+  display: block;
+}
+
+.headerContainer .desktopButtons {
   gap: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.headerContainer .headerLink {
-  font-weight: 500;
-  color: var(--text-color-1);
-  text-decoration: none;
-}
-
 .headerContainer .desktopButtons > * {
   font-size: 1rem;
 }
 
+.headerContainer .headerLink {
+  font-weight: 500;
+  color: var(--text-color-4);
+  text-decoration: none;
+}
+
 .headerContainer .headerLink:hover {
   cursor: pointer;
-  color: var(--text-color-2);
+  color: var(--text-color-1);
 }
 
 .headerContainer .headerLinkActive {
   font-weight: 500;
-  color: var(--text-color-2);
-  text-decoration: underline;
+  color: var(--text-color-1);
 }
 
 .headerContainer .headerLinkActive:hover {
   cursor: pointer;
-  color: var(--text-color-2);
+  color: var(--text-color-1);
 }
 
 .headerContainer .secondSection .mobileButtons {
@@ -172,10 +147,15 @@
   }
 }
 
-@media screen and (max-width: 468px) {
-  .headerContainer .secondSection .desktopButtons {
+@media screen and (max-width: 480px) {
+  .headerContainer .firstSection .desktopButtons {
     display: none;
   }
+
+  .secondSectionContactButton {
+    display: none;
+  }
+
   .headerContainer .secondSection .mobileButtons {
     display: flex;
   }
