@@ -4,9 +4,9 @@ import { Button, ButtonColor } from "../../components/button/Button";
 import { RouteLink } from "../../components/link/RouteLink";
 
 const NotFound = () => {
-  document.title = "AxmBro | Not found"
   return (
-    <ScreenContainer>
+    <ScreenContainer
+      documentTitle="AxmBro | Not found">
 
       <ScreenSection
         id="notFound"

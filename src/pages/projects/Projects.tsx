@@ -20,7 +20,6 @@ interface ProjectItem {
 }
 
 function Projects() {
-  document.title = "AxmBro | Projects"
   const location = useLocation();
   const initialSearch = location.state?.search || "";
   const [search, setSearch] = useState(initialSearch);
@@ -49,7 +48,8 @@ function Projects() {
   });
 
   return (
-    <ScreenContainer>
+    <ScreenContainer
+    documentTitle="AxmBro | Projects">
       <ScreenSection
         style={{ padding: "1rem 0 0 0", border: 0 }}
         title={`Projects: ${projectsLength}`}

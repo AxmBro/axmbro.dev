@@ -13,7 +13,6 @@ import { EXPERIENCE_TREE, SKILLS_CARDS } from "../../components/global/constants
 import { RouteLink } from "../../components/link/RouteLink";
 
 const Home = () => {
-  document.title = "AxmBro | Home"
   const navigate = useNavigate();
   const ScreenSectionListStyle = {
     padding: 0,
@@ -26,7 +25,8 @@ const Home = () => {
 
 
   return (
-    <ScreenContainer>
+    <ScreenContainer
+    documentTitle="AxmBro | Home">
 
       <ScreenSection
         id="aboutme"

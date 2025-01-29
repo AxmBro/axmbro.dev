@@ -7,9 +7,9 @@ import "../../components/layout/ScreenSection.css";
 import { Button, ButtonColor } from "../../components/button/Button";
 
 const Contact = () => {
-  document.title = "AxmBro | Contact"
   return (
-    <ScreenContainer>
+    <ScreenContainer
+      documentTitle="AxmBro | Contact">
 
       <ScreenSection
         id="contact"

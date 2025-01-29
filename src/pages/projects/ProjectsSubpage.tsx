@@ -11,7 +11,8 @@ import { ScreenContainer } from "../../components/layout/ScreenContainer";
 
 const ProjectsSubPage: React.FC = () => {
   const { projectId } = useParams<{ projectId: string }>();
-  document.title = `AxmBro | Projects | ${projectId}`
+  
+  const title = projectId!.replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase());
 
   const projectLayouts: { [key: string]: JSX.Element } = {
     better_bedrock: <BetterBedrockPage />,
@@ -24,7 +25,8 @@ const ProjectsSubPage: React.FC = () => {
 
   if (!projectId || !projectLayouts[projectId]) {
     return (
-      <ScreenContainer>
+      <ScreenContainer
+        documentTitle="AxmBro | Project not found">
         <ScreenSection
           title="Project not found"
           description1="The project you are looking for does not exist. Please check the URL and try again."
@@ -33,8 +35,9 @@ const ProjectsSubPage: React.FC = () => {
     )
   }
 
+
   return (
-    <ScreenContainer>
+    <ScreenContainer documentTitle={`AxmBro | ${title}`}>
       {projectLayouts[projectId]}
     </ScreenContainer>
   );

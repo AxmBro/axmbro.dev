@@ -4,7 +4,6 @@ import styles from "./TermsOfUse.module.css";
 import { NavLink } from "react-router-dom";
 
 const TermsOfUse = () => {
-  document.title = "AxmBro | Terms of use"
   const lastUpdate = "21.01.2025";
 
   const content = [
@@ -39,7 +38,8 @@ const TermsOfUse = () => {
   ]
 
   return (
-    <ScreenContainer>
+    <ScreenContainer
+      documentTitle="AxmBro | Terms of use">
 
       <ScreenSection
         id="termsOfUse"
