@@ -43,12 +43,12 @@ const CustomButton: React.FC<CustomButtonProps> = ({
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}>
       <div className={styles.customButtonInner}>
-        <h2 style={{ color: "var(--text-color-1)" }}>
+        <p style={{ color: "var(--text-color-1)" }}>
           {text}
           {textContant && (<span>: <span style={{
             color: `rgb(${border.r}, ${border.g}, ${border.b})`
           }}>{`${textContant}`}</span></span>)}
-        </h2>
+        </p>
         {children}
       </div>
     </div>

@@ -27,8 +27,8 @@ const ScreenSection: React.FC<ScreenSectionProp> = ({
   return (
     <div className="ScreenSection" style={{ padding: singleParagraph ? "1rem 0 2rem 0" : "", border: singleParagraph ? 0 : "", ...style }} id={id}>
       {title ? <h1>{title}</h1> : null}
-      {description1 ? <h2 style={{ paddingBottom: description2 ? "1rem" : 0 }}>{description1}</h2> : null}
-      {description2 ? <h2>{description2}</h2> : null}
+      {description1 ? <p style={{ paddingBottom: description2 ? "1rem" : 0 }}>{description1}</p> : null}
+      {description2 ? <p>{description2}</p> : null}
       <div
         style={{
           paddingTop: (ignoreChildrenPadding ? 0 : ((children && (title || description1 || description2)) ? "1rem" : 0)),

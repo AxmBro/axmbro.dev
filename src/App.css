@@ -19,7 +19,7 @@ body {
   --text-color-4: rgb(128, 128, 138);
 
   --web-bg-color-1: rgb(0, 0, 0);
-  --web-bg-color-2: rgb(12, 12, 12);
+  --web-bg-color-2: rgb(24, 24, 24);
 
   --button-bg-color-1: rgb(223, 223, 223);
   --button-bg-color-2: rgb(0, 143, 252);
@@ -29,10 +29,16 @@ body {
   --border-radius: 10px;
   --border-width: 1px;
   --max-website-width: 70rem;
+
+  --font-p: 1rem;
+  --font-h1: 2.2rem;
+  --font-h2: 1.6rem;
 }
 
 h1,
-h2 {
+h2,
+h3,
+p {
   color: var(--text-color-1);
   word-wrap: break-word;
   font-weight: 500;
@@ -40,12 +46,19 @@ h2 {
   padding: 0;
 }
 
+p,
+a {
+  font-weight: 500;
+  font-size: var(--font-p);
+}
+
 h1 {
   font-weight: 600;
-  font-size: 2.2rem;
+  font-size: var(--font-h1);
 }
 
 h2 {
+  font-weight: 600;
   font-size: 1rem;
 }
 

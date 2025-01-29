@@ -7,7 +7,8 @@
 .searchBar {
   width: 100%;
   height: 3rem;
-  border: var(--border-width) solid var(--line-break-color);
+  border: 0;
+  /* border: var(--border-width) solid var(--line-break-color); */
   border-radius: var(--border-radius);
   background-color: var(--web-bg-color-2);
   color: var(--text-color-1);
@@ -56,19 +57,19 @@
   background-color: var(--web-bg-color-2);
   display: flex;
   padding: 1rem;
-  border: var(--border-width) solid var(--line-break-color);
+  /* border: var(--border-width) solid var(--line-break-color); */
   border-radius: var(--border-radius);
   min-height: 100px;
 }
 
 .Title {
   color: var(--text-color-1);
-  font-size: 1.5rem;
+  font-size: var(--font-h2);
 }
 
 .TitleUrl {
   color: var(--text-color-1);
-  font-size: 1.5rem;
+  font-size: var(--font-h2);
 }
 
 .TitleUrl:hover {

@@ -16,8 +16,8 @@ const Card: React.FC<CardProps> = ({
 }) => {
   return (
     <div className={styles.card} style={style}>
-      <h1 className={styles.title}>{title}</h1>
-      <h2 className={styles.description}>{description}</h2>
+      <h2 className={styles.title}>{title}</h2>
+      <p className={styles.description}>{description}</p>
       {children}
     </div>
   )

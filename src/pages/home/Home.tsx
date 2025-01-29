@@ -33,7 +33,7 @@ const Home = () => {
         style={{ padding: "1rem 0 2rem 0" }}
         ignoreChildrenPadding={true}
         title="About Me">
-        <h2 style={{ paddingBottom: "1rem" }}>Hey I'm <span className={styles.heroText}>Axmbro</span>! I like creating fancy and cool things on the computer, experiment with code, develop small programs and in the process learn how these amazing machines work!</h2>
+        <p style={{ paddingBottom: "1rem" }}>Hey, I'm <span className={styles.heroText}>Axmbro</span>! I like creating fancy and cool things on the computer, experimenting with code, developing small programs, and learning how these amazing machines work in the process!</p>
         <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
           <RouterLink
             to="/projects" >
@@ -89,11 +89,11 @@ const Home = () => {
             date={EXPERIENCE_TREE[1].date}
             company={EXPERIENCE_TREE[1].company}
             items={EXPERIENCE_TREE[1].items}>
-            <h2 style={{ padding: "1rem 0" }}>
+            <p style={{ padding: "1rem 0" }}>
               <RouterLink
                 className={styles.heroTextBBRouter}
                 to="/projects/better_bedrock" ><span className={`${styles.heroText} ${styles.heroTextBB}`}>Better Bedrock - the project I'm most proud of!</span>
-              </RouterLink> Started from nothing by just me, that evoled to the most advanced let's say addon in MCBE! - I started to play Minecraft Bedrock Edition when I was young and in this game, I began to create random stuff related to user interface - UI. Later, I moved on to entity models, animations, and general entity logic. By combining all these elements I created this project!</h2>
+              </RouterLink> Started from nothing by just me, that evoled to the most advanced let's say addon in MCBE! - I started to play Minecraft Bedrock Edition when I was young and in this game, I began to create random stuff related to user interface - UI. Later, I moved on to entity models, animations, and general entity logic. By combining all these elements I created this project!</p>
             <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
               <RouterLink
                 to="/projects/better_bedrock" >
