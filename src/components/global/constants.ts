@@ -63,8 +63,8 @@ export const EXPERIENCE_TREE = [
     date: "NOW",
     company: "MCBE UI Developer, Web Developer",
     items: [
-      { name: "Creating custom UI projects. Mainly custom elements for HUD and Server Forms. With my knowledge and experience I am able to create almost everything you want! If you are looking for someone who is able to bring your wildest ideas related to UI, feel free to contact me!" },
-      { name: "Well... to become Web Developer I need more knowledge and experience :D" },
+      { name: "Creating custom JsonUI projects. Mainly custom elements for HUD and Server Forms. With my knowledge and experience I am able to create almost everything you want! If you are looking for someone who is able to bring your wildest ideas related to UI, feel free to contact me!" },
+      { name: "Well... to become Web Developer I need still more knowledge and experience :D" },
     ]
   },
   {
@@ -72,10 +72,9 @@ export const EXPERIENCE_TREE = [
     date: "07.02.2022 - NOW",
     company: "@Better Bedrock",
     items: [
-      { name: "Designing and creating new features using JSON in Minecraft Bedrock JsonUI system" },
-      { name: "Creating basic models and simple animations using BlockBench and Minecraft Entity components etc." },
-      { name: "Recording trailers for new version, mostly quick videos, but more recently longer ones called showcase trailers" },
-      { name: "Managing discord comunnity server, in most cases helping and announcing important information" },
+      { name: "Creating new features using mainly JsonUI and more rarely Json Models" },
+      { name: "Recording changelog videos and quick trailers, but more recently longer ones called showcase trailers " },
+      { name: "Managing discord community server" },
     ]
   }
 ]
@@ -84,11 +83,10 @@ export const SKILLS_CARDS = [
   {
     title: "Programming",
     items: [
+      { name: "Minecraft Bedrock JsonUI", value: "10/10" },
+      { name: "JAVASCRIPT", value: "7/10" },
       { name: "HTML", value: "7/10" },
       { name: "CSS", value: "6/10" },
-      { name: "JAVASCRIPT", value: "7/10" },
-      { name: "TYPESCRIPT", value: "4/10" },
-      { name: "Minecraft Bedrock JsonUI", value: "10/10" },
     ]
   },
   {
@@ -102,7 +100,8 @@ export const SKILLS_CARDS = [
     title: "Learning",
     items: [
       { name: "React", value: "5/10" },
-      { name: "Python", value: "3/10" },
+      { name: "TYPESCRIPT", value: "4/10" },
+      { name: "Python", value: "2/10" },
     ]
   },
   {

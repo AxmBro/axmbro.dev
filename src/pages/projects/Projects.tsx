@@ -133,21 +133,21 @@ const ProjectsGrid: React.FC<ProjectsGridProps> = ({ items, hideTags }) => {
                       alt={item.logoSrc}
                     />
                   )}
-                  <h1
+                  <h2
                     onClick={() => handleProjectClick(item)}
                     className={item.url ? `${styles.TitleUrl}` : `${styles.Title}`}
                     style={{ cursor: item.url ? "pointer" : undefined }}
                   >
                     {item.title}
-                  </h1>
+                  </h2>
                 </div>
-                <h2 className={styles.Description}>{item.description}</h2>
+                <p className={styles.Description}>{item.description}</p>
                 {(item.tags && hideTags) && (
                   <div className={styles.TagsContainer}>
                     {item.tags.map((tag) => (
-                      <h2 key={`TagKey${tag}`} className={styles.Tag}>
+                      <p key={`TagKey${tag}`} className={styles.Tag}>
                         {tag}
-                      </h2>
+                      </p>
                     ))}
                   </div>
                 )}
@@ -195,7 +195,6 @@ const SearchbarGrid: React.FC<SearchbarGridProps> = ({ search, setSearch }) => {
     }, 5000);
 
     return () => clearInterval(intervalId);
-    // eslint-disable-next-line
   }, []);
 
   return (

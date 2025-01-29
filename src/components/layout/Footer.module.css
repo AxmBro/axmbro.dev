@@ -24,7 +24,7 @@
   border-top: var(--border-width) solid var(--line-break-color);
 }
 
-.bottomFooterContainer h2 {
+.bottomFooterContainer p {
   color: var(--text-color-4);
   text-align: left;
 }

@@ -6,16 +6,15 @@
 
 .container {
   padding: 1rem;
-  border: var(--border-width) solid var(--line-break-color);
+  /* border: var(--border-width) solid var(--line-break-color); */
   border-radius: var(--border-radius);
   background-color: var(--web-bg-color-2);
 }
 
 .role {
-  font-size: 1.5rem;
+  font-size: var(--font-h2);
 }
 
 .date {
-  font-size: 1rem;
   margin-bottom: 1rem;
 }

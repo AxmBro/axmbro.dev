@@ -26,7 +26,7 @@
 }
 
 .image-section .image-section-title {
-  font-size: 1.5rem;
+  font-size: var(--font-h2);
 }
 
 .image-section-row {

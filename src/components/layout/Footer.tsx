@@ -58,7 +58,7 @@ const Footer: React.FC = () => {
       </div>
 
       <div className={styles.bottomFooterContainer}>
-        <h2>Copyright © AxmBro | All rights reserved</h2>
+        <p>Copyright © AxmBro | All rights reserved</p>
       </div>
     </ScreenContainer>
   );

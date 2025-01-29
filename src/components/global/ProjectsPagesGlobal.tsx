@@ -37,8 +37,8 @@ const ImageSection: React.FC<ImageSectionProps> = ({ title, sectionDescription, 
           return <li key={`li${index}`} className="image-section" style={{ paddingTop: rowStyle ? 0 : "1rem", paddingBottom: rowStyle ? 0 : "1rem" }}>
             {!rowStyle &&
               <div>
-                <h1 className="image-section-title">{`${index + 1}. ${item.title}`}</h1>
-                <h2 className="image-section-description">{item.description}</h2>
+                <h2 className="image-section-title">{`${index + 1}. ${item.title}`}</h2>
+                <p className="image-section-description">{item.description}</p>
               </div>}
             {item.imageSrc && <div className="image-section-img-container" style={{ paddingBottom: rowStyle ? "1rem" : 0, paddingTop: rowStyle ? 0 : "1rem" }}>
               <img src={imageSrc} alt="" className="image-section-img" />
