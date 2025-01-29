@@ -4,13 +4,14 @@ import { useLocation } from "react-router-dom";
 
 interface ScreenContainerProps {
   children: ReactNode,
-  style?: React.CSSProperties
+  style?: React.CSSProperties,
   useMinHeight?: boolean,
-  id?: string
-  className?: string
+  id?: string,
+  className?: string,
+  documentTitle: string
 }
 
-const ScreenContainer: React.FC<ScreenContainerProps> = ({ children, style, useMinHeight = true, id, className }) => {
+const ScreenContainer: React.FC<ScreenContainerProps> = ({ children, style, useMinHeight = true, id, className, documentTitle }) => {
   const [minHeight, setMinHeight] = useState("0");
   const [locationChange, setLocationChange] = useState(false);
 
@@ -43,6 +44,12 @@ const ScreenContainer: React.FC<ScreenContainerProps> = ({ children, style, useM
       window.removeEventListener('resize', handleResize);
     };
   }, [useMinHeight, locationChange]);
+
+  useEffect(() => {
+    if (documentTitle) {
+      document.title = documentTitle;
+    }
+  }, []);
 
   return (
     <div id={id} style={{ minHeight: minHeight }} className={className}>

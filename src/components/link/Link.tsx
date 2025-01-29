@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./Link.module.css";
 
 interface LinkProps {
+  useButtonFontHeight?: boolean,
   useUnderline?: boolean,
   textColor?: string,
   text?: string,
@@ -11,6 +12,7 @@ interface LinkProps {
 }
 
 const Link: React.FC<LinkProps> = ({
+  useButtonFontHeight = false,
   useUnderline = true,
   textColor = "var(--text-color-2)",
   text,
@@ -22,22 +24,25 @@ const Link: React.FC<LinkProps> = ({
   return (
     <>
       {!children && (<a
-        style={{ color: textColor }}
+        style={{ color: textColor, fontWeight: useButtonFontHeight ? "600" : "500" }}
         className={useUnderline ? `${styles.link}` : `${styles.linkWithoutUnderline}`}
         href={href}
         rel="noopener noreferrer"
         target={openInNewTab ? "_blank" : undefined}
       >{text ?? "{text}"}
-      </a>)}
-      {children && (
-        <a
-          href={href}
-          rel="noopener noreferrer"
-          target={openInNewTab ? "_blank" : undefined}
-        >
-          {children}
-        </a>
-      )}
+      </a >)
+      }
+      {
+        children && (
+          <a
+            href={href}
+            rel="noopener noreferrer"
+            target={openInNewTab ? "_blank" : undefined}
+          >
+            {children}
+          </a>
+        )
+      }
     </>
   )
 }

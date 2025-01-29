@@ -6,11 +6,11 @@ import { RouteLink } from "../../components/link/RouteLink";
 import { Link } from "../../components/link/Link";
 
 const Info = () => {
-  document.title = "AxmBro | Info"
   const height = "3.5rem";
   const width = "100%";
   return (
-    <ScreenContainer>
+    <ScreenContainer
+    documentTitle="AxmBro | Info">
 
       <ScreenSection
         id="info"
