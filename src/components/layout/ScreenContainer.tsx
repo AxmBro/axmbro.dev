@@ -8,7 +8,7 @@ interface ScreenContainerProps {
   useMinHeight?: boolean,
   id?: string,
   className?: string,
-  documentTitle: string
+  documentTitle?: string
 }
 
 const ScreenContainer: React.FC<ScreenContainerProps> = ({ children, style, useMinHeight = true, id, className, documentTitle }) => {

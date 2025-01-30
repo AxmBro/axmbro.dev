@@ -4,7 +4,6 @@ import { Header } from "./components/layout/Header";
 import { Projects } from "./pages/projects/Projects";
 import { Footer } from "./components/layout/Footer";
 import { ProjectsSubPage } from "./pages/projects/ProjectsSubpage";
-import { Info } from "./pages/info/Info";
 import { TermsOfUse } from "./pages/terms-of-use/TermsOfUse";
 import { Home } from "./pages/home/Home";
 import { Contact } from "./pages/contact/Contact";
@@ -21,7 +20,6 @@ const App: FC = () => {
           <Route path="/" element={<Home />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/projects/:projectId" element={<ProjectsSubPage />} />
-          <Route path="/info" element={<Info />} />
           <Route path="/terms_of_use" element={<TermsOfUse />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />

@@ -40,12 +40,6 @@ const Footer: React.FC = () => {
           >
             Contact
           </NavLink>
-          <NavLink
-            to="/info"
-            end
-          >
-            Info
-          </NavLink>
 
         </div>
         <div className={styles.routesContainer}>

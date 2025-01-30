@@ -20,4 +20,5 @@
 
 .ScreenSectionList ul li .highlight {
   color: var(--text-color-2);
+  font-weight: 600;
 }
