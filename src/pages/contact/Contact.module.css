@@ -1,8 +1,4 @@
 .buttonsContainer {
-  padding-top: 1rem;
-}
-
-.buttonsContainer {
   display: flex;
   flex-direction: column;
   gap: 1rem;
