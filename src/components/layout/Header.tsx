@@ -45,11 +45,7 @@ const Header: React.FC = () => {
     {
       to: "/contact",
       text: "Contact",
-    },
-    {
-      to: "/info",
-      text: "Info",
-    },
+    }
   ]
 
   return (

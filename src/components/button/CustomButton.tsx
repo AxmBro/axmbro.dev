@@ -46,6 +46,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({
         <p style={{ color: "var(--text-color-1)" }}>
           {text}
           {textContant && (<span>: <span style={{
+            fontWeight: 600,
             color: `rgb(${border.r}, ${border.g}, ${border.b})`
           }}>{`${textContant}`}</span></span>)}
         </p>

@@ -26,28 +26,14 @@ const Home = () => {
 
   return (
     <ScreenContainer
-    documentTitle="AxmBro | Home">
+      documentTitle="AxmBro | Home">
 
       <ScreenSection
         id="aboutme"
         style={{ padding: "1rem 0 2rem 0" }}
         ignoreChildrenPadding={true}
         title="About Me">
-        <p style={{ paddingBottom: "1rem" }}>Hey, I'm <span className={styles.heroText}>Axmbro</span>! I like creating fancy and cool things on the computer, experimenting with code, developing small programs, and learning how these amazing machines work in the process!</p>
-        <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
-          <RouterLink
-            to="/projects" >
-            <Button
-              buttonColor={ButtonColor.blue}
-              text="Projects" />
-          </RouterLink>
-          <RouterLink
-            to="/contact" >
-            <Button
-              buttonColor={ButtonColor.default}
-              text="Contact" />
-          </RouterLink>
-        </div>
+        <p>Hey, I'm <span className={styles.heroText}>Axmbro</span>! I like creating fancy and cool things on the computer, experimenting with code, developing small programs, and learning how these amazing machines work in the process!</p>
       </ScreenSection>
 
       <ScreenSection
@@ -115,8 +101,8 @@ const Home = () => {
             <Button text="Contact" buttonColor={ButtonColor.blue}></Button>
           </RouteLink>
           <RouteLink
-            to="/info">
-            <Button text="All contacts /info" buttonColor={ButtonColor.default}></Button>
+            to="/projects">
+            <Button text="Projects" buttonColor={ButtonColor.default}></Button>
           </RouteLink>
         </div>
       </ScreenSection>
