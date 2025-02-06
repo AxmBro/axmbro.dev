@@ -35,7 +35,7 @@ const Home = () => {
         noChildrenPadding={true}
         title="AxmBro"
         titleClassName={global_styles.h1HeroText}>
-        <p>I'm 18 year old <b>Junior Developer</b> from <b>Poland</b>. I have been learning programming for more than 2 years and I'm still learning and experimenting with code.</p>
+        <p>I'm 18 year old <b>Junior Developer</b> from <b>Poland</b>. I have been learning programming for more than 2 years. I'm still learning, experimenting with code and building simple projects!</p>
       </ScreenSection>
 
       <ScreenSection
