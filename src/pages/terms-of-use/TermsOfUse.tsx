@@ -2,6 +2,7 @@ import { ScreenSection } from "../../components/layout/ScreenSection";
 import { ScreenContainer } from "../../components/layout/ScreenContainer";
 import styles from "./TermsOfUse.module.css";
 import { NavLink } from "react-router-dom";
+import global_styles from "./../../components/global/global-styles.module.css";
 
 const TermsOfUse = () => {
   const lastUpdate = "21.01.2025";
@@ -43,9 +44,10 @@ const TermsOfUse = () => {
 
       <ScreenSection
         id="termsOfUse"
-        singleParagraph={true}
+        noBorder={true}
         childrenTopDivider={true}
         title="Terms of Use"
+        titleClassName={global_styles.h1HeroText}
         description1="By accessing this website (axmbro.dev), you agree to these Terms. If you disagree, do not use the site.">
         <div className={styles.termsOfUse}>
           {content.map((item) => {

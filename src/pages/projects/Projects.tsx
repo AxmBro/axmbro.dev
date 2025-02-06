@@ -7,6 +7,7 @@ import { ScreenContainer } from "../../components/layout/ScreenContainer";
 import { PROJECTS } from "../../components/global/constants";
 import { RouteLink } from "../../components/link/RouteLink";
 import starImage from "../../assets/star.png";
+import global_styles from "./../../components/global/global-styles.module.css";
 
 interface ProjectItem {
   title: string;
@@ -32,10 +33,23 @@ function Projects() {
       return false;
     }
   });
+  const [showOnlyPinned, setShowOnlyPinned] = useState(() => {
+    try {
+      const savedLocalValue = localStorage.getItem("showOnlyPinned");
+      return savedLocalValue ? JSON.parse(savedLocalValue) : false;
+    } catch (error) {
+      console.log(error)
+      return false;
+    }
+  });
 
   useEffect(() => {
     localStorage.setItem("hideTags", JSON.stringify(hideTags));
   }, [hideTags]);
+
+  useEffect(() => {
+    localStorage.setItem("showOnlyPinned", JSON.stringify(showOnlyPinned));
+  }, [showOnlyPinned]);
 
   let items: ProjectItem[] = PROJECTS
 
@@ -49,26 +63,34 @@ function Projects() {
 
   return (
     <ScreenContainer
-    documentTitle="AxmBro | Projects">
+      documentTitle="AxmBro | Projects">
       <ScreenSection
-        style={{ padding: "1rem 0 0 0", border: 0 }}
-        title={`Projects: ${projectsLength}`}
-        description1="Here is a list of all the projects I've been involved in! Most of them include videos and screenshots for a closer look at my work. Each project shows the skills and techniques I've learned over time.">
+        titleDescription={`In total: ${projectsLength}`}
+        style={{ border: 0 }}
+        title="Projects"
+        titleClassName={global_styles.h1HeroText}
+        noChildrenPadding={true}>
         <>
+          <p style={{ marginBottom: "2rem" }}>Here is a list of projects I've worked on! <b>Most of them include screenshots, videos, and explanations to give you a better look at my work</b>. Each project shows the skills I've learned and improved over time!</p>
           <SearchbarGrid search={search} setSearch={setSearch} />
           <div className={styles.searchbarButtonsContainer}>
             <Button
               onClick={() => setHideTags(!hideTags)}
-              text={hideTags ? "Show Tags" : "Hide Tags"}
+              text={hideTags ? "Show tags" : "Hide tags"}
               buttonColor={ButtonColor.blue} />
+            <Button
+              onClick={() => setShowOnlyPinned(!showOnlyPinned)}
+              text={showOnlyPinned ? "Show all" : "Show only pinned"}
+              buttonColor={ButtonColor.default} />
           </div>
         </>
       </ScreenSection>
       {(items.length > 0) &&
         <ScreenSection
-          style={{ borderBottom: 0 }}>
+          style={{ borderBottom: 0, padding: "0.75rem 0 2rem 0" }}>
           <ProjectsGrid
             hideTags={!hideTags}
+            showOnlyPinned={showOnlyPinned}
             items={items} />
         </ScreenSection>}
       {(items.length === 0) && (
@@ -81,9 +103,10 @@ function Projects() {
 interface ProjectsGridProps {
   items: ProjectItem[];
   hideTags?: boolean;
+  showOnlyPinned?: boolean;
 }
 
-const ProjectsGrid: React.FC<ProjectsGridProps> = ({ items, hideTags }) => {
+const ProjectsGrid: React.FC<ProjectsGridProps> = ({ items, hideTags, showOnlyPinned }) => {
   const navigate = useNavigate();
 
   const handleProjectClick = (project: ProjectItem) => {
@@ -108,7 +131,7 @@ const ProjectsGrid: React.FC<ProjectsGridProps> = ({ items, hideTags }) => {
 
         const imageAlt = item.imgSrc || "";
 
-        return (
+        return (showOnlyPinned && !item.star) ? null : (
           <div
             key={`item${item.title}`}
             className={styles.ProjectsGridItem}
@@ -128,18 +151,21 @@ const ProjectsGrid: React.FC<ProjectsGridProps> = ({ items, hideTags }) => {
               <div>
                 <div className={styles.TitleAndLogoContainer}>
                   {item.logoSrc && (
-                    <img
-                      src={logoImageSrc}
-                      alt={item.logoSrc}
-                    />
+                    <div>
+                      <img
+                        src={logoImageSrc}
+                        alt={item.logoSrc}
+                      />
+                    </div>
                   )}
-                  <h2
-                    onClick={() => handleProjectClick(item)}
-                    className={item.url ? `${styles.TitleUrl}` : `${styles.Title}`}
-                    style={{ cursor: item.url ? "pointer" : undefined }}
-                  >
-                    {item.title}
-                  </h2>
+                  <div>
+                    <h2
+                      onClick={() => handleProjectClick(item)}
+                      className={item.url ? `${styles.TitleUrl}` : ""}
+                      style={{ cursor: item.url ? "pointer" : "" }}>
+                      {item.title}
+                    </h2>
+                  </div>
                 </div>
                 <p className={styles.Description}>{item.description}</p>
                 {(item.tags && hideTags) && (
