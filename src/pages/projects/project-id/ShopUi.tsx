@@ -9,7 +9,6 @@ const ShopUIPage: React.FC = () => {
   return (
     <div className="projects_pages">
       <ScreenSection
-        style={{ padding: "1rem 0 2rem 0" }}
         title="Shop UI"
         description1="CUSTOM SERVER FORM UI created for personal use, but also to test custom tabs in vanilla style, many texts in each button and search feature! General appearance and in-game UI was fully created by me."
         children={
@@ -66,7 +65,7 @@ const ShopUIPage: React.FC = () => {
       </ImageSection>
       <div id="credits">
         <ScreenSection
-          ignoreChildrenPadding={true}
+          noChildrenPadding={true}
           title="Creators"
           children={
             <div>
@@ -83,7 +82,7 @@ const ShopUIPage: React.FC = () => {
         ></ScreenSection>
         <ScreenSection
           style={{ borderBottom: 0 }}
-          ignoreChildrenPadding={true}
+          noChildrenPadding={true}
           title="Technology"
           children={
             <div>

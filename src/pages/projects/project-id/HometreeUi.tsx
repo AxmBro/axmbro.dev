@@ -8,7 +8,6 @@ function HometreeUIPage() {
   return (
     <div className="projects_pages">
       <ScreenSection
-        style={{ padding: "1rem 0 2rem 0" }}
         title="Hometree UI"
         description1="CUSTOM SERVER FORM UI created for customer. It's pretty colorful and simple grid UI used in gamemodes selector and extra information form! General appearance was designed by customer and slighly by me. In-game UI is fully created by me."
         children={
@@ -50,7 +49,7 @@ function HometreeUIPage() {
       </ImageSection>
       <div id="credits">
         <ScreenSection
-          ignoreChildrenPadding={true}
+          noChildrenPadding={true}
           title="Creators"
           children={
             <div>
@@ -67,7 +66,7 @@ function HometreeUIPage() {
         ></ScreenSection>
         <ScreenSection
           style={{ borderBottom: 0 }}
-          ignoreChildrenPadding={true}
+          noChildrenPadding={true}
           title="Technology"
           children={
             <div>

@@ -22,7 +22,7 @@
 }
 
 .header .logoContainer .logoImg {
-  padding-right: 1rem;
+  margin-right: 1rem;
   width: 2.8rem;
   aspect-ratio: 1 / 1;
 }
@@ -56,7 +56,7 @@
 }
 
 .headerContainer .desktopButtons > * {
-  font-size: 1rem;
+  font-size: var(--font-p);
 }
 
 .headerContainer .headerLink {
@@ -86,7 +86,7 @@
 
 .headerContainer .secondSection .mobileButtons button {
   background-color: transparent;
-  font-size: 1rem;
+  font-size: var(--font-p);
 }
 
 .headerContainer .mobileButtons .menu {

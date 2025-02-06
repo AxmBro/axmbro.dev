@@ -17,23 +17,23 @@
 .button[data-color="defaultEmpty"] {
   background-color: var(--web-bg-color-1);
   color: var(--text-color-1);
-  border: var(--border-width) solid var(--line-break-color);
+  box-shadow: var(--box-shadow);
 }
 
 .button[data-color="defaultEmpty"]:hover {
   background-color: var(--line-break-color);
-  border: var(--border-width) solid var(--line-break-color);
+  box-shadow: var(--box-shadow);
 }
 
 .button[data-color="defaultEmpty2"] {
+  box-shadow: var(--box-shadow);
   background-color: var(--web-bg-color-2);
   color: var(--text-color-1);
-  border: var(--border-width) solid var(--line-break-color);
 }
 
 .button[data-color="defaultEmpty2"]:hover {
   background-color: var(--line-break-color);
-  border: var(--border-width) solid var(--line-break-color);
+  box-shadow: var(--box-shadow);
 }
 
 .button[data-color="default"] {
@@ -60,6 +60,7 @@
 }
 
 .buttonInner {
+  font-size: var(--font-p);
   display: flex;
   justify-content: center;
   align-items: center;

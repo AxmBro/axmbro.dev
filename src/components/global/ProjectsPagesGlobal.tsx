@@ -22,7 +22,7 @@ const ImageSection: React.FC<ImageSectionProps> = ({ title, sectionDescription, 
   return (
     <ScreenSection
       style={{ padding: rowStyle ? "2rem 0 2rem 0" : "2rem 0 1rem 0" }}
-      ignoreChildrenPadding={true}
+      noChildrenPadding={true}
       childrenTopDivider={childrenTopDividerInside}
       title={title}
       description1={sectionDescription}>
@@ -56,7 +56,7 @@ const ImageSection: React.FC<ImageSectionProps> = ({ title, sectionDescription, 
 }
 
 // interface ScreenSectionProp {
-//   ignoreChildrenPadding?: boolean;
+//   noChildrenPadding?: boolean;
 //   children?: ReactNode;
 //   title?: string
 //   description1?: string
@@ -65,7 +65,7 @@ const ImageSection: React.FC<ImageSectionProps> = ({ title, sectionDescription, 
 // }
 
 // const ScreenSection: React.FC<ScreenSectionProp> = ({
-//   ignoreChildrenPadding = false,
+//   noChildrenPadding = false,
 //   children,
 //   title,
 //   description1,
@@ -79,7 +79,7 @@ const ImageSection: React.FC<ImageSectionProps> = ({ title, sectionDescription, 
 //       {description2 ? <h2>{description2}</h2> : null}
 //       <div
 //         style={{
-//           paddingTop: (ignoreChildrenPadding ? 0 : ((children && (title || description1 || description2)) ? "1rem" : 0))
+//           paddingTop: (noChildrenPadding ? 0 : ((children && (title || description1 || description2)) ? "1rem" : 0))
 //         }}>
 //         {children}
 //       </div>
