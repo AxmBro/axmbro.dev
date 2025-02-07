@@ -99,7 +99,7 @@ const Header: React.FC = () => {
                 style={{ display: menuOpen ? "none" : "inline-block" }}
                 aria-label="Open menu"
               >
-                <h2 className={styles.headerLinkMobile}>Menu</h2>
+                <p className={styles.headerLinkMobile}>Menu</p>
               </div>
               <div
                 className={styles.menu}
