@@ -1,12 +1,22 @@
 import nodemailer from "nodemailer";
 
+let lastSentTime = {};
+
 export default async function handler(req, res) {
   if (req.method === "POST") {
     const { email, message } = req.body;
+    const now = Date.now();
+    const cooldown = 10 * 1000;
 
-    const date = new Date().toLocaleString("pl-PL", {
-      timeZone: "Europe/Warsaw",
-    });
+    if (lastSentTime[email] && now - lastSentTime[email] < cooldown) {
+      res.setHeader("Retry-After", "10");
+      return res
+        .status(429)
+        .json({ error: "Poczekaj 10 sekund przed wysłaniem kolejnej wiadomości." });
+    }
+
+    lastSentTime[email] = now;
+    const date = new Date().toLocaleString("pl-PL", { timeZone: "Europe/Warsaw" });
 
     const transporter = nodemailer.createTransport({
       service: "gmail",
