@@ -71,7 +71,7 @@ const Contact = () => {
             ))}
           </div>
           <p style={{ marginTop: "2rem" }}>Email form coming soon!</p>
-          {/* <ConactForm /> */}
+          <ConactForm />
         </>
       </ScreenSection>
 

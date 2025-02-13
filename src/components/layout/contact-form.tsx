@@ -6,7 +6,7 @@ const ConactForm: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault;
-    const response = await fetch("http://localhost:5000/send-email", {
+    const response = await fetch("/api/sendEmail", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -16,6 +16,8 @@ const ConactForm: React.FC = () => {
 
     if (response.ok) {
       alert("Message sent!");
+      setEmail("");
+      setMessage("");
     } else {
       alert("Failed to send message.");
     }
