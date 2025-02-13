@@ -6,13 +6,15 @@ export default async function handler(req, res) {
   if (req.method === "POST") {
     const { email, message } = req.body;
     const now = Date.now();
-    const cooldown = 10 * 1000;
+    const cooldown = 30 * 1000;
 
     if (lastSentTime[email] && now - lastSentTime[email] < cooldown) {
-      res.setHeader("Retry-After", "10");
-      return res
-        .status(429)
-        .json({ error: "Poczekaj 10 sekund przed wysłaniem kolejnej wiadomości." });
+      const remainingTime = cooldown - (now - lastSentTime[email]);
+      res.setHeader("Retry-After", Math.ceil(remainingTime / 1000));
+
+      return res.status(429).json({
+        error: `Please wait ${Math.ceil(remainingTime / 1000)} seconds before sending another message.`,
+      });
     }
 
     lastSentTime[email] = now;
