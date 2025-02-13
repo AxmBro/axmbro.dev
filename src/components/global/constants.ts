@@ -112,3 +112,15 @@ export const SKILLS_CARDS = [
     ]
   }
 ]
+
+export const SOCIAL_LINK_BUTTONS = [
+  { href: "https://github.com/AxmBro", text: "AxmBro", socialUrl: "https://github.com" },
+  { href: "https://discord.com/users/679603350236299266", text: "axmbro", socialUrl: "https://discord.gg" },
+  { href: "https://discord.gg/wJhH86c2wb", text: "Personal Server", socialUrl: "https://discord.gg" },
+  { href: "discord.gg/ZGK5WYXnEY", text: "Featured Server", socialUrl: "https://discord.gg" },
+  { href: "https://www.youtube.com/@axmbro", text: "Main Channel", socialUrl: "https://www.youtube.com" },
+  { href: "https://www.youtube.com/@axmbro2", text: "Second Channel", socialUrl: "https://www.youtube.com" },
+  { href: "https://twitter.com/AxmBro", text: "AxmBro", socialUrl: "https://x.com" },
+  { href: "https://www.instagram.com/axmbro_", text: "axmbro_", socialUrl: "https://www.instagram.com" },
+  { href: "https://www.instagram.com/axmbro_", text: "axmbro@gmail.com", socialUrl: "https://mail.google.com/" }
+];

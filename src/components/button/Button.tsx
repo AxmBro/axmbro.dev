@@ -7,6 +7,7 @@ interface ButtonProps {
   children?: ReactNode,
   style?: React.CSSProperties;
   onClick?: () => void;
+  childrenFirstRender?: boolean,
 }
 
 enum ButtonColor {
@@ -21,13 +22,15 @@ const Button: React.FC<ButtonProps> = ({
   text,
   children,
   style,
+  childrenFirstRender = false,
   onClick
 }) => {
   return (
     <div className={styles.button} data-color={buttonColor} style={style} onClick={onClick}>
       <div className={styles.buttonInner}>
+        {childrenFirstRender && children}
         {text && text}
-        {children}
+        {!childrenFirstRender && children}
       </div>
     </div>
   )
