@@ -58,9 +58,8 @@ const Contact = () => {
         title="Conact"
         titleClassName={global_styles.h1HeroText} >
         <>
-          <p style={{ marginBottom: "1rem" }}>Whether you have a project in mind or just want to reach out, <b>I would love to hear from you!</b> Let us combine our ideas and <b>make something absolutely amazing together!</b></p>
-          <p style={{ marginBottom: "2rem" }}>Here is list of buttons with quick redirect to platforms!</p>
-          <div className={styles.contactFlexContainer}>
+          <p style={{ marginBottom: "2rem" }}>Whether you have a project in mind or just want to reach out, <b>I would love to hear from you!</b> Let us combine our ideas and <b>make something absolutely amazing together!</b>Here is list of buttons with quick redirect to platforms.</p>
+          <div className={styles.contactFlexContainer} style={{ marginBottom: "2rem" }}>
             {SOCIAL_LINK_BUTTONS.map((button, index) => (
               <SocialLinkButton
                 key={index}
@@ -70,7 +69,6 @@ const Contact = () => {
               />
             ))}
           </div>
-          <p style={{ marginTop: "2rem" }}>Email form coming soon!</p>
           <ConactForm />
         </>
       </ScreenSection>

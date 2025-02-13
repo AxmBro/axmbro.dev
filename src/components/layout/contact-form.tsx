@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import styles from "./contact-form.module.css";
+import { Button, ButtonColor } from "../button/Button";
 
 const ConactForm: React.FC = () => {
   const [email, setEmail] = useState("");
@@ -26,18 +28,23 @@ const ConactForm: React.FC = () => {
   return (
     <form onSubmit={handleSubmit}>
       <input
+        className={styles.contactFormInput}
         type="email"
         placeholder="Your Email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         required />
       <textarea
+        className={styles.contactFormTextarea}
         placeholder="Your Message"
         value={message}
         onChange={(e) => setMessage(e.target.value)}
         required>
       </textarea>
-      <button type="submit">Send</button>
+      <button className={styles.contactFormSubmit} type="submit">
+        <Button text="Submit" style={{ width: "100%" }} buttonColor={ButtonColor.defaultEmpty2}>
+        </Button>
+      </button>
     </form>
   );
 }
