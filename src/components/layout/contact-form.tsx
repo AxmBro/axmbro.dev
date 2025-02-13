@@ -5,7 +5,7 @@ const ConactForm: React.FC = () => {
   const [message, setMessage] = useState("");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault;
+    e.preventDefault();
     const response = await fetch("/api/sendEmail", {
       method: "POST",
       headers: {
