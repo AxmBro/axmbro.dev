@@ -31,10 +31,8 @@ const ScreenSection: React.FC<ScreenSectionProp> = ({
 }) => {
   return (
     <div className="ScreenSection" style={{ border: noBorder ? 0 : "", ...style }} id={id}>
-      <div className={styles.titleContrainer}>
-        {title ? <h1 className={titleClassName}>{title}</h1> : null}
-        {titleDescription ? <p className={styles.titleDescription}>{titleDescription}</p> : null}
-      </div>
+      {title ? <h1 className={titleClassName}>{title}</h1> : null}
+      {titleDescription ? <p className={styles.titleDescription}>{titleDescription}</p> : null}
       {description1 ? <p style={{ paddingBottom: description2 ? "1rem" : 0 }}>{description1}</p> : null}
       {description2 ? <p>{description2}</p> : null}
       <div

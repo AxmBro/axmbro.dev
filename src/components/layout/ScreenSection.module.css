@@ -1,20 +1,3 @@
-.titleContrainer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
 .titleDescription {
-  color: var(--text-color-1) !important;
-}
-
-@media screen and (max-width: 330px) {
-  .titleContrainer {
-    gap: 0;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-bottom: 1rem;
-  }
+  margin-bottom: 0.5rem;
 }
