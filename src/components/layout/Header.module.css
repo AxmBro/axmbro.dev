@@ -48,6 +48,11 @@
   display: block;
 }
 
+.secondSection {
+  gap: 1rem;
+  display: inherit;
+}
+
 .headerContainer .desktopButtons {
   gap: 1rem;
   display: flex;

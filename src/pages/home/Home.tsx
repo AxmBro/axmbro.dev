@@ -36,6 +36,16 @@ const Home = () => {
         title="AxmBro"
         titleClassName={global_styles.h1HeroText}>
         <p>I'm 18 year old <b>Junior Developer</b> from <b>Poland</b>. I have been learning programming for more than 2 years. I'm still learning, experimenting with code and building simple projects!</p>
+        <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", marginTop: "2rem" }}>
+          <RouteLink
+            to="/contact">
+            <Button text="Contact" buttonColor={ButtonColor.blue}></Button>
+          </RouteLink>
+          <RouteLink
+            to="/projects">
+            <Button text="Projects" buttonColor={ButtonColor.default}></Button>
+          </RouteLink>
+        </div>
       </ScreenSection>
 
       <ScreenSection
