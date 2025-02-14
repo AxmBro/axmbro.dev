@@ -83,7 +83,7 @@ const Home = () => {
               date={EXPERIENCE_TREE[0].date}
               company={EXPERIENCE_TREE[0].company}
               items={EXPERIENCE_TREE[0].items}>
-              <div style={{ paddingTop: "1rem" }}>
+              <div style={{ paddingTop: "1rem", width: "fit-content" }}>
                 <Button buttonColor={ButtonColor.blue} text="Example JsonUI Projects" onClick={handleExampleProjectsClick} />
               </div>
             </ExperienceTree>

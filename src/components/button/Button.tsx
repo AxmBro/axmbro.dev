@@ -8,6 +8,7 @@ interface ButtonProps {
   style?: React.CSSProperties;
   onClick?: () => void;
   childrenFirstRender?: boolean,
+  type?: "submit" | "reset" | "button" | undefined;
 }
 
 enum ButtonColor {
@@ -23,17 +24,30 @@ const Button: React.FC<ButtonProps> = ({
   children,
   style,
   childrenFirstRender = false,
+  type,
   onClick
 }) => {
-  return (
-    <div className={styles.button} data-color={buttonColor} style={style} onClick={onClick}>
-      <div className={styles.buttonInner}>
-        {childrenFirstRender && children}
-        {text && text}
-        {!childrenFirstRender && children}
-      </div>
+  const buttonContent = (
+    <div className={styles.buttonInner}>
+      {childrenFirstRender && children}
+      {text && text}
+      {!childrenFirstRender && children}
     </div>
-  )
+  );
+
+  return (
+    <>
+      {type ? (
+        <button type={type} className={styles.button} data-color={buttonColor} style={style} onClick={onClick}>
+          {buttonContent}
+        </button>
+      ) : (
+        <div className={styles.button} data-color={buttonColor} style={style} onClick={onClick}>
+          {buttonContent}
+        </div>
+      )}
+    </>
+  );
 }
 
 export { Button, ButtonColor };

@@ -11,9 +11,7 @@
   flex-wrap: wrap;
 }
 
-@media screen and (max-width: 288px) {
-  .contactFlexContainer {
-    flex-direction: column;
-    align-items: center;
-  }
+.contactFlexContainer > * {
+  flex: 1 1 min(220px, 100%);
+  max-width: 100%;
 }

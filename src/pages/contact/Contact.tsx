@@ -5,9 +5,8 @@ import { Link } from "../../components/link/Link";
 import global_styles from "./../../components/global/global-styles.module.css";
 import { SocialIcon } from "react-social-icons";
 import { Button, ButtonColor } from "../../components/button/Button";
-import { useMediaQuery } from 'react-responsive';
 import { SOCIAL_LINK_BUTTONS } from "../../components/global/constants";
-import { ConactForm } from "../../components/layout/contact-form";
+import { ContactForm } from "../../components/layout/contact-form";
 
 const Contact = () => {
   const SocialiconSize = "2.25rem";
@@ -16,7 +15,6 @@ const Contact = () => {
   const SocialIconFgColor = "var(--text-color-1)";
   const buttonColor = ButtonColor.blue;
 
-  const MediaMaxWidth = useMediaQuery({ query: '(max-width: 288px)' });
 
   interface SocialLinkButtonProps {
     href: string;
@@ -26,12 +24,12 @@ const Contact = () => {
 
   const SocialLinkButton = ({ href, text, socialUrl }: SocialLinkButtonProps) => (
     <Link
-      style={{ width: MediaMaxWidth ? "inherit" : "" }}
+      style={{ width: "inherit" }}
       href={href}
       openInNewTab={true}
     >
       <Button
-        style={{ width: MediaMaxWidth ? "100%" : "" }}
+        style={{ width: "100%" }}
         childrenFirstRender={true}
         text={text}
         buttonColor={buttonColor}
@@ -53,13 +51,12 @@ const Contact = () => {
 
       <ScreenSection
         id="contact"
-        noBorder={true}
         noChildrenPadding={true}
         title="Conact"
         titleClassName={global_styles.h1HeroText} >
         <>
-          <p style={{ marginBottom: "2rem" }}>Whether you have a project in mind or just want to reach out, <b>I would love to hear from you!</b> Let us combine our ideas and <b>make something absolutely amazing together!</b>Here is list of buttons with quick redirect to platforms.</p>
-          <div className={styles.contactFlexContainer} style={{ marginBottom: "2rem" }}>
+          <p style={{ marginBottom: "2rem" }}>Whether you have a project in mind or just want to reach out, <b>I would love to hear from you!</b> Let us combine our ideas and <b>make something absolutely amazing together!</b> Here is list of redirect buttons to my social media platforms.</p>
+          <div className={styles.contactFlexContainer}>
             {SOCIAL_LINK_BUTTONS.map((button, index) => (
               <SocialLinkButton
                 key={index}
@@ -69,7 +66,15 @@ const Contact = () => {
               />
             ))}
           </div>
-          <ConactForm />
+        </>
+      </ScreenSection>
+
+      <ScreenSection
+        noBorder={true}
+        description1="Fill out the form below and I will get back to you as soon as possible."
+        title="Send a message">
+        <>
+          <ContactForm />
         </>
       </ScreenSection>
 
