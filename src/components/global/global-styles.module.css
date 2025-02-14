@@ -23,3 +23,62 @@
     background-position: 100% 50%;
   }
 }
+
+.formInputText {
+  width: 100%;
+  height: 2.75rem;
+  border: 0;
+  box-shadow: var(--box-shadow);
+  border-radius: var(--border-radius);
+  background-color: var(--web-bg-color-2);
+  color: var(--text-color-1);
+  font-size: var(--font-p);
+  font-family:
+    "Poppins",
+    "Arial",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    "Roboto",
+    "Oxygen",
+    "Ubuntu",
+    "Cantarell",
+    "Fira Sans",
+    "Droid Sans",
+    "Helvetica Neue",
+    sans-serif;
+  padding: 0.5rem 0.75rem;
+  box-sizing: border-box;
+  font-weight: 600;
+}
+
+.formTextArea {
+  min-width: 100%;
+  border: 0;
+  box-shadow: var(--box-shadow);
+  border-radius: var(--border-radius);
+  background-color: var(--web-bg-color-2);
+  color: var(--text-color-1);
+  font-size: var(--font-p);
+  font-family:
+    "Poppins",
+    "Arial",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    "Roboto",
+    "Oxygen",
+    "Ubuntu",
+    "Cantarell",
+    "Fira Sans",
+    "Droid Sans",
+    "Helvetica Neue",
+    sans-serif;
+  box-sizing: border-box;
+  font-weight: 500;
+  resize: vertical;
+  min-height: 2.75rem;
+  height: clamp(2.75rem, 10rem, 100vh);
+  max-height: 100vh;
+  padding: 0.5rem 0.75rem;
+}
