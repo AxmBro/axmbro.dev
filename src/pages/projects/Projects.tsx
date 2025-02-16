@@ -8,6 +8,7 @@ import { PROJECTS } from "../../components/global/constants";
 import { RouteLink } from "../../components/link/RouteLink";
 import starImage from "../../assets/star.png";
 import global_styles from "./../../components/global/global-styles.module.css";
+import { Popover } from "../../components/popover/Popover"; // Import Popover component
 
 interface ProjectItem {
   title: string;
@@ -61,6 +62,21 @@ function Projects() {
       (item.tags && item.tags.join(" ").toLowerCase().includes(search.toLowerCase()));
   });
 
+  const buttonsActions = [
+    {
+      ref: hideTags,
+      text1: "Show tags",
+      text2: "Hide tags",
+      action: () => setHideTags(!hideTags)
+    },
+    {
+      ref: showOnlyPinned,
+      text1: "Show all",
+      text2: "Show only pinned",
+      action: () => setShowOnlyPinned(!showOnlyPinned)
+    }
+  ];
+
   return (
     <ScreenContainer
       documentTitle="AxmBro | Projects">
@@ -72,17 +88,7 @@ function Projects() {
         noChildrenPadding={true}>
         <>
           <p style={{ marginBottom: "2rem" }}>Here is a list of projects I've worked on! <b>Most of them include screenshots, videos, and explanations to give you a better look at my work</b>. Each project shows the skills I've learned and improved over time!</p>
-          <SearchbarGrid search={search} setSearch={setSearch} />
-          <div className={styles.searchbarButtonsContainer}>
-            <Button
-              onClick={() => setHideTags(!hideTags)}
-              text={hideTags ? "Show tags" : "Hide tags"}
-              buttonColor={ButtonColor.blue} />
-            <Button
-              onClick={() => setShowOnlyPinned(!showOnlyPinned)}
-              text={showOnlyPinned ? "Show all" : "Show only pinned"}
-              buttonColor={ButtonColor.default} />
-          </div>
+          <SearchbarGrid search={search} setSearch={setSearch} buttonsActionsArray={buttonsActions} />
         </>
       </ScreenSection>
       {(items.length > 0) &&
@@ -94,7 +100,7 @@ function Projects() {
             items={items} />
         </ScreenSection>}
       {(items.length === 0) && (
-        <h2 style={{ marginTop: "2rem" }}>{`There are no results for: ${search}`}</h2>
+        <h2 style={{ marginTop: "0.75rem" }}>{`There are no results for: ${search}`}</h2>
       )}
     </ScreenContainer>
   );
@@ -199,10 +205,12 @@ const ProjectsGrid: React.FC<ProjectsGridProps> = ({ items, hideTags, showOnlyPi
 interface SearchbarGridProps {
   search: string;
   setSearch: (value: string) => void;
+  buttonsActionsArray: { ref: boolean; text1: string; text2: string; action: () => void }[];
 }
 
-const SearchbarGrid: React.FC<SearchbarGridProps> = ({ search, setSearch }) => {
+const SearchbarGrid: React.FC<SearchbarGridProps> = ({ search, setSearch, buttonsActionsArray }) => {
   const [animatedPlaceholder, setAnimatedPlaceholder] = useState("");
+  const [showPopover, setShowPopover] = useState(false); // State to manage popover visibility
 
   const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { target } = event;
@@ -225,9 +233,26 @@ const SearchbarGrid: React.FC<SearchbarGridProps> = ({ search, setSearch }) => {
 
   return (
     <div className={styles.searchBarWrapper}>
-      <input type="text" className={styles.searchBar} placeholder={`Search by: ${animatedPlaceholder}`} value={search} onChange={handleChangeInput} />
+      <input type="text" className={global_styles.formInputText} placeholder={`Search by: ${animatedPlaceholder}`} value={search} onChange={handleChangeInput} />
+      <div style={{ position: "relative" }}>
+        <Button
+          style={{ minWidth: "0", whiteSpace: "nowrap" }}
+          text="Options"
+          buttonColor={ButtonColor.defaultEmpty2}
+          onClick={() => setShowPopover(!showPopover)}
+        />
+        {showPopover && (
+          <Popover>
+            {buttonsActionsArray.map((buttonAction, index) => {
+              return (
+                <Button text={buttonAction.ref ? buttonAction.text1 : buttonAction.text2} onClick={buttonAction.action} buttonColor={index === 0 ? ButtonColor.blue : ButtonColor.default} />
+              )
+            })}
+          </Popover>
+        )}
+      </div>
       {search && (<div onClick={() => setSearch("")}>
-        <Button style={{ width: "3rem", minWidth: "0" }} text="X" buttonColor={ButtonColor.defaultEmpty2}></Button>
+        <Button style={{ width: "2.75rem", minWidth: "0" }} text="X" buttonColor={ButtonColor.defaultEmpty2}></Button>
       </div>)}
     </div>
   )

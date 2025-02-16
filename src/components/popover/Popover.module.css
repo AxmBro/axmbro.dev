@@ -1,0 +1,15 @@
+.popover {
+  position: absolute;
+  width: max-content;
+  top: 100%;
+  right: 0;
+  background-color: var(--web-bg-color-2);
+  box-shadow: var(--box-shadow);
+  border-radius: var(--border-radius);
+  padding: 1rem;
+  margin-top: 0.5rem;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}

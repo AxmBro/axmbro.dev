@@ -79,6 +79,7 @@ const Home = () => {
           <p style={{ marginBottom: "2rem" }}>I'm currently learning websites with plans to become a <b>Web Developer</b>. In the past I built custom UIs for Minecraft Bedrock Edition, in which I feel like almost a <b>Senior Developer</b>. If you have any plans to create custom UIs in this game, <b>feel free to contact me and check my work in projects page!</b></p>
           <ExperienceTreeContainer>
             <ExperienceTree
+            index={2}
               role={EXPERIENCE_TREE[0].role}
               date={EXPERIENCE_TREE[0].date}
               company={EXPERIENCE_TREE[0].company}
@@ -88,6 +89,7 @@ const Home = () => {
               </div>
             </ExperienceTree>
             <ExperienceTree
+            index={1}
               role={EXPERIENCE_TREE[1].role}
               date={EXPERIENCE_TREE[1].date}
               company={EXPERIENCE_TREE[1].company}
