@@ -42,7 +42,7 @@ function MurderDetectorPage() {
         items={[
           {
             title: "Visible Sheriffs",
-            description: "Once player in gave is going to take bow or arrow to hand, bow icon will be instantly visible above his name.",
+            description: "Once player in game is going to take bow or arrow to hand, bow icon will be instantly visible above his name.",
             imageSrc: "mm4"
           },
           {
