@@ -21,9 +21,10 @@ interface ExperienceTreeProps {
   items?: { name: string, value?: string }[];
   children?: ReactNode;
   id?: string;
+  index?: number;
 }
 
-const ExperienceTree: React.FC<ExperienceTreeProps> = ({ role, date, company, items = [], children, id }) => {
+const ExperienceTree: React.FC<ExperienceTreeProps> = ({ role, date, company, items = [], children, id, index }) => {
   const ScreenSectionListStyle = {
     padding: 0,
     border: 0
@@ -31,9 +32,12 @@ const ExperienceTree: React.FC<ExperienceTreeProps> = ({ role, date, company, it
 
   return (
     <div className={styles.container} id={id}>
-      <h2 className={styles.role}>{role}</h2>
-      <p className={styles.date}>{`${date},`}
-        <span className={styles.company} style={{ color: "var(--text-color-2)", fontWeight: 600 }}>{` ${company}`}</span>
+      <div className={styles.header}>
+        <h2 className={styles.role}>{role}</h2>
+        {index && (<h2 className={styles.role}>{`#${index}`}</h2>)}
+      </div>
+      <p className={styles.date}>
+        {`${date},`} <span className={styles.company} style={{ color: "var(--text-color-2)", fontWeight: 600 }}>{` ${company}`}</span>
       </p>
       <ScreenSectionList
         style={ScreenSectionListStyle}
