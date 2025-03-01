@@ -16,8 +16,7 @@ const Footer: React.FC = () => {
           <NavLink
             to="/"
             end
-            className={styles.logoNavLink}
-          >
+            className={styles.logoNavLink}>
             <div className={styles.logoContainer}>
               <img src={logo} className={styles.logoImg} alt="" />
             </div>
@@ -40,19 +39,15 @@ const Footer: React.FC = () => {
           >
             Contact
           </NavLink>
-
-        </div>
-        <div className={styles.routesContainer}>
           <NavLink
             to="/terms_of_use"
             end>
             Terms of Use
           </NavLink>
         </div>
-      </div>
-
-      <div className={styles.bottomFooterContainer}>
-        <p>Copyright © AxmBro | All rights reserved</p>
+        <div className={styles.routesContainer}>
+          <p>Copyright © AxmBro | All rights reserved</p>
+        </div>
       </div>
     </ScreenContainer>
   );
