@@ -1,8 +1,8 @@
-import { ScreenSection } from "../../components/layout/screen-section";
-import { ScreenContainer } from "../../components/layout/screen-container";
+import { ScreenSection } from "../../common/layout/screen-section";
+import { ScreenContainer } from "../../common/layout/screen-container";
 import styles from "./terms-of-use.module.css";
 import { NavLink } from "react-router-dom";
-import global_styles from "./../../components/global/global-styles.module.css";
+import global_styles from "../../common/global/global-styles.module.css";
 
 const TermsOfUse = () => {
   const lastUpdate = "21.01.2025";

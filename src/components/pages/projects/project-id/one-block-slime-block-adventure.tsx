@@ -1,6 +1,6 @@
-import { ScreenSection } from "../../../components/layout/screen-section";
-import { Button, ButtonColor } from "../../../components/button/button";
-import { Link } from "../../../components/link/link";
+import { ScreenSection } from "../../../common/layout/screen-section";
+import { Button, ButtonColor } from "../../../common/button/button";
+import { Link } from "../../../common/link/link";
 
 function OneBlockSlimeBlockAdventurePage() {
   return (

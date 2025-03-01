@@ -28,10 +28,10 @@ const ImageSection: React.FC<ImageSectionProps> = ({ title, sectionDescription, 
       description1={sectionDescription}>
       <ul style={{ padding: rowStyle ? "1rem 0 0 0" : 0, margin: 0 }} className={rowStyle ? "image-section-row" : ""}>
         {items.map((item, index) => {
-          const images = import.meta.glob('../../assets/*.png', { eager: true });
+          const images = import.meta.glob('../../../assets/*.png', { eager: true });
 
           const imageSrc = item.imageSrc
-            ? (images[`../../assets/${item.imageSrc}.png`] as { default: string }).default
+            ? (images[`../../../assets/${item.imageSrc}.png`] as { default: string }).default
             : "";
 
           return <li key={`li${index}`} className="image-section" style={{ paddingTop: rowStyle ? 0 : "1rem", paddingBottom: rowStyle ? 0 : "1rem" }}>

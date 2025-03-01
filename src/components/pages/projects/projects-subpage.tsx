@@ -1,13 +1,13 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { ScreenSection } from "../../components/layout/screen-section";
+import { ScreenSection } from "../../common/layout/screen-section";
 import { BetterBedrockPage } from "./project-id/better-bedrock";
 import { MurderDetectorPage } from "./project-id/murder-detector";
 import { OneBlockSlimeBlockAdventurePage } from "./project-id/one-block-slime-block-adventure";
 import { ShopUIPage } from "./project-id/shop-ui";
 import { HometreeUIPage } from "./project-id/hometree-ui";
 import { SimpleUIPage } from "./project-id/simple-ui";
-import { ScreenContainer } from "../../components/layout/screen-container";
+import { ScreenContainer } from "../../common/layout/screen-container";
 
 const ProjectsSubPage: React.FC = () => {
   const { projectId } = useParams<{ projectId: string }>();

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./contact-form.module.css";
 import { Button, ButtonColor } from "../button/button";
-import global_styles from "./../../components/global/global-styles.module.css";
+import global_styles from "../../../components/common/global/global-styles.module.css";
 
 const ContactForm: React.FC = () => {
   const [email, setEmail] = useState("");

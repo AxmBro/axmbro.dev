@@ -2,17 +2,17 @@ import styles from "./home.module.css";
 import {
   ScreenSection,
   ScreenSectionList,
-} from "../../components/layout/screen-section";
+} from "../../common/layout/screen-section";
 import { Link as RouterLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { Card } from "../../components/card/card";
-import { Button, ButtonColor } from "../../components/button/button";
-import { ScreenContainer } from "../../components/layout/screen-container";
-import { ExperienceTree, ExperienceTreeContainer } from "../../components/layout/experience-tree";
-import { EXPERIENCE_TREE, SKILLS_CARDS } from "../../components/global/constants";
-import { RouteLink } from "../../components/link/route-link";
+import { Card } from "../../common/card/card";
+import { Button, ButtonColor } from "../../common/button/button";
+import { ScreenContainer } from "../../common/layout/screen-container";
+import { ExperienceTree, ExperienceTreeContainer } from "../../common/layout/experience-tree";
+import { EXPERIENCE_TREE, SKILLS_CARDS } from "../../common/global/constants";
+import { RouteLink } from "../../common/link/route-link";
 
-import global_styles from "./../../components/global/global-styles.module.css";
+import global_styles from "../../../components/common/global/global-styles.module.css";
 
 const Home = () => {
   const navigate = useNavigate();

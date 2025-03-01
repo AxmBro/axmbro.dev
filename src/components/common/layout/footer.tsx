@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./footer.module.css";
 import { ScreenContainer } from "./screen-container";
 import { NavLink } from "react-router-dom";
-import logo from "../../assets/logo192.png";
+import logo from "../../../assets/logo192.png";
 
 const Footer: React.FC = () => {
   return (
