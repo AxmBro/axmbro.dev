@@ -1,7 +1,7 @@
-import { ScreenSection } from "../../../components/layout/screen-section";
-import { Button, ButtonColor } from "../../../components/button/button";
-import { Link } from "../../../components/link/link";
-import { ImageSection } from "../../../components/global/projects-pages-global";
+import { ScreenSection } from "../../../common/layout/screen-section";
+import { Button, ButtonColor } from "../../../common/button/button";
+import { Link } from "../../../common/link/link";
+import { ImageSection } from "../../../common/global/projects-pages-global";
 import { scrollToElement } from "../../../utils/scroll";
 
 function HometreeUIPage() {

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { Button, ButtonColor } from "../button/button";
 import styles from "./header.module.css";
-import logo from "../../assets/logo192.png";
+import logo from "../../../assets/logo192.png";
 import { Link as RouterLink } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 

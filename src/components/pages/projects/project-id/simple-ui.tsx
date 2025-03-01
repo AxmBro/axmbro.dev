@@ -1,10 +1,10 @@
 import React from "react";
-import { ScreenSection } from "../../../components/layout/screen-section";
-import { Button, ButtonColor } from "../../../components/button/button";
-import { Link } from "../../../components/link/link";
-import { ImageSection } from "../../../components/global/projects-pages-global";
+import { ScreenSection } from "../../../common/layout/screen-section";
+import { Button, ButtonColor } from "../../../common//button/button";
+import { Link } from "../../../common//link/link";
+import { ImageSection } from "../../../common/global/projects-pages-global";
 import { scrollToElement } from "../../../utils/scroll";
-import { RouteLink } from "../../../components/link/route-link";
+import { RouteLink } from "../../../common/link/route-link";
 
 const SimpleUIPage: React.FC = () => {
   return (

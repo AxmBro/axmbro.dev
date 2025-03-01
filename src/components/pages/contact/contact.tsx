@@ -1,12 +1,12 @@
-import { ScreenSection } from "../../components/layout/screen-section";
-import { ScreenContainer } from "../../components/layout/screen-container";
+import { ScreenSection } from "../../common/layout/screen-section";
+import { ScreenContainer } from "../../common/layout/screen-container";
 import styles from "./contact.module.css";
-import { Link } from "../../components/link/link";
-import global_styles from "./../../components/global/global-styles.module.css";
+import { Link } from "../../common/link/link";
+import global_styles from "../../common/global/global-styles.module.css";
 import { SocialIcon } from "react-social-icons";
-import { Button, ButtonColor } from "../../components/button/button";
-import { SOCIAL_LINK_BUTTONS } from "../../components/global/constants";
-import { ContactForm } from "../../components/layout/contact-form";
+import { Button, ButtonColor } from "../../common/button/button";
+import { SOCIAL_LINK_BUTTONS } from "../../common/global/constants";
+import { ContactForm } from "../../common/layout/contact-form";
 
 const Contact = () => {
   const SocialiconSize = "2.25rem";

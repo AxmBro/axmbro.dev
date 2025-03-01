@@ -1,15 +1,15 @@
 import { FC } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { Header } from "./components/layout/header";
-import { Projects } from "./pages/projects/projects";
-import { Footer } from "./components/layout/footer";
-import { ProjectsSubPage } from "./pages/projects/projects-subpage";
-import { TermsOfUse } from "./pages/terms-of-use/terms-of-use";
-import { Home } from "./pages/home/home";
-import { Contact } from "./pages/contact/contact";
+import { Header } from "./components/common/layout/header";
+import { Projects } from "./components/pages/projects/projects";
+import { Footer } from "./components/common/layout/footer";
+import { ProjectsSubPage } from "./components/pages/projects/projects-subpage";
+import { TermsOfUse } from "./components/pages/terms-of-use/terms-of-use";
+import { Home } from "./components/pages/home/home";
+import { Contact } from "./components/pages/contact/contact";
 
 import "./app.css";
-import { NotFound } from "./pages/not-found/not-found";
+import { NotFound } from "./components/pages/not-found/not-found";
 
 const App: FC = () => {
   return (

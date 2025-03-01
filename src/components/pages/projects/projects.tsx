@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { ScreenSection } from "../../components/layout/screen-section";
-import { Button, ButtonColor } from "../../components/button/button";
+import { ScreenSection } from "../../common/layout/screen-section";
+import { Button, ButtonColor } from "../../common/button/button";
 import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./projects.module.css"
-import { ScreenContainer } from "../../components/layout/screen-container";
-import { PROJECTS } from "../../components/global/constants";
-import { RouteLink } from "../../components/link/route-link";
-import starImage from "../../assets/star.png";
-import global_styles from "./../../components/global/global-styles.module.css";
-import { Popover } from "../../components/popover/popover";
+import { ScreenContainer } from "../../common/layout/screen-container";
+import { PROJECTS } from "../../common/global/constants";
+import { RouteLink } from "../../common/link/route-link";
+import starImage from "../../../assets/star.png";
+import global_styles from "../../common/global/global-styles.module.css";
+import { Popover } from "../../common/popover/popover";
 
 interface ProjectItem {
   title: string;
@@ -125,14 +125,14 @@ const ProjectsGrid: React.FC<ProjectsGridProps> = ({ items, hideTags, showOnlyPi
   return (
     <div className={styles.ProjectsGrid}>
       {items.map((item) => {
-        const images = import.meta.glob('../../assets/*.png', { eager: true });
+        const images = import.meta.glob('../../../assets/*.png', { eager: true });
 
         const imageSrc = item.imgSrc
-          ? (images[`../../assets/${item.imgSrc}.png`] as { default: string }).default
+          ? (images[`../../../assets/${item.imgSrc}.png`] as { default: string }).default
           : "";
 
         const logoImageSrc = item.logoSrc
-          ? (images[`../../assets/${item.logoSrc}.png`] as { default: string }).default
+          ? (images[`../../../assets/${item.logoSrc}.png`] as { default: string }).default
           : "";
 
         const imageAlt = item.imgSrc || "";

@@ -1,7 +1,7 @@
-import { ScreenSection } from "../../components/layout/screen-section";
-import { ScreenContainer } from "../../components/layout/screen-container";
-import { Button, ButtonColor } from "../../components/button/button";
-import { RouteLink } from "../../components/link/route-link";
+import { ScreenSection } from "../../common/layout/screen-section";
+import { ScreenContainer } from "../../common/layout/screen-container";
+import { Button, ButtonColor } from "../../common/button/button";
+import { RouteLink } from "../../common/link/route-link";
 
 const NotFound = () => {
   return (

@@ -1,9 +1,9 @@
-import { ScreenSection } from "../../../components/layout/screen-section";
-import { Button, ButtonColor } from "../../../components/button/button";
-import { Link } from "../../../components/link/link";
-import "../../../components/global/projects-pages-global.css";
+import { ScreenSection } from "../../../common/layout/screen-section";
+import { Button, ButtonColor } from "../../../common/button/button";
+import { Link } from "../../../common/link/link";
+import "./../../../common/global/projects-pages-global.css";
 import { scrollToElement } from "../../../utils/scroll";
-import { ImageSection } from "../../../components/global/projects-pages-global";
+import { ImageSection } from "../../../common/global/projects-pages-global";
 
 function MurderDetectorPage() {
   return (
