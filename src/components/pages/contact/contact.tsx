@@ -24,7 +24,6 @@ const Contact = () => {
 
   const SocialLinkButton = ({ href, text, socialUrl }: SocialLinkButtonProps) => (
     <Link
-      style={{ width: "inherit" }}
       href={href}
       openInNewTab={true}
     >
