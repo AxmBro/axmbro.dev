@@ -9,9 +9,16 @@
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .contactFlexContainer > * {
-  flex: 1 1 min(200px, 100%);
+  width: max-content;
   max-width: 100%;
+}
+
+@media screen and (max-width: 425px) {
+  .contactFlexContainer > * {
+    width: 100%;
+  }
 }

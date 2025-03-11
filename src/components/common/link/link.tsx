@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./Link.module.css";
+import styles from "./link.module.css";
 
 interface LinkProps {
   style?: React.CSSProperties,
