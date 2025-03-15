@@ -35,7 +35,7 @@ const Home = () => {
         noChildrenPadding={true}
         title="AxmBro"
         titleClassName={global_styles.h1HeroText}>
-        <p>I'm 19 year old <b>Junior Developer</b> from <b>Poland</b>. I have been learning programming for more than 2 years. I'm still learning, experimenting with code and building simple projects!</p>
+        <p>I'm 19 year old self taught <b>Junior Developer</b> from <b>Poland</b>. I have been learning programming for more than 2 years. I'm still learning, experimenting with code and building simple projects!</p>
         <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", marginTop: "2rem" }}>
           <RouteLink
             to="/contact">
@@ -53,7 +53,7 @@ const Home = () => {
         title="Skills"
         noChildrenPadding={true}>
         <>
-          <p>Here is a list of my skills, rated out of 10 <b>based on</b> my own knowledge and experience.</p>
+          <p>Here is a list of my skills <b>rated on</b> my own knowledge, experience and opinion.</p>
           <div className={styles.SkillsSection}>
             {SKILLS_CARDS.map((_, index) => {
               return (
@@ -79,7 +79,7 @@ const Home = () => {
           <p style={{ marginBottom: "2rem" }}>I'm currently learning websites with plans to become a <b>Web Developer</b>. In the past I built custom UIs for Minecraft Bedrock Edition, in which I feel like almost a <b>Senior Developer</b>. If you have any plans to create custom UIs in this game, <b>feel free to contact me and check my work in projects page!</b></p>
           <ExperienceTreeContainer>
             <ExperienceTree
-            index={2}
+              index={2}
               role={EXPERIENCE_TREE[0].role}
               date={EXPERIENCE_TREE[0].date}
               company={EXPERIENCE_TREE[0].company}
@@ -89,7 +89,7 @@ const Home = () => {
               </div>
             </ExperienceTree>
             <ExperienceTree
-            index={1}
+              index={1}
               role={EXPERIENCE_TREE[1].role}
               date={EXPERIENCE_TREE[1].date}
               company={EXPERIENCE_TREE[1].company}
