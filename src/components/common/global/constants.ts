@@ -83,25 +83,26 @@ export const SKILLS_CARDS = [
   {
     title: "Programming",
     items: [
-      { name: "Minecraft Bedrock JsonUI", value: "10/10" },
-      { name: "JAVASCRIPT", value: "7/10" },
-      { name: "HTML", value: "7/10" },
-      { name: "CSS", value: "6/10" },
+      { name: "Minecraft Bedrock JsonUI", value: "Advanced" },
+      { name: "JAVASCRIPT", value: "Intermediate" },
+      { name: "HTML", value: "Intermediate" },
+      { name: "CSS", value: "Intermediate" },
     ]
   },
   {
     title: "Tools",
     items: [
-      { name: "Github (Version Control)", value: "6/10" },
-      { name: "Visual Studio Code (IDE)", value: "7/10" }
+      { name: "React (Library)", value: "Intermediate/Junior" },
+      { name: "TailwindCSS (Framework)", value: "Pre-Intermediate" },
+      { name: "Github (Version Control)", value: "Pre-Intermediate" },
+      { name: "Vite, Vercel (Other)", value: "Beginner" },
     ]
   },
   {
     title: "Learning",
     items: [
-      { name: "React", value: "5/10" },
-      { name: "TYPESCRIPT", value: "4/10" },
-      { name: "Python", value: "2/10" },
+      { name: "TYPESCRIPT", value: "Pre-Intermediate" },
+      { name: "Python", value: "Beginner" },
     ]
   },
   {
