@@ -51,7 +51,7 @@ const Contact = () => {
       <ScreenSection
         id="contact"
         noChildrenPadding={true}
-        title="Conact"
+        title="Contact"
         titleClassName={global_styles.h1HeroText} >
         <>
           <p style={{ marginBottom: "2rem" }}>Whether you have a project in mind or just want to reach out, <b>I would love to hear from you!</b> Let us combine our ideas and <b>make something absolutely amazing together!</b> Here is list of redirect buttons to my social media platforms.</p>
