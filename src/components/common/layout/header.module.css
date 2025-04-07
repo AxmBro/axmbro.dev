@@ -41,7 +41,7 @@
 }
 
 .section1 {
-  display: inherit;
+  display: flex;
 }
 
 .desktopButtons {

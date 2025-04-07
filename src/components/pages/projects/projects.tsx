@@ -9,6 +9,7 @@ import { RouteLink } from "../../common/link/route-link";
 import starImage from "../../../assets/star.png";
 import global_styles from "../../common/global/global-styles.module.css";
 import { Popover } from "../../common/popover/popover";
+import settings_icon from "../../../assets/settings_icon.png";
 
 interface ProjectItem {
   title: string;
@@ -81,13 +82,12 @@ function Projects() {
     <ScreenContainer
       documentTitle="AxmBro | Projects">
       <ScreenSection
-        titleDescription={`In total: ${projectsLength}`}
         style={{ border: 0 }}
         title="Projects"
         titleClassName={global_styles.h1HeroText}
         noChildrenPadding={true}>
         <>
-          <p style={{ marginBottom: "2rem" }}>Here is a list of projects I've worked on! <b>Most of them include screenshots, videos, and explanations to give you a better look at my work</b>. Each project shows the skills I've learned and improved over time!</p>
+          <p style={{ marginBottom: "2rem" }}>Here is a list of {projectsLength} projects in total I've worked on! <b>Most of them include screenshots, videos, and explanations to give you a better look at my work</b>. Each project shows the skills I've learned and improved over time!</p>
           <SearchbarGrid search={search} setSearch={setSearch} buttonsActionsArray={buttonsActions} />
         </>
       </ScreenSection>
@@ -236,16 +236,23 @@ const SearchbarGrid: React.FC<SearchbarGridProps> = ({ search, setSearch, button
       <input type="text" className={global_styles.formInputText} placeholder={`Search by: ${animatedPlaceholder}`} value={search} onChange={handleChangeInput} />
       <div style={{ position: "relative" }}>
         <Button
-          style={{ minWidth: "0", whiteSpace: "nowrap" }}
-          text="Options"
+          style={{ minWidth: "2.75rem", whiteSpace: "nowrap" }}
+          // text="Options"
           buttonColor={ButtonColor.defaultEmpty2}
-          onClick={() => setShowPopover(!showPopover)}
-        />
+          onClick={() => setShowPopover(!showPopover)}>
+            <img src={settings_icon} alt="settings_icon" style={{height: "1.25rem"}} />
+            {/* <p>Options</p> */}
+        </Button>
         {showPopover && (
           <Popover>
             {buttonsActionsArray.map((buttonAction, index) => {
               return (
-                <Button text={buttonAction.ref ? buttonAction.text1 : buttonAction.text2} onClick={buttonAction.action} buttonColor={index === 0 ? ButtonColor.blue : ButtonColor.default} />
+                <Button
+                  key={`buttonAction${index}`}
+                  text={buttonAction.ref ? buttonAction.text1 : buttonAction.text2}
+                  onClick={buttonAction.action}
+                  buttonColor={index === 0 ? ButtonColor.blue : ButtonColor.default}
+                />
               )
             })}
           </Popover>

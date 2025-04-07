@@ -84,7 +84,7 @@ const Home = () => {
               date={EXPERIENCE_TREE[0].date}
               company={EXPERIENCE_TREE[0].company}
               items={EXPERIENCE_TREE[0].items}>
-              <div style={{ paddingTop: "1rem", width: "fit-content" }}>
+              <div style={{ paddingTop: "1.5rem", width: "fit-content" }}>
                 <Button buttonColor={ButtonColor.blue} text="Example JsonUI Projects" onClick={handleExampleProjectsClick} />
               </div>
             </ExperienceTree>
@@ -94,16 +94,18 @@ const Home = () => {
               date={EXPERIENCE_TREE[1].date}
               company={EXPERIENCE_TREE[1].company}
               items={EXPERIENCE_TREE[1].items}>
-              <p style={{ padding: "1rem 0" }}>
+              <p style={{ paddingTop: "1rem" }}>
                 <RouterLink
                   className={styles.heroTextBBRouter}
                   to="/projects/better_bedrock" ><span className={`${styles.heroText} ${global_styles.h1HeroText}`}>Better Bedrock - the project I'm most proud of!</span>
                 </RouterLink> Started from nothing by just me, that evoled to the most advanced let's say addon in MCBE! - I started to play Minecraft Bedrock Edition when I was young and in this game, I began to create random stuff related to user interface - UI. Later, I moved on to entity models, animations, and general entity logic. By combining all these elements I created this project!</p>
               <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
-                <RouterLink
-                  to="/projects/better_bedrock" >
-                  <Button buttonColor={ButtonColor.blue} text="Better Bedrock Showcase" />
-                </RouterLink>
+                <div style={{ paddingTop: "1.5rem", width: "fit-content" }}>
+                  <RouterLink
+                    to="/projects/better_bedrock" >
+                    <Button buttonColor={ButtonColor.blue} text="Better Bedrock Showcase" />
+                  </RouterLink>
+                </div>
               </div>
             </ExperienceTree>
           </ExperienceTreeContainer>

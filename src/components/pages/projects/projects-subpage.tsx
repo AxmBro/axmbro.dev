@@ -1,6 +1,5 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { ScreenSection } from "../../common/layout/screen-section";
 import { BetterBedrockPage } from "./project-id/better-bedrock";
 import { MurderDetectorPage } from "./project-id/murder-detector";
 import { OneBlockSlimeBlockAdventurePage } from "./project-id/one-block-slime-block-adventure";
@@ -8,6 +7,7 @@ import { ShopUIPage } from "./project-id/shop-ui";
 import { HometreeUIPage } from "./project-id/hometree-ui";
 import { SimpleUIPage } from "./project-id/simple-ui";
 import { ScreenContainer } from "../../common/layout/screen-container";
+import { NotFound } from "../not-found/not-found";
 
 const ProjectsSubPage: React.FC = () => {
   const { projectId } = useParams<{ projectId: string }>();
@@ -25,13 +25,14 @@ const ProjectsSubPage: React.FC = () => {
 
   if (!projectId || !projectLayouts[projectId]) {
     return (
-      <ScreenContainer
-        documentTitle="AxmBro | Project not found">
-        <ScreenSection
-          title="Project not found"
-          description1="The project you are looking for does not exist. Please check the URL and try again."
-        ></ScreenSection>
-      </ScreenContainer>
+      <NotFound/>
+      // <ScreenContainer
+      //   documentTitle="AxmBro | Project not found">
+      //   <ScreenSection
+      //     title="Project not found"
+      //     description1="The project you are looking for does not exist. Please check the URL and try again."
+      //   ></ScreenSection>
+      // </ScreenContainer>
     )
   }
 
