@@ -58,23 +58,22 @@ const Header: React.FC = () => {
         <div className={styles.header} id="header">
           <div className={styles.headerContainer}>
 
-            <div className={styles.section1}>
-              <NavLink
-                onClick={handleLogoClick}
-                to="/"
-                end
-                style={{ textDecoration: 0 }}>
+            <NavLink
+            className={styles.section1}
+              onClick={handleLogoClick}
+              to="/"
+              end
+              style={{ textDecoration: 0 }}>
                 <div className={styles.logoContainer}>
                   <img src={logo} className={styles.logoImg} alt="Axmbro Logo" />
                 </div>
-              </NavLink>
               {!minWidth && (
                 <div className={styles.logoTextContainer}>
                   <p>AxmBro</p>
                   <p style={{ color: "var(--text-color-4)" }}>Junior Developer</p>
                 </div>
               )}
-            </div>
+            </NavLink>
 
             <div className={styles.section3}>
               {!isResponsive && (

@@ -87,22 +87,18 @@ export const SKILLS_CARDS = [
       { name: "JAVASCRIPT", value: "Intermediate" },
       { name: "HTML", value: "Intermediate" },
       { name: "CSS", value: "Intermediate" },
+      { name: "TYPESCRIPT", value: "Pre-Intermediate" },
+      { name: "Python", value: "Beginner" },
     ]
   },
   {
     title: "Tools",
     items: [
-      { name: "React (Library)", value: "Intermediate/Junior" },
+      { name: "React (Library)", value: "Intermediate" },
       { name: "TailwindCSS (Framework)", value: "Pre-Intermediate" },
       { name: "Github (Version Control)", value: "Pre-Intermediate" },
       { name: "Vite, Vercel (Other)", value: "Beginner" },
-    ]
-  },
-  {
-    title: "Learning",
-    items: [
-      { name: "TYPESCRIPT", value: "Pre-Intermediate" },
-      { name: "Python", value: "Beginner" },
+      { name: "Regolith (MCBE Compiler)", value: "Beginner" },
     ]
   },
   {
@@ -123,5 +119,5 @@ export const SOCIAL_LINK_BUTTONS = [
   { href: "https://www.youtube.com/@axmbro2", text: "Second Channel", socialUrl: "https://www.youtube.com" },
   { href: "https://twitter.com/AxmBro", text: "AxmBro", socialUrl: "https://x.com" },
   { href: "https://www.instagram.com/axmbro_", text: "axmbro_", socialUrl: "https://www.instagram.com" },
-  { href: "https://www.instagram.com/axmbro_", text: "axmbro@gmail.com", socialUrl: "https://mail.google.com/" }
+  { href: "mailto:axmbro@gmail.com", text: "axmbro@gmail.com", socialUrl: "https://mail.google.com/" }
 ];
