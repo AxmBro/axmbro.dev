@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { BetterBedrockPage } from "./project-id/better-bedrock";
 import { MurderDetectorPage } from "./project-id/murder-detector";
 import { OneBlockSlimeBlockAdventurePage } from "./project-id/one-block-slime-block-adventure";
+import { RaSurvivalPage } from "./project-id/ra-survival";
 import { ShopUIPage } from "./project-id/shop-ui";
 import { HometreeUIPage } from "./project-id/hometree-ui";
 import { SimpleUIPage } from "./project-id/simple-ui";
@@ -11,7 +12,7 @@ import { NotFound } from "../not-found/not-found";
 
 const ProjectsSubPage: React.FC = () => {
   const { projectId } = useParams<{ projectId: string }>();
-  
+
   const title = projectId!.replace(/_/g, " ").replace(/\b\w/g, l => l.toUpperCase());
 
   const projectLayouts: { [key: string]: JSX.Element } = {
@@ -21,18 +22,12 @@ const ProjectsSubPage: React.FC = () => {
     shop_ui: <ShopUIPage />,
     hometree_ui: <HometreeUIPage />,
     simple_ui: <SimpleUIPage />,
+    ra_survival: <RaSurvivalPage />,
   };
 
   if (!projectId || !projectLayouts[projectId]) {
     return (
-      <NotFound/>
-      // <ScreenContainer
-      //   documentTitle="AxmBro | Project not found">
-      //   <ScreenSection
-      //     title="Project not found"
-      //     description1="The project you are looking for does not exist. Please check the URL and try again."
-      //   ></ScreenSection>
-      // </ScreenContainer>
+      <NotFound />
     )
   }
 

@@ -62,20 +62,14 @@
   width: 2rem;
 }
 
-.ImageWrapper {
-  height: max-content;
-  overflow: hidden;
-  width: 50%;
-  flex-basis: 340px;
-  flex-shrink: 0;
-}
-
 .ImageWrapperUrl {
   height: max-content;
   overflow: hidden;
   width: 50%;
   flex-basis: 340px;
   flex-shrink: 0;
+  aspect-ratio: 16 / 9;
+  background-color: var(--line-break-color);
 }
 
 .ImageWrapperUrl:hover {

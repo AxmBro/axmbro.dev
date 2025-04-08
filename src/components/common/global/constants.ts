@@ -29,6 +29,15 @@ export const PROJECTS = [
     url: "one_block_slime_block_adventure_page"
   },
   {
+    title: "Ra Survival",
+    description: "I was part of creating custom HUD elements!",
+    tags: ["MCBE JsonUI"],
+    // imgSrc: "obsba",
+    star: true,
+    // downloadLink: "https://www.mushco.games/games",
+    url: "ra_survival"
+  },
+  {
     title: "Shop UI",
     description: "CUSTOM SERVER FORM UI created for personal use, but also to test custom tabs in vanilla style, many texts in each button and search feature! General appearance and in-game UI was fully created by me.",
     tags: ["MCBE JsonUI", "MCBE Server Form"],
