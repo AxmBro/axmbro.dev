@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 body {
   margin: 0;
   padding: 0;
@@ -47,8 +49,6 @@ p {
   color: var(--text-color-1);
   word-wrap: break-word;
   font-weight: 500;
-  margin: 0;
-  padding: 0;
 }
 
 p,
@@ -89,6 +89,10 @@ ins:hover {
 
 ul, li {
   font-size: var(--font-p);
+}
+
+ul {
+  list-style: initial;
 }
 
 button {
