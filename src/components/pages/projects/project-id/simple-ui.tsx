@@ -22,7 +22,7 @@ const SimpleUIPage: React.FC = () => {
               <Link useUnderline={false} useButtonFontHeight={true} textColor="var(--web-bg-color-1)" text="Discord Server" href="https://discord.gg/ZGK5WYXnEY"></Link>
             </Button>
             <div onClick={() => { scrollToElement("credits") }}>
-              <Button buttonColor={ButtonColor.defaultEmpty2} text="Credits"></Button>
+              <Button buttonColor={ButtonColor.default} text="Credits"></Button>
             </div>
           </div>
         }

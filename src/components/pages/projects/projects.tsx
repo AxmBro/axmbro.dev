@@ -147,12 +147,10 @@ const ProjectsGrid: React.FC<ProjectsGridProps> = ({ items, hideTags, showOnlyPi
                 <img className={styles.Star} src={starImage} alt="starImg" />
               </div>
             )}
-            {item.imgSrc && (
-              <div onClick={() => handleProjectClick(item)}
-                className={item.url ? `${styles.ImageWrapperUrl}` : `${styles.ImageWrapper}`}>
-                <img src={imageSrc} alt={imageAlt} className={styles.Image} />
-              </div>
-            )}
+            <div onClick={() => handleProjectClick(item)}
+              className={styles.ImageWrapperUrl}>
+              {item.imgSrc && <img src={imageSrc} alt={imageAlt} className={styles.Image} />}
+            </div>
             <div className={styles.Container}>
               <div>
                 <div className={styles.TitleAndLogoContainer}>
@@ -240,8 +238,8 @@ const SearchbarGrid: React.FC<SearchbarGridProps> = ({ search, setSearch, button
           // text="Options"
           buttonColor={ButtonColor.defaultEmpty2}
           onClick={() => setShowPopover(!showPopover)}>
-            <img src={settings_icon} alt="settings_icon" style={{height: "1.25rem"}} />
-            {/* <p>Options</p> */}
+          <img src={settings_icon} alt="settings_icon" style={{ height: "1.25rem" }} />
+          {/* <p>Options</p> */}
         </Button>
         {showPopover && (
           <Popover>

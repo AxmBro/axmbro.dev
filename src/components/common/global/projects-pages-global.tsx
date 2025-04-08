@@ -15,18 +15,16 @@ interface ImageSectionProps {
   items: ImageSectionItemsProps[];
   children?: ReactNode;
   style?: React.CSSProperties;
-
 }
 
-const ImageSection: React.FC<ImageSectionProps> = ({ title, sectionDescription, items, rowStyle, childrenTopDividerInside = true }) => {
+const ImageSection: React.FC<ImageSectionProps> = ({ title, sectionDescription, items, rowStyle}) => {
   return (
     <ScreenSection
       style={{ padding: rowStyle ? "2rem 0 2rem 0" : "2rem 0 1rem 0" }}
       noChildrenPadding={true}
-      childrenTopDivider={childrenTopDividerInside}
       title={title}
       description1={sectionDescription}>
-      <ul style={{ padding: rowStyle ? "1rem 0 0 0" : 0, margin: 0 }} className={rowStyle ? "image-section-row" : ""}>
+      <ul style={{ padding: rowStyle ? "1rem 0 0 0" : 0, margin: 0, marginTop: "1rem" }} className={rowStyle ? "image-section-row" : ""}>
         {items.map((item, index) => {
           const images = import.meta.glob('../../../assets/*.png', { eager: true });
 
@@ -38,7 +36,7 @@ const ImageSection: React.FC<ImageSectionProps> = ({ title, sectionDescription, 
             {!rowStyle &&
               <div>
                 <h2 className="image-section-title">{`${index + 1}. ${item.title}`}</h2>
-                <p className="image-section-description">{item.description}</p>
+                <p>{item.description}</p>
               </div>}
             {item.imageSrc && <div className="image-section-img-container" style={{ paddingBottom: rowStyle ? "1rem" : 0, paddingTop: rowStyle ? 0 : "1rem" }}>
               <img src={imageSrc} alt="" className="image-section-img" />
@@ -46,7 +44,7 @@ const ImageSection: React.FC<ImageSectionProps> = ({ title, sectionDescription, 
             {rowStyle &&
               <div>
                 <h1 className="image-section-title">{`${index + 1}. ${item.title}`}</h1>
-                <h2 className="image-section-description">{item.description}</h2>
+                <p>{item.description}</p>
               </div>}
           </li>
         })}

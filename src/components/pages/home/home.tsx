@@ -25,7 +25,6 @@ const Home = () => {
     navigate("/projects", { state: { search: "mcbe jsonui" } });
   };
 
-
   return (
     <ScreenContainer
       documentTitle="AxmBro | Home">

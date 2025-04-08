@@ -12,10 +12,6 @@
   background-color: var(--web-bg-color-2);
 }
 
-.role {
-  font-size: var(--font-h2);
-}
-
 .date {
   margin-bottom: 1rem;
 }
