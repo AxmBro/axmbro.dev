@@ -93,7 +93,7 @@ export const SKILLS_CARDS = [
     title: "Programming",
     items: [
       { name: "Minecraft Bedrock JsonUI", value: "Advanced" },
-      { name: "JAVASCRIPT", value: "Intermediate" },
+      { name: "JAVASCRIPT", value: "Pre-Intermediate" },
       { name: "HTML", value: "Intermediate" },
       { name: "CSS", value: "Intermediate" },
       { name: "TYPESCRIPT", value: "Pre-Intermediate" },
