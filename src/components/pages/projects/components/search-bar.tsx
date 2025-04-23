@@ -1,5 +1,5 @@
 
-import styles from "./projects.module.css"
+import styles from "../projects.module.css"
 import { Button, ButtonColor } from "../../../common/button/button";
 import { useEffect, useState } from "react";
 import { Popover } from "../../../common/popover/popover";
