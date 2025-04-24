@@ -23,16 +23,16 @@ export const ProjectGridItem: React.FC<ProjectGridItemProps> = ({ items, hideTag
   };
 
   return (
-    <div className={styles.ProjectGridItem}>
+    <div className={styles.ProjectGrid}>
       {items.map((item) => {
-        const images = import.meta.glob('../../../assets/*.png', { eager: true });
+        const images = import.meta.glob('../../../../assets/*.png', { eager: true });
 
         const imageSrc = item.imgSrc
-          ? (images[`../../../assets/${item.imgSrc}.png`] as { default: string }).default
+          ? (images[`../../../../assets/${item.imgSrc}.png`] as { default: string }).default
           : "";
 
         const logoImageSrc = item.logoSrc
-          ? (images[`../../../assets/${item.logoSrc}.png`] as { default: string }).default
+          ? (images[`../../../../assets/${item.logoSrc}.png`] as { default: string }).default
           : "";
 
         const imageAlt = item.imgSrc || "";
@@ -40,7 +40,7 @@ export const ProjectGridItem: React.FC<ProjectGridItemProps> = ({ items, hideTag
         return (showOnlyPinned && !item.star) ? null : (
           <div
             key={`item${item.title}`}
-            className={styles.ProjectGridItemItem}
+            className={styles.ProjectGridItem}
           >
             {item.star && (
               <div className={styles.StarContainer}>
