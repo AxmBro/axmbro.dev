@@ -1,8 +1,8 @@
 
 import { useNavigate } from "react-router-dom";
 import { ProjectItem } from "../projects"
-import styles from "./projects.module.css"
-import starImage from "../../../assets/star.png";
+import styles from "../projects.module.css"
+import starImage from "../../../../assets/star.png";
 import { RouteLink } from "../../../common/link/route-link";
 import { Button, ButtonColor } from "../../../common/button/button";
 

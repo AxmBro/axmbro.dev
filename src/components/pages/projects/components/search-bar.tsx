@@ -3,8 +3,8 @@ import styles from "../projects.module.css"
 import { Button, ButtonColor } from "../../../common/button/button";
 import { useEffect, useState } from "react";
 import { Popover } from "../../../common/popover/popover";
-import global_styles from "../../common/global/global-styles.module.css";
-import settings_icon from "../../../assets/settings_icon.png";
+import global_styles from "../../../common/global/global-styles.module.css";
+import settings_icon from "../../../../assets/settings_icon.png";
 
 interface ProjectsSearchbarProps {
   search: string;
