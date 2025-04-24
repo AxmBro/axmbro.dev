@@ -10,17 +10,17 @@
   flex: 1 1 min(200px, 100%);
 }
 
-.ProjectsGrid {
+.ProjectGrid {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
 }
 
-.ProjectsGrid .StarContainer {
+.ProjectGrid .StarContainer {
   position: absolute;
 }
 
-.ProjectsGrid .Star {
+.ProjectGrid .Star {
   display: block;
   line-height: 1;
   position: relative;
@@ -31,11 +31,11 @@
   transition: transform 0.5s ease;
 }
 
-.ProjectsGridItem:hover .Star {
+.ProjectGridItem:hover .Star {
   transform: rotate(145deg);
 }
 
-.ProjectsGridItem {
+.ProjectGridItem {
   box-shadow: var(--box-shadow);
   overflow: hidden;
   background-color: var(--web-bg-color-2);
@@ -76,7 +76,7 @@
   cursor: pointer;
 }
 
-.ProjectsGridItem .Image {
+.ProjectGridItem .Image {
   display: block;
   width: 100%;
   aspect-ratio: 16 / 9;
@@ -84,11 +84,11 @@
   transition: scale 0.25s ease;
 }
 
-.ProjectsGridItem .Image:hover {
+.ProjectGridItem .Image:hover {
   scale: 1.1;
 }
 
-.ProjectsGridItem .Container {
+.ProjectGridItem .Container {
   padding-left: 1rem;
   display: flex;
   width: 100%;
@@ -97,16 +97,16 @@
   width: 100%;
 }
 
-.ProjectsGridItem .DownloadContainer {
+.ProjectGridItem .DownloadContainer {
   align-self: flex-start;
 }
 
-.ProjectsGridItem .DownloadButton {
+.ProjectGridItem .DownloadButton {
   display: flex;
   flex-direction: row;
 }
 
-.ProjectsGridItem .DownloadButton {
+.ProjectGridItem .DownloadButton {
   text-decoration: none;
 }
 
@@ -136,7 +136,7 @@
 }
 
 @media screen and (max-width: 900px) {
-  .ProjectsGridItem {
+  .ProjectGridItem {
     flex-direction: column;
   }
 
@@ -154,13 +154,13 @@
     margin-bottom: 1rem;
   }
 
-  .ProjectsGridItem .Container {
+  .ProjectGridItem .Container {
     padding-left: 0;
   }
 }
 
 @media screen and (max-width: 500px) {
-  .ProjectsGridItem .DownloadContainer {
+  .ProjectGridItem .DownloadContainer {
     display: none;
   }
 }
@@ -172,7 +172,7 @@
     transition: opacity 0.25s ease, transform 0.25s ease;
   }
 
-  .ProjectsGridItem:hover .navButtonsContainer {
+  .ProjectGridItem:hover .navButtonsContainer {
     opacity: 1;
     transform: translateY(0);
   }
