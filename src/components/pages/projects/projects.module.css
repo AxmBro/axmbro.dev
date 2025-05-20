@@ -55,8 +55,6 @@
 }
 
 .TitleAndLogoContainer img {
-  position: relative;
-  top: 0.2rem;
   margin-right: 0.5rem;
   height: 2rem;
   width: 2rem;
