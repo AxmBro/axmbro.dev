@@ -1,50 +1,18 @@
-# React + TypeScript + Vite
+# AXMBRO.DEV
+This is my first bigger project when I learnt some more advanced stuff about JS, CSS, TS and React. From commits amount and their history I can cleary say that this entire page was my experimental land. Currently it's in some actually nice looking style and responsive design.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Generally I reworked this whole project multiple times to match naming conventions, clean code and all that stuff. Also some elements are clearly AI helped - it's not like I had no idea how to do thigs, helped, yes just helped. And there are some silly elements like that small backend and more complex react router stuff that I still need to learn :D
 
-Currently, two official plugins are available:
+Website is hosted on vercel in which I am still beginner so I just hope this things won't send me crazy bill for some images lol, free plan probably prevents it so any attacks and defended by doing nothing, actually great security ngl lolz
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# Tech stack
+- React
+- Javascript
+- Typescript
+- Vite
+- TailwindCSS
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+# How to run this thing
+Just copy whole repository, make sure you have node and then use in terminal:
+- `npm install`
+- `npm run dev`
