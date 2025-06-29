@@ -32,10 +32,10 @@ const Home = () => {
       <ScreenSection
         id="aboutme"
         noChildrenPadding={true}
-        title="AxmBro"
+        title="About"
         titleClassName={global_styles.h1HeroText}>
-        <p>I'm 19 year old self taught <b>Junior Developer</b> from <b>Poland</b>. I have been learning programming for more than 2 years. I'm still learning, experimenting with code and building simple projects!</p>
-        <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", marginTop: "2rem" }}>
+        <p>I'm 19 year old self taught <b>Programmer</b> from <b>Poland</b>. I have been learning programming for more than 3 years and still continues it by experimenting with code, building projects and sometimes getting hired for commissions!</p>
+        <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", paddingTop: "1.5rem" }}>
           <RouteLink
             to="/contact">
             <Button text="Contact" buttonColor={ButtonColor.blue}></Button>
@@ -52,7 +52,7 @@ const Home = () => {
         title="Skills"
         noChildrenPadding={true}>
         <>
-          <p>Here is a list of my skills <b>rated on</b> my own knowledge, experience and opinion.</p>
+          <p><b>Rated on</b> my own knowledge, experience and opinion.</p>
           <div className={styles.SkillsSection}>
             {SKILLS_CARDS.map((_, index) => {
               return (
@@ -75,7 +75,7 @@ const Home = () => {
         title="Experience"
         noChildrenPadding={true}>
         <>
-          <p style={{ marginBottom: "2rem" }}>I'm currently learning websites with plans to become a <b>Web Developer</b>. In the past I built custom UIs for Minecraft Bedrock Edition, in which I feel like almost a <b>Senior Developer</b>. If you have any plans to create custom UIs in this game, <b>feel free to contact me and check my work in projects page!</b></p>
+          <p style={{ marginBottom: "1.5rem" }}>I'm currently learning websites with plans to become a <b>Web Developer</b>. In the past I built custom UIs for Minecraft Bedrock Edition, in which I feel like almost a <b>Senior Developer</b>. If you have any plans to create custom UIs in this game, <b>feel free to contact me and check my work in projects page!</b></p>
           <ExperienceTreeContainer>
             <ExperienceTree
               index={2}
@@ -97,7 +97,7 @@ const Home = () => {
                 <RouterLink
                   className={styles.heroTextBBRouter}
                   to="/projects/better_bedrock" ><span className={`${styles.heroText} ${global_styles.h1HeroText}`}>Better Bedrock - the project I'm most proud of!</span>
-                </RouterLink> Started from nothing by just me, that evoled to the most advanced let's say addon in MCBE! - I started to play Minecraft Bedrock Edition when I was young and in this game, I began to create random stuff related to user interface - UI. Later, I moved on to entity models, animations, and general entity logic. By combining all these elements I created this project!</p>
+                </RouterLink> Started from nothing by just me, then evoled to the most advanced Texture Pack in MCBE! - I started to play Minecraft Bedrock Edition when I was young and in this game, I began to create random stuff related to user interface - UI. Later, I moved on to entity models, animations, and general entity logic. By combining all these elements I created this project!</p>
               <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
                 <div style={{ paddingTop: "1.5rem", width: "fit-content" }}>
                   <RouterLink
@@ -117,7 +117,7 @@ const Home = () => {
         title="Contact"
         noChildrenPadding={true}>
         <>
-          <p style={{ marginBottom: "2rem" }}>Whether you have a project in mind or just want to reach out, <b>I would love to hear from you!</b> Let us combine our ideas and <b>make something absolutely amazing together!</b></p>
+          <p style={{ marginBottom: "1.5rem" }}>Whether you have a project in mind or just want to reach out, <b>I would love to hear from you!</b> Let us combine our ideas and <b>make something absolutely amazing together!</b></p>
           <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
             <RouteLink
               to="/contact">

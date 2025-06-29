@@ -3,7 +3,7 @@ import "./screen-section.css";
 import styles from "./screen-section.module.css";
 
 interface ScreenSectionProp {
-  noBorder?: Boolean;
+  noBorder?: boolean;
   noChildrenPadding?: boolean;
   childrenTopDivider?: boolean;
   children?: ReactNode;
@@ -37,7 +37,7 @@ const ScreenSection: React.FC<ScreenSectionProp> = ({
       {description2 ? <p>{description2}</p> : null}
       <div
         style={{
-          paddingTop: (noChildrenPadding ? 0 : ((children && (title || description1 || description2)) ? "2rem" : 0)),
+          paddingTop: (noChildrenPadding ? 0 : ((children && (title || description1 || description2)) ? "1.5rem" : 0)),
           marginTop: childrenTopDivider ? "1rem" : "",
           borderTop: childrenTopDivider ? "1px var(--line-break-color) solid" : "",
         }}>
