@@ -28,7 +28,7 @@ const getLocalStorageValue = (key: string) => {
   }
 };
 
-let items: ProjectItem[] = PROJECTS
+const items: ProjectItem[] = PROJECTS
 
 function Projects() {
   const location = useLocation();
@@ -44,8 +44,7 @@ function Projects() {
     localStorage.setItem("showOnlyPinned", JSON.stringify(showOnlyPinned));
   }, [showOnlyPinned]);
 
-
-  items = items.filter(item => {
+  const filteredItems = items.filter(item => {
     return item.title.toLowerCase().includes(search.toLowerCase()) ||
       item.description.toLowerCase().includes(search.toLowerCase()) ||
       (item.tags && item.tags.join(" ").toLowerCase().includes(search.toLowerCase()));
@@ -75,19 +74,19 @@ function Projects() {
         titleClassName={global_styles.h1HeroText}
         noChildrenPadding={true}>
         <>
-          <p style={{ marginBottom: "2rem" }}>Here is a list of {items.length} projects in total I've worked on! <b>Most of them include screenshots, videos, and explanations to give you a better look at my work</b>. Each project shows the skills I've learned and improved over time!</p>
+          <p style={{ marginBottom: "1.5rem" }}>Here is a list of {filteredItems.length} projects in total I've worked on! <b>Most of them include screenshots, videos, and explanations to give you a better look at my work</b>. Each project shows the skills I've learned and improved over time!</p>
           <ProjectsSearchbar search={search} setSearch={setSearch} buttonsActionsArray={buttonsActions} />
         </>
       </ScreenSection>
-      {(items.length > 0) &&
+      {(filteredItems.length > 0) &&
         <ScreenSection
           style={{ borderBottom: 0, padding: "0.75rem 0 2rem 0" }}>
           <ProjectGridItem
             hideTags={!hideTags}
             showOnlyPinned={showOnlyPinned}
-            items={items} />
+            items={filteredItems} />
         </ScreenSection>}
-      {(items.length === 0) && (
+      {(filteredItems.length === 0) && (
         <h2 style={{ marginTop: "0.75rem" }}>{`There are no results for: ${search}`}</h2>
       )}
     </ScreenContainer>

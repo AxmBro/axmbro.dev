@@ -5,6 +5,7 @@ import styles from "../projects.module.css"
 import starImage from "../../../../assets/star.png";
 import { RouteLink } from "../../../common/link/route-link";
 import { Button, ButtonColor } from "../../../common/button/button";
+import { Link } from "../../../common/link/link";
 
 interface ProjectGridItemProps {
   items: ProjectItem[];
@@ -87,10 +88,11 @@ export const ProjectGridItem: React.FC<ProjectGridItemProps> = ({ items, hideTag
                   to={item.url!}>
                   <Button buttonColor={ButtonColor.blue} text="Showcase" />
                 </RouteLink>)}
-                {item.downloadLink && (<RouteLink
-                  to={item.url!}>
-                  <Button buttonColor={ButtonColor.default} text="Download" />
-                </RouteLink>)}
+                {item.downloadLink && (
+                <Button buttonColor={ButtonColor.default}>
+                  <Link useUnderline={false} useButtonFontHeight={true} textColor="var(--web-bg-color-1)" text="Download" href={item.downloadLink!}></Link>
+                </Button>
+              )}
               </div>
             </div>
           </div>

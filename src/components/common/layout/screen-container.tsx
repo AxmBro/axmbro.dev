@@ -1,6 +1,6 @@
 import React, { ReactNode, useEffect, useState } from "react";
 import styles from "./screen-container.module.css";
-import { useLocation } from "react-router-dom";
+// import { useLocation } from "react-router-dom";
 
 interface ScreenContainerProps {
   children: ReactNode,
@@ -15,15 +15,15 @@ const ScreenContainer: React.FC<ScreenContainerProps> = ({ children, style, useM
   const [minHeight, setMinHeight] = useState("0");
   const [locationChange, setLocationChange] = useState(false);
 
-  const location = useLocation();
+  // const location = useLocation();
 
-  useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      behavior: "auto",
-    });
-    setLocationChange(true)
-  }, [location]);
+  // useEffect(() => {
+  //   window.scrollTo({
+  //     top: 0,
+  //     behavior: "auto",
+  //   });
+  //   setLocationChange(true)
+  // }, [location]);
 
   useEffect(() => {
     const handleResize = () => {

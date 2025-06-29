@@ -1,7 +1,7 @@
 export const PROJECTS = [
   {
     title: "Better Bedrock",
-    description: "The Better Bedrock is project of Texture Pack for MCBE Edition, Website and Mobile App available only for Android. The Main goal is to improve the default Minecraft gameplay to a whole new level with many new features!",
+    description: "Is a free, powerful and customizable texture pack for Minecraft Bedrock Edition! Enhance your gameplay with multiple features and almost 300 config options, supported on all platforms.",
     tags: ["MCBE JsonUI", "React", "Flutter", "Supabase", "Windows API", "Android API"],
     imgSrc: "bbReleaseThumbnail",
     logoSrc: "bbLogo",
@@ -10,8 +10,25 @@ export const PROJECTS = [
     url: "better_bedrock"
   },
   {
+    title: "One Slime Block Adventure",
+    description: "Adventure map created with Slime Block the YouTuber. I got hired to implement fancy UI stuff to either HUD and server forms. This project was the most complex one I have ever worked on!",
+    tags: ["MCBE JsonUI", "MCBE Server Form"],
+    imgSrc: "obsba",
+    star: true,
+    downloadLink: "https://www.minecraft.net/en-us/marketplace/pdp/mush-co/one-slime-block-adventure/ade4af56-a677-445d-a6ed-628e28eb7d88",
+    url: "one_slime_block_adventure_page"
+  },
+  {
+    title: "Ra Survival",
+    description: "Inspired by Call of Duty Zombie mode map for MCBE. I got hired to implement fancy UI stuff to game!",
+    tags: ["MCBE JsonUI"],
+    imgSrc: "raThumbnail",
+    star: true,
+    url: "ra_survival"
+  },
+  {
     title: "Murder Detector",
-    description: "Simple let us say... shhhh... CHEAT by just TEXTURE PACK. Models system provided by MCBE allows to check what item player is holding, or with additional info, held. Using this user is able to see which person is murderer or sheriff by icon above head or optionally by extra xray!",
+    description: "Simple CHEAT by just TEXTURE PACK. I created this pack to test texture pack possibilities and decided to increase ban rate on servers LOL",
     tags: ["MCBE JsonUI", "MCBE Models"],
     imgSrc: "murderDetector1",
     logoSrc: "mdLogo",
@@ -20,47 +37,29 @@ export const PROJECTS = [
     url: "murder_detector"
   },
   {
-    title: "One Block Slime Block Adventure",
-    description: "I was part of creating custom HUD elements with custom server from! This was the most advanced project I've worked on, it was a great experience to work with other developers and create something that big and complex!",
-    tags: ["MCBE JsonUI", "MCBE Server Form"],
-    imgSrc: "obsba",
-    star: true,
-    downloadLink: "https://www.mushco.games/games",
-    url: "one_block_slime_block_adventure_page"
-  },
-  {
-    title: "Ra Survival",
-    description: "I was part of creating custom HUD elements!",
-    tags: ["MCBE JsonUI"],
-    // imgSrc: "obsba",
-    star: true,
-    // downloadLink: "https://www.mushco.games/games",
-    url: "ra_survival"
-  },
-  {
     title: "Shop UI",
-    description: "CUSTOM SERVER FORM UI created for personal use, but also to test custom tabs in vanilla style, many texts in each button and search feature! General appearance and in-game UI was fully created by me.",
+    description: "Great looking and vanilla styled UI fully designed and created by me. Previously I used this for experimenting, but sold to interested customer.",
     tags: ["MCBE JsonUI", "MCBE Server Form"],
     imgSrc: "shop_form1",
     url: "shop_ui"
   },
   {
     title: "Hometree UI",
-    description: "CUSTOM SERVER FORM UI created for customer. It's pretty colorful and simple grid UI used in gamemodes selector and extra information form! General appearance was designed by customer and slightly by me. In-game UI is fully created by me.",
+    description: "Colorful and simple UI for customer.",
     tags: ["MCBE JsonUI", "MCBE Server Form"],
     imgSrc: "hometree1",
     url: "hometree_ui"
   },
   {
     title: "Simple UI",
-    description: "CUSTOM SERVER FORM UI created for personal use, but also to test custom buttons layout! General appearance and in-game UI was fully created by me.",
+    description: "Experimental UI  for personal use.",
     tags: ["MCBE JsonUI", "MCBE Server Form"],
     imgSrc: "simple_server_form1",
     url: "simple_ui"
   },
   {
     title: "This Website",
-    description: "Currently created by mainly using JS, TS and React. Simple website with needed info separated by routes. General style is minimalistic and it's in portfolio theme. Previously this website was created using only HTML, JS, CSS - it was pain when implementing routes manually...",
+    description: "My whole journey with learning how websites work and how to create them. Currently using JS, TS and React, but previously it was only HTML, JS and CSS.",
     tags: ["HTML", "CSS", "JavaScript", "TypeScript", "React"],
     imgSrc: "thisweb"
   },
@@ -70,10 +69,10 @@ export const EXPERIENCE_TREE = [
   {
     role: "Freelancer",
     date: "NOW",
-    company: "MCBE UI Developer, Web Developer",
+    company: "MCBE JsonUI, Web Developer",
     items: [
-      { name: "Creating custom JsonUI projects. Mainly custom elements for HUD and Server Forms. With my knowledge and experience I am able to create almost everything you want! If you are looking for someone who is able to bring your wildest ideas related to UI, feel free to contact me!" },
-      { name: "Well... to become Web Developer I need still more knowledge and experience :D" },
+      { name: "Creating complex HUD and server form UIs." },
+      { name: "Well... to become Web Developer I need still to learn stuff :c" },
     ]
   },
   {
@@ -81,40 +80,66 @@ export const EXPERIENCE_TREE = [
     date: "07.02.2022 - NOW",
     company: "@Better Bedrock",
     items: [
-      { name: "Creating new features using mainly JsonUI and more rarely Json Models" },
-      { name: "Recording changelog videos and quick trailers, but more recently longer ones called showcase trailers " },
-      { name: "Managing discord community server" },
+      { name: "Creating features using  JsonUI and Json Models." },
+      { name: "Recording a wide variety of videos." },
+      { name: "Managing discord community server." },
+      { name: "Managing and slightly coding website design and functions." },
     ]
   }
 ]
 
 export const SKILLS_CARDS = [
   {
-    title: "Programming",
+    title: "Programming Languages",
     items: [
-      { name: "Minecraft Bedrock JsonUI", value: "Advanced" },
-      { name: "JAVASCRIPT", value: "Pre-Intermediate" },
+      { name: "Minecraft Bedrock JsonUI", value: "Advanced+" },
+      { name: "JAVASCRIPT", value: "Intermediate" },
+      { name: "TYPESCRIPT", value: "Beginner+" },
       { name: "HTML", value: "Intermediate" },
       { name: "CSS", value: "Intermediate" },
-      { name: "TYPESCRIPT", value: "Pre-Intermediate" },
       { name: "Python", value: "Beginner" },
     ]
   },
   {
     title: "Tools",
     items: [
-      { name: "React (Library)", value: "Intermediate" },
-      { name: "TailwindCSS (Framework)", value: "Pre-Intermediate" },
-      { name: "Github (Version Control)", value: "Pre-Intermediate" },
-      { name: "Vite, Vercel (Other)", value: "Beginner" },
-      { name: "Regolith (MCBE Compiler)", value: "Beginner" },
+      { name: "Github", value: "Intermediate+" },
+      { name: "React", value: "Intermediate" },
+      { name: "TailwindCSS", value: "Intermediate" },
+      { name: "Vercel", value: "Beginner" },
+      { name: "Vite", value: "Beginner" },
+      { name: "Regolith", value: "Beginner+" },
     ]
   },
   {
-    title: "Languages",
+    title: "MCBE Development",
     items: [
-      { name: "Polish", value: "Native" },
-      { name: "English", value: "B2, Learning" },
+      { name: "JsonUI", value: "Advanced+" },
+      { name: "Resource Pack", value: "Intermediate+" },
+      { name: "Molang", value: "Intermediate+" },
+      { name: "Entities", value: "Intermediate+" },
+      { name: "Technical animations & render controllers", value: "Intermediate+" },
+      { name: "Regolith (Compiler Tool)", value: "Beginner+" },
+      { name: "Behavior Pack", value: "Beginner+" },
+      { name: "ScriptAPI", value: "Beginner+" },
+      { name: "Models & Modeling", value: "Beginner+" },
+      { name: "Commands", value: "Beginner+" },
+      { name: "Particles", value: "Beginner" },
+      { name: "Blocks & Items", value: "Beginner" },
+      { name: "Graphics & Sound", value: "-" },
+      { name: "World Generation", value: "-" },
+      { name: "External & Internal Clients", value: "-" },
+    ]
+  },
+  {
+    title: "Other",
+    items: [
+      { name: "Polish Language", value: "Native" },
+      { name: "English Language", value: "B2/C1, Learning" },
+      { name: "Problem Solving", value: "Intermediate" },
+      { name: "Time Management", value: "Intermediate" },
+      { name: "UI/UX Design", value: "Intermediate" },
+      { name: "Art & Modeling", value: "Beginner - perfectionist hell" },
     ]
   }
 ]

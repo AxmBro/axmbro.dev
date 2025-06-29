@@ -70,7 +70,7 @@ const Header: React.FC = () => {
               {!minWidth && (
                 <div className={styles.logoTextContainer}>
                   <p>AxmBro</p>
-                  <p style={{ color: "var(--text-color-4)" }}>Junior Developer</p>
+                  <p style={{ color: "var(--text-color-4)" }}>Programmer</p>
                 </div>
               )}
             </NavLink>
