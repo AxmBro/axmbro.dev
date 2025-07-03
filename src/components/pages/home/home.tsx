@@ -52,7 +52,7 @@ const Home = () => {
         title="Skills"
         noChildrenPadding={true}>
         <>
-          <p><b>Rated on</b> my own knowledge, experience and opinion.</p>
+          <p><b>Rated on</b> my own knowledge and experience achieved by contributing projects.</p>
           <div className={styles.SkillsSection}>
             {SKILLS_CARDS.map((_, index) => {
               return (

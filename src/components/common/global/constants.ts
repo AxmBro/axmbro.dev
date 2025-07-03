@@ -93,8 +93,8 @@ export const SKILLS_CARDS = [
     title: "Programming Languages",
     items: [
       { name: "Minecraft Bedrock JsonUI", value: "Advanced+" },
-      { name: "JAVASCRIPT", value: "Intermediate" },
-      { name: "TYPESCRIPT", value: "Beginner+" },
+      { name: "Javascript", value: "Intermediate" },
+      { name: "Typescript", value: "Beginner+" },
       { name: "HTML", value: "Intermediate" },
       { name: "CSS", value: "Intermediate" },
       { name: "Python", value: "Beginner" },
@@ -103,43 +103,40 @@ export const SKILLS_CARDS = [
   {
     title: "Tools",
     items: [
-      { name: "Github", value: "Intermediate+" },
+      { name: "Git/Github", value: "Intermediate" },
       { name: "React", value: "Intermediate" },
       { name: "TailwindCSS", value: "Intermediate" },
+      { name: "Regolith", value: "Beginner+" },
       { name: "Vercel", value: "Beginner" },
       { name: "Vite", value: "Beginner" },
-      { name: "Regolith", value: "Beginner+" },
     ]
   },
   {
     title: "MCBE Development",
     items: [
       { name: "JsonUI", value: "Advanced+" },
-      { name: "Resource Pack", value: "Intermediate+" },
-      { name: "Molang", value: "Intermediate+" },
-      { name: "Entities", value: "Intermediate+" },
-      { name: "Technical animations & render controllers", value: "Intermediate+" },
-      { name: "Regolith (Compiler Tool)", value: "Beginner+" },
+      { name: "Resource Packs", value: "Intermediate+" },
       { name: "Behavior Pack", value: "Beginner+" },
       { name: "ScriptAPI", value: "Beginner+" },
-      { name: "Models & Modeling", value: "Beginner+" },
-      { name: "Commands", value: "Beginner+" },
-      { name: "Particles", value: "Beginner" },
-      { name: "Blocks & Items", value: "Beginner" },
-      { name: "Graphics & Sound", value: "-" },
-      { name: "World Generation", value: "-" },
+      { name: "Molang", value: "Intermediate+" },
+      { name: "Entities", value: "Intermediate+" },
+      { name: "Technical animation & render controllers", value: "Intermediate+" },
+      { name: "Models, Modeling, Commands", value: "Beginner+" },
+      { name: "Blocks, Items, Particles", value: "Beginner" },
+      { name: "Graphics, Sound, World Generation", value: "-" },
       { name: "External & Internal Clients", value: "-" },
+      { name: "Regolith (Compiler Tool)", value: "Beginner+" },
     ]
   },
   {
     title: "Other",
     items: [
-      { name: "Polish Language", value: "Native" },
-      { name: "English Language", value: "B2/C1, Learning" },
+      { name: "Polish Language", value: "C1, Native" },
+      { name: "English Language", value: "B2, Learning" },
       { name: "Problem Solving", value: "Intermediate" },
       { name: "Time Management", value: "Intermediate" },
       { name: "UI/UX Design", value: "Intermediate" },
-      { name: "Art & Modeling", value: "Beginner - perfectionist hell" },
+      { name: "Art & Modeling", value: "Beginner+ (perfectionist hell)" },
     ]
   }
 ]
