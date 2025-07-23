@@ -16,7 +16,7 @@ export const PROJECTS = [
     imgSrc: "obsba",
     star: true,
     downloadLink: "https://www.minecraft.net/en-us/marketplace/pdp/mush-co/one-slime-block-adventure/ade4af56-a677-445d-a6ed-628e28eb7d88",
-    url: "one_slime_block_adventure_page"
+    url: "one_slime_block_adventure"
   },
   {
     title: "Ra Survival",
@@ -78,7 +78,7 @@ export const EXPERIENCE_TREE = [
   {
     role: "Owner, Lead Developer",
     date: "07.02.2022 - NOW",
-    company: "@Better Bedrock",
+    company: "Better Bedrock",
     items: [
       { name: "Creating features using  JsonUI and Json Models." },
       { name: "Recording a wide variety of videos." },

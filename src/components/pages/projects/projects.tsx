@@ -69,7 +69,7 @@ function Projects() {
     <ScreenContainer
       documentTitle="AxmBro | Projects">
       <ScreenSection
-        style={{ border: 0 }}
+        style={{ border: 0, padding: "3rem 0 2rem 0" }}
         title="Projects"
         titleClassName={global_styles.h1HeroText}
         noChildrenPadding={true}>

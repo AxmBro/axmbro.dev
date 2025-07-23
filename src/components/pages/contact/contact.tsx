@@ -12,8 +12,8 @@ const Contact = () => {
   const SocialiconSize = "2.25rem";
   const SocialiconMargin = "0.5rem";
   const SocialIconBgColor = "var(--web-bg-color-1)";
-  const SocialIconFgColor = "var(--text-color-1)";
-  const buttonColor = ButtonColor.blue;
+  const SocialIconFgColor = "var(--text-color-2)";
+  const buttonColor = ButtonColor.defaultEmpty2;
 
 
   interface SocialLinkButtonProps {

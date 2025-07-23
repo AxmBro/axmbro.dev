@@ -18,7 +18,7 @@ const ProjectsSubPage: React.FC = () => {
   const projectLayouts: { [key: string]: JSX.Element } = {
     better_bedrock: <BetterBedrockPage />,
     murder_detector: <MurderDetectorPage />,
-    one_slime_block_adventure_page: <OneSlimeBlockAdventurePage />,
+    one_slime_block_adventure: <OneSlimeBlockAdventurePage />,
     shop_ui: <ShopUIPage />,
     hometree_ui: <HometreeUIPage />,
     simple_ui: <SimpleUIPage />,
@@ -30,7 +30,6 @@ const ProjectsSubPage: React.FC = () => {
       <NotFound />
     )
   }
-
 
   return (
     <ScreenContainer documentTitle={`AxmBro | ${title}`}>
