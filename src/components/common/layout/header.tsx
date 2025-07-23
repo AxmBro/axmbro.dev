@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { Button, ButtonColor } from "../button/button";
 import styles from "./header.module.css";
@@ -23,6 +23,8 @@ const NAV_LINKS = [
 
 const Header: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [buttonVisibility, setButtonVisibility] = useState(true);
+  const [buttonText, setButtonText] = useState("Contact Me!");
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -51,6 +53,26 @@ const Header: React.FC = () => {
       handleNavigation("/");
     }
   }
+
+  useEffect(() => {
+    let timeoutId: NodeJS.Timeout;
+
+    if (location.pathname === "/contact") {
+      setButtonText("Thank You!");
+      timeoutId = setTimeout(() => {
+        setButtonVisibility(false);
+      }, 1000);
+    } else {
+      setButtonText("Contact Me!");
+      setButtonVisibility(true);
+    }
+
+    return () => {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+    };
+  }, [location]);
 
   return (
     <>
@@ -94,10 +116,12 @@ const Header: React.FC = () => {
             <div className={styles.section2}>
               {!isResponsive && (
                 <RouterLink
+                  // style={{visibility: (location.pathname === "/contact" ? "hidden" : "unset")}}
+                  style={{visibility: (buttonVisibility ? "unset" : "hidden")}}
                   to="/contact" >
                   <Button
                     buttonColor={ButtonColor.blue}
-                    text="Contact me!" />
+                    text={buttonText} />
                 </RouterLink>
               )}
               {(isResponsive) && (
@@ -108,7 +132,6 @@ const Header: React.FC = () => {
               )}
             </div>
           </div>
-
 
           {(isResponsive && menuOpen) && (
             <div className={styles.mobileMenu} >

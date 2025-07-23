@@ -79,7 +79,7 @@ function RaSurvivalPage() {
           },
           {
             title: "Ending of special round animation",
-            description: "Generally it has that transition, however I recommen to check development video to see this whole animation!",
+            description: "Generally it has that transition, however I recommend to check development video to see this whole animation!",
             imageSrc: "ra19"
           },
           {
@@ -158,7 +158,7 @@ function RaSurvivalPage() {
           },
           {
             title: "UI visiblity (technical)",
-            description: "There is completely special and custom function that allows to toggle HUD visiblity by commandds.",
+            description: "There is completely special and custom function that allows to toggle HUD visiblity by commands.",
             imageSrc: "ra20"
           },
           {
