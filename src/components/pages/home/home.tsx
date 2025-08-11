@@ -34,7 +34,7 @@ const Home = () => {
         noChildrenPadding={true}
         title="About"
         titleClassName={global_styles.h1HeroText}>
-        <p>I'm 19 year old self taught <b>Programmer</b> from <b>Poland</b>. I have been learning programming for more than 3 years and still continues it by experimenting with code, building projects and sometimes getting hired for commissions!</p>
+        <p>I'm 19 year old self taught <b>Programmer</b> from <b>Poland</b>. I have been learning programming for more than 3 years and still continue it by experimenting with code, building projects and sometimes getting hired for commissions!</p>
         <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", paddingTop: "1.5rem" }}>
           <RouteLink
             to="/contact">
