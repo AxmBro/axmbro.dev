@@ -75,7 +75,7 @@ const Home = () => {
         title="Experience"
         noChildrenPadding={true}>
         <>
-          <p style={{ marginBottom: "1.5rem" }}>I'm currently learning websites with plans to become a <b>Web Developer</b>. In the past I built custom UIs for Minecraft Bedrock Edition, in which I feel like almost a <b>Senior Developer</b>. If you have any plans to create custom UIs in this game, <b>feel free to contact me and check my work in projects page!</b></p>
+          <p style={{ marginBottom: "1.5rem" }}>I'm currently learning websites with plans to become a <b>Web Developer</b>. In the past I built custom UIs for Minecraft Bedrock Edition, in which I feel like almost an <b>Expert</b>. If you have any plans to create custom UIs in this game, <b>feel free to contact me and check my work in projects page!</b></p>
           <ExperienceTreeContainer>
             <ExperienceTree
               index={2}

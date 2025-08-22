@@ -1,24 +1,26 @@
+import React from "react";
 import { ScreenSection } from "../../../common/layout/screen-section";
 import { Button, ButtonColor } from "../../../common/button/button";
 import { Link } from "../../../common/link/link";
 import { ImageSection } from "../../../common/global/projects-pages-global";
 import { RouteLink } from "../../../common/link/route-link";
 
-function HometreeUIPage() {
+const SynergyUIPage: React.FC = () => {
   return (
     <div className="projects_pages">
       <ScreenSection
-        title="Hometree UI"
-        description1="Colorful and simple UI for customer. General appearance was designed by customer and slighly by me. In-game UI is fully created by me."
+        title="Synergy UI"
+        description1="Simple UI inspired by TFT game. Fully responsive and clear looking interface for customer."
         children={
           <div className="ScreenSectionButtons">
             <RouteLink
               to="/contact">
-              <Button text="Contact" buttonColor={ButtonColor.default}></Button>
+              <Button text="Contact" buttonColor={ButtonColor.blue}></Button>
             </RouteLink>
           </div>
         }
       ></ScreenSection>
+
       <ScreenSection
         noChildrenPadding={true}
         title="Information"
@@ -33,30 +35,32 @@ function HometreeUIPage() {
           </div>
         }
       ></ScreenSection>
+
+
       <ImageSection
-        noBorder={true}
+      noBorder={true}
         title={"In-game Screnshots"}
         sectionDescription={"Here is a list of in-game screenshots with short description!"}
         items={[
           {
-            title: "Gamemodes Selector",
-            description: "UI with header that contains title logo on left and title with multiline description on right. There are buttons in grid style under, with selectable color and optional '2x XP' text in top right corner.",
-            imageSrc: "hometree1"
+            title: "Whole Element",
+            description: "Which is located in the left side of the scree. It's fully customizable, you can set index, title, description, image and extra synergies at the bottom!",
+            imageSrc: "synergy_ui1"
           },
           {
-            title: "Again Gamemodes Selector",
-            description: "This time with more buttons and visible scroll on right.",
-            imageSrc: "hometree3"
+            title: "Adjustable Length",
+            description: "You can always set the length of the elements, which you want to display! But also, hide index if it's not needed.",
+            imageSrc: "synergy_ui2"
           },
           {
-            title: "Grid Button",
-            description: "This is closer look of grid button. See that the color of the button title matches the outline, which is only visible when the cursor is hovered over.",
-            imageSrc: "hometree4"
+            title: "Just One Element",
+            description: "Use only one element with set the index if needed. Take a look how background autmatically adjusts to the elements size.",
+            imageSrc: "synergy_ui3"
           },
           {
-            title: "Advertisement Form",
-            description: "Simple UI that shows only big image in center and continue (basically exit) button under. It's only for information purposes.",
-            imageSrc: "hometree2"
+            title: "Example Usage",
+            description: "Finally here is one simple example :3",
+            imageSrc: "synergy_ui4"
           },
         ]}>
       </ImageSection>
@@ -64,4 +68,4 @@ function HometreeUIPage() {
   )
 }
 
-export { HometreeUIPage }
+export { SynergyUIPage }

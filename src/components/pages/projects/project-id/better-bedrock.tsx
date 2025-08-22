@@ -2,15 +2,15 @@ import { ScreenSection } from "../../../common/layout/screen-section";
 import { Button, ButtonColor } from "../../../common/button/button";
 import { Link } from "../../../common/link/link";
 import "../../../common/global/projects-pages-global.css";
-import { scrollToElement } from "../../../utils/scroll";
 import { ImageSection } from "../../../common/global/projects-pages-global";
+import { RouteLink } from "../../../common/link/route-link";
 
 function BetterBedrockPage() {
   return (
     <div className="better_bedrock_page projects_pages">
       <ScreenSection
         title="Better Bedrock"
-        description1="The Better Bedrock is project of Texture Pack for MCBE Edition, Website and Mobile App available only for Android. The Main goal is to improve the default Minecraft gameplay to a whole new level with many new features!"
+        description1="Is a free, powerful and customizable texture pack for Minecraft Bedrock Edition! Enhance your gameplay with multiple features and almost 300 config options, supported on all platforms."
         children={
           <div className="ScreenSectionButtons">
             <Button buttonColor={ButtonColor.blue}>
@@ -19,25 +19,46 @@ function BetterBedrockPage() {
             <Button buttonColor={ButtonColor.default}>
               <Link useUnderline={false} useButtonFontHeight={true} textColor="var(--web-bg-color-1)" text="Discord Server" href="https://discord.gg/ZGK5WYXnEY"></Link>
             </Button>
-            <div onClick={() => { scrollToElement("credits") }}>
-              <Button buttonColor={ButtonColor.default} text="Credits"></Button>
-            </div>
+            <RouteLink
+              to="/contact">
+              <Button text="Contact" buttonColor={ButtonColor.default}></Button>
+            </RouteLink>
           </div>
         }
       ></ScreenSection>
+
+      <ScreenSection
+        noChildrenPadding={true}
+        title="Information"
+        children={
+          <div className="ScreenSectionList" style={{ padding: 0, border: 0 }}>
+            <ul>
+              <li key={`1`}>
+                Texture Packs:{" "}
+                <Link href="https://github.com/AxmBro" text="Me - AxmBro" ></Link>
+              </li>
+              <li key={`2`}>
+                Website & Other:{" "}
+                <Link href="https://github.com/idarkQ" text="iDarkQ" ></Link>
+              </li>
+            </ul>
+          </div>
+        }
+      ></ScreenSection>
+
       <div id="trailer-container">
         <ScreenSection
           title="Latest Version Trailer"
           description1="Take a look at this showcase trailer, which shows in details all key elements for Better Bedrock v7.0+ These are texture pack, mobile client and website."
           children={
             <div className="iframe-container">
-              <iframe src="https://www.youtube.com/embed/v5O-AG9P1Ag?si=mhlCWsULlzvv94Yg" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+              <iframe src="https://www.youtube.com/embed/4XSc0J0mrlU" title="BETTER BEDROCK V8 RELEASE! The Best Utility Texture Pack for Minecraft Bedrock | Showcase Trailer" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
             </div>
           }
         ></ScreenSection>
       </div>
       <ImageSection
-        title={"Texture Pack v7.2"}
+        title={"Texture Pack"}
         sectionDescription={"Here is a list of featues with brief description and the actual in-game view!"}
         items={[
           {
@@ -73,7 +94,38 @@ function BetterBedrockPage() {
         ]}>
       </ImageSection>
       <ImageSection
-        title={"Mobile App"}
+        title={"Website"}
+        sectionDescription={"Which is open source! Navigate to github repository from the footer."}
+        items={[
+          {
+            title: "Home",
+            description: "Simple section with just important info, it needs to be improved for sure :3",
+            imageSrc: "web1"
+          },
+          {
+            title: "Downloads",
+            description: "Section where you can download latest BB content, Extensions for Texture Pack and Archived versions.",
+            imageSrc: "web2"
+          },
+          {
+            title: "Community/Side Projects",
+            description: "Section where you can find related projects to the Better Bedrock.",
+            imageSrc: "web3"
+          },
+          {
+            title: "Information",
+            description: "In which you can find FAQ separated by categories.",
+            imageSrc: "web4"
+          },
+          {
+            title: "Tutorial Videos",
+            description: "Under the FAQ you can find a list of videos that explain how to use Better Bedrock and its features.",
+            imageSrc: "web5"
+          },
+        ]}>
+      </ImageSection>
+      <ImageSection
+        title={"Mobile App (CANCELLED)"}
         sectionDescription={"Here is a list of desktop website views with short description!"}
         rowStyle={true}
         childrenTopDividerInside={false}
@@ -96,28 +148,7 @@ function BetterBedrockPage() {
         ]}>
       </ImageSection>
       <ImageSection
-        title={"Website"}
-        sectionDescription={"Here is a list of desktop website views with short description!"}
-        items={[
-          {
-            title: "Home",
-            description: "Simple section with just important info, in my opinion still lacks of some elements :S",
-            imageSrc: "web1"
-          },
-          {
-            title: "Downloads",
-            description: "Section where you can download latest BB content, Extensions for Texture Pack, Side Projects, Archived versions.",
-            imageSrc: "web2"
-          },
-          {
-            title: "Faq",
-            description: "Here is list of frequently asked questions!",
-            imageSrc: "web3"
-          },
-        ]}>
-      </ImageSection>
-      <ImageSection
-        title={"Windows Client v1"}
+        title={"Windows Client v1 (CANCELLED)"}
         sectionDescription={"Here is a list of featues with brief description and the actual in-game view!"}
         items={[
           {
@@ -127,56 +158,6 @@ function BetterBedrockPage() {
           },
         ]}>
       </ImageSection>
-      <div id="credits">
-        <ScreenSection
-          noChildrenPadding={true}
-          title="Creators"
-          children={
-            <div>
-              <div className="ScreenSectionList" style={{ padding: 0, border: 0 }}>
-                <ul>
-                  <li key={`1`}>
-                    Texture Pack, Discord:{" "}
-                    <Link href="https://github.com/AxmBro" text="AxmBro" ></Link>
-                  </li>
-                  <li key={`2`}>
-                    Mobile App, Website, Android Client, Windows Client:{" "}
-                    <Link href="https://github.com/idarkQ" text="iDarkQ" ></Link>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          }
-        ></ScreenSection>
-        <ScreenSection
-          style={{ borderBottom: 0 }}
-          noChildrenPadding={true}
-          title="Technology"
-          children={
-            <div>
-              <div className="ScreenSectionList" style={{ padding: 0, border: 0 }}>
-                <ul>
-                  <li key={`1`}>
-                    Texture Pack:{" "}
-                    <Link href="https://www.json.org/json-en.html" text="JSON" ></Link>
-                    {" | "}
-                    <Link href="https://wiki.bedrock.dev/json-ui/json-ui-documentation.html" text="Minecraft Bedrock JsonUI" ></Link>
-                  </li>
-                  <li key={`2`}>
-                    Website, Android Client, Windows Client:{" "}
-                    <Link href="https://flutter.dev/" text="Flutter" ></Link>
-                    {" | "}
-                    <Link href="https://react.dev/" text="React" ></Link>
-                    {" | "}
-                    <Link href="https://supabase.com/" text="Supabase" ></Link>
-                    {" | Platform APIs"}
-                  </li>
-                </ul>
-              </div>
-            </div>
-          }
-        ></ScreenSection>
-      </div>
     </div>
   )
 }

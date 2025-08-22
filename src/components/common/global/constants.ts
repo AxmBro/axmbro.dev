@@ -2,7 +2,7 @@ export const PROJECTS = [
   {
     title: "Better Bedrock",
     description: "Is a free, powerful and customizable texture pack for Minecraft Bedrock Edition! Enhance your gameplay with multiple features and almost 300 config options, supported on all platforms.",
-    tags: ["MCBE JsonUI", "React", "Flutter", "Supabase", "Windows API", "Android API"],
+    tags: ["MCBE JsonUI", "React",],
     imgSrc: "bbReleaseThumbnail",
     logoSrc: "bbLogo",
     star: true,
@@ -27,14 +27,21 @@ export const PROJECTS = [
     url: "ra_survival"
   },
   {
-    title: "Murder Detector",
+    title: "Murder Detector+",
     description: "Simple CHEAT by just TEXTURE PACK. I created this pack to test texture pack possibilities and decided to increase ban rate on servers LOL",
     tags: ["MCBE JsonUI", "MCBE Models"],
-    imgSrc: "murderDetector1",
+    imgSrc: "murder_detector",
     logoSrc: "mdLogo",
     star: true,
     downloadLink: "https://betterbedrock.com/#/downloads",
     url: "murder_detector"
+  },
+  {
+    title: "Synergy UI",
+    description: "Simple UI inspired by TFT game. Fully responsive and clear looking interface for customer.",
+    tags: ["MCBE JsonUI", "MCBE Server Form"],
+    imgSrc: "synergy_ui0",
+    url: "synergy_ui"
   },
   {
     title: "Shop UI",
@@ -60,7 +67,7 @@ export const PROJECTS = [
   {
     title: "This Website",
     description: "My whole journey with learning how websites work and how to create them. Currently using JS, TS and React, but previously it was only HTML, JS and CSS.",
-    tags: ["HTML", "CSS", "JavaScript", "TypeScript", "React"],
+    tags: ["React", "JavaScript", "TypeScript", "CSS"],
     imgSrc: "thisweb"
   },
 ]

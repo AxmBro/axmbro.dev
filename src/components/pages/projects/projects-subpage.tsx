@@ -9,6 +9,7 @@ import { HometreeUIPage } from "./project-id/hometree-ui";
 import { SimpleUIPage } from "./project-id/simple-ui";
 import { ScreenContainer } from "../../common/layout/screen-container";
 import { NotFound } from "../not-found/not-found";
+import { SynergyUIPage } from "./project-id/synergy-ui";
 
 const ProjectsSubPage: React.FC = () => {
   const { projectId } = useParams<{ projectId: string }>();
@@ -23,6 +24,7 @@ const ProjectsSubPage: React.FC = () => {
     hometree_ui: <HometreeUIPage />,
     simple_ui: <SimpleUIPage />,
     ra_survival: <RaSurvivalPage />,
+    synergy_ui: <SynergyUIPage />,
   };
 
   if (!projectId || !projectLayouts[projectId]) {

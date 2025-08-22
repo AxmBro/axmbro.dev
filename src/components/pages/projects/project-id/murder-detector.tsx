@@ -2,14 +2,13 @@ import { ScreenSection } from "../../../common/layout/screen-section";
 import { Button, ButtonColor } from "../../../common/button/button";
 import { Link } from "../../../common/link/link";
 import "./../../../common/global/projects-pages-global.css";
-import { scrollToElement } from "../../../utils/scroll";
 import { ImageSection } from "../../../common/global/projects-pages-global";
 
 function MurderDetectorPage() {
   return (
     <div className="murder_detector_page projects_pages">
       <ScreenSection
-        title="Murder Detector"
+        title="Murder Detector+"
         description1="Simple let us say... shhhh... CHEAT by just TEXTURE PACK. Models system provided by MCBE allows to check what item player is holding, or with additional info, held. Using this user is able to see which person is murderer or sheriff by icon above head or optionally by extra xray!"
         children={
           <div className="ScreenSectionButtons">
@@ -17,14 +16,26 @@ function MurderDetectorPage() {
               <Link useUnderline={false} useButtonFontHeight={true} textColor="var(--web-bg-color-1)" text="Download" href="https://betterbedrock.com"></Link>
             </Button>
             <Button buttonColor={ButtonColor.default}>
-              <Link useUnderline={false} useButtonFontHeight={true} textColor="var(--web-bg-color-1)" text="Discord Server" href="https://discord.gg/ZGK5WYXnEY"></Link>
+              <Link useUnderline={false} useButtonFontHeight={true} textColor="var(--web-bg-color-1)" text="Preview" href="https://betterbedrock.com/preview/murder_detector.mcpack"></Link>
             </Button>
-            <div onClick={() => { scrollToElement("credits") }}>
-              <Button buttonColor={ButtonColor.default} text="Credits"></Button>
-            </div>
           </div>
         }
       ></ScreenSection>
+      <ScreenSection
+        noChildrenPadding={true}
+        title="Information"
+        children={
+          <div className="ScreenSectionList" style={{ padding: 0, border: 0 }}>
+            <ul>
+              <li key={`1`}>
+                Creator:{" "}
+                <Link href="https://github.com/AxmBro" text="Me - AxmBro" ></Link>
+              </li>
+            </ul>
+          </div>
+        }
+      ></ScreenSection>
+
       <div id="trailer-container">
         <ScreenSection
           title="Trailer"
@@ -36,8 +47,10 @@ function MurderDetectorPage() {
           }
         ></ScreenSection>
       </div>
+
       <ImageSection
-        title={"Texture Pack v3.1"}
+        noBorder={true}
+        title={"Texture Pack"}
         sectionDescription={"Here is a list of featues with brief description and the actual in-game view!"}
         items={[
           {
@@ -46,7 +59,7 @@ function MurderDetectorPage() {
             imageSrc: "mm4"
           },
           {
-            title: "Visible Murderers too!",
+            title: "Murderers are visible too!",
             description: "You are able to see sword icon above murderer, by same logic like above, but detection list is larger than just bow or arrow: all types of swords, mace and nether_star.",
             imageSrc: "mm5"
           },
@@ -67,43 +80,6 @@ function MurderDetectorPage() {
           },
         ]}>
       </ImageSection>
-      <div id="credits">
-        <ScreenSection
-          noChildrenPadding={true}
-          title="Creators"
-          children={
-            <div>
-              <div className="ScreenSectionList" style={{ padding: 0, border: 0 }}>
-                <ul>
-                  <li key={`1`}>
-                    Texture Pack:{" "}
-                    <Link href="https://github.com/AxmBro" text="AxmBro" ></Link>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          }
-        ></ScreenSection>
-        <ScreenSection
-          style={{ borderBottom: 0 }}
-          noChildrenPadding={true}
-          title="Technology"
-          children={
-            <div>
-              <div className="ScreenSectionList" style={{ padding: 0, border: 0 }}>
-                <ul>
-                  <li key={`1`}>
-                    Texture Pack:{" "}
-                    <Link href="https://www.json.org/json-en.html" text="JSON" ></Link>
-                    {" | "}
-                    <Link href="https://wiki.bedrock.dev/json-ui/json-ui-documentation.html" text="Minecraft Bedrock JsonUI" ></Link>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          }
-        ></ScreenSection>
-      </div>
     </div>
   )
 }
