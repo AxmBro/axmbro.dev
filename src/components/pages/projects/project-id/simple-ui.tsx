@@ -3,7 +3,6 @@ import { ScreenSection } from "../../../common/layout/screen-section";
 import { Button, ButtonColor } from "../../../common//button/button";
 import { Link } from "../../../common//link/link";
 import { ImageSection } from "../../../common/global/projects-pages-global";
-import { scrollToElement } from "../../../utils/scroll";
 import { RouteLink } from "../../../common/link/route-link";
 
 const SimpleUIPage: React.FC = () => {
@@ -11,23 +10,39 @@ const SimpleUIPage: React.FC = () => {
     <div className="projects_pages">
       <ScreenSection
         title="Simple UI"
-        description1="CUSTOM SERVER FORM UI created for personal use, but also to test custom buttons layout! General appearance and in-game UI was fully created by me."
+        description1="Experimental UI for personal use, but also to test custom buttons layout! General appearance and in-game UI was fully created by me."
         children={
           <div className="ScreenSectionButtons">
             <RouteLink
               to="/contact">
               <Button text="Want this UI? Contact Me" buttonColor={ButtonColor.blue}></Button>
             </RouteLink>
-            <Button buttonColor={ButtonColor.default}>
-              <Link useUnderline={false} useButtonFontHeight={true} textColor="var(--web-bg-color-1)" text="Discord Server" href="https://discord.gg/ZGK5WYXnEY"></Link>
-            </Button>
-            <div onClick={() => { scrollToElement("credits") }}>
-              <Button buttonColor={ButtonColor.default} text="Credits"></Button>
-            </div>
+            <RouteLink
+              to="/contact">
+              <Button text="Contact" buttonColor={ButtonColor.default}></Button>
+            </RouteLink>
           </div>
         }
       ></ScreenSection>
+
+      <ScreenSection
+        noChildrenPadding={true}
+        title="Information"
+        children={
+          <div className="ScreenSectionList" style={{ padding: 0, border: 0 }}>
+            <ul>
+              <li key={`1`}>
+                Creator:{" "}
+                <Link href="https://github.com/AxmBro" text="Me - AxmBro" ></Link>
+              </li>
+            </ul>
+          </div>
+        }
+      ></ScreenSection>
+
+
       <ImageSection
+      noBorder={true}
         title={"In-game Screnshots"}
         sectionDescription={"Here is a list of in-game screenshots with short description!"}
         items={[
@@ -48,43 +63,6 @@ const SimpleUIPage: React.FC = () => {
           },
         ]}>
       </ImageSection>
-      <div id="credits">
-        <ScreenSection
-          noChildrenPadding={true}
-          title="Creators"
-          children={
-            <div>
-              <div className="ScreenSectionList" style={{ padding: 0, border: 0 }}>
-                <ul>
-                  <li key={`1`}>
-                    Texture Pack:{" "}
-                    <Link href="https://github.com/AxmBro" text="AxmBro" ></Link>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          }
-        ></ScreenSection>
-        <ScreenSection
-          style={{ borderBottom: 0 }}
-          noChildrenPadding={true}
-          title="Technology"
-          children={
-            <div>
-              <div className="ScreenSectionList" style={{ padding: 0, border: 0 }}>
-                <ul>
-                  <li key={`1`}>
-                    Texture Pack:{" "}
-                    <Link href="https://www.json.org/json-en.html" text="JSON" ></Link>
-                    {" | "}
-                    <Link href="https://wiki.bedrock.dev/json-ui/json-ui-documentation.html" text="Minecraft Bedrock JsonUI" ></Link>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          }
-        ></ScreenSection>
-      </div>
     </div>
   )
 }
