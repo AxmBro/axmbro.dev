@@ -16,6 +16,6 @@ Copy entire repository, make sure you have [node](https://nodejs.org/en) and the
 - `npm install`
 - `npm run dev`
 
-Add .env and put here:
+Add .env in base folder and put here:
 - `EMAIL_USER= your email`
 - `EMAIL_PASS= your email password`
