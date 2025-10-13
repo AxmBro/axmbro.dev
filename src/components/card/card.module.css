@@ -1,0 +1,23 @@
+.card {
+  box-shadow: var(--box-shadow);
+  padding: 1rem;
+  border-radius: var(--border-radius);
+  background-color: var(--web-bg-color-2);
+}
+
+.card .title {
+  font-size: var(--font-h2);
+}
+
+.card > * {
+  word-wrap: break-word;
+}
+
+.card {
+  min-width: 0;
+  min-height: 0;
+}
+
+.card .ProjectsGridItem:hover .title {
+  color: var(--text-color-2);
+}
