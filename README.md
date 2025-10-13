@@ -17,5 +17,5 @@ Copy entire repository, make sure you have [node](https://nodejs.org/en) and the
 - `npm run dev`
 
 Add .env and put here:
-EMAIL_USER= your email
-EMAIL_PASS= your email password
+- `EMAIL_USER= your email`
+- `EMAIL_PASS= your email password`
