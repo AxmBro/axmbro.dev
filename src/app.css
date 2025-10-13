@@ -53,8 +53,12 @@ p {
 
 p,
 a {
-  font-weight: 500;
   font-size: var(--font-p);
+}
+
+a {
+  color: var(--text-color-2);
+  text-decoration: underline;
 }
 
 h1 {
@@ -74,7 +78,6 @@ html {
 }
 
 b {
-  color: var(--text-color-b);
   font-weight: 600;
 }
 
