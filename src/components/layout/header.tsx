@@ -1,0 +1,157 @@
+import { useEffect, useState } from "react";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { Button } from "../button/button";
+import styles from "./header.module.css";
+import logo from "../../assets/logo192.png";
+import { useMediaQuery } from "react-responsive";
+import { RouterLink } from "../router-link/rouer-link";
+
+const NAV_LINKS = [
+  {
+    to: "/",
+    text: "Home",
+  },
+  {
+    to: "/projects",
+    text: "Projects",
+  },
+  {
+    to: "/contact",
+    text: "Contact",
+  }
+]
+
+const Header = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [buttonVisibility, setButtonVisibility] = useState(true);
+  const [buttonText, setButtonText] = useState("Contact Me!");
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const minWidth = useMediaQuery({ query: "(max-width: 250px)" });
+  const isResponsive = useMediaQuery({ query: "(max-width: 650px)" });
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
+  const closeMenu = () => {
+    setMenuOpen(false);
+  };
+
+  const handleNavigation = (to: string) => {
+    navigate(to);
+  };
+
+  const handleLogoClick = () => {
+    if (location.pathname === "/") {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    } else {
+      handleNavigation("/");
+    }
+  }
+
+  useEffect(() => {
+    let timeoutId: ReturnType<typeof setTimeout>;;
+
+    if (location.pathname === "/contact") {
+      setButtonText("Thank You!");
+      timeoutId = setTimeout(() => {
+        setButtonVisibility(false);
+      }, 1000);
+    } else {
+      setButtonText("Contact Me!");
+      setButtonVisibility(true);
+    }
+
+    return () => {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+    };
+  }, [location]);
+
+  return (
+    <>
+      <div className={styles.headerRoot}>
+        <div className={styles.header} id="header">
+          <div className={styles.headerContainer}>
+
+            <NavLink
+            className={styles.section1}
+              onClick={handleLogoClick}
+              to="/"
+              end
+              style={{ textDecoration: 0 }}>
+                <div className={styles.logoContainer}>
+                  <img src={logo} className={styles.logoImg} alt="Axmbro Logo" />
+                </div>
+              {!minWidth && (
+                <div className={styles.logoTextContainer}>
+                  <p>AxmBro</p>
+                  <p style={{ color: "var(--text-color-4)" }}>Programmer</p>
+                </div>
+              )}
+            </NavLink>
+
+            <div className={styles.section3}>
+              {!isResponsive && (
+                <div className={styles.desktopButtons}>
+                  {NAV_LINKS.map((link) => (
+                    <NavLink
+                    style={{textDecoration: "none"}}
+                      key={link.to}
+                      to={link.to}
+                      end
+                      className={({ isActive }) => isActive ? `${styles.headerLinkActive}` : `${styles.headerLink}`}>
+                      {link.text}
+                    </NavLink>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <div className={styles.section2}>
+              {!isResponsive && (
+                <RouterLink
+                  style={{visibility: (buttonVisibility ? "unset" : "hidden")}}
+                  to="/contact" >
+                  <Button
+                    buttonColor={"blue"}
+                    text={buttonText} />
+                </RouterLink>
+              )}
+              {(isResponsive) && (
+                <div
+                  onClick={toggleMenu}>
+                  <p className={`${styles.headerLink} ${styles.noSelect}`} style={{ color: "var(--text-color-1)" }}>{menuOpen ? "Close" : "Menu"}</p>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {(isResponsive && menuOpen) && (
+            <div className={styles.mobileMenu} >
+              {NAV_LINKS.map((link) => (
+                <div key={link.to} onClick={toggleMenu}>
+                  <NavLink to={link.to} end style={{ width: "100%" }}>
+                    <Button
+                      buttonColor={"defaultEmpty2"}
+                      text={link.text}
+                      style={{ width: "100%", boxSizing: "border-box" }}
+                    ></Button>
+                  </NavLink>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+      {(isResponsive && menuOpen) && (<div className={styles.overlay} onClick={closeMenu}></div>)}
+    </>
+  );
+};
+export { Header };
