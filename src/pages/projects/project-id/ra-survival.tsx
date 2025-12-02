@@ -54,7 +54,6 @@ function RaSurvivalPage() {
         }
       ></ScreenSection>
       <ImageSection
-        noBorder={true}
         title={"In-game Screnshots"}
         sectionDescription={"Here is a list of in-game screenshots with short description! There were already some elements, so here is only list that I created and added to this map."}
         items={[
@@ -93,7 +92,6 @@ function RaSurvivalPage() {
             description: "It has option to display rounds in either roman numbers and normal numbers.",
             imageSrc: "ra7"
           },
-          // todo: add video "Special round animation"
           {
             title: "Gun display",
             description: "Is in bottom right corner. It shows current gun icon, name and ammo. It has fancy slide animation when switching guns.",
@@ -109,7 +107,6 @@ function RaSurvivalPage() {
             description: "When ammo is really low, color is changed to dark red and text appears under crosshair. Also with subtle entry animation!",
             imageSrc: "ra5"
           },
-          // todo: add video "All Gun and Ammo elements in action"
           {
             title: "Power-Ups",
             description: "It's anoter UI part above hotbars. If player colects any power-up, then there are entry and exit animations on UI.",
@@ -120,7 +117,6 @@ function RaSurvivalPage() {
             description: "If player has more power-ups at the same time, they expand to fit everything in middle, of course with entry and exit animation!",
             imageSrc: "ra8"
           },
-          // todo: add video "Power-Up animations in action"
           {
             title: "Perks",
             description: "Positioned in bottom left corner above rounds element, used to indicate that player has certain buffs.",
@@ -131,7 +127,6 @@ function RaSurvivalPage() {
             description: "All these icons have custom entry, exit and close animations. They are always sticked to left side as well.",
             imageSrc: "ra11"
           },
-          // todo: add video "Perks animations in action"
           {
             title: "Crosshair notifications",
             description: "Extra element for quick message to user.",
@@ -167,6 +162,32 @@ function RaSurvivalPage() {
             description: "Same as UI visibility, but for crosshair. Sometimes there is need to just hide this element and so there it is!",
             imageSrc: "ra21"
           },
+        ]}>
+      </ImageSection>
+      <ScreenSection
+        title="Custom Inventory Screen"
+        description1="Take a look at this development video, which shows extra open/close animations!"
+        children={
+          <div className="iframe-container">
+            <iframe src="https://www.youtube.com/embed/1BAl75sganU" title="Ra survival - custom inventory screen" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+          </div>
+        }
+      ></ScreenSection>
+      <ImageSection
+        noBorder={true}
+        title={"Images of the Custom Inventory Screen"}
+        sectionDescription={"Simple layout that update sinstantly without any reloads. By using some simple trick I managed to make it this way instead of using server forms :D"}
+        items={[
+          {
+            title: "Custom Inventory Screen",
+            description: "Separated by updatable elements. Everything you see there can be changed.",
+            imageSrc: "ra22"
+          },
+          {
+            title: "Behind the scenes",
+            description: "It's just normal inventory, but items inside and their description is used as data to display content in many places in the custom layout!",
+            imageSrc: "ra23"
+          }
         ]}>
       </ImageSection>
     </div>

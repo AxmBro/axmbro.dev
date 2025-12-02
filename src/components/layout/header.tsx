@@ -81,14 +81,14 @@ const Header = () => {
           <div className={styles.headerContainer}>
 
             <NavLink
-            className={styles.section1}
+              className={styles.section1}
               onClick={handleLogoClick}
               to="/"
               end
               style={{ textDecoration: 0 }}>
-                <div className={styles.logoContainer}>
-                  <img src={logo} className={styles.logoImg} alt="Axmbro Logo" />
-                </div>
+              <div className={styles.logoContainer}>
+                <img src={logo} className={styles.logoImg} alt="Axmbro Logo" />
+              </div>
               {!minWidth && (
                 <div className={styles.logoTextContainer}>
                   <p>AxmBro</p>
@@ -102,7 +102,7 @@ const Header = () => {
                 <div className={styles.desktopButtons}>
                   {NAV_LINKS.map((link) => (
                     <NavLink
-                    style={{textDecoration: "none"}}
+                      style={{ textDecoration: "none" }}
                       key={link.to}
                       to={link.to}
                       end
@@ -117,7 +117,7 @@ const Header = () => {
             <div className={styles.section2}>
               {!isResponsive && (
                 <RouterLink
-                  style={{visibility: (buttonVisibility ? "unset" : "hidden")}}
+                  style={{ visibility: (buttonVisibility ? "unset" : "hidden") }}
                   to="/contact" >
                   <Button
                     buttonColor={"blue"}
@@ -137,7 +137,7 @@ const Header = () => {
             <div className={styles.mobileMenu} >
               {NAV_LINKS.map((link) => (
                 <div key={link.to} onClick={toggleMenu}>
-                  <NavLink to={link.to} end style={{ width: "100%" }}>
+                  <NavLink to={link.to} end style={{ width: "100%", textDecoration: "none" }}>
                     <Button
                       buttonColor={"defaultEmpty2"}
                       text={link.text}
