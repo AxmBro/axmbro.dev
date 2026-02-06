@@ -13,7 +13,7 @@ function MurderDetectorPage() {
         children={
           <div className="ScreenSectionButtons">
             <RouterLink
-              to="https://betterbedrock.com" newTab>
+              to="https://betterbedrock.com/project/preview/murder_detector" newTab>
               <Button text="Download" buttonColor={"blue"}></Button>
             </RouterLink>
           </div>

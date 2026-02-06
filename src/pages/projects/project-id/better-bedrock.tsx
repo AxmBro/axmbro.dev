@@ -13,7 +13,7 @@ function BetterBedrockPage() {
         children={
           <div className="ScreenSectionButtons">
             <RouterLink
-              to="https://betterbedrock.com" newTab>
+              to="https://betterbedrock.com/downloads/better-bedrock" newTab>
               <Button text="Download" buttonColor={"blue"}></Button>
             </RouterLink>
             <RouterLink
