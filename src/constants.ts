@@ -65,6 +65,13 @@ export const PROJECTS = [
     url: "os_ui"
   },
   {
+    title: "Hugo SMP UI",
+    description: "Java styled Pause Menu UI for bedrock-java server. With little edited scoreboard to match style from java version. UI created for customer.",
+    tags: ["MCBE JsonUI"],
+    imgSrc: "hugo_smp_ui1",
+    url: "hugo_smp_ui"
+  },
+  {
     title: "Red UI",
     description: "Experimental UI for personal use! General appearance and in-game UI was fully created by me. It's not finished project.",
     tags: ["MCBE JsonUI", "MCBE Server Form"],
