@@ -182,11 +182,6 @@ function RaSurvivalPage() {
             title: "Custom Inventory Screen",
             description: "Separated by updatable elements. Everything you see there can be changed.",
             imageSrc: "ra22"
-          },
-          {
-            title: "Behind the scenes",
-            description: "It's just normal inventory, but items inside and their description is used as data to display content in many places in the custom layout!",
-            imageSrc: "ra23"
           }
         ]}>
       </ImageSection>
