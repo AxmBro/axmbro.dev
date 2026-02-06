@@ -12,6 +12,7 @@ import { BedrockPortalUIPage } from "./project-id/bedrock-portal-ui";
 import { OSUIPage } from "./project-id/os-ui";
 import { RedUIPage } from "./project-id/red-ui";
 import { ScreenContainer } from "../../components/layout/screen-container";
+import { HugoSmpUIPage } from "./project-id/huge-smp-ui";
 
 const ProjectsSubPage = () => {
   const { projectId } = useParams<{ projectId: string }>();
@@ -30,6 +31,7 @@ const ProjectsSubPage = () => {
     bedrock_portal_ui: <BedrockPortalUIPage />,
     os_ui: <OSUIPage />,
     red_ui: <RedUIPage />,
+    hugo_smp_ui: <HugoSmpUIPage />,
   };
 
   if (!projectId || !projectLayouts[projectId]) {
