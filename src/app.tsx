@@ -10,6 +10,7 @@ import { Home } from "./pages/home/home";
 import { Contact } from "./pages/contact/contact";
 import { NotFound } from "./pages/not-found/not-found";
 import { ScrollToTop } from "./components/scroll-to-top/scroll-to-top";
+import { AsciiOverlay } from "./components/ascii-overlay/ascii-overlay";
 import "./app.css";
 
 createRoot(document.getElementById('root')!).render(
@@ -17,6 +18,7 @@ createRoot(document.getElementById('root')!).render(
     <Router>
       <ScrollToTop>
         <div className="App">
+          <AsciiOverlay />
           <Header />
           <Routes>
             <Route path="/" element={<Home />} />
