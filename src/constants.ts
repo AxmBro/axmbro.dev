@@ -2,7 +2,7 @@ export const PROJECTS = [
   {
     title: "Better Bedrock",
     description: "Is a free, powerful and customizable texture pack for Minecraft Bedrock Edition! Enhance your gameplay with multiple features and almost 300 config options, supported on all platforms.",
-    tags: ["MCBE JsonUI", "React",],
+    tags: ["JsonUI", "Models", "React"],
     imgSrc: "bbReleaseThumbnail",
     logoSrc: "bbLogo",
     star: true,
@@ -12,7 +12,7 @@ export const PROJECTS = [
   {
     title: "One Slime Block Adventure",
     description: "Adventure map created with Slime Block the YouTuber. I got hired to implement fancy UI stuff to either HUD and server forms. This project was the most complex one I have ever worked on!",
-    tags: ["MCBE JsonUI", "MCBE Server Form"],
+    tags: ["JsonUI", "Server Form"],
     imgSrc: "obsba",
     star: true,
     downloadLink: "https://www.minecraft.net/en-us/marketplace/pdp/mush-co/one-slime-block-adventure/ade4af56-a677-445d-a6ed-628e28eb7d88",
@@ -21,7 +21,7 @@ export const PROJECTS = [
   {
     title: "Ra Survival",
     description: "Inspired by Call of Duty Zombie mode map for MCBE. I got hired to implement fancy UI stuff to game!",
-    tags: ["MCBE JsonUI"],
+    tags: ["JsonUI"],
     imgSrc: "raThumbnail",
     star: true,
     url: "ra_survival"
@@ -29,7 +29,7 @@ export const PROJECTS = [
   {
     title: "Murder Detector+",
     description: "Simple CHEAT by just TEXTURE PACK. I created this pack to test texture pack possibilities and decided to increase ban rate on servers LOL",
-    tags: ["MCBE JsonUI", "MCBE Models"],
+    tags: ["JsonUI", "Models"],
     imgSrc: "murder_detector",
     logoSrc: "mdLogo",
     star: true,
@@ -39,58 +39,64 @@ export const PROJECTS = [
   {
     title: "Bedrock Portal UI",
     description: "Nice looking oreUI themed UI. Mainly in dark theme with cool subtle features and great layout.",
-    tags: ["MCBE JsonUI", "MCBE Server Form"],
+    tags: ["JsonUI", "Server Form"],
     imgSrc: "bpui1",
     url: "bedrock_portal_ui"
   },
   {
     title: "Shop UI",
     description: "Great looking and vanilla styled UI fully designed and created by me. Previously I used this for experimenting, but sold to interested customer.",
-    tags: ["MCBE JsonUI", "MCBE Server Form"],
+    tags: ["JsonUI", "Server Form"],
     imgSrc: "shop_form1",
     url: "shop_ui"
   },
   {
     title: "Synergy UI",
     description: "Simple UI inspired by TFT game. Fully responsive and clear looking interface for customer.",
-    tags: ["MCBE JsonUI", "MCBE Server Form"],
+    tags: ["JsonUI", "Server Form"],
     imgSrc: "synergy_ui0",
     url: "synergy_ui"
   },
   {
     title: "OS UI",
     description: "Experimental UI for personal use! General appearance and in-game UI was fully created by me.",
-    tags: ["MCBE JsonUI", "MCBE Server Form"],
+    tags: ["JsonUI", "Server Form"],
     imgSrc: "osui1",
     url: "os_ui"
   },
   {
     title: "Hugo SMP UI",
     description: "Java styled Pause Menu UI for bedrock-java server. With little edited scoreboard to match style from java version. UI created for customer.",
-    tags: ["MCBE JsonUI"],
+    tags: ["JsonUI"],
     imgSrc: "hugo_smp_ui1",
     url: "hugo_smp_ui"
   },
   {
-    title: "Red UI",
-    description: "Experimental UI for personal use! General appearance and in-game UI was fully created by me. It's not finished project.",
-    tags: ["MCBE JsonUI", "MCBE Server Form"],
-    imgSrc: "redui1",
-    url: "red_ui"
-  },
-  {
     title: "Hometree UI",
     description: "Colorful and simple UI for customer.",
-    tags: ["MCBE JsonUI", "MCBE Server Form"],
+    tags: ["JsonUI", "Server Form"],
     imgSrc: "hometree1",
     url: "hometree_ui"
   },
   {
     title: "Simple UI",
     description: "Experimental UI  for personal use.",
-    tags: ["MCBE JsonUI", "MCBE Server Form"],
+    tags: ["JsonUI", "Server Form"],
     imgSrc: "simple_server_form1",
     url: "simple_ui"
+  },
+  {
+    title: "Red UI",
+    description: "Experimental UI for personal use! General appearance and in-game UI was fully created by me. It's not finished project.",
+    tags: ["JsonUI", "Server Form"],
+    imgSrc: "redui1",
+    url: "red_ui"
+  },
+  {
+    title: "Custom Sky Overlay",
+    description: "Collection of 16 custom skies for Minecraft Bedrock Edition. Adjust them using subpacks.",
+    imgSrc: "custom_sky_overlay1",
+    url: "custom_sky_overlay"
   },
   {
     title: "This Website",
