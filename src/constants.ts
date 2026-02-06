@@ -6,7 +6,7 @@ export const PROJECTS = [
     imgSrc: "bbReleaseThumbnail",
     logoSrc: "bbLogo",
     star: true,
-    downloadLink: "https://betterbedrock.com/#/downloads",
+    downloadLink: "https://betterbedrock.com/downloads/better-bedrock",
     url: "better_bedrock"
   },
   {
@@ -33,7 +33,7 @@ export const PROJECTS = [
     imgSrc: "murder_detector",
     logoSrc: "mdLogo",
     star: true,
-    downloadLink: "https://betterbedrock.com/#/downloads",
+    downloadLink: "https://betterbedrock.com/project/preview/murder_detector",
     url: "murder_detector"
   },
   {
