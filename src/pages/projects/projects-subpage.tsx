@@ -13,6 +13,7 @@ import { OSUIPage } from "./project-id/os-ui";
 import { RedUIPage } from "./project-id/red-ui";
 import { ScreenContainer } from "../../components/layout/screen-container";
 import { HugoSmpUIPage } from "./project-id/huge-smp-ui";
+import { CustomSkyOverlayPage } from "./project-id/custom-sky-overlay";
 
 const ProjectsSubPage = () => {
   const { projectId } = useParams<{ projectId: string }>();
@@ -32,6 +33,7 @@ const ProjectsSubPage = () => {
     os_ui: <OSUIPage />,
     red_ui: <RedUIPage />,
     hugo_smp_ui: <HugoSmpUIPage />,
+    custom_sky_overlay: <CustomSkyOverlayPage />,
   };
 
   if (!projectId || !projectLayouts[projectId]) {
