@@ -109,17 +109,14 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         <div className={styles.buttons}>
           {buttonsToRender.map((btn, i) => {
             const variant = i === 0 ? "primary" : "secondary";
-            if (btn.isLink) {
-              return (
-                <Link key={`btn-${i}`} href={btn.href}>
-                  <Button text={btn.text} variant={variant} />
-                </Link>
-              );
-            }
             return (
-              <a key={`btn-${i}`} href={btn.href} target={btn.external ? "_blank" : undefined} rel={btn.external ? "noopener noreferrer" : undefined}>
-                <Button text={btn.text} variant={variant} />
-              </a>
+              <Button
+                key={`btn-${i}`}
+                text={btn.text}
+                variant={variant}
+                href={btn.href}
+                external={btn.external}
+              />
             );
           })}
         </div>

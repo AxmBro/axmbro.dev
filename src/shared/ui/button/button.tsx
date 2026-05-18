@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import Link from "next/link";
 import styles from "./button.module.scss";
 
 interface ButtonProps {
@@ -12,6 +13,8 @@ interface ButtonProps {
   style?: React.CSSProperties;
   onClick?: () => void;
   type?: "submit" | "reset" | "button";
+  href?: string;
+  external?: boolean;
 }
 
 export const Button = ({
@@ -20,8 +23,41 @@ export const Button = ({
   children,
   style,
   type = "button",
-  onClick
+  onClick,
+  href,
+  external
 }: ButtonProps) => {
+  const content = text || children;
+
+  if (href) {
+    if (external || href.startsWith("http")) {
+      return (
+        <a
+          href={href}
+          className={styles.button}
+          data-variant={variant}
+          style={style}
+          onClick={onClick}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {content}
+        </a>
+      );
+    }
+
+    return (
+      <Link
+        href={href}
+        className={styles.button}
+        data-variant={variant}
+        style={style}
+        onClick={onClick}
+      >
+        {content}
+      </Link>
+    );
+  }
 
   return (
     <button
@@ -31,7 +67,7 @@ export const Button = ({
       style={style}
       onClick={onClick}
     >
-      {text || children}
+      {content}
     </button>
   );
 };

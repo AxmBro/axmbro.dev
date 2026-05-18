@@ -24,12 +24,8 @@ export default function HomePage() {
         titleDescription={PORTFOLIO_TEXTS.about.description}
       >
         <div className={styles.buttonsGroup}>
-          <Link href="/contact">
-            <Button text="Get in Touch" variant="primary" />
-          </Link>
-          <Link href="/projects">
-            <Button text="View Portfolio" variant="secondary" />
-          </Link>
+          <Button text="Get in Touch" variant="primary" href="/contact" />
+          <Button text="View Portfolio" variant="secondary" href="/projects" />
         </div>
         <HeroStats />
       </ScreenSection>
@@ -61,12 +57,8 @@ export default function HomePage() {
         headingTag="h2"
       >
         <div className={styles.buttonsGroupContact}>
-          <Link href="/contact">
-            <Button text="Start a Project" variant="primary" />
-          </Link>
-          <Link href="/projects">
-            <Button text="Browse My Work" variant="secondary" />
-          </Link>
+          <Button text="Start a Project" variant="primary" href="/contact" />
+          <Button text="Browse My Work" variant="secondary" href="/projects" />
         </div>
       </ScreenSection>
 
