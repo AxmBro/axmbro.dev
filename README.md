@@ -68,13 +68,11 @@ yarn install
 ```
 
 ### 3. Environment Setup
-Create a `.env` file in the root directory and supply your SMTP configuration for the contact form:
+Create a `.env` file in the root directory and supply your Gmail and search console verification configurations:
 ```env
-SMTP_HOST=your-smtp-host
-SMTP_PORT=587
-SMTP_USER=your-smtp-username
-SMTP_PASS=your-smtp-password
-SMTP_TO=destination-email@address.com
+EMAIL_USER=your-gmail-address@gmail.com
+EMAIL_PASS=your-gmail-app-password
+NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION=your-google-verification-hash
 ```
 
 ### 4. Running the Development Server
