@@ -1,0 +1,102 @@
+@use '../../shared/styles/variables' as *;
+
+.searchBar {
+  display: flex;
+  align-items: center;
+  padding: 0 2rem 0 2rem;
+}
+
+.searchInput {
+  flex: 1;
+  height: 3.25rem;
+  border: 1px solid var(--line-break-color);
+  background-color: rgba(255, 255, 255, 0.02);
+  color: var(--color-neutral-100);
+  font-size: var(--font-p);
+  font-family: inherit;
+  padding: 0 1rem;
+  box-sizing: border-box;
+
+  &:focus {
+    outline: none;
+    border-color: var(--color-neutral-100);
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+
+  &::placeholder {
+    color: var(--color-neutral-400);
+    opacity: 0.6;
+  }
+}
+
+.clearButton {
+  height: 3.25rem;
+  width: 3.25rem;
+  flex-shrink: 0;
+  border: 1px solid var(--line-break-color);
+  border-left: 0;
+  background-color: rgba(255, 255, 255, 0.02);
+  color: var(--color-neutral-400);
+  font-size: var(--font-p2);
+  font-family: inherit;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--color-neutral-100);
+  }
+}
+
+.tabsWrapper {
+  display: flex;
+  width: 100%;
+  padding: 2rem;
+  padding-top: 1.5rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  width: 100%;
+
+  @media (max-width: $breakpoint-wide) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.gridItem {
+  border-right: 1px solid var(--line-break-color);
+  border-bottom: 1px solid var(--line-break-color);
+
+  &:nth-child(2n) {
+    border-right: none;
+  }
+
+  &:last-child,
+  &:nth-last-child(2):nth-child(odd) {
+    border-bottom: none;
+  }
+
+  @media (max-width: $breakpoint-wide) {
+    border-right: none;
+
+    &:nth-last-child(2):nth-child(odd) {
+      border-bottom: 1px solid var(--line-break-color);
+    }
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}
+
+.noResults {
+  border-top: 1px solid var(--line-break-color);
+  padding: 2rem;
+}
