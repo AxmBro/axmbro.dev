@@ -21,9 +21,7 @@ export const ExperienceGrid = () => {
             {exp.buttons && exp.buttons.length > 0 && (
               <div className={styles.expButtonsRow}>
                 {exp.buttons.map((btn, i) => (
-                  <Link key={i} href={btn.href}>
-                    <Button variant={btn.variant} text={btn.text} />
-                  </Link>
+                  <Button key={i} href={btn.href} variant={btn.variant} text={btn.text} />
                 ))}
               </div>
             )}
