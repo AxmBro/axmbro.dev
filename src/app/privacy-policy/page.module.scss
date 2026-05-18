@@ -1,0 +1,57 @@
+@use '../../shared/styles/variables' as *;
+
+.itemList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.item {
+  border-top: 1px solid var(--line-break-color);
+  padding: 2.5rem 2rem;
+}
+
+.itemTitle {
+  color: var(--color-neutral-100);
+  font-size: var(--font-h2);
+  font-weight: var(--weight-h2);
+  margin: 0 0 0.5rem 0;
+}
+
+.itemText {
+  margin: 0;
+  color: var(--color-neutral-400);
+  font-size: var(--font-p);
+  font-weight: var(--weight-p);
+  line-height: var(--lh-p);
+}
+
+.link {
+  color: var(--color-neutral-300);
+  text-decoration: underline;
+  text-decoration-color: var(--color-neutral-300);
+  text-underline-offset: 4px;
+  transition: color 0.15s ease, text-decoration-color 0.15s ease;
+
+  &:hover {
+    color: var(--color-neutral-100);
+    text-decoration-color: var(--color-neutral-100);
+  }
+}
+
+.headerDescWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  p {
+    margin: 0;
+  }
+}
+
+.lastUpdated {
+  color: var(--color-neutral-400);
+  font-size: var(--font-p);
+  font-weight: var(--weight-p);
+}
