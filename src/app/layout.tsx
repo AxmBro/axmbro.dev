@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   description: "Personal portfolio of AxmBro - Programmer, MCBE JsonUI Developer, Web Developer.",
   metadataBase: new URL("https://axmbro.dev"),
   verification: {
-    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || "",
+    google: process.env.GOOGLE_SITE_VERIFICATION || "",
   },
   openGraph: {
     title: "AxmBro | Programmer",

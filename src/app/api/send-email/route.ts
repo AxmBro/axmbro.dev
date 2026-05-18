@@ -17,14 +17,14 @@ export async function POST(request: NextRequest) {
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASSWORD,
       },
     });
 
     await transporter.sendMail({
-      from: process.env.EMAIL_USER,
-      to: process.env.EMAIL_USER,
+      from: process.env.SMTP_USER,
+      to: process.env.SMTP_USER,
       subject: `axmbro.dev - Message from ${email}`,
       text: `From: ${email}\n\n${message}`,
       replyTo: email,

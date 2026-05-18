@@ -70,9 +70,9 @@ yarn install
 ### 3. Environment Setup
 Create a `.env` file in the root directory and supply your Gmail and search console verification configurations:
 ```env
-EMAIL_USER=your-gmail-address@gmail.com
-EMAIL_PASS=your-gmail-app-password
-NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION=your-google-verification-hash
+SMTP_USER=your-gmail-address@gmail.com
+SMTP_PASSWORD=your-gmail-app-password
+GOOGLE_SITE_VERIFICATION=your-google-verification-hash
 ```
 
 ### 4. Running the Development Server
@@ -87,14 +87,3 @@ To build and optimize the application for production deployment:
 ```bash
 yarn build
 ```
-
----
-
-## 🌐 Deployment
-
-The codebase is ready for **Vercel** out of the box:
-1. Push your repository to GitHub / GitLab.
-2. Import the project to Vercel.
-3. **IMPORTANT**: In the Project Settings under the **General** tab, set the **Framework Preset** to **Next.js** (do not leave it as Vite or Other).
-4. Configure the environment variables from your `.env` file in Vercel.
-5. Deploy.
