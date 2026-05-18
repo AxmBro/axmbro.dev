@@ -1,0 +1,69 @@
+@use '../../styles/variables' as *;
+
+.faqList {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border-top: 1px solid var(--line-break-color);
+}
+
+.faqItem {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border-bottom: 1px solid var(--line-break-color);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.faqHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 1.5rem 2rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+
+  &:hover {
+    .faqQuestion {
+      color: var(--color-neutral-100);
+    }
+  }
+}
+
+.faqQuestion {
+  font-family: inherit;
+  font-size: var(--font-h3);
+  color: var(--color-neutral-100);
+  margin: 0;
+  padding-right: 2rem;
+}
+
+.faqAnswerContainer {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100%;
+
+  &[data-open="true"] {
+    grid-template-rows: 1fr;
+  }
+}
+
+.faqAnswerContent {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.faqAnswer {
+  font-size: var(--font-p2);
+  line-height: var(--lh-p2);
+  color: var(--color-neutral-400);
+  margin: 0;
+  padding: 0 2rem 1.75rem 2rem;
+}
