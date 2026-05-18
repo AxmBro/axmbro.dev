@@ -1,0 +1,58 @@
+@use '../../../shared/styles/variables' as *;
+
+.tabsWrapper {
+  display: flex;
+  width: 100%;
+  overflow-x: auto;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.tabButton {
+  background: transparent;
+  border: 1px solid var(--line-break-color);
+  border-right: none;
+  color: var(--color-neutral-400);
+  font-family: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+  user-select: none;
+  transition: none;
+
+  &:last-child {
+    border-right: 1px solid var(--line-break-color);
+  }
+
+  &:hover,
+  &[data-active="true"] {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--color-neutral-100);
+
+    @supports (color: color-mix(in oklab, white, black)) {
+      background-color: color-mix(in oklab, var(--color-neutral-100) 10%, transparent);
+    }
+  }
+
+  &[disabled] {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}
+
+.tabsWrapper[data-size="medium"] {
+  .tabButton {
+    padding: 1rem 1.5rem;
+    font-size: var(--font-p);
+  }
+}
+
+.tabsWrapper[data-size="small"] {
+  .tabButton {
+    padding: 0.8rem 1.2rem;
+    font-size: var(--font-p2);
+  }
+}
