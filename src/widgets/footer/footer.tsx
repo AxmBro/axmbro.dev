@@ -30,7 +30,7 @@ export const Footer = () => {
           </div>
 
           <div className={styles.footerColumn}>
-            <h4 className={styles.columnTitle}>Navigation</h4>
+            <div className={styles.columnTitle}>Navigation</div>
             <nav className={styles.columnLinks}>
               <Link href="/">Home</Link>
               <Link href="/projects">Projects</Link>
@@ -41,7 +41,7 @@ export const Footer = () => {
           </div>
 
           <div className={styles.footerColumn}>
-            <h4 className={styles.columnTitle}>Featured</h4>
+            <div className={styles.columnTitle}>Featured</div>
             <nav className={styles.columnLinks}>
               {featuredProjects.map((p) => (
                 <Link key={p.slug || p.title} href={p.slug ? `/projects/${p.slug}` : "/projects"}>
@@ -52,7 +52,7 @@ export const Footer = () => {
           </div>
 
           <div className={styles.footerColumn}>
-            <h4 className={styles.columnTitle}>Contact</h4>
+            <div className={styles.columnTitle}>Contact</div>
             <nav className={styles.columnLinks}>
               <Link href="/contact">Contact Form</Link>
               {github && <a href={github.href} target="_blank" rel="noopener noreferrer">GitHub</a>}
