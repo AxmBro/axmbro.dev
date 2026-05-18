@@ -1,0 +1,79 @@
+.section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--web-bg-color-1);
+  border: 1px solid var(--line-break-color);
+}
+
+.titleBlock {
+  padding: 0;
+
+  &.hasPadding {
+    padding: 2rem 2rem 0 2rem;
+
+    &.noChildren {
+      padding: 2rem;
+    }
+  }
+}
+
+.title {
+  color: var(--color-neutral-100);
+  font-size: var(--font-h1);
+  font-weight: var(--weight-h1);
+  margin: 0;
+  letter-spacing: 1px;
+}
+
+.description {
+  color: var(--color-neutral-400);
+  font-size: var(--font-p);
+  font-weight: var(--weight-p);
+  line-height: var(--lh-p);
+  margin-top: 0.5rem;
+  max-width: 950px;
+
+  strong {
+    font-weight: 500;
+    color: var(--color-neutral-100);
+  }
+}
+
+.childrenContainer {
+  width: 100%;
+  margin-top: 1.5rem;
+
+  &.hasPadding {
+    padding: 0 2rem 2rem 2rem;
+  }
+}
+
+.listContainer {
+  width: 100%;
+}
+
+.listTitle {
+  color: var(--color-neutral-100);
+  font-size: var(--font-h2);
+  font-weight: var(--weight-h2);
+  letter-spacing: 0.5px;
+  margin-bottom: 0.5rem;
+}
+
+.listItemsWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.listItem {
+  font-size: var(--font-p);
+  color: var(--color-neutral-400);
+  font-weight: var(--weight-p);
+  line-height: var(--lh-p);
+
+  .listValue {
+    color: var(--color-neutral-100);
+    font-weight: 400;
+  }
+}

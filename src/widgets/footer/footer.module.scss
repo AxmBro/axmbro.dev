@@ -1,0 +1,120 @@
+@use '../../shared/styles/variables' as *;
+
+.footerWrapper {
+  border-top: 1px solid var(--line-break-color);
+  background-color: var(--web-bg-color-1);
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  padding: 0 1rem;
+}
+
+.footerScreenContainer {
+  max-width: var(--max-website-width);
+  margin: 0 auto;
+  position: relative;
+  border-left: 1px solid var(--line-break-color);
+  border-right: 1px solid var(--line-break-color);
+}
+
+.footerGrid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  margin-bottom: 0;
+  position: relative;
+  z-index: 2;
+
+  @media (max-width: $breakpoint-wide) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media (max-width: $breakpoint-md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.footerColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 2rem;
+  border-right: 1px solid var(--line-break-color);
+  border-bottom: 1px solid var(--line-break-color);
+
+  &:last-child {
+    border-right: none;
+  }
+
+  @media (max-width: $breakpoint-wide) {
+    &:nth-child(2n) {
+      border-right: none;
+    }
+  }
+
+  @media (max-width: $breakpoint-md) {
+    border-right: none;
+  }
+}
+
+.logoInfo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  width: fit-content;
+
+  &:hover {
+    text-decoration: underline;
+
+    .brandName {
+      color: var(--color-neutral-100);
+    }
+  }
+}
+
+.brandName {
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: var(--color-neutral-100);
+  letter-spacing: 0.5px;
+}
+
+.brandDesc {
+  color: var(--color-neutral-400);
+  line-height: var(--lh-p2);
+  font-size: var(--font-p2);
+  max-width: 300px;
+}
+
+.columnTitle {
+  color: var(--color-neutral-100);
+  font-size: var(--font-p2);
+  font-weight: 500;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.columnLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  a {
+    text-decoration: none;
+    font-size: var(--font-p2);
+    width: fit-content;
+  }
+}
+
+.bottomBar {
+  padding: 1.25rem 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.legalRow {
+  color: var(--color-neutral-400);
+  font-size: 0.85rem;
+  text-align: center;
+}

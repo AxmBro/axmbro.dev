@@ -1,0 +1,12 @@
+
+.buttonsGroupContact {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.buttonsGroup {
+  @extend .buttonsGroupContact;
+  padding-inline: 2rem;
+  margin-bottom: 2rem;
+}

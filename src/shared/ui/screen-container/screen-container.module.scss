@@ -1,0 +1,19 @@
+.screenContainer {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  padding: 0 1rem;
+}
+
+.screenContent {
+  gap: 4rem;
+  width: 100%;
+  max-width: var(--max-website-width);
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  padding-block: 4rem;
+}
