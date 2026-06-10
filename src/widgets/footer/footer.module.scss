@@ -103,6 +103,9 @@
     text-decoration: none;
     font-size: var(--font-p2);
     width: fit-content;
+    max-width: 100%;
+    word-break: break-word;
+    hyphens: auto;
   }
 }
 

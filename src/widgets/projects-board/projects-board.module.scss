@@ -8,6 +8,7 @@
 
 .searchInput {
   flex: 1;
+  min-width: 0;
   height: 3.25rem;
   border: 1px solid var(--color-border);
   background-color: rgba(255, 255, 255, 0.02);
@@ -54,6 +55,8 @@
   padding-top: 1.5rem;
   overflow-x: auto;
   scrollbar-width: none;
+  box-sizing: border-box;
+  min-width: 0;
 
   &::-webkit-scrollbar {
     display: none;
@@ -64,6 +67,7 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   width: 100%;
+  min-width: 0;
 
   @media (max-width: $breakpoint-wide) {
     grid-template-columns: 1fr;
@@ -73,6 +77,8 @@
 .gridItem {
   border-right: 1px solid var(--color-border);
   border-bottom: 1px solid var(--color-border);
+  min-width: 0;
+  max-width: 100%;
 
   &:nth-child(2n) {
     border-right: none;

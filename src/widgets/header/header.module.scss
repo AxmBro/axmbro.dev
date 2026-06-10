@@ -52,6 +52,10 @@
     letter-spacing: 0.5px;
     margin: 0;
     line-height: 1;
+
+    @media (max-width: 340px) {
+      display: none;
+    }
   }
 }
 

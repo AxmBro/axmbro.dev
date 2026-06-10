@@ -11,8 +11,13 @@
   border-radius: 8px;
   font-family: inherit;
   outline: none;
-  white-space: nowrap;
+  white-space: normal;
+  text-align: center;
   text-decoration: none !important;
+  max-width: 100%;
+  box-sizing: border-box;
+  word-break: break-word;
+  hyphens: auto;
 
   &[data-variant="primary"] {
     background-color: var(--color-accent);

@@ -5,4 +5,13 @@
   flex-wrap: wrap;
   gap: 0.75rem;
   width: 100%;
+
+  @media (max-width: $breakpoint-sm) {
+    flex-direction: column;
+    
+    > * {
+      width: 100%;
+      justify-content: center;
+    }
+  }
 }

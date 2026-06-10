@@ -114,13 +114,12 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       )}
 
       {pageData?.videos?.map((video, i) => (
-        <ScreenSection key={`video-${i}`} title={video.title} titleDescription={video.description}>
+        <ScreenSection key={`video-${i}`} title={video.title} titleDescription={video.description} withChildrenPadding={false}>
           <div className={styles.iframeContainer}>
             <iframe
-              src={`https://www.youtube.com/embed/${video.youtubeId}`}
+              src={`https://www.youtube.com/embed/${video.youtubeId}?rel=0`}
               title={video.title}
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerPolicy="strict-origin-when-cross-origin"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
             />
           </div>

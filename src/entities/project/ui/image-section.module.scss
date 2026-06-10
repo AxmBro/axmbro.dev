@@ -13,11 +13,27 @@
 
   .item {
     border-top: 1px solid var(--color-border);
-    padding: 2.5rem 2rem;
+    display: flex;
+    flex-direction: column;
 
     &:first-child {
       border-top: none;
-      padding-top: 0;
+    }
+  }
+
+  .imgWrapper {
+    border-left: none;
+    border-right: none;
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+    margin-bottom: 0;
+  }
+
+  .textContent {
+    padding: 1.5rem 2rem 2rem 2rem;
+
+    @media (max-width: $breakpoint-md) {
+      padding: 0.75rem 1.25rem 1.25rem 1.25rem;
     }
   }
 }
@@ -25,7 +41,8 @@
 .gridList {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 2rem;
+  gap: 0;
+  border-top: 1px solid var(--color-border);
 
   @media (max-width: $breakpoint-md) {
     grid-template-columns: 1fr;
@@ -34,13 +51,59 @@
   .item {
     display: flex;
     flex-direction: column;
+    border-right: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+
+    &:nth-child(3n) {
+      border-right: none;
+    }
+
+    &:nth-last-child(-n+3):nth-child(3n+1),
+    &:nth-last-child(-n+2):nth-child(3n+2),
+    &:last-child {
+      border-bottom: none;
+    }
+
+    @media (max-width: $breakpoint-wide) {
+      &:nth-child(3n) {
+        border-right: 1px solid var(--color-border);
+      }
+      &:nth-child(2n) {
+        border-right: none;
+      }
+
+      border-bottom: 1px solid var(--color-border);
+
+      &:nth-last-child(-n+2):nth-child(2n+1),
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+
+    @media (max-width: $breakpoint-md) {
+      border-right: none !important;
+      border-bottom: 1px solid var(--color-border);
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
   }
 
   .imgWrapper {
     aspect-ratio: auto;
     border: none;
+    border-bottom: 1px solid var(--color-border);
     background: transparent;
-    margin-bottom: 1rem;
+    margin-bottom: 0;
+  }
+
+  .textContent {
+    padding: 1.5rem 2rem 2rem 2rem;
+
+    @media (max-width: $breakpoint-md) {
+      padding: 0.75rem 1.25rem 1.25rem 1.25rem;
+    }
   }
 
   .img {
