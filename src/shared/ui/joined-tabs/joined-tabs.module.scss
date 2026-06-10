@@ -20,6 +20,7 @@
   cursor: pointer;
   white-space: nowrap;
   transition: none;
+  flex-shrink: 0;
 
   &:last-child {
     border-right: 1px solid var(--color-border);

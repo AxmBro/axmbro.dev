@@ -9,6 +9,7 @@
 .screenContent {
   gap: 4rem;
   width: 100%;
+  min-width: 0;
   max-width: var(--max-website-width);
   box-sizing: border-box;
   position: relative;

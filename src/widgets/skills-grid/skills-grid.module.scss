@@ -4,6 +4,7 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   width: 100%;
+  min-width: 0;
   border-top: 1px solid var(--color-border);
 
   @media (max-width: $breakpoint-wide) {
