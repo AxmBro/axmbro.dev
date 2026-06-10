@@ -8,8 +8,8 @@ A modern, high-performance portfolio website built with Next.js and React.
 - **Library:** React (19.2.4)
 - **Language:** TypeScript (5.x)
 - **Styling:** Sass
-- **Icons:** Lucide React, React Icons
-- **Content Processing:** react-markdown, gray-matter
+- **Icons:** React Icons
+- **Content Processing:** gray-matter
 
 ## Environment Variables
 
@@ -18,11 +18,11 @@ Create a `.env` file in the root of your project and add the following variables
 ```env
 # Email address used for sending contact form messages.
 # Where to get: Your standard email address (e.g., Gmail).
-EMAIL_USER=
+SMTP_USER=
 
 # App password for the email account to bypass 2FA.
 # Where to get: Google Account -> Security -> 2-Step Verification -> App Passwords.
-EMAIL_PASS=
+SMTP_PASSWORD=
 
 # Google Search Console verification token for SEO.
 # Where to get: Google Search Console -> Add Property -> HTML tag verification -> copy the 'content' value.
