@@ -9,17 +9,15 @@
   font-weight: 400;
   cursor: pointer;
   border-radius: 8px;
-  user-select: none;
   font-family: inherit;
   outline: none;
   white-space: nowrap;
   text-decoration: none !important;
   background-color: transparent;
   color: var(--color-neutral-100);
-  border: 1px solid var(--line-break-color);
+  border: 1px solid var(--color-border);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  transition: all 0.2s ease;
 
   &:hover {
     background-color: rgba(255, 255, 255, 0.1);
@@ -36,12 +34,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--accent-blue) !important;
+  color: var(--color-accent) !important;
   flex-shrink: 0;
 }
 
 .text {
   font-weight: 400;
-  line-height: var(--lh-p);
+  line-height: var(--line-height-p);
   font-size: var(--font-p);
 }

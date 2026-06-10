@@ -1,10 +1,9 @@
 import { notFound } from "next/navigation";
-import Link from "next/link";
 import { PROJECTS } from "@/shared/constants/data";
 import { ScreenContainer } from "@/shared/ui/screen-container";
 import { ScreenSection, ScreenSectionList } from "@/shared/ui/screen-section";
 import { Button } from "@/shared/ui/button";
-import { ImageSection } from "@/widgets/projects/image-section";
+import { ImageSection } from "@/entities/project";
 import { getProjectData } from "@/shared/lib/markdown";
 import styles from "./page.module.scss";
 
@@ -15,45 +14,20 @@ interface ProjectPageProps {
 export async function generateMetadata({ params }: ProjectPageProps) {
   const { projectId } = await params;
   const pageData = await getProjectData(projectId);
-  const project = PROJECTS.find(p => p.slug === projectId);
-  const title = pageData?.title || project?.title || projectId.replace(/_/g, " ");
-  const description = pageData?.description || project?.description || "";
-  const projectFolder = project?.slug || "thisweb";
-  const imagePath = project?.image
-    ? `/images/projects/${projectFolder}/${project.image}.png`
-    : "/images/ui/logo192.png";
-
+  const project = PROJECTS.find(p => p.url === projectId);
   return {
-    title,
-    description,
-    openGraph: {
-      title: `AxmBro | ${title}`,
-      description,
-      images: [
-        {
-          url: imagePath,
-          width: 1200,
-          height: 675,
-          alt: `${title} - Project Showcase`,
-        }
-      ]
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: `AxmBro | ${title}`,
-      description,
-      images: [imagePath],
-    }
+    title: pageData?.title || project?.title || projectId.replace(/_/g, " "),
+    description: pageData?.description || project?.description
   };
 }
 
 export function generateStaticParams() {
-  return PROJECTS.filter(p => p.slug).map(p => ({ projectId: p.slug! }));
+  return PROJECTS.filter(p => p.url).map(p => ({ projectId: p.url! }));
 }
 
 export default async function ProjectPage({ params }: ProjectPageProps) {
   const { projectId } = await params;
-  const project = PROJECTS.find(p => p.slug === projectId);
+  const project = PROJECTS.find(p => p.url === projectId);
   if (!project) notFound();
 
   const pageData = await getProjectData(projectId);
@@ -104,18 +78,19 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     <ScreenContainer>
       <ScreenSection
         title={pageData?.title || project.title}
+        headingLevel="h1"
         titleDescription={renderDescription(description)}
       >
         <div className={styles.buttons}>
           {buttonsToRender.map((btn, i) => {
             const variant = i === 0 ? "primary" : "secondary";
             return (
-              <Button
-                key={`btn-${i}`}
-                text={btn.text}
-                variant={variant}
-                href={btn.href}
-                external={btn.external}
+              <Button 
+                key={`btn-${i}`} 
+                text={btn.text} 
+                variant={variant} 
+                href={btn.href} 
+                external={btn.external} 
               />
             );
           })}
@@ -125,28 +100,21 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       {pageData?.credits && pageData.credits.length > 0 && (
         <ScreenSection
           title="Information"
-          titleDescription={pageData.creditsDescription ?? "Key contributors and development credits for this project."}
-          headingTag="h2"
+          titleDescription={pageData.creditsDescription ?? "People involved in creating this project."}
         >
           <ScreenSectionList
-            items={pageData.credits.map(c => {
-              if (!c.href) return { name: c.role, value: c.name };
-              const isExternal = c.href.startsWith("http");
-              return {
-                name: c.role,
-                value: isExternal ? (
-                  <a href={c.href} target="_blank" rel="noopener noreferrer" className={styles.creditLink}>{c.name}</a>
-                ) : (
-                  <Link href={c.href} className={styles.creditLink}>{c.name}</Link>
-                )
-              };
-            })}
+            items={pageData.credits.map(c => ({
+              name: c.role,
+              value: c.href
+                ? <a href={c.href} target="_blank" rel="noopener noreferrer" className={styles.creditLink}>{c.name}</a>
+                : c.name,
+            }))}
           />
         </ScreenSection>
       )}
 
       {pageData?.videos?.map((video, i) => (
-        <ScreenSection key={`video-${i}`} title={video.title} titleDescription={video.description} headingTag="h2">
+        <ScreenSection key={`video-${i}`} title={video.title} titleDescription={video.description}>
           <div className={styles.iframeContainer}>
             <iframe
               src={`https://www.youtube.com/embed/${video.youtubeId}`}

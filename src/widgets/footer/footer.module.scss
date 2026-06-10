@@ -1,8 +1,8 @@
 @use '../../shared/styles/variables' as *;
 
 .footerWrapper {
-  border-top: 1px solid var(--line-break-color);
-  background-color: var(--web-bg-color-1);
+  border-top: 1px solid var(--color-border);
+  background-color: var(--color-bg-primary);
   position: relative;
   overflow: hidden;
   width: 100%;
@@ -13,8 +13,8 @@
   max-width: var(--max-website-width);
   margin: 0 auto;
   position: relative;
-  border-left: 1px solid var(--line-break-color);
-  border-right: 1px solid var(--line-break-color);
+  border-left: 1px solid var(--color-border);
+  border-right: 1px solid var(--color-border);
 }
 
 .footerGrid {
@@ -38,8 +38,8 @@
   flex-direction: column;
   gap: 8px;
   padding: 2rem;
-  border-right: 1px solid var(--line-break-color);
-  border-bottom: 1px solid var(--line-break-color);
+  border-right: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
 
   &:last-child {
     border-right: none;
@@ -81,7 +81,7 @@
 
 .brandDesc {
   color: var(--color-neutral-400);
-  line-height: var(--lh-p2);
+  line-height: var(--line-height-p2);
   font-size: var(--font-p2);
   max-width: 300px;
 }

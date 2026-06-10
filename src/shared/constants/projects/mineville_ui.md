@@ -5,64 +5,66 @@ credits:
     name: AxmBro
     href: /contact
 imageSections:
-  - title: Server Forms
-    description: High-performance and visually stunning custom server-side interface forms designed from scratch to improve overall player navigation and aesthetic coherence.
+  - title: Server Interfaces
+    description: High-performance custom interface forms designed to enhance player navigation and server branding.
     items:
       - title: Project Overview
-        description: Overview of elements in the HUD and main server forms.
+        description: Overview of the main server dashboard and HUD elements.
         imageSrc: main
       - title: Orebits Shop
-        description: A simple and clean shop layout that is animated during opening and on hover, changing background color and scaling the icons.
+        description: A clean, animated shop interface with dynamic hover effects.
         imageSrc: orebits1
-      - title: Orebits Sold Out buttons
-        description: Compact buy confirm dialog showing a sold-out view, where clicking is disabled and the visual layout changes dynamically.
+      - title: Orebits Sold Out
+        description: Interactive purchase dialogs with visually distinct sold-out states.
         imageSrc: orebits2
       - title: Trade UI
-        description: An animated trading user interface where players can add multiple items and exchange them securely, featuring a clean design and smooth animations.
+        description: Secure, animated trading interface for seamless item exchange between players.
         imageSrc: trade1
-      - title: Trade UI Buttons
-        description: Dedicated offer setup box where you can click on your selected items to add or remove them from the offer.
+      - title: Trade Selection
+        description: Intuitive offer setup panel for managing trade items.
         imageSrc: trade2
-      - title: Trade UI in Usage
-        description: Real-time bilateral trade container grid in use on the live server. It performs exceptionally well under load, featuring a clean design and responsive hover text details.
+      - title: Live Trading
+        description: Bilateral trading system, highly optimized for server performance under heavy load.
         imageSrc: trade3
-      - title: Details UI
-        description: Simple profile summary page showing the given texture path, complete with back and next buttons to cycle through panels.
+      - title: Profile Details
+        description: Clean profile summary panels with easy-to-use navigation.
         imageSrc: details1
-      - title: Details UI
-        description: Custom detailed stats panel without buttons that occupies 100% of its container size and adapts dynamically to the container layout.
+      - title: Dynamic Stats
+        description: Statistics panel that automatically adapts to varying content.
         imageSrc: details2
-      - title: Inventory UI
-        description: A custom chest interface built on the vanilla layout in server forms, displaying item counts, stack indicators, and durability trackers.
+      - title: Custom Inventory
+        description: Upgraded inventory layout featuring enhanced item counts and durability tracking.
         imageSrc: inventory1
-      - title: Inventory UI
-        description: An optimized storage container search filter featuring dynamic sorting keys and responsive hover text details.
+      - title: Storage Filters
+        description: Advanced storage filtering system with dynamic sorting capabilities.
         imageSrc: inventory2
-  - title: Enhanced Server Interfaces
-    description: Fine-tuned default server interfaces where only the layout, styling, and visual structure have been customized.
+  - title: Enhanced Default Menus
+    description: Refined vanilla interfaces with improved layouts and visual consistency.
     items:
-      - title: Auction House Search Bar
-        description: Redesigned listing search interface featuring a customized search button.
+      - title: Auction Search
+        description: Redesigned auction house search with a modernized interface.
         imageSrc: auction1
-      - title: Auction House Categories
-        description: Simplified category sorting container where I added additional custom toggles that perfectly mock checked states.
+      - title: Category Sorting
+        description: Streamlined category sorting with custom toggle states.
         imageSrc: auction2
-  - title: Custom HUD Elements
-    description: Ground-up custom overlay elements designed for a better user experience and enhanced gameplay, built in a highly performant way.
+  - title: Custom HUD Modules
+    description: Highly performant custom overlay elements built for an enhanced gameplay experience.
     items:
       - title: Client-Side Minimap
-        description: Advanced minimap widget featuring 3 area chunk selection modes, running fully client-side with 0ms delay.
+        description: Advanced, zero-delay minimap widget running fully on the client side.
         imageSrc: hud4
-      - title: Client-Side Minimap in Usage
-        description: Full in-game view of the high-performance client-side minimap in active usage on the live production server, running exceptionally well.
+      - title: Minimap in Action
+        description: Live production view of the high-performance minimap in active use.
         imageSrc: hud5
-      - title: Armor HUD
-        description: Sleek overlay slot trackers showing durability bars, counts, and individual visibility toggle buttons.
+      - title: Equipment HUD
+        description: Sleek equipment tracker with durability bars and visibility toggles.
         imageSrc: hud2
-      - title: Minimalist Scoreboard
-        description: Custom compact scoreboard with server branding logo and scaled texts to prevent blocking the viewport.
+      - title: Minimal Scoreboard
+        description: Compact, unobtrusive server scoreboard with custom branding.
         imageSrc: hud1
-      - title: Custom HUD Title
-        description: An optimized custom title announcement layout that matches vanilla behavior 1:1, complete with smooth animations.
+      - title: Announcement Titles
+        description: Optimized server announcement titles with smooth vanilla-like animations.
         imageSrc: hud3
 ---
+
+Mineville UI is a comprehensive, high-performance interface overhaul designed specifically for Minecraft Bedrock servers. Built from the ground up to ensure seamless player navigation and aesthetic coherence, it features custom server forms, optimized inventory and trading systems, and advanced HUD elements. The project demonstrates a strong focus on UX/UI design, performance optimization under load, and cohesive branding for a professional gaming environment.

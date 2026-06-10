@@ -6,8 +6,8 @@ extraButtons:
     external: true
 credits:
   - role: UI system creator
-    name: AxmBro
-    href: /contact
+    name: Me - AxmBro
+    href: https://github.com/AxmBro
   - role: Everything rest
     name: Mush Co Team
     href: https://www.mushco.games/
@@ -32,16 +32,16 @@ imageSections:
     items:
       - title: Locations
         description: >-
-          Are fancy texts located on subtle leaf in top left corner to indicate
-          player location.
+          Styled location labels on a subtle leaf graphic in the top left
+          corner, indicating the player's current area.
         imageSrc: osba1
       - title: Closer look at Locations
-        description: Texts are immiediately updated without any animations.
+        description: Text updates instantly, without any transition animations.
         imageSrc: osba2
       - title: Coin Counter
         description: >-
-          Is located in top right corner around other counters. Numbers are
-          updated immiediately, whenever coin is animated based on situation.
+          Sits in the top right corner with the other counters. The number
+          updates instantly, and the coin animates based on the situation.
         imageSrc: osba3
       - title: Closer look at Coin Counter
         description: >-
@@ -86,8 +86,8 @@ imageSections:
         imageSrc: osba13
       - title: Custom Title
         description: >-
-          Needed to create because of high normal title usage and it's not
-          changable bahaviour which was needed.
+          Built because the default title was used heavily and its fixed
+          behaviour did not allow the control the project needed.
         imageSrc: osba14
       - title: Custom Title with Icons
         description: >-
@@ -100,7 +100,7 @@ imageSections:
           of default element.
         imageSrc: osba15
       - title: Custom Boss Bars
-        description: Which are beautiful! I think there is no need to explain them lol.
+        description: Fully custom boss bars built from scratch to match the map's style.
         imageSrc: osba21
       - title: Closer look at Custom Boss Bars
         description: >-
@@ -157,10 +157,10 @@ imageSections:
         imageSrc: osba28
 ---
 
-Is adventure map created with Slime Block the YouTuber. I got hired to implement fancy UI stuff to either HUD and server forms. This project was the most complex one I have ever worked on!
+A large-scale adventure map built with YouTuber Slime Block. I was commissioned to design and implement the entire custom UI, covering both the in-game HUD and the server forms. It remains one of the most complex projects I have worked on.
 
-My part here was to just add this entire UI logic. I didn't created any textures, but used provided and made them work with JsonUI system. It was a great experience to work with Mike and create that big and complex map! During working I learned more about team job and how simple tasks may actually be difficult. Over that time I must admit that it gave me great knowledge and battlefield to test my skills - it was my first bigger project to work on!
+My responsibility was the full UI layer. I did not create the textures myself; instead, I took the provided assets and built them into a working JsonUI system. Collaborating with the team on a project of this scale taught me a lot about teamwork and how seemingly simple tasks can become surprisingly difficult. It was my first large commission and a valuable opportunity to test my skills in a real production environment.
 
-Speaking of working, it was long adventure, because there were many custom HUD elements to add (From here I must thank art person - vemigvan, because all asstes were perfectly adjusted!) but also the most complex custom server form - the map form which took me some hours to create. At the end final effects of these all custom UIs are just beautiful :D
+The scope was significant: there were many custom HUD elements to build (full credit to the artist, vemigvan, whose assets were perfectly prepared), along with the most complex piece, the custom map form, which took considerable time to get right. The final result across all of these interfaces is something I am genuinely proud of.
 
-Currently this is completed map which is available to buy on minecraft marketplace. You can quickly check Mushco website or download pack using buttons under!
+The map is now complete and available on the Minecraft Marketplace. You can visit the Mush Co website or download the pack using the buttons below.

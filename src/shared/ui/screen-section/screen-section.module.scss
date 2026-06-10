@@ -2,8 +2,8 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  background-color: var(--web-bg-color-1);
-  border: 1px solid var(--line-break-color);
+  background-color: var(--color-bg-primary);
+  border: 1px solid var(--color-border);
 }
 
 .titleBlock {
@@ -21,7 +21,7 @@
 .title {
   color: var(--color-neutral-100);
   font-size: var(--font-h1);
-  font-weight: var(--weight-h1);
+  font-weight: 400;
   margin: 0;
   letter-spacing: 1px;
 }
@@ -29,10 +29,11 @@
 .description {
   color: var(--color-neutral-400);
   font-size: var(--font-p);
-  font-weight: var(--weight-p);
-  line-height: var(--lh-p);
+  font-weight: 400;
+  line-height: var(--line-height-p);
   margin-top: 0.5rem;
   max-width: 950px;
+  white-space: pre-line;
 
   strong {
     font-weight: 500;
@@ -56,7 +57,7 @@
 .listTitle {
   color: var(--color-neutral-100);
   font-size: var(--font-h2);
-  font-weight: var(--weight-h2);
+  font-weight: 400;
   letter-spacing: 0.5px;
   margin-bottom: 0.5rem;
 }
@@ -69,8 +70,8 @@
 .listItem {
   font-size: var(--font-p);
   color: var(--color-neutral-400);
-  font-weight: var(--weight-p);
-  line-height: var(--lh-p);
+  font-weight: 400;
+  line-height: var(--line-height-p);
 
   .listValue {
     color: var(--color-neutral-100);

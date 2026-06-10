@@ -2,11 +2,11 @@
 title: Custom Sky Overlay
 credits:
   - role: Creator
-    name: AxmBro
-    href: /contact
+    name: Me - AxmBro
+    href: https://github.com/AxmBro
 imageSections:
   - title: Sky Previews
-    description: Here is a list of custom sky overlays!
+    description: A selection of the custom sky overlays included in the pack.
     items:
       - title: Sky 1
         description: Custom sky overlay preview.
@@ -19,4 +19,4 @@ imageSections:
         imageSrc: custom_sky_overlay3
 ---
 
-Collection of 16 custom skies for Minecraft Bedrock Edition. Adjust them using subpacks.
+A collection of 16 custom sky overlays for Minecraft Bedrock Edition, switchable through subpacks without modifying any core files.

@@ -1,0 +1,75 @@
+.experienceVerticalGrid {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border-top: 1px solid var(--color-border);
+}
+
+.expVerticalItem {
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.expHeaderOneLine {
+  padding: 2rem 2rem 0 2rem;
+  margin-bottom: 0.5rem;
+  font-size: var(--font-h2);
+  font-weight: var(--weight-h2);
+  color: var(--color-neutral-100);
+  text-transform: uppercase;
+  line-height: 1.4;
+  border-bottom: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: .5rem;
+
+  .expDate {
+    color: var(--color-neutral-400);
+    font-size: var(--font-p2);
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: normal;
+  }
+}
+
+.expTextContent {
+  padding: 0 2rem 2rem 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.expListMinimal {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+
+  li {
+    font-size: var(--font-p);
+    color: var(--color-neutral-400);
+    line-height: 1.6;
+    display: flex;
+    gap: 0.5rem;
+
+    &::before {
+      content: '–';
+      color: var(--color-neutral-100);
+      font-weight: 400;
+    }
+  }
+}
+
+.expButtonsRow {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}

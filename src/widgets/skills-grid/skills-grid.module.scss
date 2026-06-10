@@ -1,0 +1,42 @@
+@use '../../shared/styles/variables' as *;
+
+.skillsGridConnected {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  width: 100%;
+  border-top: 1px solid var(--color-border);
+
+  @media (max-width: $breakpoint-wide) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.skillGroupItem {
+  padding: 2rem;
+  border-right: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+
+  &:nth-child(2n) {
+    border-right: none;
+  }
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:nth-child(2n-1):nth-last-child(2) {
+    border-bottom: none;
+  }
+
+  &:last-child:nth-child(2n-1) {
+    border-right: none;
+  }
+
+  @media (max-width: $breakpoint-wide) {
+    border-right: none;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}

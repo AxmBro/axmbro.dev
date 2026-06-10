@@ -1,12 +1,12 @@
 ---
-title: Bedrock Portal Ui
+title: Bedrock Portal UI
 credits:
   - role: Creator
-    name: AxmBro
-    href: /contact
+    name: Me - AxmBro
+    href: https://github.com/AxmBro
 imageSections:
-  - title: In-game Screnshots
-    description: Here is a list of in-game screenshots with short description!
+  - title: In-game Screenshots
+    description: In-game screenshots, each with a short description.
     items:
       - title: Server Explorer UI
         description: >-
@@ -17,12 +17,12 @@ imageSections:
         description: Entire UI is perfectly positioned and it cuts in proper edges.
         imageSrc: bpui2
       - title: Server Explorer without Scrolling
-        description: View without scrolling, simple and clean
+        description: View without scrolling, simple and clean.
         imageSrc: bpui3
       - title: Expandable 'More' Button
         description: >-
-          When clicked, it's showing the rest of navigation buttons. Also there
-          is subtle dark background behind ;)
+          When clicked, it reveals the remaining navigation buttons, with a
+          subtle dark background behind them.
         imageSrc: bpui4
       - title: Server Page UI
         description: >-
@@ -34,8 +34,8 @@ imageSections:
         imageSrc: bpui7
       - title: Custom Servers Scrolling
         description: >-
-          Again, perfectly cut scrolling panel, pay attention that texture of
-          scroll bar is changed to oreUI themed one 1:1
+          Another cleanly cut scrolling panel. The scroll bar texture is
+          reworked to match the OreUI theme.
         imageSrc: bpui8
       - title: Custom Modal Form
         description: >-

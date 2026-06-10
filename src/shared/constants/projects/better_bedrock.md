@@ -6,8 +6,8 @@ extraButtons:
     external: true
 credits:
   - role: Texture Packs
-    name: AxmBro
-    href: /contact
+    name: Me - AxmBro
+    href: https://github.com/AxmBro
   - role: Website & Other
     name: iDarkQ
     href: https://github.com/idarkQ
@@ -21,8 +21,8 @@ videos:
 imageSections:
   - title: Texture Pack
     description: >-
-      Here is a list of featues with brief description and the actual in-game
-      view!
+      A breakdown of the main features, each with a short description and the
+      actual in-game view.
     items:
       - title: Gameplay on Another Level
         description: >-
@@ -55,12 +55,10 @@ imageSections:
           later on your phone and finally on a friend's Console!
         imageSrc: bb6
   - title: Website
-    description: Which is open source! Navigate to github repository from the footer.
+    description: The official website is open source. The GitHub repository is linked in the footer.
     items:
       - title: Home
-        description: >-
-          Simple section with just important info, it needs to be improved for
-          sure :3
+        description: Simple landing section with the key information at a glance.
         imageSrc: web1
       - title: Downloads
         description: >-
@@ -79,7 +77,7 @@ imageSections:
           Better Bedrock and its features.
         imageSrc: web5
   - title: Mobile App (CANCELLED)
-    description: Here is a list of desktop website views with short description!
+    description: An overview of the planned mobile app, with a short description of each view.
     rowStyle: true
     items:
       - title: Home
@@ -97,12 +95,12 @@ imageSections:
         imageSrc: mobile3
   - title: Windows Client v1 (CANCELLED)
     description: >-
-      Here is a list of featues with brief description and the actual in-game
-      view!
+      A short overview of the planned desktop client, with a brief description
+      of each view.
     items:
       - title: Client Application
         description: Mod Menu in Better Bedrock style, currently with simple modules!
         imageSrc: client1
 ---
 
-Is a free, powerful and customizable texture pack for Minecraft Bedrock Edition! Enhance your gameplay with multiple features and almost 300 config options, supported on all platforms.
+Better Bedrock is a free, highly customizable UI and texture pack for Minecraft Bedrock Edition, with nearly 300 configuration options and full cross-platform support. It enhances gameplay with HUD mods, reworked menus, and a range of optional extension packs, and is backed by an open-source website I designed and co-developed.

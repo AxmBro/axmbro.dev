@@ -1,24 +1,23 @@
 ---
-title: Simple Ui
+title: Simple UI
 credits:
   - role: Creator
-    name: AxmBro
-    href: /contact
+    name: Me - AxmBro
+    href: https://github.com/AxmBro
 imageSections:
-  - title: In-game Screnshots
-    description: Here is a list of in-game screenshots with short description!
+  - title: In-game Screenshots
+    description: In-game screenshots, each with a short description.
     items:
       - title: Just Server Form
         description: >-
-          UI with title and description wrapped into section with darker
-          background that is on top. There is also stack of buttons under in
-          pretty flex style.
+          A title and description wrapped in a section with a darker background
+          at the top, with a stack of buttons below in a clean flex layout.
         imageSrc: simple_server_form1
       - title: Again Server Form
-        description: There is extra section named 'Leaderboard' with buttons in list style.
+        description: An extra 'Leaderboard' section with buttons in a list layout.
         imageSrc: simple_server_form2
       - title: Top Right Corner
-        description: And 2 buttons in top right, help with on-hover text and close button.
+        description: "Two buttons in the top right: a help button with on-hover text and a close button."
         imageSrc: simple_server_form3
 ---
 

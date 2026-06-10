@@ -1,16 +1,15 @@
 import { Metadata } from "next";
-import Link from "next/link";
 import { ScreenContainer } from "@/shared/ui/screen-container";
 import { ScreenSection } from "@/shared/ui/screen-section";
 import { Button } from "@/shared/ui/button";
-import { SkillsGrid } from "@/widgets/home/skills-grid/skills-grid";
-import { ExperienceGrid } from "@/widgets/home/experience-grid/experience-grid";
-import { HeroStats } from "@/widgets/home/hero-stats/hero-stats";
-import { PORTFOLIO_TEXTS } from "@/shared/constants/data";
+import { SkillsGrid } from "@/widgets/skills-grid";
+import { ExperienceGrid } from "@/widgets/experience-grid";
+import { HeroStats } from "@/widgets/hero-stats";
+import { HOME_PAGE_TEXTS } from "@/shared/constants/data";
 import styles from "./page.module.scss";
 
 export const metadata: Metadata = {
-  title: "Home",
+  title: "AxmBro | Home",
 };
 
 export default function HomePage() {
@@ -21,7 +20,8 @@ export default function HomePage() {
         id="aboutme"
         withChildrenPadding={false}
         title="About"
-        titleDescription={PORTFOLIO_TEXTS.about.description}
+        headingLevel="h1"
+        titleDescription={HOME_PAGE_TEXTS.about.description}
       >
         <div className={styles.buttonsGroup}>
           <Button text="Get in Touch" variant="primary" href="/contact" />
@@ -33,9 +33,8 @@ export default function HomePage() {
       <ScreenSection
         id="skills"
         title="Skills"
-        titleDescription={PORTFOLIO_TEXTS.skills.description}
+        titleDescription={HOME_PAGE_TEXTS.skills.description}
         withChildrenPadding={false}
-        headingTag="h2"
       >
         <SkillsGrid />
       </ScreenSection>
@@ -43,9 +42,8 @@ export default function HomePage() {
       <ScreenSection
         id="experience"
         title="Experience"
-        titleDescription={PORTFOLIO_TEXTS.experience.description}
+        titleDescription={HOME_PAGE_TEXTS.experience.description}
         withChildrenPadding={false}
-        headingTag="h2"
       >
         <ExperienceGrid />
       </ScreenSection>
@@ -53,12 +51,10 @@ export default function HomePage() {
       <ScreenSection
         id="contact"
         title="Contact"
-        titleDescription={PORTFOLIO_TEXTS.contact.description}
-        headingTag="h2"
-      >
+        titleDescription={HOME_PAGE_TEXTS.contact.description}>
         <div className={styles.buttonsGroupContact}>
           <Button text="Start a Project" variant="primary" href="/contact" />
-          <Button text="Browse My Work" variant="secondary" href="/projects" />
+          <Button text="View Portfolio" variant="secondary" href="/projects" />
         </div>
       </ScreenSection>
 

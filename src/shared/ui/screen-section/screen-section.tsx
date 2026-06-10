@@ -10,7 +10,7 @@ interface ScreenSectionProps {
   className?: string;
   withHeaderPadding?: boolean;
   withChildrenPadding?: boolean;
-  headingTag?: "h1" | "h2" | "h3";
+  headingLevel?: "h1" | "h2" | "h3";
 }
 
 export const ScreenSection = ({
@@ -22,8 +22,10 @@ export const ScreenSection = ({
   className,
   withHeaderPadding = true,
   withChildrenPadding = true,
-  headingTag: Heading = "h1"
+  headingLevel = "h2"
 }: ScreenSectionProps) => {
+  const HeadingTag = headingLevel;
+
   return (
     <section className={`${styles.section} ${className || ""}`} id={id} style={style}>
       {(title || titleDescription) && (
@@ -32,7 +34,7 @@ export const ScreenSection = ({
           ${withHeaderPadding ? styles.hasPadding : ''} 
           ${!children ? styles.noChildren : ''}
         `}>
-          {title && <Heading className={styles.title}>{title}</Heading>}
+          {title && <HeadingTag className={styles.title}>{title}</HeadingTag>}
           {titleDescription && <div className={styles.description}>{titleDescription}</div>}
         </div>
       )}
@@ -50,12 +52,14 @@ interface ScreenSectionListProps {
   items: { name: string; value?: React.ReactNode; valueColor?: string }[];
   style?: React.CSSProperties;
   className?: string;
+  headingLevel?: "h2" | "h3" | "h4";
 }
 
-export const ScreenSectionList = ({ title, items, style, className }: ScreenSectionListProps) => {
+export const ScreenSectionList = ({ title, items, style, className, headingLevel = "h3" }: ScreenSectionListProps) => {
+  const HeadingTag = headingLevel;
   return (
     <div className={`${styles.listContainer} ${className || ""}`} style={style}>
-      {title && <h2 className={styles.listTitle}>{title}</h2>}
+      {title && <HeadingTag className={styles.listTitle}>{title}</HeadingTag>}
       <div className={styles.listItemsWrapper}>
         {items.map((item, index) => (
           <div key={index} className={styles.listItem}>

@@ -6,8 +6,8 @@ extraButtons:
     external: true
 credits:
   - role: UI system creator
-    name: AxmBro
-    href: /contact
+    name: Me - AxmBro
+    href: https://github.com/AxmBro
   - role: Main creator
     name: Radium
     href: https://github.com/DirtyDan-555
@@ -26,9 +26,8 @@ videos:
 imageSections:
   - title: In-game Screenshots
     description: >-
-      Here is a list of in-game screenshots with short description! There were
-      already some elements, so here is only list that I created and added to
-      this map.
+      In-game screenshots of the elements I created and added to this map. Some
+      elements already existed, so this list covers only my own work.
     items:
       - title: Hotbars
         description: Classic vanilla layout has been changed to 3 sections.
@@ -47,14 +46,14 @@ imageSections:
         imageSrc: ra18
       - title: Rounds element
         description: >-
-          Is in bottom left corner. It shows current round number and has fancy
-          change animation when switching rounds - to match three bell sounds,
-          it flashes and changes color to dark red.
+          Sits in the bottom left corner, showing the current round number with
+          a smooth change animation when switching rounds. To match the three
+          bell sounds, it flashes and shifts color to dark red.
         imageSrc: ra6
       - title: Gun display
         description: >-
-          Is in bottom right corner. It shows current gun icon, name and ammo.
-          It has fancy slide animation when switching guns.
+          Sits in the bottom right corner, showing the current gun icon, name,
+          and ammo, with a smooth slide animation when switching guns.
         imageSrc: ra3
       - title: Low ammo indicator
         description: >-
@@ -63,8 +62,8 @@ imageSections:
         imageSrc: ra5
       - title: Power-Ups
         description: >-
-          It's anoter UI part above hotbars. If player colects any power-up,
-          then there are entry and exit animations on UI.
+          Another UI element above the hotbars. When the player collects a
+          power-up, it plays entry and exit animations.
         imageSrc: ra9
       - title: All Power-Ups
         description: >-
@@ -91,9 +90,8 @@ imageSections:
         imageSrc: ra16
   - title: Custom Inventory Screen
     description: >-
-      Simple layout that update sinstantly without any reloads. By using some
-      simple trick I managed to make it this way instead of using server forms
-      :D
+      A simple layout that updates instantly without any reloads. With a custom
+      technique I built it this way instead of relying on server forms.
     items:
       - title: Custom Inventory Screen
         description: >-
@@ -102,8 +100,8 @@ imageSections:
         imageSrc: ra22
 ---
 
-Is minecraft map for Bedrock Edition created by Radium and inspired by Call of Duty Zombie mode. I was hired to implement UI for this map, which includes various elements such as hotbars, gun display, rounds, power-ups, perks, crosshair notifications and more.
+A Minecraft Bedrock Edition map by Radium, inspired by Call of Duty's Zombies mode. I was commissioned to build the full UI, including hotbars, a gun display, round counters, power-ups, perks, crosshair notifications, and more.
 
-My part here was to just add this entire logic. I didn't created any textures, but used provided and made them work with JsonUI system.
+My responsibility was the entire UI logic. I did not create the textures myself; I took the provided assets and built them into a working JsonUI system.
 
-Generally this project is still in development and textures, icons, design and everything may be changed or slightly adjusted.
+The project is still in active development, so textures, icons, and design may change or be adjusted over time.

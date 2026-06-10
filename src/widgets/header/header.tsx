@@ -40,7 +40,7 @@ export const Header = () => {
           <div className={styles.headerContainer}>
             <Link className={styles.logoSection} onClick={handleLogoClick} href="/">
               <Image
-                src="/images/ui/logo192.png"
+                src="/icon192.png"
                 className={styles.logoImg}
                 alt="Axmbro Logo"
                 width={32}

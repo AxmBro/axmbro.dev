@@ -15,6 +15,7 @@ export default function PrivacyPolicyPage() {
       <ScreenSection
         id="privacyPolicy"
         title="Privacy Policy"
+        headingLevel="h1"
         titleDescription={
           <div className={styles.headerDescWrapper}>
             <p>This Privacy Policy outlines how your personal data is collected and processed.</p>
@@ -27,7 +28,7 @@ export default function PrivacyPolicyPage() {
           {PRIVACY_POLICY_ITEMS.map((item, index) => (
             <li key={index} className={styles.item}>
               <h2 className={styles.itemTitle}>{item.title}</h2>
-              <p className={styles.itemText}>{item.content}</p>
+              <p className={styles.itemText}>{item.text}</p>
             </li>
           ))}
           <li className={styles.item}>
