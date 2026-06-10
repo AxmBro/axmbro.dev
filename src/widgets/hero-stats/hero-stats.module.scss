@@ -1,0 +1,61 @@
+@use '../../shared/styles/variables' as *;
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 100%;
+  border-top: 1px solid var(--color-border);
+
+  @media (max-width: $breakpoint-md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 2rem 1rem;
+  
+  border-right: 1px solid var(--color-border);
+  
+  &:nth-child(3n) {
+    border-right: none;
+  }
+  
+  &:nth-child(n+4) {
+    border-top: 1px solid var(--color-border);
+  }
+
+  @media (max-width: $breakpoint-md) {
+    border-right: none;
+    border-bottom: none;
+
+    border-top: 1px solid var(--color-border);
+
+    &:first-child {
+      border-top: none;
+    }
+
+    &.empty {
+      display: none;
+    }
+  }
+}
+
+.value {
+  font-size: var(--font-h1);
+  font-weight: 400;
+  line-height: var(--line-height-h1);
+  color: var(--color-accent);
+  margin-bottom: 0.5rem;
+}
+
+.label {
+  font-size: var(--font-p2);
+  font-weight: 400;
+  line-height: var(--line-height-p2);
+  color: var(--color-neutral-400);
+  text-transform: uppercase;
+}

@@ -1,12 +1,12 @@
 ---
-title: Hugo Smp Ui
+title: Hugo SMP UI
 credits:
   - role: Creator
-    name: AxmBro
-    href: /contact
+    name: Me - AxmBro
+    href: https://github.com/AxmBro
 imageSections:
-  - title: In-game Screnshots
-    description: Here is a list of in-game screenshots!
+  - title: In-game Screenshots
+    description: In-game screenshots, each with a short description.
     items:
       - title: Java Styled Pause Menu
         description: Pause menu styled to match Java edition.

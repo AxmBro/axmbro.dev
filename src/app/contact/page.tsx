@@ -2,18 +2,20 @@ import { Metadata } from "next";
 import { ScreenContainer } from "@/shared/ui/screen-container";
 import { ScreenSection } from "@/shared/ui/screen-section";
 import { SocialLinkButton } from "@/shared/ui/social-link-button";
-import { SOCIAL_LINKS, PORTFOLIO_TEXTS } from "@/shared/constants/data";
-import { ContactForm } from "@/shared/ui/contact-form";
-import { FAQAccordion } from "@/shared/ui/faq-accordion";
+import { SOCIAL_LINK_BUTTONS, HOME_PAGE_TEXTS } from "@/shared/constants/data";
+import { ContactForm } from "@/features/contact-form";
+import { FAQAccordion } from "@/features/faq-accordion";
 import styles from "./page.module.scss";
 
 export const metadata: Metadata = {
   title: "Contact",
-  description: "Get in touch with AxmBro - reach out via social media or send a message directly.",
+  description:
+    "Get in touch with AxmBro for Minecraft Bedrock UI (JsonUI) commissions, web development, or B2B inquiries. Send a message directly or connect through social channels.",
   openGraph: {
     title: "AxmBro | Contact",
-    description: "Get in touch with AxmBro - reach out via social media or send a message directly.",
-    images: ["/images/ui/logo192.png"],
+    description:
+      "Get in touch with AxmBro for Minecraft Bedrock UI (JsonUI) commissions, web development, or B2B inquiries.",
+    images: ["/images/ui/og-image.png"],
   },
 };
 
@@ -26,10 +28,11 @@ export default function ContactPage() {
         id="contact"
         withChildrenPadding={true}
         title="Contact"
-        titleDescription={PORTFOLIO_TEXTS.contactPage.socials}
+        headingLevel="h1"
+        titleDescription={HOME_PAGE_TEXTS.contactPage.socials}
       >
         <div className={styles.socialList}>
-          {SOCIAL_LINKS.map((button, index) => (
+          {SOCIAL_LINK_BUTTONS.map((button, index) => (
             <SocialLinkButton key={index} link={button} />
           ))}
         </div>
@@ -38,8 +41,7 @@ export default function ContactPage() {
       <ScreenSection
         title="Send a message"
         withChildrenPadding={false}
-        titleDescription={PORTFOLIO_TEXTS.contactPage.form}
-        headingTag="h2"
+        titleDescription={HOME_PAGE_TEXTS.contactPage.form}
       >
         <ContactForm />
       </ScreenSection>
@@ -47,8 +49,7 @@ export default function ContactPage() {
       <ScreenSection
         title="Frequently Asked Questions"
         withChildrenPadding={false}
-        titleDescription="Got questions? Here are quick answers regarding commissions, billing, custom UI technical details, and general timelines."
-        headingTag="h2"
+        titleDescription="Quick answers about commissions, pricing, custom UI technical details, and typical timelines."
       >
         <FAQAccordion />
       </ScreenSection>

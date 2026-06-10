@@ -1,31 +1,31 @@
 ---
-title: Synergy Ui
+title: Synergy UI
 credits:
   - role: Creator
-    name: AxmBro
-    href: /contact
+    name: Me - AxmBro
+    href: https://github.com/AxmBro
 imageSections:
-  - title: In-game Screnshots
-    description: Here is a list of in-game screenshots with short description!
+  - title: In-game Screenshots
+    description: In-game screenshots, each with a short description.
     items:
       - title: Whole Element
         description: >-
-          Which is located in the left side of the scree. It's fully
-          customizable, you can set index, title, description, image and extra
-          synergies at the bottom!
+          Positioned on the left side of the screen. Fully customizable: you can
+          set the index, title, description, image, and extra synergies at the
+          bottom.
         imageSrc: synergy_ui1
       - title: Adjustable Length
         description: >-
-          You can always set the length of the elements, which you want to
-          display! But also, hide index if it's not needed.
+          You can set how many elements are displayed, and hide the index when
+          it is not needed.
         imageSrc: synergy_ui2
       - title: Just One Element
         description: >-
-          Use only one element with set the index if needed. Take a look how
-          background autmatically adjusts to the elements size.
+          Use a single element and set its index if needed. The background
+          automatically adjusts to the element's size.
         imageSrc: synergy_ui3
       - title: Example Usage
-        description: Finally here is one simple example :3
+        description: A simple example of the element in use.
         imageSrc: synergy_ui4
 ---
 

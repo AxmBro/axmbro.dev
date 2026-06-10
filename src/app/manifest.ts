@@ -2,17 +2,17 @@ import { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "AxmBro Portfolio",
+    name: "AxmBro | MCBE UI Architect & Developer",
     short_name: "AxmBro",
-    description: "Personal portfolio of AxmBro - Programmer, MCBE JsonUI Developer, Web Developer.",
+    description: "Computer Science student and UI Architect from Poland. Specializing in engineering custom Minecraft Bedrock interfaces (JsonUI) and modern web applications.",
     start_url: "/",
     display: "standalone",
-    background_color: "#0a0a0c",
-    theme_color: "#ffffff",
+    background_color: "#000000",
+    theme_color: "#000000",
     icons: [
       {
-        src: "/images/ui/logo192.png",
-        sizes: "192x192",
+        src: "/icon.png",
+        sizes: "512x512",
         type: "image/png",
       },
     ],

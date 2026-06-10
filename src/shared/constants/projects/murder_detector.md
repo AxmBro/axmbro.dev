@@ -1,21 +1,20 @@
 ---
-title: Murder Detector
+title: Murder Detector+
 credits:
   - role: Creator
-    name: AxmBro
-    href: /contact
+    name: Me - AxmBro
+    href: https://github.com/AxmBro
 videos:
   - title: Trailer
     description: >-
-      Take a look at this showcase trailer, which shows in details all key
-      elements for Better Bedrock v7.0+ These are texture pack, mobile client
-      and website.
+      Showcase trailer for Murder Detector+, demonstrating how the detection
+      indicators work in-game.
     youtubeId: CijS2JXf7BI
 imageSections:
   - title: Texture Pack
     description: >-
-      Here is a list of featues with brief description and the actual in-game
-      view!
+      A breakdown of the main features, each with a short description and the
+      actual in-game view.
     items:
       - title: Visible Sheriffs
         description: >-
@@ -38,15 +37,14 @@ imageSections:
           If you don't like current options you can change them in subpacks and
           use: 1. Only Icon 2. Default without colors 3. Default (icon + color)
         imageSrc: mm7
-      - title: IMPORTANT!
+      - title: Reliable Detection
         description: >-
-          Why this pack is better than other packs of this type? Because of
-          double check with cooldown to make SURE that player is murderer or
-          sheriff, this trick bypasses simple wEaPoN against such packs from
-          server - they give everybody sword at the start, then in packs all
-          players would have icon above their heads, this issue is fixed in this
-          pack! And it's available on every possible platform that can import
-          texture packs!
+          What sets this pack apart is a double-check system with a cooldown
+          that confirms whether a player is actually a murderer or sheriff. It
+          avoids a common countermeasure where servers hand every player a sword
+          at the start, which would otherwise mark everyone with an icon. The
+          pack resolves that issue and works on every platform that supports
+          texture packs.
         imageSrc: mm8
 ---
 

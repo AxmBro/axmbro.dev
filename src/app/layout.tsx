@@ -13,25 +13,38 @@ const lexend = Lexend({
 
 export const metadata: Metadata = {
   title: {
-    default: "AxmBro | Programmer",
+    default: "AxmBro | MCBE UI Architect & Developer",
     template: "AxmBro | %s",
   },
-  description: "Personal portfolio of AxmBro - Programmer, MCBE JsonUI Developer, Web Developer.",
+  description:
+    "Computer Science student and UI Architect from Poland. I engineer custom Minecraft Bedrock interfaces (JsonUI) for marketplace studios and build modern web applications.",
+  keywords: [
+    "AxmBro",
+    "Minecraft Bedrock",
+    "JsonUI",
+    "MCBE UI",
+    "UI Architect",
+    "custom HUD",
+    "server forms",
+    "web developer",
+    "Better Bedrock",
+  ],
   metadataBase: new URL("https://axmbro.dev"),
   verification: {
-    google: process.env.GOOGLE_SITE_VERIFICATION || "",
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || "",
   },
   openGraph: {
-    title: "AxmBro | Programmer",
-    description: "Personal portfolio of AxmBro - Programmer, MCBE JsonUI Developer, Web Developer.",
+    title: "AxmBro | MCBE UI Architect & Developer",
+    description:
+      "Computer Science student and UI Architect from Poland. I engineer custom Minecraft Bedrock interfaces (JsonUI) for marketplace studios and build modern web applications.",
     url: "https://axmbro.dev",
     siteName: "AxmBro",
     images: [
       {
-        url: "/images/ui/logo192.png",
-        width: 192,
-        height: 192,
-        alt: "AxmBro - Portfolio",
+        url: "/images/ui/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "AxmBro - MCBE UI Architect & Developer Portfolio",
       },
     ],
     locale: "en_US",
@@ -39,9 +52,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "AxmBro | Programmer",
-    description: "Personal portfolio of AxmBro - Programmer, MCBE JsonUI Developer, Web Developer.",
-    images: ["/images/ui/logo192.png"],
+    title: "AxmBro | MCBE UI Architect & Developer",
+    description:
+      "Computer Science student and UI Architect from Poland. I engineer custom Minecraft Bedrock interfaces (JsonUI) and build modern web applications.",
+    images: ["/images/ui/og-image.png"],
     creator: "@AxmBro",
   },
   robots: {
@@ -51,36 +65,9 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "AxmBro",
-    "url": "https://axmbro.dev",
-    "image": "https://axmbro.dev/images/ui/logo192.png",
-    "sameAs": [
-      "https://github.com/AxmBro",
-      "https://www.youtube.com/@axmbro",
-      "https://www.youtube.com/@axmbro2",
-      "https://twitter.com/AxmBro",
-      "https://www.instagram.com/axmbro_"
-    ],
-    "jobTitle": "Minecraft Bedrock UI Developer & Web Developer",
-    "knowsAbout": [
-      "Minecraft Bedrock Edition",
-      "JsonUI",
-      "React",
-      "TypeScript",
-      "Web Development"
-    ]
-  };
-
   return (
     <html lang="en" className={lexend.variable}>
       <body>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
         <Header />
         <div className="main-layout">
           <main className="main-content">

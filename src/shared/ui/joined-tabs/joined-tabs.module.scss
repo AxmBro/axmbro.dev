@@ -13,17 +13,16 @@
 
 .tabButton {
   background: transparent;
-  border: 1px solid var(--line-break-color);
+  border: 1px solid var(--color-border);
   border-right: none;
   color: var(--color-neutral-400);
   font-family: inherit;
   cursor: pointer;
   white-space: nowrap;
-  user-select: none;
   transition: none;
 
   &:last-child {
-    border-right: 1px solid var(--line-break-color);
+    border-right: 1px solid var(--color-border);
   }
 
   &:hover,

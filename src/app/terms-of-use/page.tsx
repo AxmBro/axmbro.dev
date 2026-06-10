@@ -15,6 +15,7 @@ export default function TermsOfUsePage() {
       <ScreenSection
         id="termsOfUse"
         title="Terms of Use"
+        headingLevel="h1"
         titleDescription={
           <div className={styles.headerDescWrapper}>
             <p>By accessing this website (axmbro.dev), you agree to these Terms. If you disagree, do not use the site.</p>
@@ -27,7 +28,7 @@ export default function TermsOfUsePage() {
           {TERMS_OF_USE_ITEMS.map((item, index) => (
             <li key={index} className={styles.item}>
               <h2 className={styles.itemTitle}>{item.title}</h2>
-              <p className={styles.itemText}>{item.content}</p>
+              <p className={styles.itemText}>{item.text}</p>
             </li>
           ))}
           <li className={styles.item}>

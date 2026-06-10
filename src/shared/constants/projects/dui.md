@@ -5,22 +5,24 @@ credits:
     name: AxmBro
     href: /contact
 imageSections:
-  - title: In-game Screenshots
-    description: High-resolution screenshots showcasing the perfectly aligned UI elements, smooth dark theme layouts, and dynamic hover text details.
+  - title: Interface Showcase
+    description: A showcase of perfectly aligned UI elements, smooth dark theme layouts, and interactive tooltips.
     items:
       - title: Navigation Hub
-        description: A sleek, minimalist in-game dashboard offering quick access to gamemodes, settings, cosmetics, and player stats.
+        description: Minimalist in-game dashboard for quick access to core features, gamemodes, and settings.
         imageSrc: dui1
-      - title: Dynamic Hover Tooltips
-        description: Context-aware custom tooltip overlays providing instant, smooth visual guidance upon hovering over menu categories.
+      - title: Dynamic Tooltips
+        description: Context-aware overlay tooltips providing instant, smooth visual feedback upon hovering.
         imageSrc: dui2
-      - title: Gamemodes Lobby Selector
-        description: A clean, vertically scrollable game lobby selector designed for seamless navigation between custom server modules.
+      - title: Lobby Selector
+        description: Clean, scrollable game lobby selector for seamless server navigation.
         imageSrc: dui3
       - title: Leaderboard Tooltip
-        description: Advanced multi-line dynamic tooltips capable of displaying text.
+        description: Advanced multi-line tooltips designed for dynamic data rendering.
         imageSrc: dui4
       - title: Custom Modal Form
-        description: A simple default modal form where only the visual design and layout have been customized.
+        description: Refined modal dialogues prioritizing visual clarity and an improved user experience.
         imageSrc: dui5
 ---
+
+DUI (Dark User Interface) is a sleek, minimalist in-game dashboard and interface suite crafted for Minecraft Bedrock Edition. Focusing on a clean, modern aesthetic with smooth dark theme layouts, it provides players with an intuitive navigation hub for gamemodes, settings, and player stats. The project highlights expertise in precision UI alignment, dynamic hover tooltips, and creating scalable, user-centric interface modules.

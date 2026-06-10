@@ -1,12 +1,12 @@
 ---
-title: Hometree Ui
+title: Hometree UI
 credits:
   - role: Creator
-    name: AxmBro
-    href: /contact
+    name: Me - AxmBro
+    href: https://github.com/AxmBro
 imageSections:
-  - title: In-game Screnshots
-    description: Here is a list of in-game screenshots with short description!
+  - title: In-game Screenshots
+    description: In-game screenshots, each with a short description.
     items:
       - title: Server Form
         description: Colorful UI with grid layout and navigation buttons.

@@ -22,7 +22,7 @@
   padding-bottom: 56.25%;
   height: 0;
   overflow: hidden;
-  border: 1px solid var(--line-break-color);
+  border: 1px solid var(--color-border);
   background: rgba(255, 255, 255, 0.02);
 
   iframe {
@@ -45,8 +45,8 @@
 .descriptionParagraph {
   color: var(--color-neutral-400);
   font-size: var(--font-p);
-  font-weight: var(--weight-p);
-  line-height: var(--lh-p);
+  font-weight: 400;
+  line-height: var(--line-height-p);
   max-width: 950px;
   margin: 0;
 

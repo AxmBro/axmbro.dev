@@ -1,89 +1,70 @@
 # axmbro.dev | Portfolio Website
 
-A modern, high-performance developer portfolio built with Next.js 16 (App Router), React 19, and SCSS Modules. This project was fully migrated from a legacy Vite static build to a modern server-optimized architecture to improve SEO, leverage React Server Components, and support dynamic, markdown-driven project pages.
+A modern, high-performance portfolio website built with Next.js and React.
 
----
+## Tech Stack
 
-## 🚀 Key Features
+- **Framework:** Next.js (16.2.6)
+- **Library:** React (19.2.4)
+- **Language:** TypeScript (5.x)
+- **Styling:** Sass
+- **Icons:** Lucide React, React Icons
+- **Content Processing:** react-markdown, gray-matter
 
-- **Next.js 16 & React Server Components**: High-performance hybrid rendering combining pre-rendered static generation (SSG) with React Server Components (RSC) to maximize load speed and indexability.
-- **Markdown-Driven Case Studies**: Project pages are loaded dynamically from structured Markdown files under `src/shared/constants/projects/`. Metadata (frontmatter) is parsed via `gray-matter` and rendered using `react-markdown`.
-- **Custom SCSS Design System**: Zero-dependency layout using SCSS Modules, leveraging Vanilla CSS custom properties for global variables, fluid typography tokens, and responsive break-points.
-- **Secure Route Handlers**: Secure contact form processing built on Next.js API Routes and integration with `nodemailer` for email deliveries.
-- **Advanced SEO Integration**: Dynamically generated sitemaps, robots.txt, custom manifest.webmanifest, metadata profiles, and clean semantic markup complying with search engine web standards.
-- **Modern ESLint 9 Flat Config**: Quality assurance and code hygiene powered by the newest flat configuration standard.
+## Environment Variables
 
----
+Create a `.env` file in the root of your project and add the following variables. Here is what they are for and where to get them:
 
-## 🛠️ Tech Stack
+```env
+# Email address used for sending contact form messages.
+# Where to get: Your standard email address (e.g., Gmail).
+EMAIL_USER=
 
-| Technology | Purpose | Description |
-| :--- | :--- | :--- |
-| **Next.js 16** | Framework | React App Router framework for static generation, routing, and API endpoints. |
-| **React 19** | Core Library | UI construction with Server Components and advanced hooks. |
-| **TypeScript** | Language | Type safety and enhanced IDE autocompletion across the codebase. |
-| **Sass / SCSS Modules** | Styling | Fully scoped, module-level styles with complex nesting and variables. |
-| **gray-matter** | Data Parser | Extractor of frontmatter metadata from Markdown project sheets. |
-| **react-markdown** | Renderer | Markdown interpreter rendering safe HTML components dynamically. |
-| **nodemailer** | API Mailer | Direct integration with SMTP servers for reliable message delivery. |
+# App password for the email account to bypass 2FA.
+# Where to get: Google Account -> Security -> 2-Step Verification -> App Passwords.
+EMAIL_PASS=
 
----
+# Google Search Console verification token for SEO.
+# Where to get: Google Search Console -> Add Property -> HTML tag verification -> copy the 'content' value.
+NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION=
 
-## 📁 Project Architecture
+# API key for fetching YouTube videos or stats.
+# Where to get: Google Cloud Console -> Enable "YouTube Data API v3" -> Credentials -> Create API Key.
+YOUTUBE_API_KEY=
+```
 
-The directory layout adheres to a highly structured modular design system, separating features, widgets, and shared logic:
+## Project Structure
+
+The project follows a modular architecture (Feature-Sliced Design inspired):
 
 ```text
 src/
-├── app/                  # Next.js App Router (Pages, layouts, dynamic routes, API endpoints)
-│   ├── api/              # Secure backend mailer API route
-│   ├── projects/         # Portfolio lists and dynamic project parameters ([projectId])
-│   ├── globals.scss      # Base design tokens, resets, and layout guidelines
-│   └── layout.tsx        # Global HTML5 shell & Metadata configurations
-├── shared/               # Reusable utility libraries, typings, and constants
-│   ├── constants/        # Global static text objects and Markdown raw data sheets
-│   ├── lib/              # Markdown loading operations and general helpers
-│   ├── styles/           # Global SCSS variables and shared tokens
-│   ├── types/            # TypeScript type declaration files
-│   └── ui/               # Modular UI base components (Button, Input, Accordion, Tabs)
-└── widgets/              # Page-level complex assemblies
-    ├── footer/           # Animated global footer component
-    ├── header/           # Sticky navigation header with mobile anchor configurations
-    ├── home/             # Home page assemblies (SkillsGrid, ExperienceGrid, HeroStats)
-    └── projects/         # Project case-study assemblies (ImageSection, ProjectCard)
+├── app/                  # Next.js App Router pages and layouts
+├── entities/             # Business entities (e.g., project, youtube)
+├── features/             # User interactions and features (e.g., contact-form, faq-accordion)
+├── shared/               # Reusable UI components, constants, and libs
+└── widgets/              # Complex UI blocks combining entities and features (header, footer, etc.)
 ```
 
----
+## Quick Start
 
-## 💻 Local Development
-
-### 1. Prerequisites
-- Node.js (v18.x or newer recommended)
-- Package Manager: `yarn`
-
-### 2. Installation
-Clone the repository and install the dependencies:
+1. Install dependencies:
 ```bash
 yarn install
 ```
 
-### 3. Environment Setup
-Create a `.env` file in the root directory and supply your Gmail and search console verification configurations:
-```env
-SMTP_USER=your-gmail-address@gmail.com
-SMTP_PASSWORD=your-gmail-app-password
-GOOGLE_SITE_VERIFICATION=your-google-verification-hash
-```
-
-### 4. Running the Development Server
-Launch the local Next.js compiler with Turbopack:
+2. Run the development server:
 ```bash
 yarn dev
 ```
-Open [http://localhost:3000](http://localhost:3000) inside your browser.
 
-### 5. Production Compilation
-To build and optimize the application for production deployment:
+Open [http://localhost:3000](http://localhost:3000) in your browser to see the result.
+
+## Production Build
+
+To build and start the application for production:
+
 ```bash
 yarn build
+yarn start
 ```

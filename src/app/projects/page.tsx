@@ -1,16 +1,18 @@
 import { Metadata } from "next";
 import { ScreenContainer } from "@/shared/ui/screen-container";
 import { ScreenSection } from "@/shared/ui/screen-section";
-import { PROJECTS, PORTFOLIO_TEXTS } from "@/shared/constants/data";
-import { ProjectsPageClient } from "./projects-page-client";
+import { PROJECTS, HOME_PAGE_TEXTS } from "@/shared/constants/data";
+import { ProjectsBoard } from "@/widgets/projects-board";
 
 export const metadata: Metadata = {
   title: "Projects",
-  description: "Browse AxmBro's portfolio of projects including Minecraft Bedrock UI mods, web development, and more.",
+  description:
+    "Portfolio of AxmBro - custom Minecraft Bedrock interfaces (JsonUI) for marketplace studios, commissioned HUDs and server forms, and web development projects.",
   openGraph: {
     title: "AxmBro | Projects",
-    description: "Browse AxmBro's portfolio of projects including Minecraft Bedrock UI mods, web development, and more.",
-    images: ["/images/ui/logo192.png"],
+    description:
+      "Portfolio of AxmBro - custom Minecraft Bedrock interfaces (JsonUI) for marketplace studios, commissioned HUDs and server forms, and web development projects.",
+    images: ["/icon.png"],
   },
 };
 
@@ -19,10 +21,11 @@ export default function ProjectsPage() {
     <ScreenContainer>
       <ScreenSection
         title="Projects"
-        titleDescription={PORTFOLIO_TEXTS.projectsPage.description(PROJECTS.length)}
+        headingLevel="h1"
+        titleDescription={HOME_PAGE_TEXTS.projectsPage.description(PROJECTS.length)}
         withChildrenPadding={false}
       >
-        <ProjectsPageClient />
+        <ProjectsBoard />
       </ScreenSection>
     </ScreenContainer>
   );

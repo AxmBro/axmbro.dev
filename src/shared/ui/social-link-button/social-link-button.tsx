@@ -1,7 +1,6 @@
 "use client";
 
-import { FaGithub, FaDiscord, FaYoutube, FaXTwitter, FaInstagram } from "react-icons/fa6";
-import { Mail } from "lucide-react";
+import { FaGithub, FaDiscord, FaYoutube, FaXTwitter, FaInstagram, FaEnvelope } from "react-icons/fa6";
 import type { SocialLink } from "@/shared/constants/data";
 import styles from "./social-link-button.module.scss";
 
@@ -11,7 +10,7 @@ const ICON_MAP = {
   youtube: FaYoutube,
   twitter: FaXTwitter,
   instagram: FaInstagram,
-  mail: Mail,
+  mail: FaEnvelope,
 } as const;
 
 interface SocialLinkButtonProps {
@@ -19,7 +18,7 @@ interface SocialLinkButtonProps {
 }
 
 export const SocialLinkButton = ({ link }: SocialLinkButtonProps) => {
-  const IconComponent = ICON_MAP[link.icon];
+  const IconComponent = ICON_MAP[link.iconId];
 
   return (
     <a
