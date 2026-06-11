@@ -1,6 +1,7 @@
 import styles from './hero-stats.module.scss';
 import { getYouTubeStats, formatStatValue } from '@/entities/youtube/api/youtube';
 import { getBaseHeroStats } from './lib/get-hero-stats';
+import { AnimatedStat } from './animated-stat';
 
 export const HeroStats = async () => {
   const ytStats = await getYouTubeStats();
@@ -26,7 +27,7 @@ export const HeroStats = async () => {
     <div className={styles.container}>
       {stats.map(({ value, label }) => (
         <div key={label} className={styles.stat}>
-          <span className={styles.value}>{value}</span>
+          <AnimatedStat className={styles.value} value={value} />
           <span className={styles.label}>{label}</span>
         </div>
       ))}
