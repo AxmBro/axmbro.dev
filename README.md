@@ -49,7 +49,6 @@ yarn dev
 
 Navigate to [http://localhost:3000](http://localhost:3000) in your browser to view the application.
 
-
 ## 📁 Project Structure
 
 This repository is organized using principles inspired by **Feature-Sliced Design (FSD)**. This methodology ensures the codebase remains scalable, predictable, and easy to navigate:
@@ -65,7 +64,7 @@ src/
 
 ## 📦 Tech Stack
 
-- **[Next.js](https://nextjs.org/)** – Component-based UI library.
+- **[Next.js](https://nextjs.org/)** – React framework for production (App Router).
 - **[React](https://react.dev/)** – Core library for building the user interface.
 - **[TypeScript](https://www.typescriptlang.org/)** – Strongly typed JavaScript for safer, scalable code.
 - **[Sass](https://sass-lang.com/)** – Advanced CSS extension language for modular styling.
@@ -74,6 +73,6 @@ src/
 - **[gray-matter](https://github.com/jonschlinkert/gray-matter)** – Parser for extracting front-matter from Markdown files.
 - **[Yarn](https://yarnpkg.com/)** – Fast and reliable package manager.
 
--
+---
 
 Thanks for checking out my code! If you like what you see, feel free to leave a star ⭐.
