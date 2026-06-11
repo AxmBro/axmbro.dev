@@ -1,41 +1,58 @@
-# axmbro.dev | Portfolio Website
+# 🚀 Portfolio Website | axmbro.dev
 
-A modern, high-performance portfolio website built with Next.js and React.
+A digital showcase of my projects, skills, and professional experience. Explore the live site here: **[axmbro.dev](https://axmbro.dev)**
 
-## Tech Stack
+This repository contains the source code for my portfolio, crafted to deliver a fast, accessible, and visually striking user experience using **Next.js** and **Sass**.
 
-- **Framework:** Next.js (16.2.6)
-- **Library:** React (19.2.4)
-- **Language:** TypeScript (5.x)
-- **Styling:** Sass
-- **Icons:** React Icons
-- **Content Processing:** gray-matter
+## ✨ Features
 
-## Environment Variables
+- **Modern Architecture:** Built on top of the Next.js App Router for optimal performance and Server Components.
+- **Maintainable Styling:** Component-scoped styling utilizing Sass Modules.
+- **Integrated Communications:** Fully functional contact form powered by Nodemailer.
+- **Markdown-Driven:** Content management and parsing handled seamlessly via `gray-matter`.
 
-Create a `.env` file in the root of your project and add the following variables. Here is what they are for and where to get them:
+## 🔐 Environment Variables
+
+To enable full functionality (such as the contact form and YouTube integrations), you must configure the environment variables. Create a `.env` file at the root of the project and populate it with the following:
 
 ```env
-# Email address used for sending contact form messages.
-# Where to get: Your standard email address (e.g., Gmail).
+# Email account used to dispatch contact form submissions
+# Source: Your standard email provider (e.g., Gmail)
 SMTP_USER=
 
-# App password for the email account to bypass 2FA.
-# Where to get: Google Account -> Security -> 2-Step Verification -> App Passwords.
+# App password for the email account (bypasses 2FA)
+# Source: Google Account -> Security -> 2-Step Verification -> App Passwords
 SMTP_PASSWORD=
 
-# Google Search Console verification token for SEO.
-# Where to get: Google Search Console -> Add Property -> HTML tag verification -> copy the 'content' value.
+# Verification token for Google Search Console (SEO)
+# Source: Google Search Console -> Add Property -> HTML tag verification
 NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION=
 
-# API key for fetching YouTube videos or stats.
-# Where to get: Google Cloud Console -> Enable "YouTube Data API v3" -> Credentials -> Create API Key.
+# API key to fetch YouTube video data or statistics
+# Source: Google Cloud Console -> Enable "YouTube Data API v3" -> Credentials
 YOUTUBE_API_KEY=
 ```
 
-## Project Structure
+## 🛠️ Quick Start
 
-The project follows a modular architecture (Feature-Sliced Design inspired):
+First, clone the repository and install the required dependencies:
+
+```bash
+yarn install
+```
+
+Start the local development server:
+
+```bash
+yarn dev
+```
+
+Navigate to [http://localhost:3000](http://localhost:3000) in your browser to view the application.
+
+
+## 📁 Project Structure
+
+This repository is organized using principles inspired by **Feature-Sliced Design (FSD)**. This methodology ensures the codebase remains scalable, predictable, and easy to navigate:
 
 ```text
 src/
@@ -46,25 +63,17 @@ src/
 └── widgets/              # Complex UI blocks combining entities and features (header, footer, etc.)
 ```
 
-## Quick Start
+## 📦 Tech Stack
 
-1. Install dependencies:
-```bash
-yarn install
-```
+- **[Next.js](https://nextjs.org/)** – Component-based UI library.
+- **[React](https://react.dev/)** – Core library for building the user interface.
+- **[TypeScript](https://www.typescriptlang.org/)** – Strongly typed JavaScript for safer, scalable code.
+- **[Sass](https://sass-lang.com/)** – Advanced CSS extension language for modular styling.
+- **[Nodemailer](https://nodemailer.com/)** – Module for Node.js apps to allow easy email sending.
+- **[React Icons](https://react-icons.github.io/react-icons/)** – Customizable SVG icons.
+- **[gray-matter](https://github.com/jonschlinkert/gray-matter)** – Parser for extracting front-matter from Markdown files.
+- **[Yarn](https://yarnpkg.com/)** – Fast and reliable package manager.
 
-2. Run the development server:
-```bash
-yarn dev
-```
+-
 
-Open [http://localhost:3000](http://localhost:3000) in your browser to see the result.
-
-## Production Build
-
-To build and start the application for production:
-
-```bash
-yarn build
-yarn start
-```
+Thanks for checking out my code! If you like what you see, feel free to leave a star ⭐.
