@@ -1,14 +1,35 @@
 import Link from "next/link";
 import Image from "next/image";
-import { PROJECTS, SOCIAL_LINK_BUTTONS, HOME_PAGE_TEXTS } from "@/shared/constants/data";
+import { FaGithub, FaDiscord, FaYoutube, FaInstagram, FaEnvelope } from "react-icons/fa6";
+import { SiNextdotjs } from "react-icons/si";
+import { SOCIAL_LINK_BUTTONS, HOME_PAGE_TEXTS, NAV_LINKS } from "@/shared/constants/data";
+import { LocalTime } from "./local-time";
+import { BackToTop } from "./back-to-top";
 import styles from "./footer.module.scss";
 
-export const Footer = () => {
-  const featuredProjects = PROJECTS.filter(p => p.star).slice(0, 4);
-  const github = SOCIAL_LINK_BUTTONS.find(s => s.iconId === "github");
-  const discord = SOCIAL_LINK_BUTTONS.find(s => s.iconId === "discord" && s.text === "axmbro");
-  const email = SOCIAL_LINK_BUTTONS.find(s => s.iconId === "mail");
+// We define the exact order of social icons we want to display in the footer
+const FOOTER_SOCIALS = [
+  { id: "github", icon: FaGithub, label: "GitHub" },
+  { id: "mail", icon: FaEnvelope, label: "Email" },
+  { id: "discord", textMatcher: "Discord (DM)", icon: FaDiscord, label: "Discord" },
+  { id: "youtube", textMatcher: "YouTube", icon: FaYoutube, label: "YouTube" },
+  { id: "betterbedrock", icon: null, label: "Better Bedrock Profile" }, // Handled specially below
+  { id: "instagram", icon: FaInstagram, label: "Instagram" },
+];
 
+const CATEGORY_LINKS = [
+  { href: "/projects", label: "View All Projects", isViewAll: true },
+  { href: "/projects?tag=JsonUI", label: "JsonUI & HUDs" },
+  { href: "/projects?tag=Server+Form", label: "Server Forms" },
+  { href: "/projects?tag=Web", label: "Web Development" },
+];
+
+const LEGAL_LINKS = [
+  { href: "/privacy-policy", label: "Privacy Policy" },
+  { href: "/terms-of-use", label: "Terms of Use" },
+];
+
+export const Footer = () => {
   return (
     <footer className={styles.footerWrapper}>
       <div className={styles.footerScreenContainer}>
@@ -27,25 +48,76 @@ export const Footer = () => {
             <p className={styles.brandDesc}>
               {HOME_PAGE_TEXTS.footer.description}
             </p>
+            <LocalTime />
+            <div className={styles.socialIconsRow}>
+              {FOOTER_SOCIALS.map((social) => {
+                const linkData = SOCIAL_LINK_BUTTONS.find(
+                  (s) => s.iconId === social.id && (!social.textMatcher || s.text === social.textMatcher)
+                );
+                
+                if (!linkData) return null;
+
+                if (social.id === "betterbedrock") {
+                  return (
+                    <a key={social.id} href={linkData.href} target="_blank" rel="noopener noreferrer" aria-label={social.label}>
+                      <span 
+                        style={{ 
+                          display: 'inline-block',
+                          width: 22, 
+                          height: 22, 
+                          backgroundColor: 'currentColor',
+                          WebkitMaskImage: 'url(/images/bb-logo.png)',
+                          WebkitMaskSize: 'contain',
+                          WebkitMaskRepeat: 'no-repeat',
+                          WebkitMaskPosition: 'center',
+                          maskImage: 'url(/images/bb-logo.png)',
+                          maskSize: 'contain',
+                          maskRepeat: 'no-repeat',
+                          maskPosition: 'center',
+                        }} 
+                      />
+                    </a>
+                  );
+                }
+
+                const Icon = social.icon!;
+                return (
+                  <a 
+                    key={social.id} 
+                    href={linkData.href} 
+                    target={social.id === "mail" ? undefined : "_blank"} 
+                    rel={social.id === "mail" ? undefined : "noopener noreferrer"} 
+                    aria-label={social.label}
+                  >
+                    <Icon size={22} />
+                  </a>
+                );
+              })}
+            </div>
           </div>
 
           <div className={styles.footerColumn}>
             <h2 className={styles.columnTitle}>Navigation</h2>
             <nav className={styles.columnLinks}>
-              <Link href="/">Home</Link>
-              <Link href="/projects">Projects</Link>
-              <Link href="/contact">Contact</Link>
-              <Link href="/privacy-policy">Privacy Policy</Link>
-              <Link href="/terms-of-use">Terms of Use</Link>
+              {NAV_LINKS.map((link) => (
+                <Link key={link.href} href={link.href}>{link.text}</Link>
+              ))}
+              {LEGAL_LINKS.map((link) => (
+                <Link key={link.href} href={link.href}>{link.label}</Link>
+              ))}
             </nav>
           </div>
 
           <div className={styles.footerColumn}>
-            <h2 className={styles.columnTitle}>Featured</h2>
+            <h2 className={styles.columnTitle}>Categories</h2>
             <nav className={styles.columnLinks}>
-              {featuredProjects.map((p) => (
-                <Link key={p.url || p.title} href={p.url ? `/projects/${p.url}` : "/projects"}>
-                  {p.title}
+              {CATEGORY_LINKS.map((link) => (
+                <Link 
+                  key={link.label} 
+                  href={link.href} 
+                  className={link.isViewAll ? styles.viewAllLink : undefined}
+                >
+                  {link.label}
                 </Link>
               ))}
             </nav>
@@ -53,18 +125,66 @@ export const Footer = () => {
 
           <div className={styles.footerColumn}>
             <h2 className={styles.columnTitle}>Contact</h2>
-            <nav className={styles.columnLinks}>
+            <nav className={`${styles.columnLinks} ${styles.contactLinks}`}>
               <Link href="/contact">Contact Form</Link>
-              {github && <a href={github.href} target="_blank" rel="noopener noreferrer">GitHub</a>}
-              {discord && <a href={discord.href} target="_blank" rel="noopener noreferrer">Discord</a>}
-              {email && <a href={email.href}>axmbro@gmail.com</a>}
+              {FOOTER_SOCIALS.filter(s => ["github", "discord", "mail"].includes(s.id)).map((social) => {
+                const linkData = SOCIAL_LINK_BUTTONS.find(
+                  (s) => s.iconId === social.id && (!social.textMatcher || s.text === social.textMatcher)
+                );
+                if (!linkData) return null;
+                
+                return (
+                  <a 
+                    key={social.id} 
+                    href={linkData.href} 
+                    target={social.id === "mail" ? undefined : "_blank"} 
+                    rel={social.id === "mail" ? undefined : "noopener noreferrer"}
+                  >
+                    {social.id === "mail" ? linkData.text : social.label}
+                  </a>
+                );
+              })}
             </nav>
           </div>
         </div>
 
         <div className={styles.bottomBar}>
-          <div className={styles.legalRow}>
-            <span>© {new Date().getFullYear()} AxmBro | All rights reserved</span>
+          <div className={styles.bottomBarContent}>
+            <div className={styles.legalRow}>
+              <Link href="/" className={styles.copyrightLink}>
+                <Image
+                  src="/icon192.png"
+                  alt="AxmBro Logo"
+                  width={14}
+                  height={14}
+                  style={{ borderRadius: '2px' }}
+                  className={styles.footerLogoIcon}
+                />
+                <span>© {new Date().getFullYear()} AxmBro | All rights reserved</span>
+              </Link>
+              <span className={styles.separator}>•</span>
+              <a 
+                href="https://nextjs.org" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className={styles.techStack}
+              >
+                <SiNextdotjs size={14} />
+                <span>Built with Next.js</span>
+              </a>
+              <span className={styles.separator}>•</span>
+              <a 
+                href="https://github.com/AxmBro/axmbro.dev" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className={styles.sourceLink}
+              >
+                <FaGithub size={14} />
+                <span>Source Code</span>
+              </a>
+            </div>
+            
+            <BackToTop />
           </div>
         </div>
 

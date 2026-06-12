@@ -32,6 +32,15 @@
       background-color: color-mix(in oklab, var(--color-neutral-100) 10%, transparent);
     }
   }
+
+  &.copied {
+    border-color: #10b981;
+    background-color: rgba(16, 185, 129, 0.1);
+    
+    .iconWrapper {
+      color: #10b981 !important;
+    }
+  }
 }
 
 .iconWrapper {

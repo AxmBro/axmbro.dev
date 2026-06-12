@@ -19,7 +19,7 @@ export default function TermsOfUsePage() {
         titleDescription={
           <div className={styles.headerDescWrapper}>
             <p>By accessing this website (axmbro.dev), you agree to these Terms. If you disagree, do not use the site.</p>
-            <p className={styles.lastUpdated}>Last updated: 17.05.2026.</p>
+            <p className={styles.lastUpdated}>Last updated: 10.06.2026.</p>
           </div>
         }
         withChildrenPadding={false}

@@ -1,8 +1,38 @@
 import Image from "next/image";
 import Link from "next/link";
-import { FaStar } from "react-icons/fa6";
+import { FaStar, FaGlobe } from "react-icons/fa6";
+import { SiReact, SiJavascript, SiTypescript, SiCss } from "react-icons/si";
 import type { ProjectItem } from "@/shared/constants/data";
 import styles from "./project-card.module.scss";
+
+const getTagIcon = (tag: string) => {
+  const mcbeTags = ["JsonUI", "Server Form", "HUD", "Models"];
+  if (mcbeTags.includes(tag)) {
+    return (
+      <Image
+        src="/images/mcbe-logo.png"
+        alt="MCBE"
+        width={14}
+        height={14}
+        className={styles.mcbeTagIcon}
+      />
+    );
+  }
+  switch (tag) {
+    case "Web":
+      return <FaGlobe size={14} />;
+    case "React":
+      return <SiReact size={14} />;
+    case "JavaScript":
+      return <SiJavascript size={14} />;
+    case "TypeScript":
+      return <SiTypescript size={14} />;
+    case "CSS":
+      return <SiCss size={14} />;
+    default:
+      return null;
+  }
+};
 
 interface ProjectCardProps {
   project: ProjectItem;
@@ -44,7 +74,10 @@ export const ProjectCard = ({ project }: ProjectCardProps) => {
         {project.tags && project.tags.length > 0 && (
           <div className={styles.tags}>
             {project.tags.map((tag) => (
-              <span key={tag} className={styles.tag}>{tag}</span>
+              <span key={tag} className={styles.tag}>
+                {getTagIcon(tag)}
+                <span>{tag}</span>
+              </span>
             ))}
           </div>
         )}

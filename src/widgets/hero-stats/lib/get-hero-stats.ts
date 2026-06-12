@@ -28,7 +28,7 @@ export function getBaseHeroStats(): HeroStat[] {
 
   return [
     { value: getYearsOfExperience(CAREER_START_DATE), label: "Years of Experience" },
-    { value: "2M+", label: "Project Downloads" },
+    { value: "2M+", label: "Personal Project Downloads" },
     { value: String(commissionCount), label: "Client Commissions" },
     { value: String(totalProjects), label: "Portfolio Projects" },
   ];

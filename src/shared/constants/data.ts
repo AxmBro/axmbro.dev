@@ -19,7 +19,7 @@ export const PROJECTS: ProjectItem[] = [
     title: "Better Bedrock",
     description:
       "A comprehensive, highly customizable UI and texture modification for MCBE. Enhances gameplay functionality with nearly 300 configuration options, fully supported across all platforms.",
-    tags: ["JsonUI", "Models", "React"],
+    tags: ["JsonUI", "Models", "React", "Web"],
     imgSrc: "bbReleaseThumbnail",
     logoSrc: "bbLogo",
     star: true,
@@ -165,7 +165,7 @@ export const PROJECTS: ProjectItem[] = [
     title: "This Website",
     description:
       "My personal portfolio and technical sandbox. Developed from the ground up using modern web technologies to showcase my transition into scalable frontend architecture.",
-    tags: ["React", "JavaScript", "TypeScript", "CSS"],
+    tags: ["React", "JavaScript", "TypeScript", "CSS", "Web"],
     imgSrc: "thisweb",
     type: "personal",
   },
@@ -304,7 +304,8 @@ export interface SocialLink {
   href: string;
   text: string;
   socialUrl: string;
-  iconId: "github" | "discord" | "youtube" | "twitter" | "instagram" | "mail";
+  iconId: "github" | "discord" | "youtube" | "twitter" | "instagram" | "mail" | "betterbedrock";
+  copyText?: string;
 }
 
 export const SOCIAL_LINK_BUTTONS: SocialLink[] = [
@@ -319,12 +320,14 @@ export const SOCIAL_LINK_BUTTONS: SocialLink[] = [
     text: "axmbro@gmail.com",
     socialUrl: "https://mail.google.com/",
     iconId: "mail",
+    copyText: "axmbro@gmail.com",
   },
   {
     href: "https://discord.com/users/679603350236299266",
     text: "Discord (DM)",
     socialUrl: "https://discord.gg",
     iconId: "discord",
+    copyText: "axmbro",
   },
   {
     href: "https://discord.gg/wJhH86c2wb",
@@ -362,6 +365,12 @@ export const SOCIAL_LINK_BUTTONS: SocialLink[] = [
     socialUrl: "https://www.instagram.com",
     iconId: "instagram",
   },
+  {
+    href: "https://betterbedrock.com/profile/AxmBro",
+    text: "Better Bedrock Profile",
+    socialUrl: "https://betterbedrock.com",
+    iconId: "betterbedrock",
+  },
 ];
 
 export const NAV_LINKS = [
@@ -383,6 +392,9 @@ export const HOME_PAGE_TEXTS = {
     description:
       "With over 4 years of active development, my experience ranges from architecting UI for commercial Minecraft marketplace studios to leading Better Bedrock, a project reaching millions of players. Currently, I balance my freelance client work with formal Computer Science studies and expanding my web development portfolio.",
   },
+  process: {
+    description: "Open for various projects (like web development - let's discuss on DM!), but my primary focus is Minecraft Bedrock. A transparent look at how I handle MCBE JsonUI commissions. Please note: I am a UI Engineer, not a pixel artist. I require ready-made textures, mockups, or clear design sketches before we begin. I can handle basic technical texture adaptations (nine-slicing, recoloring, simple outlines), but complex asset creation is outside my scope.",
+  },
   contact: {
     description:
       "Looking for a specialized UI Architect for your Minecraft Bedrock project, or need a modern web application? I am currently open for B2B contracts and freelance commissions. Reach out to discuss your technical requirements.",
@@ -401,6 +413,21 @@ export const HOME_PAGE_TEXTS = {
       `A collection of ${count} projects, from custom Minecraft Bedrock interfaces (JsonUI) for marketplace studios and private clients to web development. Each one reflects a real problem solved and skills applied.`,
   },
 };
+
+export const PROCESS_STEPS = [
+  {
+    title: "1. Planning & Architecture",
+    description: "We start by discussing your server's needs, technical constraints, and visual style. You provide the mockups and textures, and I provide a clear timeline and technical outline.",
+  },
+  {
+    title: "2. Development & UI Engineering",
+    description: "I build the JsonUI components, ensuring pixel-perfect layouts, optimized render controllers, and seamless integration with your ScriptAPI.",
+  },
+  {
+    title: "3. Delivery & Support",
+    description: "You receive the final resource pack ready for deployment, along with 30 days of technical support for any game updates that might affect the UI.",
+  },
+];
 
 export interface FAQItem {
   question: string;

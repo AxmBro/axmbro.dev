@@ -91,6 +91,9 @@
 }
 
 .tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
   font-size: 0.75rem;
   font-weight: 400;
   color: var(--color-neutral-400);
@@ -103,4 +106,10 @@
   &:last-child {
     border-right: 1px solid var(--color-border);
   }
+}
+
+.mcbeTagIcon {
+  filter: grayscale(100%);
+  opacity: 0.7;
+  object-fit: contain;
 }

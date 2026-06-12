@@ -19,3 +19,29 @@
   padding-inline: 2rem;
   margin-bottom: 2rem;
 }
+
+.processCta {
+  padding: 4rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.5rem;
+  border-bottom: 1px solid var(--color-border);
+  background: radial-gradient(ellipse at top, rgba(255,255,255,0.03) 0%, transparent 70%);
+}
+
+.ctaTitle {
+  font-size: var(--font-h2);
+  color: var(--color-neutral-100);
+  font-weight: 500;
+  margin: 0;
+}
+
+.ctaText {
+  color: var(--color-neutral-400);
+  font-size: var(--font-p);
+  max-width: 600px;
+  line-height: var(--line-height-p);
+  margin: 0;
+}
