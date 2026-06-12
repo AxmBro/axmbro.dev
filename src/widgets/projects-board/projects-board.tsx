@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { PROJECTS, type ProjectType } from "@/shared/constants/data";
 import { ProjectCard } from "@/entities/project";
 import { JoinedTabs } from "@/shared/ui/joined-tabs";
@@ -13,13 +14,29 @@ export const ProjectsBoard = () => {
   const [search, setSearch] = useState("");
   const [activeTab, setActiveTab] = useState<TabType>("all");
 
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
+  const initialized = useRef(false);
+
   useEffect(() => {
-    const savedTab = sessionStorage.getItem("projectsActiveTab") as TabType | null;
-    if (savedTab && TABS.includes(savedTab)) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setActiveTab(savedTab);
+    const tagParam = searchParams.get("tag");
+    
+    if (tagParam) {
+      setSearch(tagParam);
+      setActiveTab("all");
+      sessionStorage.setItem("projectsActiveTab", "all");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      router.replace(pathname, { scroll: false });
+    } else if (!initialized.current) {
+      const savedTab = sessionStorage.getItem("projectsActiveTab") as TabType | null;
+      if (savedTab && TABS.includes(savedTab)) {
+        setActiveTab(savedTab);
+      }
     }
-  }, []);
+    
+    initialized.current = true;
+  }, [searchParams, pathname, router]);
 
   const handleTabChange = (tab: TabType) => {
     setActiveTab(tab);

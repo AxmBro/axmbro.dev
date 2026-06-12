@@ -15,34 +15,36 @@
     border-top: 1px solid var(--color-border);
     display: flex;
     flex-direction: column;
+    padding: 2.5rem 2rem;
+
+    @media (max-width: $breakpoint-md) {
+      padding: 1.5rem 1rem;
+    }
 
     &:first-child {
       border-top: none;
+      padding-top: 0;
     }
   }
 
   .imgWrapper {
-    border-left: none;
-    border-right: none;
-    border-top: 1px solid var(--color-border);
-    border-bottom: 1px solid var(--color-border);
-    margin-bottom: 0;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    margin-bottom: 1rem;
+    background: rgba(255, 255, 255, 0.02);
   }
 
   .textContent {
-    padding: 1.5rem 2rem 2rem 2rem;
-
-    @media (max-width: $breakpoint-md) {
-      padding: 0.75rem 1.25rem 1.25rem 1.25rem;
-    }
+    padding: 0;
   }
 }
 
 .gridList {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 0;
-  border-top: 1px solid var(--color-border);
+  gap: 2rem;
 
   @media (max-width: $breakpoint-md) {
     grid-template-columns: 1fr;
@@ -51,59 +53,17 @@
   .item {
     display: flex;
     flex-direction: column;
-    border-right: 1px solid var(--color-border);
-    border-bottom: 1px solid var(--color-border);
-
-    &:nth-child(3n) {
-      border-right: none;
-    }
-
-    &:nth-last-child(-n+3):nth-child(3n+1),
-    &:nth-last-child(-n+2):nth-child(3n+2),
-    &:last-child {
-      border-bottom: none;
-    }
-
-    @media (max-width: $breakpoint-wide) {
-      &:nth-child(3n) {
-        border-right: 1px solid var(--color-border);
-      }
-      &:nth-child(2n) {
-        border-right: none;
-      }
-
-      border-bottom: 1px solid var(--color-border);
-
-      &:nth-last-child(-n+2):nth-child(2n+1),
-      &:last-child {
-        border-bottom: none;
-      }
-    }
-
-    @media (max-width: $breakpoint-md) {
-      border-right: none !important;
-      border-bottom: 1px solid var(--color-border);
-
-      &:last-child {
-        border-bottom: none;
-      }
-    }
   }
 
   .imgWrapper {
     aspect-ratio: auto;
-    border: none;
-    border-bottom: 1px solid var(--color-border);
+    border: 1px solid var(--color-border);
     background: transparent;
-    margin-bottom: 0;
+    margin-bottom: 1rem;
   }
 
   .textContent {
-    padding: 1.5rem 2rem 2rem 2rem;
-
-    @media (max-width: $breakpoint-md) {
-      padding: 0.75rem 1.25rem 1.25rem 1.25rem;
-    }
+    padding: 0;
   }
 
   .img {
@@ -135,7 +95,7 @@
   font-size: var(--font-h2);
   font-weight: 400;
   letter-spacing: 0.5px;
-  margin: 0 0 0.5rem 0;
+  margin: 0;
 }
 
 .itemDesc {

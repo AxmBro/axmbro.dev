@@ -19,7 +19,7 @@ export default function PrivacyPolicyPage() {
         titleDescription={
           <div className={styles.headerDescWrapper}>
             <p>This Privacy Policy outlines how your personal data is collected and processed.</p>
-            <p className={styles.lastUpdated}>Last updated: 17.05.2026.</p>
+            <p className={styles.lastUpdated}>Last updated: 10.06.2026.</p>
           </div>
         }
         withChildrenPadding={false}

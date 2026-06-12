@@ -21,7 +21,7 @@ export const ImageSection = ({ title, sectionDescription, items, rowStyle, proje
     <ScreenSection 
       title={title} 
       titleDescription={sectionDescription}
-      withChildrenPadding={false}
+      withChildrenPadding={rowStyle ? true : false}
     >
       <ul className={rowStyle ? styles.gridList : styles.stackList}>
         {items.map((item, index) => (
