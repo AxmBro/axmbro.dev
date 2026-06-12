@@ -20,15 +20,15 @@ const getTagIcon = (tag: string) => {
   }
   switch (tag) {
     case "Web":
-      return <FaGlobe size={14} />;
+      return <FaGlobe size={14} aria-hidden />;
     case "React":
-      return <SiReact size={14} />;
+      return <SiReact size={14} aria-hidden />;
     case "JavaScript":
-      return <SiJavascript size={14} />;
+      return <SiJavascript size={14} aria-hidden />;
     case "TypeScript":
-      return <SiTypescript size={14} />;
+      return <SiTypescript size={14} aria-hidden />;
     case "CSS":
-      return <SiCss size={14} />;
+      return <SiCss size={14} aria-hidden />;
     default:
       return null;
   }
@@ -67,7 +67,7 @@ export const ProjectCard = ({ project }: ProjectCardProps) => {
           )}
           <h2 className={styles.title}>{project.title}</h2>
           {project.star && (
-            <FaStar className={styles.starIcon} size={20} />
+            <FaStar className={styles.starIcon} size={20} aria-hidden />
           )}
         </div>
         <p className={styles.description}>{project.description}</p>

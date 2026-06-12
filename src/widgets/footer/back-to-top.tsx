@@ -10,7 +10,7 @@ export const BackToTop = () => {
 
   return (
     <button onClick={scrollToTop} className={styles.backToTop} aria-label="Back to top">
-      <FaArrowUp size={14} />
+      <FaArrowUp size={14} aria-hidden />
       <span>Back to Top</span>
     </button>
   );

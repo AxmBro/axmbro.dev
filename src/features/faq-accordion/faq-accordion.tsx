@@ -14,6 +14,7 @@ const ChevronIcon = ({ isOpen }: { isOpen: boolean }) => (
     strokeWidth="1.5"
     strokeLinecap="round"
     strokeLinejoin="round"
+    aria-hidden
     style={{
       transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
       transition: "transform 0.25s cubic-bezier(0.4, 0, 0.2, 1)",
