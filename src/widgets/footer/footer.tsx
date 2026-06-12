@@ -7,15 +7,23 @@ import { LocalTime } from "./local-time";
 import { BackToTop } from "./back-to-top";
 import styles from "./footer.module.scss";
 
-// We define the exact order of social icons we want to display in the footer
-const FOOTER_SOCIALS = [
+type FooterSocial = {
+  id: string;
+  label: string;
+  icon: React.ComponentType<{ size: number; "aria-hidden"?: boolean }> | null;
+  textMatcher?: string;
+};
+
+const FOOTER_SOCIALS: FooterSocial[] = [
   { id: "github", icon: FaGithub, label: "GitHub" },
   { id: "mail", icon: FaEnvelope, label: "Email" },
   { id: "discord", textMatcher: "Discord (DM)", icon: FaDiscord, label: "Discord" },
   { id: "youtube", textMatcher: "YouTube", icon: FaYoutube, label: "YouTube" },
-  { id: "betterbedrock", icon: null, label: "Better Bedrock Profile" }, // Handled specially below
+  { id: "betterbedrock", icon: null, label: "Better Bedrock Profile" },
   { id: "instagram", icon: FaInstagram, label: "Instagram" },
 ];
+
+const CONTACT_SOCIAL_IDS = ["github", "discord", "mail"];
 
 const CATEGORY_LINKS = [
   { href: "/projects", label: "View All Projects", isViewAll: true },
@@ -28,6 +36,14 @@ const LEGAL_LINKS = [
   { href: "/privacy-policy", label: "Privacy Policy" },
   { href: "/terms-of-use", label: "Terms of Use" },
 ];
+
+const getSocialLink = (social: FooterSocial) =>
+  SOCIAL_LINK_BUTTONS.find(
+    (s) => s.iconId === social.id && (!social.textMatcher || s.text === social.textMatcher)
+  );
+
+const externalLinkProps = (isMail: boolean) =>
+  isMail ? {} : { target: "_blank" as const, rel: "noopener noreferrer" as const };
 
 export const Footer = () => {
   return (
@@ -51,45 +67,32 @@ export const Footer = () => {
             <LocalTime />
             <div className={styles.socialIconsRow}>
               {FOOTER_SOCIALS.map((social) => {
-                const linkData = SOCIAL_LINK_BUTTONS.find(
-                  (s) => s.iconId === social.id && (!social.textMatcher || s.text === social.textMatcher)
-                );
-                
+                const linkData = getSocialLink(social);
                 if (!linkData) return null;
 
                 if (social.id === "betterbedrock") {
                   return (
-                    <a key={social.id} href={linkData.href} target="_blank" rel="noopener noreferrer" aria-label={social.label}>
-                      <span 
-                        style={{ 
-                          display: 'inline-block',
-                          width: 22, 
-                          height: 22, 
-                          backgroundColor: 'currentColor',
-                          WebkitMaskImage: 'url(/images/bb-logo.png)',
-                          WebkitMaskSize: 'contain',
-                          WebkitMaskRepeat: 'no-repeat',
-                          WebkitMaskPosition: 'center',
-                          maskImage: 'url(/images/bb-logo.png)',
-                          maskSize: 'contain',
-                          maskRepeat: 'no-repeat',
-                          maskPosition: 'center',
-                        }} 
-                      />
+                    <a
+                      key={social.id}
+                      href={linkData.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={social.label}
+                    >
+                      <span className={styles.betterBedrockIcon} />
                     </a>
                   );
                 }
 
                 const Icon = social.icon!;
                 return (
-                  <a 
-                    key={social.id} 
-                    href={linkData.href} 
-                    target={social.id === "mail" ? undefined : "_blank"} 
-                    rel={social.id === "mail" ? undefined : "noopener noreferrer"} 
+                  <a
+                    key={social.id}
+                    href={linkData.href}
                     aria-label={social.label}
+                    {...externalLinkProps(social.id === "mail")}
                   >
-                    <Icon size={22} />
+                    <Icon size={22} aria-hidden />
                   </a>
                 );
               })}
@@ -112,9 +115,9 @@ export const Footer = () => {
             <h2 className={styles.columnTitle}>Categories</h2>
             <nav className={styles.columnLinks}>
               {CATEGORY_LINKS.map((link) => (
-                <Link 
-                  key={link.label} 
-                  href={link.href} 
+                <Link
+                  key={link.label}
+                  href={link.href}
                   className={link.isViewAll ? styles.viewAllLink : undefined}
                 >
                   {link.label}
@@ -127,18 +130,15 @@ export const Footer = () => {
             <h2 className={styles.columnTitle}>Contact</h2>
             <nav className={`${styles.columnLinks} ${styles.contactLinks}`}>
               <Link href="/contact">Contact Form</Link>
-              {FOOTER_SOCIALS.filter(s => ["github", "discord", "mail"].includes(s.id)).map((social) => {
-                const linkData = SOCIAL_LINK_BUTTONS.find(
-                  (s) => s.iconId === social.id && (!social.textMatcher || s.text === social.textMatcher)
-                );
+              {FOOTER_SOCIALS.filter((s) => CONTACT_SOCIAL_IDS.includes(s.id)).map((social) => {
+                const linkData = getSocialLink(social);
                 if (!linkData) return null;
-                
+
                 return (
-                  <a 
-                    key={social.id} 
-                    href={linkData.href} 
-                    target={social.id === "mail" ? undefined : "_blank"} 
-                    rel={social.id === "mail" ? undefined : "noopener noreferrer"}
+                  <a
+                    key={social.id}
+                    href={linkData.href}
+                    {...externalLinkProps(social.id === "mail")}
                   >
                     {social.id === "mail" ? linkData.text : social.label}
                   </a>
@@ -157,37 +157,36 @@ export const Footer = () => {
                   alt="AxmBro Logo"
                   width={14}
                   height={14}
-                  style={{ borderRadius: '2px' }}
+                  style={{ borderRadius: "2px" }}
                   className={styles.footerLogoIcon}
                 />
                 <span>© {new Date().getFullYear()} AxmBro | All rights reserved</span>
               </Link>
               <span className={styles.separator}>•</span>
-              <a 
-                href="https://nextjs.org" 
-                target="_blank" 
+              <a
+                href="https://nextjs.org"
+                target="_blank"
                 rel="noopener noreferrer"
                 className={styles.techStack}
               >
-                <SiNextdotjs size={14} />
+                <SiNextdotjs size={14} aria-hidden />
                 <span>Built with Next.js</span>
               </a>
               <span className={styles.separator}>•</span>
-              <a 
-                href="https://github.com/AxmBro/axmbro.dev" 
-                target="_blank" 
+              <a
+                href="https://github.com/AxmBro/axmbro.dev"
+                target="_blank"
                 rel="noopener noreferrer"
                 className={styles.sourceLink}
               >
-                <FaGithub size={14} />
+                <FaGithub size={14} aria-hidden />
                 <span>Source Code</span>
               </a>
             </div>
-            
+
             <BackToTop />
           </div>
         </div>
-
       </div>
     </footer>
   );

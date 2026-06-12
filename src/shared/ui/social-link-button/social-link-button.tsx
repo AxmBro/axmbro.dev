@@ -61,7 +61,7 @@ export const SocialLinkButton = ({ link }: SocialLinkButtonProps) => {
       onClick={handleClick}
     >
       <span className={styles.iconWrapper}>
-        {copied ? <FaCheck size={20} /> : <IconComponent size={20} />}
+        {copied ? <FaCheck size={20} aria-hidden /> : <IconComponent size={20} aria-hidden />}
       </span>
       <span className={styles.text}>{copied ? "Copied!" : link.text}</span>
     </a>
