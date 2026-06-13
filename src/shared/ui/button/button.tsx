@@ -1,7 +1,10 @@
+"use client";
+
 import { ReactNode } from "react";
 import Link from "next/link";
+import { HashLink } from "@/shared/ui/hash-link";
+import { primeProjectsBoard } from "@/shared/lib/projects-board-state";
 import styles from "./button.module.scss";
-
 interface ButtonProps {
   /** 
    * Button variant. 
@@ -43,6 +46,37 @@ export const Button = ({
         >
           {content}
         </a>
+      );
+    }
+
+    if (href.includes("#")) {
+      return (
+        <HashLink
+          href={href}
+          className={styles.button}
+          data-variant={variant}
+          style={style}
+          onClick={onClick}
+        >
+          {content}
+        </HashLink>
+      );
+    }
+
+    if (href === "/projects") {
+      return (
+        <Link
+          href={href}
+          className={styles.button}
+          data-variant={variant}
+          style={style}
+          onClick={() => {
+            onClick?.();
+            primeProjectsBoard({ tab: "all" });
+          }}
+        >
+          {content}
+        </Link>
       );
     }
 

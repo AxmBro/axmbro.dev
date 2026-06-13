@@ -8,7 +8,11 @@ export const ExperienceGrid = () => {
       {EXPERIENCE_TREE.map((exp, index) => (
         <div key={index} className={styles.expVerticalItem}>
           <div className={styles.expHeaderOneLine}>
-            <span>{exp.role} @ {exp.company}</span>
+            <span className={styles.expRoleLine}>
+              <span className={styles.expRole}>{exp.role}</span>
+              <span className={styles.expAt}> @ </span>
+              <span className={styles.expCompany}>{exp.company}</span>
+            </span>
             <span className={styles.expDate}>({exp.date})</span>
           </div>
           <div className={styles.expTextContent}>
@@ -19,18 +23,14 @@ export const ExperienceGrid = () => {
             </ul>
             {exp.buttons && exp.buttons.length > 0 && (
               <div className={styles.expButtonsRow}>
-                {exp.buttons.map((btn, i) => {
-                  const isExternal = btn.href.startsWith("http");
-                  return (
-                    <Button 
+                {exp.buttons.map((btn, i) => (
+                    <Button
                       key={i}
-                      variant={btn.variant} 
-                      text={btn.text} 
+                      variant={btn.variant}
+                      text={btn.text}
                       href={btn.href}
-                      external={isExternal}
                     />
-                  );
-                })}
+                  ))}
               </div>
             )}
           </div>

@@ -10,6 +10,8 @@ interface ScreenSectionProps {
   className?: string;
   withHeaderPadding?: boolean;
   withChildrenPadding?: boolean;
+  /** Tight gap between title block and children - desc to list/content (projects). Default: --spacing-section */
+  tightChildrenGap?: boolean;
   headingLevel?: "h1" | "h2" | "h3";
 }
 
@@ -22,6 +24,7 @@ export const ScreenSection = ({
   className,
   withHeaderPadding = true,
   withChildrenPadding = true,
+  tightChildrenGap = false,
   headingLevel = "h2"
 }: ScreenSectionProps) => {
   const HeadingTag = headingLevel;
@@ -39,7 +42,9 @@ export const ScreenSection = ({
         </div>
       )}
       {children && (
-        <div className={`${styles.childrenContainer} ${withChildrenPadding ? styles.hasPadding : ''}`}>
+        <div
+          className={`${styles.childrenContainer} ${withChildrenPadding ? styles.hasPadding : ""} ${title || titleDescription ? styles.belowTitle : ""} ${tightChildrenGap ? styles.tightGap : ""}`}
+        >
           {children}
         </div>
       )}
@@ -49,7 +54,7 @@ export const ScreenSection = ({
 
 interface ScreenSectionListProps {
   title?: string;
-  items: { name: string; value?: React.ReactNode; valueColor?: string }[];
+  items: { name: string; value?: React.ReactNode }[];
   style?: React.CSSProperties;
   className?: string;
   headingLevel?: "h2" | "h3" | "h4";

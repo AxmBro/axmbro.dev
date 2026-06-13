@@ -1,19 +1,19 @@
 @use '../../shared/styles/variables' as *;
+@use '../../shared/styles/mixins' as *;
 
 .searchBar {
   display: flex;
   align-items: center;
-  padding: 0 2rem 0 2rem;
+  @include section-padding-inline;
 }
 
 .searchInput {
+  @include text-body(var(--color-neutral-100));
   flex: 1;
   min-width: 0;
   height: 3.25rem;
   border: 1px solid var(--color-border);
   background-color: rgba(255, 255, 255, 0.02);
-  color: var(--color-neutral-100);
-  font-size: var(--font-p);
   font-family: inherit;
   padding: 0 1rem;
   box-sizing: border-box;
@@ -31,14 +31,13 @@
 }
 
 .clearButton {
+  @include text-body-sm;
   height: 3.25rem;
   width: 3.25rem;
   flex-shrink: 0;
   border: 1px solid var(--color-border);
   border-left: 0;
   background-color: rgba(255, 255, 255, 0.02);
-  color: var(--color-neutral-400);
-  font-size: var(--font-p2);
   font-family: inherit;
   cursor: pointer;
 
@@ -51,8 +50,8 @@
 .tabsWrapper {
   display: flex;
   width: 100%;
-  padding: 2rem;
-  padding-top: 1.5rem;
+  padding: var(--spacing-block);
+  padding-top: var(--spacing-section);
   overflow-x: auto;
   scrollbar-width: none;
   box-sizing: border-box;
@@ -104,5 +103,5 @@
 
 .noResults {
   border-top: 1px solid var(--color-border);
-  padding: 2rem;
+  padding: var(--spacing-block);
 }

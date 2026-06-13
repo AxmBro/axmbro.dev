@@ -6,6 +6,10 @@ import styles from "./footer.module.scss";
 export const BackToTop = () => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
+
+    if (window.location.hash) {
+      history.replaceState(null, "", window.location.pathname + window.location.search);
+    }
   };
 
   return (

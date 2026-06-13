@@ -5,9 +5,15 @@ import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { PROJECTS, type ProjectType } from "@/shared/constants/data";
 import { ProjectCard } from "@/entities/project";
 import { JoinedTabs } from "@/shared/ui/joined-tabs";
+import {
+  consumeProjectsTagFilter,
+  getSavedProjectsTab,
+  saveProjectsTab,
+  type ProjectsBoardTab,
+} from "@/shared/lib/projects-board-state";
 import styles from "./projects-board.module.scss";
 
-type TabType = "all" | "featured" | ProjectType;
+type TabType = ProjectsBoardTab | ProjectType;
 const TABS: TabType[] = ["all", "featured", "personal", "commissions"];
 
 export const ProjectsBoard = () => {
@@ -21,26 +27,36 @@ export const ProjectsBoard = () => {
 
   useEffect(() => {
     const tagParam = searchParams.get("tag");
-    
+    const tagFromStorage = consumeProjectsTagFilter();
+
+    if (tagFromStorage) {
+      setSearch(tagFromStorage);
+      setActiveTab("all");
+      saveProjectsTab("all");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      initialized.current = true;
+      return;
+    }
+
     if (tagParam) {
       setSearch(tagParam);
       setActiveTab("all");
-      sessionStorage.setItem("projectsActiveTab", "all");
+      saveProjectsTab("all");
       window.scrollTo({ top: 0, behavior: "smooth" });
       router.replace(pathname, { scroll: false });
     } else if (!initialized.current) {
-      const savedTab = sessionStorage.getItem("projectsActiveTab") as TabType | null;
-      if (savedTab && TABS.includes(savedTab)) {
+      const savedTab = getSavedProjectsTab();
+      if (savedTab) {
         setActiveTab(savedTab);
       }
     }
-    
+
     initialized.current = true;
   }, [searchParams, pathname, router]);
 
   const handleTabChange = (tab: TabType) => {
     setActiveTab(tab);
-    sessionStorage.setItem("projectsActiveTab", tab);
+    saveProjectsTab(tab);
   };
 
   const filtered = PROJECTS.filter((item) => {

@@ -1,3 +1,5 @@
+@use '../../styles/mixins' as *;
+
 .section {
   width: 100%;
   min-width: 0;
@@ -10,38 +12,27 @@
 }
 
 .titleBlock {
+  @include stack-xs;
   padding: 0;
-  margin-bottom: 1.5rem;
-
-  &.noChildren {
-    margin-bottom: 0;
-  }
 
   &.hasPadding {
-    padding: 2rem 2rem 0 2rem;
+    padding: var(--spacing-block) var(--spacing-block) 0 var(--spacing-block);
 
     &.noChildren {
-      padding: 2rem;
+      @include section-padding;
     }
   }
 }
 
 .title {
-  color: var(--color-neutral-100);
-  font-size: var(--font-h1);
-  font-weight: 400;
-  margin: 0;
+  @include text-display;
   letter-spacing: 1px;
   word-break: break-word;
   hyphens: auto;
 }
 
 .description {
-  color: var(--color-neutral-400);
-  font-size: var(--font-p);
-  font-weight: 400;
-  line-height: var(--line-height-p);
-  margin-top: 0.5rem;
+  @include text-body;
   max-width: 950px;
   white-space: pre-line;
 
@@ -55,21 +46,35 @@
   width: 100%;
   min-width: 0;
 
-  &.hasPadding {
-    padding: 0 2rem 2rem 2rem;
+  &.belowTitle.hasPadding {
+    padding: var(--spacing-section) var(--spacing-block) var(--spacing-block) var(--spacing-block);
+  }
+
+  &.belowTitle:not(.hasPadding) {
+    padding-top: var(--spacing-section);
+  }
+
+  &.belowTitle.tightGap:not(.hasPadding) {
+    padding-top: var(--spacing-xs);
+  }
+
+  &.belowTitle.tightGap.hasPadding {
+    padding: var(--spacing-xs) var(--spacing-block) var(--spacing-block) var(--spacing-block);
+  }
+
+  &.hasPadding:not(.belowTitle) {
+    padding: 0 var(--spacing-block) var(--spacing-block) var(--spacing-block);
   }
 }
 
 .listContainer {
+  @include stack-xs;
   width: 100%;
 }
 
 .listTitle {
-  color: var(--color-neutral-100);
-  font-size: var(--font-h2);
-  font-weight: 400;
+  @include text-h2;
   letter-spacing: 0.5px;
-  margin-bottom: 0.5rem;
 }
 
 .listItemsWrapper {
@@ -78,13 +83,9 @@
 }
 
 .listItem {
-  font-size: var(--font-p);
-  color: var(--color-neutral-400);
-  font-weight: 400;
-  line-height: var(--line-height-p);
+  @include text-body;
 
   .listValue {
     color: var(--color-neutral-100);
-    font-weight: 400;
   }
 }
