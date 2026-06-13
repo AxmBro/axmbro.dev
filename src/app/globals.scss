@@ -1,6 +1,9 @@
 @use '../shared/styles/variables' as *;
 
+// Runtime design tokens — use as var(--token) in any CSS module (no @use required).
+// Breakpoints live in shared/styles/_variables.scss (compile-time only).
 :root {
+  /* Colors */
   --color-neutral-100: oklch(97% 0 0);
   --color-neutral-400: oklch(70.8% 0 0);
 
@@ -9,6 +12,7 @@
   --color-accent: rgb(0, 143, 252);
   --max-website-width: 70rem;
 
+  /* Typography — font sizes */
   --font-p: 1rem;
   --font-p2: 0.875rem;
   --font-h1: 3rem;
@@ -16,18 +20,39 @@
   --font-h3: 1rem;
   --font-h4: 1rem;
 
-  --line-height-h1: 1.1;
-  --line-height-h2: 1.2;
-  --line-height-h3: 1.5;
-  --line-height-h4: 1.5;
-  --line-height-p: 1.6;
-  --line-height-p2: 1.6;
+  /* Typography — line heights */
+  --line-height-display: 1.1; /* h1, hero stats */
+  --line-height-heading: 1.2; /* h2, h3, h4 */
+  --line-height-body: 1.6; /* p, p2, descriptions */
+
+  /* Spacing — layout rhythm (see ScreenSection, footer, experience grid) */
+  --spacing-xs: 0.5rem; /* tight: title ↔ description, items in a group */
+  --spacing-section: 1.5rem; /* loose: header block ↔ content, text ↔ actions */
+  --spacing-block: 2rem; /* section / column padding */
+
+  /* Scroll anchors — sticky header offset (see scroll-to-hash.ts) */
+  --header-offset: 5.375rem;
+  --scroll-anchor-gap: var(--spacing-section);
+  --scroll-anchor-offset: calc(var(--header-offset) + var(--scroll-anchor-gap));
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+html {
+  scroll-padding-top: var(--header-offset);
+}
+
+/* Scroll anchors: section[id] = tight under header | [data-scroll-anchor] = header + gap (see scroll-to-hash.ts) */
+section[id] {
+  scroll-margin-top: calc(var(--header-offset) - 1px);
+}
+
+[data-scroll-anchor] {
+  scroll-margin-top: var(--scroll-anchor-offset);
 }
 
 input,
@@ -43,7 +68,7 @@ body {
   font-family: var(--font-lexend), Arial, sans-serif;
   font-weight: 400;
   font-size: var(--font-p);
-  line-height: var(--line-height-p);
+  line-height: var(--line-height-body);
   -webkit-font-smoothing: antialiased;
 }
 
@@ -52,31 +77,27 @@ h2,
 h3,
 h4 {
   color: var(--color-neutral-100);
-  margin: 0;
+  font-weight: 400;
 }
 
 h1 {
   font-size: var(--font-h1);
-  font-weight: 400;
-  line-height: var(--line-height-h1);
+  line-height: var(--line-height-display);
 }
 
 h2 {
   font-size: var(--font-h2);
-  font-weight: 400;
-  line-height: var(--line-height-h2);
+  line-height: var(--line-height-heading);
 }
 
 h3 {
   font-size: var(--font-h3);
-  font-weight: 400;
-  line-height: var(--line-height-h3);
+  line-height: var(--line-height-heading);
 }
 
 h4 {
   font-size: var(--font-h4);
-  font-weight: 400;
-  line-height: var(--line-height-h4);
+  line-height: var(--line-height-heading);
 }
 
 a {
@@ -93,14 +114,10 @@ a {
   }
 }
 
-p {
-  margin: 0;
-}
-
 .main-layout {
   display: flex;
   flex-direction: column;
-  min-height: calc(100vh - 4rem);
+  min-height: calc(100vh - var(--header-offset));
 }
 
 .main-content {

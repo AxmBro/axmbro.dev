@@ -1,0 +1,65 @@
+// Typography & layout mixins — compose :root tokens from globals.scss.
+// Import: @use '../../shared/styles/mixins' as *;
+
+@mixin text-display($color: var(--color-neutral-100)) {
+  font-size: var(--font-h1);
+  line-height: var(--line-height-display);
+  font-weight: 400;
+  color: $color;
+}
+
+@mixin text-h2($color: var(--color-neutral-100)) {
+  font-size: var(--font-h2);
+  line-height: var(--line-height-heading);
+  font-weight: 400;
+  color: $color;
+}
+
+@mixin text-h3($color: var(--color-neutral-100)) {
+  font-size: var(--font-h3);
+  line-height: var(--line-height-heading);
+  font-weight: 400;
+  color: $color;
+}
+
+@mixin text-body($color: var(--color-neutral-400)) {
+  font-size: var(--font-p);
+  line-height: var(--line-height-body);
+  font-weight: 400;
+  color: $color;
+}
+
+@mixin text-body-sm($color: var(--color-neutral-400)) {
+  font-size: var(--font-p2);
+  line-height: var(--line-height-body);
+  font-weight: 400;
+  color: $color;
+}
+
+// Caption — meta/secondary copy (timestamps, legal, footer labels).
+@mixin text-caption($color: var(--color-neutral-400)) {
+  @include text-body-sm($color);
+}
+
+// Neutralize global `a:hover { text-decoration: underline }` on button-like links.
+@mixin link-plain {
+  text-decoration: none !important;
+
+  &:hover {
+    text-decoration: none !important;
+  }
+}
+
+@mixin stack-xs {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+@mixin section-padding {
+  padding: var(--spacing-block);
+}
+
+@mixin section-padding-inline {
+  padding-inline: var(--spacing-block);
+}
