@@ -1,3 +1,5 @@
+import { contactSectionHref, SECTION_IDS } from "./anchors";
+
 export type ProjectType = "personal" | "commissions";
 
 export interface ProjectItem {
@@ -201,7 +203,7 @@ export const EXPERIENCE_TREE: ExperienceItem[] = [
     ],
     buttons: [
       { text: "Browse Portfolio", href: "/projects", variant: "primary" },
-      { text: "Hire Me", href: "/contact", variant: "secondary" },
+      { text: "Hire Me", href: contactSectionHref(SECTION_IDS.sendMessage), variant: "secondary" },
     ],
   },
   {
@@ -303,7 +305,6 @@ export const SKILLS_CARDS: SkillCard[] = [
 export interface SocialLink {
   href: string;
   text: string;
-  socialUrl: string;
   iconId: "github" | "discord" | "youtube" | "twitter" | "instagram" | "mail" | "betterbedrock";
   copyText?: string;
 }
@@ -312,66 +313,67 @@ export const SOCIAL_LINK_BUTTONS: SocialLink[] = [
   {
     href: "https://github.com/AxmBro",
     text: "GitHub",
-    socialUrl: "https://github.com",
     iconId: "github",
   },
   {
     href: "mailto:axmbro@gmail.com",
     text: "axmbro@gmail.com",
-    socialUrl: "https://mail.google.com/",
     iconId: "mail",
     copyText: "axmbro@gmail.com",
   },
   {
     href: "https://discord.com/users/679603350236299266",
     text: "Discord (DM)",
-    socialUrl: "https://discord.gg",
     iconId: "discord",
     copyText: "axmbro",
   },
   {
     href: "https://discord.gg/wJhH86c2wb",
     text: "Personal Discord",
-    socialUrl: "https://discord.gg",
     iconId: "discord",
   },
   {
     href: "https://discord.gg/ZGK5WYXnEY",
     text: "Better Bedrock Discord",
-    socialUrl: "https://discord.gg",
     iconId: "discord",
   },
   {
     href: "https://www.youtube.com/@axmbro",
     text: "YouTube",
-    socialUrl: "https://www.youtube.com",
     iconId: "youtube",
   },
   {
     href: "https://www.youtube.com/@axmbro2",
     text: "YouTube (2nd)",
-    socialUrl: "https://www.youtube.com",
     iconId: "youtube",
   },
   {
     href: "https://twitter.com/AxmBro",
     text: "Twitter / X",
-    socialUrl: "https://x.com",
     iconId: "twitter",
   },
   {
     href: "https://www.instagram.com/axmbro_",
     text: "Instagram",
-    socialUrl: "https://www.instagram.com",
     iconId: "instagram",
   },
   {
     href: "https://betterbedrock.com/profile/AxmBro",
     text: "Better Bedrock Profile",
-    socialUrl: "https://betterbedrock.com",
     iconId: "betterbedrock",
   },
 ];
+
+export const HOME_SELECTED_PROJECT_URLS = [
+  "better_bedrock",
+  "one_slime_block_adventure",
+  "ra_survival",
+] as const;
+
+export const getHomeSelectedProjects = () =>
+  HOME_SELECTED_PROJECT_URLS.map((url) => PROJECTS.find((p) => p.url === url)).filter(
+    (p): p is ProjectItem => Boolean(p)
+  );
 
 export const NAV_LINKS = [
   { href: "/", text: "Home" },
@@ -383,6 +385,10 @@ export const HOME_PAGE_TEXTS = {
   about: {
     description:
       "I am a 20-year-old Computer Science student and UI Architect from Poland. My core expertise is Minecraft Bedrock Edition modding, where I specialize in engineering advanced custom interfaces (JsonUI). I collaborate directly with official marketplace studios and private clients to deliver high-performance game UI.\n\nWhile my professional focus lies in game architecture, I actively build web applications and explore AI tools to strengthen my general software engineering fundamentals. I approach every project with a perfectionist mindset, focusing on pixel-perfect layouts, scalable code, and seamless user experiences.",
+  },
+  selectedWork: {
+    description:
+      "Hand-picked highlights from marketplace releases, studio commissions, and personal MCBE UI work - the projects that best show scope, polish, and real player reach.",
   },
   skills: {
     description:
@@ -432,6 +438,8 @@ export const PROCESS_STEPS = [
 export interface FAQItem {
   question: string;
   answer: string;
+  /** Deep-link slug - URL becomes /contact#faq-{slug} (e.g. faq-pricing). */
+  slug?: string;
 }
 
 export const FAQ_ITEMS: FAQItem[] = [
@@ -442,6 +450,7 @@ export const FAQ_ITEMS: FAQItem[] = [
   },
   {
     question: "Are you currently accepting new commissions?",
+    slug: "availability",
     answer:
       "Yes, I am actively open for new freelance commissions regarding Minecraft Bedrock JsonUI development. For other custom technical modifications or special inquiries, feel free to reach out directly to discuss them privately.",
   },
@@ -454,16 +463,19 @@ export const FAQ_ITEMS: FAQItem[] = [
   {
     question:
       "Do I need to provide complete UI designs, or do you handle the styling?",
+    slug: "mockups",
     answer:
       "I highly prefer that you have a plan or visual concept ready before we start. If I have to design the interface layout completely from scratch, it will take more time, cost more, and increase the risk of back-and-forth changes. Even a rough sketch made in Paint, a screenshot, or a text outline works, but the cleaner and more detailed the mockup, the faster and more cost-effective the development process will be.",
   },
   {
     question: "What is your typical turnaround time for commissions?",
+    slug: "turnaround",
     answer:
       "For Minecraft Bedrock commissions, turnaround times vary depending on the depth of the project. Simple UI panels or adjustments take about 3 to 7 days, while complex custom UI overhauls typically require 1 to 3 weeks. For other projects, such as web development, timelines vary and are discussed and adjusted individually to meet your schedule. A precise timeline estimate will be provided after we review your exact requirements.",
   },
   {
     question: "How do you handle project pricing and payments?",
+    slug: "pricing",
     answer:
       "Pricing is calculated individually based on the project's specific scope and complexity. Once we agree on terms and technical requirements, I require a 50% upfront advance before starting development. The remaining 50% is paid upon successful completion and delivery of the assets. I am generally flexible and open to custom contracts or tailored business terms depending on your project needs.",
   },

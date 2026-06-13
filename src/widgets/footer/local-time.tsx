@@ -23,11 +23,11 @@ export const LocalTime = () => {
     return () => clearInterval(interval);
   }, []);
 
-  if (!time) return <div className={styles.localTime}>Local time in Poland: --:--</div>;
+  if (!time) return <p className={styles.localTime}>Local time in Poland: --:--</p>;
 
   return (
-    <div className={styles.localTime}>
+    <p className={styles.localTime}>
       Local time in Poland: <span>{time} (GMT+1/GMT+2)</span>
-    </div>
+    </p>
   );
 };
