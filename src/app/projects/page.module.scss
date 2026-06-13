@@ -1,0 +1,18 @@
+@use '../../shared/styles/variables' as *;
+
+.buttonsGroup {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding-inline: var(--spacing-block);
+  padding-bottom: var(--spacing-block);
+
+  @media (max-width: $breakpoint-sm) {
+    flex-direction: column;
+    width: 100%;
+
+    > * {
+      width: 100%;
+    }
+  }
+}
