@@ -1,47 +1,30 @@
 import { Metadata } from "next";
-import Link from "next/link";
-import { ScreenContainer } from "@/shared/ui/screen-container";
-import { ScreenSection } from "@/shared/ui/screen-section";
+import { LegalPage } from "@/shared/ui/legal-page";
 import { PRIVACY_POLICY_ITEMS } from "@/shared/constants/legal";
-import styles from "./page.module.scss";
+import { SECTION_IDS } from "@/shared/constants/anchors";
+
+const description =
+  "Privacy Policy for axmbro.dev - how personal data is collected and processed when you use this portfolio site or contact form.";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
+  description,
+  openGraph: {
+    title: "AxmBro.dev | Privacy Policy",
+    description,
+    images: ["/images/ui/og-image.png"],
+  },
 };
 
 export default function PrivacyPolicyPage() {
   return (
-    <ScreenContainer>
-      <ScreenSection
-        id="privacyPolicy"
-        title="Privacy Policy"
-        headingLevel="h1"
-        titleDescription={
-          <div className={styles.headerDescWrapper}>
-            <p>This Privacy Policy outlines how your personal data is collected and processed.</p>
-            <p className={styles.lastUpdated}>Last updated: 10.06.2026.</p>
-          </div>
-        }
-        withChildrenPadding={false}
-      >
-        <ul className={styles.itemList}>
-          {PRIVACY_POLICY_ITEMS.map((item, index) => (
-            <li key={index} className={styles.item}>
-              <h2 className={styles.itemTitle}>{item.title}</h2>
-              <p className={styles.itemText}>{item.text}</p>
-            </li>
-          ))}
-          <li className={styles.item}>
-            <h2 className={styles.itemTitle}>Contact</h2>
-            <p className={styles.itemText}>
-              To exercise any of your rights or ask questions regarding privacy, please contact me directly at:{" "}
-              <Link href="/contact" className={styles.link}>
-                /contact
-              </Link>
-            </p>
-          </li>
-        </ul>
-      </ScreenSection>
-    </ScreenContainer>
+    <LegalPage
+      id={SECTION_IDS.privacyPolicy}
+      title="Privacy Policy"
+      intro="This Privacy Policy outlines how your personal data is collected and processed."
+      lastUpdated="10.06.2026"
+      items={PRIVACY_POLICY_ITEMS}
+      contactBlurb="To exercise any of your rights or ask questions regarding privacy, please contact me directly at:"
+    />
   );
 }
