@@ -1,19 +1,18 @@
-@use '../../../shared/styles/variables' as *;
+@use '../../../shared/styles/mixins' as *;
 
 .button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   padding: 0.65rem 1.4rem;
-  font-size: var(--font-p);
-  font-weight: 400;
+  @include text-body(var(--color-neutral-100));
+  @include link-plain;
   cursor: pointer;
   border-radius: 8px;
   font-family: inherit;
   outline: none;
   white-space: normal;
   text-align: center;
-  text-decoration: none !important;
   max-width: 100%;
   box-sizing: border-box;
   word-break: break-word;

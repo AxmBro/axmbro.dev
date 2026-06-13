@@ -1,41 +1,36 @@
 @use '../../shared/styles/variables' as *;
+@use '../../shared/styles/mixins' as *;
 
 $form-row-height: 3.25rem;
 
 .formWrapper {
   border-top: 1px solid var(--color-border);
-
 }
 
 .form {
-  padding: 2rem;
+  @include section-padding;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: var(--spacing-section);
   width: 100%;
 }
 
 .fieldGroup {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  @include stack-xs;
 }
 
 .label {
-  color: var(--color-neutral-400);
-  font-size: var(--font-p);
+  @include text-body;
 }
 
 %formFieldBase {
+  @include text-body(var(--color-neutral-100));
   width: 100%;
   box-sizing: border-box;
   border: 1px solid var(--color-border);
   border-radius: 0;
   background-color: rgba(255, 255, 255, 0.02);
-  color: var(--color-neutral-100);
-  font-size: var(--font-p);
   font-family: inherit;
-  font-weight: 400;
   padding: 0 1rem;
 
   &:focus {
@@ -63,13 +58,11 @@ $form-row-height: 3.25rem;
 }
 
 .submitButton {
-  margin-top: 1rem;
   width: 100%;
   min-height: $form-row-height;
   border-radius: 0;
   font-family: inherit;
-  font-size: var(--font-p);
-  font-weight: 400;
+  @include text-body;
   cursor: pointer;
   border: 1px solid var(--color-border);
   background-color: rgba(255, 255, 255, 0.02);
@@ -90,6 +83,7 @@ $form-row-height: 3.25rem;
     }
   }
 
+  /* Override [data-active] styles when disabled or showing status feedback. */
   &[disabled] {
     opacity: 0.6;
     cursor: not-allowed;
@@ -117,8 +111,6 @@ $form-row-height: 3.25rem;
 }
 
 .intentWrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  @include stack-xs;
   width: 100%;
 }

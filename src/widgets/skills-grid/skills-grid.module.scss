@@ -13,16 +13,15 @@
 }
 
 .skillGroupItem {
-  padding: 2rem;
+  padding: var(--spacing-block);
   border-right: 1px solid var(--color-border);
-  border-bottom: 1px solid var(--color-border);
+
+  &:not(:last-child) {
+    border-bottom: 1px solid var(--color-border);
+  }
 
   &:nth-child(2n) {
     border-right: none;
-  }
-
-  &:last-child {
-    border-bottom: none;
   }
 
   &:nth-child(2n-1):nth-last-child(2) {
@@ -36,8 +35,8 @@
   @media (max-width: $breakpoint-wide) {
     border-right: none;
 
-    &:last-child {
-      border-bottom: none;
+    &:nth-child(2n-1):nth-last-child(2) {
+      border-bottom: 1px solid var(--color-border);
     }
   }
 }
