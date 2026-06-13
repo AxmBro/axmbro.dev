@@ -1,3 +1,9 @@
+// Compile-time SCSS variables — import with: @use '.../variables' as *;
+//
+// Breakpoints: @media (max-width: $breakpoint-md) { ... }
+// Typography/layout mixins: @use '.../mixins' as *;
+// Design tokens: globals.scss :root → var(--spacing-xs), var(--line-height-body), etc.
+
 $breakpoint-sm: 480px;
 $breakpoint-md: 576px;
 $breakpoint-tablet: 768px;
