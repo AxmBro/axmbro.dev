@@ -3,6 +3,7 @@ import Link from "next/link";
 import { FaStar, FaGlobe } from "react-icons/fa6";
 import { SiReact, SiJavascript, SiTypescript, SiCss } from "react-icons/si";
 import type { ProjectItem } from "@/shared/constants/data";
+import { getProjectThumbnailSrc } from "../lib/get-project-thumbnail";
 import styles from "./project-card.module.scss";
 
 const getTagIcon = (tag: string) => {
@@ -40,13 +41,14 @@ interface ProjectCardProps {
 
 export const ProjectCard = ({ project }: ProjectCardProps) => {
   const projectFolder = project.url || "thisweb";
+  const thumbnailSrc = getProjectThumbnailSrc(project);
 
   const inner = (
     <div className={styles.card}>
-      {project.imgSrc && (
+      {thumbnailSrc && (
         <div className={styles.imageWrapper}>
           <Image
-            src={`/images/projects/${projectFolder}/${project.imgSrc}.png`}
+            src={thumbnailSrc}
             alt={project.title}
             className={styles.image}
             width={1280}
