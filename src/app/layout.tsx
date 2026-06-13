@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Lexend } from "next/font/google";
 import { Header } from "@/widgets/header";
 import { Footer } from "@/widgets/footer";
+import { HashScroll } from "@/shared/ui/hash-scroll";
 import "./globals.scss";
 
 const lexend = Lexend({
@@ -13,8 +15,8 @@ const lexend = Lexend({
 
 export const metadata: Metadata = {
   title: {
-    default: "AxmBro | MCBE UI Architect & Developer",
-    template: "AxmBro | %s",
+    default: "AxmBro.dev | MCBE UI Architect & Developer",
+    template: "AxmBro.dev | %s",
   },
   description:
     "Computer Science student and UI Architect from Poland. I engineer custom Minecraft Bedrock interfaces (JsonUI) for marketplace studios and build modern web applications.",
@@ -34,7 +36,7 @@ export const metadata: Metadata = {
     google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || "",
   },
   openGraph: {
-    title: "AxmBro | MCBE UI Architect & Developer",
+    title: "AxmBro.dev | MCBE UI Architect & Developer",
     description:
       "Computer Science student and UI Architect from Poland. I engineer custom Minecraft Bedrock interfaces (JsonUI) for marketplace studios and build modern web applications.",
     url: "https://axmbro.dev",
@@ -52,7 +54,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "AxmBro | MCBE UI Architect & Developer",
+    title: "AxmBro.dev | MCBE UI Architect & Developer",
     description:
       "Computer Science student and UI Architect from Poland. I engineer custom Minecraft Bedrock interfaces (JsonUI) and build modern web applications.",
     images: ["/images/ui/og-image.png"],
@@ -68,6 +70,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={lexend.variable}>
       <body>
+        <Script src="/scripts/hash-scroll-init.js" strategy="beforeInteractive" />
+        <HashScroll />
         <Header />
         <div className="main-layout">
           <main className="main-content">

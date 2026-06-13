@@ -2,7 +2,12 @@ import Link from "next/link";
 import Image from "next/image";
 import { FaGithub, FaDiscord, FaYoutube, FaInstagram, FaEnvelope } from "react-icons/fa6";
 import { SiNextdotjs } from "react-icons/si";
+import { HomeLink } from "@/shared/ui/home-link";
+import { HashLink } from "@/shared/ui/hash-link";
+import { ProjectsTagLink, ProjectsBoardLink } from "@/shared/ui/projects-tag-link";
+import { BetterBedrockIcon } from "@/shared/ui/better-bedrock-icon";
 import { SOCIAL_LINK_BUTTONS, HOME_PAGE_TEXTS, NAV_LINKS } from "@/shared/constants/data";
+import { contactSectionHref, SECTION_IDS } from "@/shared/constants/anchors";
 import { LocalTime } from "./local-time";
 import { BackToTop } from "./back-to-top";
 import styles from "./footer.module.scss";
@@ -23,14 +28,14 @@ const FOOTER_SOCIALS: FooterSocial[] = [
   { id: "instagram", icon: FaInstagram, label: "Instagram" },
 ];
 
-const CONTACT_SOCIAL_IDS = ["github", "discord", "mail"];
-
-const CATEGORY_LINKS = [
-  { href: "/projects", label: "View All Projects", isViewAll: true },
-  { href: "/projects?tag=JsonUI", label: "JsonUI & HUDs" },
-  { href: "/projects?tag=Server+Form", label: "Server Forms" },
-  { href: "/projects?tag=Web", label: "Web Development" },
+const CATEGORY_LINKS: ({ label: string } & { tag: string } | { label: string })[] = [
+  { label: "View All Projects" },
+  { tag: "JsonUI", label: "JsonUI & HUDs" },
+  { tag: "Server Form", label: "Server Forms" },
+  { tag: "Web", label: "Web Development" },
 ];
+
+const MAIL_LINK = SOCIAL_LINK_BUTTONS.find((link) => link.iconId === "mail");
 
 const LEGAL_LINKS = [
   { href: "/privacy-policy", label: "Privacy Policy" },
@@ -50,21 +55,23 @@ export const Footer = () => {
     <footer className={styles.footerWrapper}>
       <div className={styles.footerScreenContainer}>
         <div className={styles.footerGrid}>
-          <div className={styles.footerColumn}>
-            <Link className={styles.logoInfo} href="/">
-              <Image
-                src="/icon192.png"
-                alt="AxmBro Logo"
-                width={32}
-                height={32}
-                className={styles.footerLogo}
-              />
-              <span className={styles.brandName}>AxmBro</span>
-            </Link>
-            <p className={styles.brandDesc}>
-              {HOME_PAGE_TEXTS.footer.description}
-            </p>
-            <LocalTime />
+          <div className={`${styles.footerColumn} ${styles.brandColumn}`}>
+            <div className={styles.brandBlock}>
+              <HomeLink className={styles.logoInfo}>
+                <Image
+                  src="/icon192.png"
+                  alt="AxmBro Logo"
+                  width={32}
+                  height={32}
+                  className={styles.footerLogo}
+                />
+                <span className={styles.brandName}>AxmBro</span>
+              </HomeLink>
+              <p className={styles.brandDesc}>
+                {HOME_PAGE_TEXTS.footer.description}
+              </p>
+              <LocalTime />
+            </div>
             <div className={styles.socialIconsRow}>
               {FOOTER_SOCIALS.map((social) => {
                 const linkData = getSocialLink(social);
@@ -79,7 +86,7 @@ export const Footer = () => {
                       rel="noopener noreferrer"
                       aria-label={social.label}
                     >
-                      <span className={styles.betterBedrockIcon} />
+                      <BetterBedrockIcon size={22} />
                     </a>
                   );
                 }
@@ -102,9 +109,21 @@ export const Footer = () => {
           <div className={styles.footerColumn}>
             <h2 className={styles.columnTitle}>Navigation</h2>
             <nav className={styles.columnLinks}>
-              {NAV_LINKS.map((link) => (
-                <Link key={link.href} href={link.href}>{link.text}</Link>
-              ))}
+              {NAV_LINKS.map((link) =>
+                link.href.includes("#") ? (
+                  <HashLink key={link.href} href={link.href}>
+                    {link.text}
+                  </HashLink>
+                ) : link.href === "/projects" ? (
+                  <ProjectsBoardLink key={link.href} tab="all">
+                    {link.text}
+                  </ProjectsBoardLink>
+                ) : (
+                  <Link key={link.href} href={link.href}>
+                    {link.text}
+                  </Link>
+                )
+              )}
               {LEGAL_LINKS.map((link) => (
                 <Link key={link.href} href={link.href}>{link.label}</Link>
               ))}
@@ -114,36 +133,28 @@ export const Footer = () => {
           <div className={styles.footerColumn}>
             <h2 className={styles.columnTitle}>Categories</h2>
             <nav className={styles.columnLinks}>
-              {CATEGORY_LINKS.map((link) => (
-                <Link
-                  key={link.label}
-                  href={link.href}
-                  className={link.isViewAll ? styles.viewAllLink : undefined}
-                >
-                  {link.label}
-                </Link>
-              ))}
+              {CATEGORY_LINKS.map((link) =>
+                "tag" in link ? (
+                  <ProjectsTagLink key={link.label} tag={link.tag}>
+                    {link.label}
+                  </ProjectsTagLink>
+                ) : (
+                  <ProjectsBoardLink key={link.label} tab="all">
+                    {link.label}
+                  </ProjectsBoardLink>
+                )
+              )}
             </nav>
           </div>
 
           <div className={styles.footerColumn}>
             <h2 className={styles.columnTitle}>Contact</h2>
             <nav className={`${styles.columnLinks} ${styles.contactLinks}`}>
-              <Link href="/contact">Contact Form</Link>
-              {FOOTER_SOCIALS.filter((s) => CONTACT_SOCIAL_IDS.includes(s.id)).map((social) => {
-                const linkData = getSocialLink(social);
-                if (!linkData) return null;
-
-                return (
-                  <a
-                    key={social.id}
-                    href={linkData.href}
-                    {...externalLinkProps(social.id === "mail")}
-                  >
-                    {social.id === "mail" ? linkData.text : social.label}
-                  </a>
-                );
-              })}
+              <HashLink href={contactSectionHref(SECTION_IDS.sendMessage)}>Contact Form</HashLink>
+              {MAIL_LINK && (
+                <a href={MAIL_LINK.href}>{MAIL_LINK.text}</a>
+              )}
+              <HashLink href={contactSectionHref(SECTION_IDS.socialLinks)}>All social links</HashLink>
             </nav>
           </div>
         </div>
@@ -151,7 +162,7 @@ export const Footer = () => {
         <div className={styles.bottomBar}>
           <div className={styles.bottomBarContent}>
             <div className={styles.legalRow}>
-              <Link href="/" className={styles.copyrightLink}>
+              <HomeLink className={styles.copyrightLink}>
                 <Image
                   src="/icon192.png"
                   alt="AxmBro Logo"
@@ -161,7 +172,7 @@ export const Footer = () => {
                   className={styles.footerLogoIcon}
                 />
                 <span>© {new Date().getFullYear()} AxmBro | All rights reserved</span>
-              </Link>
+              </HomeLink>
               <span className={styles.separator}>•</span>
               <a
                 href="https://nextjs.org"

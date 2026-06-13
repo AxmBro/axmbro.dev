@@ -1,4 +1,5 @@
 @use '../../shared/styles/variables' as *;
+@use '../../shared/styles/mixins' as *;
 
 .footerWrapper {
   border-top: 1px solid var(--color-border);
@@ -35,9 +36,8 @@
 
 .footerColumn {
   display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding: 2rem;
+  @include section-padding;
+  @include stack-xs;
   border-right: 1px solid var(--color-border);
   border-bottom: 1px solid var(--color-border);
 
@@ -56,10 +56,18 @@
   }
 }
 
+.brandColumn {
+  gap: 0.75rem;
+}
+
+.brandBlock {
+  @include stack-xs;
+}
+
 .logoInfo {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--spacing-xs);
   text-decoration: none;
   width: fit-content;
 
@@ -73,35 +81,16 @@
 }
 
 .brandName {
-  font-size: 1.5rem;
-  font-weight: 400;
-  color: var(--color-neutral-100);
+  @include text-h2;
   letter-spacing: 0.5px;
 }
 
 .brandDesc {
-  color: var(--color-neutral-400);
-  line-height: var(--line-height-p2);
-  font-size: var(--font-p2);
+  @include text-body-sm;
   max-width: 300px;
   word-break: break-word;
   overflow-wrap: break-word;
   hyphens: auto;
-}
-
-.betterBedrockIcon {
-  display: inline-block;
-  width: 22px;
-  height: 22px;
-  background-color: currentColor;
-  -webkit-mask-image: url(/images/bb-logo.png);
-  mask-image: url(/images/bb-logo.png);
-  -webkit-mask-size: contain;
-  mask-size: contain;
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  -webkit-mask-position: center;
-  mask-position: center;
 }
 
 .socialIconsRow {
@@ -109,13 +98,15 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 1rem;
-  margin-top: 0.5rem;
+  min-height: 22px;
 
   a {
     color: var(--color-neutral-400);
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
+    line-height: 0;
 
     &:hover {
       color: var(--color-neutral-100);
@@ -124,21 +115,17 @@
 }
 
 .columnTitle {
-  color: var(--color-neutral-100);
-  font-size: var(--font-p2);
+  @include text-body-sm(var(--color-neutral-100));
   font-weight: 500;
   text-transform: uppercase;
-  margin: 0;
 }
 
 .columnLinks {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+  @include stack-xs;
 
   a {
+    @include text-caption;
     text-decoration: none;
-    font-size: var(--font-p2);
     width: fit-content;
     max-width: 100%;
     word-break: break-word;
@@ -153,11 +140,10 @@
 }
 
 .bottomBar {
-  padding: 1.25rem 2rem;
+  padding: 1.25rem var(--spacing-block);
   display: flex;
   justify-content: center;
   align-items: center;
-  border-top: 1px solid var(--color-border);
 }
 
 .bottomBarContent {
@@ -169,26 +155,24 @@
   flex-wrap: wrap;
   gap: 1rem;
 
-  @media (max-width: $breakpoint-md) {
+  @media (max-width: $breakpoint-wide) {
     flex-direction: column;
     justify-content: center;
   }
 }
 
 .legalRow {
-  color: var(--color-neutral-400);
-  font-size: 0.85rem;
+  @include text-caption;
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: var(--spacing-xs);
 }
 
 .separator {
   opacity: 0.5;
-  font-size: 0.7rem;
 }
 
 .techStack {
@@ -237,24 +221,17 @@
 }
 
 .localTime {
-  color: var(--color-neutral-400);
-  font-size: var(--font-p2);
-  line-height: var(--line-height-p2);
-  display: flex;
-  align-items: center;
-  gap: 0.35rem;
+  @include text-caption;
 
   span {
-    color: var(--color-neutral-100);
+    font-weight: 500;
   }
 }
 
 .backToTop {
+  @include text-caption;
   background: none;
   border: none;
-  color: var(--color-neutral-400);
-  font-size: var(--font-p2);
-  line-height: var(--line-height-p2);
   display: flex;
   align-items: center;
   gap: 0.35rem;
@@ -264,15 +241,5 @@
 
   &:hover {
     color: var(--color-neutral-100);
-  }
-}
-
-.viewAllLink {
-  color: var(--color-neutral-400) !important;
-  font-size: var(--font-p2) !important;
-  margin-bottom: 0.25rem;
-
-  &:hover {
-    color: var(--color-neutral-100) !important;
   }
 }

@@ -1,23 +1,43 @@
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PROJECTS } from "@/shared/constants/data";
+import { getProjectThumbnailSrc } from "@/entities/project";
 import { ScreenContainer } from "@/shared/ui/screen-container";
 import { ScreenSection, ScreenSectionList } from "@/shared/ui/screen-section";
 import { Button } from "@/shared/ui/button";
 import { ImageSection } from "@/entities/project";
 import { getProjectData } from "@/shared/lib/markdown";
+import { contactSectionHref, SECTION_IDS } from "@/shared/constants/anchors";
 import styles from "./page.module.scss";
 
 interface ProjectPageProps {
   params: Promise<{ projectId: string }>;
 }
 
-export async function generateMetadata({ params }: ProjectPageProps) {
+export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
   const { projectId } = await params;
   const pageData = await getProjectData(projectId);
-  const project = PROJECTS.find(p => p.url === projectId);
+  const project = PROJECTS.find((p) => p.url === projectId);
+  const title = pageData?.title || project?.title || projectId.replace(/_/g, " ");
+  const description = pageData?.description || project?.description;
+  const thumbnail = project ? getProjectThumbnailSrc(project) : null;
+
   return {
-    title: pageData?.title || project?.title || projectId.replace(/_/g, " "),
-    description: pageData?.description || project?.description
+    title,
+    description,
+    openGraph: {
+      title: `AxmBro.dev | ${title}`,
+      description,
+      images: thumbnail
+        ? [{ url: thumbnail, width: 1280, height: 720, alt: title }]
+        : ["/images/ui/og-image.png"],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `AxmBro.dev | ${title}`,
+      description,
+      images: thumbnail ? [thumbnail] : ["/images/ui/og-image.png"],
+    },
   };
 }
 
@@ -70,9 +90,12 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   }
   buttonsToRender.push({
     text: "Contact",
-    href: "/contact",
-    isLink: true,
+    href: contactSectionHref(SECTION_IDS.sendMessage),
   });
+
+  const showCommissionCta =
+    project.type === "commissions" ||
+    project.tags?.some((tag) => tag === "JsonUI" || tag === "Server Form");
 
   return (
     <ScreenContainer>
@@ -101,6 +124,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         <ScreenSection
           title="Information"
           titleDescription={pageData.creditsDescription ?? "People involved in creating this project."}
+          tightChildrenGap
         >
           <ScreenSectionList
             items={pageData.credits.map(c => ({
@@ -139,6 +163,22 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
       {!pageData && (
         <ScreenSection titleDescription="Full project showcase coming soon." />
+      )}
+
+      {showCommissionCta && (
+        <ScreenSection
+          title="Interested in similar work?"
+          titleDescription="Commission custom JsonUI, server forms, or HUDs for your Bedrock project."
+          withChildrenPadding={false}
+        >
+          <div className={styles.commissionCta}>
+            <Button
+              text="Commission similar UI"
+              variant="primary"
+              href={contactSectionHref(SECTION_IDS.sendMessage)}
+            />
+          </div>
+        </ScreenSection>
       )}
     </ScreenContainer>
   );

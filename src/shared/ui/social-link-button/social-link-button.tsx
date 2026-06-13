@@ -3,27 +3,9 @@
 import { useState } from "react";
 import { FaGithub, FaDiscord, FaYoutube, FaXTwitter, FaInstagram, FaEnvelope } from "react-icons/fa6";
 import { FaCheck } from "react-icons/fa6";
+import { BetterBedrockIcon } from "@/shared/ui/better-bedrock-icon";
 import type { SocialLink } from "@/shared/constants/data";
 import styles from "./social-link-button.module.scss";
-
-const BetterBedrockIcon = ({ size }: { size: number }) => (
-  <span 
-    style={{ 
-      display: 'inline-block',
-      width: size, 
-      height: size, 
-      backgroundColor: 'currentColor',
-      WebkitMaskImage: 'url(/images/bb-logo.png)',
-      WebkitMaskSize: 'contain',
-      WebkitMaskRepeat: 'no-repeat',
-      WebkitMaskPosition: 'center',
-      maskImage: 'url(/images/bb-logo.png)',
-      maskSize: 'contain',
-      maskRepeat: 'no-repeat',
-      maskPosition: 'center',
-    }} 
-  />
-);
 
 const ICON_MAP = {
   github: FaGithub,
@@ -32,7 +14,7 @@ const ICON_MAP = {
   twitter: FaXTwitter,
   instagram: FaInstagram,
   mail: FaEnvelope,
-  betterbedrock: BetterBedrockIcon,
+  betterbedrock: ({ size }: { size: number }) => <BetterBedrockIcon size={size} />,
 } as const;
 
 interface SocialLinkButtonProps {

@@ -1,7 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FAQ_ITEMS } from "@/shared/constants/data";
+import { faqItemId } from "@/shared/constants/anchors";
+import { parseHashId } from "@/shared/lib/scroll-to-hash";
 import styles from "./faq-accordion.module.scss";
 
 const ChevronIcon = ({ isOpen }: { isOpen: boolean }) => (
@@ -26,22 +28,46 @@ const ChevronIcon = ({ isOpen }: { isOpen: boolean }) => (
   </svg>
 );
 
-export const FAQAccordion = () => {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
+const findSlugFromHash = () => {
+  const id = parseHashId(window.location.hash);
+  if (!id.startsWith("faq-")) return null;
+  const slug = id.slice("faq-".length);
+  return FAQ_ITEMS.some((item) => item.slug === slug) ? slug : null;
+};
 
-  const toggleFAQ = (index: number) => {
-    setOpenIndex(openIndex === index ? null : index);
+export const FAQAccordion = () => {
+  const [openSlug, setOpenSlug] = useState<string | null>(null);
+
+  useEffect(() => {
+    const syncFromHash = () => {
+      const slug = findSlugFromHash();
+      if (slug) setOpenSlug(slug);
+    };
+
+    syncFromHash();
+    window.addEventListener("hashchange", syncFromHash);
+    return () => window.removeEventListener("hashchange", syncFromHash);
+  }, []);
+
+  const toggleFAQ = (slug: string | undefined, index: number) => {
+    const key = slug ?? String(index);
+    setOpenSlug(openSlug === key ? null : key);
   };
 
   return (
     <div className={styles.faqList}>
       {FAQ_ITEMS.map((item, index) => {
-        const isOpen = openIndex === index;
+        const key = item.slug ?? String(index);
+        const isOpen = openSlug === key;
         return (
-          <div key={index} className={styles.faqItem}>
+          <div
+            key={item.slug ?? index}
+            id={item.slug ? faqItemId(item.slug) : undefined}
+            className={styles.faqItem}
+          >
             <button
               className={styles.faqHeader}
-              onClick={() => toggleFAQ(index)}
+              onClick={() => toggleFAQ(item.slug, index)}
               aria-expanded={isOpen}
             >
               <span className={styles.faqQuestion}>{item.question}</span>

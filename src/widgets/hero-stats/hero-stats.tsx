@@ -1,5 +1,5 @@
 import styles from './hero-stats.module.scss';
-import { getYouTubeStats, formatStatValue } from '@/entities/youtube/api/youtube';
+import { formatStatValue, getYouTubeStats } from "@/entities/youtube";
 import { getBaseHeroStats } from './lib/get-hero-stats';
 import { AnimatedStat } from './animated-stat';
 
