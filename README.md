@@ -9,42 +9,41 @@ This repository contains the source code for my portfolio, crafted to deliver a 
 - **Modern Architecture:** Built on top of the Next.js App Router for optimal performance and Server Components.
 - **Maintainable Styling:** Component-scoped styling utilizing Sass Modules.
 - **Integrated Communications:** Fully functional contact form powered by Nodemailer.
-- **Markdown-Driven:** Content management and parsing handled seamlessly via `gray-matter`.
+- **Project content:** Long-form project pages from Markdown via `gray-matter`.
 
 ## 🔐 Environment Variables
 
-To enable full functionality (such as the contact form and YouTube integrations), you must configure the environment variables. Create a `.env` file at the root of the project and populate it with the following:
+Optional. Copy `.env.example` to `.env` and fill in what you need. Details for each variable are in `.env.example`.
 
-```env
-# Email account used to dispatch contact form submissions
-# Source: Your standard email provider (e.g., Gmail)
-SMTP_USER=
+- **SMTP_USER / SMTP_PASSWORD** - contact form
+- **YOUTUBE_API_KEY** - live YouTube stats on the home page
+- **NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION** - Google Search Console meta tag
 
-# App password for the email account (bypasses 2FA)
-# Source: Google Account -> Security -> 2-Step Verification -> App Passwords
-SMTP_PASSWORD=
-
-# Verification token for Google Search Console (SEO)
-# Source: Google Search Console -> Add Property -> HTML tag verification
-NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION=
-
-# API key to fetch YouTube video data or statistics
-# Source: Google Cloud Console -> Enable "YouTube Data API v3" -> Credentials
-YOUTUBE_API_KEY=
-```
+The site runs without them; missing keys only disable those features.
 
 ## 🛠️ Quick Start
 
-First, clone the repository and install the required dependencies:
+Clone the repository and install dependencies:
 
 ```bash
+git clone https://github.com/AxmBro/axmbro.dev.git
+cd axmbro.dev
 yarn install
+cp .env.example .env
 ```
 
 Start the local development server:
 
 ```bash
 yarn dev
+```
+
+Other scripts:
+
+```bash
+yarn build
+yarn start
+yarn lint
 ```
 
 Navigate to [http://localhost:3000](http://localhost:3000) in your browser to view the application.
@@ -62,16 +61,22 @@ src/
 └── widgets/              # Complex UI blocks combining entities and features (header, footer, etc.)
 ```
 
+Project cards and site copy live in `src/shared/constants/data.ts`. Long project write-ups: `src/shared/constants/projects/` - see [projects README](src/shared/constants/projects/README.md).
+
 ## 📦 Tech Stack
 
-- **[Next.js](https://nextjs.org/)** – React framework for production (App Router).
-- **[React](https://react.dev/)** – Core library for building the user interface.
-- **[TypeScript](https://www.typescriptlang.org/)** – Strongly typed JavaScript for safer, scalable code.
-- **[Sass](https://sass-lang.com/)** – Advanced CSS extension language for modular styling.
-- **[Nodemailer](https://nodemailer.com/)** – Module for Node.js apps to allow easy email sending.
-- **[React Icons](https://react-icons.github.io/react-icons/)** – Customizable SVG icons.
-- **[gray-matter](https://github.com/jonschlinkert/gray-matter)** – Parser for extracting front-matter from Markdown files.
-- **[Yarn](https://yarnpkg.com/)** – Fast and reliable package manager.
+- **[Next.js](https://nextjs.org/)** - React framework for production (App Router).
+- **[React](https://react.dev/)** - Core library for building the user interface.
+- **[TypeScript](https://www.typescriptlang.org/)** - Strongly typed JavaScript for safer, scalable code.
+- **[Sass](https://sass-lang.com/)** - Advanced CSS extension language for modular styling.
+- **[Nodemailer](https://nodemailer.com/)** - Module for Node.js apps to allow easy email sending.
+- **[React Icons](https://react-icons.github.io/react-icons/)** - Customizable SVG icons.
+- **[gray-matter](https://github.com/jonschlinkert/gray-matter)** - Parser for extracting front-matter from Markdown files.
+- **[Yarn](https://yarnpkg.com/)** - Fast and reliable package manager.
+
+## License
+
+Source is provided for viewing only. See [LICENSE](LICENSE) - no copy, modify, or use without explicit permission.
 
 ---
 
