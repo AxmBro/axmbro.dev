@@ -1,16 +1,27 @@
 "use client";
 
 import Link from "next/link";
+import {
+  type MouseEvent,
+  type MouseEventHandler,
+  type ReactNode,
+  type CSSProperties,
+} from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { normalizePageHash, scrollToHash } from "@/shared/lib/scroll-to-hash";
 import { storePendingHash } from "@/shared/lib/pending-hash";
 
+/**
+ * Link with hash scroll (sticky header offset). Cross-page: stores hash in sessionStorage
+ * and navigates first. Same page: scrolls in place. See scroll-to-hash.ts.
+ */
 interface HashLinkProps {
+  /** Path + hash, e.g. /contact#send-message or #faq-pricing on current page. */
   href: string;
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
-  style?: React.CSSProperties;
-  onClick?: React.MouseEventHandler<HTMLAnchorElement>;
+  style?: CSSProperties;
+  onClick?: MouseEventHandler<HTMLAnchorElement>;
   "data-variant"?: string;
 }
 
@@ -30,7 +41,7 @@ export const HashLink = ({ href, children, className, style, onClick, "data-vari
   const path = href.slice(0, hashIndex) || pathname;
   const hash = normalizePageHash(href.slice(hashIndex));
 
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  const handleClick = (e: MouseEvent<HTMLAnchorElement>) => {
     onClick?.(e);
     if (e.defaultPrevented) return;
 

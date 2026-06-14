@@ -181,7 +181,7 @@ export interface ExperienceItem {
   buttons?: {
     text: string;
     href: string;
-    variant: "primary" | "secondary" | "white";
+    variant: "primary" | "secondary" | "outline" | "white";
   }[];
 }
 
@@ -227,7 +227,7 @@ export const EXPERIENCE_TREE: ExperienceItem[] = [
         href: "/projects/better_bedrock",
         variant: "primary",
       },
-      { text: "Official Website", href: "https://betterbedrock.com/", variant: "secondary" },
+      { text: "Official Website", href: "https://betterbedrock.com/", variant: "outline" },
     ],
   },
   {
@@ -438,7 +438,7 @@ export const PROCESS_STEPS = [
 export interface FAQItem {
   question: string;
   answer: string;
-  /** Deep-link slug - URL becomes /contact#faq-{slug} (e.g. faq-pricing). */
+  /** Optional slug for /contact#faq-{slug} deep links. */
   slug?: string;
 }
 

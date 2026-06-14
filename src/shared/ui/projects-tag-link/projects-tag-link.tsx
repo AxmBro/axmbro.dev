@@ -1,15 +1,18 @@
 "use client";
 
 import Link from "next/link";
+import type { ReactNode } from "react";
 import { primeProjectsBoard } from "@/shared/lib/projects-board-state";
 
 interface ProjectsTagLinkProps {
   tag: string;
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
 }
 
-/** Sets a one-shot tag filter and opens /projects without ?tag= in the URL (avoids query + hash conflicts). */
+/**
+ * Inline tag link to /projects. Sets one-shot tag filter via sessionStorage (no ?tag= in URL).
+ */
 export const ProjectsTagLink = ({ tag, children, className }: ProjectsTagLinkProps) => (
   <Link
     href="/projects"

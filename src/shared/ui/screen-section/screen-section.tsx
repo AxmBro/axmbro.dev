@@ -1,17 +1,25 @@
-import React, { ReactNode } from 'react';
+import { ReactNode, type CSSProperties } from "react";
 import styles from './screen-section.module.scss';
 
+/**
+ * Bordered content section with optional title block.
+ * Set id for hash links (see anchors.ts). Use tightChildrenGap on dense pages (e.g. project detail).
+ */
 interface ScreenSectionProps {
+  /** Hash target - pair with Link or HashLink href. */
   id?: string;
   title?: ReactNode;
   titleDescription?: ReactNode;
   children?: ReactNode;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
   className?: string;
+  /** Padding around title block. @default true */
   withHeaderPadding?: boolean;
+  /** Padding around children. @default true */
   withChildrenPadding?: boolean;
-  /** Tight gap between title block and children - desc to list/content (projects). Default: --spacing-section */
+  /** Smaller gap between title and content (project detail pages). */
   tightChildrenGap?: boolean;
+  /** @default h2 */
   headingLevel?: "h1" | "h2" | "h3";
 }
 
@@ -54,8 +62,8 @@ export const ScreenSection = ({
 
 interface ScreenSectionListProps {
   title?: string;
-  items: { name: string; value?: React.ReactNode }[];
-  style?: React.CSSProperties;
+  items: { name: string; value?: ReactNode }[];
+  style?: CSSProperties;
   className?: string;
   headingLevel?: "h2" | "h3" | "h4";
 }
