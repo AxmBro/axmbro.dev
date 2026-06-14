@@ -5,23 +5,31 @@ import {
   primeProjectsBoard,
   type ProjectsBoardTab,
 } from "@/shared/lib/projects-board-state";
+import { ROUTES } from "@/shared/constants/routes";
 import buttonStyles from "@/shared/ui/button/button.module.scss";
 
+/**
+ * Link to /projects with optional tab or tag preset (sessionStorage, consumed on mount).
+ * Same variants as Button (primary, secondary, outline).
+ */
 interface ProjectsBoardButtonProps {
   text: string;
+  /** @default all when only tag is set */
   tab?: ProjectsBoardTab;
+  /** One-shot tag filter (no ?tag= in URL). */
   tag?: string;
-  variant?: "primary" | "secondary";
+  /** @default outline */
+  variant?: "primary" | "secondary" | "outline";
 }
 
 export const ProjectsBoardButton = ({
   text,
   tab,
   tag,
-  variant = "secondary",
+  variant = "outline",
 }: ProjectsBoardButtonProps) => (
   <Link
-    href="/projects"
+    href={ROUTES.projects}
     className={buttonStyles.button}
     data-variant={variant}
     onClick={() => primeProjectsBoard({ tab, tag })}

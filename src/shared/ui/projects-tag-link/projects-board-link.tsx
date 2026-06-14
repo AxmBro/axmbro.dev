@@ -1,14 +1,16 @@
 "use client";
 
 import Link from "next/link";
+import type { ReactNode } from "react";
 import {
   primeProjectsBoard,
   type ProjectsBoardTab,
 } from "@/shared/lib/projects-board-state";
+import { ROUTES } from "@/shared/constants/routes";
 
 interface ProjectsBoardLinkProps {
   tab?: ProjectsBoardTab;
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
   onClick?: () => void;
 }
@@ -20,7 +22,7 @@ export const ProjectsBoardLink = ({
   onClick,
 }: ProjectsBoardLinkProps) => (
   <Link
-    href="/projects"
+    href={ROUTES.projects}
     className={className}
     onClick={() => {
       onClick?.();

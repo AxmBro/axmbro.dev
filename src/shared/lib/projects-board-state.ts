@@ -10,6 +10,9 @@ export const PROJECTS_BOARD_TABS: ProjectsBoardTab[] = [
   "commissions",
 ];
 
+export const isProjectsBoardTab = (value: string): value is ProjectsBoardTab =>
+  (PROJECTS_BOARD_TABS as readonly string[]).includes(value);
+
 export const primeProjectsBoard = (options: {
   tab?: ProjectsBoardTab;
   tag?: string;
@@ -38,10 +41,8 @@ export const consumeProjectsTagFilter = (): string | null => {
 
 export const getSavedProjectsTab = (): ProjectsBoardTab | null => {
   try {
-    const saved = sessionStorage.getItem(
-      PROJECTS_ACTIVE_TAB_KEY,
-    ) as ProjectsBoardTab | null;
-    if (saved && PROJECTS_BOARD_TABS.includes(saved)) {
+    const saved = sessionStorage.getItem(PROJECTS_ACTIVE_TAB_KEY);
+    if (saved && isProjectsBoardTab(saved)) {
       return saved;
     }
   } catch {}

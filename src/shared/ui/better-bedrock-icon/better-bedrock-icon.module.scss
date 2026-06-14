@@ -1,5 +1,7 @@
 .icon {
   display: inline-block;
+  width: var(--icon-size, 22px);
+  height: var(--icon-size, 22px);
   background-color: currentColor;
   -webkit-mask-image: url(/images/bb-logo.png);
   mask-image: url(/images/bb-logo.png);

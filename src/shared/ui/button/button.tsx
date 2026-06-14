@@ -1,19 +1,31 @@
 "use client";
 
-import { ReactNode } from "react";
 import Link from "next/link";
 import { HashLink } from "@/shared/ui/hash-link";
 import { primeProjectsBoard } from "@/shared/lib/projects-board-state";
+import type { ButtonVariant } from "./button-variants";
+import { ROUTES } from "@/shared/constants/routes";
 import styles from "./button.module.scss";
+
+export type { ButtonVariant } from "./button-variants";
+export { buttonVariantForIndex } from "./button-variants";
+
+/**
+ * Shared button / link. Default variant: outline.
+ *
+ * Variants:
+ * - primary - blue fill
+ * - secondary - gray fill + border
+ * - outline - transparent + border
+ *
+ * In a row of Buttons, prefer `buttonVariantForIndex` for consistent hierarchy.
+ * With href: external URLs open in new tab; hash routes use HashLink;
+ * /projects resets board tab to "all" via sessionStorage.
+ */
 interface ButtonProps {
-  /** 
-   * Button variant. 
-   * 'primary' (blue), 'secondary' (gray), 'white' (white), 'input' (form input match).
-   */
-  variant?: "primary" | "secondary" | "white" | "input";
-  text?: string;
-  children?: ReactNode;
-  style?: React.CSSProperties;
+  /** @default outline */
+  variant?: ButtonVariant;
+  text: string;
   onClick?: () => void;
   type?: "submit" | "reset" | "button";
   href?: string;
@@ -21,16 +33,14 @@ interface ButtonProps {
 }
 
 export const Button = ({
-  variant = "secondary",
+  variant = "outline",
   text,
-  children,
-  style,
   type = "button",
   onClick,
   href,
   external
 }: ButtonProps) => {
-  const content = text || children;
+  const content = text;
 
   if (href) {
     if (external || href.startsWith("http")) {
@@ -39,7 +49,6 @@ export const Button = ({
           href={href}
           className={styles.button}
           data-variant={variant}
-          style={style}
           onClick={onClick}
           target="_blank"
           rel="noopener noreferrer"
@@ -55,7 +64,6 @@ export const Button = ({
           href={href}
           className={styles.button}
           data-variant={variant}
-          style={style}
           onClick={onClick}
         >
           {content}
@@ -63,13 +71,12 @@ export const Button = ({
       );
     }
 
-    if (href === "/projects") {
+    if (href === ROUTES.projects) {
       return (
         <Link
           href={href}
           className={styles.button}
           data-variant={variant}
-          style={style}
           onClick={() => {
             onClick?.();
             primeProjectsBoard({ tab: "all" });
@@ -85,7 +92,6 @@ export const Button = ({
         href={href}
         className={styles.button}
         data-variant={variant}
-        style={style}
         onClick={onClick}
       >
         {content}
@@ -98,7 +104,6 @@ export const Button = ({
       type={type}
       className={styles.button}
       data-variant={variant}
-      style={style}
       onClick={onClick}
     >
       {content}

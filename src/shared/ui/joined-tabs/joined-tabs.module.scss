@@ -29,12 +29,8 @@
 
   &:hover,
   &[data-active="true"] {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: var(--surface-hover);
     color: var(--color-neutral-100);
-
-    @supports (color: color-mix(in oklab, white, black)) {
-      background-color: color-mix(in oklab, var(--color-neutral-100) 10%, transparent);
-    }
   }
 
   &[disabled] {
@@ -54,11 +50,4 @@
   padding: 0.8rem 1.2rem;
   font-size: var(--font-p2);
   line-height: var(--line-height-body);
-}
-
-.tabsWrapper[data-size="medium"] .tabButton:hover,
-.tabsWrapper[data-size="medium"] .tabButton[data-active="true"],
-.tabsWrapper[data-size="small"] .tabButton:hover,
-.tabsWrapper[data-size="small"] .tabButton[data-active="true"] {
-  color: var(--color-neutral-100);
 }

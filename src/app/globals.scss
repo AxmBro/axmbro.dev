@@ -1,18 +1,43 @@
 @use '../shared/styles/variables' as *;
 
-// Runtime design tokens — use as var(--token) in any CSS module (no @use required).
-// Breakpoints live in shared/styles/_variables.scss (compile-time only).
+// Design tokens: var(--*) in any CSS module (no @use).
+// Breakpoints are SCSS-only in shared/styles/_variables.scss ($breakpoint-md, etc.).
+//
+// Prefixes:
+//   color-*   text, borders, solid fills, brand
+//   surface-* translucent overlays (hover, inputs, header)
+//
+// Usage:
+//   Page / section bg - color-bg-primary
+//   Grid lines, media frames - color-border (media: border only, no fill)
+//   Text fields, search - surface-input, surface-input-focus on focus
+//   Nav, tabs, outline - surface-hover
+//   Secondary buttons - color-secondary, color-secondary-hover
+//   Primary CTA, success - color-accent (accent-subtle for tinted bg)
+//   Text on accent buttons - color-on-accent
+//   Form errors - color-error
 :root {
-  /* Colors */
   --color-neutral-100: oklch(97% 0 0);
   --color-neutral-400: oklch(70.8% 0 0);
 
   --color-bg-primary: #000000;
   --color-border: rgb(31, 31, 31);
-  --color-accent: rgb(0, 143, 252);
-  --max-website-width: 70rem;
+  --max-website-width: 64rem;
 
-  /* Typography — font sizes */
+  --color-accent: rgb(0, 143, 252);
+  --color-accent-subtle: color-mix(in srgb, var(--color-accent) 10%, transparent);
+  --color-on-accent: #000000;
+  --color-error: rgb(255, 78, 100);
+
+  --color-secondary: rgb(20, 20, 20);
+  --color-secondary-hover: var(--color-border);
+
+  --surface-hover: rgba(255, 255, 255, 0.1);
+  --surface-input: rgba(255, 255, 255, 0.02);
+  --surface-input-focus: rgba(255, 255, 255, 0.05);
+  --surface-header: rgba(0, 0, 0, 0.9);
+  --surface-overlay: rgba(0, 0, 0, 0.4);
+
   --font-p: 1rem;
   --font-p2: 0.875rem;
   --font-h1: 3rem;
@@ -20,20 +45,48 @@
   --font-h3: 1rem;
   --font-h4: 1rem;
 
-  /* Typography — line heights */
-  --line-height-display: 1.1; /* h1, hero stats */
-  --line-height-heading: 1.2; /* h2, h3, h4 */
-  --line-height-body: 1.6; /* p, p2, descriptions */
+  --line-height-display: 1.1;
+  --line-height-heading: 1.2;
+  --line-height-body: 1.6;
 
-  /* Spacing — layout rhythm (see ScreenSection, footer, experience grid) */
-  --spacing-xs: 0.5rem; /* tight: title ↔ description, items in a group */
-  --spacing-section: 1.5rem; /* loose: header block ↔ content, text ↔ actions */
-  --spacing-block: 2rem; /* section / column padding */
+  --spacing-xs: 0.5rem;
+  --spacing-section: 1.5rem;
+  --spacing-block: 2rem;
+  --page-section-gap: 6rem;
+  --page-padding-block: 6rem;
+  --layout-gutter-outer: 1rem;
 
-  /* Scroll anchors — sticky header offset (see scroll-to-hash.ts) */
-  --header-offset: 5.375rem;
+  --header-pad-block: 1.25rem;
+  --header-logo-size: 32px;
+  --header-offset: calc(var(--header-pad-block) * 2 + var(--header-logo-size));
+
   --scroll-anchor-gap: var(--spacing-section);
   --scroll-anchor-offset: calc(var(--header-offset) + var(--scroll-anchor-gap));
+}
+
+/* Mobile — $breakpoint-tablet */
+@media (max-width: $breakpoint-tablet) {
+  :root {
+    --font-p: 0.9375rem;
+    --font-p2: 0.8125rem;
+    --font-h1: 2rem;
+    --font-h2: 1.25rem;
+    --font-h3: 0.9375rem;
+    --font-h4: 0.9375rem;
+
+    --line-height-display: 1.12;
+    --line-height-heading: 1.2;
+
+    --spacing-xs: 0.375rem;
+    --spacing-section: 1rem;
+    --spacing-block: 1.25rem;
+    --page-section-gap: 3.5rem;
+    --page-padding-block: 3rem;
+    --layout-gutter-outer: 0.75rem;
+
+    --header-pad-block: 0.75rem;
+    --header-logo-size: 28px;
+  }
 }
 
 * {
@@ -46,9 +99,9 @@ html {
   scroll-padding-top: var(--header-offset);
 }
 
-/* Scroll anchors: section[id] = tight under header | [data-scroll-anchor] = header + gap (see scroll-to-hash.ts) */
+/* section[id]: flush under header; [data-scroll-anchor]: extra gap below header */
 section[id] {
-  scroll-margin-top: calc(var(--header-offset) - 1px);
+  scroll-margin-top: var(--header-offset);
 }
 
 [data-scroll-anchor] {

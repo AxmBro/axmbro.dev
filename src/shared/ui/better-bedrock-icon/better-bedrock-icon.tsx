@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import styles from "./better-bedrock-icon.module.scss";
 
 interface BetterBedrockIconProps {
@@ -8,7 +9,7 @@ interface BetterBedrockIconProps {
 export const BetterBedrockIcon = ({ size = 22, className }: BetterBedrockIconProps) => (
   <span
     className={`${styles.icon} ${className ?? ""}`}
-    style={{ width: size, height: size }}
+    style={{ "--icon-size": `${size}px` } as CSSProperties}
     aria-hidden
   />
 );

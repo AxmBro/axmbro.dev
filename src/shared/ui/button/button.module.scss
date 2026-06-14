@@ -20,18 +20,7 @@
 
   &[data-variant="primary"] {
     background-color: var(--color-accent);
-    color: #000000;
-    border: none;
-
-    &:hover,
-    &:active {
-      filter: brightness(0.85);
-    }
-  }
-
-  &[data-variant="white"] {
-    background-color: #ffffff;
-    color: #000000;
+    color: var(--color-on-accent);
     border: none;
 
     &:hover,
@@ -41,31 +30,25 @@
   }
 
   &[data-variant="secondary"] {
+    background-color: var(--color-secondary);
+    color: var(--color-neutral-100);
+    border: 1px solid var(--color-border);
+
+    &:hover,
+    &:active {
+      background-color: var(--color-secondary-hover);
+    }
+  }
+
+  &[data-variant="outline"] {
     background-color: transparent;
     color: var(--color-neutral-100);
     border: 1px solid var(--color-border);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
 
     &:hover,
     &:active {
-      background-color: rgba(255, 255, 255, 0.1);
-      
-      @supports (color: color-mix(in oklab, white, black)) {
-        background-color: color-mix(in oklab, var(--color-neutral-100) 10%, transparent);
-      }
+      background-color: var(--surface-hover);
     }
   }
 
-  &[data-variant="input"] {
-    background-color: rgba(255, 255, 255, 0.02);
-    color: var(--color-neutral-400);
-    border: 1px solid var(--color-border);
-    
-    &:hover,
-    &:active {
-      background-color: rgba(255, 255, 255, 0.05);
-      color: var(--color-neutral-100);
-    }
-  }
 }

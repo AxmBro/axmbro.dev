@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import { ScreenContainer } from "@/shared/ui/screen-container";
 import { ScreenSection } from "@/shared/ui/screen-section";
 import { Button } from "@/shared/ui/button";
+import { ButtonGroup } from "@/shared/ui/button-group";
 import { PROJECTS, HOME_PAGE_TEXTS } from "@/shared/constants/data";
 import { contactSectionHref, homeSectionHref, SECTION_IDS } from "@/shared/constants/anchors";
 import { ProjectsBoard } from "@/widgets/projects-board";
@@ -29,7 +30,7 @@ export default function ProjectsPage() {
         titleDescription={HOME_PAGE_TEXTS.projectsPage.description(PROJECTS.length)}
         withChildrenPadding={false}
       >
-        <Suspense fallback={<div style={{ padding: "2rem", textAlign: "center", color: "var(--color-neutral-400)" }}>Loading projects...</div>}>
+        <Suspense fallback={<div className={styles.loading}>Loading projects...</div>}>
           <ProjectsBoard />
         </Suspense>
       </ScreenSection>
@@ -39,14 +40,14 @@ export default function ProjectsPage() {
         titleDescription="Tell me about your project and I'll reply within 24 hours. New to commissions? See how I plan, build, and deliver JsonUI work before you reach out."
         withChildrenPadding={false}
       >
-        <div className={styles.buttonsGroup}>
+        <ButtonGroup padInline padBottom>
           <Button text="Get in Touch" variant="primary" href={contactSectionHref(SECTION_IDS.sendMessage)} />
           <Button
             text="View commission process"
-            variant="secondary"
+            variant="outline"
             href={homeSectionHref(SECTION_IDS.commissionProcess)}
           />
-        </div>
+        </ButtonGroup>
       </ScreenSection>
     </ScreenContainer>
   );

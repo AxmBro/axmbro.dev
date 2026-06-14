@@ -4,7 +4,8 @@ import { PROJECTS } from "@/shared/constants/data";
 import { getProjectThumbnailSrc } from "@/entities/project";
 import { ScreenContainer } from "@/shared/ui/screen-container";
 import { ScreenSection, ScreenSectionList } from "@/shared/ui/screen-section";
-import { Button } from "@/shared/ui/button";
+import { Button, buttonVariantForIndex } from "@/shared/ui/button";
+import { ButtonGroup } from "@/shared/ui/button-group";
 import { ImageSection } from "@/entities/project";
 import { getProjectData } from "@/shared/lib/markdown";
 import { contactSectionHref, SECTION_IDS } from "@/shared/constants/anchors";
@@ -104,20 +105,17 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         headingLevel="h1"
         titleDescription={renderDescription(description)}
       >
-        <div className={styles.buttons}>
-          {buttonsToRender.map((btn, i) => {
-            const variant = i === 0 ? "primary" : "secondary";
-            return (
-              <Button 
-                key={`btn-${i}`} 
-                text={btn.text} 
-                variant={variant} 
-                href={btn.href} 
-                external={btn.external} 
+        <ButtonGroup>
+          {buttonsToRender.map((btn, i) => (
+              <Button
+                key={`btn-${i}`}
+                text={btn.text}
+                variant={buttonVariantForIndex(i, buttonsToRender.length)}
+                href={btn.href}
+                external={btn.external}
               />
-            );
-          })}
-        </div>
+            ))}
+        </ButtonGroup>
       </ScreenSection>
 
       {pageData?.credits && pageData.credits.length > 0 && (

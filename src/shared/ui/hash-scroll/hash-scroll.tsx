@@ -19,6 +19,7 @@ const scrollFromTop = () => {
 
 export const HashScroll = () => {
   const pathname = usePathname();
+  // Init effect already handles first mount; skip duplicate scroll on first pathname tick.
   const skipInitialPathname = useRef(true);
 
   useEffect(() => {

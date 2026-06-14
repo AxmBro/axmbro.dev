@@ -1,6 +1,3 @@
-// Typography & layout mixins — compose :root tokens from globals.scss.
-// Import: @use '../../shared/styles/mixins' as *;
-
 @mixin text-display($color: var(--color-neutral-100)) {
   font-size: var(--font-h1);
   line-height: var(--line-height-display);
@@ -36,12 +33,11 @@
   color: $color;
 }
 
-// Caption — meta/secondary copy (timestamps, legal, footer labels).
 @mixin text-caption($color: var(--color-neutral-400)) {
   @include text-body-sm($color);
 }
 
-// Neutralize global `a:hover { text-decoration: underline }` on button-like links.
+// Cancel global a:hover underline on button-styled links.
 @mixin link-plain {
   text-decoration: none !important;
 

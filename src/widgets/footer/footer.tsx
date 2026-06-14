@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import type { ComponentType } from "react";
 import { FaGithub, FaDiscord, FaYoutube, FaInstagram, FaEnvelope } from "react-icons/fa6";
 import { SiNextdotjs } from "react-icons/si";
 import { HomeLink } from "@/shared/ui/home-link";
@@ -8,6 +9,7 @@ import { ProjectsTagLink, ProjectsBoardLink } from "@/shared/ui/projects-tag-lin
 import { BetterBedrockIcon } from "@/shared/ui/better-bedrock-icon";
 import { SOCIAL_LINK_BUTTONS, HOME_PAGE_TEXTS, NAV_LINKS } from "@/shared/constants/data";
 import { contactSectionHref, SECTION_IDS } from "@/shared/constants/anchors";
+import { ROUTES } from "@/shared/constants/routes";
 import { LocalTime } from "./local-time";
 import { BackToTop } from "./back-to-top";
 import styles from "./footer.module.scss";
@@ -15,7 +17,7 @@ import styles from "./footer.module.scss";
 type FooterSocial = {
   id: string;
   label: string;
-  icon: React.ComponentType<{ size: number; "aria-hidden"?: boolean }> | null;
+  icon: ComponentType<{ size: number; "aria-hidden"?: boolean }> | null;
   textMatcher?: string;
 };
 
@@ -28,7 +30,7 @@ const FOOTER_SOCIALS: FooterSocial[] = [
   { id: "instagram", icon: FaInstagram, label: "Instagram" },
 ];
 
-const CATEGORY_LINKS: ({ label: string } & { tag: string } | { label: string })[] = [
+const CATEGORY_LINKS: { label: string; tag?: string }[] = [
   { label: "View All Projects" },
   { tag: "JsonUI", label: "JsonUI & HUDs" },
   { tag: "Server Form", label: "Server Forms" },
@@ -38,17 +40,14 @@ const CATEGORY_LINKS: ({ label: string } & { tag: string } | { label: string })[
 const MAIL_LINK = SOCIAL_LINK_BUTTONS.find((link) => link.iconId === "mail");
 
 const LEGAL_LINKS = [
-  { href: "/privacy-policy", label: "Privacy Policy" },
-  { href: "/terms-of-use", label: "Terms of Use" },
+  { href: ROUTES.privacyPolicy, label: "Privacy Policy" },
+  { href: ROUTES.termsOfUse, label: "Terms of Use" },
 ];
 
 const getSocialLink = (social: FooterSocial) =>
   SOCIAL_LINK_BUTTONS.find(
     (s) => s.iconId === social.id && (!social.textMatcher || s.text === social.textMatcher)
   );
-
-const externalLinkProps = (isMail: boolean) =>
-  isMail ? {} : { target: "_blank" as const, rel: "noopener noreferrer" as const };
 
 export const Footer = () => {
   return (
@@ -97,7 +96,9 @@ export const Footer = () => {
                     key={social.id}
                     href={linkData.href}
                     aria-label={social.label}
-                    {...externalLinkProps(social.id === "mail")}
+                    {...(social.id === "mail"
+                      ? {}
+                      : { target: "_blank", rel: "noopener noreferrer" })}
                   >
                     <Icon size={22} aria-hidden />
                   </a>
@@ -114,7 +115,7 @@ export const Footer = () => {
                   <HashLink key={link.href} href={link.href}>
                     {link.text}
                   </HashLink>
-                ) : link.href === "/projects" ? (
+                ) : link.href === ROUTES.projects ? (
                   <ProjectsBoardLink key={link.href} tab="all">
                     {link.text}
                   </ProjectsBoardLink>
@@ -134,7 +135,7 @@ export const Footer = () => {
             <h2 className={styles.columnTitle}>Categories</h2>
             <nav className={styles.columnLinks}>
               {CATEGORY_LINKS.map((link) =>
-                "tag" in link ? (
+                link.tag ? (
                   <ProjectsTagLink key={link.label} tag={link.tag}>
                     {link.label}
                   </ProjectsTagLink>
@@ -168,7 +169,6 @@ export const Footer = () => {
                   alt="AxmBro Logo"
                   width={14}
                   height={14}
-                  style={{ borderRadius: "2px" }}
                   className={styles.footerLogoIcon}
                 />
                 <span>© {new Date().getFullYear()} AxmBro | All rights reserved</span>
