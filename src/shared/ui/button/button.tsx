@@ -1,19 +1,30 @@
 "use client";
 
-import { ReactNode } from "react";
+import { ReactNode, type CSSProperties } from "react";
 import Link from "next/link";
 import { HashLink } from "@/shared/ui/hash-link";
 import { primeProjectsBoard } from "@/shared/lib/projects-board-state";
 import styles from "./button.module.scss";
+
+/**
+ * Shared button / link. Default variant: outline.
+ *
+ * Variants:
+ * - primary - blue fill
+ * - secondary - gray fill + border
+ * - outline - transparent + border
+ * - white - white fill
+ * - input - matches form field styling
+ *
+ * With href: external URLs open in new tab; hash routes use HashLink;
+ * /projects resets board tab to "all" via sessionStorage.
+ */
 interface ButtonProps {
-  /** 
-   * Button variant. 
-   * 'primary' (blue), 'secondary' (gray), 'white' (white), 'input' (form input match).
-   */
-  variant?: "primary" | "secondary" | "white" | "input";
+  /** @default outline */
+  variant?: "primary" | "secondary" | "outline" | "white" | "input";
   text?: string;
   children?: ReactNode;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
   onClick?: () => void;
   type?: "submit" | "reset" | "button";
   href?: string;
@@ -21,7 +32,7 @@ interface ButtonProps {
 }
 
 export const Button = ({
-  variant = "secondary",
+  variant = "outline",
   text,
   children,
   style,

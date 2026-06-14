@@ -37,7 +37,8 @@ export default function HomePage() {
       >
         <div className={styles.buttonsGroup}>
           <Button text="Get in Touch" variant="primary" href={contactSectionHref(SECTION_IDS.sendMessage)} />
-          <Button text="Commission Process" variant="secondary" href={homeSectionHref(SECTION_IDS.commissionProcess)} />
+          <Button text="Browse Projects" variant="secondary" href="/projects" />
+          <Button text="Commission Process" variant="outline" href={homeSectionHref(SECTION_IDS.commissionProcess)} />
         </div>
         <HeroStats />
       </ScreenSection>
@@ -94,7 +95,7 @@ export default function HomePage() {
           </div>
           <div className={styles.buttonsGroupContact}>
             <Button text="Start a Project" variant="primary" href={contactSectionHref(SECTION_IDS.sendMessage)} />
-            <Button text="Common questions" variant="secondary" href={contactSectionHref(SECTION_IDS.faq)} />
+            <Button text="Common questions" variant="outline" href={contactSectionHref(SECTION_IDS.faq)} />
           </div>
         </div>
       </ScreenSection>

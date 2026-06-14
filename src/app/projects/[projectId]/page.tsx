@@ -106,7 +106,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       >
         <div className={styles.buttons}>
           {buttonsToRender.map((btn, i) => {
-            const variant = i === 0 ? "primary" : "secondary";
+            const variant = i === 0 ? "primary" : "outline";
             return (
               <Button 
                 key={`btn-${i}`} 

@@ -43,7 +43,7 @@ export default function ProjectsPage() {
           <Button text="Get in Touch" variant="primary" href={contactSectionHref(SECTION_IDS.sendMessage)} />
           <Button
             text="View commission process"
-            variant="secondary"
+            variant="outline"
             href={homeSectionHref(SECTION_IDS.commissionProcess)}
           />
         </div>
