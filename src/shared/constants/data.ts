@@ -1,4 +1,5 @@
 import { contactSectionHref, SECTION_IDS } from "./anchors";
+import type { ButtonVariant } from "@/shared/ui/button";
 
 export type ProjectType = "personal" | "commissions";
 
@@ -181,7 +182,7 @@ export interface ExperienceItem {
   buttons?: {
     text: string;
     href: string;
-    variant: "primary" | "secondary" | "outline" | "white";
+    variant: ButtonVariant;
   }[];
 }
 
@@ -305,9 +306,18 @@ export const SKILLS_CARDS: SkillCard[] = [
 export interface SocialLink {
   href: string;
   text: string;
-  iconId: "github" | "discord" | "youtube" | "twitter" | "instagram" | "mail" | "betterbedrock";
+  iconId: SocialIconId;
   copyText?: string;
 }
+
+export type SocialIconId =
+  | "github"
+  | "discord"
+  | "youtube"
+  | "twitter"
+  | "instagram"
+  | "mail"
+  | "betterbedrock";
 
 export const SOCIAL_LINK_BUTTONS: SocialLink[] = [
   {
@@ -368,7 +378,7 @@ export const HOME_SELECTED_PROJECT_URLS = [
   "better_bedrock",
   "one_slime_block_adventure",
   "ra_survival",
-] as const;
+];
 
 export const getHomeSelectedProjects = () =>
   HOME_SELECTED_PROJECT_URLS.map((url) => PROJECTS.find((p) => p.url === url)).filter(

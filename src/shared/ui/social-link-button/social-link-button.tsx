@@ -1,21 +1,21 @@
 "use client";
 
-import { useState, type MouseEvent } from "react";
+import { useState, type ComponentType, type MouseEvent } from "react";
 import { FaGithub, FaDiscord, FaYoutube, FaXTwitter, FaInstagram, FaEnvelope } from "react-icons/fa6";
 import { FaCheck } from "react-icons/fa6";
 import { BetterBedrockIcon } from "@/shared/ui/better-bedrock-icon";
-import type { SocialLink } from "@/shared/constants/data";
+import type { SocialIconId, SocialLink } from "@/shared/constants/data";
 import styles from "./social-link-button.module.scss";
 
-const ICON_MAP = {
+const ICON_MAP: Record<SocialIconId, ComponentType<{ size: number; "aria-hidden"?: boolean }>> = {
   github: FaGithub,
   discord: FaDiscord,
   youtube: FaYoutube,
   twitter: FaXTwitter,
   instagram: FaInstagram,
   mail: FaEnvelope,
-  betterbedrock: ({ size }: { size: number }) => <BetterBedrockIcon size={size} />,
-} as const;
+  betterbedrock: ({ size }) => <BetterBedrockIcon size={size} />,
+};
 
 /** Social chip. link.copyText copies to clipboard instead of navigating (accent "Copied!" feedback). */
 interface SocialLinkButtonProps {
