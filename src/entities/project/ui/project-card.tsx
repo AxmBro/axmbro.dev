@@ -53,6 +53,7 @@ export const ProjectCard = ({ project }: ProjectCardProps) => {
             className={styles.image}
             width={1280}
             height={720}
+            sizes="(max-width: 992px) 100vw, min(50vw, 512px)"
           />
         </div>
       )}
