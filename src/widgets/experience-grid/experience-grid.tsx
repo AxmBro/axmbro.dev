@@ -1,4 +1,5 @@
-import { Button } from "@/shared/ui/button";
+import { Button, buttonVariantForIndex } from "@/shared/ui/button";
+import { ButtonGroup } from "@/shared/ui/button-group";
 import { EXPERIENCE_TREE } from "@/shared/constants/data";
 import styles from "./experience-grid.module.scss";
 
@@ -22,16 +23,16 @@ export const ExperienceGrid = () => {
               ))}
             </ul>
             {exp.buttons && exp.buttons.length > 0 && (
-              <div className={styles.expButtonsRow}>
+              <ButtonGroup marginTop>
                 {exp.buttons.map((btn, i) => (
                     <Button
                       key={i}
-                      variant={btn.variant}
+                      variant={buttonVariantForIndex(i, exp.buttons!.length)}
                       text={btn.text}
                       href={btn.href}
                     />
                   ))}
-              </div>
+              </ButtonGroup>
             )}
           </div>
         </div>
