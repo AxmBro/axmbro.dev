@@ -22,7 +22,7 @@
 
   --color-bg-primary: #000000;
   --color-border: rgb(31, 31, 31);
-  --max-website-width: 60rem;
+  --max-website-width: 64rem;
 
   --color-accent: rgb(0, 143, 252);
   --color-accent-subtle: color-mix(in srgb, var(--color-accent) 10%, transparent);
@@ -52,10 +52,41 @@
   --spacing-xs: 0.5rem;
   --spacing-section: 1.5rem;
   --spacing-block: 2rem;
+  --page-section-gap: 6rem;
+  --page-padding-block: 6rem;
+  --layout-gutter-outer: 1rem;
 
-  --header-offset: 5.375rem;
+  --header-pad-block: 1.25rem;
+  --header-logo-size: 32px;
+  --header-offset: calc(var(--header-pad-block) * 2 + var(--header-logo-size));
+
   --scroll-anchor-gap: var(--spacing-section);
   --scroll-anchor-offset: calc(var(--header-offset) + var(--scroll-anchor-gap));
+}
+
+/* Mobile — $breakpoint-tablet */
+@media (max-width: $breakpoint-tablet) {
+  :root {
+    --font-p: 0.9375rem;
+    --font-p2: 0.8125rem;
+    --font-h1: 2rem;
+    --font-h2: 1.25rem;
+    --font-h3: 0.9375rem;
+    --font-h4: 0.9375rem;
+
+    --line-height-display: 1.12;
+    --line-height-heading: 1.2;
+
+    --spacing-xs: 0.375rem;
+    --spacing-section: 1rem;
+    --spacing-block: 1.25rem;
+    --page-section-gap: 3.5rem;
+    --page-padding-block: 3rem;
+    --layout-gutter-outer: 0.75rem;
+
+    --header-pad-block: 0.75rem;
+    --header-logo-size: 28px;
+  }
 }
 
 * {
@@ -68,9 +99,9 @@ html {
   scroll-padding-top: var(--header-offset);
 }
 
-/* section[id]: flush under header; [data-scroll-anchor]: header + gap */
+/* section[id]: flush under header; [data-scroll-anchor]: extra gap below header */
 section[id] {
-  scroll-margin-top: calc(var(--header-offset) - 1px);
+  scroll-margin-top: var(--header-offset);
 }
 
 [data-scroll-anchor] {

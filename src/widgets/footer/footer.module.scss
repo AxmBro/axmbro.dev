@@ -7,7 +7,7 @@
   position: relative;
   overflow: hidden;
   width: 100%;
-  padding: 0 1rem;
+  padding: 0 var(--layout-gutter-outer);
 }
 
 .footerScreenContainer {
@@ -206,6 +206,7 @@
 
 .footerLogoIcon {
   filter: grayscale(100%);
+  border-radius: 2px;
 }
 
 .sourceLink {
