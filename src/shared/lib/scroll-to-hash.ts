@@ -1,13 +1,18 @@
 /**
- * Scroll anchor usage (offsets live in globals.scss):
+ * Hash navigation. Offsets: globals.scss (--header-offset, scroll-margin rules).
  *
- * Section - id on ScreenSection + plain Link:
- *   <ScreenSection id="commission-process" ... />
- *   <Link href="/#commission-process">Commission Process</Link>
+ * Flow:
+ *   hash-scroll-init.js - strip hash before first paint, store in sessionStorage
+ *   HashLink - cross-page clicks store pending hash, same-page scrolls in place
+ *   HashScroll - restore pending hash after route, listen to hashchange
  *
- * Custom element - id + data-scroll-anchor + HashLink:
- *   <div id="social-links" data-scroll-anchor>...</div>
- *   <HashLink href="/contact#social-links">All social links</HashLink>
+ * Section id + Link:
+ *   <ScreenSection id="commission-process" />
+ *   <Link href="/#commission-process">...</Link>
+ *
+ * Extra gap under sticky header - id + data-scroll-anchor + HashLink:
+ *   <div id="social-links" data-scroll-anchor />
+ *   <HashLink href="/contact#social-links">...</HashLink>
  */
 export const parseHashId = (hash: string) =>
   decodeURIComponent(hash.replace(/^#/, "").split("#")[0]);
