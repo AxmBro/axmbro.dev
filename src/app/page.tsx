@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { ScreenContainer } from "@/shared/ui/screen-container";
 import { ScreenSection } from "@/shared/ui/screen-section";
 import { Button } from "@/shared/ui/button";
+import { ButtonGroup } from "@/shared/ui/button-group";
 import { ProjectsBoardButton } from "@/shared/ui/projects-tag-link";
 import { SkillsGrid } from "@/widgets/skills-grid";
 import { ExperienceGrid } from "@/widgets/experience-grid";
@@ -10,6 +11,7 @@ import { HeroStats } from "@/widgets/hero-stats";
 import { ProjectCard } from "@/entities/project";
 import { HOME_PAGE_TEXTS, getHomeSelectedProjects } from "@/shared/constants/data";
 import { contactSectionHref, homeSectionHref, SECTION_IDS } from "@/shared/constants/anchors";
+import { ROUTES } from "@/shared/constants/routes";
 import styles from "./page.module.scss";
 
 export const metadata: Metadata = {
@@ -35,11 +37,11 @@ export default function HomePage() {
         headingLevel="h1"
         titleDescription={HOME_PAGE_TEXTS.about.description}
       >
-        <div className={styles.buttonsGroup}>
+        <ButtonGroup padInline marginBottom>
           <Button text="Get in Touch" variant="primary" href={contactSectionHref(SECTION_IDS.sendMessage)} />
-          <Button text="Browse Projects" variant="secondary" href="/projects" />
+          <Button text="Browse Projects" variant="secondary" href={ROUTES.projects} />
           <Button text="Commission Process" variant="outline" href={homeSectionHref(SECTION_IDS.commissionProcess)} />
-        </div>
+        </ButtonGroup>
         <HeroStats />
       </ScreenSection>
 
@@ -75,8 +77,10 @@ export default function HomePage() {
           ))}
         </div>
         <div className={styles.selectedFooter}>
-          <ProjectsBoardButton text="View all projects" tab="all" variant="primary" />
-          <ProjectsBoardButton text="More featured projects" tab="featured" />
+          <ButtonGroup>
+            <ProjectsBoardButton text="View all projects" tab="all" variant="primary" />
+            <ProjectsBoardButton text="More featured projects" tab="featured" />
+          </ButtonGroup>
         </div>
       </ScreenSection>
 
@@ -93,10 +97,10 @@ export default function HomePage() {
             <h3 className={styles.ctaTitle}>Ready to build something amazing?</h3>
             <p className={styles.ctaText}>{HOME_PAGE_TEXTS.contact.description}</p>
           </div>
-          <div className={styles.buttonsGroupContact}>
+          <ButtonGroup align="center" marginTop>
             <Button text="Start a Project" variant="primary" href={contactSectionHref(SECTION_IDS.sendMessage)} />
             <Button text="Common questions" variant="outline" href={contactSectionHref(SECTION_IDS.faq)} />
-          </div>
+          </ButtonGroup>
         </div>
       </ScreenSection>
 

@@ -5,6 +5,7 @@ import {
   primeProjectsBoard,
   type ProjectsBoardTab,
 } from "@/shared/lib/projects-board-state";
+import { ROUTES } from "@/shared/constants/routes";
 import buttonStyles from "@/shared/ui/button/button.module.scss";
 
 /**
@@ -28,7 +29,7 @@ export const ProjectsBoardButton = ({
   variant = "outline",
 }: ProjectsBoardButtonProps) => (
   <Link
-    href="/projects"
+    href={ROUTES.projects}
     className={buttonStyles.button}
     data-variant={variant}
     onClick={() => primeProjectsBoard({ tab, tag })}

@@ -3,9 +3,12 @@
 import Link from "next/link";
 import { HashLink } from "@/shared/ui/hash-link";
 import { primeProjectsBoard } from "@/shared/lib/projects-board-state";
+import type { ButtonVariant } from "./button-variants";
+import { ROUTES } from "@/shared/constants/routes";
 import styles from "./button.module.scss";
 
-export type ButtonVariant = "primary" | "secondary" | "outline";
+export type { ButtonVariant } from "./button-variants";
+export { buttonVariantForIndex } from "./button-variants";
 
 /**
  * Shared button / link. Default variant: outline.
@@ -15,6 +18,7 @@ export type ButtonVariant = "primary" | "secondary" | "outline";
  * - secondary - gray fill + border
  * - outline - transparent + border
  *
+ * In a row of Buttons, prefer `buttonVariantForIndex` for consistent hierarchy.
  * With href: external URLs open in new tab; hash routes use HashLink;
  * /projects resets board tab to "all" via sessionStorage.
  */
@@ -67,7 +71,7 @@ export const Button = ({
       );
     }
 
-    if (href === "/projects") {
+    if (href === ROUTES.projects) {
       return (
         <Link
           href={href}

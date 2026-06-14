@@ -3,6 +3,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { primeProjectsBoard } from "@/shared/lib/projects-board-state";
+import { ROUTES } from "@/shared/constants/routes";
 
 interface ProjectsTagLinkProps {
   tag: string;
@@ -15,7 +16,7 @@ interface ProjectsTagLinkProps {
  */
 export const ProjectsTagLink = ({ tag, children, className }: ProjectsTagLinkProps) => (
   <Link
-    href="/projects"
+    href={ROUTES.projects}
     className={className}
     onClick={() => primeProjectsBoard({ tag, tab: "all" })}
   >
