@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type MouseEvent } from "react";
 import { FaGithub, FaDiscord, FaYoutube, FaXTwitter, FaInstagram, FaEnvelope } from "react-icons/fa6";
 import { FaCheck } from "react-icons/fa6";
 import { BetterBedrockIcon } from "@/shared/ui/better-bedrock-icon";
@@ -17,6 +17,7 @@ const ICON_MAP = {
   betterbedrock: ({ size }: { size: number }) => <BetterBedrockIcon size={size} />,
 } as const;
 
+/** Social chip. link.copyText copies to clipboard instead of navigating (accent "Copied!" feedback). */
 interface SocialLinkButtonProps {
   link: SocialLink;
 }
@@ -25,7 +26,7 @@ export const SocialLinkButton = ({ link }: SocialLinkButtonProps) => {
   const [copied, setCopied] = useState(false);
   const IconComponent = ICON_MAP[link.iconId];
 
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  const handleClick = (e: MouseEvent<HTMLAnchorElement>) => {
     if (link.copyText) {
       e.preventDefault();
       navigator.clipboard.writeText(link.copyText);

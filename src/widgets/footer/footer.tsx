@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import type { ComponentType } from "react";
 import { FaGithub, FaDiscord, FaYoutube, FaInstagram, FaEnvelope } from "react-icons/fa6";
 import { SiNextdotjs } from "react-icons/si";
 import { HomeLink } from "@/shared/ui/home-link";
@@ -15,7 +16,7 @@ import styles from "./footer.module.scss";
 type FooterSocial = {
   id: string;
   label: string;
-  icon: React.ComponentType<{ size: number; "aria-hidden"?: boolean }> | null;
+  icon: ComponentType<{ size: number; "aria-hidden"?: boolean }> | null;
   textMatcher?: string;
 };
 

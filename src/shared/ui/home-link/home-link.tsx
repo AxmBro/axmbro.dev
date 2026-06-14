@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ReactNode } from "react";
+import { ReactNode, type MouseEvent } from "react";
 
 interface HomeLinkProps {
   className?: string;
@@ -13,7 +13,7 @@ interface HomeLinkProps {
 export const HomeLink = ({ className, children, onClick }: HomeLinkProps) => {
   const pathname = usePathname();
 
-  const handleClick = (e: React.MouseEvent) => {
+  const handleClick = (e: MouseEvent) => {
     onClick?.();
 
     if (pathname === "/") {

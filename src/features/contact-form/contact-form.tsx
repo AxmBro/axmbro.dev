@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, type FormEvent, type ChangeEvent } from "react";
 import { JoinedTabs } from "@/shared/ui/joined-tabs";
 import { sendEmailAction } from "./api/send-email";
 import styles from "./contact-form.module.scss";
@@ -51,7 +51,7 @@ export const ContactForm = () => {
     };
   }, []);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!isReady) return;
 
@@ -87,7 +87,7 @@ export const ContactForm = () => {
   };
 
   const handleInputChange = (setter: (val: string) => void) => (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setter(e.target.value);
     if (setter === setMessage) {

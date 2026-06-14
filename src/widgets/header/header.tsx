@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, type MouseEvent } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
@@ -33,7 +33,7 @@ export const Header = () => {
   const toggleMenu = () => setMenuOpen(!menuOpen);
   const closeMenu = () => setMenuOpen(false);
 
-  const handlePlainNavClick = (href: string) => (e: React.MouseEvent<HTMLAnchorElement>) => {
+  const handlePlainNavClick = (href: string) => (e: MouseEvent<HTMLAnchorElement>) => {
     closeMenu();
     if (pathname !== href) return;
 

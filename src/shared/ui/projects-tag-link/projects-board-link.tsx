@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import type { ReactNode } from "react";
 import {
   primeProjectsBoard,
   type ProjectsBoardTab,
@@ -8,7 +9,7 @@ import {
 
 interface ProjectsBoardLinkProps {
   tab?: ProjectsBoardTab;
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
   onClick?: () => void;
 }

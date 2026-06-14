@@ -7,18 +7,25 @@ import {
 } from "@/shared/lib/projects-board-state";
 import buttonStyles from "@/shared/ui/button/button.module.scss";
 
+/**
+ * Link to /projects with optional tab or tag preset (sessionStorage, consumed on mount).
+ * Same variants as Button except input/white.
+ */
 interface ProjectsBoardButtonProps {
   text: string;
+  /** @default all when only tag is set */
   tab?: ProjectsBoardTab;
+  /** One-shot tag filter (no ?tag= in URL). */
   tag?: string;
-  variant?: "primary" | "secondary";
+  /** @default outline */
+  variant?: "primary" | "secondary" | "outline";
 }
 
 export const ProjectsBoardButton = ({
   text,
   tab,
   tag,
-  variant = "secondary",
+  variant = "outline",
 }: ProjectsBoardButtonProps) => (
   <Link
     href="/projects"

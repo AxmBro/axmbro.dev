@@ -1,4 +1,4 @@
-/** Stable section IDs for hash navigation - kebab-case, used in ScreenSection `id` and hrefs. */
+/** Section IDs for hash links (kebab-case). */
 export const SECTION_IDS = {
   about: "about",
   skills: "skills",
