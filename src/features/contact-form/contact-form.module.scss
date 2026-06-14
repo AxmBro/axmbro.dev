@@ -29,14 +29,14 @@ $form-row-height: 3.25rem;
   box-sizing: border-box;
   border: 1px solid var(--color-border);
   border-radius: 0;
-  background-color: rgba(255, 255, 255, 0.02);
+  background-color: var(--surface-input);
   font-family: inherit;
   padding: 0 1rem;
 
   &:focus {
     outline: none;
     border-color: var(--color-neutral-100);
-    background-color: rgba(255, 255, 255, 0.05);
+    background-color: var(--surface-input-focus);
   }
 
   &::placeholder {
@@ -65,17 +65,17 @@ $form-row-height: 3.25rem;
   @include text-body;
   cursor: pointer;
   border: 1px solid var(--color-border);
-  background-color: rgba(255, 255, 255, 0.02);
+  background-color: var(--surface-input);
   color: var(--color-neutral-400);
 
   &:hover {
-    background-color: rgba(255, 255, 255, 0.05);
+    background-color: var(--surface-input-focus);
     color: var(--color-neutral-100);
   }
 
   &[data-active="true"] {
     background-color: var(--color-accent);
-    color: #000000;
+    color: var(--color-on-accent);
     border: none;
 
     &:hover {
@@ -83,18 +83,18 @@ $form-row-height: 3.25rem;
     }
   }
 
-  /* Override [data-active] styles when disabled or showing status feedback. */
+  /* Submit: data-active vs disabled / success / error states */
   &[disabled] {
     opacity: 0.6;
     cursor: not-allowed;
-    background-color: rgba(255, 255, 255, 0.02) !important;
+    background-color: var(--surface-input) !important;
     color: var(--color-neutral-400) !important;
     border: 1px solid var(--color-border) !important;
     filter: none !important;
   }
 
   &[data-status="success"] {
-    background-color: rgba(255, 255, 255, 0.01) !important;
+    background-color: var(--surface-input) !important;
     color: var(--color-accent) !important;
     border: 1px solid var(--color-border) !important;
     cursor: not-allowed;
@@ -102,8 +102,8 @@ $form-row-height: 3.25rem;
   }
 
   &[data-status="error"] {
-    background-color: rgba(255, 255, 255, 0.01) !important;
-    color: rgb(255, 78, 100) !important;
+    background-color: var(--surface-input) !important;
+    color: var(--color-error) !important;
     border: 1px solid var(--color-border) !important;
     cursor: not-allowed;
     opacity: 1 !important;

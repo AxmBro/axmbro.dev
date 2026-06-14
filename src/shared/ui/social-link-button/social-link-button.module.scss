@@ -22,19 +22,15 @@
   hyphens: auto;
 
   &:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-
-    @supports (color: color-mix(in oklab, white, black)) {
-      background-color: color-mix(in oklab, var(--color-neutral-100) 10%, transparent);
-    }
+    background-color: var(--surface-hover);
   }
 
   &.copied {
-    border-color: #10b981;
-    background-color: rgba(16, 185, 129, 0.1);
+    border-color: var(--color-accent);
+    background-color: var(--color-accent-subtle);
 
     .iconWrapper {
-      color: #10b981;
+      color: var(--color-accent);
     }
   }
 }
