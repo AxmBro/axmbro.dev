@@ -29,7 +29,7 @@ export default function NotFound() {
       >
         <div className={styles.buttonsGroup}>
           <Button text="Back to Home" variant="primary" href="/" />
-          <ProjectsBoardButton text="View Projects" tab="all" variant="secondary" />
+          <ProjectsBoardButton text="View Projects" tab="all" variant="outline" />
         </div>
       </ScreenSection>
     </ScreenContainer>
