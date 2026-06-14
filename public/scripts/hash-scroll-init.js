@@ -1,3 +1,4 @@
+// Before hydration: stash hash and scroll to top. See scroll-to-hash.ts.
 history.scrollRestoration = "manual";
 
 if (location.hash) {
