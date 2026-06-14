@@ -1,7 +1,7 @@
-import { HashLink } from "@/shared/ui/hash-link";
+import Link from "next/link";
 import { ScreenContainer } from "@/shared/ui/screen-container";
 import { ScreenSection } from "@/shared/ui/screen-section";
-import { contactSectionHref, SECTION_IDS } from "@/shared/constants/anchors";
+import { ROUTES } from "@/shared/constants/routes";
 import type { LegalItem } from "@/shared/constants/legal";
 import styles from "./legal-page.module.scss";
 
@@ -47,9 +47,9 @@ export const LegalPage = ({
             <h2 className={styles.itemTitle}>Contact</h2>
             <p className={styles.itemText}>
               {contactBlurb}{" "}
-              <HashLink href={contactSectionHref(SECTION_IDS.sendMessage)} className={styles.link}>
-                /contact#send-message
-              </HashLink>
+              <Link href={ROUTES.contact} className={styles.link}>
+                {ROUTES.contact}
+              </Link>
             </p>
           </li>
         </ul>
