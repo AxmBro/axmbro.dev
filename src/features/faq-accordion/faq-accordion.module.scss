@@ -63,3 +63,14 @@
   @include text-body-sm;
   padding: 0 var(--spacing-block) 1.75rem var(--spacing-block);
 }
+
+.chevron {
+  flex-shrink: 0;
+  color: var(--color-neutral-400);
+  transform: rotate(0deg);
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &[data-open="true"] {
+    transform: rotate(180deg);
+  }
+}
