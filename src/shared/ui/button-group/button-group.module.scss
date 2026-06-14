@@ -1,0 +1,36 @@
+@use '../../styles/variables' as *;
+
+.group {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+
+  &[data-align="center"] {
+    justify-content: center;
+  }
+
+  &[data-pad-inline] {
+    padding-inline: var(--spacing-block);
+  }
+
+  &[data-margin-bottom] {
+    margin-bottom: var(--spacing-block);
+  }
+
+  &[data-pad-bottom] {
+    padding-bottom: var(--spacing-block);
+  }
+
+  &[data-margin-top] {
+    margin-top: var(--spacing-section);
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    flex-direction: column;
+    width: 100%;
+
+    > * {
+      width: 100%;
+    }
+  }
+}
