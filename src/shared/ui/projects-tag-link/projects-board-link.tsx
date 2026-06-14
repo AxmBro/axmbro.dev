@@ -6,6 +6,7 @@ import {
   primeProjectsBoard,
   type ProjectsBoardTab,
 } from "@/shared/lib/projects-board-state";
+import { ROUTES } from "@/shared/constants/routes";
 
 interface ProjectsBoardLinkProps {
   tab?: ProjectsBoardTab;
@@ -21,7 +22,7 @@ export const ProjectsBoardLink = ({
   onClick,
 }: ProjectsBoardLinkProps) => (
   <Link
-    href="/projects"
+    href={ROUTES.projects}
     className={className}
     onClick={() => {
       onClick?.();

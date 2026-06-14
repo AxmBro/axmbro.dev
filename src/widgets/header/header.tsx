@@ -8,9 +8,10 @@ import { HomeLink } from "@/shared/ui/home-link";
 import { HashLink } from "@/shared/ui/hash-link";
 import { ProjectsBoardLink } from "@/shared/ui/projects-tag-link";
 import { NAV_LINKS } from "@/shared/constants/data";
+import { ROUTES } from "@/shared/constants/routes";
 import styles from "./header.module.scss";
 
-const navPath = (href: string) => href.split("#")[0] || "/";
+const navPath = (href: string) => href.split("#")[0] || ROUTES.home;
 const hasHash = (href: string) => href.includes("#");
 
 const MOBILE_NAV_ID = "header-mobile-nav";
@@ -53,7 +54,7 @@ export const Header = () => {
       );
     }
 
-    if (link.href === "/projects") {
+    if (link.href === ROUTES.projects) {
       return (
         <ProjectsBoardLink key={link.href} tab="all" className={className} onClick={closeMenu}>
           {link.text}
