@@ -8,7 +8,7 @@ interface YouTubeChannelItem {
 const YOUTUBE_CHANNELS = {
   axmbro: "UCJ4h7Ph4PBivLl9FePFZFqQ",
   axmbro2: "UCrmm0FiLHkbv9gNAmXjTCHw",
-} as const;
+};
 
 const CHANNEL_IDS = Object.values(YOUTUBE_CHANNELS).join(",");
 

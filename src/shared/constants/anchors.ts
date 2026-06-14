@@ -11,7 +11,7 @@ export const SECTION_IDS = {
   faq: "faq",
   privacyPolicy: "privacy-policy",
   termsOfUse: "terms-of-use",
-} as const;
+};
 
 export const homeSectionHref = (id: string) => `/#${id}`;
 

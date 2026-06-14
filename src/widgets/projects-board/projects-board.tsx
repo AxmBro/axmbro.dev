@@ -2,23 +2,22 @@
 
 import { useState, useEffect, useRef } from "react";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
-import { PROJECTS, type ProjectType } from "@/shared/constants/data";
+import { PROJECTS } from "@/shared/constants/data";
 import { ProjectCard } from "@/entities/project";
 import { JoinedTabs } from "@/shared/ui/joined-tabs";
 import {
   consumeProjectsTagFilter,
   getSavedProjectsTab,
+  isProjectsBoardTab,
   saveProjectsTab,
+  PROJECTS_BOARD_TABS,
   type ProjectsBoardTab,
 } from "@/shared/lib/projects-board-state";
 import styles from "./projects-board.module.scss";
 
-type TabType = ProjectsBoardTab | ProjectType;
-const TABS: TabType[] = ["all", "featured", "personal", "commissions"];
-
 export const ProjectsBoard = () => {
   const [search, setSearch] = useState("");
-  const [activeTab, setActiveTab] = useState<TabType>("all");
+  const [activeTab, setActiveTab] = useState<ProjectsBoardTab>("all");
 
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -54,7 +53,7 @@ export const ProjectsBoard = () => {
     initialized.current = true;
   }, [searchParams, pathname, router]);
 
-  const handleTabChange = (tab: TabType) => {
+  const handleTabChange = (tab: ProjectsBoardTab) => {
     setActiveTab(tab);
     saveProjectsTab(tab);
   };
@@ -103,12 +102,16 @@ export const ProjectsBoard = () => {
 
       <div className={styles.tabsWrapper}>
         <JoinedTabs
-          options={TABS.map((tab) => ({
+          options={PROJECTS_BOARD_TABS.map((tab) => ({
             id: tab,
             label: tab.charAt(0).toUpperCase() + tab.slice(1),
           }))}
           activeId={activeTab}
-          onChange={(id) => handleTabChange(id as TabType)}
+          onChange={(id) => {
+            if (isProjectsBoardTab(id)) {
+              handleTabChange(id);
+            }
+          }}
           size="medium"
         />
       </div>

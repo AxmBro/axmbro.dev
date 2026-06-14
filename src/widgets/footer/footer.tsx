@@ -29,7 +29,7 @@ const FOOTER_SOCIALS: FooterSocial[] = [
   { id: "instagram", icon: FaInstagram, label: "Instagram" },
 ];
 
-const CATEGORY_LINKS: ({ label: string } & { tag: string } | { label: string })[] = [
+const CATEGORY_LINKS: { label: string; tag?: string }[] = [
   { label: "View All Projects" },
   { tag: "JsonUI", label: "JsonUI & HUDs" },
   { tag: "Server Form", label: "Server Forms" },
@@ -47,9 +47,6 @@ const getSocialLink = (social: FooterSocial) =>
   SOCIAL_LINK_BUTTONS.find(
     (s) => s.iconId === social.id && (!social.textMatcher || s.text === social.textMatcher)
   );
-
-const externalLinkProps = (isMail: boolean) =>
-  isMail ? {} : { target: "_blank" as const, rel: "noopener noreferrer" as const };
 
 export const Footer = () => {
   return (
@@ -98,7 +95,9 @@ export const Footer = () => {
                     key={social.id}
                     href={linkData.href}
                     aria-label={social.label}
-                    {...externalLinkProps(social.id === "mail")}
+                    {...(social.id === "mail"
+                      ? {}
+                      : { target: "_blank", rel: "noopener noreferrer" })}
                   >
                     <Icon size={22} aria-hidden />
                   </a>
@@ -135,7 +134,7 @@ export const Footer = () => {
             <h2 className={styles.columnTitle}>Categories</h2>
             <nav className={styles.columnLinks}>
               {CATEGORY_LINKS.map((link) =>
-                "tag" in link ? (
+                link.tag ? (
                   <ProjectsTagLink key={link.label} tag={link.tag}>
                     {link.label}
                   </ProjectsTagLink>

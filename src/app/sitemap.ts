@@ -4,7 +4,7 @@ import { PROJECTS } from "@/shared/constants/data";
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://axmbro.dev";
 
-  const baseRoutes = [
+  const baseRoutes: MetadataRoute.Sitemap = [
     "",
     "/contact",
     "/privacy-policy",
@@ -13,14 +13,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
-    changeFrequency: (route === "" ? "weekly" : "monthly") as "weekly" | "monthly",
+    changeFrequency: route === "" ? "weekly" : "monthly",
     priority: route === "" ? 1.0 : 0.8,
   }));
 
-  const projectRoutes = PROJECTS.filter((p) => p.url).map((project) => ({
+  const projectRoutes: MetadataRoute.Sitemap = PROJECTS.filter((p) => p.url).map((project) => ({
     url: `${baseUrl}/projects/${project.url}`,
     lastModified: new Date(),
-    changeFrequency: "weekly" as const,
+    changeFrequency: "weekly",
     priority: 0.7,
   }));
 
