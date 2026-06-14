@@ -19,7 +19,7 @@
     padding: 2.5rem var(--spacing-block);
 
     @media (max-width: $breakpoint-md) {
-      padding: var(--spacing-section) 1rem;
+      padding-block: var(--spacing-section);
     }
 
     &:first-child {

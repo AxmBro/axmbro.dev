@@ -10,7 +10,7 @@
   background-color: var(--surface-header);
   backdrop-filter: blur(15px);
   border-bottom: 1px solid var(--color-border);
-  padding: 0 1rem;
+  padding: 0 var(--layout-gutter-outer);
 }
 
 .header {
@@ -27,7 +27,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.25rem var(--spacing-block);
+  padding: var(--header-pad-block) var(--spacing-block);
 }
 
 .logoSection {
@@ -42,8 +42,8 @@
   }
 
   .logoImg {
-    width: 32px;
-    height: 32px;
+    width: var(--header-logo-size);
+    height: var(--header-logo-size);
   }
 
   .logoText {
@@ -97,7 +97,7 @@
 
 .menuToggle {
   cursor: pointer;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 0.875rem;
   background-color: var(--color-secondary);
   border: 1px solid var(--color-border);
   border-radius: 8px;
@@ -132,7 +132,7 @@
 }
 
 .mobileNavItem {
-  padding: 1rem var(--spacing-block);
+  padding: 0.875rem var(--spacing-block);
   @include text-body;
   @include link-plain;
   border-bottom: 1px solid var(--color-border);

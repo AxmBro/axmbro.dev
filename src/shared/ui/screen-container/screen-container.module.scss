@@ -3,11 +3,11 @@
   justify-content: center;
   position: relative;
   width: 100%;
-  padding: 0 1rem;
+  padding: 0 var(--layout-gutter-outer);
 }
 
 .screenContent {
-  gap: 6rem;
+  gap: var(--page-section-gap);
   width: 100%;
   min-width: 0;
   max-width: var(--max-website-width);
@@ -16,5 +16,5 @@
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  padding-block: 6rem;
+  padding-block: var(--page-padding-block);
 }
