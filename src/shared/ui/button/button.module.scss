@@ -29,17 +29,6 @@
     }
   }
 
-  &[data-variant="white"] {
-    background-color: #ffffff;
-    color: var(--color-on-accent);
-    border: none;
-
-    &:hover,
-    &:active {
-      filter: brightness(0.85);
-    }
-  }
-
   &[data-variant="secondary"] {
     background-color: var(--color-secondary);
     color: var(--color-neutral-100);
@@ -62,15 +51,4 @@
     }
   }
 
-  &[data-variant="input"] {
-    background-color: var(--surface-input);
-    color: var(--color-neutral-400);
-    border: 1px solid var(--color-border);
-
-    &:hover,
-    &:active {
-      background-color: var(--surface-input-focus);
-      color: var(--color-neutral-100);
-    }
-  }
 }
