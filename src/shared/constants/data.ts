@@ -1,5 +1,5 @@
 import { contactSectionHref, SECTION_IDS } from "./anchors";
-import type { ButtonVariant } from "@/shared/ui/button";
+import { projectDetailPath, ROUTES } from "./routes";
 
 export type ProjectType = "personal" | "commissions";
 
@@ -182,7 +182,6 @@ export interface ExperienceItem {
   buttons?: {
     text: string;
     href: string;
-    variant: ButtonVariant;
   }[];
 }
 
@@ -203,8 +202,8 @@ export const EXPERIENCE_TREE: ExperienceItem[] = [
       },
     ],
     buttons: [
-      { text: "Browse Portfolio", href: "/projects", variant: "primary" },
-      { text: "Hire Me", href: contactSectionHref(SECTION_IDS.sendMessage), variant: "secondary" },
+      { text: "Browse Portfolio", href: ROUTES.projects },
+      { text: "Hire Me", href: contactSectionHref(SECTION_IDS.sendMessage) },
     ],
   },
   {
@@ -225,10 +224,9 @@ export const EXPERIENCE_TREE: ExperienceItem[] = [
     buttons: [
       {
         text: "Explore Project",
-        href: "/projects/better_bedrock",
-        variant: "primary",
+        href: projectDetailPath("better_bedrock"),
       },
-      { text: "Official Website", href: "https://betterbedrock.com/", variant: "outline" },
+      { text: "Official Website", href: "https://betterbedrock.com/" },
     ],
   },
   {
@@ -386,9 +384,9 @@ export const getHomeSelectedProjects = () =>
   );
 
 export const NAV_LINKS = [
-  { href: "/", text: "Home" },
-  { href: "/projects", text: "Projects" },
-  { href: "/contact", text: "Contact" },
+  { href: ROUTES.home, text: "Home" },
+  { href: ROUTES.projects, text: "Projects" },
+  { href: ROUTES.contact, text: "Contact" },
 ];
 
 export const HOME_PAGE_TEXTS = {
@@ -448,13 +446,13 @@ export const PROCESS_STEPS = [
 export interface FAQItem {
   question: string;
   answer: string;
-  /** Optional slug for /contact#faq-{slug} deep links. */
   slug?: string;
 }
 
 export const FAQ_ITEMS: FAQItem[] = [
   {
     question: "What value do you bring to my project?",
+    slug: "value",
     answer:
       "You get a developer who understands both interface design and player behavior. I don't just write layout code - I build custom HUDs, server forms, and chest UIs that make your server stand out, keep players engaged, and boost your store conversions. I handle the entire Minecraft Bedrock JsonUI side so you can focus on running your game. I also take on web development, building matching, responsive landing pages for a complete, professional presence - so if you have a web concept in mind, let me know.",
   },
@@ -467,6 +465,7 @@ export const FAQ_ITEMS: FAQItem[] = [
   {
     question:
       "Do you focus on frontend UI or backend development in Minecraft Bedrock?",
+    slug: "scope",
     answer:
       "In Minecraft Bedrock, I specialize entirely on the frontend side: custom JsonUI (HUDs, server forms, chest UIs, and other interfaces). I also handle resource packs, custom entities, Molang, and technical animations/render controllers. While I don't write complex backend Behavior Pack scripts, I structure my UIs to integrate cleanly with custom ScriptAPIs. On the web side, I am actively building my skills and currently consider myself beginner-to-intermediate in that field.",
   },
@@ -491,11 +490,13 @@ export const FAQ_ITEMS: FAQItem[] = [
   },
   {
     question: "What happens if a future Minecraft update breaks the UI?",
+    slug: "support",
     answer:
       "Minecraft Bedrock updates frequently modify UI files, which can break custom screens. For all commissioned projects, I provide 30 days of free technical support after delivery to fix any layout issues caused by official game updates. After this period, updates or maintenance work can be arranged as needed.",
   },
   {
     question: "Do I receive full ownership and raw source files of the UI?",
+    slug: "ownership",
     answer:
       "Typically yes, but this is an individual matter depending on the scale and nature of the project. For standard, straightforward commissions, full file usage is included. For complex commercial platforms or large-scale integrations, custom licensing terms or an IP transfer fee may be negotiated based on your specific legal requirements.",
   },

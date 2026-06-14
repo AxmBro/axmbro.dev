@@ -1,4 +1,3 @@
-/** Section IDs for hash links (kebab-case). */
 export const SECTION_IDS = {
   about: "about",
   skills: "skills",
@@ -18,3 +17,5 @@ export const homeSectionHref = (id: string) => `/#${id}`;
 export const contactSectionHref = (id: string) => `/contact#${id}`;
 
 export const faqItemId = (slug: string) => `faq-${slug}`;
+
+export const faqItemHref = (slug: string) => contactSectionHref(faqItemId(slug));
