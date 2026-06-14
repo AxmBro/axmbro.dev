@@ -68,18 +68,3 @@
     }
   }
 }
-
-.expButtonsRow {
-  margin-top: var(--spacing-section);
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-
-  @media (max-width: $breakpoint-sm) {
-    flex-direction: column;
-
-    > * {
-      width: 100%;
-    }
-  }
-}
