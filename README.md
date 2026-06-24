@@ -80,4 +80,4 @@ Source is provided for viewing only. See [LICENSE](LICENSE) - no copy, modify, o
 
 ---
 
-Thanks for checking out my code! If you like what you see, feel free to leave a star ⭐.
+Thanks for checking out my code! If you like what you see, feel free to leave a star ⭐. 
