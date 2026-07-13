@@ -10,7 +10,7 @@ import buttonStyles from "@/shared/ui/button/button.module.scss";
 
 /**
  * Link to /projects with optional tab or tag preset (sessionStorage, consumed on mount).
- * Same variants as Button (primary, secondary, outline).
+ * Same variants as Button (primary, outline).
  */
 interface ProjectsBoardButtonProps {
   text: string;
@@ -19,7 +19,7 @@ interface ProjectsBoardButtonProps {
   /** One-shot tag filter (no ?tag= in URL). */
   tag?: string;
   /** @default outline */
-  variant?: "primary" | "secondary" | "outline";
+  variant?: "primary" | "outline";
 }
 
 export const ProjectsBoardButton = ({

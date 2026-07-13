@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import { ScreenContainer } from "@/shared/ui/screen-container";
 import { ScreenSection } from "@/shared/ui/screen-section";
-import { Button } from "@/shared/ui/button";
+import { Button, buttonVariantForIndex } from "@/shared/ui/button";
 import { ButtonGroup } from "@/shared/ui/button-group";
 import { ProjectsBoardButton } from "@/shared/ui/projects-tag-link";
 import { SkillsGrid } from "@/widgets/skills-grid";
@@ -38,9 +38,9 @@ export default function HomePage() {
         titleDescription={HOME_PAGE_TEXTS.about.description}
       >
         <ButtonGroup padInline marginBottom>
-          <Button text="Get in Touch" variant="primary" href={contactSectionHref(SECTION_IDS.sendMessage)} />
-          <Button text="Browse Projects" variant="secondary" href={ROUTES.projects} />
-          <Button text="Commission Process" variant="outline" href={homeSectionHref(SECTION_IDS.commissionProcess)} />
+          <Button text="Get in Touch" variant={buttonVariantForIndex(0)} href={contactSectionHref(SECTION_IDS.sendMessage)} />
+          <Button text="Browse Projects" variant={buttonVariantForIndex(1)} href={ROUTES.projects} />
+          <Button text="Commission Process" variant={buttonVariantForIndex(2)} href={homeSectionHref(SECTION_IDS.commissionProcess)} />
         </ButtonGroup>
         <HeroStats />
       </ScreenSection>

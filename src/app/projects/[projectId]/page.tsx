@@ -110,7 +110,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               <Button
                 key={`btn-${i}`}
                 text={btn.text}
-                variant={buttonVariantForIndex(i, buttonsToRender.length)}
+                variant={buttonVariantForIndex(i)}
                 href={btn.href}
                 external={btn.external}
               />
