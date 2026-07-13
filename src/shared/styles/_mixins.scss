@@ -59,3 +59,22 @@
 @mixin section-padding-inline {
   padding-inline: var(--spacing-block);
 }
+
+@mixin list-minimal {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+
+  li {
+    @include text-body;
+    display: flex;
+    gap: var(--spacing-xs);
+
+    &::before {
+      content: '-';
+      color: var(--color-neutral-100);
+    }
+  }
+}

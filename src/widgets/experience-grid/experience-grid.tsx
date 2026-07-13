@@ -11,7 +11,7 @@ export const ExperienceGrid = () => {
           <div className={styles.expHeaderOneLine}>
             <span className={styles.expRoleLine}>
               <span className={styles.expRole}>{exp.role}</span>
-              <span className={styles.expAt}> @ </span>
+              <span className={styles.expAt}> @</span>
               <span className={styles.expCompany}>{exp.company}</span>
             </span>
             <span className={styles.expDate}>({exp.date})</span>
@@ -27,7 +27,7 @@ export const ExperienceGrid = () => {
                 {exp.buttons.map((btn, i) => (
                     <Button
                       key={i}
-                      variant={buttonVariantForIndex(i, exp.buttons!.length)}
+                      variant={buttonVariantForIndex(i)}
                       text={btn.text}
                       href={btn.href}
                     />
