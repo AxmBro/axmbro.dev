@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { Analytics } from "@vercel/analytics/next";
 import { Lexend } from "next/font/google";
+import { GoogleAnalytics } from "@/shared/ui/google-analytics";
 import { Header } from "@/widgets/header";
 import { Footer } from "@/widgets/footer";
 import { HashScroll } from "@/shared/ui/hash-scroll";
@@ -58,6 +59,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en" className={lexend.variable} suppressHydrationWarning>
       <head>
         <script src="/scripts/hash-scroll-init.js" />
+        <GoogleAnalytics />
       </head>
       <body suppressHydrationWarning>
         <HashScroll />
