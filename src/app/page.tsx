@@ -9,22 +9,18 @@ import { ExperienceGrid } from "@/widgets/experience-grid";
 import { HeroSection } from "@/widgets/hero-section";
 import { TrackRecord } from "@/widgets/track-record";
 import { ProjectCard } from "@/entities/project";
-import { HOME_PAGE_TEXTS, getHomeSelectedProjects } from "@/shared/constants/data";
+import { HOME_PAGE_TEXTS, getHomeSelectedProjects, SITE_METADATA, CTA_LABELS } from "@/shared/constants/data";
 import { contactSectionHref, SECTION_IDS } from "@/shared/constants/anchors";
 import { ROUTES } from "@/shared/constants/routes";
+import { createPageMetadata } from "@/shared/lib/page-metadata";
 import styles from "./page.module.scss";
 
-export const metadata: Metadata = {
-  title: "AxmBro.dev | Home",
-  description:
-    "Computer Science student and Minecraft Bedrock UI Engineer building custom JsonUI for studios, servers, and creators, plus responsive React and Next.js websites.",
-  openGraph: {
-    title: "AxmBro.dev | Home",
-    description:
-      "Computer Science student and Minecraft Bedrock UI Engineer building custom JsonUI for studios, servers, and creators, plus responsive React and Next.js websites.",
-    images: ["/images/ui/og-image.png"],
-  },
-};
+export const metadata: Metadata = createPageMetadata({
+  title: "Home",
+  absoluteTitle: "AxmBro.dev | Home",
+  description: SITE_METADATA.homeDescription,
+  path: ROUTES.home,
+});
 
 export default function HomePage() {
   const selectedProjects = getHomeSelectedProjects();
@@ -61,7 +57,7 @@ export default function HomePage() {
           <div className={styles.selectedFooterHeader}>
             <h3 className={styles.selectedFooterTitle}>Explore More Projects</h3>
             <p className={styles.selectedFooterDescription}>
-              Browse the full portfolio or filter to featured projects.
+              {HOME_PAGE_TEXTS.selectedWork.exploreMore}
             </p>
           </div>
           <ButtonGroup marginTop>
@@ -100,12 +96,12 @@ export default function HomePage() {
       >
         <ButtonGroup padInline marginBottom>
           <Button
-            text="Commission Details"
+            text={CTA_LABELS.commissionDetails}
             variant={buttonVariantForIndex(0)}
             href={ROUTES.commissions}
           />
           <Button
-            text="Start a Project"
+            text={CTA_LABELS.startProject}
             variant={buttonVariantForIndex(1)}
             href={contactSectionHref(SECTION_IDS.startProject)}
           />

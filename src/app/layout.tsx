@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import Script from "next/script";
 import { Lexend } from "next/font/google";
 import { Header } from "@/widgets/header";
 import { Footer } from "@/widgets/footer";
 import { HashScroll } from "@/shared/ui/hash-scroll";
 import { PixelClickWave } from "@/shared/ui/pixel-click-wave";
+import { SITE_METADATA } from "@/shared/constants/data";
 import "./globals.scss";
 
 const lexend = Lexend({
@@ -20,27 +20,15 @@ export const metadata: Metadata = {
     default: "Home",
     template: "AxmBro.dev | %s",
   },
-  description:
-    "Computer Science student and Minecraft Bedrock UI Engineer from Poland building custom JsonUI for studios, servers, and creators, plus responsive React and Next.js websites.",
-  keywords: [
-    "AxmBro",
-    "Minecraft Bedrock",
-    "JsonUI",
-    "MCBE UI",
-    "UI Engineer",
-    "custom HUD",
-    "server forms",
-    "web developer",
-    "Better Bedrock",
-  ],
+  description: SITE_METADATA.homeDescription,
+  keywords: SITE_METADATA.keywords,
   metadataBase: new URL("https://axmbro.dev"),
   verification: {
     google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || "",
   },
   openGraph: {
     title: "AxmBro.dev | Home",
-    description:
-      "Computer Science student and Minecraft Bedrock UI Engineer from Poland building custom JsonUI for studios, servers, and creators, plus responsive React and Next.js websites.",
+    description: SITE_METADATA.homeDescription,
     url: "https://axmbro.dev",
     siteName: "AxmBro",
     images: [
@@ -48,7 +36,7 @@ export const metadata: Metadata = {
         url: "/images/ui/og-image.png",
         width: 1200,
         height: 630,
-        alt: "AxmBro - Minecraft Bedrock UI Engineer and Frontend Developer Portfolio",
+        alt: SITE_METADATA.ogImageAlt,
       },
     ],
     locale: "en_US",
@@ -57,8 +45,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "AxmBro.dev | Home",
-    description:
-      "Computer Science student and Minecraft Bedrock UI Engineer from Poland building custom JsonUI and responsive React and Next.js websites.",
+    description: SITE_METADATA.homeDescription,
     images: ["/images/ui/og-image.png"],
     creator: "@AxmBro",
   },
@@ -71,8 +58,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={lexend.variable} suppressHydrationWarning>
+      <head>
+        <script src="/scripts/hash-scroll-init.js" />
+      </head>
       <body suppressHydrationWarning>
-        <Script src="/scripts/hash-scroll-init.js" strategy="beforeInteractive" />
         <HashScroll />
         <PixelClickWave />
         <Header />

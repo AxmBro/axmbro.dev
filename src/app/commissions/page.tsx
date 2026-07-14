@@ -6,27 +6,23 @@ import {
   COMMISSION_REQUIREMENTS,
   COMMISSION_SERVICES,
   COMMISSIONS_PAGE_TEXTS,
+  SITE_METADATA,
 } from "@/shared/constants/data";
-import { contactSectionHref, SECTION_IDS } from "@/shared/constants/anchors";
+import { contactSectionHref, homeSectionHref, SECTION_IDS } from "@/shared/constants/anchors";
+import { ROUTES } from "@/shared/constants/routes";
+import { createPageMetadata } from "@/shared/lib/page-metadata";
 import { Button, buttonVariantForIndex } from "@/shared/ui/button";
 import { ButtonGroup } from "@/shared/ui/button-group";
-import { ProjectsBoardButton } from "@/shared/ui/projects-tag-link";
 import { ScreenContainer } from "@/shared/ui/screen-container";
 import { ScreenSection } from "@/shared/ui/screen-section";
 import { CommissionInfoGrid } from "@/widgets/commission-info-grid";
 import { ProcessGrid } from "@/widgets/process-grid";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Commissions",
-  description:
-    "Commission custom Minecraft Bedrock JsonUI, HUDs, server forms, menus, and resource pack interfaces from AxmBro.",
-  openGraph: {
-    title: "AxmBro.dev | Commissions",
-    description:
-      "Custom Minecraft Bedrock JsonUI, HUDs, server forms, menus, and connected interface systems for studios, servers, and creators.",
-    images: ["/images/ui/og-image.png"],
-  },
-};
+  description: SITE_METADATA.commissionsDescription,
+  path: ROUTES.commissions,
+});
 
 export default function CommissionsPage() {
   return (
@@ -39,14 +35,14 @@ export default function CommissionsPage() {
       >
         <ButtonGroup>
           <Button
-            text="Start a Project"
+            text={COMMISSIONS_PAGE_TEXTS.ctaContact}
             variant={buttonVariantForIndex(0)}
             href={contactSectionHref(SECTION_IDS.startProject)}
           />
-          <ProjectsBoardButton
-            text="Browse Client Work"
-            tab="commissions"
+          <Button
+            text={COMMISSIONS_PAGE_TEXTS.ctaProof}
             variant={buttonVariantForIndex(1)}
+            href={homeSectionHref(SECTION_IDS.selectedWork)}
           />
         </ButtonGroup>
       </ScreenSection>
@@ -108,12 +104,12 @@ export default function CommissionsPage() {
       >
         <ButtonGroup>
           <Button
-            text="Start a Project"
+            text={COMMISSIONS_PAGE_TEXTS.ctaContact}
             variant={buttonVariantForIndex(0)}
             href={contactSectionHref(SECTION_IDS.startProject)}
           />
           <Button
-            text="Contact Options"
+            text={COMMISSIONS_PAGE_TEXTS.ctaSecondary}
             variant={buttonVariantForIndex(1)}
             href={contactSectionHref(SECTION_IDS.contactOptions)}
           />

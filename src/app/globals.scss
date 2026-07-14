@@ -41,6 +41,7 @@
   --font-p: 1rem;
   --font-p2: 0.875rem;
   --font-h1: 3rem;
+  --font-hero-title: calc(var(--font-h1) * 7 / 6);
   --font-h2: 1.5rem;
   --font-h3: 1rem;
   --font-h4: 1rem;
@@ -68,9 +69,10 @@
 /* Mobile - $breakpoint-tablet */
 @media (max-width: $breakpoint-tablet) {
   :root {
-    --font-p: 0.9375rem;
-    --font-p2: 0.8125rem;
+    --font-p: 0.875rem;
+    --font-p2: 0.875rem;
     --font-h1: 2rem;
+    --font-hero-title: calc(var(--font-h1) * 7 / 6);
     --font-h2: 1.25rem;
     --font-h3: 0.9375rem;
     --font-h4: 0.9375rem;

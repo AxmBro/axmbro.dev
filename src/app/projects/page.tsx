@@ -4,23 +4,18 @@ import { ScreenContainer } from "@/shared/ui/screen-container";
 import { ScreenSection } from "@/shared/ui/screen-section";
 import { Button } from "@/shared/ui/button";
 import { ButtonGroup } from "@/shared/ui/button-group";
-import { PROJECTS, HOME_PAGE_TEXTS } from "@/shared/constants/data";
+import { PROJECTS, HOME_PAGE_TEXTS, SITE_METADATA, CTA_LABELS } from "@/shared/constants/data";
 import { contactSectionHref, SECTION_IDS } from "@/shared/constants/anchors";
 import { ROUTES } from "@/shared/constants/routes";
+import { createPageMetadata } from "@/shared/lib/page-metadata";
 import { ProjectsBoard } from "@/widgets/projects-board";
 import styles from "./page.module.scss";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Projects",
-  description:
-    "Portfolio of AxmBro - custom Minecraft Bedrock interfaces (JsonUI) for marketplace studios, commissioned HUDs and server forms, and web development projects.",
-  openGraph: {
-    title: "AxmBro.dev | Projects",
-    description:
-      "Portfolio of AxmBro - custom Minecraft Bedrock interfaces (JsonUI) for marketplace studios, commissioned HUDs and server forms, and web development projects.",
-    images: ["/images/ui/og-image.png"],
-  },
-};
+  description: SITE_METADATA.projectsDescription,
+  path: ROUTES.projects,
+});
 
 export default function ProjectsPage() {
   return (
@@ -45,12 +40,12 @@ export default function ProjectsPage() {
       >
         <ButtonGroup padInline padBottom>
           <Button
-            text="Start a Project"
+            text={CTA_LABELS.startProject}
             variant="primary"
             href={contactSectionHref(SECTION_IDS.startProject)}
           />
           <Button
-            text="Commission Details"
+            text={CTA_LABELS.commissionDetails}
             variant="outline"
             href={ROUTES.commissions}
           />

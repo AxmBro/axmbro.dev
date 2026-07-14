@@ -2,7 +2,7 @@
  * Hash navigation. Offsets: globals.scss (--header-offset, scroll-margin rules).
  *
  * Flow:
- *   hash-scroll-init.js - strip hash before first paint, store in sessionStorage
+ *   public/scripts/hash-scroll-init.js - strip hash before first paint, store in sessionStorage
  *   HashLink - cross-page clicks store pending hash, same-page scrolls in place
  *   HashScroll - restore pending hash after route, listen to hashchange
  *

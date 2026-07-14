@@ -5,6 +5,7 @@ import { useCallback, useEffect, useState } from "react";
 import styles from "./hero-section.module.scss";
 
 const FLIP_INTERVAL_MS = 6000;
+const INITIAL_FLIP_DELAY_MS = 700;
 
 const PORTRAITS = [
   {
@@ -68,7 +69,8 @@ export const HeroPortrait = () => {
     const timeoutId = window.setTimeout(() => {
       showNextPortrait();
       setHasCompletedInitialFlip(true);
-    }, 700);
+    }, INITIAL_FLIP_DELAY_MS);
+
     return () => window.clearTimeout(timeoutId);
   }, [showNextPortrait]);
 

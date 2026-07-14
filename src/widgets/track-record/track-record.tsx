@@ -44,6 +44,7 @@ export const TrackRecord = async () => {
               className={styles.client}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label={client.name}
             >
               {client.logoSrc && (
                 <Image
@@ -52,10 +53,8 @@ export const TrackRecord = async () => {
                   width={client.logoWidth ?? 160}
                   height={client.logoHeight ?? 48}
                   className={styles.clientLogo}
-                  data-solid-background={client.logoHasSolidBackground || undefined}
                 />
               )}
-              <span className={styles.clientName}>{client.name}</span>
             </a>
           ))}
         </div>

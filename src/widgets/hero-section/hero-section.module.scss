@@ -1,7 +1,22 @@
 @use '../../shared/styles/variables' as *;
 @use '../../shared/styles/mixins' as *;
 
+.heroSection {
+  position: relative;
+  isolation: isolate;
+}
+
+.waveLayer {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
 .heroGrid {
+  position: relative;
+  z-index: 2;
   display: grid;
   grid-template-columns: minmax(0, 1fr) 22rem;
   min-width: 0;
@@ -28,7 +43,10 @@
 }
 
 .title {
-  @include text-display;
+  font-size: var(--font-hero-title);
+  line-height: var(--line-height-display);
+  font-weight: 400;
+  color: var(--color-neutral-100);
   max-width: 44rem;
   overflow-wrap: break-word;
 }
@@ -38,10 +56,6 @@
   max-width: 44rem;
   margin-top: var(--spacing-section);
   white-space: pre-line;
-
-  @media (max-width: $breakpoint-tablet) {
-    margin-top: 0;
-  }
 }
 
 .portraitColumn {
@@ -57,6 +71,7 @@
   @media (max-width: $breakpoint-tablet) {
     border-top: 1px solid var(--color-border);
     border-left: none;
+    padding-bottom: calc(var(--spacing-block) + var(--spacing-section));
   }
 }
 

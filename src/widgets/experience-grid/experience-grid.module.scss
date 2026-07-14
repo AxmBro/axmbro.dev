@@ -17,30 +17,33 @@
   }
 }
 
-.expHeaderOneLine {
-  padding: var(--spacing-block) var(--spacing-block) 0 var(--spacing-block);
-  @include text-h2;
-  border-bottom: none;
+.expHeader {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   flex-wrap: wrap;
   gap: var(--spacing-xs);
+  padding: var(--spacing-block) var(--spacing-block) 0 var(--spacing-block);
 }
 
-.expAt {
-  color: var(--color-neutral-400);
+.expHeaderMain {
+  @include stack-2xs;
+  min-width: 0;
+}
+
+.expRole {
+  @include text-h2;
+  font-weight: 500;
 }
 
 .expCompany {
-  font-weight: 500;
+  @include text-h2(var(--color-neutral-400));
+  font-weight: 400;
 }
 
 .expDate {
-  @include text-caption;
-  font-weight: 500;
-  text-transform: none;
-  letter-spacing: normal;
+  @include text-body;
+  flex-shrink: 0;
 }
 
 .expTextContent {

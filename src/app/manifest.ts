@@ -1,11 +1,11 @@
 import type { MetadataRoute } from "next";
+import { SITE_METADATA } from "@/shared/constants/data";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "AxmBro.dev | Minecraft Bedrock UI Engineer",
+    name: "AxmBro.dev",
     short_name: "AxmBro",
-    description:
-      "Computer Science student and Minecraft Bedrock UI Engineer building custom JsonUI and responsive web interfaces.",
+    description: SITE_METADATA.homeDescription,
     start_url: "/",
     display: "standalone",
     background_color: "#000000",
