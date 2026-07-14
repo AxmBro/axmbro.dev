@@ -24,6 +24,13 @@
   }
 }
 
+.eyebrow {
+  @include text-caption;
+  color: var(--color-neutral-400);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
 .title {
   @include text-display;
   letter-spacing: 1px;

@@ -1,4 +1,4 @@
-import { ReactNode, type CSSProperties } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import styles from './screen-section.module.scss';
 
 /**
@@ -8,6 +8,8 @@ import styles from './screen-section.module.scss';
 interface ScreenSectionProps {
   /** Hash target - pair with Link or HashLink href. */
   id?: string;
+  /** Short muted label above the section title. */
+  eyebrow?: ReactNode;
   title?: ReactNode;
   titleDescription?: ReactNode;
   children?: ReactNode;
@@ -25,6 +27,7 @@ interface ScreenSectionProps {
 
 export const ScreenSection = ({
   id,
+  eyebrow,
   title,
   titleDescription,
   children,
@@ -36,22 +39,24 @@ export const ScreenSection = ({
   headingLevel = "h2"
 }: ScreenSectionProps) => {
   const HeadingTag = headingLevel;
+  const hasHeader = Boolean(eyebrow || title || titleDescription);
 
   return (
     <section className={`${styles.section} ${className || ""}`} id={id} style={style}>
-      {(title || titleDescription) && (
+      {hasHeader && (
         <div className={`
           ${styles.titleBlock} 
           ${withHeaderPadding ? styles.hasPadding : ''} 
           ${!children ? styles.noChildren : ''}
         `}>
+          {eyebrow && <div className={styles.eyebrow}>{eyebrow}</div>}
           {title && <HeadingTag className={styles.title}>{title}</HeadingTag>}
           {titleDescription && <div className={styles.description}>{titleDescription}</div>}
         </div>
       )}
       {children && (
         <div
-          className={`${styles.childrenContainer} ${withChildrenPadding ? styles.hasPadding : ""} ${title || titleDescription ? styles.belowTitle : ""} ${tightChildrenGap ? styles.tightGap : ""}`}
+          className={`${styles.childrenContainer} ${withChildrenPadding ? styles.hasPadding : ""} ${hasHeader ? styles.belowTitle : ""} ${tightChildrenGap ? styles.tightGap : ""}`}
         >
           {children}
         </div>
