@@ -15,7 +15,7 @@ import { ROUTES } from "@/shared/constants/routes";
 import styles from "./page.module.scss";
 
 export const metadata: Metadata = {
-  title: "Home",
+  title: "AxmBro.dev | Home",
   description:
     "Computer Science student and Minecraft Bedrock UI Engineer building custom JsonUI for studios, servers, and creators, plus responsive React and Next.js websites.",
   openGraph: {
