@@ -83,11 +83,10 @@
 }
 
 .client {
-  @include stack-xs;
   @include link-plain;
+  display: flex;
   align-items: center;
   justify-content: center;
-  gap: calc(var(--spacing-xs) * 2);
   min-height: 6rem;
   padding: var(--spacing-block);
   color: inherit;
@@ -106,17 +105,6 @@
   &:hover,
   &:focus-visible {
     background-color: var(--surface-hover);
-
-    .clientName {
-      color: var(--color-neutral-100);
-      text-decoration: underline;
-      text-underline-offset: 0.2em;
-    }
-
-    .clientLogo {
-      filter: none;
-      opacity: 1;
-    }
   }
 }
 
@@ -126,27 +114,11 @@
   max-height: 3rem;
   height: auto;
   object-fit: contain;
-  filter: grayscale(1) brightness(0) invert(1);
-  opacity: 0.82;
-  transition:
-    filter 220ms ease,
-    opacity 220ms ease;
-
-  &[data-solid-background] {
-    filter: grayscale(1) saturate(0);
-    opacity: 0.68;
-  }
-}
-
-.clientName {
-  @include text-caption;
-  text-transform: uppercase;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .stat,
-  .value,
-  .clientLogo {
+  .value {
     transition: none;
   }
 }

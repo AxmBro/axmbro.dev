@@ -9,13 +9,12 @@ export const ExperienceGrid = () => {
     <div className={styles.experienceVerticalGrid}>
       {EXPERIENCE_TREE.map((exp) => (
         <div key={`${exp.role}-${exp.company}`} className={styles.expVerticalItem}>
-          <div className={styles.expHeaderOneLine}>
-            <span className={styles.expRoleLine}>
+          <div className={styles.expHeader}>
+            <div className={styles.expHeaderMain}>
               <span className={styles.expRole}>{exp.role}</span>
-              <span className={styles.expAt}> at </span>
               <span className={styles.expCompany}>{exp.company}</span>
-            </span>
-            <span className={styles.expDate}>({exp.date})</span>
+            </div>
+            <span className={styles.expDate}>{exp.date}</span>
           </div>
           <div className={styles.expTextContent}>
             <ul className={styles.expListMinimal}>
