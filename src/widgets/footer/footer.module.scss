@@ -83,11 +83,18 @@
 .brandName {
   @include text-h2;
   letter-spacing: 0.5px;
+  line-height: 1;
+}
+
+.footerLogo {
+  width: var(--header-logo-size);
+  height: var(--header-logo-size);
 }
 
 .brandDesc {
   @include text-body-sm;
   max-width: 300px;
+  margin-top: 0.25rem;
   word-break: break-word;
   overflow-wrap: break-word;
   hyphens: auto;
@@ -131,6 +138,14 @@
     word-break: break-word;
     hyphens: auto;
   }
+}
+
+.navigationDivider {
+  width: calc(100% + var(--spacing-block) + var(--spacing-block));
+  height: 1px;
+  margin-block: var(--spacing-xs);
+  margin-inline: calc(0px - var(--spacing-block));
+  background-color: var(--color-border);
 }
 
 .contactLinks {

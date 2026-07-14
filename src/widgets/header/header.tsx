@@ -13,6 +13,13 @@ import styles from "./header.module.scss";
 
 const navPath = (href: string) => href.split("#")[0] || ROUTES.home;
 const hasHash = (href: string) => href.includes("#");
+const isNavActive = (pathname: string, href: string) => {
+  const targetPath = navPath(href);
+
+  return targetPath === ROUTES.home
+    ? pathname === ROUTES.home
+    : pathname === targetPath || pathname.startsWith(`${targetPath}/`);
+};
 
 const MOBILE_NAV_ID = "header-mobile-nav";
 
@@ -43,7 +50,12 @@ export const Header = () => {
   };
 
   const navLinkClass = (href: string) =>
-    pathname === navPath(href) ? `${styles.navItem} ${styles.navItemActive}` : styles.navItem;
+    isNavActive(pathname, href) ? `${styles.navItem} ${styles.navItemActive}` : styles.navItem;
+
+  const mobileNavLinkClass = (href: string) =>
+    isNavActive(pathname, href)
+      ? `${styles.mobileNavItem} ${styles.navItemActive}`
+      : styles.mobileNavItem;
 
   const renderNavLink = (link: (typeof NAV_LINKS)[number], className: string) => {
     if (hasHash(link.href)) {
@@ -105,7 +117,7 @@ export const Header = () => {
 
           {isResponsive && menuOpen && (
             <nav id={MOBILE_NAV_ID} className={styles.mobileMenu} aria-label="Mobile">
-              {NAV_LINKS.map((link) => renderNavLink(link, styles.mobileNavItem))}
+              {NAV_LINKS.map((link) => renderNavLink(link, mobileNavLinkClass(link.href)))}
             </nav>
           )}
         </div>

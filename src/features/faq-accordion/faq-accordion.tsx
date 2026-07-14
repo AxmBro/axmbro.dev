@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { FAQ_ITEMS } from "@/shared/constants/data";
+import { FAQ_ITEMS, type FAQItem } from "@/shared/constants/data";
 import { faqItemId } from "@/shared/constants/anchors";
 import { parseHashId } from "@/shared/lib/scroll-to-hash";
 import styles from "./faq-accordion.module.scss";
@@ -24,26 +24,30 @@ const ChevronIcon = ({ isOpen }: { isOpen: boolean }) => (
   </svg>
 );
 
-const findSlugFromHash = () => {
+const findSlugFromHash = (items: FAQItem[]) => {
   const id = parseHashId(window.location.hash);
   if (!id.startsWith("faq-")) return null;
   const slug = id.slice("faq-".length);
-  return FAQ_ITEMS.some((item) => item.slug === slug) ? slug : null;
+  return items.some((item) => item.slug === slug) ? slug : null;
 };
 
-export const FAQAccordion = () => {
+interface FAQAccordionProps {
+  items?: FAQItem[];
+}
+
+export const FAQAccordion = ({ items = FAQ_ITEMS }: FAQAccordionProps) => {
   const [openSlug, setOpenSlug] = useState<string | null>(null);
 
   useEffect(() => {
     const syncFromHash = () => {
-      const slug = findSlugFromHash();
+      const slug = findSlugFromHash(items);
       if (slug) setOpenSlug(slug);
     };
 
     syncFromHash();
     window.addEventListener("hashchange", syncFromHash);
     return () => window.removeEventListener("hashchange", syncFromHash);
-  }, []);
+  }, [items]);
 
   const toggleFAQ = (slug: string | undefined, index: number) => {
     const key = slug ?? String(index);
@@ -52,7 +56,7 @@ export const FAQAccordion = () => {
 
   return (
     <div className={styles.faqList}>
-      {FAQ_ITEMS.map((item, index) => {
+      {items.map((item, index) => {
         const key = item.slug ?? String(index);
         const isOpen = openSlug === key;
         return (
