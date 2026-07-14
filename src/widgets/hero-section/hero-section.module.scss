@@ -38,6 +38,10 @@
   max-width: 44rem;
   margin-top: var(--spacing-section);
   white-space: pre-line;
+
+  @media (max-width: $breakpoint-tablet) {
+    margin-top: 0;
+  }
 }
 
 .portraitColumn {
