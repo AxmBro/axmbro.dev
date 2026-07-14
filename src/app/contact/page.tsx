@@ -7,24 +7,20 @@ import {
   CONTACT_FAQ_ITEMS,
   SOCIAL_LINK_BUTTONS,
   HOME_PAGE_TEXTS,
+  SITE_METADATA,
 } from "@/shared/constants/data";
 import { SECTION_IDS } from "@/shared/constants/anchors";
 import { ROUTES } from "@/shared/constants/routes";
+import { createPageMetadata } from "@/shared/lib/page-metadata";
 import { ContactForm, MoreProfiles } from "@/features/contact-form";
 import { FAQAccordion } from "@/features/faq-accordion";
 import styles from "./page.module.scss";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Contact",
-  description:
-    "Get in touch with AxmBro for Minecraft Bedrock UI (JsonUI) commissions, web development, or B2B inquiries. Send a message directly or connect through social channels.",
-  openGraph: {
-    title: "AxmBro.dev | Contact",
-    description:
-      "Get in touch with AxmBro for Minecraft Bedrock UI (JsonUI) commissions, web development, or B2B inquiries.",
-    images: ["/images/ui/og-image.png"],
-  },
-};
+  description: SITE_METADATA.contactDescription,
+  path: ROUTES.contact,
+});
 
 export default function ContactPage() {
   const directChannels = SOCIAL_LINK_BUTTONS.filter((link) => link.channel === "direct");

@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { PROJECTS } from "@/shared/constants/data";
+import { PROJECTS, SITE_METADATA } from "@/shared/constants/data";
 import { getProjectThumbnailSrc } from "@/entities/project";
 import { ScreenContainer } from "@/shared/ui/screen-container";
 import { ScreenSection, ScreenSectionList } from "@/shared/ui/screen-section";
@@ -9,6 +9,8 @@ import { ButtonGroup } from "@/shared/ui/button-group";
 import { ImageSection } from "@/entities/project";
 import { getProjectData } from "@/shared/lib/markdown";
 import { contactSectionHref, SECTION_IDS } from "@/shared/constants/anchors";
+import { projectDetailPath } from "@/shared/constants/routes";
+import { createPageMetadata } from "@/shared/lib/page-metadata";
 import styles from "./page.module.scss";
 
 interface ProjectPageProps {
@@ -20,26 +22,18 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
   const pageData = await getProjectData(projectId);
   const project = PROJECTS.find((p) => p.url === projectId);
   const title = pageData?.title || project?.title || projectId.replace(/_/g, " ");
-  const description = pageData?.description || project?.description;
+  const description = pageData?.description || project?.description || SITE_METADATA.projectsDescription;
   const thumbnail = project ? getProjectThumbnailSrc(project) : null;
 
-  return {
+  return createPageMetadata({
     title,
     description,
-    openGraph: {
-      title: `AxmBro.dev | ${title}`,
-      description,
-      images: thumbnail
-        ? [{ url: thumbnail, width: 1280, height: 720, alt: title }]
-        : ["/images/ui/og-image.png"],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: `AxmBro.dev | ${title}`,
-      description,
-      images: thumbnail ? [thumbnail] : ["/images/ui/og-image.png"],
-    },
-  };
+    path: projectDetailPath(projectId),
+    images: thumbnail
+      ? [{ url: thumbnail, width: 1280, height: 720, alt: `${title} project preview` }]
+      : undefined,
+    imageAlt: `${title} project preview`,
+  });
 }
 
 export function generateStaticParams() {

@@ -2,19 +2,15 @@ import { Metadata } from "next";
 import { LegalPage } from "@/shared/ui/legal-page";
 import { PRIVACY_POLICY_ITEMS } from "@/shared/constants/legal";
 import { SECTION_IDS } from "@/shared/constants/anchors";
+import { ROUTES } from "@/shared/constants/routes";
+import { SITE_METADATA } from "@/shared/constants/data";
+import { createPageMetadata } from "@/shared/lib/page-metadata";
 
-const description =
-  "Privacy Policy for axmbro.dev - how personal data is collected and processed when you use this portfolio site or contact form.";
-
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Privacy Policy",
-  description,
-  openGraph: {
-    title: "AxmBro.dev | Privacy Policy",
-    description,
-    images: ["/images/ui/og-image.png"],
-  },
-};
+  description: SITE_METADATA.privacyPolicyDescription,
+  path: ROUTES.privacyPolicy,
+});
 
 export default function PrivacyPolicyPage() {
   return (

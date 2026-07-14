@@ -5,20 +5,14 @@ import { Button } from "@/shared/ui/button";
 import { ButtonGroup } from "@/shared/ui/button-group";
 import { ProjectsBoardButton } from "@/shared/ui/projects-tag-link";
 import { ROUTES } from "@/shared/constants/routes";
+import { SITE_METADATA } from "@/shared/constants/data";
+import { createPageMetadata } from "@/shared/lib/page-metadata";
 
-const description =
-  "This page doesn't exist on axmbro.dev. Check the URL or return to the homepage.";
-
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Page not found",
-  description,
+  description: SITE_METADATA.notFoundDescription,
   robots: { index: false, follow: true },
-  openGraph: {
-    title: "AxmBro.dev | Page not found",
-    description,
-    images: ["/images/ui/og-image.png"],
-  },
-};
+});
 
 export default function NotFound() {
   return (

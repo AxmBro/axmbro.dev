@@ -1,19 +1,16 @@
 import type { Metadata } from "next";
+import { SITE_METADATA } from "@/shared/constants/data";
+import { ROUTES } from "@/shared/constants/routes";
+import { createPageMetadata } from "@/shared/lib/page-metadata";
 import { ScreenContainer } from "@/shared/ui/screen-container";
 import { ScreenSection } from "@/shared/ui/screen-section";
 import { SitemapGrid, SitemapProjectList } from "@/widgets/sitemap-grid";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Sitemap",
-  description:
-    "Browse the main pages, portfolio sections, project views, commission information, and legal pages on AxmBro.dev.",
-  openGraph: {
-    title: "AxmBro.dev | Sitemap",
-    description:
-      "Browse the main pages, portfolio sections, project views, commission information, and legal pages on AxmBro.dev.",
-    images: ["/images/ui/og-image.png"],
-  },
-};
+  description: SITE_METADATA.sitemapDescription,
+  path: ROUTES.sitemap,
+});
 
 export default function SitemapPage() {
   return (
