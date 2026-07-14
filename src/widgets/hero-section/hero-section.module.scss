@@ -48,7 +48,12 @@
   font-weight: 400;
   color: var(--color-neutral-100);
   max-width: 44rem;
-  @include mobile-wrap-hyphens;
+  overflow-wrap: break-word;
+  word-break: normal;
+
+  @media (max-width: $breakpoint-tablet) {
+    max-width: 100%;
+  }
 }
 
 .description {

@@ -19,9 +19,7 @@ export const HeroSection = () => (
     <div className={styles.heroGrid}>
       <div className={styles.heroContent}>
         <p className={styles.eyebrow}>Profile</p>
-        <h1 lang="en" className={styles.title}>
-          Minecraft Bedrock UI Engineer & Frontend Developer
-        </h1>
+        <h1 className={styles.title}>Minecraft Bedrock UI Engineer & Frontend Developer</h1>
         <p className={styles.description}>{HOME_PAGE_TEXTS.hero.description}</p>
         <ButtonGroup marginTop>
           <Button

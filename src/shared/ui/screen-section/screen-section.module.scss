@@ -1,4 +1,3 @@
-@use '../../styles/variables' as *;
 @use '../../styles/mixins' as *;
 
 .section {
@@ -35,11 +34,8 @@
 .title {
   @include text-display;
   letter-spacing: 1px;
-  @include mobile-wrap-hyphens;
-
-  @media (max-width: $breakpoint-tablet) {
-    letter-spacing: normal;
-  }
+  overflow-wrap: break-word;
+  word-break: normal;
 }
 
 .description {
@@ -86,11 +82,6 @@
 .listTitle {
   @include text-h2;
   letter-spacing: 0.5px;
-  @include mobile-wrap-hyphens;
-
-  @media (max-width: $breakpoint-tablet) {
-    letter-spacing: normal;
-  }
 }
 
 .listItemsWrapper {
