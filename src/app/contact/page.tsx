@@ -1,10 +1,16 @@
-import { Metadata } from "next";
+import type { Metadata } from "next";
+import Link from "next/link";
 import { ScreenContainer } from "@/shared/ui/screen-container";
 import { ScreenSection } from "@/shared/ui/screen-section";
 import { SocialLinkButton } from "@/shared/ui/social-link-button";
-import { SOCIAL_LINK_BUTTONS, HOME_PAGE_TEXTS } from "@/shared/constants/data";
+import {
+  CONTACT_FAQ_ITEMS,
+  SOCIAL_LINK_BUTTONS,
+  HOME_PAGE_TEXTS,
+} from "@/shared/constants/data";
 import { SECTION_IDS } from "@/shared/constants/anchors";
-import { ContactForm } from "@/features/contact-form";
+import { ROUTES } from "@/shared/constants/routes";
+import { ContactForm, MoreProfiles } from "@/features/contact-form";
 import { FAQAccordion } from "@/features/faq-accordion";
 import styles from "./page.module.scss";
 
@@ -21,27 +27,17 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
+  const directChannels = SOCIAL_LINK_BUTTONS.filter((link) => link.channel === "direct");
+  const profilesAndCommunities = SOCIAL_LINK_BUTTONS.filter((link) => link.channel === "extra");
+
   return (
     <ScreenContainer>
 
       <ScreenSection
-        className={styles.contactSection}
-        id={SECTION_IDS.contactSocials}
-        withChildrenPadding={true}
-        title="Contact"
+        id={SECTION_IDS.startProject}
+        eyebrow="Contact"
+        title="Start a Project"
         headingLevel="h1"
-        titleDescription={HOME_PAGE_TEXTS.contactPage.socials}
-      >
-        <div id={SECTION_IDS.socialLinks} data-scroll-anchor className={styles.socialList}>
-          {SOCIAL_LINK_BUTTONS.map((button, index) => (
-            <SocialLinkButton key={index} link={button} />
-          ))}
-        </div>
-      </ScreenSection>
-
-      <ScreenSection
-        id={SECTION_IDS.sendMessage}
-        title="Send a message"
         withChildrenPadding={false}
         titleDescription={HOME_PAGE_TEXTS.contactPage.form}
       >
@@ -49,12 +45,33 @@ export default function ContactPage() {
       </ScreenSection>
 
       <ScreenSection
-        id={SECTION_IDS.faq}
-        title="Frequently Asked Questions"
-        withChildrenPadding={false}
-        titleDescription="Quick answers about commissions, pricing, custom UI technical details, and typical timelines."
+        id={SECTION_IDS.contactOptions}
+        eyebrow="Direct Contact"
+        withChildrenPadding
+        title="Other Ways to Connect"
+        titleDescription={HOME_PAGE_TEXTS.contactPage.socials}
       >
-        <FAQAccordion />
+        <div className={styles.socialList}>
+          {directChannels.map((button) => (
+            <SocialLinkButton key={button.href} link={button} />
+          ))}
+        </div>
+        <MoreProfiles links={profilesAndCommunities} />
+      </ScreenSection>
+
+      <ScreenSection
+        id={SECTION_IDS.quickQuestions}
+        eyebrow="Answers"
+        title="Quick Questions"
+        withChildrenPadding={false}
+        titleDescription={
+          <>
+            Short answers on availability and fit. Pricing, process, and delivery details are on the{" "}
+            <Link href={ROUTES.commissions}>Commissions page</Link>.
+          </>
+        }
+      >
+        <FAQAccordion items={CONTACT_FAQ_ITEMS} />
       </ScreenSection>
 
     </ScreenContainer>

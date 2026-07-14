@@ -83,7 +83,6 @@ $form-row-height: 3.25rem;
     }
   }
 
-  /* Submit: data-active vs disabled / success / error states */
   &[disabled] {
     opacity: 0.6;
     cursor: not-allowed;
@@ -92,25 +91,21 @@ $form-row-height: 3.25rem;
     border: 1px solid var(--color-border) !important;
     filter: none !important;
   }
-
-  &[data-status="success"] {
-    background-color: var(--surface-input) !important;
-    color: var(--color-accent) !important;
-    border: 1px solid var(--color-border) !important;
-    cursor: not-allowed;
-    opacity: 1 !important;
-  }
-
-  &[data-status="error"] {
-    background-color: var(--surface-input) !important;
-    color: var(--color-error) !important;
-    border: 1px solid var(--color-border) !important;
-    cursor: not-allowed;
-    opacity: 1 !important;
-  }
 }
 
 .intentWrapper {
   @include stack-xs;
   width: 100%;
+}
+
+.formStatus {
+  @include text-body-sm;
+
+  &[data-status="success"] {
+    color: var(--color-accent);
+  }
+
+  &[data-status="error"] {
+    color: var(--color-error);
+  }
 }

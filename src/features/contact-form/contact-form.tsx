@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect, type FormEvent, type ChangeEvent } from "react";
 import { JoinedTabs } from "@/shared/ui/joined-tabs";
 import { sendEmailAction } from "./api/send-email";
+import { CONTACT_FORM_INTENTS } from "@/shared/constants/data";
 import styles from "./contact-form.module.scss";
 
 export const ContactForm = () => {
@@ -14,34 +15,6 @@ export const ContactForm = () => {
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const isReady = emailRegex.test(email.trim()) && message.trim() !== "" && status === "idle";
-
-  const intents = [
-    {
-      id: "custom-ui",
-      label: "Custom UI",
-      template: "Hello AxmBro! I'd like to order a custom UI for my Minecraft Bedrock project. Here is my concept: "
-    },
-    {
-      id: "server-forms",
-      label: "Server Forms",
-      template: "Hello AxmBro! I'd like to order custom server forms for my Minecraft Bedrock project. Here is my concept: "
-    },
-    {
-      id: "custom-hud",
-      label: "Custom HUD",
-      template: "Hello AxmBro! I'd like to order a custom HUD for my Minecraft Bedrock project. Here is my concept: "
-    },
-    {
-      id: "web-dev",
-      label: "Web Development",
-      template: "Hello AxmBro! I'd like to talk about a web development project (e.g., custom landing page). Here is my concept: "
-    },
-    {
-      id: "other",
-      label: "Other",
-      template: "Hello AxmBro! I'd like to inquire about a custom project. Here are the details: "
-    }
-  ];
 
   useEffect(() => {
     return () => {
@@ -90,9 +63,6 @@ export const ContactForm = () => {
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setter(e.target.value);
-    if (setter === setMessage) {
-      setActiveIntent(null);
-    }
     if (status === "success" || status === "error") {
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
@@ -103,7 +73,13 @@ export const ContactForm = () => {
 
   const handleIntentClick = (intentId: string, template: string) => {
     setActiveIntent(intentId);
-    setMessage(template);
+    setMessage((currentMessage) => {
+      const containsOnlyTemplate =
+        currentMessage === "" ||
+        CONTACT_FORM_INTENTS.some((intent) => intent.template === currentMessage);
+
+      return containsOnlyTemplate ? template : currentMessage;
+    });
     if (status === "success" || status === "error") {
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
@@ -130,12 +106,12 @@ export const ContactForm = () => {
         </div>
 
         <div className={styles.intentWrapper}>
-          <span className={styles.label}>What are you looking for? (Optional)</span>
+          <span className={styles.label}>Project Type (Optional)</span>
           <JoinedTabs
-            options={intents}
+            options={CONTACT_FORM_INTENTS}
             activeId={activeIntent}
             onChange={(id) => {
-              const intent = intents.find((i) => i.id === id);
+              const intent = CONTACT_FORM_INTENTS.find((item) => item.id === id);
               if (intent) {
                 handleIntentClick(intent.id, intent.template);
               }
@@ -150,7 +126,7 @@ export const ContactForm = () => {
           <textarea
             id="contact-message"
             className={styles.textarea}
-            placeholder="Enter your message"
+            placeholder="Include the project scope, required screens, target Minecraft version, preferred timeline, and any mockups or textures you already have."
             value={message}
             onChange={handleInputChange(setMessage)}
             required
@@ -162,14 +138,22 @@ export const ContactForm = () => {
           type="submit"
           className={styles.submitButton}
           data-active={isReady ? "true" : "false"}
-          data-status={status}
-          disabled={status !== "idle"}
+          disabled={!isReady}
         >
-          {status === "submitting" && "Sending..."}
-          {status === "success" && "Message sent successfully! I will get back to you soon."}
-          {status === "error" && "Failed to send message. Please check your connection or try again later."}
-          {status === "idle" && (isReady ? "Send Message" : "Fill the form")}
+          {status === "submitting" ? "Sending..." : "Send Message"}
         </button>
+        {(status === "success" || status === "error") && (
+          <p
+            className={styles.formStatus}
+            data-status={status}
+            role="status"
+            aria-live="polite"
+          >
+            {status === "success"
+              ? "Message sent. I will reply as soon as possible."
+              : "Message could not be sent. Please try again or use email."}
+          </p>
+        )}
       </form>
     </div>
   );
