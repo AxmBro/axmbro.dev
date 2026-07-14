@@ -23,9 +23,6 @@ export const metadata: Metadata = {
   description: SITE_METADATA.homeDescription,
   keywords: SITE_METADATA.keywords,
   metadataBase: new URL("https://axmbro.dev"),
-  verification: {
-    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || "",
-  },
   openGraph: {
     title: "AxmBro.dev | Home",
     description: SITE_METADATA.homeDescription,
