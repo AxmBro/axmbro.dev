@@ -23,9 +23,9 @@ export const CookieConsent = () => {
 
   return (
     <section className={styles.banner} aria-label="Cookie consent">
-      <h2 className={styles.title}>Cookies and analytics</h2>
+      <h2 className={styles.title}>We use cookies</h2>
       <p className={styles.text}>
-        Vercel Analytics runs by default. Google Analytics 4 loads only if you accept.
+        Optional analytics helps us improve the site. Accept if you are OK with that.
       </p>
       <div className={styles.actions}>
         <Button text="Accept cookies" variant="primary" onClick={() => handleChoice("accepted")} />

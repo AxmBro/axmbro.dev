@@ -19,6 +19,12 @@
     right: auto;
     max-width: 28rem;
   }
+
+  @media (max-width: $breakpoint-tablet) {
+    right: 0;
+    left: 0;
+    bottom: 0;
+  }
 }
 
 .title {
