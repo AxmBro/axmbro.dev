@@ -70,8 +70,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className={lexend.variable}>
-      <body>
+    <html lang="en" className={lexend.variable} suppressHydrationWarning>
+      <body suppressHydrationWarning>
         <Script src="/scripts/hash-scroll-init.js" strategy="beforeInteractive" />
         <HashScroll />
         <PixelClickWave />
