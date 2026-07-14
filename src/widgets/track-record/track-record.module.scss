@@ -1,0 +1,152 @@
+@use '../../shared/styles/variables' as *;
+@use '../../shared/styles/mixins' as *;
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 100%;
+  border-top: 1px solid var(--color-border);
+
+  @media (max-width: $breakpoint-md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.stat {
+  @include stack-xs;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  padding: var(--spacing-block);
+  text-align: center;
+  border-right: 1px solid var(--color-border);
+  transition: background-color 180ms ease;
+
+  &:not(.empty):hover {
+    background-color: var(--surface-hover);
+  }
+
+  &:nth-child(3n) {
+    border-right: none;
+  }
+
+  &:nth-child(n + 4) {
+    border-top: 1px solid var(--color-border);
+  }
+
+  @media (max-width: $breakpoint-md) {
+    border-top: 1px solid var(--color-border);
+    border-right: none;
+
+    &:first-child {
+      border-top: none;
+    }
+
+    &.empty {
+      display: none;
+    }
+  }
+}
+
+.value {
+  @include text-display(var(--color-accent));
+  display: inline-block;
+  transition: transform 180ms ease;
+}
+
+.label {
+  @include text-caption;
+  text-transform: uppercase;
+}
+
+.clients {
+  border-top: 1px solid var(--color-border);
+}
+
+.clientsHeader {
+  @include stack-2xs;
+  padding: var(--spacing-block);
+}
+
+.clientsTitle {
+  @include text-h2;
+}
+
+.clientsDescription {
+  @include text-body;
+}
+
+.clientRow {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  border-top: 1px solid var(--color-border);
+}
+
+.client {
+  @include stack-xs;
+  @include link-plain;
+  align-items: center;
+  justify-content: center;
+  gap: calc(var(--spacing-xs) * 2);
+  min-height: 6rem;
+  padding: var(--spacing-block);
+  color: inherit;
+  text-align: center;
+  border-right: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+
+  &:nth-child(2n) {
+    border-right: none;
+  }
+
+  &:nth-last-child(-n + 2) {
+    border-bottom: none;
+  }
+
+  &:hover,
+  &:focus-visible {
+    background-color: var(--surface-hover);
+
+    .clientName {
+      color: var(--color-neutral-100);
+      text-decoration: underline;
+      text-underline-offset: 0.2em;
+    }
+
+    .clientLogo {
+      filter: none;
+      opacity: 1;
+    }
+  }
+}
+
+.clientLogo {
+  width: auto;
+  max-width: 100%;
+  max-height: 3rem;
+  height: auto;
+  object-fit: contain;
+  filter: grayscale(1) brightness(0) invert(1);
+  opacity: 0.82;
+  transition:
+    filter 220ms ease,
+    opacity 220ms ease;
+
+  &[data-solid-background] {
+    filter: grayscale(1) saturate(0);
+    opacity: 0.68;
+  }
+}
+
+.clientName {
+  @include text-caption;
+  text-transform: uppercase;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stat,
+  .value,
+  .clientLogo {
+    transition: none;
+  }
+}
