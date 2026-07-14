@@ -3,7 +3,7 @@ title: Mineville UI
 credits:
   - role: Creator
     name: AxmBro
-    href: /contact#send-message
+    href: /contact#start-project
 imageSections:
   - title: Server Interfaces
     description: High-performance custom interface forms designed to enhance player navigation and server branding.

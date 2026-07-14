@@ -11,8 +11,8 @@
  *   <Link href="/#commission-process">...</Link>
  *
  * Extra gap under sticky header - id + data-scroll-anchor + HashLink:
- *   <div id="social-links" data-scroll-anchor />
- *   <HashLink href="/contact#social-links">...</HashLink>
+ *   <div id="contact-options" data-scroll-anchor />
+ *   <HashLink href="/contact#contact-options">...</HashLink>
  */
 export const parseHashId = (hash: string) =>
   decodeURIComponent(hash.replace(/^#/, "").split("#")[0]);
