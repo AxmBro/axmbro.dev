@@ -48,7 +48,7 @@
   font-weight: 400;
   color: var(--color-neutral-100);
   max-width: 44rem;
-  overflow-wrap: break-word;
+  @include mobile-wrap-hyphens;
 }
 
 .description {
