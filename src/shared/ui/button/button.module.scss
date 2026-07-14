@@ -4,7 +4,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.65rem 1.4rem;
+  padding: 0.65rem 1.3rem;
   @include text-body(var(--color-neutral-100));
   @include link-plain;
   cursor: pointer;
@@ -15,8 +15,9 @@
   text-align: center;
   max-width: 100%;
   box-sizing: border-box;
-  word-break: break-word;
-  hyphens: auto;
+  overflow-wrap: break-word;
+  word-break: normal;
+  hyphens: none;
 
   &[data-variant="primary"] {
     background-color: var(--color-accent);
