@@ -17,7 +17,6 @@ Optional. Copy `.env.example` to `.env` and fill in what you need. Details for e
 
 - **SMTP_USER / SMTP_PASSWORD** - contact form
 - **YOUTUBE_API_KEY** - live YouTube stats on the home page
-- **NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION** - Google Search Console meta tag
 
 The site runs without them; missing keys only disable those features.
 
