@@ -14,11 +14,19 @@ export const PRIVACY_POLICY_ITEMS: LegalItem[] = [
   },
   {
     title: "Data Collected via Contact Form",
-    text: "When you submit a message using our contact form, we collect your email address, and any personal information you choose to include in the message body. We do not use tracking cookies or marketing newsletters."
+    text: "When you submit a message using our contact form, we collect your email address and any personal information you choose to include in the message body. We do not use marketing newsletters."
+  },
+  {
+    title: "Website Analytics",
+    text: "We use Vercel Analytics for basic page views (no cookies). Google Analytics 4 runs only if you accept analytics cookies in the banner."
+  },
+  {
+    title: "Cookies",
+    text: "You can accept or reject analytics cookies on your first visit. Rejecting disables GA4. Clear site data to choose again."
   },
   {
     title: "Purpose & Legal Basis",
-    text: "We process your personal data exclusively to respond to your inquiries, provide support, and manage communication. The legal basis for processing is your explicit consent (by sending the form) and our legitimate interest in communicating with users."
+    text: "Contact form data is processed to respond to your message (consent when sending). Analytics helps measure site usage. GA4 requires your cookie consent."
   },
   {
     title: "Data Retention",
