@@ -1,11 +1,18 @@
 .canvas {
   position: fixed;
-  z-index: 9999;
   inset: 0;
   width: 100vw;
   height: 100vh;
   pointer-events: none;
   mix-blend-mode: screen;
+}
+
+.canvasBehind {
+  mix-blend-mode: plus-lighter;
+}
+
+.canvasAbove {
+  z-index: 9999;
 }
 
 @media (prefers-reduced-motion: reduce) {

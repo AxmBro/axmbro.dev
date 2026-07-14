@@ -1,13 +1,21 @@
-import { contactSectionHref, homeSectionHref, SECTION_IDS } from "@/shared/constants/anchors";
+import { homeSectionHref, SECTION_IDS } from "@/shared/constants/anchors";
 import { HOME_PAGE_TEXTS } from "@/shared/constants/data";
+import { ROUTES } from "@/shared/constants/routes";
 import { Button, buttonVariantForIndex } from "@/shared/ui/button";
 import { ButtonGroup } from "@/shared/ui/button-group";
 import { ScreenSection } from "@/shared/ui/screen-section";
 import { HeroPortrait } from "./hero-portrait";
+import { HeroWaveTimer } from "./hero-wave-timer";
 import styles from "./hero-section.module.scss";
 
 export const HeroSection = () => (
-  <ScreenSection id={SECTION_IDS.profile} withChildrenPadding={false}>
+  <ScreenSection
+    id={SECTION_IDS.profile}
+    withChildrenPadding={false}
+    className={styles.heroSection}
+  >
+    <HeroWaveTimer />
+    <div className={styles.waveLayer} data-pixel-wave-behind />
     <div className={styles.heroGrid}>
       <div className={styles.heroContent}>
         <p className={styles.eyebrow}>Profile</p>
@@ -15,14 +23,14 @@ export const HeroSection = () => (
         <p className={styles.description}>{HOME_PAGE_TEXTS.hero.description}</p>
         <ButtonGroup marginTop>
           <Button
-            text="View Selected Work"
+            text={HOME_PAGE_TEXTS.hero.ctaCommissions}
             variant={buttonVariantForIndex(0)}
-            href={homeSectionHref(SECTION_IDS.selectedWork)}
+            href={ROUTES.commissions}
           />
           <Button
-            text="Start a Project"
+            text={HOME_PAGE_TEXTS.hero.ctaWork}
             variant={buttonVariantForIndex(1)}
-            href={contactSectionHref(SECTION_IDS.startProject)}
+            href={homeSectionHref(SECTION_IDS.selectedWork)}
           />
         </ButtonGroup>
       </div>
