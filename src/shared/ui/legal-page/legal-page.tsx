@@ -26,6 +26,7 @@ export const LegalPage = ({
     <ScreenContainer>
       <ScreenSection
         id={id}
+        eyebrow="Legal"
         title={title}
         headingLevel="h1"
         titleDescription={
