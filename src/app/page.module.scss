@@ -3,13 +3,14 @@
 
 .selectedGrid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  width: 100%;
+  grid-template-columns: repeat(2, 1fr);
+  width: auto;
   min-width: 0;
-  border-top: 1px solid var(--color-border);
+  margin-inline: var(--spacing-block);
+  border: 1px solid var(--color-border);
   align-items: stretch;
 
-  @media (max-width: $breakpoint-wide) {
+  @media (max-width: $breakpoint-tablet) {
     grid-template-columns: 1fr;
   }
 }
@@ -20,6 +21,7 @@
   min-height: 100%;
   min-width: 0;
   border-right: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
 
   > * {
     flex: 1;
@@ -29,44 +31,38 @@
     width: 100%;
   }
 
-  &:nth-child(3n) {
+  &:nth-child(2n) {
     border-right: none;
   }
 
-  @media (max-width: $breakpoint-wide) {
-    border-right: none;
+  &:nth-last-child(-n + 2) {
+    border-bottom: none;
+  }
 
-    &:not(:last-child) {
-      border-bottom: 1px solid var(--color-border);
+  @media (max-width: $breakpoint-tablet) {
+    border-right: none;
+    border-bottom: 1px solid var(--color-border);
+
+    &:last-child {
+      border-bottom: none;
     }
   }
 }
 
 .selectedFooter {
+  margin-top: var(--spacing-section);
   padding: var(--spacing-section) var(--spacing-block) var(--spacing-block);
   border-top: 1px solid var(--color-border);
 }
 
-.processCta {
-  padding: var(--page-section-gap) var(--spacing-block);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
+.selectedFooterHeader {
+  @include stack-2xs;
 }
 
-.ctaHeader {
-  @include stack-xs;
-  align-items: center;
-  text-align: center;
-}
-
-.ctaTitle {
+.selectedFooterTitle {
   @include text-h2;
-  font-weight: 500;
 }
 
-.ctaText {
+.selectedFooterDescription {
   @include text-body;
-  max-width: 600px;
 }

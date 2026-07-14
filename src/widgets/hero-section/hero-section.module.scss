@@ -1,0 +1,170 @@
+@use '../../shared/styles/variables' as *;
+@use '../../shared/styles/mixins' as *;
+
+.heroGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 22rem;
+  min-width: 0;
+
+  @media (max-width: $breakpoint-tablet) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.heroContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--spacing-xs);
+  min-width: 0;
+  padding: var(--spacing-block);
+}
+
+.eyebrow {
+  @include text-caption;
+  color: var(--color-neutral-400);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.title {
+  @include text-display;
+  max-width: 44rem;
+  overflow-wrap: break-word;
+}
+
+.description {
+  @include text-body;
+  max-width: 44rem;
+  margin-top: var(--spacing-section);
+  white-space: pre-line;
+}
+
+.portraitColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xs);
+  min-width: 0;
+  padding: var(--spacing-block);
+  border-left: 1px solid var(--color-border);
+
+  @media (max-width: $breakpoint-tablet) {
+    border-top: 1px solid var(--color-border);
+    border-left: none;
+  }
+}
+
+.portraitButton {
+  position: relative;
+  width: 18rem;
+  max-width: 100%;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  outline: none;
+  background: none;
+  cursor: pointer;
+
+  &:focus-visible {
+    box-shadow: 0 0 0 2px var(--color-accent);
+  }
+}
+
+.portraitScene {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  perspective: 60rem;
+}
+
+.portraitCard {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 650ms ease;
+}
+
+.portraitCardFlipped {
+  transform: rotateY(180deg);
+}
+
+.portraitFace {
+  position: absolute;
+  inset: 0;
+  display: block;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  backface-visibility: hidden;
+}
+
+.portraitBack {
+  transform: rotateY(180deg);
+}
+
+.portraitImage {
+  object-fit: cover;
+}
+
+.portraitImageDesign {
+  transform: scale(1.055);
+}
+
+.portraitLabel {
+  @include text-caption(var(--color-neutral-100));
+  position: absolute;
+  z-index: 2;
+  bottom: 0;
+  left: 50%;
+  padding: var(--spacing-2xs) var(--spacing-xs);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background-color: var(--surface-header);
+  backdrop-filter: blur(10px);
+  white-space: nowrap;
+  text-transform: uppercase;
+  animation: portrait-label-pulse 1700ms ease 250ms both;
+}
+
+.portraitLabelPending {
+  opacity: 0;
+  animation: none;
+  transform: translate(-50%, 50%);
+}
+
+@keyframes portrait-label-pulse {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 50%) scale(0.82);
+  }
+
+  20%,
+  70% {
+    opacity: 1;
+    transform: translate(-50%, 50%) scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, 50%) scale(0.94);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portraitCard {
+    transition: none;
+  }
+
+  .portraitLabel {
+    animation: none;
+    transform: translate(-50%, 50%);
+  }
+
+  .portraitLabelPending {
+    opacity: 1;
+  }
+}

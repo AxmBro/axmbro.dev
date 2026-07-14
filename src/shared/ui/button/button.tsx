@@ -14,11 +14,10 @@ export { buttonVariantForIndex } from "./button-variants";
  * Shared button / link. Default variant: outline.
  *
  * Variants:
- * - primary - blue fill
- * - secondary - gray fill + border
- * - outline - transparent + border
+ * - primary - blue fill (main CTA; first in a group)
+ * - outline - transparent + border (second and later in a group)
  *
- * In a row of Buttons, prefer `buttonVariantForIndex` for consistent hierarchy.
+ * In a row of Buttons, use `buttonVariantForIndex(index)` for consistent hierarchy.
  * With href: external URLs open in new tab; hash routes use HashLink;
  * /projects resets board tab to "all" via sessionStorage.
  */

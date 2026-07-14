@@ -1,4 +1,5 @@
 @use '../../shared/styles/variables' as *;
+@use '../../shared/styles/mixins' as *;
 
 .skillsGridConnected {
   display: grid;
@@ -13,7 +14,7 @@
 }
 
 .skillGroupItem {
-  padding: var(--spacing-block);
+  @include stack-xs;
   border-right: 1px solid var(--color-border);
 
   &:not(:last-child) {
@@ -39,4 +40,27 @@
       border-bottom: 1px solid var(--color-border);
     }
   }
+}
+
+.skillHeader {
+  padding: var(--spacing-block) var(--spacing-block) 0 var(--spacing-block);
+}
+
+.skillTitle {
+  @include text-h2;
+  letter-spacing: 0.5px;
+}
+
+.skillTextContent {
+  padding: 0 var(--spacing-block) var(--spacing-block) var(--spacing-block);
+  display: flex;
+  flex-direction: column;
+}
+
+.skillListMinimal {
+  @include list-minimal;
+}
+
+.skillValue {
+  color: var(--color-neutral-100);
 }

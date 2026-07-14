@@ -19,6 +19,7 @@ interface ImageSectionProps {
 export const ImageSection = ({ title, sectionDescription, items, rowStyle, projectId }: ImageSectionProps) => {
   return (
     <ScreenSection 
+      eyebrow="Showcase"
       title={title} 
       titleDescription={sectionDescription}
       withChildrenPadding={rowStyle ? true : false}

@@ -1,11 +1,12 @@
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import { Suspense } from "react";
 import { ScreenContainer } from "@/shared/ui/screen-container";
 import { ScreenSection } from "@/shared/ui/screen-section";
 import { Button } from "@/shared/ui/button";
 import { ButtonGroup } from "@/shared/ui/button-group";
 import { PROJECTS, HOME_PAGE_TEXTS } from "@/shared/constants/data";
-import { contactSectionHref, homeSectionHref, SECTION_IDS } from "@/shared/constants/anchors";
+import { contactSectionHref, SECTION_IDS } from "@/shared/constants/anchors";
+import { ROUTES } from "@/shared/constants/routes";
 import { ProjectsBoard } from "@/widgets/projects-board";
 import styles from "./page.module.scss";
 
@@ -25,6 +26,7 @@ export default function ProjectsPage() {
   return (
     <ScreenContainer>
       <ScreenSection
+        eyebrow="Portfolio"
         title="Projects"
         headingLevel="h1"
         titleDescription={HOME_PAGE_TEXTS.projectsPage.description(PROJECTS.length)}
@@ -36,16 +38,21 @@ export default function ProjectsPage() {
       </ScreenSection>
 
       <ScreenSection
-        title="Need something similar?"
-        titleDescription="Tell me about your project and I'll reply within 24 hours. New to commissions? See how I plan, build, and deliver JsonUI work before you reach out."
+        eyebrow="Services"
+        title="Want Something Similar?"
+        titleDescription="Tell me about your project, or review the commission scope, workflow, pricing details, and support terms before you get in touch."
         withChildrenPadding={false}
       >
         <ButtonGroup padInline padBottom>
-          <Button text="Get in Touch" variant="primary" href={contactSectionHref(SECTION_IDS.sendMessage)} />
           <Button
-            text="View commission process"
+            text="Start a Project"
+            variant="primary"
+            href={contactSectionHref(SECTION_IDS.startProject)}
+          />
+          <Button
+            text="Commission Details"
             variant="outline"
-            href={homeSectionHref(SECTION_IDS.commissionProcess)}
+            href={ROUTES.commissions}
           />
         </ButtonGroup>
       </ScreenSection>

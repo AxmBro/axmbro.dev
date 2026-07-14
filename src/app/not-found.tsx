@@ -24,6 +24,7 @@ export default function NotFound() {
   return (
     <ScreenContainer>
       <ScreenSection
+        eyebrow="404"
         title="Page not found"
         headingLevel="h1"
         titleDescription="This path doesn't exist on axmbro.dev. Check the URL or head back to known terrain."

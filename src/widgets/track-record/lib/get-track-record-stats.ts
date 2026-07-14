@@ -1,6 +1,6 @@
 import { CAREER_START_DATE, PROJECTS } from "@/shared/constants/data";
 
-export interface HeroStat {
+export interface TrackRecordStat {
   value: string;
   label: string;
 }
@@ -22,14 +22,13 @@ function getYearsOfExperience(
   return `${Math.max(years, 0)}+`;
 }
 
-export function getBaseHeroStats(): HeroStat[] {
-  const totalProjects = PROJECTS.length;
-  const commissionCount = PROJECTS.filter((p) => p.type === "commissions").length;
+export function getBaseTrackRecordStats(): TrackRecordStat[] {
+  const commissionCount = PROJECTS.filter((project) => project.type === "commissions").length;
 
   return [
-    { value: getYearsOfExperience(CAREER_START_DATE), label: "Years of Experience" },
-    { value: "2M+", label: "Personal Project Downloads" },
+    { value: getYearsOfExperience(CAREER_START_DATE), label: "Years Experience" },
+    { value: "2M+", label: "Project Downloads" },
     { value: String(commissionCount), label: "Client Commissions" },
-    { value: String(totalProjects), label: "Portfolio Projects" },
+    { value: String(PROJECTS.length), label: "Portfolio Projects" },
   ];
 }

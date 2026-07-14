@@ -1,4 +1,4 @@
-import { MetadataRoute } from "next";
+import type { MetadataRoute } from "next";
 import { PROJECTS } from "@/shared/constants/data";
 import { projectDetailPath, ROUTES } from "@/shared/constants/routes";
 
@@ -7,7 +7,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const staticPaths = [
     ROUTES.home,
+    ROUTES.commissions,
     ROUTES.contact,
+    ROUTES.sitemap,
     ROUTES.privacyPolicy,
     ROUTES.termsOfUse,
     ROUTES.projects,

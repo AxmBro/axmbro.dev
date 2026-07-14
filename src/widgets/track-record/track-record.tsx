@@ -1,0 +1,65 @@
+import Image from "next/image";
+import { formatStatValue, getYouTubeStats } from "@/entities/youtube";
+import { HOME_CLIENT_STUDIOS, HOME_PAGE_TEXTS } from "@/shared/constants/data";
+import { getBaseTrackRecordStats } from "./lib/get-track-record-stats";
+import { TrackRecordStats } from "./track-record-stats";
+import styles from "./track-record.module.scss";
+
+export const TrackRecord = async () => {
+  const youtubeStats = await getYouTubeStats();
+  const stats = getBaseTrackRecordStats();
+
+  if (youtubeStats.subscribers > 0) {
+    stats.push({
+      value: formatStatValue(youtubeStats.subscribers),
+      label: "YouTube Subscribers",
+    });
+  }
+
+  if (youtubeStats.views > 0) {
+    stats.push({
+      value: formatStatValue(youtubeStats.views),
+      label: "YouTube Views",
+    });
+  }
+
+  const emptyCellsCount = stats.length % 3 === 0 ? 0 : 3 - (stats.length % 3);
+
+  return (
+    <>
+      <TrackRecordStats stats={stats} emptyCellsCount={emptyCellsCount} />
+
+      <div className={styles.clients}>
+        <div className={styles.clientsHeader}>
+          <h3 className={styles.clientsTitle}>Selected Clients & Studios</h3>
+          <p className={styles.clientsDescription}>
+            {HOME_PAGE_TEXTS.trackRecord.clientsDescription}
+          </p>
+        </div>
+        <div className={styles.clientRow}>
+          {HOME_CLIENT_STUDIOS.map((client) => (
+            <a
+              key={client.name}
+              href={client.href}
+              className={styles.client}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {client.logoSrc && (
+                <Image
+                  src={client.logoSrc}
+                  alt={`${client.name} logo`}
+                  width={client.logoWidth ?? 160}
+                  height={client.logoHeight ?? 48}
+                  className={styles.clientLogo}
+                  data-solid-background={client.logoHasSolidBackground || undefined}
+                />
+              )}
+              <span className={styles.clientName}>{client.name}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </>
+  );
+};

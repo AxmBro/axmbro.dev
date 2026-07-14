@@ -12,7 +12,7 @@
 //   Grid lines, media frames - color-border (media: border only, no fill)
 //   Text fields, search - surface-input, surface-input-focus on focus
 //   Nav, tabs, outline - surface-hover
-//   Secondary buttons - color-secondary, color-secondary-hover
+//   Header menu toggle - color-secondary, color-secondary-hover
 //   Primary CTA, success - color-accent (accent-subtle for tinted bg)
 //   Text on accent buttons - color-on-accent
 //   Form errors - color-error
@@ -49,6 +49,7 @@
   --line-height-heading: 1.2;
   --line-height-body: 1.6;
 
+  --spacing-2xs: 0.25rem;
   --spacing-xs: 0.5rem;
   --spacing-section: 1.5rem;
   --spacing-block: 2rem;
@@ -64,7 +65,7 @@
   --scroll-anchor-offset: calc(var(--header-offset) + var(--scroll-anchor-gap));
 }
 
-/* Mobile — $breakpoint-tablet */
+/* Mobile - $breakpoint-tablet */
 @media (max-width: $breakpoint-tablet) {
   :root {
     --font-p: 0.9375rem;
@@ -77,6 +78,7 @@
     --line-height-display: 1.12;
     --line-height-heading: 1.2;
 
+    --spacing-2xs: 0.1875rem;
     --spacing-xs: 0.375rem;
     --spacing-section: 1rem;
     --spacing-block: 1.25rem;

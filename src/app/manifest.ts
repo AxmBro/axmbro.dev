@@ -1,10 +1,11 @@
-import { MetadataRoute } from "next";
+import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "AxmBro.dev | MCBE UI Architect & Developer",
+    name: "AxmBro.dev | Minecraft Bedrock UI Engineer",
     short_name: "AxmBro",
-    description: "Computer Science student and UI Architect from Poland. Specializing in engineering custom Minecraft Bedrock interfaces (JsonUI) and modern web applications.",
+    description:
+      "Computer Science student and Minecraft Bedrock UI Engineer building custom JsonUI and responsive web interfaces.",
     start_url: "/",
     display: "standalone",
     background_color: "#000000",

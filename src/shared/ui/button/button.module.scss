@@ -29,17 +29,6 @@
     }
   }
 
-  &[data-variant="secondary"] {
-    background-color: var(--color-secondary);
-    color: var(--color-neutral-100);
-    border: 1px solid var(--color-border);
-
-    &:hover,
-    &:active {
-      background-color: var(--color-secondary-hover);
-    }
-  }
-
   &[data-variant="outline"] {
     background-color: transparent;
     color: var(--color-neutral-100);

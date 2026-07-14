@@ -1,7 +1,6 @@
-export type ButtonVariant = "primary" | "secondary" | "outline";
+export type ButtonVariant = "primary" | "outline";
 
-export function buttonVariantForIndex(index: number, total: number): ButtonVariant {
-  if (index === 0) return "primary";
-  if (total >= 3 && index === 1) return "secondary";
-  return "outline";
+/** First button in a row: primary; all others: outline. */
+export function buttonVariantForIndex(index: number): ButtonVariant {
+  return index === 0 ? "primary" : "outline";
 }

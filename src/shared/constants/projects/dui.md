@@ -3,7 +3,7 @@ title: DUI
 credits:
   - role: Creator
     name: AxmBro
-    href: /contact#send-message
+    href: /contact#start-project
 imageSections:
   - title: Interface Showcase
     description: A showcase of perfectly aligned UI elements, smooth dark theme layouts, and interactive tooltips.

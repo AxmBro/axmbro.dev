@@ -20,7 +20,6 @@
 .expHeaderOneLine {
   padding: var(--spacing-block) var(--spacing-block) 0 var(--spacing-block);
   @include text-h2;
-  text-transform: uppercase;
   border-bottom: none;
   display: flex;
   justify-content: space-between;
@@ -29,8 +28,8 @@
   gap: var(--spacing-xs);
 }
 
-.expRoleLine {
-  text-transform: uppercase;
+.expAt {
+  color: var(--color-neutral-400);
 }
 
 .expCompany {
@@ -51,20 +50,5 @@
 }
 
 .expListMinimal {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-
-  li {
-    @include text-body;
-    display: flex;
-    gap: var(--spacing-xs);
-
-    &::before {
-      content: '-';
-      color: var(--color-neutral-100);
-    }
-  }
+  @include list-minimal;
 }

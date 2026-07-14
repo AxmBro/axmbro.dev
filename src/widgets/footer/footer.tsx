@@ -40,6 +40,7 @@ const CATEGORY_LINKS: { label: string; tag?: string }[] = [
 const MAIL_LINK = SOCIAL_LINK_BUTTONS.find((link) => link.iconId === "mail");
 
 const LEGAL_LINKS = [
+  { href: ROUTES.sitemap, label: "Sitemap" },
   { href: ROUTES.privacyPolicy, label: "Privacy Policy" },
   { href: ROUTES.termsOfUse, label: "Terms of Use" },
 ];
@@ -125,6 +126,7 @@ export const Footer = () => {
                   </Link>
                 )
               )}
+              <span className={styles.navigationDivider} aria-hidden />
               {LEGAL_LINKS.map((link) => (
                 <Link key={link.href} href={link.href}>{link.label}</Link>
               ))}
@@ -151,11 +153,11 @@ export const Footer = () => {
           <div className={styles.footerColumn}>
             <h2 className={styles.columnTitle}>Contact</h2>
             <nav className={`${styles.columnLinks} ${styles.contactLinks}`}>
-              <HashLink href={contactSectionHref(SECTION_IDS.sendMessage)}>Contact Form</HashLink>
+              <HashLink href={contactSectionHref(SECTION_IDS.startProject)}>Start a Project</HashLink>
               {MAIL_LINK && (
                 <a href={MAIL_LINK.href}>{MAIL_LINK.text}</a>
               )}
-              <HashLink href={contactSectionHref(SECTION_IDS.socialLinks)}>All social links</HashLink>
+              <HashLink href={contactSectionHref(SECTION_IDS.contactOptions)}>Contact Options</HashLink>
             </nav>
           </div>
         </div>

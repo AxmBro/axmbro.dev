@@ -16,7 +16,7 @@ import { storePendingHash } from "@/shared/lib/pending-hash";
  * and navigates first. Same page: scrolls in place. See scroll-to-hash.ts.
  */
 interface HashLinkProps {
-  /** Path + hash, e.g. /contact#send-message or #faq-pricing on current page. */
+  /** Path + hash, e.g. /contact#start-project or #faq-pricing on current page. */
   href: string;
   children: ReactNode;
   className?: string;
