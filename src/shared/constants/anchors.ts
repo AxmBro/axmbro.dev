@@ -1,13 +1,18 @@
 export const SECTION_IDS = {
-  about: "about",
+  profile: "profile",
+  trackRecord: "track-record",
   skills: "skills",
-  experience: "experience",
+  experience: "experience-education",
+  workWithMe: "work-with-me",
+  commissionServices: "services",
+  commissionRequirements: "requirements",
   commissionProcess: "commission-process",
+  commissionDelivery: "delivery-support",
+  commissionFaq: "commission-faq",
   selectedWork: "selected-work",
-  contactSocials: "contact",
-  sendMessage: "send-message",
-  socialLinks: "social-links",
-  faq: "faq",
+  startProject: "start-project",
+  contactOptions: "contact-options",
+  quickQuestions: "quick-questions",
   privacyPolicy: "privacy-policy",
   termsOfUse: "terms-of-use",
 };
@@ -16,6 +21,11 @@ export const homeSectionHref = (id: string) => `/#${id}`;
 
 export const contactSectionHref = (id: string) => `/contact#${id}`;
 
+export const commissionSectionHref = (id: string) => `/commissions#${id}`;
+
 export const faqItemId = (slug: string) => `faq-${slug}`;
 
 export const faqItemHref = (slug: string) => contactSectionHref(faqItemId(slug));
+
+export const commissionFaqItemHref = (slug: string) =>
+  commissionSectionHref(faqItemId(slug));

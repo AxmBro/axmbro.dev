@@ -1,5 +1,5 @@
-import { contactSectionHref, SECTION_IDS } from "./anchors";
 import { projectDetailPath, ROUTES } from "./routes";
+import type { ProjectsBoardTab } from "@/shared/lib/projects-board-state";
 
 export type ProjectType = "personal" | "commissions";
 
@@ -174,36 +174,36 @@ export const PROJECTS: ProjectItem[] = [
   },
 ];
 
+type ExperienceButton =
+  | { text: string; href: string; projectsTab?: never }
+  | { text: string; projectsTab: ProjectsBoardTab; href?: never };
+
 export interface ExperienceItem {
   role: string;
   date: string;
   company: string;
   items: { name: string; value?: string }[];
-  buttons?: {
-    text: string;
-    href: string;
-  }[];
+  buttons?: ExperienceButton[];
 }
 
 export const EXPERIENCE_TREE: ExperienceItem[] = [
   {
-    role: "Freelance UI Architect & Developer",
+    role: "Freelance Minecraft Bedrock UI Engineer",
     date: "Present",
     company: "Self-Employed",
     items: [
       {
-        name: "Minecraft Bedrock Edition: Delivering commercial UI solutions (JsonUI) for official Marketplace studios and private servers. Architecting advanced custom HUDs, Server Forms.",
+        name: "Deliver commercial Minecraft Bedrock JsonUI for Marketplace studios and private servers, including custom HUDs, server forms, and menu systems.",
       },
       {
-        name: "Web Development: Building modern, responsive web applications and lightweight landing pages tailored to client specifications.",
+        name: "Build responsive websites and landing pages with React, Next.js, TypeScript, and SCSS when a client also needs a web presence.",
       },
       {
-        name: "Actively accepting B2B contracts and freelance commissions.",
+        name: "Handle technical planning, project scope, client communication, delivery, contracts, and invoicing for freelance and B2B work.",
       },
     ],
     buttons: [
-      { text: "Browse Portfolio", href: ROUTES.projects },
-      { text: "Hire Me", href: contactSectionHref(SECTION_IDS.sendMessage) },
+      { text: "Browse Client Work", projectsTab: "commissions" },
     ],
   },
   {
@@ -212,21 +212,20 @@ export const EXPERIENCE_TREE: ExperienceItem[] = [
     company: "Better Bedrock",
     items: [
       {
-        name: "Architected and maintained a large-scale UI/Texture modification within the MCBE ecosystem, generating over 2M+ downloads.",
+        name: "Founded Better Bedrock and grew it into a long-running Minecraft Bedrock UI and texture project with more than 2M downloads.",
       },
       {
-        name: "Directing project roadmaps, community engagement, and producing promotional media (video showcases, graphics).",
+        name: "Lead product direction, release planning, community communication, and promotional content across video and graphics.",
       },
       {
-        name: "Designed the UI/UX vision and co-developed the official open-source project website alongside a technical partner",
+        name: "Designed the interface system and co-developed the open-source project website with a technical partner.",
       },
     ],
     buttons: [
       {
-        text: "Explore Project",
+        text: "View Better Bedrock",
         href: projectDetailPath("better_bedrock"),
       },
-      { text: "Official Website", href: "https://betterbedrock.com/" },
     ],
   },
   {
@@ -235,10 +234,10 @@ export const EXPERIENCE_TREE: ExperienceItem[] = [
     company: "University of Silesia",
     items: [
       {
-        name: "Successfully completing the first year of my degree, building a strong academic foundation in software engineering and low-level system architecture.",
+        name: "Study Computer Science at the University of Silesia, building a formal foundation in software engineering and computer systems.",
       },
       {
-        name: "Key subjects mastered: Algorithms, Database Systems, Object-Oriented Programming, Computer Networks, and Digital Logic.",
+        name: "Current coursework includes algorithms, databases, object-oriented programming, computer networks, and digital logic.",
       },
     ],
   },
@@ -253,7 +252,7 @@ export const SKILLS_CARDS: SkillCard[] = [
   {
     title: "Minecraft Bedrock Edition (Core Expertise)",
     items: [
-      { name: "JsonUI (User Interface)", value: "Expert" },
+      { name: "JsonUI (Custom UI, HUDs, Server Forms)", value: "Expert" },
       { name: "Resource Packs", value: "Advanced" },
       { name: "Entities & Molang", value: "Intermediate" },
       { name: "ScriptAPI & Regolith", value: "Beginner" },
@@ -263,24 +262,26 @@ export const SKILLS_CARDS: SkillCard[] = [
     title: "Frontend & Web Development (Active Learning)",
     items: [
       { name: "JavaScript & TypeScript", value: "Intermediate" },
-      { name: "React Ecosystem (Next.js, Vite)", value: "Intermediate" },
-      { name: "UI Styling (HTML, SCSS, Tailwind)", value: "Intermediate" },
+      { name: "React & Next.js", value: "Intermediate" },
+      { name: "HTML, SCSS & Responsive UI", value: "Intermediate" },
+      { name: "Vercel Deployment", value: "Beginner" },
     ],
   },
   {
-    title: "CS Fundamentals & Tools",
+    title: "Computer Science Fundamentals",
     items: [
       { name: "Algorithms & Data Structures", value: "Intermediate" },
-      { name: "Git, GitHub", value: "Intermediate" },
-      { name: "Hosting & Deployment (Vercel)", value: "Beginner" },
-      { name: "Digital Logic & Linux", value: "Beginner" },
+      { name: "Object-Oriented Programming", value: "Intermediate" },
+      { name: "Databases & SQL", value: "Beginner" },
+      { name: "Computer Networks & Digital Logic", value: "Beginner" },
     ],
   },
   {
-    title: "Backend, Databases & Languages",
+    title: "Development Tools & Languages",
     items: [
-      { name: "Academic Languages (C++, Java, Python)", value: "Beginner" },
-      { name: "SQL", value: "Beginner" },
+      { name: "Git & GitHub", value: "Intermediate" },
+      { name: "C++, Java & Python", value: "Beginner" },
+      { name: "Linux", value: "Beginner" },
     ],
   },
   {
@@ -289,7 +290,7 @@ export const SKILLS_CARDS: SkillCard[] = [
       { name: "Community Management", value: "Advanced" },
       { name: "Project Scoping & Roadmapping", value: "Intermediate" },
       { name: "Client Communication (B2B)", value: "Intermediate" },
-      { name: "Contract Management & Invoicing", value: "Intermediate" },
+      { name: "Contracts & Invoicing", value: "Intermediate" },
     ],
   },
   {
@@ -306,6 +307,7 @@ export interface SocialLink {
   text: string;
   iconId: SocialIconId;
   copyText?: string;
+  channel: "direct" | "extra";
 }
 
 export type SocialIconId =
@@ -322,53 +324,95 @@ export const SOCIAL_LINK_BUTTONS: SocialLink[] = [
     href: "https://github.com/AxmBro",
     text: "GitHub",
     iconId: "github",
+    channel: "direct",
   },
   {
     href: "mailto:axmbro@gmail.com",
     text: "axmbro@gmail.com",
     iconId: "mail",
     copyText: "axmbro@gmail.com",
+    channel: "direct",
   },
   {
     href: "https://discord.com/users/679603350236299266",
     text: "Discord (DM)",
     iconId: "discord",
     copyText: "axmbro",
+    channel: "direct",
   },
   {
     href: "https://discord.gg/wJhH86c2wb",
     text: "Personal Discord",
     iconId: "discord",
+    channel: "extra",
   },
   {
     href: "https://discord.gg/ZGK5WYXnEY",
     text: "Better Bedrock Discord",
     iconId: "discord",
+    channel: "extra",
   },
   {
     href: "https://www.youtube.com/@axmbro",
     text: "YouTube",
     iconId: "youtube",
+    channel: "extra",
   },
   {
     href: "https://www.youtube.com/@axmbro2",
     text: "YouTube (2nd)",
     iconId: "youtube",
-  },
-  {
-    href: "https://twitter.com/AxmBro",
-    text: "Twitter / X",
-    iconId: "twitter",
-  },
-  {
-    href: "https://www.instagram.com/axmbro_",
-    text: "Instagram",
-    iconId: "instagram",
+    channel: "extra",
   },
   {
     href: "https://betterbedrock.com/profile/AxmBro",
     text: "Better Bedrock Profile",
     iconId: "betterbedrock",
+    channel: "extra",
+  },
+  {
+    href: "https://twitter.com/AxmBro",
+    text: "Twitter / X",
+    iconId: "twitter",
+    channel: "extra",
+  },
+  {
+    href: "https://www.instagram.com/axmbro_",
+    text: "Instagram",
+    iconId: "instagram",
+    channel: "extra",
+  },
+];
+
+export const CONTACT_FORM_INTENTS = [
+  {
+    id: "complete-ui",
+    label: "Complete UI System",
+    template:
+      "Hello AxmBro! I'd like to discuss a complete UI system for my Minecraft Bedrock project. Here are the details: ",
+  },
+  {
+    id: "hud-overlay",
+    label: "HUD or Overlay",
+    template:
+      "Hello AxmBro! I'd like to discuss a custom HUD or overlay for my Minecraft Bedrock project. Here are the details: ",
+  },
+  {
+    id: "forms-menus",
+    label: "Server Forms or Menus",
+    template:
+      "Hello AxmBro! I'd like to discuss server forms or menus for my Minecraft Bedrock project. Here are the details: ",
+  },
+  {
+    id: "web-project",
+    label: "Web Project",
+    template:
+      "Hello AxmBro! I'd like to discuss a responsive web project. Here are the details: ",
+  },
+  {
+    id: "other",
+    label: "Other",
+    template: "Hello AxmBro! I'd like to discuss a custom project. Here are the details: ",
   },
 ];
 
@@ -376,6 +420,48 @@ export const HOME_SELECTED_PROJECT_URLS = [
   "better_bedrock",
   "one_slime_block_adventure",
   "ra_survival",
+  "mineville_ui",
+];
+
+export interface ClientStudio {
+  name: string;
+  href: string;
+  logoSrc?: string;
+  logoWidth?: number;
+  logoHeight?: number;
+  logoHasSolidBackground?: boolean;
+}
+
+export const HOME_CLIENT_STUDIOS: ClientStudio[] = [
+  {
+    name: "InPvP",
+    href: "https://inpvp.net/",
+    logoSrc: "/images/companies-logos/inpvp.png",
+    logoWidth: 796,
+    logoHeight: 266,
+  },
+  {
+    name: "Mush Co",
+    href: "https://www.mushco.games/",
+    logoSrc: "/images/companies-logos/mushco.png",
+    logoWidth: 676,
+    logoHeight: 218,
+  },
+  {
+    name: "A30x1",
+    href: "https://www.a30x1.com/",
+    logoSrc: "/images/companies-logos/a30x1.png",
+    logoWidth: 88,
+    logoHeight: 88,
+  },
+  {
+    name: "Radium Studio",
+    href: "https://www.radium-studio.com/",
+    logoSrc: "/images/companies-logos/radium-studio.png",
+    logoWidth: 370,
+    logoHeight: 370,
+    logoHasSolidBackground: true,
+  },
 ];
 
 export const getHomeSelectedProjects = () =>
@@ -386,41 +472,45 @@ export const getHomeSelectedProjects = () =>
 export const NAV_LINKS = [
   { href: ROUTES.home, text: "Home" },
   { href: ROUTES.projects, text: "Projects" },
+  { href: ROUTES.commissions, text: "Commissions" },
   { href: ROUTES.contact, text: "Contact" },
 ];
 
 export const HOME_PAGE_TEXTS = {
-  about: {
+  hero: {
     description:
-      "I am a 20-year-old Computer Science student and UI Architect from Poland. My core expertise is Minecraft Bedrock Edition modding, where I specialize in engineering advanced custom interfaces (JsonUI). I collaborate directly with official marketplace studios and private clients to deliver high-performance game UI.\n\nWhile my professional focus lies in game architecture, I actively build web applications and explore AI tools to strengthen my general software engineering fundamentals. I approach every project with a perfectionist mindset, focusing on pixel-perfect layouts, scalable code, and seamless user experiences.",
+      "I am a Computer Science student from Poland with over four years of hands-on experience building Minecraft Bedrock interfaces. I create custom JsonUI systems for Marketplace studios, private servers, and independent creators, including HUDs, server forms, and menu systems. I also build responsive websites with React and Next.js while continuing to grow my broader software engineering skills.",
+  },
+  trackRecord: {
+    description:
+      "A practical snapshot of more than four years building Minecraft Bedrock UI through paid commissions, independent releases, and technical content.",
+    clientsDescription:
+      "A selection of studios and creators I have worked with on commercial Minecraft Bedrock projects, including custom JsonUI, HUDs, and server interfaces.",
   },
   selectedWork: {
     description:
-      "Hand-picked highlights from marketplace releases, studio commissions, and personal MCBE UI work - the projects that best show scope, polish, and real player reach.",
+      "Selected studio commissions and independent projects that show technical scope, interface quality, and real player reach.",
   },
   skills: {
     description:
-      "An overview of the core technologies, languages, and tools I use to architect custom Minecraft Bedrock interfaces, build modern web applications, and develop reliable technical projects.",
+      "A focused view of the tools I use in real projects, the skills I apply through practical work, and the areas I am still learning.",
   },
   experience: {
     description:
-      "With over 4 years of active development, my experience ranges from architecting UI for commercial Minecraft marketplace studios to leading Better Bedrock, a project reaching millions of players. Currently, I balance my freelance client work with formal Computer Science studies and expanding my web development portfolio.",
-  },
-  process: {
-    description: "Open for various projects (like web development - let's discuss on DM!), but my primary focus is Minecraft Bedrock. A transparent look at how I handle MCBE JsonUI commissions. Please note: I am a UI Engineer, not a pixel artist. I require ready-made textures, mockups, or clear design sketches before we begin. I can handle basic technical texture adaptations (nine-slicing, recoloring, simple outlines), but complex asset creation is outside my scope.",
+      "My background combines commercial Minecraft Bedrock UI work, freelance web development, leading a project with more than 2M downloads, and ongoing Computer Science studies.",
   },
   contact: {
     description:
-      "Looking for a specialized UI Architect for your Minecraft Bedrock project, or need a modern web application? I am currently open for B2B contracts and freelance commissions. Reach out to discuss your technical requirements.",
+      "Ready to commission Minecraft Bedrock UI or discuss a web project? Review the scope, requirements, and process, or send your project brief directly.",
   },
   footer: {
     description:
-      "Computer Science student and UI Architect from Poland. Specializing in engineering custom Minecraft Bedrock interfaces (JsonUI) and modern web applications.",
+      "Computer Science student and Minecraft Bedrock UI Engineer from Poland. Building custom JsonUI for studios, servers, and creators, plus responsive web interfaces.",
   },
   contactPage: {
     socials:
-      "Ready to discuss your project? Reach me directly through any of the channels below for UI commissions, B2B contracts, or general inquiries.",
-    form: "Prefer email? Send a message directly through the form below. I review all inquiries and usually respond within 24 hours to discuss scope, timelines, and technical details.",
+      "Prefer direct contact? Use email, Discord, or GitHub. Additional profiles and community links are available below.",
+    form: "Send your project brief through the form below. Include the scope, target version, required screens, and any existing mockups or textures. I usually respond within 24 hours.",
   },
   projectsPage: {
     description: (count: number) =>
@@ -428,18 +518,97 @@ export const HOME_PAGE_TEXTS = {
   },
 };
 
-export const PROCESS_STEPS = [
+export interface CommissionInfoItem {
+  title: string;
+  description: string;
+}
+
+export const COMMISSIONS_PAGE_TEXTS = {
+  intro:
+    "Custom Minecraft Bedrock JsonUI for studios, servers, and creators who need more than a simple reskin. I build HUDs, server forms, menus, and connected UI systems around your designs and technical requirements. Currently accepting new Minecraft Bedrock UI commissions.",
+  services:
+    "Focused Minecraft Bedrock interface work, from individual screens to complete UI systems.",
+  requirements:
+    "A clear starting point keeps the project faster, easier to estimate, and closer to the result you expect.",
+  process:
+    "A simple three-step workflow from the first technical review to final delivery and support.",
+  delivery:
+    "You receive organized project files, a clear handoff, and support after release.",
+  faq:
+    "Answers about scope, design files, pricing, timelines, ownership, and support.",
+  cta:
+    "Send the project scope, required screens, target Minecraft version, and any mockups or textures you already have. I will review the details and reply with the next steps.",
+};
+
+export const COMMISSION_SERVICES: CommissionInfoItem[] = [
   {
-    title: "1. Planning & Architecture",
-    description: "We start by discussing your server's needs, technical constraints, and visual style. You provide the mockups and textures, and I provide a clear timeline and technical outline.",
+    title: "Custom HUDs & Overlays",
+    description:
+      "Gameplay HUDs, status displays, trackers, overlays, and interface elements built around your visual direction.",
   },
   {
-    title: "2. Development & UI Engineering",
-    description: "I build the JsonUI components, ensuring pixel-perfect layouts, optimized render controllers, and seamless integration with your ScriptAPI.",
+    title: "Server Forms & Menu Systems",
+    description:
+      "Custom server forms, navigation menus, chest screens, shops, and connected interfaces for Bedrock projects.",
+  },
+  {
+    title: "Resource Pack UI Integration",
+    description:
+      "JsonUI structure, textures, animations, and layouts prepared to work cleanly with your resource pack and ScriptAPI flow.",
+  },
+];
+
+export const COMMISSION_REQUIREMENTS: CommissionInfoItem[] = [
+  {
+    title: "Project Scope",
+    description:
+      "A list of required screens, expected interactions, target platforms, and the Minecraft version you support.",
+  },
+  {
+    title: "Visual Direction",
+    description:
+      "Ready textures and mockups are ideal. Clear sketches, references, or a structured text brief can also work.",
+  },
+  {
+    title: "Technical Context",
+    description:
+      "Share the existing resource pack, ScriptAPI requirements, file constraints, and any systems the UI must connect to.",
+  },
+];
+
+export const COMMISSION_DELIVERABLES: CommissionInfoItem[] = [
+  {
+    title: "Production Files",
+    description:
+      "Organized JsonUI, texture, and resource pack files prepared for testing and deployment in your project.",
+  },
+  {
+    title: "Project Handoff",
+    description:
+      "A clear explanation of the delivered structure, important integration details, and any agreed usage terms.",
+  },
+  {
+    title: "30 Days of Support",
+    description:
+      "Technical support after delivery for agreed fixes and Minecraft updates that affect the commissioned interface.",
+  },
+];
+
+export const PROCESS_STEPS = [
+  {
+    title: "1. Scope & Planning",
+    description:
+      "We review the required screens, technical constraints, existing files, mockups, and textures. You receive a clear scope and timeline before development starts.",
+  },
+  {
+    title: "2. JsonUI Development",
+    description:
+      "I build the interface, connect the required screens, test the layouts, and prepare the UI for your resource pack and ScriptAPI workflow.",
   },
   {
     title: "3. Delivery & Support",
-    description: "You receive the final resource pack ready for deployment, along with 30 days of technical support for any game updates that might affect the UI.",
+    description:
+      "You receive the agreed project files and a clear handoff, followed by 30 days of technical support for the delivered interface.",
   },
 ];
 
@@ -454,13 +623,13 @@ export const FAQ_ITEMS: FAQItem[] = [
     question: "What value do you bring to my project?",
     slug: "value",
     answer:
-      "You get a developer who understands both interface design and player behavior. I don't just write layout code - I build custom HUDs, server forms, and chest UIs that make your server stand out, keep players engaged, and boost your store conversions. I handle the entire Minecraft Bedrock JsonUI side so you can focus on running your game. I also take on web development, building matching, responsive landing pages for a complete, professional presence - so if you have a web concept in mind, let me know.",
+      "You get a developer who builds JsonUI around Bedrock constraints and player flow, including custom HUDs, server forms, chest UIs, and menu systems that integrate with your resource pack and scripts. I can also take on matching responsive web work when needed.",
   },
   {
     question: "Are you currently accepting new commissions?",
     slug: "availability",
     answer:
-      "Yes, I am actively open for new freelance commissions regarding Minecraft Bedrock JsonUI development. For other custom technical modifications or special inquiries, feel free to reach out directly to discuss them privately.",
+      "Yes. I am currently accepting Minecraft Bedrock JsonUI commissions. Send your scope, target version, required screens, and any mockups or textures through the contact form so I can review the fit.",
   },
   {
     question:
@@ -501,3 +670,23 @@ export const FAQ_ITEMS: FAQItem[] = [
       "Typically yes, but this is an individual matter depending on the scale and nature of the project. For standard, straightforward commissions, full file usage is included. For complex commercial platforms or large-scale integrations, custom licensing terms or an IP transfer fee may be negotiated based on your specific legal requirements.",
   },
 ];
+
+const COMMISSION_FAQ_SLUGS = new Set([
+  "availability",
+  "scope",
+  "mockups",
+  "turnaround",
+  "pricing",
+  "support",
+  "ownership",
+]);
+
+export const COMMISSION_FAQ_ITEMS = FAQ_ITEMS.filter(
+  (item) => item.slug && COMMISSION_FAQ_SLUGS.has(item.slug),
+);
+
+const CONTACT_FAQ_SLUGS = new Set(["value", "availability"]);
+
+export const CONTACT_FAQ_ITEMS = FAQ_ITEMS.filter(
+  (item) => item.slug && CONTACT_FAQ_SLUGS.has(item.slug),
+);

@@ -1,7 +1,9 @@
 export const ROUTES = {
   home: "/",
   projects: "/projects",
+  commissions: "/commissions",
   contact: "/contact",
+  sitemap: "/sitemap",
   privacyPolicy: "/privacy-policy",
   termsOfUse: "/terms-of-use",
 };
