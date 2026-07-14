@@ -33,7 +33,7 @@ export const PROJECTS: ProjectItem[] = [
   {
     title: "One Slime Block Adventure",
     description:
-      "A large-scale adventure map commissioned by YouTuber Slime Block. Architected and developed advanced custom interfaces, including specialized HUDs and interactive server forms.",
+      "A large-scale adventure map commissioned by YouTuber Slime Block. Engineered and developed advanced custom interfaces, including specialized HUDs and interactive server forms.",
     tags: ["JsonUI", "Server Form"],
     imgSrc: "obsba",
     star: true,
@@ -45,7 +45,7 @@ export const PROJECTS: ProjectItem[] = [
   {
     title: "Ra Survival",
     description:
-      "A Call of Duty Zombies-inspired survival map for MCBE. Commissioned to design and implement immersive, custom UI architectures that match the game's dark aesthetic.",
+      "A Call of Duty Zombies-inspired survival map for MCBE. Commissioned to design and implement immersive custom UI systems that match the game's dark aesthetic.",
     tags: ["JsonUI"],
     imgSrc: "raThumbnail",
     star: true,
@@ -167,7 +167,7 @@ export const PROJECTS: ProjectItem[] = [
   {
     title: "This Website",
     description:
-      "My personal portfolio and technical sandbox. Developed from the ground up using modern web technologies to showcase my transition into scalable frontend architecture.",
+      "My personal portfolio and technical sandbox. Developed from the ground up with React and Next.js to showcase my Minecraft Bedrock UI work and frontend development.",
     tags: ["React", "JavaScript", "TypeScript", "CSS", "Web"],
     imgSrc: "thisweb",
     type: "personal",
@@ -188,7 +188,7 @@ export interface ExperienceItem {
 
 export const EXPERIENCE_TREE: ExperienceItem[] = [
   {
-    role: "Freelance Minecraft Bedrock UI Engineer",
+    role: "Freelance Minecraft Bedrock UI Engineer & Web Developer",
     date: "Present",
     company: "Self-Employed",
     items: [
@@ -196,10 +196,10 @@ export const EXPERIENCE_TREE: ExperienceItem[] = [
         name: "Deliver commercial Minecraft Bedrock JsonUI for Marketplace studios and private servers, including custom HUDs, server forms, and menu systems.",
       },
       {
-        name: "Build responsive websites and landing pages with React, Next.js, TypeScript, and SCSS when a client also needs a web presence.",
+        name: "Build responsive websites and landing pages with React, Next.js, TypeScript, and SCSS for commission and freelance clients.",
       },
       {
-        name: "Handle technical planning, project scope, client communication, delivery, contracts, and invoicing for freelance and B2B work.",
+        name: "Handle JsonUI-focused technical planning, project scope, client communication, delivery, contracts, and invoicing for freelance and B2B work.",
       },
     ],
     buttons: [
@@ -234,7 +234,7 @@ export const EXPERIENCE_TREE: ExperienceItem[] = [
     company: "University of Silesia",
     items: [
       {
-        name: "Study Computer Science at the University of Silesia, building a formal foundation in software engineering and computer systems.",
+        name: "Building a formal foundation in software engineering and computer systems.",
       },
       {
         name: "Current coursework includes algorithms, databases, object-oriented programming, computer networks, and digital logic.",
@@ -429,7 +429,6 @@ export interface ClientStudio {
   logoSrc?: string;
   logoWidth?: number;
   logoHeight?: number;
-  logoHasSolidBackground?: boolean;
 }
 
 export const HOME_CLIENT_STUDIOS: ClientStudio[] = [
@@ -460,7 +459,6 @@ export const HOME_CLIENT_STUDIOS: ClientStudio[] = [
     logoSrc: "/images/companies-logos/radium-studio.png",
     logoWidth: 370,
     logoHeight: 370,
-    logoHasSolidBackground: true,
   },
 ];
 
@@ -476,20 +474,72 @@ export const NAV_LINKS = [
   { href: ROUTES.contact, text: "Contact" },
 ];
 
+export const SITE_METADATA = {
+  homeDescription:
+    "20-year-old Computer Science student and Minecraft Bedrock UI Engineer from Poland. Custom JsonUI, HUDs, server forms, and React and Next.js websites for Marketplace studios and creators.",
+  footerDescription:
+    "Computer Science student and Minecraft Bedrock UI Engineer from Poland. Custom JsonUI, HUDs, server forms, and React websites for studios and creators.",
+  projectsDescription:
+    "Portfolio of Minecraft Bedrock UI commissions, personal JsonUI releases, and web projects, including Better Bedrock, client HUDs, server forms, and featured studio work.",
+  commissionsDescription:
+    "Commission custom Minecraft Bedrock JsonUI, HUDs, server forms, and menu systems for studios, servers, and creators. Review scope, process, delivery, and FAQ before starting a project.",
+  contactDescription:
+    "Contact AxmBro for Minecraft Bedrock UI commissions and web projects. Send a project brief or reach out via email, Discord, or GitHub.",
+  sitemapDescription:
+    "Browse AxmBro.dev pages, portfolio sections, project views, commission information, contact options, and legal pages.",
+  privacyPolicyDescription:
+    "Privacy Policy for AxmBro.dev - how personal data is collected and processed through the portfolio site and contact form.",
+  termsOfUseDescription:
+    "Terms of Use for AxmBro.dev - rules for using this portfolio website and related services.",
+  notFoundDescription:
+    "This page does not exist on AxmBro.dev. Check the URL or return to the homepage.",
+  keywords: [
+    "AxmBro",
+    "Minecraft Bedrock",
+    "Minecraft Bedrock UI Engineer",
+    "JsonUI",
+    "MCBE UI",
+    "custom HUD",
+    "server forms",
+    "Marketplace studio",
+    "UI Engineer",
+    "web developer",
+    "React",
+    "Next.js",
+    "Better Bedrock",
+    "Poland",
+  ],
+  ogImageAlt:
+    "AxmBro - Minecraft Bedrock UI Engineer portfolio and commission work",
+};
+
+export const CTA_LABELS = {
+  startProject: "Start a Project",
+  viewSelectedWork: "View Selected Work",
+  browseClientWork: "Browse Client Work",
+  commissionDetails: "Commission Details",
+  minecraftBedrockCommissions: "Minecraft Bedrock Commissions",
+  contactOptions: "Contact Options",
+} as const;
+
 export const HOME_PAGE_TEXTS = {
   hero: {
     description:
-      "I am a Computer Science student from Poland with over four years of hands-on experience building Minecraft Bedrock interfaces. I create custom JsonUI systems for Marketplace studios, private servers, and independent creators, including HUDs, server forms, and menu systems. I also build responsive websites with React and Next.js while continuing to grow my broader software engineering skills.",
+      "I am a 20-year-old Computer Science student from Poland, specializing in Minecraft Bedrock Edition development. I engineer advanced interfaces for Marketplace studios, private servers, and independent creators, including custom JsonUI, HUDs, and server forms.\n\nI also build responsive websites with React and Next.js, explore AI tools to grow my software engineering skills, and keep pushing personal projects. I focus on pixel-perfect layouts, scalable code, and seamless user experience",
+    ctaWork: CTA_LABELS.viewSelectedWork,
+    ctaCommissions: CTA_LABELS.minecraftBedrockCommissions,
   },
   trackRecord: {
     description:
-      "A practical snapshot of more than four years building Minecraft Bedrock UI through paid commissions, independent releases, and technical content.",
+      "Paid commissions, independent releases, and technical content that show the scope of my Minecraft Bedrock UI work, project reach, and audience growth.",
     clientsDescription:
-      "A selection of studios and creators I have worked with on commercial Minecraft Bedrock projects, including custom JsonUI, HUDs, and server interfaces.",
+      "Studios and creators I have worked with on commercial Minecraft Bedrock projects, including custom game UIs, HUDs, and server forms.",
   },
   selectedWork: {
     description:
       "Selected studio commissions and independent projects that show technical scope, interface quality, and real player reach.",
+    exploreMore:
+      "Browse the full portfolio across client commissions, personal releases, and featured JsonUI work. Filter by all projects, featured work, personal releases, or client commissions.",
   },
   skills: {
     description:
@@ -504,8 +554,7 @@ export const HOME_PAGE_TEXTS = {
       "Ready to commission Minecraft Bedrock UI or discuss a web project? Review the scope, requirements, and process, or send your project brief directly.",
   },
   footer: {
-    description:
-      "Computer Science student and Minecraft Bedrock UI Engineer from Poland. Building custom JsonUI for studios, servers, and creators, plus responsive web interfaces.",
+    description: SITE_METADATA.footerDescription,
   },
   contactPage: {
     socials:
@@ -538,6 +587,9 @@ export const COMMISSIONS_PAGE_TEXTS = {
     "Answers about scope, design files, pricing, timelines, ownership, and support.",
   cta:
     "Send the project scope, required screens, target Minecraft version, and any mockups or textures you already have. I will review the details and reply with the next steps.",
+  ctaContact: CTA_LABELS.startProject,
+  ctaProof: CTA_LABELS.viewSelectedWork,
+  ctaSecondary: CTA_LABELS.contactOptions,
 };
 
 export const COMMISSION_SERVICES: CommissionInfoItem[] = [
