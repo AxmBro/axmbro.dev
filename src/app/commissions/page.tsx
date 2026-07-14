@@ -1,0 +1,124 @@
+import type { Metadata } from "next";
+import { FAQAccordion } from "@/features/faq-accordion";
+import {
+  COMMISSION_DELIVERABLES,
+  COMMISSION_FAQ_ITEMS,
+  COMMISSION_REQUIREMENTS,
+  COMMISSION_SERVICES,
+  COMMISSIONS_PAGE_TEXTS,
+} from "@/shared/constants/data";
+import { contactSectionHref, SECTION_IDS } from "@/shared/constants/anchors";
+import { Button, buttonVariantForIndex } from "@/shared/ui/button";
+import { ButtonGroup } from "@/shared/ui/button-group";
+import { ProjectsBoardButton } from "@/shared/ui/projects-tag-link";
+import { ScreenContainer } from "@/shared/ui/screen-container";
+import { ScreenSection } from "@/shared/ui/screen-section";
+import { CommissionInfoGrid } from "@/widgets/commission-info-grid";
+import { ProcessGrid } from "@/widgets/process-grid";
+
+export const metadata: Metadata = {
+  title: "Minecraft Bedrock UI Commissions",
+  description:
+    "Commission custom Minecraft Bedrock JsonUI, HUDs, server forms, menus, and resource pack interfaces from AxmBro.",
+  openGraph: {
+    title: "Minecraft Bedrock UI Commissions | AxmBro.dev",
+    description:
+      "Custom Minecraft Bedrock JsonUI, HUDs, server forms, menus, and connected interface systems for studios, servers, and creators.",
+    images: ["/images/ui/og-image.png"],
+  },
+};
+
+export default function CommissionsPage() {
+  return (
+    <ScreenContainer>
+      <ScreenSection
+        eyebrow="Services"
+        title="Minecraft Bedrock UI Commissions"
+        headingLevel="h1"
+        titleDescription={COMMISSIONS_PAGE_TEXTS.intro}
+      >
+        <ButtonGroup>
+          <Button
+            text="Start a Project"
+            variant={buttonVariantForIndex(0)}
+            href={contactSectionHref(SECTION_IDS.startProject)}
+          />
+          <ProjectsBoardButton
+            text="Browse Client Work"
+            tab="commissions"
+            variant={buttonVariantForIndex(1)}
+          />
+        </ButtonGroup>
+      </ScreenSection>
+
+      <ScreenSection
+        id={SECTION_IDS.commissionServices}
+        eyebrow="Scope"
+        title="What I Build"
+        titleDescription={COMMISSIONS_PAGE_TEXTS.services}
+        withChildrenPadding={false}
+      >
+        <CommissionInfoGrid items={COMMISSION_SERVICES} />
+      </ScreenSection>
+
+      <ScreenSection
+        id={SECTION_IDS.commissionRequirements}
+        eyebrow="Preparation"
+        title="What I Need From You"
+        titleDescription={COMMISSIONS_PAGE_TEXTS.requirements}
+        withChildrenPadding={false}
+      >
+        <CommissionInfoGrid items={COMMISSION_REQUIREMENTS} />
+      </ScreenSection>
+
+      <ScreenSection
+        id={SECTION_IDS.commissionProcess}
+        eyebrow="Workflow"
+        title="Commission Process"
+        titleDescription={COMMISSIONS_PAGE_TEXTS.process}
+        withChildrenPadding={false}
+      >
+        <ProcessGrid />
+      </ScreenSection>
+
+      <ScreenSection
+        id={SECTION_IDS.commissionDelivery}
+        eyebrow="Handoff"
+        title="Delivery & Support"
+        titleDescription={COMMISSIONS_PAGE_TEXTS.delivery}
+        withChildrenPadding={false}
+      >
+        <CommissionInfoGrid items={COMMISSION_DELIVERABLES} />
+      </ScreenSection>
+
+      <ScreenSection
+        id={SECTION_IDS.commissionFaq}
+        eyebrow="Answers"
+        title="Commission FAQ"
+        titleDescription={COMMISSIONS_PAGE_TEXTS.faq}
+        withChildrenPadding={false}
+      >
+        <FAQAccordion items={COMMISSION_FAQ_ITEMS} />
+      </ScreenSection>
+
+      <ScreenSection
+        eyebrow="Contact"
+        title="Ready to Discuss Your Project?"
+        titleDescription={COMMISSIONS_PAGE_TEXTS.cta}
+      >
+        <ButtonGroup>
+          <Button
+            text="Start a Project"
+            variant={buttonVariantForIndex(0)}
+            href={contactSectionHref(SECTION_IDS.startProject)}
+          />
+          <Button
+            text="Contact Options"
+            variant={buttonVariantForIndex(1)}
+            href={contactSectionHref(SECTION_IDS.contactOptions)}
+          />
+        </ButtonGroup>
+      </ScreenSection>
+    </ScreenContainer>
+  );
+}
