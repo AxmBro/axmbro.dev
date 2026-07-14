@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import { Analytics } from "@vercel/analytics/next";
 import { Lexend } from "next/font/google";
 import { Header } from "@/widgets/header";
 import { Footer } from "@/widgets/footer";
@@ -68,6 +69,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           </main>
           <Footer />
         </div>
+        <Analytics />
       </body>
     </html>
   );
