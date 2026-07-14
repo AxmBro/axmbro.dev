@@ -17,11 +17,11 @@ import { CommissionInfoGrid } from "@/widgets/commission-info-grid";
 import { ProcessGrid } from "@/widgets/process-grid";
 
 export const metadata: Metadata = {
-  title: "Minecraft Bedrock UI Commissions",
+  title: "Commissions",
   description:
     "Commission custom Minecraft Bedrock JsonUI, HUDs, server forms, menus, and resource pack interfaces from AxmBro.",
   openGraph: {
-    title: "Minecraft Bedrock UI Commissions | AxmBro.dev",
+    title: "AxmBro.dev | Commissions",
     description:
       "Custom Minecraft Bedrock JsonUI, HUDs, server forms, menus, and connected interface systems for studios, servers, and creators.",
     images: ["/images/ui/og-image.png"],

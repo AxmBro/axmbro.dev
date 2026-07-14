@@ -7,6 +7,12 @@ export const metadata: Metadata = {
   title: "Sitemap",
   description:
     "Browse the main pages, portfolio sections, project views, commission information, and legal pages on AxmBro.dev.",
+  openGraph: {
+    title: "AxmBro.dev | Sitemap",
+    description:
+      "Browse the main pages, portfolio sections, project views, commission information, and legal pages on AxmBro.dev.",
+    images: ["/images/ui/og-image.png"],
+  },
 };
 
 export default function SitemapPage() {

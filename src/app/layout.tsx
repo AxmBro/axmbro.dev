@@ -17,7 +17,7 @@ const lexend = Lexend({
 
 export const metadata: Metadata = {
   title: {
-    default: "Minecraft Bedrock UI Engineer & Frontend Developer | AxmBro.dev",
+    default: "Home",
     template: "AxmBro.dev | %s",
   },
   description:
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || "",
   },
   openGraph: {
-    title: "Minecraft Bedrock UI Engineer & Frontend Developer | AxmBro.dev",
+    title: "AxmBro.dev | Home",
     description:
       "Computer Science student and Minecraft Bedrock UI Engineer from Poland building custom JsonUI for studios, servers, and creators, plus responsive React and Next.js websites.",
     url: "https://axmbro.dev",
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Minecraft Bedrock UI Engineer & Frontend Developer | AxmBro.dev",
+    title: "AxmBro.dev | Home",
     description:
       "Computer Science student and Minecraft Bedrock UI Engineer from Poland building custom JsonUI and responsive React and Next.js websites.",
     images: ["/images/ui/og-image.png"],
