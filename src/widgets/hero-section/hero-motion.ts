@@ -1,0 +1,10 @@
+export const HERO_FLIP_INTERVAL_MS = 6000;
+export const HERO_INITIAL_FLIP_DELAY_MS = 700;
+
+export const HERO_FIRST_SYNCED_BEAT_MS =
+  HERO_INITIAL_FLIP_DELAY_MS + HERO_FLIP_INTERVAL_MS;
+
+export const HERO_MONOCHROME_WAVE = {
+  intervalMs: HERO_FLIP_INTERVAL_MS,
+  opacityScale: 0.72,
+} as const;
