@@ -10,6 +10,13 @@ export const PROJECTS_BOARD_TABS: ProjectsBoardTab[] = [
   "commissions",
 ];
 
+export const PROJECTS_BOARD_TAB_LABELS: Record<ProjectsBoardTab, string> = {
+  all: "All",
+  featured: "Featured",
+  personal: "Personal",
+  commissions: "Client Work",
+};
+
 export const isProjectsBoardTab = (value: string): value is ProjectsBoardTab =>
   (PROJECTS_BOARD_TABS as readonly string[]).includes(value);
 

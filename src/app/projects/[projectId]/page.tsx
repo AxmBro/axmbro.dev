@@ -89,18 +89,19 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       });
     });
   }
-  buttonsToRender.push({
-    text: "Contact",
-    href: contactSectionHref(SECTION_IDS.sendMessage),
-  });
-
   const showCommissionCta =
     project.type === "commissions" ||
     project.tags?.some((tag) => tag === "JsonUI" || tag === "Server Form");
 
+  buttonsToRender.push({
+    text: showCommissionCta ? "Request Similar Work" : "Start a Project",
+    href: contactSectionHref(SECTION_IDS.startProject),
+  });
+
   return (
     <ScreenContainer>
       <ScreenSection
+        eyebrow="Project"
         title={pageData?.title || project.title}
         headingLevel="h1"
         titleDescription={renderDescription(description)}
@@ -120,6 +121,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
       {pageData?.credits && pageData.credits.length > 0 && (
         <ScreenSection
+          eyebrow="Credits"
           title="Information"
           titleDescription={pageData.creditsDescription ?? "People involved in creating this project."}
           tightChildrenGap
@@ -136,7 +138,12 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       )}
 
       {pageData?.videos?.map((video, i) => (
-        <ScreenSection key={`video-${i}`} title={video.title} titleDescription={video.description}>
+        <ScreenSection
+          key={`video-${i}`}
+          eyebrow="Media"
+          title={video.title}
+          titleDescription={video.description}
+        >
           <div className={styles.iframeContainer}>
             <iframe
               src={`https://www.youtube.com/embed/${video.youtubeId}?rel=0`}
@@ -160,23 +167,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       ))}
 
       {!pageData && (
-        <ScreenSection titleDescription="Full project showcase coming soon." />
-      )}
-
-      {showCommissionCta && (
-        <ScreenSection
-          title="Interested in similar work?"
-          titleDescription="Commission custom JsonUI, server forms, or HUDs for your Bedrock project."
-          withChildrenPadding={false}
-        >
-          <div className={styles.commissionCta}>
-            <Button
-              text="Commission similar UI"
-              variant="primary"
-              href={contactSectionHref(SECTION_IDS.sendMessage)}
-            />
-          </div>
-        </ScreenSection>
+        <ScreenSection eyebrow="Status" titleDescription="Full project showcase coming soon." />
       )}
     </ScreenContainer>
   );

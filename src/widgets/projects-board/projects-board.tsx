@@ -11,6 +11,7 @@ import {
   isProjectsBoardTab,
   saveProjectsTab,
   PROJECTS_BOARD_TABS,
+  PROJECTS_BOARD_TAB_LABELS,
   type ProjectsBoardTab,
 } from "@/shared/lib/projects-board-state";
 import styles from "./projects-board.module.scss";
@@ -25,32 +26,36 @@ export const ProjectsBoard = () => {
   const initialized = useRef(false);
 
   useEffect(() => {
-    const tagParam = searchParams.get("tag");
-    const tagFromStorage = consumeProjectsTagFilter();
+    const animationId = window.requestAnimationFrame(() => {
+      const tagParam = searchParams.get("tag");
+      const tagFromStorage = consumeProjectsTagFilter();
 
-    if (tagFromStorage) {
-      setSearch(tagFromStorage);
-      setActiveTab("all");
-      saveProjectsTab("all");
-      window.scrollTo({ top: 0, behavior: "smooth" });
-      initialized.current = true;
-      return;
-    }
-
-    if (tagParam) {
-      setSearch(tagParam);
-      setActiveTab("all");
-      saveProjectsTab("all");
-      window.scrollTo({ top: 0, behavior: "smooth" });
-      router.replace(pathname, { scroll: false });
-    } else if (!initialized.current) {
-      const savedTab = getSavedProjectsTab();
-      if (savedTab) {
-        setActiveTab(savedTab);
+      if (tagFromStorage) {
+        setSearch(tagFromStorage);
+        setActiveTab("all");
+        saveProjectsTab("all");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        initialized.current = true;
+        return;
       }
-    }
 
-    initialized.current = true;
+      if (tagParam) {
+        setSearch(tagParam);
+        setActiveTab("all");
+        saveProjectsTab("all");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        router.replace(pathname, { scroll: false });
+      } else if (!initialized.current) {
+        const savedTab = getSavedProjectsTab();
+        if (savedTab) {
+          setActiveTab(savedTab);
+        }
+      }
+
+      initialized.current = true;
+    });
+
+    return () => window.cancelAnimationFrame(animationId);
   }, [searchParams, pathname, router]);
 
   const handleTabChange = (tab: ProjectsBoardTab) => {
@@ -104,7 +109,7 @@ export const ProjectsBoard = () => {
         <JoinedTabs
           options={PROJECTS_BOARD_TABS.map((tab) => ({
             id: tab,
-            label: tab.charAt(0).toUpperCase() + tab.slice(1),
+            label: PROJECTS_BOARD_TAB_LABELS[tab],
           }))}
           activeId={activeTab}
           onChange={(id) => {

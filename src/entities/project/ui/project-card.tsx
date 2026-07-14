@@ -37,14 +37,18 @@ const getTagIcon = (tag: string) => {
 
 interface ProjectCardProps {
   project: ProjectItem;
+  /** Show project technology tags. @default true */
+  showTags?: boolean;
+  /** Hide tags and clamp the description to two lines. @default false */
+  compact?: boolean;
 }
 
-export const ProjectCard = ({ project }: ProjectCardProps) => {
+export const ProjectCard = ({ project, showTags = true, compact = false }: ProjectCardProps) => {
   const projectFolder = project.url || "thisweb";
   const thumbnailSrc = getProjectThumbnailSrc(project);
 
   const inner = (
-    <div className={styles.card}>
+    <div className={styles.card} data-compact={compact || undefined}>
       {thumbnailSrc && (
         <div className={styles.imageWrapper}>
           <Image
@@ -74,7 +78,7 @@ export const ProjectCard = ({ project }: ProjectCardProps) => {
           )}
         </div>
         <p className={styles.description}>{project.description}</p>
-        {project.tags && project.tags.length > 0 && (
+        {!compact && showTags && project.tags && project.tags.length > 0 && (
           <div className={styles.tags}>
             {project.tags.map((tag) => (
               <span key={tag} className={styles.tag}>

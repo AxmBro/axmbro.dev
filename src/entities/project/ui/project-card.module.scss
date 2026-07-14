@@ -80,17 +80,22 @@
   min-height: 0;
 }
 
+.card[data-compact] {
+  .description {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+}
+
 .tags {
   display: flex;
+  flex-wrap: wrap;
   flex-shrink: 0;
   margin-top: auto;
   padding-top: var(--spacing-xs);
-  overflow-x: auto;
-  scrollbar-width: none;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
+  padding-bottom: 1px;
 }
 
 .tag {
@@ -103,12 +108,9 @@
   padding: 0.3rem 0.8rem;
   background: transparent;
   border: 1px solid var(--color-border);
-  border-right: none;
+  margin-right: -1px;
+  margin-bottom: -1px;
   white-space: nowrap;
-
-  &:last-child {
-    border-right: 1px solid var(--color-border);
-  }
 }
 
 .mcbeTagIcon {
