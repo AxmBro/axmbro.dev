@@ -1,1 +1,1 @@
-export { JoinedTabs, type TabOption } from "./joined-tabs";
+export { JoinedTabs } from "./joined-tabs";

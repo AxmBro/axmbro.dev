@@ -4,7 +4,7 @@ import matter from "gray-matter";
 
 const CONTENT_PATH = path.join(process.cwd(), "src/shared/constants/projects");
 
-export interface ProjectMarkdownData {
+interface ProjectMarkdownData {
   id: string;
   title: string;
   description: string;

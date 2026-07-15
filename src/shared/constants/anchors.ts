@@ -24,8 +24,3 @@ export const contactSectionHref = (id: string) => `/contact#${id}`;
 export const commissionSectionHref = (id: string) => `/commissions#${id}`;
 
 export const faqItemId = (slug: string) => `faq-${slug}`;
-
-export const faqItemHref = (slug: string) => contactSectionHref(faqItemId(slug));
-
-export const commissionFaqItemHref = (slug: string) =>
-  commissionSectionHref(faqItemId(slug));

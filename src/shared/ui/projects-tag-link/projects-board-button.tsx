@@ -6,6 +6,7 @@ import {
   type ProjectsBoardTab,
 } from "@/shared/lib/projects-board-state";
 import { ROUTES } from "@/shared/constants/routes";
+import type { ButtonVariant } from "@/shared/ui/button";
 import buttonStyles from "@/shared/ui/button/button.module.scss";
 
 /**
@@ -19,7 +20,7 @@ interface ProjectsBoardButtonProps {
   /** One-shot tag filter (no ?tag= in URL). */
   tag?: string;
   /** @default outline */
-  variant?: "primary" | "outline";
+  variant?: ButtonVariant;
 }
 
 export const ProjectsBoardButton = ({

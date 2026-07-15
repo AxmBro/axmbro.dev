@@ -8,6 +8,7 @@ import { HomeLink } from "@/shared/ui/home-link";
 import { HashLink } from "@/shared/ui/hash-link";
 import { ProjectsBoardLink } from "@/shared/ui/projects-tag-link";
 import { NAV_LINKS } from "@/shared/constants/data";
+import { BREAKPOINT_TABLET_PX } from "@/shared/constants/breakpoints";
 import { ROUTES } from "@/shared/constants/routes";
 import styles from "./header.module.scss";
 
@@ -29,7 +30,7 @@ export const Header = () => {
   const pathname = usePathname();
 
   useEffect(() => {
-    const mqResponsive = window.matchMedia("(max-width: 768px)");
+    const mqResponsive = window.matchMedia(`(max-width: ${BREAKPOINT_TABLET_PX}px)`);
     const handleResponsive = (e: MediaQueryListEvent | MediaQueryList) => setIsResponsive(e.matches);
 
     handleResponsive(mqResponsive);

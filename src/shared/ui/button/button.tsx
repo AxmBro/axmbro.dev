@@ -7,9 +7,6 @@ import type { ButtonVariant } from "./button-variants";
 import { ROUTES } from "@/shared/constants/routes";
 import styles from "./button.module.scss";
 
-export type { ButtonVariant } from "./button-variants";
-export { buttonVariantForIndex } from "./button-variants";
-
 /**
  * Shared button / link. Default variant: outline.
  *
