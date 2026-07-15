@@ -178,7 +178,7 @@ type ExperienceButton =
   | { text: string; href: string; projectsTab?: never }
   | { text: string; projectsTab: ProjectsBoardTab; href?: never };
 
-export interface ExperienceItem {
+interface ExperienceItem {
   role: string;
   date: string;
   company: string;
@@ -243,7 +243,7 @@ export const EXPERIENCE_TREE: ExperienceItem[] = [
   },
 ];
 
-export interface SkillCard {
+interface SkillCard {
   title: string;
   items: { name: string; value: string }[];
 }
@@ -384,6 +384,29 @@ export const SOCIAL_LINK_BUTTONS: SocialLink[] = [
   },
 ];
 
+type FooterSocialEntry = {
+  iconId: SocialIconId;
+  text?: string;
+};
+
+export const FOOTER_SOCIAL_ENTRIES: FooterSocialEntry[] = [
+  { iconId: "github" },
+  { iconId: "mail" },
+  { iconId: "discord", text: "Discord (DM)" },
+  { iconId: "youtube", text: "YouTube" },
+  { iconId: "betterbedrock", text: "Better Bedrock Profile" },
+  { iconId: "instagram" },
+];
+
+export const getFooterSocialLinks = (): SocialLink[] =>
+  FOOTER_SOCIAL_ENTRIES.flatMap((entry) => {
+    const link = SOCIAL_LINK_BUTTONS.find(
+      (item) => item.iconId === entry.iconId && (!entry.text || item.text === entry.text),
+    );
+
+    return link ? [link] : [];
+  });
+
 export const CONTACT_FORM_INTENTS = [
   {
     id: "complete-ui",
@@ -416,14 +439,14 @@ export const CONTACT_FORM_INTENTS = [
   },
 ];
 
-export const HOME_SELECTED_PROJECT_URLS = [
+const HOME_SELECTED_PROJECT_URLS = [
   "better_bedrock",
   "one_slime_block_adventure",
   "ra_survival",
   "mineville_ui",
 ];
 
-export interface ClientStudio {
+interface ClientStudio {
   name: string;
   href: string;
   logoSrc?: string;

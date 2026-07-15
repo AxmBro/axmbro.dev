@@ -1,34 +1,17 @@
 import Link from "next/link";
 import Image from "next/image";
-import type { ComponentType } from "react";
-import { FaGithub, FaDiscord, FaYoutube, FaInstagram, FaEnvelope } from "react-icons/fa6";
+import { FaGithub } from "react-icons/fa6";
 import { SiNextdotjs } from "react-icons/si";
 import { HomeLink } from "@/shared/ui/home-link";
 import { HashLink } from "@/shared/ui/hash-link";
 import { ProjectsTagLink, ProjectsBoardLink } from "@/shared/ui/projects-tag-link";
-import { BetterBedrockIcon } from "@/shared/ui/better-bedrock-icon";
-import { SOCIAL_LINK_BUTTONS, HOME_PAGE_TEXTS, NAV_LINKS } from "@/shared/constants/data";
+import { getFooterSocialLinks, HOME_PAGE_TEXTS, NAV_LINKS, SOCIAL_LINK_BUTTONS } from "@/shared/constants/data";
 import { contactSectionHref, SECTION_IDS } from "@/shared/constants/anchors";
 import { ROUTES } from "@/shared/constants/routes";
+import { FooterSocialRow } from "./footer-social-row";
 import { LocalTime } from "./local-time";
 import { BackToTop } from "./back-to-top";
 import styles from "./footer.module.scss";
-
-type FooterSocial = {
-  id: string;
-  label: string;
-  icon: ComponentType<{ size: number; "aria-hidden"?: boolean }> | null;
-  textMatcher?: string;
-};
-
-const FOOTER_SOCIALS: FooterSocial[] = [
-  { id: "github", icon: FaGithub, label: "GitHub" },
-  { id: "mail", icon: FaEnvelope, label: "Email" },
-  { id: "discord", textMatcher: "Discord (DM)", icon: FaDiscord, label: "Discord" },
-  { id: "youtube", textMatcher: "YouTube", icon: FaYoutube, label: "YouTube" },
-  { id: "betterbedrock", icon: null, label: "Better Bedrock Profile" },
-  { id: "instagram", icon: FaInstagram, label: "Instagram" },
-];
 
 const CATEGORY_LINKS: { label: string; tag?: string }[] = [
   { label: "View All Projects" },
@@ -45,12 +28,9 @@ const LEGAL_LINKS = [
   { href: ROUTES.termsOfUse, label: "Terms of Use" },
 ];
 
-const getSocialLink = (social: FooterSocial) =>
-  SOCIAL_LINK_BUTTONS.find(
-    (s) => s.iconId === social.id && (!social.textMatcher || s.text === social.textMatcher)
-  );
-
 export const Footer = () => {
+  const footerSocialLinks = getFooterSocialLinks();
+
   return (
     <footer className={styles.footerWrapper}>
       <div className={styles.footerScreenContainer}>
@@ -72,40 +52,7 @@ export const Footer = () => {
               </p>
               <LocalTime />
             </div>
-            <div className={styles.socialIconsRow}>
-              {FOOTER_SOCIALS.map((social) => {
-                const linkData = getSocialLink(social);
-                if (!linkData) return null;
-
-                if (social.id === "betterbedrock") {
-                  return (
-                    <a
-                      key={social.id}
-                      href={linkData.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={social.label}
-                    >
-                      <BetterBedrockIcon size={22} />
-                    </a>
-                  );
-                }
-
-                const Icon = social.icon!;
-                return (
-                  <a
-                    key={social.id}
-                    href={linkData.href}
-                    aria-label={social.label}
-                    {...(social.id === "mail"
-                      ? {}
-                      : { target: "_blank", rel: "noopener noreferrer" })}
-                  >
-                    <Icon size={22} aria-hidden />
-                  </a>
-                );
-              })}
-            </div>
+            <FooterSocialRow links={footerSocialLinks} />
           </div>
 
           <div className={styles.footerColumn}>
