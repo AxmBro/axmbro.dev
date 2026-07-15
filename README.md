@@ -1,55 +1,48 @@
 # 🚀 Portfolio Website | axmbro.dev
 
-A digital showcase of my projects, skills, and professional experience. Explore the live site here: **[axmbro.dev](https://axmbro.dev)**
+A digital showcase of my projects, skills, and professional experience. Live site: **[axmbro.dev](https://axmbro.dev)**
 
 This repository contains the source code for my portfolio, crafted to deliver a fast, accessible, and visually striking user experience using **Next.js** and **Sass**.
 
 ## ✨ Features
 
-- **Modern Architecture:** Built on top of the Next.js App Router for optimal performance and Server Components.
-- **Maintainable Styling:** Component-scoped styling utilizing Sass Modules.
-- **Integrated Communications:** Fully functional contact form powered by Nodemailer.
-- **Project content:** Long-form project pages from Markdown via `gray-matter`.
+- **Fast pages:** Built with Next.js so routes load quickly; project pages are generated at build time.
+- **Organized styling:** Each component has its own Sass file, so the layout stays consistent and easy to update.
+- **Built-in contact:** Visitors can send a project inquiry straight from the site.
+- **Detailed project pages:** Short cards on the board; full case studies with images and video when you add a Markdown file.
+- **SEO basics:** Page titles, descriptions, and share previews set per route.
 
 ## 🔐 Environment Variables
 
-Optional. Copy `.env.example` to `.env` and fill in what you need. Details for each variable are in `.env.example`.
+All optional - the site builds and runs without them. Copy `.env.example` to `.env` when you need a feature below. Field notes live in `.env.example`.
 
-- **SMTP_USER / SMTP_PASSWORD** - contact form
-- **YOUTUBE_API_KEY** - live YouTube stats on the home page
-
-The site runs without them; missing keys only disable those features.
+- **SMTP_USER, SMTP_PASSWORD** - contact form email
+- **YOUTUBE_API_KEY** - live subscriber and view counts on the home page
+- **NEXT_PUBLIC_GA_MEASUREMENT_ID** - Google Analytics 4 (cookie consent required)
 
 ## 🛠️ Quick Start
 
-Clone the repository and install dependencies:
+Clone the repository and install dependencies. **Requires Node 20+ and Yarn.**
 
 ```bash
 git clone https://github.com/AxmBro/axmbro.dev.git
 cd axmbro.dev
 yarn install
-cp .env.example .env
-```
-
-Start the local development server:
-
-```bash
+cp .env.example .env   # optional
 yarn dev
 ```
 
-Other scripts:
+Open [http://localhost:3000](http://localhost:3000).
 
 ```bash
-yarn build
-yarn start
+yarn build   # production build
+yarn start   # run build locally
 yarn lint
 ```
 
-Navigate to [http://localhost:3000](http://localhost:3000) in your browser to view the application.
-
 ## 📁 Project Structure
 
-This repository is organized using principles inspired by **Feature-Sliced Design (FSD)**. This methodology ensures the codebase remains scalable, predictable, and easy to navigate:
+This repository is organized using principles inspired by [**Feature-Sliced Design (FSD)**](https://feature-sliced.design/). This methodology ensures the codebase remains scalable, predictable, and easy to navigate:
 
 ```text
 src/
@@ -60,7 +53,7 @@ src/
 └── widgets/              # Complex UI blocks combining entities and features (header, footer, etc.)
 ```
 
-Project cards and site copy live in `src/shared/constants/data.ts`. Long project write-ups: `src/shared/constants/projects/` - see [projects README](src/shared/constants/projects/README.md).
+**Content:** `src/shared/constants/data.ts` (cards, nav, copy), `src/shared/constants/projects/*.md` (detail pages), `src/shared/constants/routes.ts`, `src/shared/constants/anchors.ts`. New project: [projects README](src/shared/constants/projects/README.md).
 
 ## 📦 Tech Stack
 
@@ -77,6 +70,4 @@ Project cards and site copy live in `src/shared/constants/data.ts`. Long project
 
 Source is provided for viewing only. See [LICENSE](LICENSE) - no copy, modify, or use without explicit permission.
 
----
-
-Thanks for checking out my code! If you like what you see, feel free to leave a star ⭐. 
+Thanks for checking out my code! If you like what you see, feel free to leave a star ⭐!
