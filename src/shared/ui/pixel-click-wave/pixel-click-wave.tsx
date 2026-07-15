@@ -11,6 +11,7 @@ import {
   type PixelWaveSpawnDetail,
 } from "@/shared/lib/pixel-wave";
 import { ROUTES } from "@/shared/constants/routes";
+import { isReducedMotion } from "@/shared/lib/motion";
 import styles from "./pixel-click-wave.module.scss";
 
 const INTERACTIVE_SELECTOR = [
@@ -184,7 +185,11 @@ export function PixelClickWave() {
   const [behindMount, setBehindMount] = useState<HTMLElement | null>(null);
 
   useLayoutEffect(() => {
-    setBehindMount(getBehindMount(pathname));
+    const frameId = window.requestAnimationFrame(() => {
+      setBehindMount(getBehindMount(pathname));
+    });
+
+    return () => window.cancelAnimationFrame(frameId);
   }, [pathname]);
 
   useEffect(() => {
@@ -197,7 +202,7 @@ export function PixelClickWave() {
     const behindCanvas = behindCanvasRef.current;
     const behindContext = behindCanvas?.getContext("2d") ?? null;
 
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const reducedMotion = isReducedMotion();
     const layers: Partial<Record<WaveLayer, LayerRuntime>> = {
       above: {
         canvas: aboveCanvas,
@@ -466,7 +471,7 @@ export function PixelClickWave() {
       if (!(event instanceof CustomEvent)) return;
 
       const detail = event.detail as PixelWaveSpawnDetail | undefined;
-      if (!detail || reducedMotion.matches) return;
+      if (!detail || reducedMotion) return;
 
       const clipElement = detail.clipSelector
         ? document.querySelector<HTMLElement>(detail.clipSelector)
@@ -485,7 +490,7 @@ export function PixelClickWave() {
       if (
         event.defaultPrevented ||
         event.button !== 0 ||
-        reducedMotion.matches ||
+        reducedMotion ||
         !(event.target instanceof Element) ||
         event.target.closest(CONTENT_SURFACE_SELECTOR) ||
         event.target.closest(INTERACTIVE_SELECTOR) ||
@@ -527,7 +532,7 @@ export function PixelClickWave() {
   }, [pathname, behindMount]);
 
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (isReducedMotion()) return;
 
     let frameId = 0;
     let attemptsLeft = 8;

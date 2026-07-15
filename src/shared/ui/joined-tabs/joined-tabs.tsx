@@ -1,6 +1,6 @@
 import styles from "./joined-tabs.module.scss";
 
-export interface TabOption {
+interface TabOption {
   id: string;
   label: string;
 }

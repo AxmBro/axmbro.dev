@@ -1,6 +1,6 @@
 export type AnalyticsConsent = "accepted" | "rejected";
 
-export const ANALYTICS_CONSENT_KEY = "axmbro-analytics-consent";
+const ANALYTICS_CONSENT_KEY = "axmbro-analytics-consent";
 export const ANALYTICS_CONSENT_EVENT = "axmbro-analytics-consent-change";
 
 export const getAnalyticsConsent = (): AnalyticsConsent | null => {
@@ -16,4 +16,7 @@ export const setAnalyticsConsent = (consent: AnalyticsConsent) => {
   window.dispatchEvent(new CustomEvent(ANALYTICS_CONSENT_EVENT, { detail: consent }));
 };
 
-export const hasAnalyticsConsent = () => getAnalyticsConsent() === "accepted";
+export const subscribeAnalyticsConsent = (onStoreChange: () => void) => {
+  window.addEventListener(ANALYTICS_CONSENT_EVENT, onStoreChange);
+  return () => window.removeEventListener(ANALYTICS_CONSENT_EVENT, onStoreChange);
+};

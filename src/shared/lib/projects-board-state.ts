@@ -1,5 +1,5 @@
-export const PROJECTS_ACTIVE_TAB_KEY = "projectsActiveTab";
-export const PROJECTS_TAG_FILTER_KEY = "projectsTagFilter";
+const PROJECTS_ACTIVE_TAB_KEY = "projectsActiveTab";
+const PROJECTS_TAG_FILTER_KEY = "projectsTagFilter";
 
 export type ProjectsBoardTab = "all" | "featured" | "personal" | "commissions";
 

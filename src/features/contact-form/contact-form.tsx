@@ -6,6 +6,9 @@ import { sendEmailAction } from "./api/send-email";
 import { CONTACT_FORM_INTENTS } from "@/shared/constants/data";
 import styles from "./contact-form.module.scss";
 
+const SUCCESS_STATUS_RESET_MS = 15000;
+const ERROR_STATUS_RESET_MS = 5000;
+
 export const ContactForm = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
@@ -41,13 +44,13 @@ export const ContactForm = () => {
 
         timeoutRef.current = setTimeout(() => {
           setStatus("idle");
-        }, 15000);
+        }, SUCCESS_STATUS_RESET_MS);
       } else {
         setStatus("error");
 
         timeoutRef.current = setTimeout(() => {
           setStatus("idle");
-        }, 5000);
+        }, ERROR_STATUS_RESET_MS);
       }
     } catch (error) {
       console.error(error);
@@ -55,7 +58,7 @@ export const ContactForm = () => {
 
       timeoutRef.current = setTimeout(() => {
         setStatus("idle");
-      }, 5000);
+      }, ERROR_STATUS_RESET_MS);
     }
   };
 

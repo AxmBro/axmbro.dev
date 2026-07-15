@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 import { Lexend } from "next/font/google";
 import { GoogleAnalytics } from "@/shared/ui/google-analytics";
@@ -58,10 +59,8 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={lexend.variable} suppressHydrationWarning>
-      <head>
-        <script src="/scripts/hash-scroll-init.js" />
-      </head>
       <body suppressHydrationWarning>
+        <Script src="/scripts/hash-scroll-init.js" strategy="beforeInteractive" />
         <GoogleAnalytics />
         <CookieConsent />
         <HashScroll />

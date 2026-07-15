@@ -1,29 +1,23 @@
 "use client";
 
 import Script from "next/script";
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 import {
-  ANALYTICS_CONSENT_EVENT,
   getAnalyticsConsent,
+  subscribeAnalyticsConsent,
   type AnalyticsConsent,
 } from "@/shared/lib/analytics-consent";
 
 const gaMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 
+const getServerConsent = () => null as AnalyticsConsent | null;
+
 export const GoogleAnalytics = () => {
-  const [consent, setConsent] = useState<AnalyticsConsent | null>(null);
-
-  useEffect(() => {
-    setConsent(getAnalyticsConsent());
-
-    const handleConsentChange = (event: Event) => {
-      const customEvent = event as CustomEvent<AnalyticsConsent>;
-      setConsent(customEvent.detail);
-    };
-
-    window.addEventListener(ANALYTICS_CONSENT_EVENT, handleConsentChange);
-    return () => window.removeEventListener(ANALYTICS_CONSENT_EVENT, handleConsentChange);
-  }, []);
+  const consent = useSyncExternalStore(
+    subscribeAnalyticsConsent,
+    getAnalyticsConsent,
+    getServerConsent,
+  );
 
   if (!gaMeasurementId || consent !== "accepted") return null;
 

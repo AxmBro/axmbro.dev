@@ -1,24 +1,29 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 import { ROUTES } from "@/shared/constants/routes";
-import { getAnalyticsConsent, setAnalyticsConsent } from "@/shared/lib/analytics-consent";
+import {
+  getAnalyticsConsent,
+  setAnalyticsConsent,
+  subscribeAnalyticsConsent,
+} from "@/shared/lib/analytics-consent";
+import { useIsClient } from "@/shared/lib/use-is-client";
 import { Button } from "@/shared/ui/button";
 import styles from "./cookie-consent.module.scss";
 
 export const CookieConsent = () => {
-  const [isVisible, setIsVisible] = useState(false);
+  const isClient = useIsClient();
+  const consent = useSyncExternalStore(
+    subscribeAnalyticsConsent,
+    getAnalyticsConsent,
+    () => null,
+  );
 
-  useEffect(() => {
-    setIsVisible(getAnalyticsConsent() === null);
-  }, []);
-
-  if (!isVisible) return null;
+  if (!isClient || consent !== null) return null;
 
   const handleChoice = (choice: "accepted" | "rejected") => {
     setAnalyticsConsent(choice);
-    setIsVisible(false);
   };
 
   return (

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { isReducedMotion } from "@/shared/lib/motion";
 
 interface AnimatedStatProps {
   value: string;
@@ -14,7 +15,7 @@ export function AnimatedStat({ value, className, replayKey = 0 }: AnimatedStatPr
   useEffect(() => {
     const match = value.match(/^([\d.]+)(.*)$/);
 
-    if (!match || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    if (!match || isReducedMotion()) {
       const animationId = window.requestAnimationFrame(() => setDisplayValue(value));
       return () => window.cancelAnimationFrame(animationId);
     }
