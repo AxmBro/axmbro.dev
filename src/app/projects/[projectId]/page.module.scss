@@ -2,12 +2,22 @@
 @use '../../../shared/styles/mixins' as *;
 
 .creditLink {
-  color: var(--color-neutral-100);
-  text-decoration: none;
+  @include text-link;
+  color: inherit;
+  text-decoration-color: currentColor;
 
   &:hover {
-    text-decoration: underline;
-    text-underline-offset: 4px;
+    color: inherit;
+    text-decoration-color: currentColor;
+  }
+}
+
+.relatedWork {
+  @include text-body;
+  margin: var(--spacing-xs) 0 0;
+
+  a {
+    @include text-link;
   }
 }
 
@@ -43,5 +53,9 @@
   strong {
     font-weight: 500;
     color: var(--color-neutral-100);
+  }
+
+  a {
+    @include text-link;
   }
 }

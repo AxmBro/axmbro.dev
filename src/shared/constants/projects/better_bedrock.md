@@ -103,4 +103,4 @@ imageSections:
         imageSrc: client1
 ---
 
-Better Bedrock is a free, highly customizable UI and texture pack for Minecraft Bedrock Edition, with nearly 300 configuration options and full cross-platform support. It enhances gameplay with HUD mods, reworked menus, and a range of optional extension packs, and is backed by an open-source website I designed and co-developed.
+Better Bedrock is a free, highly customizable UI and texture pack for Minecraft Bedrock Edition, with nearly 300 configuration options and full cross-platform support. It enhances gameplay with HUD mods, reworked menus, and a range of optional extension packs, and is backed by an [open-source website](https://betterbedrock.com) I designed and co-developed.

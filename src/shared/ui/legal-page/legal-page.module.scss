@@ -24,15 +24,8 @@
 }
 
 .link {
+  @include text-link;
   color: var(--color-neutral-400);
-  text-decoration: underline;
-  text-decoration-color: var(--color-neutral-400);
-  text-underline-offset: 4px;
-
-  &:hover {
-    color: var(--color-neutral-100);
-    text-decoration-color: var(--color-neutral-100);
-  }
 }
 
 .headerDescWrapper {

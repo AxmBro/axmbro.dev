@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { SITE_METADATA } from "@/shared/constants/data";
 import { ROUTES } from "@/shared/constants/routes";
 import { createPageMetadata } from "@/shared/lib/page-metadata";
@@ -28,7 +29,14 @@ export default function SitemapPage() {
       <ScreenSection
         eyebrow="Portfolio"
         title="All Projects"
-        titleDescription="A complete index of the client commissions, personal releases, and technical projects currently listed on AxmBro.dev."
+        titleDescription={
+          <>
+            A complete index of the client commissions, personal releases, and
+            technical projects currently listed on AxmBro.dev.{" "}
+            <Link href={ROUTES.projects}>Filter on the Projects page</Link> to
+            narrow by featured work, personal releases, or client commissions.
+          </>
+        }
         withChildrenPadding={false}
       >
         <SitemapProjectList />

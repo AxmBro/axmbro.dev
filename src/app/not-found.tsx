@@ -1,11 +1,11 @@
 import { Metadata } from "next";
+import Link from "next/link";
 import { ScreenContainer } from "@/shared/ui/screen-container";
 import { ScreenSection } from "@/shared/ui/screen-section";
-import { Button } from "@/shared/ui/button";
+import { Button, buttonVariantForIndex } from "@/shared/ui/button";
 import { ButtonGroup } from "@/shared/ui/button-group";
-import { ProjectsBoardButton } from "@/shared/ui/projects-tag-link";
+import { CTA_LABELS, SITE_METADATA } from "@/shared/constants/data";
 import { ROUTES } from "@/shared/constants/routes";
-import { SITE_METADATA } from "@/shared/constants/data";
 import { createPageMetadata } from "@/shared/lib/page-metadata";
 
 export const metadata: Metadata = createPageMetadata({
@@ -21,11 +21,29 @@ export default function NotFound() {
         eyebrow="404"
         title="Page not found"
         headingLevel="h1"
-        titleDescription="This path doesn't exist on axmbro.dev. Check the URL or head back to known terrain."
+        titleDescription={
+          <>
+            This path doesn't exist on axmbro.dev.{" "}
+            <Link href={ROUTES.projects}>{CTA_LABELS.browseAllProjects}</Link>
+            {" or check "}
+            <Link href={ROUTES.commissions}>
+              {CTA_LABELS.minecraftBedrockCommissions}
+            </Link>
+            {" while you get back on track."}
+          </>
+        }
       >
         <ButtonGroup>
-          <Button text="Back to Home" variant="primary" href={ROUTES.home} />
-          <ProjectsBoardButton text="View Projects" tab="all" variant="outline" />
+          <Button
+            text="Back to Home"
+            variant={buttonVariantForIndex(0)}
+            href={ROUTES.home}
+          />
+          <Button
+            text="Contact"
+            variant={buttonVariantForIndex(1)}
+            href={ROUTES.contact}
+          />
         </ButtonGroup>
       </ScreenSection>
     </ScreenContainer>

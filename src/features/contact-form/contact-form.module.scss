@@ -33,8 +33,9 @@ $form-row-height: 3.25rem;
   font-family: inherit;
   padding: 0 1rem;
 
+  @include focus-ring;
+
   &:focus {
-    outline: none;
     border-color: var(--color-neutral-100);
     background-color: var(--surface-input-focus);
   }

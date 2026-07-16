@@ -33,7 +33,10 @@ imageSections:
         description: Classic vanilla layout has been changed to 3 sections.
         imageSrc: ra2
       - title: Closer look at hotbars
-        description: With in-game items it gets more interesting!
+        description: >-
+          With in-game items it gets more interesting. Slots can also lock based
+          on the item inside - still selectable, but without the selected
+          texture and slightly less visible.
         imageSrc: ra1
       - title: Opacity function in hotbars
         description: >-
@@ -44,17 +47,28 @@ imageSections:
       - title: Special Round Animation
         description: Is played when player starts game.
         imageSrc: ra18
+      - title: Ending of special round animation
+        description: >-
+          Transition out of the round-start animation. Best seen in the
+          development video above.
+        imageSrc: ra19
       - title: Rounds element
         description: >-
           Sits in the bottom left corner, showing the current round number with
           a smooth change animation when switching rounds. To match the three
           bell sounds, it flashes and shifts color to dark red.
         imageSrc: ra6
+      - title: Closer look at rounds element
+        description: Can display rounds as roman numerals or normal numbers.
+        imageSrc: ra7
       - title: Gun display
         description: >-
           Sits in the bottom right corner, showing the current gun icon, name,
           and ammo, with a smooth slide animation when switching guns.
         imageSrc: ra3
+      - title: Closer look at gun display
+        description: When ammo is low, the color shifts to light red.
+        imageSrc: ra4
       - title: Low ammo indicator
         description: >-
           When ammo is really low, color is changed to dark red and text appears
@@ -75,19 +89,41 @@ imageSections:
           Positioned in bottom left corner above rounds element, used to
           indicate that player has certain buffs.
         imageSrc: ra10
+      - title: Closer look at perks
+        description: >-
+          Icons use custom entry, exit, and close animations, and stay stuck to
+          the left side.
+        imageSrc: ra11
       - title: Crosshair notifications
         description: Extra element for quick message to user.
         imageSrc: ra12
+      - title: Closer look at crosshair notifications
+        description: >-
+          Messages have entry and exit animations and can stack up to 4 lines.
+        imageSrc: ra13
       - title: Hurt Flash
         description: >-
           Whenever player receives damage and their health is not low, slightly
           red overlay appears.
         imageSrc: ra14
+      - title: Doubled Hurt Flash
+        description: >-
+          When health is very low, overlay transparency is doubled. Both states
+          have entry and exit animations.
+        imageSrc: ra15
       - title: Electric Flash
         description: >-
           Is visible when player walks through electric trap, blue overlay
           appears with entry animation and disappears smoothly as well.
         imageSrc: ra16
+      - title: UI visibility (technical)
+        description: >-
+          Custom command-driven toggle for HUD visibility during gameplay.
+        imageSrc: ra20
+      - title: Custom Crosshair visibility (technical)
+        description: >-
+          Same visibility control as the HUD, but for the custom crosshair only.
+        imageSrc: ra21
   - title: Custom Inventory Screen
     description: >-
       A simple layout that updates instantly without any reloads. With a custom
@@ -100,8 +136,10 @@ imageSections:
         imageSrc: ra22
 ---
 
-A Minecraft Bedrock Edition map by Radium, inspired by Call of Duty's Zombies mode. I was commissioned to build the full UI, including hotbars, a gun display, round counters, power-ups, perks, crosshair notifications, and more.
+A Minecraft Bedrock Edition map by [Radium](https://www.radium-studio.com/), inspired by Call of Duty's Zombies mode. I was commissioned to build the full UI, including hotbars, a gun display, round counters, power-ups, perks, crosshair notifications, and more.
 
-My responsibility was the entire UI logic. I did not create the textures myself; I took the provided assets and built them into a working JsonUI system.
+My responsibility was the entire UI logic. I did not create the textures myself; I took the provided assets and built them into a working JsonUI system. Motion and feedback matter a lot here, so [watch the showcase video](#showcase-video) for the systems in action.
 
 The project is still in active development, so textures, icons, and design may change or be adjusted over time.
+
+Similar HUD-focused commission work: [Mineville UI](/projects/mineville_ui).

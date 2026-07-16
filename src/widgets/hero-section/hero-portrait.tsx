@@ -7,19 +7,19 @@ import styles from "./hero-section.module.scss";
 
 const PORTRAITS = [
   {
-    src: "/images/axmbro-logo-irl.png",
+    src: "/images/brand/axmbro-logo-irl.png",
     alt: "AxmBro portrait",
     kind: "photo",
     label: "Computer Science Student",
   },
   {
-    src: "/images/axmbro-logo-design.png",
+    src: "/images/brand/axmbro-logo-design.png",
     alt: "AxmBro illustrated logo",
     kind: "design",
     label: "Content Creator",
   },
   {
-    src: "/images/axmbro-logo-mc.png",
+    src: "/images/brand/axmbro-logo-mc.png",
     alt: "AxmBro Minecraft character",
     kind: "minecraft",
     label: "Minecraft Bedrock Player",

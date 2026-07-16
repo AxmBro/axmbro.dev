@@ -21,14 +21,14 @@ const lexend = Lexend({
 
 export const metadata: Metadata = {
   title: {
-    default: "Home",
+    default: "Minecraft Bedrock UI Engineer",
     template: "AxmBro.dev | %s",
   },
   description: SITE_METADATA.homeDescription,
   keywords: SITE_METADATA.keywords,
   metadataBase: new URL("https://axmbro.dev"),
   openGraph: {
-    title: "AxmBro.dev | Home",
+    title: "AxmBro.dev | Minecraft Bedrock UI Engineer",
     description: SITE_METADATA.homeDescription,
     url: "https://axmbro.dev",
     siteName: "AxmBro",
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "AxmBro.dev | Home",
+    title: "AxmBro.dev | Minecraft Bedrock UI Engineer",
     description: SITE_METADATA.homeDescription,
     images: ["/images/ui/og-image.png"],
     creator: "@AxmBro",
@@ -60,6 +60,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={lexend.variable} suppressHydrationWarning>
       <body suppressHydrationWarning>
+        <a href="#main" className="skip-link">
+          Skip to main content
+        </a>
         <Script src="/scripts/hash-scroll-init.js" strategy="beforeInteractive" />
         <GoogleAnalytics />
         <CookieConsent />
@@ -67,7 +70,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <PixelClickWave />
         <Header />
         <div className="main-layout">
-          <main className="main-content">
+          <main id="main" className="main-content" tabIndex={-1}>
             {children}
           </main>
           <Footer />

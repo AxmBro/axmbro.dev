@@ -88,9 +88,10 @@ export const ProjectsBoard = () => {
     <>
       <div className={styles.searchBar}>
         <input
-          type="text"
+          type="search"
           className={styles.searchInput}
           placeholder="Search..."
+          aria-label="Search projects"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
@@ -112,6 +113,7 @@ export const ProjectsBoard = () => {
             label: PROJECTS_BOARD_TAB_LABELS[tab],
           }))}
           activeId={activeTab}
+          aria-label="Filter projects"
           onChange={(id) => {
             if (isProjectsBoardTab(id)) {
               handleTabChange(id);
@@ -130,7 +132,56 @@ export const ProjectsBoard = () => {
           ))}
         </div>
       ) : (
-        <p className={styles.noResults}>No results for: <strong>{search}</strong></p>
+        <div className={styles.noResults}>
+          {search ? (
+            <>
+              <p className={styles.noResultsMessage}>
+                No results for: <strong>{search}</strong>.
+              </p>
+              <p className={styles.noResultsActions}>
+                <button
+                  type="button"
+                  className={styles.emptyAction}
+                  onClick={() => setSearch("")}
+                >
+                  Clear search
+                </button>
+                {" or switch to "}
+                <button
+                  type="button"
+                  className={styles.emptyAction}
+                  onClick={() => {
+                    setSearch("");
+                    handleTabChange("commissions");
+                  }}
+                >
+                  {PROJECTS_BOARD_TAB_LABELS.commissions}
+                </button>
+                .
+              </p>
+            </>
+          ) : (
+            <p className={styles.noResultsMessage}>
+              No projects in this filter. Switch to{" "}
+              <button
+                type="button"
+                className={styles.emptyAction}
+                onClick={() => handleTabChange("all")}
+              >
+                {PROJECTS_BOARD_TAB_LABELS.all}
+              </button>
+              {" or "}
+              <button
+                type="button"
+                className={styles.emptyAction}
+                onClick={() => handleTabChange("commissions")}
+              >
+                {PROJECTS_BOARD_TAB_LABELS.commissions}
+              </button>
+              .
+            </p>
+          )}
+        </div>
       )}
     </>
   );

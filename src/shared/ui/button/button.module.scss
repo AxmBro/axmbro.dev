@@ -10,7 +10,7 @@
   cursor: pointer;
   border-radius: 8px;
   font-family: inherit;
-  outline: none;
+  @include focus-ring;
   white-space: normal;
   text-align: center;
   max-width: 100%;

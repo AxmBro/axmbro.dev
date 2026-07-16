@@ -8,6 +8,7 @@
   height: 100%;
   min-height: 100%;
   @include link-plain;
+  @include focus-ring;
   color: inherit;
   cursor: pointer;
   min-width: 0;
@@ -64,20 +65,12 @@
   height: 28px;
 }
 
-.starIcon {
-  color: #ffd700;
-  flex-shrink: 0;
-  filter: drop-shadow(0 0 5px rgba(253, 224, 71, 0.45));
-}
-
 .title {
   @include text-h2;
 }
 
 .description {
   @include text-body-sm;
-  flex: 1;
-  min-height: 0;
 }
 
 .card[data-compact] {
@@ -86,16 +79,15 @@
     overflow: hidden;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
+    line-clamp: 2;
   }
 }
 
 .tags {
   display: flex;
   flex-wrap: wrap;
+  gap: var(--spacing-xs);
   flex-shrink: 0;
-  margin-top: auto;
-  padding-top: var(--spacing-xs);
-  padding-bottom: 1px;
 }
 
 .tag {
@@ -108,9 +100,58 @@
   padding: 0.3rem 0.8rem;
   background: transparent;
   border: 1px solid var(--color-border);
-  margin-right: -1px;
-  margin-bottom: -1px;
   white-space: nowrap;
+}
+
+.tagType {
+  flex-shrink: 0;
+}
+
+.tagFeatured {
+  color: var(--color-neutral-400);
+  border-color: var(--color-border);
+  background: transparent;
+}
+
+.tagPersonal {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+  background: var(--color-accent-subtle);
+}
+
+.tagCommissioned {
+  color: var(--color-gold);
+  border-color: var(--color-gold);
+  background: var(--color-gold-subtle);
+}
+
+.featuredTagIcon {
+  flex-shrink: 0;
+  color: inherit;
+}
+
+.personalTagLogo {
+  width: 14px;
+  height: 14px;
+  object-fit: cover;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.tagIconSlot {
+  width: 14px;
+  height: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.minecoinIcon {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  image-rendering: pixelated;
 }
 
 .mcbeTagIcon {

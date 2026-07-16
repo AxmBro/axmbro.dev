@@ -14,11 +14,14 @@ interface ImageSectionProps {
   items: ImageSectionItem[];
   rowStyle?: boolean;
   projectId: string;
+  /** Hash target for project TOC */
+  id?: string;
 }
 
-export const ImageSection = ({ title, sectionDescription, items, rowStyle, projectId }: ImageSectionProps) => {
+export const ImageSection = ({ title, sectionDescription, items, rowStyle, projectId, id }: ImageSectionProps) => {
   return (
     <ScreenSection 
+      id={id}
       eyebrow="Showcase"
       title={title} 
       titleDescription={sectionDescription}
@@ -35,11 +38,12 @@ export const ImageSection = ({ title, sectionDescription, items, rowStyle, proje
                   className={styles.img}
                   width={1280}
                   height={720}
+                  sizes="(max-width: 1024px) 100vw, 1024px"
                 />
               </div>
             )}
             <div className={styles.textContent}>
-              <h2 className={styles.itemTitle}>{`${index + 1}. ${item.title}`}</h2>
+              <h3 className={styles.itemTitle}>{`${index + 1}. ${item.title}`}</h3>
               <p className={styles.itemDesc}>{item.description}</p>
             </div>
           </li>

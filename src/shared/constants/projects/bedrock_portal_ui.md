@@ -24,6 +24,11 @@ imageSections:
           When clicked, it reveals the remaining navigation buttons, with a
           subtle dark background behind them.
         imageSrc: bpui4
+      - title: "'More' Dropdown Content"
+        description: >-
+          Content on the right is cleanly cut at the bottom edge when the More
+          panel is open.
+        imageSrc: bpui5
       - title: Server Page UI
         description: >-
           Simple menu with more information that comes after previous UI from

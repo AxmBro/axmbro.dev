@@ -40,7 +40,7 @@ export const Footer = () => {
               <HomeLink className={styles.logoInfo}>
                 <Image
                   src="/icon192.png"
-                  alt="AxmBro Logo"
+                  alt=""
                   width={32}
                   height={32}
                   className={styles.footerLogo}
@@ -115,7 +115,7 @@ export const Footer = () => {
               <HomeLink className={styles.copyrightLink}>
                 <Image
                   src="/icon192.png"
-                  alt="AxmBro Logo"
+                  alt=""
                   width={14}
                   height={14}
                   className={styles.footerLogoIcon}

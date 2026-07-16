@@ -202,8 +202,6 @@ export function PixelClickWave() {
     return () => window.cancelAnimationFrame(frameId);
   }, [pathname]);
 
-  // Keep the wave engine mounted across route changes. Remounting on behindMount
-  // used to drop the spawn listener mid-intro when navigating quickly.
   useEffect(() => {
     const aboveCanvas = aboveCanvasRef.current;
     if (!aboveCanvas) return;
@@ -612,8 +610,6 @@ export function PixelClickWave() {
         return;
       }
 
-      // Spawn listener lives on the stable engine effect; wait one frame so layout
-      // (and optional behind portal) can settle after soft navigation.
       frameId = window.requestAnimationFrame(() => {
         if (cancelled) return;
 

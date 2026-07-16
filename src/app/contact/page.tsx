@@ -12,6 +12,7 @@ import {
 import { SECTION_IDS } from "@/shared/constants/anchors";
 import { ROUTES } from "@/shared/constants/routes";
 import { createPageMetadata } from "@/shared/lib/page-metadata";
+import { buildFaqPageJsonLd, JsonLd } from "@/shared/lib/json-ld";
 import { ContactForm, MoreProfiles } from "@/features/contact-form";
 import { FAQAccordion } from "@/features/faq-accordion";
 import styles from "./page.module.scss";
@@ -28,6 +29,7 @@ export default function ContactPage() {
 
   return (
     <ScreenContainer>
+      <JsonLd data={buildFaqPageJsonLd(CONTACT_FAQ_ITEMS)} />
 
       <ScreenSection
         id={SECTION_IDS.startProject}

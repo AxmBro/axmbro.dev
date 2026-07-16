@@ -31,10 +31,12 @@
 }
 
 .logoSection {
+  @include focus-ring;
   display: flex;
   align-items: center;
   gap: var(--spacing-xs);
   text-decoration: none;
+  border-radius: 8px;
 
   &:hover {
     text-decoration: underline;
@@ -73,6 +75,7 @@
   justify-content: center;
   @include text-body;
   @include link-plain;
+  @include focus-ring;
   padding: 0.6rem 1rem;
   border-radius: 8px;
   background-color: transparent;
@@ -103,6 +106,7 @@
   border-radius: 8px;
   font: inherit;
   color: inherit;
+  @include focus-ring;
 
   &:hover,
   &:active {
@@ -135,6 +139,7 @@
   padding: 0.875rem var(--spacing-block);
   @include text-body;
   @include link-plain;
+  @include focus-ring;
   border-bottom: 1px solid var(--color-border);
   background-color: transparent;
 

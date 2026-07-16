@@ -47,6 +47,10 @@
     font-weight: 500;
     color: var(--color-neutral-100);
   }
+
+  a {
+    @include text-link;
+  }
 }
 
 .childrenContainer {
@@ -84,15 +88,21 @@
   letter-spacing: 0.5px;
 }
 
-.listItemsWrapper {
-  display: flex;
-  flex-direction: column;
-}
-
-.listItem {
-  @include text-body;
+.listMinimal {
+  @include list-minimal;
 
   .listValue {
     color: var(--color-neutral-100);
+
+    a {
+      @include text-link;
+      color: inherit;
+      text-decoration-color: currentColor;
+
+      &:hover {
+        color: inherit;
+        text-decoration-color: currentColor;
+      }
+    }
   }
 }

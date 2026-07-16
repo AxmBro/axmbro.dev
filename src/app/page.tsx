@@ -16,8 +16,7 @@ import { createPageMetadata } from "@/shared/lib/page-metadata";
 import styles from "./page.module.scss";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Home",
-  absoluteTitle: "AxmBro.dev | Home",
+  title: "Minecraft Bedrock UI Engineer",
   description: SITE_METADATA.homeDescription,
   path: ROUTES.home,
 });
@@ -61,7 +60,7 @@ export default function HomePage() {
             </p>
           </div>
           <ButtonGroup marginTop>
-            <ProjectsBoardButton text="Browse All Projects" tab="all" variant="primary" />
+            <ProjectsBoardButton text={CTA_LABELS.browseAllProjects} tab="all" variant="primary" />
             <ProjectsBoardButton text="View Featured Projects" tab="featured" />
           </ButtonGroup>
         </div>

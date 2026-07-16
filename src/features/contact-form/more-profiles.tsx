@@ -9,15 +9,19 @@ interface MoreProfilesProps {
   links: SocialLink[];
 }
 
+const MORE_PROFILES_PANEL_ID = "more-profiles-panel";
+
 export function MoreProfiles({ links }: MoreProfilesProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className={styles.moreProfiles}>
       <button
+        id="more-profiles-trigger"
         type="button"
         className={styles.moreProfilesToggle}
         aria-expanded={isOpen}
+        aria-controls={MORE_PROFILES_PANEL_ID}
         onClick={() => setIsOpen((current) => !current)}
       >
         <span
@@ -28,8 +32,12 @@ export function MoreProfiles({ links }: MoreProfilesProps) {
         More Profiles & Communities
       </button>
       <div
+        id={MORE_PROFILES_PANEL_ID}
+        role="region"
+        aria-labelledby="more-profiles-trigger"
         className={styles.moreProfilesContent}
         data-open={isOpen ? "true" : "false"}
+        inert={!isOpen ? true : undefined}
       >
         <div className={styles.moreProfilesContentInner}>
           <div className={styles.socialList}>

@@ -1,29 +1,36 @@
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { PROJECTS, SITE_METADATA } from "@/shared/constants/data";
-import { getProjectThumbnailSrc } from "@/entities/project";
+import { PROJECTS, CTA_LABELS } from "@/shared/constants/data";
+import { getProjectThumbnailSrc, ImageSection } from "@/entities/project";
 import { ScreenContainer } from "@/shared/ui/screen-container";
 import { ScreenSection, ScreenSectionList } from "@/shared/ui/screen-section";
 import { Button, buttonVariantForIndex } from "@/shared/ui/button";
 import { ButtonGroup } from "@/shared/ui/button-group";
-import { ImageSection } from "@/entities/project";
+import { ProjectsBoardLink } from "@/shared/ui/projects-tag-link";
 import { getProjectData } from "@/shared/lib/markdown";
+import { renderInlineMdLinks } from "@/shared/lib/render-inline-md-links";
+import { slugifySectionId } from "@/shared/lib/slugify-section-id";
 import { contactSectionHref, SECTION_IDS } from "@/shared/constants/anchors";
 import { projectDetailPath } from "@/shared/constants/routes";
 import { createPageMetadata } from "@/shared/lib/page-metadata";
+import { ProjectToc, type ProjectTocItem } from "@/widgets/project-toc";
 import styles from "./page.module.scss";
 
 interface ProjectPageProps {
   params: Promise<{ projectId: string }>;
 }
 
+export const dynamicParams = false;
+
 export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
   const { projectId } = await params;
-  const pageData = await getProjectData(projectId);
   const project = PROJECTS.find((p) => p.url === projectId);
-  const title = pageData?.title || project?.title || projectId.replace(/_/g, " ");
-  const description = pageData?.description || project?.description || SITE_METADATA.projectsDescription;
-  const thumbnail = project ? getProjectThumbnailSrc(project) : null;
+  if (!project) notFound();
+
+  const pageData = await getProjectData(projectId);
+  const title = pageData?.title || project.title;
+  const description = pageData?.description || project.description;
+  const thumbnail = getProjectThumbnailSrc(project);
 
   return createPageMetadata({
     title,
@@ -38,6 +45,17 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
 
 export function generateStaticParams() {
   return PROJECTS.filter(p => p.url).map(p => ({ projectId: p.url! }));
+}
+
+function uniqueSectionId(base: string, used: Set<string>): string {
+  let id = base || "section";
+  let n = 2;
+  while (used.has(id)) {
+    id = `${base}-${n}`;
+    n += 1;
+  }
+  used.add(id);
+  return id;
 }
 
 export default async function ProjectPage({ params }: ProjectPageProps) {
@@ -58,7 +76,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           if (!trimmed) return null;
           return (
             <p key={idx} className={styles.descriptionParagraph}>
-              {trimmed}
+              {renderInlineMdLinks(trimmed)}
             </p>
           );
         })}
@@ -92,9 +110,52 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     href: contactSectionHref(SECTION_IDS.startProject),
   });
 
+  const usedIds = new Set<string>();
+  const tocItems: ProjectTocItem[] = [];
+
+  const overviewId = uniqueSectionId(SECTION_IDS.projectOverview, usedIds);
+  tocItems.push({
+    id: overviewId,
+    label: "Overview",
+  });
+
+  const creditsId = pageData?.credits?.length
+    ? uniqueSectionId(SECTION_IDS.projectCredits, usedIds)
+    : null;
+  if (creditsId) {
+    tocItems.push({ id: creditsId, label: "Credits" });
+  }
+
+  const videoIds =
+    pageData?.videos?.map((video, i) =>
+      uniqueSectionId(
+        i === 0 ? SECTION_IDS.projectShowcase : slugifySectionId(video.title),
+        usedIds,
+      ),
+    ) ?? [];
+
+  if (videoIds.length > 0) {
+    tocItems.push({
+      id: videoIds[0],
+      label: "Videos",
+      watchIds: videoIds,
+    });
+  }
+
+  const galleryIds =
+    pageData?.imageSections?.map((section, i) => {
+      const id = uniqueSectionId(slugifySectionId(section.title), usedIds);
+      tocItems.push({
+        id,
+        label: section.title.trim() || `Section ${i + 1}`,
+      });
+      return id;
+    }) ?? [];
+
   return (
     <ScreenContainer>
       <ScreenSection
+        id={overviewId}
         eyebrow="Project"
         title={pageData?.title || project.title}
         headingLevel="h1"
@@ -113,11 +174,16 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         </ButtonGroup>
       </ScreenSection>
 
-      {pageData?.credits && pageData.credits.length > 0 && (
+      <ProjectToc items={tocItems} />
+
+      {pageData?.credits && pageData.credits.length > 0 && creditsId && (
         <ScreenSection
+          id={creditsId}
           eyebrow="Credits"
           title="Information"
-          titleDescription={pageData.creditsDescription ?? "People involved in creating this project."}
+          titleDescription={
+            pageData.creditsDescription ?? "People involved in creating this project."
+          }
           tightChildrenGap
         >
           <ScreenSectionList
@@ -128,20 +194,30 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 : c.name,
             }))}
           />
+          {project.type === "commissions" && (
+            <p className={styles.relatedWork}>
+              <ProjectsBoardLink tab="commissions">
+                {CTA_LABELS.browseClientWork}
+              </ProjectsBoardLink>
+              {" for more commissioned JsonUI."}
+            </p>
+          )}
         </ScreenSection>
       )}
 
       {pageData?.videos?.map((video, i) => (
         <ScreenSection
           key={`video-${i}`}
+          id={videoIds[i]}
           eyebrow="Media"
           title={video.title}
           titleDescription={video.description}
         >
           <div className={styles.iframeContainer}>
             <iframe
-              src={`https://www.youtube.com/embed/${video.youtubeId}?rel=0`}
+              src={`https://www.youtube-nocookie.com/embed/${video.youtubeId}?rel=0`}
               title={video.title}
+              loading="lazy"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
             />
@@ -152,6 +228,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       {pageData?.imageSections?.map((section, i) => (
         <ImageSection
           key={`section-${i}`}
+          id={galleryIds[i]}
           title={section.title}
           sectionDescription={section.description}
           items={section.items}
@@ -166,4 +243,3 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     </ScreenContainer>
   );
 }
-

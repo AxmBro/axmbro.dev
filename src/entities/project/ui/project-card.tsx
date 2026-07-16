@@ -2,17 +2,22 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaStar, FaGlobe } from "react-icons/fa6";
 import { SiReact, SiJavascript, SiTypescript, SiCss } from "react-icons/si";
-import type { ProjectItem } from "@/shared/constants/data";
+import type { ProjectItem, ProjectType } from "@/shared/constants/data";
 import { getProjectThumbnailSrc } from "../lib/get-project-thumbnail";
 import styles from "./project-card.module.scss";
 
+const TYPE_TAG_LABEL: Record<ProjectType, string> = {
+  personal: "Personal",
+  commissions: "Commissioned",
+};
+
 const getTagIcon = (tag: string) => {
-  const mcbeTags = ["JsonUI", "Server Form", "HUD", "Models"];
+  const mcbeTags = ["JsonUI", "Server Form", "HUD", "Models", "Textures", "Entities", "Inventory"];
   if (mcbeTags.includes(tag)) {
     return (
       <Image
-        src="/images/mcbe-logo.png"
-        alt="MCBE"
+        src="/images/ui/mcbe-logo.png"
+        alt=""
         width={14}
         height={14}
         className={styles.mcbeTagIcon}
@@ -35,6 +40,46 @@ const getTagIcon = (tag: string) => {
   }
 };
 
+const FeaturedTag = () => (
+  <span className={`${styles.tag} ${styles.tagType} ${styles.tagFeatured}`}>
+    <FaStar className={styles.featuredTagIcon} size={12} aria-hidden />
+    <span>Featured</span>
+  </span>
+);
+
+const TypeTag = ({ type }: { type: ProjectType }) => {
+  if (type === "personal") {
+    return (
+      <span className={`${styles.tag} ${styles.tagType} ${styles.tagPersonal}`}>
+        <Image
+          src="/icon192.png"
+          alt=""
+          width={14}
+          height={14}
+          className={styles.personalTagLogo}
+        />
+        <span>{TYPE_TAG_LABEL.personal}</span>
+      </span>
+    );
+  }
+
+  return (
+    <span className={`${styles.tag} ${styles.tagType} ${styles.tagCommissioned}`}>
+      <span className={styles.tagIconSlot} aria-hidden>
+        <Image
+          src="/images/ui/minecoin.png"
+          alt=""
+          width={9}
+          height={9}
+          className={styles.minecoinIcon}
+          unoptimized
+        />
+      </span>
+      <span>{TYPE_TAG_LABEL.commissions}</span>
+    </span>
+  );
+};
+
 interface ProjectCardProps {
   project: ProjectItem;
   /** Show project technology tags. @default true */
@@ -44,8 +89,11 @@ interface ProjectCardProps {
 }
 
 export const ProjectCard = ({ project, showTags = true, compact = false }: ProjectCardProps) => {
-  const projectFolder = project.url || "thisweb";
   const thumbnailSrc = getProjectThumbnailSrc(project);
+  const showTagRow =
+    !compact &&
+    showTags &&
+    (Boolean(project.star) || Boolean(project.type) || (project.tags?.length ?? 0) > 0);
 
   const inner = (
     <div className={styles.card} data-compact={compact || undefined}>
@@ -53,7 +101,7 @@ export const ProjectCard = ({ project, showTags = true, compact = false }: Proje
         <div className={styles.imageWrapper}>
           <Image
             src={thumbnailSrc}
-            alt={project.title}
+            alt=""
             className={styles.image}
             width={1280}
             height={720}
@@ -65,22 +113,22 @@ export const ProjectCard = ({ project, showTags = true, compact = false }: Proje
         <div className={styles.header}>
           {project.logoSrc && (
             <Image
-              src={`/images/projects/${projectFolder}/${project.logoSrc}.png`}
-              alt={`${project.title} logo`}
+              src={`/images/projects-logos/${project.logoSrc}.png`}
+              alt=""
               width={28}
               height={28}
               className={styles.logo}
+              unoptimized
             />
           )}
           <h2 className={styles.title}>{project.title}</h2>
-          {project.star && (
-            <FaStar className={styles.starIcon} size={20} aria-hidden />
-          )}
         </div>
         <p className={styles.description}>{project.description}</p>
-        {!compact && showTags && project.tags && project.tags.length > 0 && (
+        {showTagRow && (
           <div className={styles.tags}>
-            {project.tags.map((tag) => (
+            {project.type && <TypeTag type={project.type} />}
+            {project.star && <FeaturedTag />}
+            {project.tags?.map((tag) => (
               <span key={tag} className={styles.tag}>
                 {getTagIcon(tag)}
                 <span>{tag}</span>
