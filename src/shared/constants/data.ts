@@ -46,7 +46,7 @@ export const PROJECTS: ProjectItem[] = [
     title: "Ra Survival",
     description:
       "A Call of Duty Zombies-inspired survival map for MCBE. Commissioned to design and implement immersive custom UI systems that match the game's dark aesthetic.",
-    tags: ["JsonUI"],
+    tags: ["JsonUI", "HUD", "Inventory"],
     imgSrc: "raThumbnail",
     star: true,
     url: "ra_survival",
@@ -76,7 +76,7 @@ export const PROJECTS: ProjectItem[] = [
     title: "Murder Detector+",
     description:
       "An experimental utility pack designed to test the limits of JsonUI capabilities and model modifications. Created as a diagnostic tool to demonstrate server-side vulnerability mechanics.",
-    tags: ["JsonUI", "Models"],
+    tags: ["Entities", "Models"],
     imgSrc: "murder_detector",
     logoSrc: "mdLogo",
     star: true,
@@ -116,7 +116,7 @@ export const PROJECTS: ProjectItem[] = [
     title: "Synergy UI",
     description:
       "A clean, TFT-inspired responsive interface commissioned by a private client. Focuses on clear data presentation and seamless user interactions.",
-    tags: ["JsonUI", "Server Form"],
+    tags: ["JsonUI", "HUD"],
     imgSrc: "synergy_ui0",
     url: "synergy_ui",
     type: "commissions",
@@ -134,7 +134,7 @@ export const PROJECTS: ProjectItem[] = [
     title: "Hugo SMP UI",
     description:
       "A Java Edition-styled Pause Menu commissioned for a cross-play bedrock-java server. Includes a custom scoreboard integration to ensure cross-platform visual consistency.",
-    tags: ["JsonUI"],
+    tags: ["JsonUI", "HUD"],
     imgSrc: "hugo_smp_ui1",
     url: "hugo_smp_ui",
     type: "commissions",
@@ -170,6 +170,7 @@ export const PROJECTS: ProjectItem[] = [
     title: "Custom Sky Overlay",
     description:
       "A comprehensive collection of 16 custom skyboxes for MCBE. Engineered with subpack support for seamless user customization without modifying core files.",
+    tags: ["Textures"],
     imgSrc: "custom_sky_overlay1",
     url: "custom_sky_overlay",
     downloadLink:

@@ -6,16 +6,24 @@ credits:
     href: https://github.com/AxmBro
 imageSections:
   - title: In-game Screenshots
-    description: In-game screenshots, each with a short description.
+    description: Colorful server forms with grid layouts tailored to the client brief.
     items:
-      - title: Server Form
-        description: Colorful UI with grid layout and navigation buttons.
+      - title: Gamemodes Selector
+        description: >-
+          Header with logo, title, and multiline description, plus a grid of
+          colored buttons with optional 2x XP labels.
         imageSrc: hometree1
-      - title: Server Form Content
-        description: Extended content view with scrollable items.
+      - title: Advertisement Form
+        description: >-
+          Simple info form with a large center image and a continue button
+          underneath.
         imageSrc: hometree2
-      - title: Server Form Expanded
-        description: Full expanded view.
+      - title: Gamemodes Selector Scrolling
+        description: Same selector with more buttons and a visible scroll bar on the right.
         imageSrc: hometree3
+      - title: Grid Button
+        description: >-
+          Closer look at a grid button - title color matches the outline, which
+          only shows on hover.
+        imageSrc: hometree4
 ---
-

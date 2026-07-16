@@ -11,9 +11,19 @@ credits:
   - role: Client
     name: InPvP
     href: https://inpvp.net/
+videos:
+  - title: Full UI Showcase
+    description: >-
+      Full walkthrough of the Zeqa UI in motion - grids, forms, progression
+      screens, and HUD. Most interfaces use smooth animations that still photos
+      cannot show. Strongly recommended if you want the real feel of the pack.
+    youtubeId: Nf5Z9dxRc_U
 imageSections:
   - title: Server Forms & UI
-    description: Custom JsonUI forms, menus, and HUD pieces built for high-traffic PvP on Zeqa.
+    description: >-
+      Custom JsonUI forms, menus, and HUD pieces built for high-traffic PvP on
+      Zeqa. Most screens include animations and transitions that do not show in
+      still shots - watch the showcase video above for the full experience.
     items:
       - title: Big Grid
         description: >-
@@ -142,3 +152,5 @@ Commissioned by InPvP for Zeqa, one of the largest Minecraft Bedrock PvP servers
 Most of the scope covered optimized server forms, grid menus, progression screens, and polished transitions. I worked from client documentation, researched Bedrock UI behavior where needed, and iterated with the team through testing and revision until the final screens shipped.
 
 Screenshots and video footage later on this page are a mix of production and development builds, so not every detail will match the live pack one-to-one - the systems shown are still real, shipped, and in use.
+
+A large part of this work is motion: open states, transitions, and feedback across most forms. That does not come through in screenshots alone, so watch the showcase video if you want to see how the UI actually plays.
