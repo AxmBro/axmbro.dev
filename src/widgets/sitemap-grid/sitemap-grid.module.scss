@@ -57,9 +57,10 @@
 .projectList {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
   width: 100%;
+  background-color: var(--color-border);
   border-top: 1px solid var(--color-border);
-  border-bottom: 1px solid var(--color-border);
 
   @media (max-width: $breakpoint-wide) {
     grid-template-columns: repeat(2, 1fr);
@@ -77,72 +78,29 @@
   padding: var(--spacing-block);
   color: inherit;
   background-color: var(--color-bg-primary);
-  border-right: 1px solid var(--color-border);
-  border-bottom: 1px solid var(--color-border);
 
-  &:nth-child(3n) {
-    border-right: none;
+  &:last-child:nth-child(3n + 1) {
+    grid-column: 1 / -1;
   }
 
-  &:last-child:not(:nth-child(3n)) {
-    border-right: none;
-  }
-
-  &:last-child {
-    border-bottom: none;
-  }
-
-  &:nth-last-child(2):nth-child(3n + 1) {
-    border-bottom: none;
-  }
-
-  &:nth-last-child(2):nth-child(3n - 1) {
-    border-bottom: none;
-  }
-
-  &:nth-last-child(3):nth-child(3n - 2) {
-    border-bottom: none;
+  &:last-child:nth-child(3n + 2) {
+    grid-column: span 2;
   }
 
   @media (max-width: $breakpoint-wide) {
-    border-right: 1px solid var(--color-border);
-
-    &:nth-child(3n) {
-      border-right: 1px solid var(--color-border);
+    &:last-child:nth-child(3n + 1),
+    &:last-child:nth-child(3n + 2) {
+      grid-column: auto;
     }
 
-    &:nth-child(2n) {
-      border-right: none;
-    }
-
-    &:last-child:not(:nth-child(2n)) {
-      border-right: none;
-    }
-
-    &:nth-last-child(2):nth-child(3n + 1),
-    &:nth-last-child(2):nth-child(3n - 1),
-    &:nth-last-child(3):nth-child(3n - 2) {
-      border-bottom: 1px solid var(--color-border);
-    }
-
-    &:last-child {
-      border-bottom: none;
-    }
-
-    &:nth-last-child(2):nth-child(odd) {
-      border-bottom: none;
+    &:last-child:nth-child(odd) {
+      grid-column: 1 / -1;
     }
   }
 
   @media (max-width: $breakpoint-md) {
-    border-right: none;
-
-    &:nth-last-child(2):nth-child(odd) {
-      border-bottom: 1px solid var(--color-border);
-    }
-
-    &:last-child {
-      border-bottom: none;
+    &:last-child:nth-child(odd) {
+      grid-column: auto;
     }
   }
 
