@@ -20,6 +20,7 @@
 }
 
 .faqHeader {
+  @include focus-ring;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -40,7 +41,9 @@
 .faqQuestion {
   @include text-h3;
   font-family: inherit;
+  font-weight: inherit;
   padding-right: 2rem;
+  margin: 0;
 }
 
 .faqAnswerContainer {
@@ -62,6 +65,10 @@
 .faqAnswer {
   @include text-body-sm;
   padding: 0 var(--spacing-block) 1.75rem var(--spacing-block);
+
+  a {
+    @include text-link;
+  }
 }
 
 .chevron {

@@ -67,4 +67,6 @@ imageSections:
         imageSrc: hud3
 ---
 
-Mineville UI is a comprehensive, high-performance interface overhaul designed specifically for Minecraft Bedrock servers. Built from the ground up to ensure seamless player navigation and aesthetic coherence, it features custom server forms, optimized inventory and trading systems, and advanced HUD elements. The project demonstrates a strong focus on UX/UI design, performance optimization under load, and cohesive branding for a professional gaming environment.
+Commissioned by [InPvP](https://inpvp.net/) for Mineville. Mineville UI is a comprehensive, high-performance interface overhaul designed specifically for Minecraft Bedrock servers. Built from the ground up to ensure seamless player navigation and aesthetic coherence, it features custom server forms, optimized inventory and trading systems, and advanced HUD elements. The project demonstrates a strong focus on UX/UI design, performance optimization under load, and cohesive branding for a professional gaming environment.
+
+Similar work for the same studio: [Zeqa UI](/projects/zeqa_ui).

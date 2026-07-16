@@ -136,8 +136,10 @@ imageSections:
         imageSrc: ra22
 ---
 
-A Minecraft Bedrock Edition map by Radium, inspired by Call of Duty's Zombies mode. I was commissioned to build the full UI, including hotbars, a gun display, round counters, power-ups, perks, crosshair notifications, and more.
+A Minecraft Bedrock Edition map by [Radium](https://www.radium-studio.com/), inspired by Call of Duty's Zombies mode. I was commissioned to build the full UI, including hotbars, a gun display, round counters, power-ups, perks, crosshair notifications, and more.
 
-My responsibility was the entire UI logic. I did not create the textures myself; I took the provided assets and built them into a working JsonUI system.
+My responsibility was the entire UI logic. I did not create the textures myself; I took the provided assets and built them into a working JsonUI system. Motion and feedback matter a lot here, so [watch the showcase video](#showcase-video) for the systems in action.
 
 The project is still in active development, so textures, icons, and design may change or be adjusted over time.
+
+Similar HUD-focused commission work: [Mineville UI](/projects/mineville_ui).

@@ -1,5 +1,13 @@
+import type { ReactNode } from "react";
+import Link from "next/link";
+import {
+  contactSectionHref,
+  homeSectionHref,
+  SECTION_IDS,
+} from "./anchors";
 import { projectDetailPath, ROUTES } from "./routes";
 import type { ProjectsBoardTab } from "@/shared/lib/projects-board-state";
+import { ProjectsBoardLink } from "@/shared/ui/projects-tag-link";
 
 export type ProjectType = "personal" | "commissions";
 
@@ -24,7 +32,7 @@ export const PROJECTS: ProjectItem[] = [
       "A comprehensive, highly customizable UI and texture modification for MCBE. Enhances gameplay functionality with nearly 300 configuration options, fully supported across all platforms.",
     tags: ["JsonUI", "Models", "React", "Web"],
     imgSrc: "bbReleaseThumbnail",
-    logoSrc: "bbLogo",
+    logoSrc: "better_bedrock",
     star: true,
     downloadLink: "https://betterbedrock.com/downloads/better-bedrock",
     url: "better_bedrock",
@@ -36,6 +44,7 @@ export const PROJECTS: ProjectItem[] = [
       "A large-scale adventure map commissioned by YouTuber Slime Block. Engineered and developed advanced custom interfaces, including specialized HUDs and interactive server forms.",
     tags: ["JsonUI", "Server Form"],
     imgSrc: "obsba",
+    logoSrc: "one_slime_block_adventure",
     star: true,
     downloadLink:
       "https://www.minecraft.net/en-us/marketplace/pdp/mush-co/one-slime-block-adventure/ade4af56-a677-445d-a6ed-628e28eb7d88",
@@ -48,6 +57,7 @@ export const PROJECTS: ProjectItem[] = [
       "A Call of Duty Zombies-inspired survival map for MCBE. Commissioned to design and implement immersive custom UI systems that match the game's dark aesthetic.",
     tags: ["JsonUI", "HUD", "Inventory"],
     imgSrc: "raThumbnail",
+    logoSrc: "ra_survival",
     star: true,
     url: "ra_survival",
     type: "commissions",
@@ -58,6 +68,7 @@ export const PROJECTS: ProjectItem[] = [
       "Custom JsonUI commissioned by InPvP for Zeqa, the largest Minecraft Bedrock PvP server. Clean layouts, smooth animations, and optimized server forms with selective HUD work.",
     tags: ["JsonUI", "Server Form", "HUD"],
     imgSrc: "zeqa_ui0",
+    logoSrc: "zeqa_ui",
     star: true,
     url: "zeqa_ui",
     type: "commissions",
@@ -68,6 +79,7 @@ export const PROJECTS: ProjectItem[] = [
       "A complex, clean, and animated custom user interface suite. Featuring highly optimized client-side minimaps, modular trade UIs, armor HUD trackers, and custom server forms.",
     tags: ["JsonUI", "Server Form", "HUD"],
     imgSrc: "main",
+    logoSrc: "mineville_ui",
     star: true,
     url: "mineville_ui",
     type: "commissions",
@@ -78,7 +90,7 @@ export const PROJECTS: ProjectItem[] = [
       "An experimental utility pack designed to test the limits of JsonUI capabilities and model modifications. Created as a diagnostic tool to demonstrate server-side vulnerability mechanics.",
     tags: ["Entities", "Models"],
     imgSrc: "murder_detector",
-    logoSrc: "mdLogo",
+    logoSrc: "murder_detector",
     star: true,
     downloadLink: "https://betterbedrock.com/project/preview/murder_detector",
     url: "murder_detector",
@@ -195,7 +207,7 @@ interface ExperienceItem {
   role: string;
   date: string;
   company: string;
-  items: { name: string; value?: string }[];
+  items: { name: ReactNode }[];
   buttons?: ExperienceButton[];
 }
 
@@ -223,7 +235,14 @@ export const EXPERIENCE_TREE: ExperienceItem[] = [
     company: "Better Bedrock",
     items: [
       {
-        name: "Founded Better Bedrock and grew it into a long-running Minecraft Bedrock UI and texture project with more than 2M downloads.",
+        name: (
+          <>
+            Founded{" "}
+            <Link href={projectDetailPath("better_bedrock")}>Better Bedrock</Link>{" "}
+            and grew it into a long-running Minecraft Bedrock UI and texture
+            project with more than 2M downloads.
+          </>
+        ),
       },
       {
         name: "Lead product direction, release planning, community communication, and promotional content across video and graphics.",
@@ -562,6 +581,7 @@ export const SITE_METADATA = {
 
 export const CTA_LABELS = {
   startProject: "Start a Project",
+  browseAllProjects: "Browse All Projects",
   viewSelectedWork: "View Selected Work",
   browseClientWork: "Browse Client Work",
   commissionDetails: "Commission Details",
@@ -573,12 +593,18 @@ export const HOME_PAGE_TEXTS = {
   hero: {
     description:
       "I am a 20-year-old Computer Science student from Poland, specializing in Minecraft Bedrock Edition development. I engineer advanced interfaces for Marketplace studios, private servers, and independent creators, including custom JsonUI, HUDs, and server forms.\n\nI also build responsive websites with React and Next.js, explore AI tools to grow my software engineering skills, and keep pushing personal projects. I focus on pixel-perfect layouts, scalable code, and seamless user experience",
-    ctaWork: CTA_LABELS.viewSelectedWork,
+    ctaWork: CTA_LABELS.browseAllProjects,
     ctaCommissions: CTA_LABELS.minecraftBedrockCommissions,
   },
   trackRecord: {
-    description:
-      "Paid commissions, independent releases, and technical content that show the scope of my Minecraft Bedrock UI work, project reach, and audience growth.",
+    description: (
+      <>
+        Paid commissions, independent releases, and technical content that show
+        the scope of my Minecraft Bedrock UI work, project reach, and audience
+        growth, including work for studios such as{" "}
+        <Link href={projectDetailPath("zeqa_ui")}>InPvP</Link>.
+      </>
+    ),
     clientsDescription:
       "Studios and creators I have worked with on commercial Minecraft Bedrock projects, including custom game UIs, HUDs, and server forms.",
   },
@@ -593,12 +619,26 @@ export const HOME_PAGE_TEXTS = {
       "A focused view of the tools I use in real projects, the skills I apply through practical work, and the areas I am still learning.",
   },
   experience: {
-    description:
-      "My background combines commercial Minecraft Bedrock UI work, freelance web development, leading a project with more than 2M downloads, and ongoing Computer Science studies.",
+    description: (
+      <>
+        My background combines commercial Minecraft Bedrock UI work, freelance
+        web development, leading a project with more than 2M downloads, and
+        ongoing Computer Science studies.{" "}
+        <ProjectsBoardLink tab="commissions">Browse Client Work</ProjectsBoardLink>
+        {" "}to see commissioned projects.
+      </>
+    ),
   },
   contact: {
-    description:
-      "Ready to commission Minecraft Bedrock UI or discuss a web project? Review the scope, requirements, and process, or send your project brief directly.",
+    description: (
+      <>
+        Ready to commission Minecraft Bedrock UI or discuss a web project? Review{" "}
+        <Link href={homeSectionHref(SECTION_IDS.selectedWork)}>
+          Selected Work
+        </Link>{" "}
+        for recent examples, then send your project brief directly.
+      </>
+    ),
   },
   footer: {
     description: SITE_METADATA.footerDescription,
@@ -606,7 +646,15 @@ export const HOME_PAGE_TEXTS = {
   contactPage: {
     socials:
       "Prefer direct contact? Use email, Discord, or GitHub. Additional profiles and community links are available below.",
-    form: "Send your project brief through the form below. Include the scope, target version, required screens, and any existing mockups or textures. I usually respond within 24 hours.",
+    form: (
+      <>
+        Send your project brief through the form below. For scope, pricing context, and
+        process, see{" "}
+        <Link href={ROUTES.commissions}>Commissions</Link>
+        . Include the target version, required screens, and any existing mockups or
+        textures. I usually respond within 24 hours.
+      </>
+    ),
   },
   projectsPage: {
     description: (count: number) =>
@@ -620,12 +668,28 @@ export interface CommissionInfoItem {
 }
 
 export const COMMISSIONS_PAGE_TEXTS = {
-  intro:
-    "Custom Minecraft Bedrock JsonUI for studios, servers, and creators who need more than a simple reskin. I build HUDs, server forms, menus, and connected UI systems around your designs and technical requirements. Currently accepting new Minecraft Bedrock UI commissions.",
+  intro: (
+    <>
+      Custom Minecraft Bedrock JsonUI for studios, servers, and creators who need
+      more than a simple reskin. I build HUDs, server forms, menus, and connected
+      UI systems around your designs and technical requirements. Currently
+      accepting new Minecraft Bedrock UI commissions.{" "}
+      <Link href={ROUTES.projects}>{CTA_LABELS.browseAllProjects}</Link> for
+      recent examples.
+    </>
+  ),
   services:
     "Focused Minecraft Bedrock interface work, from individual screens to complete UI systems.",
-  requirements:
-    "A clear starting point keeps the project faster, easier to estimate, and closer to the result you expect.",
+  requirements: (
+    <>
+      A clear starting point keeps the project faster, easier to estimate, and
+      closer to the result you expect. When you are ready,{" "}
+      <Link href={contactSectionHref(SECTION_IDS.startProject)}>
+        send the brief through the contact form
+      </Link>
+      .
+    </>
+  ),
   process:
     "A simple three-step workflow from the first technical review to final delivery and support.",
   delivery:
@@ -711,7 +775,10 @@ export const PROCESS_STEPS = [
 
 export interface FAQItem {
   question: string;
-  answer: string;
+  /** Plain-text answer for FAQPage JSON-LD (and default UI when `answer` is omitted). */
+  answerText: string;
+  /** Rich UI answer; defaults to `answerText`. */
+  answer?: ReactNode;
   slug?: string;
 }
 
@@ -719,51 +786,97 @@ export const FAQ_ITEMS: FAQItem[] = [
   {
     question: "What value do you bring to my project?",
     slug: "value",
-    answer:
-      "You get a developer who builds JsonUI around Bedrock constraints and player flow, including custom HUDs, server forms, chest UIs, and menu systems that integrate with your resource pack and scripts. I can also take on matching responsive web work when needed.",
+    answerText:
+      "You get a developer who builds JsonUI around Bedrock constraints and player flow, including custom HUDs, server forms, chest UIs, and menu systems that integrate with your resource pack and scripts. I can also take on matching responsive web work when needed. See Selected Work for recent examples.",
+    answer: (
+      <>
+        You get a developer who builds JsonUI around Bedrock constraints and
+        player flow, including custom HUDs, server forms, chest UIs, and menu
+        systems that integrate with your resource pack and scripts. I can also
+        take on matching responsive web work when needed.{" "}
+        <Link href={homeSectionHref(SECTION_IDS.selectedWork)}>
+          See Selected Work
+        </Link>{" "}
+        for recent examples.
+      </>
+    ),
   },
   {
     question: "Are you currently accepting new commissions?",
     slug: "availability",
-    answer:
+    answerText:
       "Yes. I am currently accepting Minecraft Bedrock JsonUI commissions. Send your scope, target version, required screens, and any mockups or textures through the contact form so I can review the fit.",
+    answer: (
+      <>
+        Yes. I am currently accepting Minecraft Bedrock JsonUI commissions. Send
+        your scope, target version, required screens, and any mockups or textures
+        through the{" "}
+        <Link href={contactSectionHref(SECTION_IDS.startProject)}>
+          contact form
+        </Link>{" "}
+        so I can review the fit.
+      </>
+    ),
   },
   {
     question:
       "Do you focus on frontend UI or backend development in Minecraft Bedrock?",
     slug: "scope",
-    answer:
+    answerText:
       "In Minecraft Bedrock, I specialize entirely on the frontend side: custom JsonUI (HUDs, server forms, chest UIs, and other interfaces). I also handle resource packs, custom entities, Molang, and technical animations/render controllers. While I don't write complex backend Behavior Pack scripts, I structure my UIs to integrate cleanly with custom ScriptAPIs. On the web side, I am actively building my skills and currently consider myself beginner-to-intermediate in that field.",
   },
   {
     question:
       "Do I need to provide complete UI designs, or do you handle the styling?",
     slug: "mockups",
-    answer:
+    answerText:
       "I highly prefer that you have a plan or visual concept ready before we start. If I have to design the interface layout completely from scratch, it will take more time, cost more, and increase the risk of back-and-forth changes. Even a rough sketch made in Paint, a screenshot, or a text outline works, but the cleaner and more detailed the mockup, the faster and more cost-effective the development process will be.",
   },
   {
     question: "What is your typical turnaround time for commissions?",
     slug: "turnaround",
-    answer:
-      "For Minecraft Bedrock commissions, turnaround times vary depending on the depth of the project. Simple UI panels or adjustments take about 3 to 7 days, while complex custom UI overhauls typically require 1 to 3 weeks. For other projects, such as web development, timelines vary and are discussed and adjusted individually to meet your schedule. A precise timeline estimate will be provided after we review your exact requirements.",
+    answerText:
+      "For Minecraft Bedrock commissions, turnaround times vary depending on the depth of the project. Simple UI panels or adjustments take about 3 to 7 days, while complex custom UI overhauls typically require 1 to 3 weeks. For other projects, such as web development, timelines vary and are discussed and adjusted individually to meet your schedule. A precise timeline estimate will be provided after we review your exact requirements. More on Commissions.",
+    answer: (
+      <>
+        For Minecraft Bedrock commissions, turnaround times vary depending on the
+        depth of the project. Simple UI panels or adjustments take about 3 to 7
+        days, while complex custom UI overhauls typically require 1 to 3 weeks.
+        For other projects, such as web development, timelines vary and are
+        discussed and adjusted individually to meet your schedule. A precise
+        timeline estimate will be provided after we review your exact
+        requirements.{" "}
+        <Link href={ROUTES.commissions}>More on Commissions</Link>.
+      </>
+    ),
   },
   {
     question: "How do you handle project pricing and payments?",
     slug: "pricing",
-    answer:
-      "Pricing is calculated individually based on the project's specific scope and complexity. Once we agree on terms and technical requirements, I require a 50% upfront advance before starting development. The remaining 50% is paid upon successful completion and delivery of the assets. I am generally flexible and open to custom contracts or tailored business terms depending on your project needs.",
+    answerText:
+      "Pricing is calculated individually based on the project's specific scope and complexity. Once we agree on terms and technical requirements, I require a 50% upfront advance before starting development. The remaining 50% is paid upon successful completion and delivery of the assets. I am generally flexible and open to custom contracts or tailored business terms depending on your project needs. More on Commissions.",
+    answer: (
+      <>
+        Pricing is calculated individually based on the project's specific
+        scope and complexity. Once we agree on terms and technical requirements,
+        I require a 50% upfront advance before starting development. The
+        remaining 50% is paid upon successful completion and delivery of the
+        assets. I am generally flexible and open to custom contracts or tailored
+        business terms depending on your project needs.{" "}
+        <Link href={ROUTES.commissions}>More on Commissions</Link>.
+      </>
+    ),
   },
   {
     question: "What happens if a future Minecraft update breaks the UI?",
     slug: "support",
-    answer:
+    answerText:
       "Minecraft Bedrock updates frequently modify UI files, which can break custom screens. For all commissioned projects, I provide 30 days of free technical support after delivery to fix any layout issues caused by official game updates. After this period, updates or maintenance work can be arranged as needed.",
   },
   {
     question: "Do I receive full ownership and raw source files of the UI?",
     slug: "ownership",
-    answer:
+    answerText:
       "Typically yes, but this is an individual matter depending on the scale and nature of the project. For standard, straightforward commissions, full file usage is included. For complex commercial platforms or large-scale integrations, custom licensing terms or an IP transfer fee may be negotiated based on your specific legal requirements.",
   },
 ];

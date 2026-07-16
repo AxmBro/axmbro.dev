@@ -59,6 +59,8 @@ export const FAQAccordion = ({ items = FAQ_ITEMS }: FAQAccordionProps) => {
       {items.map((item, index) => {
         const key = item.slug ?? String(index);
         const isOpen = openSlug === key;
+        const triggerId = `faq-trigger-${key}`;
+        const panelId = `faq-panel-${key}`;
         return (
           <div
             key={item.slug ?? index}
@@ -66,16 +68,26 @@ export const FAQAccordion = ({ items = FAQ_ITEMS }: FAQAccordionProps) => {
             className={styles.faqItem}
           >
             <button
+              id={triggerId}
+              type="button"
               className={styles.faqHeader}
               onClick={() => toggleFAQ(item.slug, index)}
               aria-expanded={isOpen}
+              aria-controls={panelId}
             >
-              <span className={styles.faqQuestion}>{item.question}</span>
+              <h3 className={styles.faqQuestion}>{item.question}</h3>
               <ChevronIcon isOpen={isOpen} />
             </button>
-            <div className={styles.faqAnswerContainer} data-open={isOpen ? "true" : "false"}>
+            <div
+              id={panelId}
+              role="region"
+              aria-labelledby={triggerId}
+              className={styles.faqAnswerContainer}
+              data-open={isOpen ? "true" : "false"}
+              inert={!isOpen ? true : undefined}
+            >
               <div className={styles.faqAnswerContent}>
-                <p className={styles.faqAnswer}>{item.answer}</p>
+                <div className={styles.faqAnswer}>{item.answer ?? item.answerText}</div>
               </div>
             </div>
           </div>

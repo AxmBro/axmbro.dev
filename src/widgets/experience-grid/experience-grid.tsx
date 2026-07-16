@@ -18,8 +18,10 @@ export const ExperienceGrid = () => {
           </div>
           <div className={styles.expTextContent}>
             <ul className={styles.expListMinimal}>
-              {exp.items.map((item) => (
-                <li key={item.name}>{item.name}</li>
+              {exp.items.map((item, i) => (
+                <li key={i}>
+                  <span>{item.name}</span>
+                </li>
               ))}
             </ul>
             {exp.buttons && exp.buttons.length > 0 && (

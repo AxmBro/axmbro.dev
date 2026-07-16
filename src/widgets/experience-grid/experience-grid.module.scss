@@ -54,4 +54,8 @@
 
 .expListMinimal {
   @include list-minimal;
+
+  a {
+    @include text-link;
+  }
 }

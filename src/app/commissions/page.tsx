@@ -11,6 +11,7 @@ import {
 import { contactSectionHref, homeSectionHref, SECTION_IDS } from "@/shared/constants/anchors";
 import { ROUTES } from "@/shared/constants/routes";
 import { createPageMetadata } from "@/shared/lib/page-metadata";
+import { buildFaqPageJsonLd, JsonLd } from "@/shared/lib/json-ld";
 import { Button, buttonVariantForIndex } from "@/shared/ui/button";
 import { ButtonGroup } from "@/shared/ui/button-group";
 import { ScreenContainer } from "@/shared/ui/screen-container";
@@ -27,6 +28,7 @@ export const metadata: Metadata = createPageMetadata({
 export default function CommissionsPage() {
   return (
     <ScreenContainer>
+      <JsonLd data={buildFaqPageJsonLd(COMMISSION_FAQ_ITEMS)} />
       <ScreenSection
         eyebrow="Services"
         title="Minecraft Bedrock UI Commissions"

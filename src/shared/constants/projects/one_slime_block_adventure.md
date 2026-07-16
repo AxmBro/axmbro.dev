@@ -157,10 +157,10 @@ imageSections:
         imageSrc: osba28
 ---
 
-A large-scale adventure map built with YouTuber Slime Block. I was commissioned to design and implement the entire custom UI, covering both the in-game HUD and the server forms. It remains one of the most complex projects I have worked on.
+A large-scale adventure map built with YouTuber Slime Block and [Mush Co](https://www.mushco.games/). I was commissioned to design and implement the entire custom UI, covering both the in-game HUD and the server forms. It remains one of the most complex projects I have worked on.
 
 My responsibility was the full UI layer. I did not create the textures myself; instead, I took the provided assets and built them into a working JsonUI system. Collaborating with the team on a project of this scale taught me a lot about teamwork and how seemingly simple tasks can become surprisingly difficult. It was my first large commission and a valuable opportunity to test my skills in a real production environment.
 
 The scope was significant: there were many custom HUD elements to build (full credit to the artist, vemigvan, whose assets were perfectly prepared), along with the most complex piece, the custom map form, which took considerable time to get right. The final result across all of these interfaces is something I am genuinely proud of.
 
-The map is now complete and available on the Minecraft Marketplace. You can visit the Mush Co website or download the pack using the buttons below.
+The map is now complete and available on the [Minecraft Marketplace](https://www.minecraft.net/en-us/marketplace/pdp/mush-co/one-slime-block-adventure/ade4af56-a677-445d-a6ed-628e28eb7d88). You can visit the Mush Co website or download the pack using the buttons below.

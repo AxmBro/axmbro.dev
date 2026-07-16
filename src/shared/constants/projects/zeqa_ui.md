@@ -125,6 +125,17 @@ imageSections:
           Unused bundles browser in a map-form style, with custom tabs, body
           text, and a Back button.
         imageSrc: zeqa_ui21
+      - title: Shared Server Forms
+        description: >-
+          Additional server forms from another InPvP pack (for example bundles,
+          auction house, and rewards grid). Design differs from the main Zeqa
+          set - the work here was integration and wiring, not a straight copy.
+        imageSrc: zeqa_ui24
+  - title: Other Modifications
+    description: >-
+      Extra pack work outside the main server form set - HUD, pause menu, and
+      chat screen updates.
+    items:
       - title: Custom Boss Bar
         description: >-
           Custom top-of-screen HUD element used instead of the default boss bar.
@@ -139,18 +150,14 @@ imageSections:
           Quick commands in the chat screen - an existing InPvP system adapted
           and wired into this pack.
         imageSrc: zeqa_ui23
-      - title: Shared Server Forms
-        description: >-
-          Additional server forms from another InPvP pack (for example bundles,
-          auction house, and rewards grid). Design differs from the main Zeqa
-          set - the work here was integration and wiring, not a straight copy.
-        imageSrc: zeqa_ui24
 ---
 
-Commissioned by InPvP for Zeqa, one of the largest Minecraft Bedrock PvP servers. I built a clean custom JsonUI layer where smooth animations and responsive server forms were the main focus, with a smaller set of HUD adjustments to match competitive gameplay.
+Commissioned by [InPvP](https://inpvp.net/) for Zeqa, one of the largest Minecraft Bedrock PvP servers. I built a clean custom JsonUI layer where smooth animations and responsive server forms were the main focus, with a smaller set of HUD adjustments to match competitive gameplay.
 
 Most of the scope covered optimized server forms, grid menus, progression screens, and polished transitions. I worked from client documentation, researched Bedrock UI behavior where needed, and iterated with the team through testing and revision until the final screens shipped.
 
 Screenshots and video footage later on this page are a mix of production and development builds, so not every detail will match the live pack one-to-one - the systems shown are still real, shipped, and in use.
 
-A large part of this work is motion: open states, transitions, and feedback across most forms. That does not come through in screenshots alone, so watch the showcase video if you want to see how the UI actually plays.
+A large part of this work is motion: open states, transitions, and feedback across most forms. That does not come through in screenshots alone, so [watch the showcase video](#showcase-video) if you want to see how the UI actually plays.
+
+Similar work for the same studio: [Mineville UI](/projects/mineville_ui).
