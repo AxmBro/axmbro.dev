@@ -49,9 +49,10 @@ export const TrackRecord = async () => {
               {client.logoSrc && (
                 <Image
                   src={client.logoSrc}
-                  alt={`${client.name} logo`}
+                  alt=""
                   width={client.logoWidth ?? 160}
                   height={client.logoHeight ?? 48}
+                  sizes="(max-width: 768px) 40vw, 160px"
                   className={styles.clientLogo}
                 />
               )}

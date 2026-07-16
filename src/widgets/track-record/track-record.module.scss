@@ -84,6 +84,7 @@
 
 .client {
   @include link-plain;
+  @include focus-ring;
   display: flex;
   align-items: center;
   justify-content: center;

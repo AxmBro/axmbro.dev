@@ -53,11 +53,8 @@
 
 .policyLink {
   @include text-body(var(--color-neutral-400));
-  @include link-plain;
+  @include text-link;
+  @include focus-ring;
   align-self: flex-start;
-
-  &:hover {
-    color: var(--color-neutral-100);
-    text-decoration: underline !important;
-  }
+  border-radius: 4px;
 }

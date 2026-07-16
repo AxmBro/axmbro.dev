@@ -1,4 +1,4 @@
-import { homeSectionHref, SECTION_IDS } from "@/shared/constants/anchors";
+import { SECTION_IDS } from "@/shared/constants/anchors";
 import { HOME_PAGE_TEXTS } from "@/shared/constants/data";
 import { ROUTES } from "@/shared/constants/routes";
 import { Button, buttonVariantForIndex } from "@/shared/ui/button";
@@ -23,14 +23,14 @@ export const HeroSection = () => (
         <p className={styles.description}>{HOME_PAGE_TEXTS.hero.description}</p>
         <ButtonGroup marginTop>
           <Button
-            text={HOME_PAGE_TEXTS.hero.ctaCommissions}
+            text={HOME_PAGE_TEXTS.hero.ctaWork}
             variant={buttonVariantForIndex(0)}
-            href={ROUTES.commissions}
+            href={ROUTES.projects}
           />
           <Button
-            text={HOME_PAGE_TEXTS.hero.ctaWork}
+            text={HOME_PAGE_TEXTS.hero.ctaCommissions}
             variant={buttonVariantForIndex(1)}
-            href={homeSectionHref(SECTION_IDS.selectedWork)}
+            href={ROUTES.commissions}
           />
         </ButtonGroup>
       </div>

@@ -109,10 +109,13 @@ export const ContactForm = () => {
         </div>
 
         <div className={styles.intentWrapper}>
-          <span className={styles.label}>Project Type (Optional)</span>
+          <span className={styles.label} id="contact-project-type">
+            Project Type (Optional)
+          </span>
           <JoinedTabs
             options={CONTACT_FORM_INTENTS}
             activeId={activeIntent}
+            aria-labelledby="contact-project-type"
             onChange={(id) => {
               const intent = CONTACT_FORM_INTENTS.find((item) => item.id === id);
               if (intent) {

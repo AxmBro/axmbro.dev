@@ -18,8 +18,9 @@
   padding: 0 1rem;
   box-sizing: border-box;
 
+  @include focus-ring;
+
   &:focus {
-    outline: none;
     border-color: var(--color-neutral-100);
     background-color: var(--surface-input-focus);
   }
@@ -32,6 +33,7 @@
 
 .clearButton {
   @include text-body-sm;
+  @include focus-ring;
   height: 3.25rem;
   width: 3.25rem;
   flex-shrink: 0;
@@ -102,6 +104,30 @@
 }
 
 .noResults {
+  @include stack-xs;
   border-top: 1px solid var(--color-border);
   padding: var(--spacing-block);
+}
+
+.noResultsMessage,
+.noResultsActions {
+  @include text-body;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.noResultsActions {
+  flex-shrink: 0;
+}
+
+.emptyAction {
+  @include text-link;
+  @include focus-ring;
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  padding: 0;
+  border-radius: 2px;
+  cursor: pointer;
 }
