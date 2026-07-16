@@ -10,24 +10,17 @@ import { ProjectsBoardLink } from "@/shared/ui/projects-tag-link";
 import { NAV_LINKS } from "@/shared/constants/data";
 import { BREAKPOINT_TABLET_PX } from "@/shared/constants/breakpoints";
 import { ROUTES } from "@/shared/constants/routes";
+import { isNavLinkActive, normalizePathname } from "@/shared/lib/nav-active";
 import styles from "./header.module.scss";
 
-const navPath = (href: string) => href.split("#")[0] || ROUTES.home;
 const hasHash = (href: string) => href.includes("#");
-const isNavActive = (pathname: string, href: string) => {
-  const targetPath = navPath(href);
-
-  return targetPath === ROUTES.home
-    ? pathname === ROUTES.home
-    : pathname === targetPath || pathname.startsWith(`${targetPath}/`);
-};
 
 const MOBILE_NAV_ID = "header-mobile-nav";
 
 export const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isResponsive, setIsResponsive] = useState(false);
-  const pathname = usePathname();
+  const pathname = normalizePathname(usePathname());
 
   useEffect(() => {
     const mqResponsive = window.matchMedia(`(max-width: ${BREAKPOINT_TABLET_PX}px)`);
@@ -51,10 +44,10 @@ export const Header = () => {
   };
 
   const navLinkClass = (href: string) =>
-    isNavActive(pathname, href) ? `${styles.navItem} ${styles.navItemActive}` : styles.navItem;
+    isNavLinkActive(pathname, href) ? `${styles.navItem} ${styles.navItemActive}` : styles.navItem;
 
   const mobileNavLinkClass = (href: string) =>
-    isNavActive(pathname, href)
+    isNavLinkActive(pathname, href)
       ? `${styles.mobileNavItem} ${styles.navItemActive}`
       : styles.mobileNavItem;
 

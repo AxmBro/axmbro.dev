@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ReactNode, type MouseEvent } from "react";
 import { ROUTES } from "@/shared/constants/routes";
+import { normalizePathname } from "@/shared/lib/nav-active";
 
 interface HomeLinkProps {
   className?: string;
@@ -12,7 +13,7 @@ interface HomeLinkProps {
 }
 
 export const HomeLink = ({ className, children, onClick }: HomeLinkProps) => {
-  const pathname = usePathname();
+  const pathname = normalizePathname(usePathname());
 
   const handleClick = (e: MouseEvent) => {
     onClick?.();
