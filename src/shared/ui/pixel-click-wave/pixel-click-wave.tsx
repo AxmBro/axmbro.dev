@@ -178,9 +178,19 @@ const getBehindMount = (pathname: string) =>
       )
     : null;
 
+interface WaveRuntime {
+  attachBehind: (canvas: HTMLCanvasElement, context: CanvasRenderingContext2D) => void;
+  detachBehind: () => void;
+  resize: () => void;
+}
+
+const INTRO_RETRY_LIMIT = 24;
+const INTRO_RETRY_MS = 32;
+
 export function PixelClickWave() {
   const aboveCanvasRef = useRef<HTMLCanvasElement>(null);
   const behindCanvasRef = useRef<HTMLCanvasElement>(null);
+  const runtimeRef = useRef<WaveRuntime | null>(null);
   const pathname = usePathname();
   const [behindMount, setBehindMount] = useState<HTMLElement | null>(null);
 
@@ -192,15 +202,14 @@ export function PixelClickWave() {
     return () => window.cancelAnimationFrame(frameId);
   }, [pathname]);
 
+  // Keep the wave engine mounted across route changes. Remounting on behindMount
+  // used to drop the spawn listener mid-intro when navigating quickly.
   useEffect(() => {
     const aboveCanvas = aboveCanvasRef.current;
     if (!aboveCanvas) return;
 
     const aboveContext = aboveCanvas.getContext("2d");
     if (!aboveContext) return;
-
-    const behindCanvas = behindCanvasRef.current;
-    const behindContext = behindCanvas?.getContext("2d") ?? null;
 
     const reducedMotion = isReducedMotion();
     const layers: Partial<Record<WaveLayer, LayerRuntime>> = {
@@ -211,15 +220,6 @@ export function PixelClickWave() {
         animationFrameId: 0,
       },
     };
-
-    if (behindCanvas && behindContext) {
-      layers.behind = {
-        canvas: behindCanvas,
-        context: behindContext,
-        waves: [],
-        animationFrameId: 0,
-      };
-    }
 
     const resolveLayer = (palette?: PixelWavePalette): LayerRuntime | null => {
       const layerKey = getWaveLayer(palette);
@@ -516,11 +516,39 @@ export function PixelClickWave() {
     };
 
     resizeCanvas();
+    runtimeRef.current = {
+      attachBehind: (canvas, context) => {
+        const existing = layers.behind;
+        if (existing?.animationFrameId) {
+          window.cancelAnimationFrame(existing.animationFrameId);
+        }
+
+        layers.behind = {
+          canvas,
+          context,
+          waves: [],
+          animationFrameId: 0,
+        };
+        resizeCanvas();
+      },
+      detachBehind: () => {
+        const existing = layers.behind;
+        if (!existing) return;
+
+        if (existing.animationFrameId) {
+          window.cancelAnimationFrame(existing.animationFrameId);
+        }
+        delete layers.behind;
+      },
+      resize: resizeCanvas,
+    };
+
     window.addEventListener("resize", resizeCanvas);
     document.addEventListener("click", handleClick);
     window.addEventListener(PIXEL_WAVE_SPAWN_EVENT, handleSpawnEvent);
 
     return () => {
+      runtimeRef.current = null;
       window.removeEventListener("resize", resizeCanvas);
       document.removeEventListener("click", handleClick);
       window.removeEventListener(PIXEL_WAVE_SPAWN_EVENT, handleSpawnEvent);
@@ -529,40 +557,78 @@ export function PixelClickWave() {
         window.cancelAnimationFrame(layer.animationFrameId);
       }
     };
-  }, [pathname, behindMount]);
+  }, []);
+
+  useEffect(() => {
+    const runtime = runtimeRef.current;
+    const behindCanvas = behindCanvasRef.current;
+    if (!runtime) return;
+
+    if (!behindMount || !behindCanvas) {
+      runtime.detachBehind();
+      return;
+    }
+
+    const behindContext = behindCanvas.getContext("2d");
+    if (!behindContext) {
+      runtime.detachBehind();
+      return;
+    }
+
+    runtime.attachBehind(behindCanvas, behindContext);
+
+    return () => {
+      runtime.detachBehind();
+    };
+  }, [behindMount]);
 
   useEffect(() => {
     if (isReducedMotion()) return;
 
-    let frameId = 0;
-    let attemptsLeft = 8;
+    let attemptsLeft = INTRO_RETRY_LIMIT;
     let cancelled = false;
+    let retryTimeoutId = 0;
+    let frameId = 0;
+
+    const clipSelector =
+      pathname === ROUTES.home
+        ? `#${SECTION_IDS.profile}`
+        : "main section";
 
     const runIntro = () => {
       if (cancelled) return;
 
-      if (pathname === ROUTES.home) {
-        const profileSection = document.querySelector<HTMLElement>(
-          `#${SECTION_IDS.profile}`,
-        );
+      const section = document.querySelector<HTMLElement>(clipSelector);
+      const rect = section?.getBoundingClientRect();
+      const isReady = Boolean(
+        section && rect && rect.width > 0 && rect.height > 0,
+      );
 
-        if (!profileSection && attemptsLeft > 0) {
+      if (!isReady) {
+        if (attemptsLeft > 0) {
           attemptsLeft -= 1;
-          frameId = window.requestAnimationFrame(runIntro);
+          retryTimeoutId = window.setTimeout(runIntro, INTRO_RETRY_MS);
           return;
-        }
-
-        if (profileSection) {
-          dispatchPixelWaveSpawn({
-            clipSelector: `#${SECTION_IDS.profile}`,
-            palette: "default",
-          });
         }
         return;
       }
 
-      dispatchPixelWaveSpawn({
-        clipSelector: "main section",
+      // Spawn listener lives on the stable engine effect; wait one frame so layout
+      // (and optional behind portal) can settle after soft navigation.
+      frameId = window.requestAnimationFrame(() => {
+        if (cancelled) return;
+
+        if (pathname === ROUTES.home) {
+          dispatchPixelWaveSpawn({
+            clipSelector,
+            palette: "default",
+          });
+          return;
+        }
+
+        dispatchPixelWaveSpawn({
+          clipSelector,
+        });
       });
     };
 
@@ -573,6 +639,7 @@ export function PixelClickWave() {
     return () => {
       cancelled = true;
       window.cancelAnimationFrame(frameId);
+      window.clearTimeout(retryTimeoutId);
     };
   }, [pathname]);
 
