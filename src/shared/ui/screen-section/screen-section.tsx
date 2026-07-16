@@ -78,14 +78,17 @@ export const ScreenSectionList = ({ title, items, style, className, headingLevel
   return (
     <div className={`${styles.listContainer} ${className || ""}`} style={style}>
       {title && <HeadingTag className={styles.listTitle}>{title}</HeadingTag>}
-      <div className={styles.listItemsWrapper}>
+      <ul className={styles.listMinimal}>
         {items.map((item, index) => (
-          <div key={index} className={styles.listItem}>
-            <span>{item.name}{item.value ? ': ' : ''}</span>
-            {item.value && <span className={styles.listValue}>{item.value}</span>}
-          </div>
+          <li key={index}>
+            <span>
+              {item.name}
+              {item.value ? ": " : ""}
+              {item.value && <span className={styles.listValue}>{item.value}</span>}
+            </span>
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
   );
 };

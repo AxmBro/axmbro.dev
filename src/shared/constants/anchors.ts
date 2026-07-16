@@ -15,6 +15,10 @@ export const SECTION_IDS = {
   quickQuestions: "quick-questions",
   privacyPolicy: "privacy-policy",
   termsOfUse: "terms-of-use",
+  /** First Media / video block on a project detail page */
+  projectShowcase: "showcase-video",
+  projectOverview: "overview",
+  projectCredits: "credits",
 };
 
 export const homeSectionHref = (id: string) => `/#${id}`;

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, type MouseEvent } from "react";
+import { useEffect, useRef, useState, type MouseEvent } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
@@ -18,6 +18,9 @@ const hasHash = (href: string) => href.includes("#");
 const MOBILE_NAV_ID = "header-mobile-nav";
 
 export const Header = () => {
+  const headerBarRef = useRef<HTMLDivElement>(null);
+  const menuToggleRef = useRef<HTMLButtonElement>(null);
+  const mobileNavRef = useRef<HTMLElement>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [isResponsive, setIsResponsive] = useState(false);
   const pathname = normalizePathname(usePathname());
@@ -32,8 +35,70 @@ export const Header = () => {
     return () => mqResponsive.removeEventListener("change", handleResponsive);
   }, []);
 
-  const toggleMenu = () => setMenuOpen(!menuOpen);
+  useEffect(() => {
+    const bar = headerBarRef.current;
+    if (!bar) return;
+
+    const syncHeight = () => {
+      // Bar row + headerRoot border-bottom (open menu must not inflate sticky offset)
+      document.documentElement.style.setProperty(
+        "--header-sticky-height",
+        `${bar.offsetHeight + 1}px`,
+      );
+    };
+
+    syncHeight();
+    const resizeObserver = new ResizeObserver(syncHeight);
+    resizeObserver.observe(bar);
+    return () => {
+      resizeObserver.disconnect();
+      document.documentElement.style.removeProperty("--header-sticky-height");
+    };
+  }, [isResponsive]);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+
+    const firstLink = mobileNavRef.current?.querySelector<HTMLElement>("a");
+    firstLink?.focus();
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        setMenuOpen(false);
+        menuToggleRef.current?.focus();
+        return;
+      }
+
+      if (e.key !== "Tab" || !mobileNavRef.current || !menuToggleRef.current) return;
+
+      const focusables = [
+        menuToggleRef.current,
+        ...Array.from(mobileNavRef.current.querySelectorAll<HTMLElement>("a")),
+      ];
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      if (!first || !last) return;
+
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [menuOpen]);
+
+  const toggleMenu = () => setMenuOpen((open) => !open);
   const closeMenu = () => setMenuOpen(false);
+  const closeMenuRestoreFocus = () => {
+    setMenuOpen(false);
+    menuToggleRef.current?.focus();
+  };
 
   const handlePlainNavClick = (href: string) => (e: MouseEvent<HTMLAnchorElement>) => {
     closeMenu();
@@ -79,12 +144,12 @@ export const Header = () => {
     <>
       <header className={styles.headerRoot}>
         <div className={styles.header}>
-          <div className={styles.headerContainer}>
+          <div ref={headerBarRef} className={styles.headerContainer}>
             <HomeLink className={styles.logoSection} onClick={closeMenu}>
               <Image
                 src="/icon192.png"
                 className={styles.logoImg}
-                alt="Axmbro Logo"
+                alt=""
                 width={32}
                 height={32}
               />
@@ -97,6 +162,7 @@ export const Header = () => {
 
             {isResponsive && (
               <button
+                ref={menuToggleRef}
                 type="button"
                 onClick={toggleMenu}
                 className={styles.menuToggle}
@@ -110,13 +176,20 @@ export const Header = () => {
           </div>
 
           {isResponsive && menuOpen && (
-            <nav id={MOBILE_NAV_ID} className={styles.mobileMenu} aria-label="Mobile">
+            <nav
+              ref={mobileNavRef}
+              id={MOBILE_NAV_ID}
+              className={styles.mobileMenu}
+              aria-label="Mobile navigation"
+            >
               {NAV_LINKS.map((link) => renderNavLink(link, mobileNavLinkClass(link.href)))}
             </nav>
           )}
         </div>
       </header>
-      {isResponsive && menuOpen && <div className={styles.overlay} onClick={closeMenu}></div>}
+      {isResponsive && menuOpen && (
+        <div className={styles.overlay} onClick={closeMenuRestoreFocus} />
+      )}
     </>
   );
 };

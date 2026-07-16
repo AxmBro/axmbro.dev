@@ -1,18 +1,14 @@
 /**
- * Hash navigation. Offsets: globals.scss (--header-offset, scroll-margin rules).
+ * Hash navigation. Offsets: globals.scss
+ * (`--header-sticky-height`, `--project-toc-height`, scroll-margin).
  *
  * Flow:
- *   public/scripts/hash-scroll-init.js - strip hash before first paint, store in sessionStorage
- *   HashLink - cross-page clicks store pending hash, same-page scrolls in place
- *   HashScroll - restore pending hash after route, listen to hashchange
+ *   public/scripts/hash-scroll-init.js - stash hash before first paint
+ *   HashLink - cross-page pending hash; same-page scrollToHash
+ *   HashScroll - restore pending hash after route / hashchange
  *
- * Section id + Link:
- *   <ScreenSection id="commission-process" />
- *   <Link href="/#commission-process">...</Link>
- *
- * Extra gap under sticky header - id + data-scroll-anchor + HashLink:
- *   <div id="contact-options" data-scroll-anchor />
- *   <HashLink href="/contact#contact-options">...</HashLink>
+ * Section: <ScreenSection id="..." /> + Link/HashLink href="#..."
+ * Extra gap under header: id + data-scroll-anchor (see hash-navigation.mdc)
  */
 export const parseHashId = (hash: string) =>
   decodeURIComponent(hash.replace(/^#/, "").split("#")[0]);

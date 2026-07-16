@@ -16,7 +16,7 @@
     border-top: 1px solid var(--color-border);
     display: flex;
     flex-direction: column;
-    padding: 2.5rem var(--spacing-block);
+    padding: var(--spacing-block) var(--spacing-block);
 
     @media (max-width: $breakpoint-md) {
       padding-block: var(--spacing-section);
@@ -33,7 +33,7 @@
     aspect-ratio: 16 / 9;
     overflow: hidden;
     border: 1px solid var(--color-border);
-    margin-bottom: 1rem;
+    margin-bottom: var(--spacing-section);
     background: transparent;
   }
 
@@ -46,7 +46,7 @@
 .gridList {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 2rem;
+  gap: var(--spacing-block);
 
   @media (max-width: $breakpoint-md) {
     grid-template-columns: 1fr;
@@ -61,7 +61,7 @@
     aspect-ratio: auto;
     border: 1px solid var(--color-border);
     background: transparent;
-    margin-bottom: 1rem;
+    margin-bottom: var(--spacing-section);
   }
 
   .textContent {
@@ -82,7 +82,7 @@
   aspect-ratio: 16 / 9;
   overflow: hidden;
   border: 1px solid var(--color-border);
-  margin-bottom: 1rem;
+  margin-bottom: var(--spacing-section);
   background: transparent;
 }
 

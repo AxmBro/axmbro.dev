@@ -46,6 +46,19 @@
   }
 }
 
+// Inline / prose links in body copy (credits, legal, section descriptions).
+// Not for nav, footer, buttons, or card surfaces.
+@mixin text-link {
+  text-decoration: underline;
+  text-decoration-color: var(--color-neutral-400);
+  text-underline-offset: 4px;
+
+  &:hover {
+    color: var(--color-neutral-100);
+    text-decoration-color: var(--color-neutral-100);
+  }
+}
+
 @mixin stack-xs {
   display: flex;
   flex-direction: column;
@@ -64,6 +77,15 @@
 
 @mixin section-padding-inline {
   padding-inline: var(--spacing-block);
+}
+
+@mixin focus-ring {
+  outline: none;
+
+  &:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
 }
 
 @mixin list-minimal {
