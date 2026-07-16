@@ -21,7 +21,7 @@ const lexend = Lexend({
 
 export const metadata: Metadata = {
   title: {
-    default: "Minecraft Bedrock UI Engineer",
+    default: "AxmBro.dev | Minecraft Bedrock UI Engineer",
     template: "AxmBro.dev | %s",
   },
   description: SITE_METADATA.homeDescription,

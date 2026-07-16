@@ -17,6 +17,7 @@ import styles from "./page.module.scss";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Minecraft Bedrock UI Engineer",
+  absoluteTitle: "AxmBro.dev | Minecraft Bedrock UI Engineer",
   description: SITE_METADATA.homeDescription,
   path: ROUTES.home,
 });
