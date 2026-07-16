@@ -233,7 +233,7 @@ export function PixelClickWave() {
     };
     let width = window.innerWidth;
     let height = window.innerHeight;
-    let lastWaveStartedAt = Number.NEGATIVE_INFINITY;
+    let lastClickWaveStartedAt = Number.NEGATIVE_INFINITY;
 
     const resizeCanvas = () => {
       const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
@@ -451,7 +451,6 @@ export function PixelClickWave() {
       const layer = resolveLayer(options?.palette);
       if (!layer) return;
 
-      lastWaveStartedAt = startedAt;
       pushWave(layer, {
         x: sectionClip.left + GRID_SIZE / 2,
         y: sectionClip.top + GRID_SIZE / 2,
@@ -500,8 +499,8 @@ export function PixelClickWave() {
       }
 
       const startedAt = performance.now();
-      if (startedAt - lastWaveStartedAt < CLICK_COOLDOWN_MS) return;
-      lastWaveStartedAt = startedAt;
+      if (startedAt - lastClickWaveStartedAt < CLICK_COOLDOWN_MS) return;
+      lastClickWaveStartedAt = startedAt;
 
       const maxRadius = getMaxRadius(event.clientX, event.clientY, width, height);
 
