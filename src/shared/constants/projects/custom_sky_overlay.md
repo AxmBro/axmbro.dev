@@ -2,7 +2,7 @@
 title: Custom Sky Overlay
 credits:
   - role: Creator
-    name: Me - AxmBro
+    name: AxmBro
     href: https://github.com/AxmBro
 imageSections:
   - title: Sky Previews

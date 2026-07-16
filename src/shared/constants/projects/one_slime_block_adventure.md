@@ -5,10 +5,10 @@ extraButtons:
     href: https://www.mushco.games/games
     external: true
 credits:
-  - role: UI system creator
-    name: Me - AxmBro
+  - role: UI Engineer
+    name: AxmBro
     href: https://github.com/AxmBro
-  - role: Everything rest
+  - role: Studio
     name: Mush Co Team
     href: https://www.mushco.games/
 videos:

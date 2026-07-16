@@ -1,8 +1,8 @@
 ---
 title: Murder Detector+
 credits:
-  - role: Creator
-    name: Me - AxmBro
+  - role: UI Engineer
+    name: AxmBro
     href: https://github.com/AxmBro
 videos:
   - title: Trailer

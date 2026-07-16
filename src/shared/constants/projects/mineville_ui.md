@@ -1,9 +1,9 @@
 ---
 title: Mineville UI
 credits:
-  - role: Creator
+  - role: UI Engineer
     name: AxmBro
-    href: /contact#start-project
+    href: https://github.com/AxmBro
 imageSections:
   - title: Server Interfaces
     description: High-performance custom interface forms designed to enhance player navigation and server branding.
