@@ -1,8 +1,8 @@
 ---
 title: Red UI
 credits:
-  - role: Creator
-    name: Me - AxmBro
+  - role: UI Engineer
+    name: AxmBro
     href: https://github.com/AxmBro
 imageSections:
   - title: In-game Screenshots

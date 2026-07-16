@@ -1,9 +1,9 @@
 ---
 title: DUI
 credits:
-  - role: Creator
+  - role: UI Engineer
     name: AxmBro
-    href: /contact#start-project
+    href: https://github.com/AxmBro
 imageSections:
   - title: Interface Showcase
     description: A showcase of perfectly aligned UI elements, smooth dark theme layouts, and interactive tooltips.

@@ -53,10 +53,20 @@ export const PROJECTS: ProjectItem[] = [
     type: "commissions",
   },
   {
+    title: "Zeqa UI",
+    description:
+      "Custom JsonUI commissioned by InPvP for Zeqa, the largest Minecraft Bedrock PvP server. Clean layouts, smooth animations, and optimized server forms with selective HUD work.",
+    tags: ["JsonUI", "Server Form", "HUD"],
+    imgSrc: "zeqa_ui0",
+    star: true,
+    url: "zeqa_ui",
+    type: "commissions",
+  },
+  {
     title: "Mineville UI",
     description:
       "A complex, clean, and animated custom user interface suite. Featuring highly optimized client-side minimaps, modular trade UIs, armor HUD trackers, and custom server forms.",
-    tags: ["JsonUI", "HUD", "Server Form"],
+    tags: ["JsonUI", "Server Form", "HUD"],
     imgSrc: "main",
     star: true,
     url: "mineville_ui",
@@ -131,7 +141,8 @@ export const PROJECTS: ProjectItem[] = [
   },
   {
     title: "Hometree UI",
-    description: "A minimalist, colorful server form interface tailored to client specifications.",
+    description:
+      "A minimalist, colorful server form interface tailored to client specifications.",
     tags: ["JsonUI", "Server Form"],
     imgSrc: "hometree1",
     url: "hometree_ui",
@@ -139,7 +150,8 @@ export const PROJECTS: ProjectItem[] = [
   },
   {
     title: "Simple UI",
-    description: "An experimental server form layout created to test responsive JsonUI bindings.",
+    description:
+      "An experimental server form layout created to test responsive JsonUI bindings.",
     tags: ["JsonUI", "Server Form"],
     imgSrc: "simple_server_form1",
     url: "simple_ui",
@@ -202,9 +214,7 @@ export const EXPERIENCE_TREE: ExperienceItem[] = [
         name: "Handle JsonUI-focused technical planning, project scope, client communication, delivery, contracts, and invoicing for freelance and B2B work.",
       },
     ],
-    buttons: [
-      { text: "Browse Client Work", projectsTab: "commissions" },
-    ],
+    buttons: [{ text: "Browse Client Work", projectsTab: "commissions" }],
   },
   {
     role: "Founder & Lead Developer",
@@ -401,7 +411,9 @@ export const FOOTER_SOCIAL_ENTRIES: FooterSocialEntry[] = [
 export const getFooterSocialLinks = (): SocialLink[] =>
   FOOTER_SOCIAL_ENTRIES.flatMap((entry) => {
     const link = SOCIAL_LINK_BUTTONS.find(
-      (item) => item.iconId === entry.iconId && (!entry.text || item.text === entry.text),
+      (item) =>
+        item.iconId === entry.iconId &&
+        (!entry.text || item.text === entry.text),
     );
 
     return link ? [link] : [];
@@ -435,7 +447,8 @@ export const CONTACT_FORM_INTENTS = [
   {
     id: "other",
     label: "Other",
-    template: "Hello AxmBro! I'd like to discuss a custom project. Here are the details: ",
+    template:
+      "Hello AxmBro! I'd like to discuss a custom project. Here are the details: ",
   },
 ];
 
@@ -443,7 +456,7 @@ const HOME_SELECTED_PROJECT_URLS = [
   "better_bedrock",
   "one_slime_block_adventure",
   "ra_survival",
-  "mineville_ui",
+  "zeqa_ui",
 ];
 
 interface ClientStudio {
@@ -486,9 +499,19 @@ export const HOME_CLIENT_STUDIOS: ClientStudio[] = [
 ];
 
 export const getHomeSelectedProjects = () =>
-  HOME_SELECTED_PROJECT_URLS.map((url) => PROJECTS.find((p) => p.url === url)).filter(
-    (p): p is ProjectItem => Boolean(p)
-  );
+  HOME_SELECTED_PROJECT_URLS.map((url) =>
+    PROJECTS.find((p) => p.url === url),
+  ).filter((p): p is ProjectItem => Boolean(p));
+
+export function getFeaturedProjects(): ProjectItem[] {
+  return PROJECTS.filter((project) => Boolean(project.star));
+}
+
+export function getProjectTypeLabel(project: ProjectItem): string {
+  if (project.type === "commissions") return "Client Commission";
+  if (project.type === "personal") return "Personal Project";
+  return "Portfolio Project";
+}
 
 export const NAV_LINKS = [
   { href: ROUTES.home, text: "Home" },
@@ -606,10 +629,8 @@ export const COMMISSIONS_PAGE_TEXTS = {
     "A simple three-step workflow from the first technical review to final delivery and support.",
   delivery:
     "You receive organized project files, a clear handoff, and support after release.",
-  faq:
-    "Answers about scope, design files, pricing, timelines, ownership, and support.",
-  cta:
-    "Send the project scope, required screens, target Minecraft version, and any mockups or textures you already have. I will review the details and reply with the next steps.",
+  faq: "Answers about scope, design files, pricing, timelines, ownership, and support.",
+  cta: "Send the project scope, required screens, target Minecraft version, and any mockups or textures you already have. I will review the details and reply with the next steps.",
   ctaContact: CTA_LABELS.startProject,
   ctaProof: CTA_LABELS.viewSelectedWork,
   ctaSecondary: CTA_LABELS.contactOptions,

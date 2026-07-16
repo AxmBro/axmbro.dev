@@ -53,8 +53,9 @@ No `.md` file → detail route still works if `url` is set; page shows card desc
 
 | Goal                 | Where                                            |
 | -------------------- | ------------------------------------------------ |
-| Home “Selected Work” | `getHomeSelectedProjects()` in `data.ts` (internal URL list) |
-| Featured tab         | `star: true` on the project                      |
+| Home “Selected Work” | `getHomeSelectedProjects()` in `data.ts` (curated URL list) |
+| Featured tab / sitemap featured | `star: true` on the project (`getFeaturedProjects()`) |
+| Sitemap “All Projects” | automatic from `PROJECTS` |
 | Sitemap              | automatic when `url` is set                      |
 | Detail URL helper    | `projectDetailPath("my_project")` in `routes.ts` |
 

@@ -5,10 +5,10 @@ extraButtons:
     href: https://discord.gg/ZGK5WYXnEY
     external: true
 credits:
-  - role: Texture Packs
-    name: Me - AxmBro
+  - role: UI & Texture Packs
+    name: AxmBro
     href: https://github.com/AxmBro
-  - role: Website & Other
+  - role: Website & Tools
     name: iDarkQ
     href: https://github.com/idarkQ
 videos:

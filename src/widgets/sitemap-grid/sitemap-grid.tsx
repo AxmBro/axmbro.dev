@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
-import { getHomeSelectedProjects, PROJECTS } from "@/shared/constants/data";
+import { getFeaturedProjects, getProjectTypeLabel, PROJECTS } from "@/shared/constants/data";
 import {
   commissionSectionHref,
   contactSectionHref,
@@ -54,7 +54,7 @@ export const SitemapGrid = () => (
     </SitemapColumn>
 
     <SitemapColumn title="Featured Projects">
-      {getHomeSelectedProjects().map((project) =>
+      {getFeaturedProjects().map((project) =>
         project.url ? (
           <Link key={project.url} href={projectDetailPath(project.url)}>
             {project.title}
@@ -97,12 +97,7 @@ export const SitemapGrid = () => (
 export const SitemapProjectList = () => (
   <div className={styles.projectList}>
     {PROJECTS.map((project) => {
-      const projectType =
-        project.type === "commissions"
-          ? "Client Commission"
-          : project.type === "personal"
-            ? "Personal Project"
-            : "Portfolio Project";
+      const projectType = getProjectTypeLabel(project);
       const content = (
         <>
           <span className={styles.projectName}>{project.title}</span>
@@ -112,7 +107,7 @@ export const SitemapProjectList = () => (
 
       return project.url ? (
         <Link
-          key={project.title}
+          key={project.url}
           href={projectDetailPath(project.url)}
           className={styles.projectItem}
         >
