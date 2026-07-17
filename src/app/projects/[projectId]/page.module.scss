@@ -40,6 +40,15 @@
   }
 }
 
+.overviewIntro {
+  display: flex;
+  flex-direction: column;
+}
+
+.overviewTags {
+  margin: var(--spacing-xs) 0;
+}
+
 .descriptionWrapper {
   display: flex;
   flex-direction: column;
