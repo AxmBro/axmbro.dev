@@ -1,12 +1,30 @@
 ---
 title: Mineville UI
+extraButtons:
+  - text: Mineville Website
+    href: https://inpvp.net/
+    external: true
 credits:
   - role: UI Engineer
     name: AxmBro
     href: https://github.com/AxmBro
+  - role: Client
+    name: InPvP
+    href: https://inpvp.net/
+videos:
+  - title: Full UI Showcase
+    description: >-
+      Full walkthrough of the Mineville UI in motion - server forms, shops,
+      trading, inventory, and HUD. Some screens use animations and transitions
+      that still photos cannot show. Watch for the full showcase of how the
+      interface actually plays.
+    youtubeId: bqnjHpkMfh4
 imageSections:
   - title: Server Interfaces
-    description: High-performance custom interface forms designed to enhance player navigation and server branding.
+    description: >-
+      High-performance custom forms for navigation and branding. Some screens
+      include animations that do not show in still shots - watch the showcase
+      video above for the full experience.
     items:
       - title: Project Overview
         description: Overview of the main server dashboard and HUD elements.
@@ -68,5 +86,7 @@ imageSections:
 ---
 
 Commissioned by [InPvP](https://inpvp.net/) for Mineville. Mineville UI is a comprehensive, high-performance interface overhaul designed specifically for Minecraft Bedrock servers. Built from the ground up to ensure seamless player navigation and aesthetic coherence, it features custom server forms, optimized inventory and trading systems, and advanced HUD elements. The project demonstrates a strong focus on UX/UI design, performance optimization under load, and cohesive branding for a professional gaming environment.
+
+A large part of this work is motion: open states, transitions, and feedback across most forms. That does not come through in screenshots alone, so [watch the showcase video](#showcase-video) if you want to see how the UI actually plays.
 
 Similar work for the same studio: [Zeqa UI](/projects/zeqa_ui).
