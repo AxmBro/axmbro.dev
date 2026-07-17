@@ -881,7 +881,7 @@ export const FAQ_ITEMS: FAQItem[] = [
   },
 ];
 
-const COMMISSION_FAQ_SLUGS = new Set([
+const COMMISSION_FAQ_SLUGS = [
   "availability",
   "scope",
   "mockups",
@@ -889,14 +889,14 @@ const COMMISSION_FAQ_SLUGS = new Set([
   "pricing",
   "support",
   "ownership",
-]);
+];
 
 export const COMMISSION_FAQ_ITEMS = FAQ_ITEMS.filter(
-  (item) => item.slug && COMMISSION_FAQ_SLUGS.has(item.slug),
+  (item) => item.slug && COMMISSION_FAQ_SLUGS.includes(item.slug),
 );
 
-const CONTACT_FAQ_SLUGS = new Set(["value", "availability"]);
+const CONTACT_FAQ_SLUGS = ["value", "availability"];
 
 export const CONTACT_FAQ_ITEMS = FAQ_ITEMS.filter(
-  (item) => item.slug && CONTACT_FAQ_SLUGS.has(item.slug),
+  (item) => item.slug && CONTACT_FAQ_SLUGS.includes(item.slug),
 );

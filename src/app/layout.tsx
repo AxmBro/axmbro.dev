@@ -26,6 +26,8 @@ export const metadata: Metadata = {
   },
   description: SITE_METADATA.homeDescription,
   keywords: SITE_METADATA.keywords,
+  authors: [{ name: "AxmBro", url: "https://axmbro.dev" }],
+  creator: "AxmBro",
   metadataBase: new URL("https://axmbro.dev"),
   openGraph: {
     title: "AxmBro.dev | Minecraft Bedrock UI Engineer",

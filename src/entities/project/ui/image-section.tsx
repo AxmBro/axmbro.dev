@@ -14,7 +14,6 @@ interface ImageSectionProps {
   items: ImageSectionItem[];
   rowStyle?: boolean;
   projectId: string;
-  /** Hash target for project TOC */
   id?: string;
 }
 

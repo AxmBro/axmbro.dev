@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PROJECTS, CTA_LABELS } from "@/shared/constants/data";
-import { getProjectThumbnailSrc, ImageSection } from "@/entities/project";
+import { getProjectThumbnailSrc, ImageSection, ProjectTags } from "@/entities/project";
 import { ScreenContainer } from "@/shared/ui/screen-container";
 import { ScreenSection, ScreenSectionList } from "@/shared/ui/screen-section";
 import { Button, buttonVariantForIndex } from "@/shared/ui/button";
@@ -159,7 +159,12 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         eyebrow="Project"
         title={pageData?.title || project.title}
         headingLevel="h1"
-        titleDescription={renderDescription(description)}
+        titleDescription={
+          <div className={styles.overviewIntro}>
+            <ProjectTags project={project} className={styles.overviewTags} />
+            {renderDescription(description)}
+          </div>
+        }
       >
         <ButtonGroup>
           {buttonsToRender.map((btn, i) => (

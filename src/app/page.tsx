@@ -9,10 +9,17 @@ import { ExperienceGrid } from "@/widgets/experience-grid";
 import { HeroSection } from "@/widgets/hero-section";
 import { TrackRecord } from "@/widgets/track-record";
 import { ProjectCard } from "@/entities/project";
-import { HOME_PAGE_TEXTS, getHomeSelectedProjects, SITE_METADATA, CTA_LABELS } from "@/shared/constants/data";
+import {
+  HOME_PAGE_TEXTS,
+  getHomeSelectedProjects,
+  SITE_METADATA,
+  CTA_LABELS,
+  SOCIAL_LINK_BUTTONS,
+} from "@/shared/constants/data";
 import { contactSectionHref, SECTION_IDS } from "@/shared/constants/anchors";
 import { ROUTES } from "@/shared/constants/routes";
 import { createPageMetadata } from "@/shared/lib/page-metadata";
+import { buildPersonJsonLd, JsonLd } from "@/shared/lib/json-ld";
 import styles from "./page.module.scss";
 
 export const metadata: Metadata = createPageMetadata({
@@ -24,9 +31,18 @@ export const metadata: Metadata = createPageMetadata({
 
 export default function HomePage() {
   const selectedProjects = getHomeSelectedProjects();
+  const sameAs = SOCIAL_LINK_BUTTONS.filter((link) =>
+    link.href.startsWith("http"),
+  ).map((link) => link.href);
 
   return (
     <ScreenContainer>
+      <JsonLd
+        data={buildPersonJsonLd({
+          description: SITE_METADATA.homeDescription,
+          sameAs,
+        })}
+      />
       <HeroSection />
 
       <ScreenSection

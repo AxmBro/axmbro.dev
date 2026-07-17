@@ -1,4 +1,3 @@
-/** Renders a JSON-LD script tag for structured data. */
 export function JsonLd({ data }: { data: Record<string, unknown> }) {
   return (
     <script
@@ -13,7 +12,6 @@ type FaqJsonLdItem = {
   answerText: string;
 };
 
-/** FAQPage schema.org payload from plain-text Q&A pairs. */
 export function buildFaqPageJsonLd(items: FaqJsonLdItem[]) {
   return {
     "@context": "https://schema.org",
@@ -26,5 +24,22 @@ export function buildFaqPageJsonLd(items: FaqJsonLdItem[]) {
         text: item.answerText,
       },
     })),
+  };
+}
+
+type PersonJsonLdOptions = {
+  description: string;
+  sameAs: string[];
+};
+
+export function buildPersonJsonLd({ description, sameAs }: PersonJsonLdOptions) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "AxmBro",
+    url: "https://axmbro.dev",
+    jobTitle: "Minecraft Bedrock UI Engineer",
+    description,
+    sameAs,
   };
 }
