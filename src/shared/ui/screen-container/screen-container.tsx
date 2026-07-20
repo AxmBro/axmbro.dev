@@ -1,5 +1,5 @@
 import { ReactNode, type CSSProperties } from "react";
-import { SectionIndexRoot } from "@/shared/ui/screen-section";
+import { ScreenContent } from "./screen-content";
 import styles from "./screen-container.module.scss";
 
 interface ScreenContainerProps {
@@ -18,9 +18,7 @@ export const ScreenContainer = ({
   return (
     <div id={id} className={className || ""}>
       <div className={styles.screenContainer} style={style}>
-        <SectionIndexRoot>
-          <div className={styles.screenContent}>{children}</div>
-        </SectionIndexRoot>
+        <ScreenContent>{children}</ScreenContent>
       </div>
     </div>
   );

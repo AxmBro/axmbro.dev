@@ -1,8 +1,14 @@
 "use client";
 
-import { useLayoutEffect, useRef, type ReactNode } from "react";
+import { useLayoutEffect, useRef, type CSSProperties, type ReactNode } from "react";
+import styles from "./screen-container.module.scss";
 
-export function SectionIndexRoot({ children }: { children: ReactNode }) {
+interface ScreenContentProps {
+  children: ReactNode;
+  style?: CSSProperties;
+}
+
+export function ScreenContent({ children, style }: ScreenContentProps) {
   const rootRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
@@ -31,7 +37,7 @@ export function SectionIndexRoot({ children }: { children: ReactNode }) {
   }, []);
 
   return (
-    <div ref={rootRef} data-section-index-root>
+    <div ref={rootRef} className={styles.screenContent} style={style}>
       {children}
     </div>
   );
