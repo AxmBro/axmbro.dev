@@ -29,6 +29,11 @@
   color: var(--color-neutral-400);
   text-transform: uppercase;
   letter-spacing: 0.08em;
+  margin: 0;
+
+  [data-section-num] {
+    font-variant-numeric: tabular-nums;
+  }
 }
 
 .title {

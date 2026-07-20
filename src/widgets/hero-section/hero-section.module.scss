@@ -35,13 +35,6 @@
   padding: var(--spacing-block);
 }
 
-.eyebrow {
-  @include text-caption;
-  color: var(--color-neutral-400);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-}
-
 .title {
   font-size: var(--font-hero-title);
   line-height: var(--line-height-display);

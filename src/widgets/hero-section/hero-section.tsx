@@ -3,7 +3,7 @@ import { HOME_PAGE_TEXTS } from "@/shared/constants/data";
 import { ROUTES } from "@/shared/constants/routes";
 import { Button, buttonVariantForIndex } from "@/shared/ui/button";
 import { ButtonGroup } from "@/shared/ui/button-group";
-import { ScreenSection } from "@/shared/ui/screen-section";
+import { ScreenSection, SectionEyebrow } from "@/shared/ui/screen-section";
 import { HeroPortrait } from "./hero-portrait";
 import { HeroWaveTimer } from "./hero-wave-timer";
 import styles from "./hero-section.module.scss";
@@ -18,7 +18,7 @@ export const HeroSection = () => (
     <div className={styles.waveLayer} data-pixel-wave-behind />
     <div className={styles.heroGrid}>
       <div className={styles.heroContent}>
-        <p className={styles.eyebrow}>Profile</p>
+        <SectionEyebrow>Profile</SectionEyebrow>
         <h1 className={styles.title}>Minecraft Bedrock UI Engineer & Frontend Developer</h1>
         <p className={styles.description}>{HOME_PAGE_TEXTS.hero.description}</p>
         <ButtonGroup marginTop>
