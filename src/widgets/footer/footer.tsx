@@ -101,10 +101,10 @@ export const Footer = () => {
             <h2 className={styles.columnTitle}>Contact</h2>
             <nav className={`${styles.columnLinks} ${styles.contactLinks}`}>
               <HashLink href={contactSectionHref(SECTION_IDS.startProject)}>Start a Project</HashLink>
+              <HashLink href={contactSectionHref(SECTION_IDS.contactOptions)}>Contact Options</HashLink>
               {MAIL_LINK && (
                 <a href={MAIL_LINK.href}>{MAIL_LINK.text}</a>
               )}
-              <HashLink href={contactSectionHref(SECTION_IDS.contactOptions)}>Contact Options</HashLink>
             </nav>
           </div>
         </div>

@@ -1,7 +1,7 @@
 import { ReactNode, type CSSProperties } from "react";
+import { SectionIndexRoot } from "@/shared/ui/screen-section";
 import styles from "./screen-container.module.scss";
 
-/** Page wrapper: max-width column, vertical gap between ScreenSections. */
 interface ScreenContainerProps {
   children: ReactNode;
   style?: CSSProperties;
@@ -18,9 +18,9 @@ export const ScreenContainer = ({
   return (
     <div id={id} className={className || ""}>
       <div className={styles.screenContainer} style={style}>
-        <div className={styles.screenContent}>
-          {children}
-        </div>
+        <SectionIndexRoot>
+          <div className={styles.screenContent}>{children}</div>
+        </SectionIndexRoot>
       </div>
     </div>
   );
