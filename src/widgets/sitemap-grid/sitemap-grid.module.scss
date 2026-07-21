@@ -79,39 +79,28 @@
   color: inherit;
   background-color: var(--color-bg-primary);
 
-  &:last-child:nth-child(3n + 1) {
-    grid-column: 1 / -1;
-  }
-
-  &:last-child:nth-child(3n + 2) {
-    grid-column: span 2;
-  }
-
-  @media (max-width: $breakpoint-wide) {
-    &:last-child:nth-child(3n + 1),
-    &:last-child:nth-child(3n + 2) {
-      grid-column: auto;
+  @media (min-width: ($breakpoint-wide + 1px)) {
+    &:last-child:nth-child(3n + 1) {
+      grid-column: 1 / -1;
     }
 
+    &:last-child:nth-child(3n + 2) {
+      grid-column: span 2;
+    }
+  }
+
+  @media (max-width: $breakpoint-wide) and (min-width: ($breakpoint-md + 1px)) {
     &:last-child:nth-child(odd) {
       grid-column: 1 / -1;
     }
   }
 
-  @media (max-width: $breakpoint-md) {
-    &:last-child:nth-child(odd) {
-      grid-column: auto;
-    }
-  }
+  &:hover,
+  &:focus-visible {
+    background-color: var(--surface-hover);
 
-  &[href] {
-    &:hover,
-    &:focus-visible {
-      background-color: var(--surface-hover);
-
-      .projectName {
-        text-decoration: underline;
-      }
+    .projectName {
+      text-decoration: underline;
     }
   }
 }

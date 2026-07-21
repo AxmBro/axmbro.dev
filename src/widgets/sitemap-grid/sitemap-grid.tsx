@@ -98,25 +98,19 @@ export const SitemapProjectList = () => (
   <div className={styles.projectList}>
     {PROJECTS.map((project) => {
       const projectType = getProjectTypeLabel(project);
-      const content = (
-        <>
-          <span className={styles.projectName}>{project.title}</span>
-          <span className={styles.projectType}>{projectType}</span>
-        </>
-      );
+      const href = project.url
+        ? projectDetailPath(project.url)
+        : ROUTES.home;
 
-      return project.url ? (
+      return (
         <Link
-          key={project.url}
-          href={projectDetailPath(project.url)}
+          key={project.url ?? project.title}
+          href={href}
           className={styles.projectItem}
         >
-          {content}
+          <span className={styles.projectName}>{project.title}</span>
+          <span className={styles.projectType}>{projectType}</span>
         </Link>
-      ) : (
-        <div key={project.title} className={styles.projectItem}>
-          {content}
-        </div>
       );
     })}
   </div>
