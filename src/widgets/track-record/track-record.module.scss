@@ -88,7 +88,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 5.5rem;
+  min-height: 5rem;
   padding: 1.25rem 1rem;
   color: inherit;
   text-align: center;
@@ -109,33 +109,26 @@
   }
 
   @media (max-width: $breakpoint-md) {
-    min-height: 4.75rem;
+    min-height: 4.25rem;
     padding: 1rem 0.75rem;
   }
 }
 
 .clientLogo {
   width: auto;
+  height: 100%;
   max-width: 78%;
-  max-height: 2.5rem;
-  height: auto;
+  max-height: 2.25rem;
   object-fit: contain;
-
-  &.clientLogoSquare {
-    max-height: 3.5rem;
-  }
 
   @media (max-width: $breakpoint-md) {
     max-width: 72%;
-    max-height: 2.1rem;
-
-    &.clientLogoSquare {
-      max-height: 2.85rem;
-    }
+    max-height: 1.85rem;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   .stat,
   .value {
     transition: none;
