@@ -46,7 +46,7 @@ export default function ContactPage() {
         id={SECTION_IDS.contactOptions}
         eyebrow="Direct Contact"
         withChildrenPadding
-        title="Other Ways to Connect"
+        title="Contact Options"
         titleDescription={HOME_PAGE_TEXTS.contactPage.socials}
       >
         <div className={styles.socialList}>

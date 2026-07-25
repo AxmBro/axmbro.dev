@@ -34,9 +34,21 @@
   background: var(--color-gold-subtle);
 }
 
+.tagDate {
+  color: var(--color-neutral-300);
+  border-color: var(--color-border);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.dateTagIcon {
+  flex-shrink: 0;
+  color: var(--color-neutral-400);
+  opacity: 0.85;
+}
+
 .featuredTagIcon {
   flex-shrink: 0;
-  color: inherit;
+  color: var(--color-gold);
 }
 
 .personalTagLogo {

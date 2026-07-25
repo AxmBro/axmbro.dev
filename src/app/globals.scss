@@ -31,7 +31,9 @@
   /* Minecoin / commission gold - amber from /images/ui/minecoin.png */
   --color-gold: #e6b422;
   --color-gold-subtle: color-mix(in srgb, var(--color-gold) 14%, transparent);
-  --color-error: rgb(255, 78, 100);
+  --color-error: #ff3b50;
+  --color-danger: #ff3b50;
+  --color-danger-hover: #ff5568;
 
   --color-secondary: rgb(20, 20, 20);
   --color-secondary-hover: var(--color-border);
@@ -142,6 +144,16 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+::selection {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: var(--color-neutral-100);
+}
+
+::-moz-selection {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: var(--color-neutral-100);
+}
+
 .skip-link {
   position: absolute;
   left: var(--layout-gutter-outer);
@@ -156,8 +168,8 @@ body {
   transform: translateY(-200%);
 
   &:focus {
-    outline: 2px solid var(--color-accent);
-    outline-offset: 2px;
+    outline: 1px solid var(--color-neutral-100);
+    outline-offset: 1px;
   }
 
   &:focus-visible {
