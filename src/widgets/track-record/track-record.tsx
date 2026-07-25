@@ -37,27 +37,36 @@ export const TrackRecord = async () => {
           </p>
         </div>
         <div className={styles.clientRow}>
-          {HOME_CLIENT_STUDIOS.map((client) => (
-            <a
-              key={client.name}
-              href={client.href}
-              className={styles.client}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={client.name}
-            >
-              {client.logoSrc && (
-                <Image
-                  src={client.logoSrc}
-                  alt=""
-                  width={client.logoWidth ?? 160}
-                  height={client.logoHeight ?? 48}
-                  sizes="(max-width: 768px) 40vw, 160px"
-                  className={styles.clientLogo}
-                />
-              )}
-            </a>
-          ))}
+          {HOME_CLIENT_STUDIOS.map((client) => {
+            const isSquare =
+              client.logoWidth &&
+              client.logoHeight &&
+              client.logoWidth / client.logoHeight < 1.5;
+
+            return (
+              <a
+                key={client.name}
+                href={client.href}
+                className={styles.client}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={client.name}
+              >
+                {client.logoSrc && (
+                  <Image
+                    src={client.logoSrc}
+                    alt=""
+                    width={client.logoWidth ?? 160}
+                    height={client.logoHeight ?? 48}
+                    sizes="(max-width: 768px) 40vw, 160px"
+                    className={`${styles.clientLogo} ${
+                      isSquare ? styles.clientLogoSquare : ""
+                    }`}
+                  />
+                )}
+              </a>
+            );
+          })}
         </div>
       </div>
     </>

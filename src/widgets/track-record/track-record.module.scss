@@ -121,9 +121,17 @@
   height: auto;
   object-fit: contain;
 
+  &.clientLogoSquare {
+    max-height: 3.5rem;
+  }
+
   @media (max-width: $breakpoint-md) {
     max-width: 72%;
     max-height: 2.1rem;
+
+    &.clientLogoSquare {
+      max-height: 2.85rem;
+    }
   }
 }
 
