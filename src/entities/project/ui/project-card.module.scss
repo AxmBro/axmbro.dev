@@ -67,9 +67,11 @@
 }
 
 .date {
-  font-size: 0.8125rem;
+  font-size: var(--font-p2);
+  line-height: var(--line-height-body);
   color: var(--color-neutral-400);
   font-weight: 400;
+  letter-spacing: normal;
   white-space: nowrap;
   flex-shrink: 0;
 }
