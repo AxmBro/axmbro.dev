@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
+import { FaChevronDown } from "react-icons/fa6";
 import { PROJECTS } from "@/shared/constants/data";
 import { ProjectCard } from "@/entities/project";
 import { JoinedTabs } from "@/shared/ui/joined-tabs";
@@ -16,14 +17,57 @@ import {
 } from "@/shared/lib/projects-board-state";
 import styles from "./projects-board.module.scss";
 
+type SortOption = "" | "newest" | "oldest" | "alphabetical";
+
+const SORT_OPTIONS: { value: SortOption; label: string }[] = [
+  { value: "newest", label: "Newest" },
+  { value: "oldest", label: "Oldest" },
+  { value: "alphabetical", label: "Alphabetical (A-Z)" },
+];
+
+const parseProjectDateTimestamp = (dateStr?: string): number => {
+  if (!dateStr) return 0;
+  const parts = dateStr.split("-");
+  const targetPart = (parts.length > 1 ? parts[parts.length - 1] : dateStr).trim();
+
+  if (/present/i.test(targetPart)) {
+    return Date.now();
+  }
+
+  const parsed = Date.parse(targetPart);
+  return Number.isNaN(parsed) ? 0 : parsed;
+};
+
 export const ProjectsBoard = () => {
   const [search, setSearch] = useState("");
   const [activeTab, setActiveTab] = useState<ProjectsBoardTab>("all");
+  const [sortOption, setSortOption] = useState<SortOption>("");
+  const [isSortOpen, setIsSortOpen] = useState(false);
 
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
   const initialized = useRef(false);
+  const sortRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (sortRef.current && !sortRef.current.contains(e.target as Node)) {
+        setIsSortOpen(false);
+      }
+    };
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setIsSortOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
 
   useEffect(() => {
     const animationId = window.requestAnimationFrame(() => {
@@ -79,6 +123,20 @@ export const ProjectsBoard = () => {
   });
 
   const sortedAndFiltered = [...filtered].sort((a, b) => {
+    if (sortOption === "newest") {
+      const timeA = parseProjectDateTimestamp(a.date);
+      const timeB = parseProjectDateTimestamp(b.date);
+      return timeB - timeA;
+    }
+    if (sortOption === "oldest") {
+      const timeA = parseProjectDateTimestamp(a.date);
+      const timeB = parseProjectDateTimestamp(b.date);
+      return timeA - timeB;
+    }
+    if (sortOption === "alphabetical") {
+      return a.title.localeCompare(b.title);
+    }
+
     if (a.star && !b.star) return -1;
     if (!a.star && b.star) return 1;
     return 0;
@@ -86,24 +144,99 @@ export const ProjectsBoard = () => {
 
   return (
     <>
-      <div className={styles.searchBar}>
-        <input
-          type="search"
-          className={styles.searchInput}
-          placeholder="Search..."
-          aria-label="Search projects"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
-        {search && (
+      <div className={styles.controlsRow}>
+        <div className={styles.searchBar}>
+          <input
+            type="search"
+            className={styles.searchInput}
+            placeholder="Search..."
+            aria-label="Search projects"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+          {search && (
+            <button
+              className={styles.clearButton}
+              onClick={() => setSearch("")}
+              aria-label="Clear search"
+            >
+              ✕
+            </button>
+          )}
+        </div>
+
+        <div className={styles.sortWrapper} ref={sortRef}>
           <button
-            className={styles.clearButton}
-            onClick={() => setSearch("")}
-            aria-label="Clear search"
+            type="button"
+            className={`${styles.sortButton} ${isSortOpen ? styles.isOpen : ""}`}
+            onClick={() => setIsSortOpen((prev) => !prev)}
+            aria-label="Sort projects"
+            aria-expanded={isSortOpen}
+            aria-haspopup="listbox"
           >
-            ✕
+            <span className={styles.sortButtonText}>
+              {sortOption
+                ? SORT_OPTIONS.find((o) => o.value === sortOption)?.label
+                : "Sort by..."}
+            </span>
+            <FaChevronDown
+              className={`${styles.chevronIcon} ${isSortOpen ? styles.chevronOpen : ""}`}
+              size={12}
+            />
           </button>
-        )}
+
+          {isSortOpen && (
+            <ul className={styles.sortDropdownMenu} role="listbox">
+              {sortOption && (
+                <>
+                  <li
+                    role="option"
+                    tabIndex={0}
+                    className={styles.clearSortItem}
+                    onClick={() => {
+                      setSortOption("");
+                      setIsSortOpen(false);
+                    }}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        setSortOption("");
+                        setIsSortOpen(false);
+                      }
+                    }}
+                  >
+                    ✕ Clear sort
+                  </li>
+                  <li className={styles.dropdownDivider} role="separator" />
+                </>
+              )}
+              {SORT_OPTIONS.map((option) => (
+                <li
+                  key={option.value}
+                  role="option"
+                  tabIndex={0}
+                  aria-selected={sortOption === option.value}
+                  className={`${styles.sortDropdownItem} ${
+                    sortOption === option.value ? styles.selectedItem : ""
+                  }`}
+                  onClick={() => {
+                    setSortOption(option.value);
+                    setIsSortOpen(false);
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      setSortOption(option.value);
+                      setIsSortOpen(false);
+                    }
+                  }}
+                >
+                  {option.label}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
       </div>
 
       <div className={styles.tabsWrapper}>
