@@ -107,6 +107,6 @@ $form-row-height: 3.25rem;
   }
 
   &[data-status="error"] {
-    color: var(--color-error);
+    color: var(--color-danger);
   }
 }
