@@ -38,11 +38,6 @@ export const TrackRecord = async () => {
         </div>
         <div className={styles.clientRow}>
           {HOME_CLIENT_STUDIOS.map((client) => {
-            const isSquare =
-              client.logoWidth &&
-              client.logoHeight &&
-              client.logoWidth / client.logoHeight < 1.5;
-
             return (
               <a
                 key={client.name}
@@ -59,9 +54,7 @@ export const TrackRecord = async () => {
                     width={client.logoWidth ?? 160}
                     height={client.logoHeight ?? 48}
                     sizes="(max-width: 768px) 40vw, 160px"
-                    className={`${styles.clientLogo} ${
-                      isSquare ? styles.clientLogoSquare : ""
-                    }`}
+                    className={styles.clientLogo}
                   />
                 )}
               </a>

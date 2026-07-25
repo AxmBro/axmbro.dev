@@ -89,7 +89,7 @@
   align-items: center;
   justify-content: center;
   min-height: 5rem;
-  padding: 1.25rem 1rem;
+  padding: 2rem;
   color: inherit;
   text-align: center;
   border-right: 1px solid var(--color-border);
@@ -109,8 +109,7 @@
   }
 
   @media (max-width: $breakpoint-md) {
-    min-height: 4.25rem;
-    padding: 1rem 0.75rem;
+    padding: 2rem;
   }
 }
 
@@ -118,13 +117,13 @@
   width: auto;
   height: 100%;
   max-width: 78%;
-  max-height: 2.25rem;
+  max-height: 3rem;
   object-fit: contain;
 
-  @media (max-width: $breakpoint-md) {
-    max-width: 72%;
-    max-height: 1.85rem;
-  }
+  // @media (max-width: $breakpoint-md) {
+  //   max-width: 72%;
+  //   max-height: 1.85rem;
+  // }
 }
 
 @media (prefers-reduced-motion: reduce) {
