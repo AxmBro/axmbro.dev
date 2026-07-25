@@ -64,7 +64,7 @@ export const PROJECTS: ProjectItem[] = [
     star: true,
     url: "ra_survival",
     type: "commissions",
-    date: "Apr 2025",
+    date: "Sep 2025",
   },
   {
     title: "Zeqa UI",
@@ -172,7 +172,7 @@ export const PROJECTS: ProjectItem[] = [
     imgSrc: "hometree1",
     url: "hometree_ui",
     type: "commissions",
-    date: "Jun 2024",
+    date: "Dec 2023",
   },
   {
     title: "Simple UI",
