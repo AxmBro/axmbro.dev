@@ -116,14 +116,14 @@
 
 .clientLogo {
   width: auto;
-  max-width: 70%;
-  max-height: 2.25rem;
+  max-width: 78%;
+  max-height: 2.5rem;
   height: auto;
   object-fit: contain;
 
   @media (max-width: $breakpoint-md) {
-    max-width: 65%;
-    max-height: 1.85rem;
+    max-width: 72%;
+    max-height: 2.1rem;
   }
 }
 
