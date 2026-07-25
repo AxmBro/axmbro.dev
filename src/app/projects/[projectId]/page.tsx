@@ -157,11 +157,15 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       <ScreenSection
         id={overviewId}
         eyebrow="Project"
-        title={pageData?.title || project.title}
+        title={
+          <div className={styles.overviewTitleRow}>
+            <div>{pageData?.title || project.title}</div>
+            {project.date && <div className={styles.overviewDate}>{project.date}</div>}
+          </div>
+        }
         headingLevel="h1"
         titleDescription={
-          <div className={styles.overviewIntro}>
-            {project.date && <div className={styles.overviewDate}>{project.date}</div>}
+          <div>
             <ProjectTags project={project} className={styles.overviewTags} />
             {renderDescription(description)}
           </div>
