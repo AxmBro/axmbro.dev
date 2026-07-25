@@ -30,17 +30,20 @@ export const ProjectCard = ({ project, showTags = true, compact = false }: Proje
       )}
       <div className={styles.body}>
         <div className={styles.header}>
-          {project.logoSrc && (
-            <Image
-              src={`/images/projects-logos/${project.logoSrc}.png`}
-              alt=""
-              width={28}
-              height={28}
-              className={styles.logo}
-              unoptimized
-            />
-          )}
-          <h2 className={styles.title}>{project.title}</h2>
+          <div className={styles.titleGroup}>
+            {project.logoSrc && (
+              <Image
+                src={`/images/projects-logos/${project.logoSrc}.png`}
+                alt=""
+                width={28}
+                height={28}
+                className={styles.logo}
+                unoptimized
+              />
+            )}
+            <h2 className={styles.title}>{project.title}</h2>
+          </div>
+          {project.date && <span className={styles.date}>{project.date}</span>}
         </div>
         <p className={styles.description}>{project.description}</p>
         {!compact && showTags ? <ProjectTags project={project} /> : null}

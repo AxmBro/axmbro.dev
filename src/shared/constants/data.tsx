@@ -21,6 +21,7 @@ export interface ProjectItem {
   downloadLink?: string;
   url?: string;
   type?: ProjectType;
+  date?: string;
 }
 
 export const CAREER_START_DATE = new Date(2022, 0, 1);
@@ -37,6 +38,7 @@ export const PROJECTS: ProjectItem[] = [
     downloadLink: "https://betterbedrock.com/downloads/better-bedrock",
     url: "better_bedrock",
     type: "personal",
+    date: "Feb 2022 - Present",
   },
   {
     title: "One Slime Block Adventure",
@@ -50,6 +52,7 @@ export const PROJECTS: ProjectItem[] = [
       "https://www.minecraft.net/en-us/marketplace/pdp/mush-co/one-slime-block-adventure/ade4af56-a677-445d-a6ed-628e28eb7d88",
     url: "one_slime_block_adventure",
     type: "commissions",
+    date: "Jul 2025",
   },
   {
     title: "Ra Survival",
@@ -61,6 +64,7 @@ export const PROJECTS: ProjectItem[] = [
     star: true,
     url: "ra_survival",
     type: "commissions",
+    date: "Apr 2025",
   },
   {
     title: "Zeqa UI",
@@ -72,6 +76,7 @@ export const PROJECTS: ProjectItem[] = [
     star: true,
     url: "zeqa_ui",
     type: "commissions",
+    date: "Jul 2026",
   },
   {
     title: "Mineville UI",
@@ -83,6 +88,7 @@ export const PROJECTS: ProjectItem[] = [
     star: true,
     url: "mineville_ui",
     type: "commissions",
+    date: "Apr 2026",
   },
   {
     title: "Murder Detector+",
@@ -95,6 +101,7 @@ export const PROJECTS: ProjectItem[] = [
     downloadLink: "https://betterbedrock.com/project/preview/murder_detector",
     url: "murder_detector",
     type: "personal",
+    date: "Sep 2022",
   },
   {
     title: "Bedrock Portal UI",
@@ -104,6 +111,7 @@ export const PROJECTS: ProjectItem[] = [
     imgSrc: "bpui1",
     url: "bedrock_portal_ui",
     type: "commissions",
+    date: "Oct 2025",
   },
   {
     title: "Shop UI",
@@ -113,6 +121,7 @@ export const PROJECTS: ProjectItem[] = [
     imgSrc: "shop_form1",
     url: "shop_ui",
     type: "commissions",
+    date: "Dec 2024",
   },
   {
     title: "DUI",
@@ -123,6 +132,7 @@ export const PROJECTS: ProjectItem[] = [
     downloadLink: "https://youtu.be/xFdnwd2tj8E",
     url: "dui",
     type: "commissions",
+    date: "Apr 2026",
   },
   {
     title: "Synergy UI",
@@ -132,6 +142,7 @@ export const PROJECTS: ProjectItem[] = [
     imgSrc: "synergy_ui0",
     url: "synergy_ui",
     type: "commissions",
+    date: "Aug 2025",
   },
   {
     title: "OS UI",
@@ -141,6 +152,7 @@ export const PROJECTS: ProjectItem[] = [
     imgSrc: "osui1",
     url: "os_ui",
     type: "personal",
+    date: "Sep 2025",
   },
   {
     title: "Hugo SMP UI",
@@ -150,6 +162,7 @@ export const PROJECTS: ProjectItem[] = [
     imgSrc: "hugo_smp_ui1",
     url: "hugo_smp_ui",
     type: "commissions",
+    date: "Nov 2025",
   },
   {
     title: "Hometree UI",
@@ -159,6 +172,7 @@ export const PROJECTS: ProjectItem[] = [
     imgSrc: "hometree1",
     url: "hometree_ui",
     type: "commissions",
+    date: "Jun 2024",
   },
   {
     title: "Simple UI",
@@ -168,6 +182,7 @@ export const PROJECTS: ProjectItem[] = [
     imgSrc: "simple_server_form1",
     url: "simple_ui",
     type: "personal",
+    date: "Aug 2024",
   },
   {
     title: "Red UI",
@@ -177,6 +192,7 @@ export const PROJECTS: ProjectItem[] = [
     imgSrc: "redui1",
     url: "red_ui",
     type: "personal",
+    date: "Sep 2024",
   },
   {
     title: "Custom Sky Overlay",
@@ -188,6 +204,7 @@ export const PROJECTS: ProjectItem[] = [
     downloadLink:
       "https://betterbedrock.com/project/preview/custom_sky_overlay",
     type: "personal",
+    date: "Oct 2021",
   },
   {
     title: "This Website",
@@ -196,6 +213,7 @@ export const PROJECTS: ProjectItem[] = [
     tags: ["React", "JavaScript", "TypeScript", "CSS", "Web"],
     imgSrc: "thisweb",
     type: "personal",
+    date: "Nov 2024 - Present",
   },
 ];
 
@@ -602,7 +620,7 @@ export const HOME_PAGE_TEXTS = {
         Paid commissions, independent releases, and technical content that show
         the scope of my Minecraft Bedrock UI work, project reach, and audience
         growth, including work for studios such as{" "}
-        <Link href={projectDetailPath("zeqa_ui")}>InPvP</Link>.
+        <Link href={projectDetailPath("zeqa_ui")}>Zeqa UI (InPvP)</Link>.
       </>
     ),
     clientsDescription:
@@ -846,7 +864,9 @@ export const FAQ_ITEMS: FAQItem[] = [
         discussed and adjusted individually to meet your schedule. A precise
         timeline estimate will be provided after we review your exact
         requirements.{" "}
-        <Link href={ROUTES.commissions}>More on Commissions</Link>.
+        <Link href={contactSectionHref(SECTION_IDS.startProject)}>
+          Start a Project
+        </Link>.
       </>
     ),
   },
@@ -854,7 +874,7 @@ export const FAQ_ITEMS: FAQItem[] = [
     question: "How do you handle project pricing and payments?",
     slug: "pricing",
     answerText:
-      "Pricing is calculated individually based on the project's specific scope and complexity. Once we agree on terms and technical requirements, I require a 50% upfront advance before starting development. The remaining 50% is paid upon successful completion and delivery of the assets. I am generally flexible and open to custom contracts or tailored business terms depending on your project needs. More on Commissions.",
+      "Pricing is calculated individually based on the project's specific scope and complexity. Once we agree on terms and technical requirements, I require a 50% upfront advance before starting development. The remaining 50% is paid upon successful completion and delivery of the assets. I am generally flexible and open to custom contracts or tailored business terms depending on your project needs.",
     answer: (
       <>
         Pricing is calculated individually based on the project's specific
@@ -863,7 +883,9 @@ export const FAQ_ITEMS: FAQItem[] = [
         remaining 50% is paid upon successful completion and delivery of the
         assets. I am generally flexible and open to custom contracts or tailored
         business terms depending on your project needs.{" "}
-        <Link href={ROUTES.commissions}>More on Commissions</Link>.
+        <Link href={contactSectionHref(SECTION_IDS.startProject)}>
+          Start a Project
+        </Link>.
       </>
     ),
   },

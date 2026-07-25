@@ -161,6 +161,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         headingLevel="h1"
         titleDescription={
           <div className={styles.overviewIntro}>
+            {project.date && <div className={styles.overviewDate}>{project.date}</div>}
             <ProjectTags project={project} className={styles.overviewTags} />
             {renderDescription(description)}
           </div>

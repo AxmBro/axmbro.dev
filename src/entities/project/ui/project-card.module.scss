@@ -54,7 +54,23 @@
 .header {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: var(--spacing-xs);
+  flex-shrink: 0;
+}
+
+.titleGroup {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  min-width: 0;
+}
+
+.date {
+  font-size: 0.8125rem;
+  color: var(--color-neutral-400);
+  font-weight: 400;
+  white-space: nowrap;
   flex-shrink: 0;
 }
 
