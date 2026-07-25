@@ -25,17 +25,34 @@ const SORT_OPTIONS: { value: SortOption; label: string }[] = [
   { value: "alphabetical", label: "Alphabetical (A-Z)" },
 ];
 
+const MONTHS = [
+  "jan",
+  "feb",
+  "mar",
+  "apr",
+  "may",
+  "jun",
+  "jul",
+  "aug",
+  "sep",
+  "oct",
+  "nov",
+  "dec",
+];
+
 const parseProjectDateTimestamp = (dateStr?: string): number => {
   if (!dateStr) return 0;
-  const parts = dateStr.split("-");
-  const targetPart = (parts.length > 1 ? parts[parts.length - 1] : dateStr).trim();
+  if (/present/i.test(dateStr)) return Date.now();
 
-  if (/present/i.test(targetPart)) {
-    return Date.now();
-  }
+  const match = dateStr.match(
+    /\b(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\s+(\d{4})\b/i,
+  );
+  if (!match) return 0;
 
-  const parsed = Date.parse(targetPart);
-  return Number.isNaN(parsed) ? 0 : parsed;
+  const month = MONTHS.indexOf(match[1].toLowerCase().slice(0, 3));
+  if (month < 0) return 0;
+
+  return Date.UTC(Number(match[2]), month, 1);
 };
 
 export const ProjectsBoard = () => {
