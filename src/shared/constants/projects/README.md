@@ -17,7 +17,8 @@ Add an object to `PROJECTS`:
   type: "commissions",                   // "personal" | "commissions" — board tabs
   star: true,                            // optional; featured tab + sort boost
   downloadLink: "https://...",           // optional; detail page button
-  date: "Sep 2025",                      // month + year only (Mon YYYY); no day/time
+  date: "Sep 2025",                      // month + year start date (Mon YYYY); no day/time
+  isPresent: true,                       // optional; appends " - Present" on display
 }
 ```
 

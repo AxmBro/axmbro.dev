@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { ProjectItem } from "@/shared/constants/data";
 import { getProjectThumbnailSrc } from "../lib/get-project-thumbnail";
+import { formatProjectDate } from "../lib/format-project-date";
 import { ProjectTags } from "./project-tags";
 import styles from "./project-card.module.scss";
 
@@ -13,6 +14,7 @@ interface ProjectCardProps {
 
 export const ProjectCard = ({ project, showTags = true, compact = false }: ProjectCardProps) => {
   const thumbnailSrc = getProjectThumbnailSrc(project);
+  const formattedDate = formatProjectDate(project);
 
   const inner = (
     <div className={styles.card} data-compact={compact || undefined}>
@@ -43,7 +45,7 @@ export const ProjectCard = ({ project, showTags = true, compact = false }: Proje
             )}
             <h2 className={styles.title}>{project.title}</h2>
           </div>
-          {project.date && <span className={styles.date}>{project.date}</span>}
+          {formattedDate && <span className={styles.date}>{formattedDate}</span>}
         </div>
         <p className={styles.description}>{project.description}</p>
         {!compact && showTags ? <ProjectTags project={project} /> : null}

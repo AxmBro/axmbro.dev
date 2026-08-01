@@ -443,7 +443,6 @@ export const FOOTER_SOCIAL_ENTRIES: FooterSocialEntry[] = [
   { iconId: "discord", text: "Discord (DM)" },
   { iconId: "youtube", text: "YouTube" },
   { iconId: "betterbedrock", text: "Better Bedrock Profile" },
-  { iconId: "instagram" },
 ];
 
 export const getFooterSocialLinks = (): SocialLink[] =>

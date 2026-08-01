@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { FaChevronDown } from "react-icons/fa6";
 import { PROJECTS } from "@/shared/constants/data";
-import { ProjectCard } from "@/entities/project";
+import { ProjectCard, formatProjectDate } from "@/entities/project";
 import { JoinedTabs } from "@/shared/ui/joined-tabs";
 import {
   consumeProjectsTagFilter,
@@ -42,7 +42,6 @@ const MONTHS = [
 
 const parseProjectDateTimestamp = (dateStr?: string): number => {
   if (!dateStr) return 0;
-  if (/present/i.test(dateStr)) return Date.now();
 
   const match = dateStr.match(
     /\b(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\s+(\d{4})\b/i,
@@ -132,10 +131,12 @@ export const ProjectsBoard = () => {
       return false;
     }
     const q = search.toLowerCase();
+    const formattedDate = formatProjectDate(item).toLowerCase();
     return (
       item.title.toLowerCase().includes(q) ||
       item.description.toLowerCase().includes(q) ||
-      item.tags?.join(" ").toLowerCase().includes(q)
+      item.tags?.join(" ").toLowerCase().includes(q) ||
+      formattedDate.includes(q)
     );
   });
 

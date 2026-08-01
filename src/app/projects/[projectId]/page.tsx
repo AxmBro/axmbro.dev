@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PROJECTS, CTA_LABELS } from "@/shared/constants/data";
-import { getProjectThumbnailSrc, ImageSection, ProjectTags } from "@/entities/project";
+import { getProjectThumbnailSrc, ImageSection, ProjectTags, formatProjectDate } from "@/entities/project";
 import { ScreenContainer } from "@/shared/ui/screen-container";
 import { ScreenSection, ScreenSectionList } from "@/shared/ui/screen-section";
 import { Button, buttonVariantForIndex } from "@/shared/ui/button";
@@ -160,7 +160,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         title={
           <div className={styles.overviewTitleRow}>
             <div>{pageData?.title || project.title}</div>
-            {project.date && <div className={styles.overviewDate}>{project.date}</div>}
+            {project.date && <div className={styles.overviewDate}>{formatProjectDate(project)}</div>}
           </div>
         }
         headingLevel="h1"
