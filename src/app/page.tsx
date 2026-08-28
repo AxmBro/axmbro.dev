@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { HashLink } from "@/shared/ui/hash-link";
 import { ScreenContainer } from "@/shared/ui/screen-container";
 import { ScreenSection } from "@/shared/ui/screen-section";
 import { Button, buttonVariantForIndex } from "@/shared/ui/button";
@@ -102,7 +103,7 @@ export default function HomePage() {
           titleDescription={
             <>
               Ready to commission Minecraft Bedrock UI or discuss a web project? Review{" "}
-              <Link href={homeSectionHref(SECTION_IDS.selectedWork)}>Selected Work</Link> for recent
+              <HashLink href={homeSectionHref(SECTION_IDS.selectedWork)}>Selected Work</HashLink> for recent
               examples, then send your project brief directly.
             </>
           }
