@@ -20,7 +20,7 @@
 //   Section eyebrows - color-eyebrow
 //   Hero / prose line length - measure-hero, measure-prose
 //   Body / heading weight - font-weight-body, font-weight-heading (mixins + h2-h4)
-//   Tight stacks - spacing-2xs (2px), spacing-xs (4px); stack-xs / stack-2xs mixins
+//   Tight stacks - spacing-xs (4px); stack-xs mixin
 //   Commissioned / minecoin - color-gold (gold-subtle for tinted bg)
 //   Form errors - color-error
 :root {
@@ -71,7 +71,6 @@
   --font-weight-body: 400;
   --font-weight-heading: 500;
 
-  --spacing-2xs: 0.125rem;
   --spacing-xs: 0.25rem;
   --spacing-section: 1.5rem;
   --spacing-block: 2rem;
@@ -92,7 +91,7 @@
   /* Sticky project TOC height - set at runtime by ProjectToc, else 0 */
   --project-toc-height: 0px;
   /* Project TOC edge chevrons / fades */
-  --toc-control-pad: calc(var(--spacing-section) + var(--spacing-xs) + var(--spacing-2xs));
+  --toc-control-pad: calc(var(--spacing-section) + var(--spacing-xs));
 }
 
 /* Mobile - $breakpoint-tablet */
@@ -109,7 +108,6 @@
     --line-height-display: 1.12;
     --line-height-heading: 1.2;
 
-    --spacing-2xs: 0.125rem;
     --spacing-xs: 0.25rem;
     --spacing-section: 1rem;
     --spacing-block: 1.25rem;

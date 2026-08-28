@@ -73,7 +73,7 @@
 
 .projectItem {
   @include link-plain;
-  @include stack-2xs;
+  @include stack-xs;
   min-width: 0;
   padding: var(--spacing-block);
   color: inherit;

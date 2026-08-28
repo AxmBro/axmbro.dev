@@ -57,7 +57,7 @@
 }
 
 .clientsHeader {
-  @include stack-2xs;
+  @include stack-xs;
   padding: var(--spacing-block);
 }
 

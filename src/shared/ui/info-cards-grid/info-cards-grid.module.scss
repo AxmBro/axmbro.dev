@@ -7,7 +7,7 @@
 
 .card {
   @include section-padding;
-  @include stack-2xs;
+  @include stack-xs;
   min-width: 0;
   border-right: 1px solid var(--color-border);
 
