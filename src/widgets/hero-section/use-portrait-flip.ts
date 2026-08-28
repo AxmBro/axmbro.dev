@@ -7,7 +7,11 @@ import {
   HERO_FLIP_INTERVAL_MS,
   HERO_INITIAL_FLIP_DELAY_MS,
 } from "./hero-motion";
-import { useHeroAlignedLoop } from "./use-hero-aligned-loop";
+import {
+  startAlignedLoop,
+  useHeroAlignedLoop,
+  type AlignedLoopHandle,
+} from "./use-hero-aligned-loop";
 
 type HeroPortraitItem = {
   src: string;
@@ -23,6 +27,8 @@ type PortraitState = {
   isFlipped: boolean;
 };
 
+type ControlMode = "synced" | "manual";
+
 const getNextPortraitIndex = (currentIndex: number, portraitCount: number) => {
   const offset = Math.floor(Math.random() * (portraitCount - 1)) + 1;
   return (currentIndex + offset) % portraitCount;
@@ -36,7 +42,11 @@ export const usePortraitFlip = (portraits: readonly HeroPortraitItem[]) => {
     isFlipped: false,
   });
   const [hasCompletedInitialFlip, setHasCompletedInitialFlip] = useState(false);
-  const isPausedRef = useRef(false);
+  const [controlMode, setControlMode] = useState<ControlMode>("synced");
+  const controlModeRef = useRef<ControlMode>("synced");
+  const syncedPausedRef = useRef(false);
+  const manualPausedRef = useRef(false);
+  const manualLoopRef = useRef<AlignedLoopHandle | null>(null);
 
   const showNextPortrait = useCallback(() => {
     setPortraitState((current) => {
@@ -58,6 +68,30 @@ export const usePortraitFlip = (portraits: readonly HeroPortraitItem[]) => {
     });
   }, [portraits.length]);
 
+  const stopManualLoop = useCallback(() => {
+    manualLoopRef.current?.stop();
+    manualLoopRef.current = null;
+  }, []);
+
+  const startManualLoop = useCallback(() => {
+    if (isReducedMotion()) return;
+
+    stopManualLoop();
+    manualLoopRef.current = startAlignedLoop({
+      firstDelayMs: HERO_FLIP_INTERVAL_MS,
+      intervalMs: HERO_FLIP_INTERVAL_MS,
+      onTick: showNextPortrait,
+      isPaused: () => manualPausedRef.current,
+    });
+  }, [showNextPortrait, stopManualLoop]);
+
+  const handleManualFlip = useCallback(() => {
+    showNextPortrait();
+    controlModeRef.current = "manual";
+    setControlMode("manual");
+    startManualLoop();
+  }, [showNextPortrait, startManualLoop]);
+
   useEffect(() => {
     if (isReducedMotion()) return;
 
@@ -69,39 +103,48 @@ export const usePortraitFlip = (portraits: readonly HeroPortraitItem[]) => {
     return () => window.clearTimeout(initialFlipId);
   }, [showNextPortrait]);
 
+  useEffect(() => () => stopManualLoop(), [stopManualLoop]);
+
   useHeroAlignedLoop({
+    enabled: controlMode === "synced",
     firstDelayMs: HERO_FIRST_SYNCED_BEAT_MS,
     intervalMs: HERO_FLIP_INTERVAL_MS,
-    isPaused: () => isPausedRef.current,
+    isPaused: () =>
+      controlModeRef.current === "manual" || syncedPausedRef.current,
     onTick: showNextPortrait,
   });
 
-  const pauseAutoFlip = useCallback(() => {
-    isPausedRef.current = true;
-  }, []);
-
-  const resumeAutoFlip = useCallback(() => {
-    isPausedRef.current = false;
-  }, []);
-
   const handlePointerEnter = useCallback(
     (event: PointerEvent<HTMLButtonElement>) => {
-      pauseAutoFlip();
       if (event.pointerType === "mouse") {
-        showNextPortrait();
+        handleManualFlip();
       }
     },
-    [pauseAutoFlip, showNextPortrait],
+    [handleManualFlip],
   );
 
   const handleClick = useCallback(
     (event: MouseEvent<HTMLButtonElement>) => {
       if (event.detail === 0) {
-        showNextPortrait();
+        handleManualFlip();
       }
     },
-    [showNextPortrait],
+    [handleManualFlip],
   );
+
+  const handleFocus = useCallback(() => {
+    if (controlModeRef.current === "manual") {
+      manualPausedRef.current = true;
+      return;
+    }
+
+    syncedPausedRef.current = true;
+  }, []);
+
+  const handleBlur = useCallback(() => {
+    manualPausedRef.current = false;
+    syncedPausedRef.current = false;
+  }, []);
 
   return {
     portraitState,
@@ -111,9 +154,8 @@ export const usePortraitFlip = (portraits: readonly HeroPortraitItem[]) => {
     currentLabel: portraits[portraitState.currentIndex].label,
     interactionHandlers: {
       onPointerEnter: handlePointerEnter,
-      onPointerLeave: resumeAutoFlip,
-      onFocus: pauseAutoFlip,
-      onBlur: resumeAutoFlip,
+      onFocus: handleFocus,
+      onBlur: handleBlur,
       onClick: handleClick,
     },
   };

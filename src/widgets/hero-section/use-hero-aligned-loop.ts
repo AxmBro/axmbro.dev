@@ -11,11 +11,11 @@ type AlignedLoopOptions = {
   enabled?: boolean;
 };
 
-type AlignedLoopHandle = {
+export type AlignedLoopHandle = {
   stop: () => void;
 };
 
-const startAlignedLoop = ({
+export const startAlignedLoop = ({
   firstDelayMs,
   intervalMs,
   onTick,
