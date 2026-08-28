@@ -5,18 +5,12 @@ interface TabOption {
   label: string;
 }
 
-/**
- * Segmented control - joined buttons with shared border (projects filters, contact intents).
- * Active tab: data-active + surface-hover styling.
- */
 interface JoinedTabsProps {
   options: TabOption[];
   activeId: string | null;
   onChange: (id: string) => void;
-  /** @default medium */
   size?: "small" | "medium";
   disabled?: boolean;
-  /** Accessible name for the control group */
   "aria-label"?: string;
   "aria-labelledby"?: string;
 }

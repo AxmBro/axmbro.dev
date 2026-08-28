@@ -1,7 +1,0 @@
-@use '../../shared/styles/mixins' as *;
-
-.loading {
-  @include section-padding;
-  text-align: center;
-  @include text-body;
-}

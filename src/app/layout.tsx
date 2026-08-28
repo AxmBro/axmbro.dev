@@ -8,8 +8,10 @@ import { CookieConsent } from "@/shared/ui/cookie-consent";
 import { Header } from "@/widgets/header";
 import { Footer } from "@/widgets/footer";
 import { HashScroll } from "@/shared/ui/hash-scroll";
+import { AmbientPixels } from "@/shared/ui/ambient-pixels";
 import { PixelClickWave } from "@/shared/ui/pixel-click-wave";
 import { SITE_METADATA } from "@/shared/constants/data";
+import { SITE_ORIGIN } from "@/shared/constants/site";
 import "./globals.scss";
 
 const lexend = Lexend({
@@ -26,13 +28,13 @@ export const metadata: Metadata = {
   },
   description: SITE_METADATA.homeDescription,
   keywords: SITE_METADATA.keywords,
-  authors: [{ name: "AxmBro", url: "https://axmbro.dev" }],
+  authors: [{ name: "AxmBro", url: SITE_ORIGIN }],
   creator: "AxmBro",
-  metadataBase: new URL("https://axmbro.dev"),
+  metadataBase: new URL(SITE_ORIGIN),
   openGraph: {
     title: "AxmBro.dev | Minecraft Bedrock UI Engineer",
     description: SITE_METADATA.homeDescription,
-    url: "https://axmbro.dev",
+    url: SITE_ORIGIN,
     siteName: "AxmBro",
     images: [
       {
@@ -72,6 +74,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <PixelClickWave />
         <Header />
         <div className="main-layout">
+          <AmbientPixels />
           <main id="main" className="main-content" tabIndex={-1}>
             {children}
           </main>

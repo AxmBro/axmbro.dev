@@ -23,7 +23,7 @@ export default function NotFound() {
         headingLevel="h1"
         titleDescription={
           <>
-            This path doesn't exist on axmbro.dev.{" "}
+            This path does not exist on axmbro.dev.{" "}
             <Link href={ROUTES.projects}>{CTA_LABELS.browseAllProjects}</Link>
             {" or check "}
             <Link href={ROUTES.commissions}>

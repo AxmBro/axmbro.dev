@@ -36,6 +36,7 @@ export const LegalPage = ({
           </div>
         }
         withChildrenPadding={false}
+        variant="default"
       >
         <ul className={styles.itemList}>
           {items.map((item, index) => (
