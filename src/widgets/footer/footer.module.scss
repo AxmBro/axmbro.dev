@@ -5,6 +5,7 @@
   border-top: 1px solid var(--color-border);
   background-color: var(--color-bg-primary);
   position: relative;
+  z-index: 2;
   /* Keeps the GridBackdrop (z-index -1) above the footer background */
   isolation: isolate;
   overflow: hidden;
@@ -129,7 +130,7 @@
 
 .columnTitle {
   @include text-body-sm(var(--color-neutral-100));
-  font-weight: 500;
+  font-weight: var(--font-weight-heading);
   text-transform: uppercase;
 }
 
@@ -150,7 +151,7 @@
 
 .contactLinks {
   a {
-    font-weight: 500;
+    font-weight: var(--font-weight-heading);
   }
 }
 
@@ -244,7 +245,7 @@
   @include text-caption;
 
   span {
-    font-weight: 500;
+    font-weight: var(--font-weight-heading);
   }
 }
 

@@ -61,12 +61,11 @@
 
 .expRole {
   @include text-h2;
-  font-weight: 500;
 }
 
 .expCompany {
   @include text-h2(var(--color-neutral-400));
-  font-weight: 400;
+  font-weight: var(--font-weight-body);
 }
 
 .expDate {
