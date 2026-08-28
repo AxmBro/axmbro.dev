@@ -89,14 +89,10 @@
 
 .description {
   @include text-body-sm;
-}
-
-.card[data-compact] {
-  .description {
-    display: -webkit-box;
-    overflow: hidden;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    line-clamp: 2;
-  }
+  // Full copy stays in the DOM for SEO; only the card preview is trimmed
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
 }

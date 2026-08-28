@@ -1,0 +1,22 @@
+@use '../../../shared/styles/variables' as *;
+@use '../../../shared/styles/mixins' as *;
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-section);
+}
+
+.paragraph {
+  @include text-body;
+  max-width: var(--measure-prose);
+
+  strong {
+    font-weight: 500;
+    color: var(--color-neutral-100);
+  }
+
+  a {
+    @include text-link;
+  }
+}
