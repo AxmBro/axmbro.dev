@@ -17,6 +17,7 @@ import { Button, buttonVariantForIndex } from "@/shared/ui/button";
 import { ButtonGroup } from "@/shared/ui/button-group";
 import { ConversionCloser } from "@/shared/ui/conversion-closer";
 import { InfoCardsGrid } from "@/shared/ui/info-cards-grid";
+import { Reveal } from "@/shared/ui/motion";
 import { ScreenContainer } from "@/shared/ui/screen-container";
 import { ScreenSection } from "@/shared/ui/screen-section";
 
@@ -30,79 +31,91 @@ export default function CommissionsPage() {
   return (
     <ScreenContainer>
       <JsonLd data={buildFaqPageJsonLd(COMMISSION_FAQ_ITEMS)} />
-      <ScreenSection
-        eyebrow="Services"
-        title="Minecraft Bedrock UI Commissions"
-        headingLevel="h1"
-        titleDescription={COMMISSIONS_PAGE_TEXTS.intro}
-      >
-        <ButtonGroup>
-          <Button
-            text={COMMISSIONS_PAGE_TEXTS.ctaContact}
-            variant={buttonVariantForIndex(0)}
-            href={contactSectionHref(SECTION_IDS.startProject)}
-          />
-          <Button
-            text={COMMISSIONS_PAGE_TEXTS.ctaProof}
-            variant={buttonVariantForIndex(1)}
-            href={homeSectionHref(SECTION_IDS.selectedWork)}
-          />
-        </ButtonGroup>
-      </ScreenSection>
+      <Reveal>
+        <ScreenSection
+          eyebrow="Services"
+          title="Minecraft Bedrock UI Commissions"
+          headingLevel="h1"
+          titleDescription={COMMISSIONS_PAGE_TEXTS.intro}
+        >
+          <ButtonGroup>
+            <Button
+              text={COMMISSIONS_PAGE_TEXTS.ctaContact}
+              variant={buttonVariantForIndex(0)}
+              href={contactSectionHref(SECTION_IDS.startProject)}
+            />
+            <Button
+              text={COMMISSIONS_PAGE_TEXTS.ctaProof}
+              variant={buttonVariantForIndex(1)}
+              href={homeSectionHref(SECTION_IDS.selectedWork)}
+            />
+          </ButtonGroup>
+        </ScreenSection>
+      </Reveal>
 
-      <ScreenSection
-        id={SECTION_IDS.commissionServices}
-        eyebrow="Scope"
-        title="What I Build"
-        titleDescription={COMMISSIONS_PAGE_TEXTS.services}
-        withChildrenPadding={false}
-        variant="accent"
-        grid="top"
-      >
-        <InfoCardsGrid items={COMMISSION_SERVICES} />
-      </ScreenSection>
+      <Reveal>
+        <ScreenSection
+          id={SECTION_IDS.commissionServices}
+          eyebrow="Scope"
+          title="What I Build"
+          titleDescription={COMMISSIONS_PAGE_TEXTS.services}
+          withChildrenPadding={false}
+          variant="accent"
+          grid="top"
+        >
+          <InfoCardsGrid items={COMMISSION_SERVICES} />
+        </ScreenSection>
+      </Reveal>
 
-      <ScreenSection
-        id={SECTION_IDS.commissionRequirements}
-        eyebrow="Preparation"
-        title="What I Need From You"
-        titleDescription={COMMISSIONS_PAGE_TEXTS.requirements}
-        withChildrenPadding={false}
-      >
-        <InfoCardsGrid items={COMMISSION_REQUIREMENTS} />
-      </ScreenSection>
+      <Reveal>
+        <ScreenSection
+          id={SECTION_IDS.commissionRequirements}
+          eyebrow="Preparation"
+          title="What I Need From You"
+          titleDescription={COMMISSIONS_PAGE_TEXTS.requirements}
+          withChildrenPadding={false}
+        >
+          <InfoCardsGrid items={COMMISSION_REQUIREMENTS} />
+        </ScreenSection>
+      </Reveal>
 
-      <ScreenSection
-        id={SECTION_IDS.commissionProcess}
-        eyebrow="Workflow"
-        title="Commission Process"
-        titleDescription={COMMISSIONS_PAGE_TEXTS.process}
-        withChildrenPadding={false}
-      >
-        <InfoCardsGrid items={PROCESS_STEPS} />
-      </ScreenSection>
+      <Reveal>
+        <ScreenSection
+          id={SECTION_IDS.commissionProcess}
+          eyebrow="Workflow"
+          title="Commission Process"
+          titleDescription={COMMISSIONS_PAGE_TEXTS.process}
+          withChildrenPadding={false}
+        >
+          <InfoCardsGrid items={PROCESS_STEPS} />
+        </ScreenSection>
+      </Reveal>
 
-      <ScreenSection
-        id={SECTION_IDS.commissionDelivery}
-        eyebrow="Handoff"
-        title="Delivery & Support"
-        titleDescription={COMMISSIONS_PAGE_TEXTS.delivery}
-        withChildrenPadding={false}
-        variant="accent"
-        grid="top"
-      >
-        <InfoCardsGrid items={COMMISSION_DELIVERABLES} />
-      </ScreenSection>
+      <Reveal>
+        <ScreenSection
+          id={SECTION_IDS.commissionDelivery}
+          eyebrow="Handoff"
+          title="Delivery & Support"
+          titleDescription={COMMISSIONS_PAGE_TEXTS.delivery}
+          withChildrenPadding={false}
+          variant="accent"
+          grid="top"
+        >
+          <InfoCardsGrid items={COMMISSION_DELIVERABLES} />
+        </ScreenSection>
+      </Reveal>
 
-      <ScreenSection
-        id={SECTION_IDS.commissionFaq}
-        eyebrow="Answers"
-        title="Commission FAQ"
-        titleDescription={COMMISSIONS_PAGE_TEXTS.faq}
-        withChildrenPadding={false}
-      >
-        <FAQAccordion items={COMMISSION_FAQ_ITEMS} />
-      </ScreenSection>
+      <Reveal>
+        <ScreenSection
+          id={SECTION_IDS.commissionFaq}
+          eyebrow="Answers"
+          title="Commission FAQ"
+          titleDescription={COMMISSIONS_PAGE_TEXTS.faq}
+          withChildrenPadding={false}
+        >
+          <FAQAccordion items={COMMISSION_FAQ_ITEMS} />
+        </ScreenSection>
+      </Reveal>
 
       <ConversionCloser
         eyebrow="Contact"
