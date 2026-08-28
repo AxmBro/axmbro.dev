@@ -2,30 +2,26 @@
 
 import Link from "next/link";
 import { HashLink } from "@/shared/ui/hash-link";
-import { primeProjectsBoard } from "@/shared/lib/projects-board-state";
+import { hasHash } from "@/shared/lib/has-hash";
+import {
+  primeProjectsBoard,
+  type ProjectsBoardTab,
+} from "@/shared/lib/projects-board-state";
 import type { ButtonVariant } from "./button-variants";
 import { ROUTES } from "@/shared/constants/routes";
 import styles from "./button.module.scss";
 
-/**
- * Shared button / link. Default variant: outline.
- *
- * Variants:
- * - primary - blue fill (main CTA; first in a group)
- * - outline - transparent + border (second and later in a group)
- *
- * In a row of Buttons, use `buttonVariantForIndex(index)` for consistent hierarchy.
- * With href: external URLs open in new tab; hash routes use HashLink;
- * /projects resets board tab to "all" via sessionStorage.
- */
 interface ButtonProps {
-  /** @default outline */
   variant?: ButtonVariant;
   text: string;
   onClick?: () => void;
   type?: "submit" | "reset" | "button";
   href?: string;
   external?: boolean;
+  /** Preset tab when href is /projects (default: all). */
+  projectsBoardTab?: ProjectsBoardTab;
+  /** One-shot tag filter when href is /projects. */
+  projectsBoardTag?: string;
 }
 
 export const Button = ({
@@ -34,10 +30,10 @@ export const Button = ({
   type = "button",
   onClick,
   href,
-  external
+  external,
+  projectsBoardTab,
+  projectsBoardTag,
 }: ButtonProps) => {
-  const content = text;
-
   if (href) {
     if (external || href.startsWith("http")) {
       return (
@@ -49,12 +45,12 @@ export const Button = ({
           target="_blank"
           rel="noopener noreferrer"
         >
-          {content}
+          {text}
         </a>
       );
     }
 
-    if (href.includes("#")) {
+    if (hasHash(href)) {
       return (
         <HashLink
           href={href}
@@ -62,7 +58,7 @@ export const Button = ({
           data-variant={variant}
           onClick={onClick}
         >
-          {content}
+          {text}
         </HashLink>
       );
     }
@@ -75,10 +71,13 @@ export const Button = ({
           data-variant={variant}
           onClick={() => {
             onClick?.();
-            primeProjectsBoard({ tab: "all" });
+            primeProjectsBoard({
+              tab: projectsBoardTab ?? "all",
+              tag: projectsBoardTag,
+            });
           }}
         >
-          {content}
+          {text}
         </Link>
       );
     }
@@ -90,7 +89,7 @@ export const Button = ({
         data-variant={variant}
         onClick={onClick}
       >
-        {content}
+        {text}
       </Link>
     );
   }
@@ -102,7 +101,7 @@ export const Button = ({
       data-variant={variant}
       onClick={onClick}
     >
-      {content}
+      {text}
     </button>
   );
 };

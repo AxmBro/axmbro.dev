@@ -1,14 +1,13 @@
 "use client";
 
-import { useLayoutEffect, useRef, type CSSProperties, type ReactNode } from "react";
+import { useLayoutEffect, useRef, type ReactNode } from "react";
 import styles from "./screen-container.module.scss";
 
 interface ScreenContentProps {
   children: ReactNode;
-  style?: CSSProperties;
 }
 
-export function ScreenContent({ children, style }: ScreenContentProps) {
+export function ScreenContent({ children }: ScreenContentProps) {
   const rootRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
@@ -37,7 +36,7 @@ export function ScreenContent({ children, style }: ScreenContentProps) {
   }, []);
 
   return (
-    <div ref={rootRef} className={styles.screenContent} style={style}>
+    <div ref={rootRef} className={styles.screenContent}>
       {children}
     </div>
   );

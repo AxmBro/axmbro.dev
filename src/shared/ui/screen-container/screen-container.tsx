@@ -1,25 +1,20 @@
-import { ReactNode, type CSSProperties } from "react";
+import { ReactNode } from "react";
+import { GridBackdrop } from "@/shared/ui/grid-backdrop";
 import { ScreenContent } from "./screen-content";
 import styles from "./screen-container.module.scss";
 
 interface ScreenContainerProps {
   children: ReactNode;
-  style?: CSSProperties;
-  id?: string;
-  className?: string;
+  /** Off where a custom hero owns the top of the page (project detail). */
+  withGridBackdrop?: boolean;
 }
 
 export const ScreenContainer = ({
   children,
-  style,
-  id,
-  className,
-}: ScreenContainerProps) => {
-  return (
-    <div id={id} className={className || ""}>
-      <div className={styles.screenContainer} style={style}>
-        <ScreenContent>{children}</ScreenContent>
-      </div>
-    </div>
-  );
-};
+  withGridBackdrop = true,
+}: ScreenContainerProps) => (
+  <div className={styles.screenContainer}>
+    {withGridBackdrop && <GridBackdrop />}
+    <ScreenContent>{children}</ScreenContent>
+  </div>
+);
