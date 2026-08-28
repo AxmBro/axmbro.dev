@@ -1,15 +1,8 @@
-@use '../../shared/styles/variables' as *;
-@use '../../shared/styles/mixins' as *;
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
 
 .grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  width: 100%;
-  border-top: 1px solid var(--color-border);
-
-  @media (max-width: $breakpoint-md) {
-    grid-template-columns: 1fr;
-  }
+  @include connected-three-column-grid;
 }
 
 .card {

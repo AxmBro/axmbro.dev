@@ -1,11 +1,11 @@
 import type { CommissionInfoItem } from "@/shared/constants/data";
-import styles from "./commission-info-grid.module.scss";
+import styles from "./info-cards-grid.module.scss";
 
-interface CommissionInfoGridProps {
+interface InfoCardsGridProps {
   items: CommissionInfoItem[];
 }
 
-export const CommissionInfoGrid = ({ items }: CommissionInfoGridProps) => (
+export const InfoCardsGrid = ({ items }: InfoCardsGridProps) => (
   <div className={styles.grid}>
     {items.map((item) => (
       <article key={item.title} className={styles.card}>
