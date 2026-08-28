@@ -18,6 +18,7 @@ import { createPageMetadata } from "@/shared/lib/page-metadata";
 import { Button, buttonVariantForIndex } from "@/shared/ui/button";
 import { ButtonGroup } from "@/shared/ui/button-group";
 import { ProjectsBoardLink } from "@/shared/ui/projects-tag-link";
+import { Reveal } from "@/shared/ui/motion";
 import { ScreenContainer } from "@/shared/ui/screen-container";
 import { ScreenSection, ScreenSectionList } from "@/shared/ui/screen-section";
 import { ProjectHero } from "@/widgets/project-hero";
@@ -93,106 +94,114 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         action={heroAction}
       />
       <ScreenContainer withGridBackdrop={false}>
-        <ScreenSection
-          id={overviewId}
-          eyebrow="Project"
-          title={
-            <div className={styles.overviewTitleRow}>
-              <div>Overview</div>
-              {project.date && <div className={styles.overviewDate}>{formatProjectDate(project)}</div>}
-            </div>
-          }
-          titleDescription={
-            <div>
-              <ProjectTags project={project} className={styles.overviewTags} />
-              <ProjectDescription text={description} />
-            </div>
-          }
-          variant="default"
-        >
-          {sectionButtons.length > 0 && (
-            <ButtonGroup>
-              {sectionButtons.map((btn, i) => (
-                <Button
-                  key={`btn-${i}`}
-                  text={btn.text}
-                  variant={buttonVariantForIndex(i)}
-                  href={btn.href}
-                  external={btn.external}
-                />
-              ))}
-            </ButtonGroup>
-          )}
-        </ScreenSection>
+        <Reveal>
+          <ScreenSection
+            id={overviewId}
+            eyebrow="Project"
+            title={
+              <div className={styles.overviewTitleRow}>
+                <div>Overview</div>
+                {project.date && <div className={styles.overviewDate}>{formatProjectDate(project)}</div>}
+              </div>
+            }
+            titleDescription={
+              <div>
+                <ProjectTags project={project} className={styles.overviewTags} />
+                <ProjectDescription text={description} />
+              </div>
+            }
+            variant="default"
+          >
+            {sectionButtons.length > 0 && (
+              <ButtonGroup>
+                {sectionButtons.map((btn, i) => (
+                  <Button
+                    key={`btn-${i}`}
+                    text={btn.text}
+                    variant={buttonVariantForIndex(i)}
+                    href={btn.href}
+                    external={btn.external}
+                  />
+                ))}
+              </ButtonGroup>
+            )}
+          </ScreenSection>
+        </Reveal>
 
         <ProjectToc items={tocItems} />
 
         {pageData?.credits && pageData.credits.length > 0 && creditsId && (
-          <ScreenSection
-            id={creditsId}
-            eyebrow="Credits"
-            title="Credits"
-            titleDescription={
-              pageData.creditsDescription ?? "People involved in creating this project."
-            }
-            tightChildrenGap
-            variant="default"
-          >
-            <ScreenSectionList
-              items={pageData.credits.map((c) => ({
-                name: c.role,
-                value: c.href
-                  ? (
-                    <a
-                      href={c.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={styles.creditLink}
-                    >
-                      {c.name}
-                    </a>
-                  )
-                  : c.name,
-              }))}
-            />
-            {project.type === "commissions" && (
-              <p className={styles.relatedWork}>
-                <ProjectsBoardLink tab="commissions">
-                  {CTA_LABELS.browseClientWork}
-                </ProjectsBoardLink>
-                {" for more commissioned JsonUI."}
-              </p>
-            )}
-          </ScreenSection>
+          <Reveal>
+            <ScreenSection
+              id={creditsId}
+              eyebrow="Credits"
+              title="Credits"
+              titleDescription={
+                pageData.creditsDescription ?? "People involved in creating this project."
+              }
+              tightChildrenGap
+              variant="default"
+            >
+              <ScreenSectionList
+                items={pageData.credits.map((c) => ({
+                  name: c.role,
+                  value: c.href
+                    ? (
+                      <a
+                        href={c.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={styles.creditLink}
+                      >
+                        {c.name}
+                      </a>
+                    )
+                    : c.name,
+                }))}
+              />
+              {project.type === "commissions" && (
+                <p className={styles.relatedWork}>
+                  <ProjectsBoardLink tab="commissions">
+                    {CTA_LABELS.browseClientWork}
+                  </ProjectsBoardLink>
+                  {" for more commissioned JsonUI."}
+                </p>
+              )}
+            </ScreenSection>
+          </Reveal>
         )}
 
         {pageData?.videos?.map((video, i) => (
-          <ScreenSection
-            key={`video-${i}`}
-            id={videoIds[i]}
-            eyebrow="Media"
-            title={video.title}
-            titleDescription={video.description}
-            variant="default"
-          >
-            <YoutubeEmbed youtubeId={video.youtubeId} title={video.title} />
-          </ScreenSection>
+          <Reveal key={`video-${i}`}>
+            <ScreenSection
+              id={videoIds[i]}
+              eyebrow="Media"
+              title={video.title}
+              titleDescription={video.description}
+              variant="default"
+            >
+              <YoutubeEmbed youtubeId={video.youtubeId} title={video.title} />
+            </ScreenSection>
+          </Reveal>
         ))}
 
         {pageData?.imageSections?.map((section, i) => (
-          <ImageSection
-            key={`section-${i}`}
-            id={galleryIds[i]}
-            title={section.title}
-            sectionDescription={section.description}
-            items={section.items}
-            rowStyle={section.rowStyle}
-            projectId={projectId}
-          />
+          <Reveal key={`section-${i}`}>
+            <ImageSection
+              id={galleryIds[i]}
+              title={section.title}
+              sectionDescription={section.description}
+              items={section.items}
+              rowStyle={section.rowStyle}
+              projectId={projectId}
+            />
+          </Reveal>
         ))}
 
         {!pageData && (
-          <ScreenSection eyebrow="Status" titleDescription="Full project showcase coming soon." variant="default" />
+          <Reveal>
+            <ScreenSection eyebrow="Status" titleDescription="Full project showcase coming soon." variant="default" />
+          </Reveal>
         )}
       </ScreenContainer>
     </>
