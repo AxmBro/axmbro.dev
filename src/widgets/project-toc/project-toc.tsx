@@ -3,14 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 import { HashLink } from "@/shared/ui/hash-link";
+import type { ProjectTocItem } from "./types";
 import styles from "./project-toc.module.scss";
-
-export interface ProjectTocItem {
-  id: string;
-  label: string;
-  /** Extra section ids that keep this TOC item active (e.g. all videos). */
-  watchIds?: string[];
-}
 
 interface ProjectTocProps {
   items: ProjectTocItem[];

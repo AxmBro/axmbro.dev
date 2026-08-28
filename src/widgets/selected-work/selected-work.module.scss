@@ -1,0 +1,68 @@
+@use '../../shared/styles/variables' as *;
+@use '../../shared/styles/mixins' as *;
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  width: auto;
+  min-width: 0;
+  margin-inline: var(--spacing-block);
+  border: 1px solid var(--color-border);
+  align-items: stretch;
+
+  @media (max-width: $breakpoint-tablet) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.gridItem {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  min-width: 0;
+  border-right: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+
+  > * {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    width: 100%;
+  }
+
+  &:nth-child(2n) {
+    border-right: none;
+  }
+
+  &:nth-last-child(-n + 2) {
+    border-bottom: none;
+  }
+
+  @media (max-width: $breakpoint-tablet) {
+    border-right: none;
+    border-bottom: 1px solid var(--color-border);
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}
+
+.footer {
+  margin-top: var(--spacing-section);
+  padding: var(--spacing-section) var(--spacing-block) var(--spacing-block);
+  border-top: 1px solid var(--color-border);
+}
+
+.footerHeader {
+  @include stack-2xs;
+}
+
+.footerTitle {
+  @include text-h2;
+}
+
+.footerDescription {
+  @include text-body;
+}

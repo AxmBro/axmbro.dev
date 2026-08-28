@@ -1,0 +1,75 @@
+@use '../../shared/styles/variables' as *;
+@use '../../shared/styles/mixins' as *;
+
+.hero {
+  /* Hard offset shadow, no blur - page background at half strength */
+  --hero-shadow-color: color-mix(in srgb, var(--color-bg-primary) 50%, transparent);
+  --hero-title-shadow: 3px 3px 0 var(--hero-shadow-color);
+  --hero-description-shadow: 1px 1px 0 var(--hero-shadow-color);
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  padding-block: calc(
+    var(--page-padding-block) + var(--spacing-block) + var(--spacing-section)
+  );
+  padding-inline: var(--layout-gutter-outer);
+}
+
+.media {
+  /* Tunables: image brightness and how dark the band gets on the way down.
+     The lower stops also carry the hero button - outline borders need it. */
+  --hero-image-opacity: 0.65;
+  --hero-dim-top: 24%;
+  --hero-dim-mid: 52%;
+  --hero-dim-low: 80%;
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  right: 0;
+  /* Runs past the hero so the fade lands in the gap above the first section */
+  bottom: calc(-1 * var(--page-padding-block));
+  pointer-events: none;
+}
+
+/* Center crop: card thumbnails often carry a title banner along the top edge,
+   which would collide with the page H1. */
+.image {
+  object-fit: cover;
+  object-position: center;
+  opacity: var(--hero-image-opacity);
+}
+
+.scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--color-bg-primary) var(--hero-dim-top), transparent) 0,
+    color-mix(in srgb, var(--color-bg-primary) var(--hero-dim-mid), transparent) 38%,
+    color-mix(in srgb, var(--color-bg-primary) var(--hero-dim-low), transparent) 66%,
+    var(--color-bg-primary) 90%
+  );
+}
+
+.inner {
+  width: 100%;
+  max-width: var(--max-website-width);
+  margin: 0 auto;
+  padding-inline: var(--spacing-block);
+}
+
+.title {
+  @include hero-display-title;
+  text-shadow: var(--hero-title-shadow);
+
+  @media (max-width: $breakpoint-tablet) {
+    max-width: 100%;
+  }
+}
+
+.description {
+  @include hero-body-copy;
+  margin-top: var(--spacing-xs);
+  text-shadow: var(--hero-description-shadow);
+}
