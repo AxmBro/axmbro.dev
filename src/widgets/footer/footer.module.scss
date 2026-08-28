@@ -59,19 +59,25 @@
   }
 }
 
+.footerColumn:not(.brandColumn) {
+  gap: calc(var(--spacing-xs) * 1.5);
+}
+
 .brandColumn {
-  gap: 0.75rem;
+  gap: calc(var(--spacing-xs) * 3);
 }
 
 .brandBlock {
-  @include stack-xs;
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--spacing-xs) * 3);
 }
 
 .logoInfo {
   @include focus-ring;
   display: flex;
   align-items: center;
-  gap: var(--spacing-xs);
+  gap: calc(var(--spacing-xs) * 3);
   text-decoration: none;
   width: fit-content;
   border-radius: 8px;
@@ -86,9 +92,11 @@
 }
 
 .brandName {
-  @include text-h2;
-  letter-spacing: 0.5px;
+  font-size: var(--font-h2);
   line-height: 1;
+  font-weight: var(--font-weight-body);
+  color: var(--color-neutral-100);
+  letter-spacing: 0.5px;
 }
 
 .footerLogo {
@@ -99,7 +107,7 @@
 .brandDesc {
   @include text-body-sm;
   max-width: 300px;
-  margin-top: 0.25rem;
+  margin-top: .25rem;
   word-break: break-word;
   overflow-wrap: break-word;
   hyphens: auto;
@@ -131,11 +139,12 @@
 .columnTitle {
   @include text-body-sm(var(--color-neutral-100));
   font-weight: var(--font-weight-heading);
-  text-transform: uppercase;
 }
 
 .columnLinks {
-  @include stack-xs;
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--spacing-xs) * 1.5);
 
   a {
     @include text-caption;
@@ -184,7 +193,7 @@
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  gap: var(--spacing-xs);
+  gap: calc(var(--spacing-xs) * 3);
 }
 
 .separator {
