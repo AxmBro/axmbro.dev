@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { HashLink } from "@/shared/ui/hash-link";
 import { ScreenContainer } from "@/shared/ui/screen-container";
 import { ScreenSection } from "@/shared/ui/screen-section";
 import { Button, buttonVariantForIndex } from "@/shared/ui/button";
 import { ButtonGroup } from "@/shared/ui/button-group";
 import { ConversionCloser } from "@/shared/ui/conversion-closer";
+import { Reveal } from "@/shared/ui/motion";
 import { ProjectsBoardLink } from "@/shared/ui/projects-tag-link";
 import { AnnouncementBar } from "@/widgets/announcement-bar";
 import { SkillsGrid } from "@/widgets/skills-grid";
@@ -48,53 +48,61 @@ export default function HomePage() {
         />
         <HeroSection />
 
-        <ScreenSection
-          id={SECTION_IDS.trackRecord}
-          eyebrow="Proof"
-          title="Track Record"
-          titleDescription={HOME_PAGE_TEXTS.trackRecord.description}
-          withChildrenPadding={false}
-        >
-          <TrackRecord />
-        </ScreenSection>
+        <Reveal>
+          <ScreenSection
+            id={SECTION_IDS.trackRecord}
+            eyebrow="Proof"
+            title="Track Record"
+            titleDescription={HOME_PAGE_TEXTS.trackRecord.description}
+            withChildrenPadding={false}
+          >
+            <TrackRecord />
+          </ScreenSection>
+        </Reveal>
 
-        <ScreenSection
-          id={SECTION_IDS.selectedWork}
-          eyebrow="Portfolio"
-          title="Selected Work"
-          titleDescription={HOME_PAGE_TEXTS.selectedWork.description}
-          withChildrenPadding={false}
-          variant="accent"
-          grid="top"
-        >
-          <SelectedWork />
-        </ScreenSection>
+        <Reveal>
+          <ScreenSection
+            id={SECTION_IDS.selectedWork}
+            eyebrow="Portfolio"
+            title="Selected Work"
+            titleDescription={HOME_PAGE_TEXTS.selectedWork.description}
+            withChildrenPadding={false}
+            variant="accent"
+            grid="top"
+          >
+            <SelectedWork />
+          </ScreenSection>
+        </Reveal>
 
-        <ScreenSection
-          id={SECTION_IDS.experience}
-          eyebrow="Background"
-          title="Experience & Education"
-          titleDescription={
-            <>
-              {HOME_PAGE_TEXTS.experience.description}{" "}
-              <ProjectsBoardLink tab="commissions">Browse Client Work</ProjectsBoardLink> to see
-              commissioned projects.
-            </>
-          }
-          withChildrenPadding={false}
-        >
-          <ExperienceGrid />
-        </ScreenSection>
+        <Reveal>
+          <ScreenSection
+            id={SECTION_IDS.experience}
+            eyebrow="Background"
+            title="Experience & Education"
+            titleDescription={
+              <>
+                {HOME_PAGE_TEXTS.experience.description}{" "}
+                <ProjectsBoardLink tab="commissions">Browse Client Work</ProjectsBoardLink> to see
+                commissioned projects.
+              </>
+            }
+            withChildrenPadding={false}
+          >
+            <ExperienceGrid />
+          </ScreenSection>
+        </Reveal>
 
-        <ScreenSection
-          id={SECTION_IDS.skills}
-          eyebrow="Capabilities"
-          title="Skills"
-          titleDescription={HOME_PAGE_TEXTS.skills.description}
-          withChildrenPadding={false}
-        >
-          <SkillsGrid />
-        </ScreenSection>
+        <Reveal>
+          <ScreenSection
+            id={SECTION_IDS.skills}
+            eyebrow="Capabilities"
+            title="Skills"
+            titleDescription={HOME_PAGE_TEXTS.skills.description}
+            withChildrenPadding={false}
+          >
+            <SkillsGrid />
+          </ScreenSection>
+        </Reveal>
 
         <ConversionCloser
           id={SECTION_IDS.workWithMe}

@@ -1,7 +1,9 @@
 import Image from "next/image";
 import type { ProjectAction } from "@/entities/project";
+import { RevealHeroMedia } from "@/shared/ui/motion";
 import { Button } from "@/shared/ui/button";
 import { ButtonGroup } from "@/shared/ui/button-group";
+import { ProjectHeroContentReveal } from "./project-hero-content-reveal";
 import styles from "./project-hero.module.scss";
 
 interface ProjectHeroProps {
@@ -15,7 +17,7 @@ export function ProjectHero({ title, description, imageSrc, action }: ProjectHer
   return (
     <header className={styles.hero}>
       {imageSrc && (
-        <div className={styles.media} aria-hidden>
+        <RevealHeroMedia className={styles.media}>
           <Image
             src={imageSrc}
             alt=""
@@ -25,9 +27,9 @@ export function ProjectHero({ title, description, imageSrc, action }: ProjectHer
             className={styles.image}
           />
           <div className={styles.scrim} />
-        </div>
+        </RevealHeroMedia>
       )}
-      <div className={styles.inner}>
+      <ProjectHeroContentReveal className={styles.inner}>
         <h1 className={styles.title}>{title}</h1>
         <p className={styles.description}>{description}</p>
         {action && (
@@ -40,7 +42,7 @@ export function ProjectHero({ title, description, imageSrc, action }: ProjectHer
             />
           </ButtonGroup>
         )}
-      </div>
+      </ProjectHeroContentReveal>
     </header>
   );
 }

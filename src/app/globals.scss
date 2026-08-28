@@ -92,6 +92,10 @@
   --project-toc-height: 0px;
   /* Project TOC edge chevrons / fades */
   --toc-control-pad: calc(var(--spacing-section) + var(--spacing-xs));
+
+  --motion-duration-hover: 0.2s;
+  --motion-ease-hover: ease-out;
+  --motion-lift-hover: -2px;
 }
 
 /* Mobile - $breakpoint-tablet */

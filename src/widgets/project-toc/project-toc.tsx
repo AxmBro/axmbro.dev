@@ -43,10 +43,17 @@ function isPageAtBottom() {
   return maxScroll > 0 && window.scrollY >= maxScroll - 2;
 }
 
+function scrollControlPadPx(root: HTMLElement): number {
+  const btn = root.parentElement?.querySelector<HTMLElement>(
+    `button.${styles.scrollBtn}`,
+  );
+  return btn?.offsetWidth ?? 0;
+}
+
 function scrollChildIntoViewX(root: HTMLElement, child: HTMLElement) {
   const rootRect = root.getBoundingClientRect();
   const childRect = child.getBoundingClientRect();
-  const pad = resolveCssLengthPx("--toc-control-pad");
+  const pad = scrollControlPadPx(root);
   const clipped =
     childRect.left < rootRect.left + pad ||
     childRect.right > rootRect.right - pad;

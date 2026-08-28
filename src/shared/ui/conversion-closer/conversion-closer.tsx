@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { Reveal } from "@/shared/ui/motion";
 import { ScreenSection } from "@/shared/ui/screen-section";
 
 interface ConversionCloserProps {
@@ -17,15 +18,17 @@ export function ConversionCloser({
   children,
 }: ConversionCloserProps) {
   return (
-    <ScreenSection
-      id={id}
-      eyebrow={eyebrow}
-      title={title}
-      titleDescription={titleDescription}
-      variant="accent"
-      withChildrenPadding={false}
-    >
-      {children}
-    </ScreenSection>
+    <Reveal>
+      <ScreenSection
+        id={id}
+        eyebrow={eyebrow}
+        title={title}
+        titleDescription={titleDescription}
+        variant="accent"
+        withChildrenPadding={false}
+      >
+        {children}
+      </ScreenSection>
+    </Reveal>
   );
 }

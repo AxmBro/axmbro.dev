@@ -13,6 +13,13 @@
   cursor: pointer;
   min-width: 0;
   max-width: 100%;
+  transition: transform var(--motion-duration-hover) var(--motion-ease-hover);
+
+  @media (hover: hover) {
+    &:hover {
+      transform: translateY(var(--motion-lift-hover));
+    }
+  }
 
   &:hover .title {
     text-decoration: underline;
@@ -95,4 +102,14 @@
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   line-clamp: 2;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .link {
+    transition: none;
+
+    &:hover {
+      transform: none;
+    }
+  }
 }

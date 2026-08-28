@@ -7,12 +7,22 @@ interface AnimatedStatProps {
   value: string;
   className?: string;
   replayKey?: number;
+  startWhen?: boolean;
 }
 
-export function AnimatedStat({ value, className, replayKey = 0 }: AnimatedStatProps) {
+export function AnimatedStat({
+  value,
+  className,
+  replayKey = 0,
+  startWhen = true,
+}: AnimatedStatProps) {
   const [displayValue, setDisplayValue] = useState("0");
 
   useEffect(() => {
+    if (!startWhen) {
+      return;
+    }
+
     const match = value.match(/^([\d.]+)(.*)$/);
 
     if (!match || isReducedMotion()) {
@@ -47,7 +57,7 @@ export function AnimatedStat({ value, className, replayKey = 0 }: AnimatedStatPr
     animationId = window.requestAnimationFrame(step);
 
     return () => window.cancelAnimationFrame(animationId);
-  }, [replayKey, value]);
+  }, [replayKey, startWhen, value]);
 
   return <span className={className}>{displayValue}</span>;
 }
