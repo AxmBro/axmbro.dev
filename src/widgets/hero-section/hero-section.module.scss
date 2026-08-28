@@ -43,6 +43,26 @@
   }
 }
 
+.titleAccent {
+  background: linear-gradient(
+    90deg,
+    var(--color-neutral-100) 0%,
+    var(--color-accent) 50%,
+    var(--color-neutral-100) 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: title-gradient-shift 8s ease infinite;
+}
+
+@keyframes title-gradient-shift {
+  to {
+    background-position: 200% center;
+  }
+}
+
 .description {
   @include hero-body-copy;
   margin-top: var(--spacing-section);
@@ -174,5 +194,11 @@
 
   .portraitLabelPending {
     opacity: 1;
+  }
+
+  .titleAccent {
+    animation: none;
+    background: none;
+    -webkit-text-fill-color: inherit;
   }
 }

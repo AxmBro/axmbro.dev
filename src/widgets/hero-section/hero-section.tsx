@@ -4,7 +4,9 @@ import { ROUTES } from "@/shared/constants/routes";
 import { Button, buttonVariantForIndex } from "@/shared/ui/button";
 import { ButtonGroup } from "@/shared/ui/button-group";
 import { ScreenSection, SectionEyebrow } from "@/shared/ui/screen-section";
+import { HeroContentReveal } from "./hero-content-reveal";
 import { HeroPortrait } from "./hero-portrait";
+import { HeroPortraitReveal } from "./hero-portrait-reveal";
 import { HeroWaveTimer } from "./hero-wave-timer";
 import styles from "./hero-section.module.scss";
 
@@ -17,9 +19,11 @@ export const HeroSection = () => (
     <HeroWaveTimer />
     <div className={styles.waveLayer} data-pixel-wave-behind />
     <div className={styles.heroGrid}>
-      <div className={styles.heroContent}>
+      <HeroContentReveal className={styles.heroContent}>
         <SectionEyebrow>Profile</SectionEyebrow>
-        <h1 className={styles.title}>Minecraft Bedrock UI Engineer & Frontend Developer</h1>
+        <h1 className={`${styles.title} ${styles.titleAccent}`}>
+          Minecraft Bedrock UI Engineer & Frontend Developer
+        </h1>
         <p className={styles.description}>{HOME_PAGE_TEXTS.hero.description}</p>
         <ButtonGroup marginTop>
           <Button
@@ -33,10 +37,10 @@ export const HeroSection = () => (
             href={ROUTES.commissions}
           />
         </ButtonGroup>
-      </div>
-      <div className={styles.portraitColumn}>
+      </HeroContentReveal>
+      <HeroPortraitReveal className={styles.portraitColumn}>
         <HeroPortrait />
-      </div>
+      </HeroPortraitReveal>
     </div>
   </ScreenSection>
 );
