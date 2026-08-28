@@ -31,10 +31,8 @@
   .imgWrapper {
     width: 100%;
     aspect-ratio: 16 / 9;
-    overflow: hidden;
-    border: 1px solid var(--color-border);
+    @include media-frame;
     margin-bottom: var(--spacing-section);
-    background: transparent;
   }
 
   .textContent {
@@ -59,8 +57,7 @@
 
   .imgWrapper {
     aspect-ratio: auto;
-    border: 1px solid var(--color-border);
-    background: transparent;
+    @include media-frame;
     margin-bottom: var(--spacing-section);
   }
 
@@ -80,10 +77,8 @@
 .imgWrapper {
   width: 100%;
   aspect-ratio: 16 / 9;
-  overflow: hidden;
-  border: 1px solid var(--color-border);
+  @include media-frame;
   margin-bottom: var(--spacing-section);
-  background: transparent;
 }
 
 .img {

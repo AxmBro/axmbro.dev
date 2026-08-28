@@ -1,7 +1,7 @@
 "use client";
 
 import type { SocialLink } from "@/shared/constants/data";
-import { SOCIAL_ICON_MAP } from "@/shared/ui/social-link-button/social-icon-map";
+import { SOCIAL_ICON_MAP } from "@/shared/ui/social-link-button";
 import styles from "./footer.module.scss";
 
 interface FooterSocialRowProps {

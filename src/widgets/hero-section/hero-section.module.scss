@@ -36,13 +36,7 @@
 }
 
 .title {
-  font-size: var(--font-hero-title);
-  line-height: var(--line-height-display);
-  font-weight: 400;
-  color: var(--color-neutral-100);
-  max-width: 44rem;
-  overflow-wrap: break-word;
-  word-break: normal;
+  @include hero-display-title;
 
   @media (max-width: $breakpoint-tablet) {
     max-width: 100%;
@@ -50,8 +44,7 @@
 }
 
 .description {
-  @include text-body;
-  max-width: 44rem;
+  @include hero-body-copy;
   margin-top: var(--spacing-section);
   white-space: pre-line;
 }
@@ -128,18 +121,20 @@
 }
 
 .portraitLabel {
-  @include text-caption(var(--color-neutral-100));
+  @include text-body(var(--color-neutral-100));
   position: absolute;
   z-index: 2;
   bottom: 0;
   left: 50%;
-  padding: var(--spacing-2xs) var(--spacing-xs);
+  padding: 0.4rem 0.8rem;
   border: 1px solid var(--color-border);
-  border-radius: 999px;
-  background-color: var(--surface-header);
-  backdrop-filter: blur(10px);
+  border-radius: 8px;
+  background-color: var(--color-bg-primary);
+  font-family: inherit;
   white-space: nowrap;
+  text-align: center;
   text-transform: uppercase;
+  font-weight: 400;
   animation: portrait-label-pulse 1700ms ease 250ms both;
 }
 

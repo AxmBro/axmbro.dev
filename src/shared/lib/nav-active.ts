@@ -1,18 +1,18 @@
 import { ROUTES } from "@/shared/constants/routes";
 
-const navPath = (href: string) => href.split("#")[0]?.split("?")[0] || ROUTES.home;
+const HOME = ROUTES.home;
 
-export const normalizePathname = (pathname: string) => {
-  const path = pathname.split("?")[0] || ROUTES.home;
-  return path || ROUTES.home;
+export const normalizePathname = (pathname: string | null | undefined) => {
+  const path = (pathname ?? "").trim().split("?")[0]?.split("#")[0] ?? "";
+  return path.replace(/\/+$/, "") || HOME;
 };
 
 export const isNavLinkActive = (pathname: string, href: string) => {
   const path = normalizePathname(pathname);
-  const targetPath = navPath(href);
+  const targetPath = normalizePathname(href);
 
-  if (targetPath === ROUTES.home) {
-    return path === ROUTES.home;
+  if (targetPath === HOME) {
+    return path === HOME;
   }
 
   if (targetPath === ROUTES.projects) {

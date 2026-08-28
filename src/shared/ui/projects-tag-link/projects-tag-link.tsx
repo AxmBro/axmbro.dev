@@ -11,9 +11,6 @@ interface ProjectsTagLinkProps {
   className?: string;
 }
 
-/**
- * Inline tag link to /projects. Sets one-shot tag filter via sessionStorage (no ?tag= in URL).
- */
 export const ProjectsTagLink = ({ tag, children, className }: ProjectsTagLinkProps) => (
   <Link
     href={ROUTES.projects}

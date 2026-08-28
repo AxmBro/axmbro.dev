@@ -21,25 +21,6 @@
   }
 }
 
-.iframeContainer {
-  position: relative;
-  width: 100%;
-  padding-bottom: 56.25%;
-  height: 0;
-  overflow: hidden;
-  border: 1px solid var(--color-border);
-  background: transparent;
-
-  iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border: 0;
-  }
-}
-
 .overviewTitleRow {
   display: flex;
   align-items: center;
@@ -71,24 +52,4 @@
 
 .overviewTags {
   margin: 0.5rem 0 0.75rem 0;
-}
-
-.descriptionWrapper {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-section);
-}
-
-.descriptionParagraph {
-  @include text-body;
-  max-width: 950px;
-
-  strong {
-    font-weight: 500;
-    color: var(--color-neutral-100);
-  }
-
-  a {
-    @include text-link;
-  }
 }

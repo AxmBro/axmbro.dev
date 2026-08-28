@@ -1,7 +1,11 @@
-const PROJECTS_ACTIVE_TAB_KEY = "projectsActiveTab";
-const PROJECTS_TAG_FILTER_KEY = "projectsTagFilter";
+import type { ProjectsBoardTab } from "@/shared/constants/data";
 
-export type ProjectsBoardTab = "all" | "featured" | "personal" | "commissions";
+export type { ProjectsBoardTab };
+
+const PROJECTS_ACTIVE_TAB_KEY = "projectsActiveTab";
+const PROJECTS_SORT_KEY = "projectsSort";
+const PROJECTS_SEARCH_KEY = "projectsSearch";
+const PROJECTS_TAG_FILTER_KEY = "projectsTagFilter";
 
 export const PROJECTS_BOARD_TABS: ProjectsBoardTab[] = [
   "all",
@@ -19,6 +23,17 @@ export const PROJECTS_BOARD_TAB_LABELS: Record<ProjectsBoardTab, string> = {
 
 export const isProjectsBoardTab = (value: string): value is ProjectsBoardTab =>
   (PROJECTS_BOARD_TABS as readonly string[]).includes(value);
+
+export type ProjectsBoardSort = "newest" | "oldest" | "alphabetical";
+
+const PROJECTS_BOARD_SORTS: ProjectsBoardSort[] = [
+  "newest",
+  "oldest",
+  "alphabetical",
+];
+
+export const isProjectsBoardSort = (value: string): value is ProjectsBoardSort =>
+  (PROJECTS_BOARD_SORTS as readonly string[]).includes(value);
 
 export const primeProjectsBoard = (options: {
   tab?: ProjectsBoardTab;
@@ -59,5 +74,43 @@ export const getSavedProjectsTab = (): ProjectsBoardTab | null => {
 export const saveProjectsTab = (tab: ProjectsBoardTab) => {
   try {
     sessionStorage.setItem(PROJECTS_ACTIVE_TAB_KEY, tab);
+  } catch {}
+};
+
+export const getSavedProjectsSort = (): ProjectsBoardSort | null => {
+  try {
+    const saved = sessionStorage.getItem(PROJECTS_SORT_KEY);
+    if (saved && isProjectsBoardSort(saved)) {
+      return saved;
+    }
+  } catch {}
+  return null;
+};
+
+export const saveProjectsSort = (sort: ProjectsBoardSort | "") => {
+  try {
+    if (sort) {
+      sessionStorage.setItem(PROJECTS_SORT_KEY, sort);
+    } else {
+      sessionStorage.removeItem(PROJECTS_SORT_KEY);
+    }
+  } catch {}
+};
+
+export const getSavedProjectsSearch = (): string | null => {
+  try {
+    return sessionStorage.getItem(PROJECTS_SEARCH_KEY);
+  } catch {
+    return null;
+  }
+};
+
+export const saveProjectsSearch = (search: string) => {
+  try {
+    if (search) {
+      sessionStorage.setItem(PROJECTS_SEARCH_KEY, search);
+    } else {
+      sessionStorage.removeItem(PROJECTS_SEARCH_KEY);
+    }
   } catch {}
 };

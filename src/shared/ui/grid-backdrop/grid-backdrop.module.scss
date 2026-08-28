@@ -1,0 +1,57 @@
+.backdrop {
+  /* Real values set by GridBackdrop from the measured column */
+  --grid-cell-x: 2rem;
+  --grid-cell-y: 2rem;
+  --grid-offset-x: 0px;
+  position: absolute;
+  /* Flush with the container top. Do not use -1px: that paints the grid onto
+     the announcement bar (and header) border-bottom. */
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: calc(var(--grid-band, 100vh) + var(--page-section-gap));
+  pointer-events: none;
+  background-image:
+    linear-gradient(
+      to right,
+      color-mix(in srgb, var(--color-neutral-100) 8%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--color-neutral-100) 8%, transparent) 1px,
+      transparent 1px
+    );
+  background-size: var(--grid-cell-x) var(--grid-cell-y);
+  /* Anchored on the column left border, so lines fall on the section borders */
+  background-position: var(--grid-offset-x) 0;
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 10%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 10%,
+    transparent 100%
+  );
+}
+
+.footerBand {
+  height: calc(100% + 1px);
+  -webkit-mask-image: linear-gradient(
+    to top,
+    #000 0%,
+    #000 10%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to top,
+    #000 0%,
+    #000 10%,
+    transparent 100%
+  );
+}

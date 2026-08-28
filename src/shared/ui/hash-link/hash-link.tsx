@@ -8,36 +8,41 @@ import {
   type CSSProperties,
 } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import { normalizePageHash, scrollToHash } from "@/shared/lib/scroll-to-hash";
+import { hasHash } from "@/shared/lib/has-hash";
+import { normalizePathname } from "@/shared/lib/nav-active";
 import { storePendingHash } from "@/shared/lib/pending-hash";
+import { normalizePageHash, scrollToHash } from "@/shared/lib/scroll-to-hash";
 
-/**
- * Link with hash scroll (sticky header offset). Cross-page: stores hash in sessionStorage
- * and navigates first. Same page: scrolls in place. See scroll-to-hash.ts.
- */
 interface HashLinkProps {
-  /** Path + hash, e.g. /contact#start-project or #faq-pricing on current page. */
   href: string;
   children: ReactNode;
   className?: string;
   style?: CSSProperties;
   onClick?: MouseEventHandler<HTMLAnchorElement>;
   "data-variant"?: string;
+  "aria-current"?: "page";
 }
 
-export const HashLink = ({ href, children, className, style, onClick, "data-variant": dataVariant }: HashLinkProps) => {
+export const HashLink = ({
+  href,
+  children,
+  className,
+  style,
+  onClick,
+  "data-variant": dataVariant,
+  "aria-current": ariaCurrent,
+}: HashLinkProps) => {
   const pathname = usePathname();
   const router = useRouter();
-  const hashIndex = href.indexOf("#");
-
-  if (hashIndex === -1) {
+  if (!hasHash(href)) {
     return (
-      <Link href={href} className={className}>
+      <Link href={href} className={className} aria-current={ariaCurrent}>
         {children}
       </Link>
     );
   }
 
+  const hashIndex = href.indexOf("#");
   const path = href.slice(0, hashIndex) || pathname;
   const hash = normalizePageHash(href.slice(hashIndex));
 
@@ -45,7 +50,7 @@ export const HashLink = ({ href, children, className, style, onClick, "data-vari
     onClick?.(e);
     if (e.defaultPrevented) return;
 
-    if (pathname !== path) {
+    if (normalizePathname(pathname) !== normalizePathname(path)) {
       e.preventDefault();
       storePendingHash(path, hash);
       router.push(path);
@@ -64,6 +69,7 @@ export const HashLink = ({ href, children, className, style, onClick, "data-vari
       className={className}
       style={style}
       data-variant={dataVariant}
+      aria-current={ariaCurrent}
       onClick={handleClick}
     >
       {children}

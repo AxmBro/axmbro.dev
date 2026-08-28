@@ -6,6 +6,7 @@ import {
   COMMISSION_REQUIREMENTS,
   COMMISSION_SERVICES,
   COMMISSIONS_PAGE_TEXTS,
+  PROCESS_STEPS,
   SITE_METADATA,
 } from "@/shared/constants/data";
 import { contactSectionHref, homeSectionHref, SECTION_IDS } from "@/shared/constants/anchors";
@@ -14,10 +15,10 @@ import { createPageMetadata } from "@/shared/lib/page-metadata";
 import { buildFaqPageJsonLd, JsonLd } from "@/shared/lib/json-ld";
 import { Button, buttonVariantForIndex } from "@/shared/ui/button";
 import { ButtonGroup } from "@/shared/ui/button-group";
+import { ConversionCloser } from "@/shared/ui/conversion-closer";
+import { InfoCardsGrid } from "@/shared/ui/info-cards-grid";
 import { ScreenContainer } from "@/shared/ui/screen-container";
 import { ScreenSection } from "@/shared/ui/screen-section";
-import { CommissionInfoGrid } from "@/widgets/commission-info-grid";
-import { ProcessGrid } from "@/widgets/process-grid";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Commissions",
@@ -55,8 +56,10 @@ export default function CommissionsPage() {
         title="What I Build"
         titleDescription={COMMISSIONS_PAGE_TEXTS.services}
         withChildrenPadding={false}
+        variant="accent"
+        grid="top"
       >
-        <CommissionInfoGrid items={COMMISSION_SERVICES} />
+        <InfoCardsGrid items={COMMISSION_SERVICES} />
       </ScreenSection>
 
       <ScreenSection
@@ -66,7 +69,7 @@ export default function CommissionsPage() {
         titleDescription={COMMISSIONS_PAGE_TEXTS.requirements}
         withChildrenPadding={false}
       >
-        <CommissionInfoGrid items={COMMISSION_REQUIREMENTS} />
+        <InfoCardsGrid items={COMMISSION_REQUIREMENTS} />
       </ScreenSection>
 
       <ScreenSection
@@ -76,7 +79,7 @@ export default function CommissionsPage() {
         titleDescription={COMMISSIONS_PAGE_TEXTS.process}
         withChildrenPadding={false}
       >
-        <ProcessGrid />
+        <InfoCardsGrid items={PROCESS_STEPS} />
       </ScreenSection>
 
       <ScreenSection
@@ -85,8 +88,10 @@ export default function CommissionsPage() {
         title="Delivery & Support"
         titleDescription={COMMISSIONS_PAGE_TEXTS.delivery}
         withChildrenPadding={false}
+        variant="accent"
+        grid="top"
       >
-        <CommissionInfoGrid items={COMMISSION_DELIVERABLES} />
+        <InfoCardsGrid items={COMMISSION_DELIVERABLES} />
       </ScreenSection>
 
       <ScreenSection
@@ -99,12 +104,12 @@ export default function CommissionsPage() {
         <FAQAccordion items={COMMISSION_FAQ_ITEMS} />
       </ScreenSection>
 
-      <ScreenSection
+      <ConversionCloser
         eyebrow="Contact"
         title="Ready to Discuss Your Project?"
         titleDescription={COMMISSIONS_PAGE_TEXTS.cta}
       >
-        <ButtonGroup>
+        <ButtonGroup padInline marginBottom>
           <Button
             text={COMMISSIONS_PAGE_TEXTS.ctaContact}
             variant={buttonVariantForIndex(0)}
@@ -116,7 +121,7 @@ export default function CommissionsPage() {
             href={contactSectionHref(SECTION_IDS.contactOptions)}
           />
         </ButtonGroup>
-      </ScreenSection>
+      </ConversionCloser>
     </ScreenContainer>
   );
 }

@@ -5,6 +5,8 @@
   border-top: 1px solid var(--color-border);
   background-color: var(--color-bg-primary);
   position: relative;
+  /* Keeps the GridBackdrop (z-index -1) above the footer background */
+  isolation: isolate;
   overflow: hidden;
   width: 100%;
   padding: 0 var(--layout-gutter-outer);
@@ -144,14 +146,6 @@
     hyphens: auto;
     border-radius: 4px;
   }
-}
-
-.navigationDivider {
-  width: calc(100% + var(--spacing-block) + var(--spacing-block));
-  height: 1px;
-  margin-block: var(--spacing-xs);
-  margin-inline: calc(0px - var(--spacing-block));
-  background-color: var(--color-border);
 }
 
 .contactLinks {

@@ -2,14 +2,7 @@
 @use '../../shared/styles/mixins' as *;
 
 .stats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  width: 100%;
-  border-top: 1px solid var(--color-border);
-
-  @media (max-width: $breakpoint-md) {
-    grid-template-columns: 1fr;
-  }
+  @include connected-three-column-grid;
 }
 
 .stat {
@@ -119,11 +112,6 @@
   max-width: 78%;
   max-height: 3rem;
   object-fit: contain;
-
-  // @media (max-width: $breakpoint-md) {
-  //   max-width: 72%;
-  //   max-height: 1.85rem;
-  // }
 }
 
 @media (prefers-reduced-motion: reduce) {

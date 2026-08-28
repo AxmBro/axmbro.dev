@@ -1,3 +1,5 @@
+@use './variables' as *;
+
 @mixin text-display($color: var(--color-neutral-100)) {
   font-size: var(--font-h1);
   line-height: var(--line-height-display);
@@ -47,10 +49,12 @@
 }
 
 // Inline / prose links in body copy (credits, legal, section descriptions).
+// Inherit surrounding text (usually gray) + underline; white only on hover.
 // Not for nav, footer, buttons, or card surfaces.
 @mixin text-link {
+  color: inherit;
   text-decoration: underline;
-  text-decoration-color: var(--color-neutral-400);
+  text-decoration-color: currentColor;
   text-underline-offset: 4px;
 
   &:hover {
@@ -79,6 +83,70 @@
   padding-inline: var(--spacing-block);
 }
 
+@mixin hero-display-title {
+  font-size: var(--font-hero-title);
+  line-height: var(--line-height-display);
+  font-weight: 400;
+  color: var(--color-neutral-100);
+  max-width: var(--measure-hero);
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+
+@mixin hero-body-copy {
+  @include text-body;
+  max-width: var(--measure-hero);
+}
+
+// Blue tint wash + accent-tinted border. ScreenSection variant="accent" only.
+@mixin accent-surface {
+  border-color: var(--color-border-accent);
+  background-image:
+    radial-gradient(
+      ellipse 72% 58% at 100% 100%,
+      color-mix(in srgb, var(--color-accent) 12%, transparent) 0%,
+      color-mix(in srgb, var(--color-accent) 4%, transparent) 42%,
+      transparent 70%
+    ),
+    linear-gradient(
+      150deg,
+      var(--color-accent-subtle) 0%,
+      color-mix(in srgb, var(--color-accent) 3%, transparent) 42%,
+      transparent 76%
+    );
+}
+
+// Blueprint line texture. Mask via `--grid-lines-mask` (top or bottom fade).
+// Column count is `--grid-lines-cols`.
+@mixin grid-lines {
+  position: relative;
+  isolation: isolate;
+  --grid-lines-cols: 8;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image:
+      linear-gradient(
+        to right,
+        color-mix(in srgb, var(--color-neutral-100) 7%, transparent) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        to bottom,
+        color-mix(in srgb, var(--color-neutral-100) 7%, transparent) 1px,
+        transparent 1px
+      );
+    /* 100% / cols keeps the outer lines on the section borders */
+    background-size: calc(100% / var(--grid-lines-cols)) calc(var(--spacing-block) * 2);
+    -webkit-mask-image: var(--grid-lines-mask, none);
+    mask-image: var(--grid-lines-mask, none);
+  }
+}
+
 @mixin focus-ring {
   outline: none;
 
@@ -86,6 +154,23 @@
     outline: 1px solid var(--color-neutral-100);
     outline-offset: 1px;
   }
+}
+
+@mixin connected-three-column-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 100%;
+  border-top: 1px solid var(--color-border);
+
+  @media (max-width: $breakpoint-md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+@mixin media-frame {
+  border: 1px solid var(--color-border);
+  background: transparent;
+  overflow: hidden;
 }
 
 @mixin list-minimal {

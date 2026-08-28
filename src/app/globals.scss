@@ -10,11 +10,15 @@
 // Usage:
 //   Page / section bg - color-bg-primary
 //   Grid lines, media frames - color-border (media: border only, no fill)
+//   Accent frames (Work With Me, announcement bar) - color-border-accent
 //   Text fields, search - surface-input, surface-input-focus on focus
 //   Nav, tabs, outline - surface-hover
 //   Header menu toggle - color-secondary, color-secondary-hover
 //   Primary CTA, success - color-accent (accent-subtle for tinted bg)
+//   Secondary accent copy - color-accent-soft (icy, near white)
 //   Text on accent buttons - color-on-accent
+//   Section eyebrows - color-eyebrow
+//   Hero / prose line length - measure-hero, measure-prose
 //   Commissioned / minecoin - color-gold (gold-subtle for tinted bg)
 //   Form errors - color-error
 :root {
@@ -23,11 +27,16 @@
 
   --color-bg-primary: #000000;
   --color-border: rgb(31, 31, 31);
+  --color-border-accent: color-mix(in srgb, var(--color-accent) 30%, var(--color-border));
   --max-website-width: 64rem;
 
   --color-accent: rgb(0, 143, 252);
   --color-accent-subtle: color-mix(in srgb, var(--color-accent) 10%, transparent);
+  /* Secondary accent copy - icy, close to white. Title stays --color-eyebrow */
+  --color-accent-soft: color-mix(in srgb, var(--color-accent) 15%, var(--color-neutral-100));
   --color-on-accent: #000000;
+  /* Section eyebrow ("01 - Proof") - same blue as the Track Record stat values */
+  --color-eyebrow: var(--color-accent);
   /* Minecoin / commission gold - amber from /images/ui/minecoin.png */
   --color-gold: #e6b422;
   --color-gold-subtle: color-mix(in srgb, var(--color-gold) 14%, transparent);
@@ -41,11 +50,14 @@
   --surface-input-focus: rgba(255, 255, 255, 0.05);
   --surface-header: rgba(0, 0, 0, 0.9);
   --surface-overlay: rgba(0, 0, 0, 0.4);
+  --surface-dropdown: #0a0a0a;
 
   --font-p: 1rem;
   --font-p2: 0.875rem;
   --font-h1: 3rem;
   --font-hero-title: calc(var(--font-h1) * 7 / 6);
+  --measure-hero: 44rem;
+  --measure-prose: 950px;
   --font-h2: 1.5rem;
   --font-h3: 1rem;
   --font-h4: 1rem;
@@ -218,6 +230,7 @@ a {
 }
 
 .main-layout {
+  position: relative;
   display: flex;
   flex-direction: column;
   min-height: calc(100vh - var(--header-offset));
@@ -225,4 +238,5 @@ a {
 
 .main-content {
   flex: 1;
+  position: relative;
 }

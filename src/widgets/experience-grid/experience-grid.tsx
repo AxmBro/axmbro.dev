@@ -25,7 +25,7 @@ export const ExperienceGrid = () => {
               ))}
             </ul>
             {exp.buttons && exp.buttons.length > 0 && (
-              <ButtonGroup marginTop>
+              <ButtonGroup className={styles.expActions}>
                 {exp.buttons.map((btn, i) => (
                   btn.projectsTab ? (
                     <ProjectsBoardButton

@@ -30,6 +30,17 @@
     }
   }
 
+  &[data-variant="neutral"] {
+    background-color: var(--color-neutral-100);
+    color: var(--color-bg-primary);
+    border: none;
+
+    &:hover,
+    &:active {
+      filter: brightness(0.85);
+    }
+  }
+
   &[data-variant="outline"] {
     background-color: transparent;
     color: var(--color-neutral-100);

@@ -1,10 +1,12 @@
+import "server-only";
+import { cache } from "react";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 
 const CONTENT_PATH = path.join(process.cwd(), "src/shared/constants/projects");
 
-interface ProjectMarkdownData {
+export interface ProjectMarkdownData {
   id: string;
   title: string;
   description: string;
@@ -21,7 +23,7 @@ interface ProjectMarkdownData {
   content: string;
 }
 
-export async function getProjectData(id: string): Promise<ProjectMarkdownData | null> {
+async function loadProjectData(id: string): Promise<ProjectMarkdownData | null> {
   try {
     const filePath = path.join(CONTENT_PATH, `${id}.md`);
     if (!fs.existsSync(filePath)) return null;
@@ -45,3 +47,5 @@ export async function getProjectData(id: string): Promise<ProjectMarkdownData | 
     return null;
   }
 }
+
+export const getProjectData = cache(loadProjectData);

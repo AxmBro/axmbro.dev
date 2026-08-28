@@ -1,7 +1,7 @@
-@use '../shared/styles/variables' as *;
-@use '../shared/styles/mixins' as *;
+@use '../../shared/styles/variables' as *;
+@use '../../shared/styles/mixins' as *;
 
-.selectedGrid {
+.grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   width: auto;
@@ -15,7 +15,7 @@
   }
 }
 
-.selectedGridItem {
+.gridItem {
   display: flex;
   flex-direction: column;
   min-height: 100%;
@@ -49,20 +49,20 @@
   }
 }
 
-.selectedFooter {
+.footer {
   margin-top: var(--spacing-section);
   padding: var(--spacing-section) var(--spacing-block) var(--spacing-block);
   border-top: 1px solid var(--color-border);
 }
 
-.selectedFooterHeader {
+.footerHeader {
   @include stack-2xs;
 }
 
-.selectedFooterTitle {
+.footerTitle {
   @include text-h2;
 }
 
-.selectedFooterDescription {
+.footerDescription {
   @include text-body;
 }

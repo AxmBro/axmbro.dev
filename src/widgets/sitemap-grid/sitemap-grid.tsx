@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
-import { getFeaturedProjects, getProjectTypeLabel, PROJECTS } from "@/shared/constants/data";
+import { getFeaturedProjects, getProjectTypeLabel, PROJECTS, CTA_LABELS } from "@/shared/constants/data";
 import {
   commissionSectionHref,
   contactSectionHref,
@@ -8,6 +8,7 @@ import {
   SECTION_IDS,
 } from "@/shared/constants/anchors";
 import { projectDetailPath, ROUTES } from "@/shared/constants/routes";
+import { SITE_PATHS } from "@/shared/constants/site";
 import { HashLink } from "@/shared/ui/hash-link";
 import { ProjectsBoardLink } from "@/shared/ui/projects-tag-link";
 import styles from "./sitemap-grid.module.scss";
@@ -83,11 +84,15 @@ export const SitemapGrid = () => (
     </SitemapColumn>
 
     <SitemapColumn title="Services & Legal">
-      <HashLink href={contactSectionHref(SECTION_IDS.startProject)}>Start a Project</HashLink>
-      <HashLink href={contactSectionHref(SECTION_IDS.contactOptions)}>Contact Options</HashLink>
+      <HashLink href={contactSectionHref(SECTION_IDS.startProject)}>
+        {CTA_LABELS.startProject}
+      </HashLink>
+      <HashLink href={contactSectionHref(SECTION_IDS.contactOptions)}>
+        {CTA_LABELS.contactOptions}
+      </HashLink>
       <HashLink href={contactSectionHref(SECTION_IDS.quickQuestions)}>Quick Questions</HashLink>
       <span className={styles.divider} aria-hidden />
-      <a href="/sitemap.xml">XML Sitemap</a>
+      <a href={SITE_PATHS.sitemapXml}>XML Sitemap</a>
       <Link href={ROUTES.privacyPolicy}>Privacy Policy</Link>
       <Link href={ROUTES.termsOfUse}>Terms of Use</Link>
     </SitemapColumn>

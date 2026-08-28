@@ -1,10 +1,9 @@
 import type { MetadataRoute } from "next";
 import { PROJECTS } from "@/shared/constants/data";
+import { SITE_ORIGIN } from "@/shared/constants/site";
 import { projectDetailPath, ROUTES } from "@/shared/constants/routes";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = "https://axmbro.dev";
-
   const staticPaths = [
     ROUTES.home,
     ROUTES.commissions,
@@ -16,14 +15,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ] as const;
 
   const baseRoutes: MetadataRoute.Sitemap = staticPaths.map((route) => ({
-    url: `${baseUrl}${route}`,
+    url: `${SITE_ORIGIN}${route}`,
     lastModified: new Date(),
     changeFrequency: route === ROUTES.home ? "weekly" : "monthly",
     priority: route === ROUTES.home ? 1.0 : 0.8,
   }));
 
   const projectRoutes: MetadataRoute.Sitemap = PROJECTS.filter((p) => p.url).map((project) => ({
-    url: `${baseUrl}${projectDetailPath(project.url!)}`,
+    url: `${SITE_ORIGIN}${projectDetailPath(project.url!)}`,
     lastModified: new Date(),
     changeFrequency: "weekly",
     priority: 0.7,

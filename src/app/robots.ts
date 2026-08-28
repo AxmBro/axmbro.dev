@@ -1,12 +1,12 @@
 import { MetadataRoute } from "next";
+import { SITE_ORIGIN, SITE_PATHS } from "@/shared/constants/site";
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = "https://axmbro.dev";
   return {
     rules: {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: `${baseUrl}/sitemap.xml`,
+    sitemap: `${SITE_ORIGIN}${SITE_PATHS.sitemapXml}`,
   };
 }

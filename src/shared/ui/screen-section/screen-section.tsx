@@ -1,6 +1,8 @@
-import type { CSSProperties, ReactNode } from "react";
+import type { ReactNode } from "react";
 import { SectionEyebrow } from "./section-eyebrow";
 import styles from "./screen-section.module.scss";
+
+type ScreenSectionVariant = "default" | "accent";
 
 interface ScreenSectionProps {
   id?: string;
@@ -8,13 +10,18 @@ interface ScreenSectionProps {
   title?: ReactNode;
   titleDescription?: ReactNode;
   children?: ReactNode;
-  style?: CSSProperties;
   className?: string;
-  withHeaderPadding?: boolean;
   withChildrenPadding?: boolean;
   tightChildrenGap?: boolean;
+  grid?: "top" | "bottom" | "none";
   headingLevel?: "h1" | "h2" | "h3";
+  variant?: ScreenSectionVariant;
 }
+
+const variantClass = (variant: ScreenSectionVariant | undefined) => {
+  if (variant === "accent") return styles.accent;
+  return "";
+};
 
 export const ScreenSection = ({
   id,
@@ -22,25 +29,26 @@ export const ScreenSection = ({
   title,
   titleDescription,
   children,
-  style,
   className,
-  withHeaderPadding = true,
   withChildrenPadding = true,
   tightChildrenGap = false,
+  grid,
   headingLevel = "h2",
+  variant,
 }: ScreenSectionProps) => {
   const HeadingTag = headingLevel;
   const hasHeader = Boolean(eyebrow || title || titleDescription);
 
   return (
-    <section className={`${styles.section} ${className || ""}`} id={id} style={style}>
+    <section
+      className={`${styles.section} ${variantClass(variant)} ${className || ""}`}
+      id={id}
+      data-plain={variant === "default" ? "" : undefined}
+      data-grid={grid}
+    >
       {hasHeader && (
         <div
-          className={`
-          ${styles.titleBlock} 
-          ${withHeaderPadding ? styles.hasPadding : ""} 
-          ${!children ? styles.noChildren : ""}
-        `}
+          className={`${styles.titleBlock} ${styles.hasPadding} ${!children ? styles.noChildren : ""}`}
         >
           {eyebrow != null && eyebrow !== "" && (
             <SectionEyebrow>{eyebrow}</SectionEyebrow>
@@ -65,21 +73,17 @@ export const ScreenSection = ({
 interface ScreenSectionListProps {
   title?: string;
   items: { name: string; value?: ReactNode }[];
-  style?: CSSProperties;
-  className?: string;
   headingLevel?: "h2" | "h3" | "h4";
 }
 
 export const ScreenSectionList = ({
   title,
   items,
-  style,
-  className,
   headingLevel = "h3",
 }: ScreenSectionListProps) => {
   const HeadingTag = headingLevel;
   return (
-    <div className={`${styles.listContainer} ${className || ""}`} style={style}>
+    <div className={styles.listContainer}>
       {title && <HeadingTag className={styles.listTitle}>{title}</HeadingTag>}
       <ul className={styles.listMinimal}>
         {items.map((item, index) => (

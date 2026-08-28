@@ -13,6 +13,7 @@ interface ProjectsBoardLinkProps {
   children: ReactNode;
   className?: string;
   onClick?: () => void;
+  "aria-current"?: "page";
 }
 
 export const ProjectsBoardLink = ({
@@ -20,10 +21,12 @@ export const ProjectsBoardLink = ({
   children,
   className,
   onClick,
+  "aria-current": ariaCurrent,
 }: ProjectsBoardLinkProps) => (
   <Link
     href={ROUTES.projects}
     className={className}
+    aria-current={ariaCurrent}
     onClick={() => {
       onClick?.();
       primeProjectsBoard({ tab });

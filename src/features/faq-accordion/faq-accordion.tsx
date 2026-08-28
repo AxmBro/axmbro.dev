@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { FAQ_ITEMS, type FAQItem } from "@/shared/constants/data";
+import type { FAQItem } from "@/shared/constants/data";
 import { faqItemId } from "@/shared/constants/anchors";
 import { parseHashId } from "@/shared/lib/scroll-to-hash";
 import styles from "./faq-accordion.module.scss";
@@ -32,10 +32,10 @@ const findSlugFromHash = (items: FAQItem[]) => {
 };
 
 interface FAQAccordionProps {
-  items?: FAQItem[];
+  items: FAQItem[];
 }
 
-export const FAQAccordion = ({ items = FAQ_ITEMS }: FAQAccordionProps) => {
+export const FAQAccordion = ({ items }: FAQAccordionProps) => {
   const [openSlug, setOpenSlug] = useState<string | null>(null);
 
   useEffect(() => {

@@ -37,6 +37,8 @@ export default function ContactPage() {
         title="Start a Project"
         headingLevel="h1"
         withChildrenPadding={false}
+        variant="accent"
+        grid="none"
         titleDescription={HOME_PAGE_TEXTS.contactPage.form}
       >
         <ContactForm />
@@ -48,6 +50,7 @@ export default function ContactPage() {
         withChildrenPadding
         title="Contact Options"
         titleDescription={HOME_PAGE_TEXTS.contactPage.socials}
+        grid="bottom"
       >
         <div className={styles.socialList}>
           {directChannels.map((button) => (
@@ -71,7 +74,6 @@ export default function ContactPage() {
       >
         <FAQAccordion items={CONTACT_FAQ_ITEMS} />
       </ScreenSection>
-
     </ScreenContainer>
   );
 }
