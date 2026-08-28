@@ -1,152 +1,64 @@
 "use client";
 
-import { useEffect, useRef, useState, type MouseEvent } from "react";
+import { useRef, type MouseEvent } from "react";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { HomeLink } from "@/shared/ui/home-link";
 import { NavRouteLink } from "@/shared/ui/nav-route-link";
 import { NAV_LINKS } from "@/shared/constants/data";
-import { BREAKPOINT_TABLET_PX } from "@/shared/constants/breakpoints";
 import { ROUTES } from "@/shared/constants/routes";
-import { isNavLinkActive, normalizePathname } from "@/shared/lib/nav-active";
-import { hasHash } from "@/shared/lib/has-hash";
+import { normalizePathname } from "@/shared/lib/nav-active";
+import {
+  getHeaderNavLinkState,
+  isPlainHeaderNavLink,
+  scrollToTopOnSameRoute,
+} from "./lib/header-nav";
+import { useHomeAnnouncementInView } from "./lib/use-home-announcement-in-view";
+import { useMobileMenu } from "./lib/use-mobile-menu";
+import { useTabletNav } from "./lib/use-tablet-nav";
+import { useStickyHeaderHeight } from "./lib/use-sticky-header-height";
 import styles from "./header.module.scss";
 
 const MOBILE_NAV_ID = "header-mobile-nav";
 
 export const Header = () => {
   const headerBarRef = useRef<HTMLDivElement>(null);
-  const menuToggleRef = useRef<HTMLButtonElement>(null);
-  const mobileNavRef = useRef<HTMLElement>(null);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [isResponsive, setIsResponsive] = useState(false);
-  const pathname = normalizePathname(usePathname());
-  const isHome = pathname === ROUTES.home;
-  const [announcementInView, setAnnouncementInView] = useState(isHome);
+  const pathname = usePathname();
+  const normalizedPath = normalizePathname(pathname);
+  const isHome = normalizedPath === ROUTES.home;
+  const isTablet = useTabletNav();
+  const {
+    menuOpen,
+    menuToggleRef,
+    mobileNavRef,
+    closeMenu,
+    toggleMenu,
+    closeMenuRestoreFocus,
+  } = useMobileMenu();
 
-  useEffect(() => {
-    const mqResponsive = window.matchMedia(`(max-width: ${BREAKPOINT_TABLET_PX}px)`);
-    const handleResponsive = (e: MediaQueryListEvent | MediaQueryList) => setIsResponsive(e.matches);
+  useStickyHeaderHeight(headerBarRef, isTablet);
+  const announcementInView = useHomeAnnouncementInView(isHome, headerBarRef, isTablet);
 
-    handleResponsive(mqResponsive);
-    mqResponsive.addEventListener("change", handleResponsive);
-
-    return () => mqResponsive.removeEventListener("change", handleResponsive);
-  }, []);
-
-  useEffect(() => {
-    const bar = headerBarRef.current;
-    if (!bar) return;
-
-    const syncHeight = () => {
-      // Bar row + headerRoot border-bottom (open menu must not inflate sticky offset)
-      document.documentElement.style.setProperty(
-        "--header-sticky-height",
-        `${bar.offsetHeight + 1}px`,
-      );
-    };
-
-    syncHeight();
-    const resizeObserver = new ResizeObserver(syncHeight);
-    resizeObserver.observe(bar);
-    return () => {
-      resizeObserver.disconnect();
-      document.documentElement.style.removeProperty("--header-sticky-height");
-    };
-  }, [isResponsive]);
-
-  useEffect(() => {
-    if (!isHome) return;
-
-    const node = document.querySelector("[data-announcement-bar]");
-    if (!(node instanceof HTMLElement)) return;
-
-    const headerPx = headerBarRef.current?.offsetHeight ?? 0;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setAnnouncementInView(entry.isIntersecting);
-      },
-      {
-        threshold: 0,
-        rootMargin: `-${headerPx}px 0px 0px 0px`,
-      },
-    );
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, [isHome, isResponsive]);
-
-  const overAnnouncement = isHome && announcementInView;
-
-  useEffect(() => {
-    if (!menuOpen) return;
-
-    const firstLink = mobileNavRef.current?.querySelector<HTMLElement>("a");
-    firstLink?.focus();
-
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        e.preventDefault();
-        setMenuOpen(false);
-        menuToggleRef.current?.focus();
-        return;
-      }
-
-      if (e.key !== "Tab" || !mobileNavRef.current || !menuToggleRef.current) return;
-
-      const focusables = [
-        menuToggleRef.current,
-        ...Array.from(mobileNavRef.current.querySelectorAll<HTMLElement>("a")),
-      ];
-      const first = focusables[0];
-      const last = focusables[focusables.length - 1];
-      if (!first || !last) return;
-
-      if (e.shiftKey && document.activeElement === first) {
-        e.preventDefault();
-        last.focus();
-      } else if (!e.shiftKey && document.activeElement === last) {
-        e.preventDefault();
-        first.focus();
-      }
-    };
-
-    document.addEventListener("keydown", onKeyDown);
-    return () => document.removeEventListener("keydown", onKeyDown);
-  }, [menuOpen]);
-
-  const toggleMenu = () => setMenuOpen((open) => !open);
-  const closeMenu = () => setMenuOpen(false);
-  const closeMenuRestoreFocus = () => {
-    setMenuOpen(false);
-    menuToggleRef.current?.focus();
-  };
-
-  const handlePlainNavClick = (href: string) => (e: MouseEvent<HTMLAnchorElement>) => {
+  const handlePlainNavClick = (href: string) => (event: MouseEvent<HTMLAnchorElement>) => {
     closeMenu();
-    if (pathname !== normalizePathname(href)) return;
-
-    e.preventDefault();
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    scrollToTopOnSameRoute(normalizedPath, href, event);
   };
 
-  const navLinkClass = (href: string) =>
-    isNavLinkActive(pathname, href) ? `${styles.navItem} ${styles.navItemActive}` : styles.navItem;
-
-  const mobileNavLinkClass = (href: string) =>
-    isNavLinkActive(pathname, href)
-      ? `${styles.mobileNavItem} ${styles.navItemActive}`
-      : styles.mobileNavItem;
-
-  const renderNavLink = (link: (typeof NAV_LINKS)[number], className: string) => {
-    const ariaCurrent = isNavLinkActive(pathname, link.href) ? "page" : undefined;
-    const isPlain = !hasHash(link.href) && link.href !== ROUTES.projects;
+  const renderNavLink = (link: (typeof NAV_LINKS)[number], baseClass: string) => {
+    const navState = getHeaderNavLinkState(
+      pathname,
+      link.href,
+      baseClass,
+      styles.navItemActive,
+    );
+    const isPlain = isPlainHeaderNavLink(link.href);
 
     return (
       <NavRouteLink
         key={link.href}
         href={link.href}
-        className={className}
-        aria-current={ariaCurrent}
+        className={navState.className}
+        aria-current={navState.ariaCurrent}
         onNavigate={isPlain ? undefined : closeMenu}
         onPlainClick={isPlain ? handlePlainNavClick(link.href) : undefined}
       >
@@ -159,7 +71,7 @@ export const Header = () => {
     <>
       <header
         className={styles.headerRoot}
-        {...(overAnnouncement ? { "data-over-announcement": "" } : {})}
+        {...(isHome && announcementInView ? { "data-over-announcement": "" } : {})}
       >
         <div className={styles.header}>
           <div ref={headerBarRef} className={styles.headerContainer}>
@@ -175,10 +87,10 @@ export const Header = () => {
             </HomeLink>
 
             <nav className={styles.desktopNav}>
-              {NAV_LINKS.map((link) => renderNavLink(link, navLinkClass(link.href)))}
+              {NAV_LINKS.map((link) => renderNavLink(link, styles.navItem))}
             </nav>
 
-            {isResponsive && (
+            {isTablet && (
               <button
                 ref={menuToggleRef}
                 type="button"
@@ -193,19 +105,19 @@ export const Header = () => {
             )}
           </div>
 
-          {isResponsive && menuOpen && (
+          {isTablet && menuOpen && (
             <nav
               ref={mobileNavRef}
               id={MOBILE_NAV_ID}
               className={styles.mobileMenu}
               aria-label="Mobile navigation"
             >
-              {NAV_LINKS.map((link) => renderNavLink(link, mobileNavLinkClass(link.href)))}
+              {NAV_LINKS.map((link) => renderNavLink(link, styles.mobileNavItem))}
             </nav>
           )}
         </div>
       </header>
-      {isResponsive && menuOpen && (
+      {isTablet && menuOpen && (
         <div className={styles.overlay} onClick={closeMenuRestoreFocus} />
       )}
     </>
