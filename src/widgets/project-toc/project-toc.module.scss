@@ -11,6 +11,7 @@
   background-color: var(--surface-header);
   border: 1px solid var(--color-border);
   backdrop-filter: blur(8px);
+  overflow: hidden;
 }
 
 .inner {
@@ -45,7 +46,8 @@
     position: absolute;
     top: 0;
     bottom: 0;
-    width: var(--toc-control-pad);
+    width: auto;
+    aspect-ratio: 1;
     pointer-events: none;
     z-index: 1;
   }
@@ -78,8 +80,9 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: var(--toc-control-pad);
-  height: auto;
+  box-sizing: border-box;
+  width: auto;
+  aspect-ratio: 1;
   padding: 0;
   border: 1px solid var(--color-border);
   background-color: var(--color-bg-primary);
