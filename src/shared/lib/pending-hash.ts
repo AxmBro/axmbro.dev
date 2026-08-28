@@ -1,3 +1,4 @@
+import { normalizePathname } from "@/shared/lib/nav-active";
 import { normalizePageHash } from "@/shared/lib/scroll-to-hash";
 
 const PENDING_HASH_KEY = "pending-hash";
@@ -25,10 +26,13 @@ export const restorePendingHash = () => {
 
     clearPendingHash();
 
-    const currentPath = window.location.pathname + window.location.search;
-    if (currentPath !== pendingPath) return false;
+    // Ignore query: affiliate params (?fbclid, ?igsh) must not block the restore.
+    if (normalizePathname(window.location.pathname) !== normalizePathname(pendingPath)) {
+      return false;
+    }
 
-    history.replaceState(null, "", pendingPath + normalizePageHash(pendingHash));
+    const currentPath = window.location.pathname + window.location.search;
+    history.replaceState(null, "", currentPath + normalizePageHash(pendingHash));
     return true;
   } catch {
     return false;
