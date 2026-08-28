@@ -6,10 +6,6 @@ import { PROJECTS } from "@/shared/constants/data";
 import { ProjectCard, formatProjectDate, parseProjectDateTimestamp } from "@/entities/project";
 import { JoinedTabs } from "@/shared/ui/joined-tabs";
 import {
-  consumeProjectsTagFilter,
-  getSavedProjectsSearch,
-  getSavedProjectsSort,
-  getSavedProjectsTab,
   isProjectsBoardTab,
   saveProjectsSearch,
   saveProjectsSort,
@@ -19,6 +15,7 @@ import {
   type ProjectsBoardSort,
   type ProjectsBoardTab,
 } from "@/shared/lib/projects-board-state";
+import { restoreSavedBoardState } from "./lib/restore-saved-board-state";
 import styles from "./projects-board.module.scss";
 
 type SortOption = "" | ProjectsBoardSort;
@@ -29,49 +26,27 @@ const SORT_OPTIONS: { value: ProjectsBoardSort; label: string }[] = [
   { value: "alphabetical", label: "Alphabetical (A-Z)" },
 ];
 
-type BoardBootstrap = {
-  search: string;
-  activeTab: ProjectsBoardTab;
-  sortOption: SortOption;
-  scrollTop: boolean;
-};
-
-let boardBootstrapCache: BoardBootstrap | null = null;
-
-function getBoardBootstrap(): BoardBootstrap {
-  if (boardBootstrapCache) return boardBootstrapCache;
-
-  const tag = consumeProjectsTagFilter();
-  if (tag) {
-    saveProjectsSearch(tag);
-    saveProjectsTab("all");
-    boardBootstrapCache = {
-      search: tag,
-      activeTab: "all",
-      sortOption: getSavedProjectsSort() ?? "",
-      scrollTop: true,
-    };
-    return boardBootstrapCache;
-  }
-
-  boardBootstrapCache = {
-    search: getSavedProjectsSearch() ?? "",
-    activeTab: getSavedProjectsTab() ?? "all",
-    sortOption: getSavedProjectsSort() ?? "",
-    scrollTop: false,
-  };
-  return boardBootstrapCache;
-}
-
 export const ProjectsBoard = () => {
-  const [search, setSearch] = useState(() => getBoardBootstrap().search);
-  const [activeTab, setActiveTab] = useState(() => getBoardBootstrap().activeTab);
-  const [sortOption, setSortOption] = useState<SortOption>(
-    () => getBoardBootstrap().sortOption,
-  );
+  const [search, setSearch] = useState("");
+  const [activeTab, setActiveTab] = useState<ProjectsBoardTab>("all");
+  const [sortOption, setSortOption] = useState<SortOption>("");
   const [isSortOpen, setIsSortOpen] = useState(false);
 
   const sortRef = useRef<HTMLDivElement>(null);
+  const restoredRef = useRef(false);
+
+  useEffect(() => {
+    if (restoredRef.current) return;
+    restoredRef.current = true;
+
+    const saved = restoreSavedBoardState();
+    setSearch(saved.search);
+    setActiveTab(saved.activeTab);
+    setSortOption(saved.sortOption);
+    if (saved.scrollTop) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }, []);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -90,12 +65,6 @@ export const ProjectsBoard = () => {
       document.removeEventListener("mousedown", handleClickOutside);
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, []);
-
-  useEffect(() => {
-    if (getBoardBootstrap().scrollTop) {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
   }, []);
 
   const handleTabChange = (tab: ProjectsBoardTab) => {
