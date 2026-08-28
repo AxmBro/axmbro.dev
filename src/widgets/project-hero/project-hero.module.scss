@@ -17,6 +17,7 @@
   --hero-cta-shadow-far: 0 6px 16px color-mix(in srgb, var(--color-bg-primary) 55%, transparent);
   position: relative;
   isolation: isolate;
+  overflow: hidden;
   width: 100%;
   padding-block: calc(
     var(--page-padding-block) + var(--spacing-block) + var(--spacing-section)
@@ -39,6 +40,7 @@
   /* Runs past the hero so the fade lands in the gap above the first section */
   bottom: calc(-1 * var(--page-padding-block));
   pointer-events: none;
+  overflow: hidden;
 }
 
 /* Center crop: card thumbnails often carry a title banner along the top edge,
