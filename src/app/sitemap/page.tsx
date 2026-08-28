@@ -3,6 +3,7 @@ import Link from "next/link";
 import { SITE_METADATA } from "@/shared/constants/data";
 import { ROUTES } from "@/shared/constants/routes";
 import { createPageMetadata } from "@/shared/lib/page-metadata";
+import { Reveal } from "@/shared/ui/motion";
 import { ScreenContainer } from "@/shared/ui/screen-container";
 import { ScreenSection } from "@/shared/ui/screen-section";
 import { SitemapGrid, SitemapProjectList } from "@/widgets/sitemap-grid";
@@ -16,31 +17,35 @@ export const metadata: Metadata = createPageMetadata({
 export default function SitemapPage() {
   return (
     <ScreenContainer>
-      <ScreenSection
-        eyebrow="Directory"
-        title="Sitemap"
-        headingLevel="h1"
-        titleDescription="Browse every main area of AxmBro.dev, including portfolio work, Minecraft Bedrock UI commissions, project filters, contact options, and legal pages."
-        withChildrenPadding={false}
-      >
-        <SitemapGrid />
-      </ScreenSection>
+      <Reveal>
+        <ScreenSection
+          eyebrow="Directory"
+          title="Sitemap"
+          headingLevel="h1"
+          titleDescription="Browse every main area of AxmBro.dev, including portfolio work, Minecraft Bedrock UI commissions, project filters, contact options, and legal pages."
+          withChildrenPadding={false}
+        >
+          <SitemapGrid />
+        </ScreenSection>
+      </Reveal>
 
-      <ScreenSection
-        eyebrow="Portfolio"
-        title="All Projects"
-        titleDescription={
-          <>
-            A complete index of the client commissions, personal releases, and
-            technical projects currently listed on AxmBro.dev.{" "}
-            <Link href={ROUTES.projects}>Filter on the Projects page</Link> to
-            narrow by featured work, personal releases, or client commissions.
-          </>
-        }
-        withChildrenPadding={false}
-      >
-        <SitemapProjectList />
-      </ScreenSection>
+      <Reveal>
+        <ScreenSection
+          eyebrow="Portfolio"
+          title="All Projects"
+          titleDescription={
+            <>
+              A complete index of the client commissions, personal releases, and
+              technical projects currently listed on AxmBro.dev.{" "}
+              <Link href={ROUTES.projects}>Filter on the Projects page</Link> to
+              narrow by featured work, personal releases, or client commissions.
+            </>
+          }
+          withChildrenPadding={false}
+        >
+          <SitemapProjectList />
+        </ScreenSection>
+      </Reveal>
     </ScreenContainer>
   );
 }
