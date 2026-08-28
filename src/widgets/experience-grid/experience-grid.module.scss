@@ -6,14 +6,38 @@
   flex-direction: column;
   width: 100%;
   border-top: 1px solid var(--color-border);
+  --exp-rail-x: var(--spacing-block);
+  --exp-content-inset: calc(var(--spacing-block) + var(--spacing-section));
 }
 
 .expVerticalItem {
-  @include stack-xs;
-  border-bottom: 1px solid var(--color-border);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
 
-  &:last-child {
-    border-bottom: none;
+  &::before {
+    content: '';
+    position: absolute;
+    left: var(--exp-rail-x);
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background-color: var(--color-border);
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: calc(var(--exp-rail-x) - 3.25px);
+    top: calc(var(--spacing-section) + 0.65em);
+    width: 8px;
+    height: 8px;
+    background-color: var(--color-neutral-100);
+  }
+
+  &:first-child::after {
+    top: calc(var(--spacing-block) + 0.65em);
   }
 }
 
@@ -23,7 +47,11 @@
   align-items: flex-start;
   flex-wrap: wrap;
   gap: var(--spacing-xs);
-  padding: var(--spacing-block) var(--spacing-block) 0 var(--spacing-block);
+  padding: var(--spacing-block) var(--spacing-block) 0 var(--exp-content-inset);
+
+  .expVerticalItem:not(:first-child) & {
+    padding-top: var(--spacing-section);
+  }
 }
 
 .expHeaderMain {
@@ -47,9 +75,17 @@
 }
 
 .expTextContent {
-  padding: 0 var(--spacing-block) var(--spacing-block) var(--spacing-block);
+  padding: 0 var(--spacing-block) calc(var(--spacing-section) / 2) var(--exp-content-inset);
   display: flex;
   flex-direction: column;
+
+  .expVerticalItem:last-child & {
+    padding-bottom: var(--spacing-block);
+  }
+}
+
+.expActions {
+  padding-top: calc(var(--spacing-section) / 1.5);
 }
 
 .expListMinimal {

@@ -20,6 +20,7 @@
   align-items: center;
   flex: 1;
   min-width: 0;
+  position: relative;
 
   @media (max-width: $breakpoint-md) {
     width: 100%;
@@ -92,7 +93,7 @@
   left: 0;
   right: 0;
   width: 100%;
-  background-color: #0a0a0a;
+  background-color: var(--surface-dropdown);
   border: 1px solid var(--color-border);
   list-style: none;
   padding: 0.25rem 0;
@@ -153,6 +154,17 @@
   outline: none;
   transition: none;
 
+  &::-webkit-search-decoration,
+  &::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    appearance: none;
+    display: none;
+  }
+
+  &.hasValue {
+    padding-right: 2.75rem;
+  }
+
   &:hover {
     background-color: var(--surface-hover);
   }
@@ -184,42 +196,29 @@
 }
 
 .clearButton {
-  @include text-body-sm;
-  height: 3.25rem;
-  width: 3.25rem;
-  flex-shrink: 0;
-  border: 1px solid var(--color-border);
-  border-left: none;
-  border-right: none;
-  background-color: var(--surface-input);
+  @include text-body-sm(var(--color-neutral-100));
+  position: absolute;
+  top: 50%;
+  right: 0.75rem;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 0;
+  border: none;
+  background: none;
   font-family: inherit;
+  line-height: 1;
   cursor: pointer;
-  outline: none;
-  transition: none;
+  transform: translateY(-50%);
 
-  &:hover {
-    background-color: var(--surface-hover);
-    color: var(--color-neutral-100);
-  }
-
+  &:hover,
   &:focus,
   &:focus-visible {
+    color: var(--color-neutral-100);
     outline: none;
-    border-color: var(--color-neutral-100);
-    background-color: var(--surface-input-focus);
-    position: relative;
-    z-index: 2;
-    border-right: 1px solid var(--color-neutral-100);
-    margin-right: -1px;
-  }
-
-  @media (max-width: $breakpoint-md) {
-    border-right: 1px solid var(--color-border);
-
-    &:focus,
-    &:focus-visible {
-      margin-right: 0;
-    }
   }
 }
 
@@ -295,15 +294,10 @@
 }
 
 .emptyAction {
+  @include text-link;
   background: none;
   border: none;
   padding: 0;
   font: inherit;
-  color: var(--color-neutral-100);
-  text-decoration: underline;
   cursor: pointer;
-
-  &:hover {
-    color: var(--color-neutral-400);
-  }
 }

@@ -1,19 +1,16 @@
 "use client";
 
 import { useEffect, useRef, useState, type MouseEvent } from "react";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { HomeLink } from "@/shared/ui/home-link";
-import { HashLink } from "@/shared/ui/hash-link";
-import { ProjectsBoardLink } from "@/shared/ui/projects-tag-link";
+import { NavRouteLink } from "@/shared/ui/nav-route-link";
 import { NAV_LINKS } from "@/shared/constants/data";
 import { BREAKPOINT_TABLET_PX } from "@/shared/constants/breakpoints";
 import { ROUTES } from "@/shared/constants/routes";
 import { isNavLinkActive, normalizePathname } from "@/shared/lib/nav-active";
+import { hasHash } from "@/shared/lib/has-hash";
 import styles from "./header.module.scss";
-
-const hasHash = (href: string) => href.includes("#");
 
 const MOBILE_NAV_ID = "header-mobile-nav";
 
@@ -24,6 +21,8 @@ export const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isResponsive, setIsResponsive] = useState(false);
   const pathname = normalizePathname(usePathname());
+  const isHome = pathname === ROUTES.home;
+  const [announcementInView, setAnnouncementInView] = useState(isHome);
 
   useEffect(() => {
     const mqResponsive = window.matchMedia(`(max-width: ${BREAKPOINT_TABLET_PX}px)`);
@@ -55,6 +54,28 @@ export const Header = () => {
       document.documentElement.style.removeProperty("--header-sticky-height");
     };
   }, [isResponsive]);
+
+  useEffect(() => {
+    if (!isHome) return;
+
+    const node = document.querySelector("[data-announcement-bar]");
+    if (!(node instanceof HTMLElement)) return;
+
+    const headerPx = headerBarRef.current?.offsetHeight ?? 0;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setAnnouncementInView(entry.isIntersecting);
+      },
+      {
+        threshold: 0,
+        rootMargin: `-${headerPx}px 0px 0px 0px`,
+      },
+    );
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [isHome, isResponsive]);
+
+  const overAnnouncement = isHome && announcementInView;
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -102,7 +123,7 @@ export const Header = () => {
 
   const handlePlainNavClick = (href: string) => (e: MouseEvent<HTMLAnchorElement>) => {
     closeMenu();
-    if (pathname !== href) return;
+    if (pathname !== normalizePathname(href)) return;
 
     e.preventDefault();
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -117,32 +138,29 @@ export const Header = () => {
       : styles.mobileNavItem;
 
   const renderNavLink = (link: (typeof NAV_LINKS)[number], className: string) => {
-    if (hasHash(link.href)) {
-      return (
-        <HashLink key={link.href} href={link.href} className={className} onClick={closeMenu}>
-          {link.text}
-        </HashLink>
-      );
-    }
-
-    if (link.href === ROUTES.projects) {
-      return (
-        <ProjectsBoardLink key={link.href} tab="all" className={className} onClick={closeMenu}>
-          {link.text}
-        </ProjectsBoardLink>
-      );
-    }
+    const ariaCurrent = isNavLinkActive(pathname, link.href) ? "page" : undefined;
+    const isPlain = !hasHash(link.href) && link.href !== ROUTES.projects;
 
     return (
-      <Link key={link.href} href={link.href} className={className} onClick={handlePlainNavClick(link.href)}>
+      <NavRouteLink
+        key={link.href}
+        href={link.href}
+        className={className}
+        aria-current={ariaCurrent}
+        onNavigate={isPlain ? undefined : closeMenu}
+        onPlainClick={isPlain ? handlePlainNavClick(link.href) : undefined}
+      >
         {link.text}
-      </Link>
+      </NavRouteLink>
     );
   };
 
   return (
     <>
-      <header className={styles.headerRoot}>
+      <header
+        className={styles.headerRoot}
+        {...(overAnnouncement ? { "data-over-announcement": "" } : {})}
+      >
         <div className={styles.header}>
           <div ref={headerBarRef} className={styles.headerContainer}>
             <HomeLink className={styles.logoSection} onClick={closeMenu}>

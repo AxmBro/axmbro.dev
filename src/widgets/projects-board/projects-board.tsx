@@ -1,69 +1,76 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { FaChevronDown } from "react-icons/fa6";
 import { PROJECTS } from "@/shared/constants/data";
-import { ProjectCard, formatProjectDate } from "@/entities/project";
+import { ProjectCard, formatProjectDate, parseProjectDateTimestamp } from "@/entities/project";
 import { JoinedTabs } from "@/shared/ui/joined-tabs";
 import {
   consumeProjectsTagFilter,
+  getSavedProjectsSearch,
+  getSavedProjectsSort,
   getSavedProjectsTab,
   isProjectsBoardTab,
+  saveProjectsSearch,
+  saveProjectsSort,
   saveProjectsTab,
   PROJECTS_BOARD_TABS,
   PROJECTS_BOARD_TAB_LABELS,
+  type ProjectsBoardSort,
   type ProjectsBoardTab,
 } from "@/shared/lib/projects-board-state";
 import styles from "./projects-board.module.scss";
 
-type SortOption = "" | "newest" | "oldest" | "alphabetical";
+type SortOption = "" | ProjectsBoardSort;
 
-const SORT_OPTIONS: { value: SortOption; label: string }[] = [
+const SORT_OPTIONS: { value: ProjectsBoardSort; label: string }[] = [
   { value: "newest", label: "Newest" },
   { value: "oldest", label: "Oldest" },
   { value: "alphabetical", label: "Alphabetical (A-Z)" },
 ];
 
-const MONTHS = [
-  "jan",
-  "feb",
-  "mar",
-  "apr",
-  "may",
-  "jun",
-  "jul",
-  "aug",
-  "sep",
-  "oct",
-  "nov",
-  "dec",
-];
-
-const parseProjectDateTimestamp = (dateStr?: string): number => {
-  if (!dateStr) return 0;
-
-  const match = dateStr.match(
-    /\b(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\s+(\d{4})\b/i,
-  );
-  if (!match) return 0;
-
-  const month = MONTHS.indexOf(match[1].toLowerCase().slice(0, 3));
-  if (month < 0) return 0;
-
-  return Date.UTC(Number(match[2]), month, 1);
+type BoardBootstrap = {
+  search: string;
+  activeTab: ProjectsBoardTab;
+  sortOption: SortOption;
+  scrollTop: boolean;
 };
 
+let boardBootstrapCache: BoardBootstrap | null = null;
+
+function getBoardBootstrap(): BoardBootstrap {
+  if (boardBootstrapCache) return boardBootstrapCache;
+
+  const tag = consumeProjectsTagFilter();
+  if (tag) {
+    saveProjectsSearch(tag);
+    saveProjectsTab("all");
+    boardBootstrapCache = {
+      search: tag,
+      activeTab: "all",
+      sortOption: getSavedProjectsSort() ?? "",
+      scrollTop: true,
+    };
+    return boardBootstrapCache;
+  }
+
+  boardBootstrapCache = {
+    search: getSavedProjectsSearch() ?? "",
+    activeTab: getSavedProjectsTab() ?? "all",
+    sortOption: getSavedProjectsSort() ?? "",
+    scrollTop: false,
+  };
+  return boardBootstrapCache;
+}
+
 export const ProjectsBoard = () => {
-  const [search, setSearch] = useState("");
-  const [activeTab, setActiveTab] = useState<ProjectsBoardTab>("all");
-  const [sortOption, setSortOption] = useState<SortOption>("");
+  const [search, setSearch] = useState(() => getBoardBootstrap().search);
+  const [activeTab, setActiveTab] = useState(() => getBoardBootstrap().activeTab);
+  const [sortOption, setSortOption] = useState<SortOption>(
+    () => getBoardBootstrap().sortOption,
+  );
   const [isSortOpen, setIsSortOpen] = useState(false);
 
-  const searchParams = useSearchParams();
-  const router = useRouter();
-  const pathname = usePathname();
-  const initialized = useRef(false);
   const sortRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -86,41 +93,25 @@ export const ProjectsBoard = () => {
   }, []);
 
   useEffect(() => {
-    const animationId = window.requestAnimationFrame(() => {
-      const tagParam = searchParams.get("tag");
-      const tagFromStorage = consumeProjectsTagFilter();
-
-      if (tagFromStorage) {
-        setSearch(tagFromStorage);
-        setActiveTab("all");
-        saveProjectsTab("all");
-        window.scrollTo({ top: 0, behavior: "smooth" });
-        initialized.current = true;
-        return;
-      }
-
-      if (tagParam) {
-        setSearch(tagParam);
-        setActiveTab("all");
-        saveProjectsTab("all");
-        window.scrollTo({ top: 0, behavior: "smooth" });
-        router.replace(pathname, { scroll: false });
-      } else if (!initialized.current) {
-        const savedTab = getSavedProjectsTab();
-        if (savedTab) {
-          setActiveTab(savedTab);
-        }
-      }
-
-      initialized.current = true;
-    });
-
-    return () => window.cancelAnimationFrame(animationId);
-  }, [searchParams, pathname, router]);
+    if (getBoardBootstrap().scrollTop) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }, []);
 
   const handleTabChange = (tab: ProjectsBoardTab) => {
     setActiveTab(tab);
     saveProjectsTab(tab);
+  };
+
+  const handleSearchChange = (value: string) => {
+    setSearch(value);
+    saveProjectsSearch(value);
+  };
+
+  const handleSortChange = (option: SortOption) => {
+    setSortOption(option);
+    saveProjectsSort(option);
+    setIsSortOpen(false);
   };
 
   const filtered = PROJECTS.filter((item) => {
@@ -166,16 +157,17 @@ export const ProjectsBoard = () => {
         <div className={styles.searchBar}>
           <input
             type="search"
-            className={styles.searchInput}
+            className={`${styles.searchInput} ${search ? styles.hasValue : ""}`}
             placeholder="Search..."
             aria-label="Search projects"
             value={search}
-            onChange={(e) => setSearch(e.target.value)}
+            onChange={(e) => handleSearchChange(e.target.value)}
           />
           {search && (
             <button
+              type="button"
               className={styles.clearButton}
-              onClick={() => setSearch("")}
+              onClick={() => handleSearchChange("")}
               aria-label="Clear search"
             >
               ✕
@@ -210,16 +202,13 @@ export const ProjectsBoard = () => {
                   <li
                     role="option"
                     tabIndex={0}
+                    aria-selected={false}
                     className={styles.clearSortItem}
-                    onClick={() => {
-                      setSortOption("");
-                      setIsSortOpen(false);
-                    }}
+                    onClick={() => handleSortChange("")}
                     onKeyDown={(e) => {
                       if (e.key === "Enter" || e.key === " ") {
                         e.preventDefault();
-                        setSortOption("");
-                        setIsSortOpen(false);
+                        handleSortChange("");
                       }
                     }}
                   >
@@ -237,15 +226,11 @@ export const ProjectsBoard = () => {
                   className={`${styles.sortDropdownItem} ${
                     sortOption === option.value ? styles.selectedItem : ""
                   }`}
-                  onClick={() => {
-                    setSortOption(option.value);
-                    setIsSortOpen(false);
-                  }}
+                  onClick={() => handleSortChange(option.value)}
                   onKeyDown={(e) => {
                     if (e.key === "Enter" || e.key === " ") {
                       e.preventDefault();
-                      setSortOption(option.value);
-                      setIsSortOpen(false);
+                      handleSortChange(option.value);
                     }
                   }}
                 >
@@ -293,7 +278,7 @@ export const ProjectsBoard = () => {
                 <button
                   type="button"
                   className={styles.emptyAction}
-                  onClick={() => setSearch("")}
+                  onClick={() => handleSearchChange("")}
                 >
                   Clear search
                 </button>
@@ -302,7 +287,7 @@ export const ProjectsBoard = () => {
                   type="button"
                   className={styles.emptyAction}
                   onClick={() => {
-                    setSearch("");
+                    handleSearchChange("");
                     handleTabChange("commissions");
                   }}
                 >
