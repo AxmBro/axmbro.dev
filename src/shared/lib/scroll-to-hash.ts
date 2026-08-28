@@ -3,8 +3,8 @@
  * (`--header-sticky-height`, `--project-toc-height`, scroll-margin).
  *
  * Flow:
- *   public/scripts/hash-scroll-init.js - stash hash before first paint
- *   HashLink - cross-page pending hash; same-page scrollToHash
+ *   HashScrollInit - stash hash before first paint (useServerInsertedHTML)
+ *   HashLink - cross-page pending hash; same-page replaceState + scrollToHash on every click
  *   HashScroll - restore pending hash after route / hashchange
  *
  * Section: <ScreenSection id="..." /> + Link/HashLink href="#..."

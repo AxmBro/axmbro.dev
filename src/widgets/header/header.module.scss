@@ -37,7 +37,7 @@
   @include focus-ring;
   display: flex;
   align-items: center;
-  gap: var(--spacing-xs);
+  gap: calc(var(--spacing-xs) * 2);
   text-decoration: none;
   border-radius: 8px;
 
@@ -52,9 +52,11 @@
   }
 
   .logoText {
-    @include text-h2;
-    letter-spacing: 0.5px;
+    font-size: var(--font-h2);
     line-height: 1;
+    font-weight: var(--font-weight-body);
+    color: var(--color-neutral-100);
+    letter-spacing: 0.5px;
 
     @media (max-width: 340px) {
       display: none;

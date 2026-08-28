@@ -53,7 +53,7 @@
   white-space: pre-line;
 
   strong {
-    font-weight: 500;
+    font-weight: var(--font-weight-heading);
     color: var(--color-neutral-100);
   }
 

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { HashLink } from "@/shared/ui/hash-link";
 import { contactSectionHref, homeSectionHref, SECTION_IDS } from "./anchors";
 import type { FAQItem } from "./types";
 
@@ -14,9 +15,9 @@ export const FAQ_ITEMS: FAQItem[] = [
         player flow, including custom HUDs, server forms, chest UIs, and menu
         systems that integrate with your resource pack and scripts. I can also
         take on matching responsive web work when needed.{" "}
-        <Link href={homeSectionHref(SECTION_IDS.selectedWork)}>
+        <HashLink href={homeSectionHref(SECTION_IDS.selectedWork)}>
           See Selected Work
-        </Link>{" "}
+        </HashLink>{" "}
         for recent examples.
       </>
     ),
@@ -31,9 +32,9 @@ export const FAQ_ITEMS: FAQItem[] = [
         Yes. I am currently accepting Minecraft Bedrock JsonUI commissions. Send
         your scope, target version, required screens, and any mockups or textures
         through the{" "}
-        <Link href={contactSectionHref(SECTION_IDS.startProject)}>
+        <HashLink href={contactSectionHref(SECTION_IDS.startProject)}>
           contact form
-        </Link>{" "}
+        </HashLink>{" "}
         so I can review the fit.
       </>
     ),
@@ -66,9 +67,9 @@ export const FAQ_ITEMS: FAQItem[] = [
         discussed and adjusted individually to meet your schedule. A precise
         timeline estimate will be provided after we review your exact
         requirements.{" "}
-        <Link href={contactSectionHref(SECTION_IDS.startProject)}>
+        <HashLink href={contactSectionHref(SECTION_IDS.startProject)}>
           Start a Project
-        </Link>.
+        </HashLink>.
       </>
     ),
   },
@@ -85,9 +86,9 @@ export const FAQ_ITEMS: FAQItem[] = [
         remaining 50% is paid upon successful completion and delivery of the
         assets. I am generally flexible and open to custom contracts or tailored
         business terms depending on your project needs.{" "}
-        <Link href={contactSectionHref(SECTION_IDS.startProject)}>
+        <HashLink href={contactSectionHref(SECTION_IDS.startProject)}>
           Start a Project
-        </Link>.
+        </HashLink>.
       </>
     ),
   },

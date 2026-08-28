@@ -1,4 +1,8 @@
-// Before hydration: stash hash and scroll to top. See scroll-to-hash.ts.
+"use client";
+
+import { useServerInsertedHTML } from "next/navigation";
+
+const HASH_SCROLL_INIT_SCRIPT = `
 history.scrollRestoration = "manual";
 
 if (location.hash) {
@@ -15,3 +19,12 @@ if (location.hash) {
     window.scrollTo(0, 0);
   }
 }
+`.trim();
+
+export const HashScrollInit = () => {
+  useServerInsertedHTML(() => (
+    <script dangerouslySetInnerHTML={{ __html: HASH_SCROLL_INIT_SCRIPT }} />
+  ));
+
+  return null;
+};

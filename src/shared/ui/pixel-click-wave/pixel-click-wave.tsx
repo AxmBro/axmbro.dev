@@ -61,6 +61,33 @@ const CLICK_COOLDOWN_MS = 1250;
 const MAX_ACTIVE_WAVES = 3;
 const SECTION_CLIP_INSET_PX = 1;
 
+interface ViewportState {
+  width: number;
+  height: number;
+  offsetX: number;
+  offsetY: number;
+}
+
+const getViewportState = (): ViewportState => {
+  const viewport = window.visualViewport;
+
+  if (!viewport) {
+    return {
+      width: window.innerWidth,
+      height: window.innerHeight,
+      offsetX: 0,
+      offsetY: 0,
+    };
+  }
+
+  return {
+    width: viewport.width,
+    height: viewport.height,
+    offsetX: viewport.offsetLeft,
+    offsetY: viewport.offsetTop,
+  };
+};
+
 interface RgbColor {
   red: number;
   green: number;
@@ -134,21 +161,28 @@ const getMaxRadius = (x: number, y: number, width: number, height: number) =>
     Math.hypot(width - x, height - y),
   );
 
-const getElementClip = (element: HTMLElement): PixelWaveClip | null => {
+const getElementClip = (
+  element: HTMLElement,
+  viewport: ViewportState,
+): PixelWaveClip | null => {
   const rect = element.getBoundingClientRect();
-  const left = Math.ceil(rect.left) + SECTION_CLIP_INSET_PX;
-  const top = Math.ceil(rect.top) + SECTION_CLIP_INSET_PX;
-  const right = Math.floor(rect.right) - SECTION_CLIP_INSET_PX;
-  const bottom = Math.floor(rect.bottom) - SECTION_CLIP_INSET_PX;
+  const left = Math.ceil(rect.left - viewport.offsetX) + SECTION_CLIP_INSET_PX;
+  const top = Math.ceil(rect.top - viewport.offsetY) + SECTION_CLIP_INSET_PX;
+  const right = Math.floor(rect.right - viewport.offsetX) - SECTION_CLIP_INSET_PX;
+  const bottom = Math.floor(rect.bottom - viewport.offsetY) - SECTION_CLIP_INSET_PX;
   const width = right - left;
   const height = bottom - top;
 
   return width > 0 && height > 0 ? { left, top, width, height } : null;
 };
 
-const getHeaderSafeClip = (clip: PixelWaveClip): PixelWaveClip | null => {
+const getHeaderSafeClip = (
+  clip: PixelWaveClip,
+  viewport: ViewportState,
+): PixelWaveClip | null => {
   const headerBottom =
-    document.querySelector<HTMLElement>("header")?.getBoundingClientRect().bottom ?? 0;
+    (document.querySelector<HTMLElement>("header")?.getBoundingClientRect().bottom ?? 0) -
+    viewport.offsetY;
   const top = Math.max(clip.top, Math.ceil(headerBottom));
   const bottom = clip.top + clip.height;
   const height = bottom - top;
@@ -191,6 +225,7 @@ export function PixelClickWave() {
   const aboveCanvasRef = useRef<HTMLCanvasElement>(null);
   const behindCanvasRef = useRef<HTMLCanvasElement>(null);
   const runtimeRef = useRef<WaveRuntime | null>(null);
+  const introPathRef = useRef<string | null>(null);
   const pathname = usePathname();
   const [behindMount, setBehindMount] = useState<HTMLElement | null>(null);
 
@@ -229,20 +264,30 @@ export function PixelClickWave() {
 
       return layer ?? layers.above!;
     };
-    let width = window.innerWidth;
-    let height = window.innerHeight;
+    let viewport: ViewportState = getViewportState();
+    let width = viewport.width;
+    let height = viewport.height;
     let lastClickWaveStartedAt = Number.NEGATIVE_INFINITY;
+
+    const applyCanvasLayout = (layer: LayerRuntime) => {
+      layer.canvas.style.left = `${viewport.offsetX}px`;
+      layer.canvas.style.top = `${viewport.offsetY}px`;
+      layer.canvas.style.width = `${width}px`;
+      layer.canvas.style.height = `${height}px`;
+    };
 
     const resizeCanvas = () => {
       const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
-      width = window.innerWidth;
-      height = window.innerHeight;
+      viewport = getViewportState();
+      width = viewport.width;
+      height = viewport.height;
 
       for (const layer of Object.values(layers)) {
         if (!layer) continue;
         layer.canvas.width = Math.round(width * pixelRatio);
         layer.canvas.height = Math.round(height * pixelRatio);
         layer.context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+        applyCanvasLayout(layer);
       }
     };
 
@@ -371,6 +416,18 @@ export function PixelClickWave() {
     };
 
     const animateLayer = (layer: LayerRuntime) => (timestamp: number) => {
+      if (layer.waves.length > 0) {
+        const nextViewport = getViewportState();
+        if (
+          nextViewport.offsetX !== viewport.offsetX ||
+          nextViewport.offsetY !== viewport.offsetY ||
+          nextViewport.width !== width ||
+          nextViewport.height !== height
+        ) {
+          resizeCanvas();
+        }
+      }
+
       const { context, waves } = layer;
       context.clearRect(0, 0, width, height);
 
@@ -378,8 +435,8 @@ export function PixelClickWave() {
         const wave = waves[index];
 
         if (wave.clipElement) {
-          const sectionClip = getElementClip(wave.clipElement);
-          const visibleClip = sectionClip ? getHeaderSafeClip(sectionClip) : null;
+          const sectionClip = getElementClip(wave.clipElement, viewport);
+          const visibleClip = sectionClip ? getHeaderSafeClip(sectionClip, viewport) : null;
           if (!sectionClip || !visibleClip) {
             waves.splice(index, 1);
             continue;
@@ -440,8 +497,8 @@ export function PixelClickWave() {
       clipElement: HTMLElement,
       options?: { palette?: PixelWavePalette; opacityScale?: number },
     ) => {
-      const sectionClip = getElementClip(clipElement);
-      const visibleClip = sectionClip ? getHeaderSafeClip(sectionClip) : null;
+      const sectionClip = getElementClip(clipElement, viewport);
+      const visibleClip = sectionClip ? getHeaderSafeClip(sectionClip, viewport) : null;
       if (!sectionClip || !visibleClip) return;
 
       const startedAt = performance.now();
@@ -500,11 +557,16 @@ export function PixelClickWave() {
       if (startedAt - lastClickWaveStartedAt < CLICK_COOLDOWN_MS) return;
       lastClickWaveStartedAt = startedAt;
 
-      const maxRadius = getMaxRadius(event.clientX, event.clientY, width, height);
+      const maxRadius = getMaxRadius(
+        event.clientX - viewport.offsetX,
+        event.clientY - viewport.offsetY,
+        width,
+        height,
+      );
 
       pushWave(layers.above!, {
-        x: event.clientX,
-        y: event.clientY,
+        x: event.clientX - viewport.offsetX,
+        y: event.clientY - viewport.offsetY,
         startedAt,
         maxRadius,
         travelDurationMs: getTravelDuration(maxRadius),
@@ -541,12 +603,16 @@ export function PixelClickWave() {
     };
 
     window.addEventListener("resize", resizeCanvas);
+    window.visualViewport?.addEventListener("resize", resizeCanvas);
+    window.visualViewport?.addEventListener("scroll", resizeCanvas);
     document.addEventListener("click", handleClick);
     window.addEventListener(PIXEL_WAVE_SPAWN_EVENT, handleSpawnEvent);
 
     return () => {
       runtimeRef.current = null;
       window.removeEventListener("resize", resizeCanvas);
+      window.visualViewport?.removeEventListener("resize", resizeCanvas);
+      window.visualViewport?.removeEventListener("scroll", resizeCanvas);
       document.removeEventListener("click", handleClick);
       window.removeEventListener(PIXEL_WAVE_SPAWN_EVENT, handleSpawnEvent);
       for (const layer of Object.values(layers)) {
@@ -582,6 +648,7 @@ export function PixelClickWave() {
   useEffect(() => {
     if (isReducedMotion()) return;
 
+    introPathRef.current = null;
     let attemptsLeft = INTRO_RETRY_LIMIT;
     let cancelled = false;
     let retryTimeoutId = 0;
@@ -611,7 +678,9 @@ export function PixelClickWave() {
       }
 
       frameId = window.requestAnimationFrame(() => {
-        if (cancelled) return;
+        if (cancelled || introPathRef.current === pathname) return;
+
+        introPathRef.current = pathname;
 
         if (pathname === ROUTES.home) {
           dispatchPixelWaveSpawn({

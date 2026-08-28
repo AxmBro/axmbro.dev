@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 import { Lexend } from "next/font/google";
 import { GoogleAnalytics } from "@/shared/ui/google-analytics";
 import { CookieConsent } from "@/shared/ui/cookie-consent";
 import { Header } from "@/widgets/header";
 import { Footer } from "@/widgets/footer";
-import { HashScroll } from "@/shared/ui/hash-scroll";
+import { HashScroll, HashScrollInit } from "@/shared/ui/hash-scroll";
 import { AmbientPixels } from "@/shared/ui/ambient-pixels";
 import { PixelClickWave } from "@/shared/ui/pixel-click-wave";
 import { SITE_METADATA } from "@/shared/constants/data";
@@ -64,10 +63,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={lexend.variable} suppressHydrationWarning>
       <body suppressHydrationWarning>
+        <HashScrollInit />
         <a href="#main" className="skip-link">
           Skip to main content
         </a>
-        <Script src="/scripts/hash-scroll-init.js" strategy="beforeInteractive" />
         <GoogleAnalytics />
         <CookieConsent />
         <HashScroll />

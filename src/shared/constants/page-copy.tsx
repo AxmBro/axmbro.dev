@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { HashLink } from "@/shared/ui/hash-link";
 import {
   contactSectionHref,
   SECTION_IDS,
@@ -417,9 +418,9 @@ export const COMMISSIONS_PAGE_TEXTS = {
     <>
       A clear starting point keeps the project faster, easier to estimate, and
       closer to the result you expect. When you are ready,{" "}
-      <Link href={contactSectionHref(SECTION_IDS.startProject)}>
+      <HashLink href={contactSectionHref(SECTION_IDS.startProject)}>
         send the brief through the contact form
-      </Link>
+      </HashLink>
       .
     </>
   ),

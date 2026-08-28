@@ -1,14 +1,14 @@
 .tags {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--spacing-xs);
+  gap: calc(var(--spacing-xs) * 2);
   flex-shrink: 0;
 }
 
 .tag {
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
+  gap: 0.5rem;
   font-size: 0.75rem;
   font-weight: 400;
   color: var(--color-neutral-400);

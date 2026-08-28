@@ -2,10 +2,19 @@
 @use '../../shared/styles/mixins' as *;
 
 .hero {
-  /* Hard offset shadow, no blur - page background at half strength */
+  /* Hard offset + soft glow - readable on varied hero media */
   --hero-shadow-color: color-mix(in srgb, var(--color-bg-primary) 50%, transparent);
-  --hero-title-shadow: 3px 3px 0 var(--hero-shadow-color);
-  --hero-description-shadow: 1px 1px 0 var(--hero-shadow-color);
+  --hero-shadow-glow: color-mix(in srgb, var(--color-bg-primary) 72%, transparent);
+  --hero-title-shadow:
+    3px 3px 0 var(--hero-shadow-color),
+    0 0 28px var(--hero-shadow-glow),
+    0 4px 18px var(--hero-shadow-glow);
+  --hero-description-shadow:
+    1px 1px 0 var(--hero-shadow-color),
+    0 0 18px var(--hero-shadow-glow),
+    0 2px 12px var(--hero-shadow-glow);
+  --hero-cta-shadow-near: 0 0 20px color-mix(in srgb, var(--color-bg-primary) 80%, transparent);
+  --hero-cta-shadow-far: 0 6px 16px color-mix(in srgb, var(--color-bg-primary) 55%, transparent);
   position: relative;
   isolation: isolate;
   width: 100%;
@@ -72,4 +81,8 @@
   @include hero-body-copy;
   margin-top: var(--spacing-xs);
   text-shadow: var(--hero-description-shadow);
+}
+
+.cta {
+  filter: drop-shadow(var(--hero-cta-shadow-near)) drop-shadow(var(--hero-cta-shadow-far));
 }

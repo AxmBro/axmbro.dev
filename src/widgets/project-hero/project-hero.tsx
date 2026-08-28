@@ -31,7 +31,7 @@ export function ProjectHero({ title, description, imageSrc, action }: ProjectHer
         <h1 className={styles.title}>{title}</h1>
         <p className={styles.description}>{description}</p>
         {action && (
-          <ButtonGroup marginTop>
+          <ButtonGroup marginTop className={styles.cta}>
             <Button
               text={action.text}
               variant="neutral"

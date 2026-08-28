@@ -1,7 +1,6 @@
 "use client";
 
-import Script from "next/script";
-import { useSyncExternalStore } from "react";
+import { useEffect, useRef, useSyncExternalStore } from "react";
 import {
   getAnalyticsConsent,
   subscribeAnalyticsConsent,
@@ -12,40 +11,49 @@ const gaMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 
 const getServerConsent = () => null as AnalyticsConsent | null;
 
+declare global {
+  interface Window {
+    dataLayer?: unknown[];
+    gtag?: (...args: unknown[]) => void;
+  }
+}
+
 export const GoogleAnalytics = () => {
   const consent = useSyncExternalStore(
     subscribeAnalyticsConsent,
     getAnalyticsConsent,
     getServerConsent,
   );
+  const loadedRef = useRef(false);
 
-  if (!gaMeasurementId || consent !== "accepted") return null;
+  useEffect(() => {
+    if (!gaMeasurementId || consent !== "accepted" || loadedRef.current) return;
+    loadedRef.current = true;
 
-  return (
-    <>
-      <Script
-        src={`https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`}
-        strategy="afterInteractive"
-      />
-      <Script id="ga4-init" strategy="afterInteractive">
-        {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('consent', 'default', {
-            analytics_storage: 'denied',
-            ad_storage: 'denied',
-            ad_user_data: 'denied',
-            ad_personalization: 'denied',
-          });
-          gtag('consent', 'update', {
-            analytics_storage: 'granted',
-          });
-          gtag('config', '${gaMeasurementId}', {
-            anonymize_ip: true,
-          });
-        `}
-      </Script>
-    </>
-  );
+    const src = `https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`;
+    if (!document.querySelector(`script[src="${src}"]`)) {
+      const script = document.createElement("script");
+      script.src = src;
+      script.async = true;
+      document.head.appendChild(script);
+    }
+
+    window.dataLayer = window.dataLayer ?? [];
+    window.gtag = function gtag() {
+      window.dataLayer?.push(arguments);
+    };
+
+    window.gtag("js", new Date());
+    window.gtag("consent", "default", {
+      analytics_storage: "granted",
+      ad_storage: "denied",
+      ad_user_data: "denied",
+      ad_personalization: "denied",
+    });
+    window.gtag("config", gaMeasurementId, {
+      anonymize_ip: true,
+    });
+  }, [consent]);
+
+  return null;
 };
