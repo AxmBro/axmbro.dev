@@ -1,24 +1,27 @@
 @use './variables' as *;
 
-@mixin text-display($color: var(--color-neutral-100)) {
-  font-size: var(--font-h1);
-  line-height: var(--line-height-display);
-  font-weight: var(--font-weight-heading);
+@mixin _text-heading(
+  $font-size,
+  $line-height,
+  $color: var(--color-neutral-100),
+  $weight: var(--font-weight-heading)
+) {
+  font-size: $font-size;
+  line-height: $line-height;
+  font-weight: $weight;
   color: $color;
+}
+
+@mixin text-display($color: var(--color-neutral-100)) {
+  @include _text-heading(var(--font-h1), var(--line-height-display), $color);
 }
 
 @mixin text-h2($color: var(--color-neutral-100)) {
-  font-size: var(--font-h2);
-  line-height: var(--line-height-heading);
-  font-weight: var(--font-weight-heading);
-  color: $color;
+  @include _text-heading(var(--font-h2), var(--line-height-heading), $color);
 }
 
 @mixin text-h3($color: var(--color-neutral-100)) {
-  font-size: var(--font-h3);
-  line-height: var(--line-height-heading);
-  font-weight: var(--font-weight-heading);
-  color: $color;
+  @include _text-heading(var(--font-h3), var(--line-height-heading), $color);
 }
 
 @mixin text-body($color: var(--color-neutral-400)) {
@@ -37,6 +40,24 @@
 
 @mixin text-caption($color: var(--color-neutral-400)) {
   @include text-body-sm($color);
+}
+
+// Section eyebrows + in-section labels (caption by default; announcement uses $size: body).
+@mixin text-eyebrow($color: var(--color-accent), $size: caption) {
+  @if $size == body {
+    @include text-body($color);
+  } @else {
+    @include text-caption($color);
+  }
+
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+// Muted uppercase label under a stat value (track record grid).
+@mixin text-stat-label($color: var(--color-neutral-400)) {
+  @include text-caption($color);
+  text-transform: uppercase;
 }
 
 // Cancel global a:hover underline on button-styled links.
@@ -77,6 +98,11 @@
   padding-inline: var(--spacing-block);
 }
 
+// Connected grid cells: equal padding on all sides; section childrenContainer owns outer bottom air.
+@mixin connected-cell-padding {
+  padding: var(--spacing-block);
+}
+
 @mixin hero-display-title {
   font-size: var(--font-hero-title);
   line-height: var(--line-height-display);
@@ -95,23 +121,72 @@
 // Blue tint wash + accent-tinted border. ScreenSection variant="accent" only.
 @mixin accent-surface {
   border-color: var(--color-border-accent);
-  background-image:
-    radial-gradient(
-      ellipse 72% 58% at 100% 100%,
-      color-mix(in srgb, var(--color-accent) 12%, transparent) 0%,
-      color-mix(in srgb, var(--color-accent) 4%, transparent) 42%,
-      transparent 70%
-    ),
-    linear-gradient(
-      150deg,
-      var(--color-accent-subtle) 0%,
-      color-mix(in srgb, var(--color-accent) 3%, transparent) 42%,
-      transparent 76%
-    );
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background-image:
+      radial-gradient(
+        ellipse 72% 58% at 100% 100%,
+        color-mix(in srgb, var(--color-accent) 12%, transparent) 0%,
+        color-mix(in srgb, var(--color-accent) 4%, transparent) 42%,
+        transparent 70%
+      ),
+      linear-gradient(
+        150deg,
+        var(--color-accent-subtle) 0%,
+        color-mix(in srgb, var(--color-accent) 3%, transparent) 42%,
+        transparent 76%
+      );
+  }
+}
+
+@keyframes accent-surface-ignite {
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+
+  22% {
+    filter: brightness(1.55);
+  }
+
+  38% {
+    filter: brightness(1.45);
+  }
+
+  52% {
+    filter: brightness(1.45);
+  }
 }
 
 // Blueprint line texture. Mask via `--grid-lines-mask` (top or bottom fade).
 // Column count is `--grid-lines-cols`.
+@keyframes grid-line-ignite {
+  0% {
+    --grid-line-strength: 7%;
+  }
+
+  22% {
+    --grid-line-strength: 16%;
+  }
+
+  38% {
+    --grid-line-strength: 15%;
+  }
+
+  52% {
+    --grid-line-strength: 15%;
+  }
+
+  100% {
+    --grid-line-strength: 7%;
+  }
+}
+
 @mixin grid-lines {
   position: relative;
   isolation: isolate;
@@ -121,21 +196,25 @@
     content: '';
     position: absolute;
     inset: 0;
-    z-index: -1;
+    z-index: 1;
     pointer-events: none;
+    --grid-line-strength: 7%;
     background-image:
       linear-gradient(
         to right,
-        color-mix(in srgb, var(--color-neutral-100) 7%, transparent) 1px,
+        color-mix(in srgb, var(--color-neutral-100) var(--grid-line-strength), transparent) 1px,
         transparent 1px
       ),
       linear-gradient(
         to bottom,
-        color-mix(in srgb, var(--color-neutral-100) 7%, transparent) 1px,
+        color-mix(in srgb, var(--color-neutral-100) var(--grid-line-strength), transparent) 1px,
         transparent 1px
       );
-    /* 100% / cols keeps the outer lines on the section borders */
-    background-size: calc(100% / var(--grid-lines-cols)) calc(var(--spacing-block) * 2);
+    background-size:
+      var(--grid-cell-x, calc(100% / var(--grid-lines-cols)))
+      var(--grid-cell-y, calc(var(--spacing-block) * 2));
+    /* --grid-position-y: top | bottom - set per section so mesh ends on full cells */
+    background-position: var(--grid-offset-x, 0) var(--grid-position-y, top);
     -webkit-mask-image: var(--grid-lines-mask, none);
     mask-image: var(--grid-lines-mask, none);
   }
@@ -150,6 +229,80 @@
   }
 }
 
+@mixin press-scale-feedback {
+  transform: scale(1);
+  transition:
+    transform var(--motion-duration-press) var(--motion-ease-standard),
+    color var(--motion-duration-press) var(--motion-ease-standard);
+
+  &:active {
+    transform: scale(var(--motion-scale-press));
+    transition-duration: var(--motion-duration-press-in);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+
+    &:active {
+      transform: none;
+    }
+  }
+}
+
+// Project TOC tab scroll + home gallery carousel arrows.
+@mixin edge-scroll-button-chrome {
+  border: 1px solid var(--color-border);
+  background-color: var(--color-bg-primary);
+  color: var(--color-neutral-100);
+  cursor: pointer;
+  font: inherit;
+  transition: background-color 180ms ease;
+
+  &:hover,
+  &:focus-visible {
+    background-color: color-mix(in srgb, var(--color-bg-primary) 88%, var(--color-neutral-100));
+  }
+}
+
+@mixin edge-scroll-button {
+  @include focus-ring;
+  @include edge-scroll-button-chrome;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+}
+
+// Single-line compact chrome: header menu, project TOC, JoinedTabs small, contact form rows.
+// Fixed height from globals - do not add breakpoint padding/height overrides in slices.
+@mixin header-control-row($color: var(--color-neutral-100)) {
+  font-size: var(--font-p2);
+  font-weight: var(--font-weight-body);
+  line-height: 1;
+  color: $color;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--header-control-height);
+  padding-inline: var(--header-control-pad-inline);
+  padding-block: 0;
+  font-family: inherit;
+}
+
+@mixin header-control-field($color: var(--color-neutral-100)) {
+  @include text-body-sm($color);
+  box-sizing: border-box;
+  height: var(--header-control-height);
+  padding-inline: var(--header-control-pad-inline);
+  padding-block: 0;
+  line-height: calc(var(--header-control-height) - 2px);
+  font-family: inherit;
+}
+
 @mixin connected-three-column-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -161,10 +314,46 @@
   }
 }
 
+// Sitemap / list grids: 1px gap lines via border-colored background.
+@mixin connected-gap-grid($columns: 3) {
+  display: grid;
+  grid-template-columns: repeat($columns, 1fr);
+  gap: 1px;
+  width: 100%;
+  background-color: var(--color-border);
+  border-top: 1px solid var(--color-border);
+
+  @if $columns >= 3 {
+    @media (max-width: $breakpoint-wide) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: $breakpoint-md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+@mixin connected-gap-cell {
+  background-color: var(--color-bg-primary);
+}
+
 @mixin media-frame {
   border: 1px solid var(--color-border);
   background: transparent;
   overflow: hidden;
+}
+
+// Standalone media only (image-section, youtube-embed). Not on full-bleed blocks inside
+// ScreenSection - parent section/cell already owns left/right frame borders.
+
+@mixin mesh-square-mark {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  padding: 0;
+  border: 1px solid var(--color-border);
+  background: transparent;
 }
 
 @mixin list-minimal {

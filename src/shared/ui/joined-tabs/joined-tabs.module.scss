@@ -49,7 +49,6 @@
 }
 
 .tabsWrapper[data-size="small"] .tabButton {
-  padding: 0.8rem 1.2rem;
-  font-size: var(--font-p2);
-  line-height: var(--line-height-body);
+  @include header-control-row(var(--color-neutral-400));
+  justify-content: center;
 }
