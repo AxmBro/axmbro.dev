@@ -1,9 +1,8 @@
-import Image from "next/image";
 import { formatStatValue, getYouTubeStats } from "@/entities/youtube";
-import { HOME_CLIENT_STUDIOS, HOME_PAGE_TEXTS } from "@/shared/constants/data";
+import { HOME_CLIENT_STUDIOS } from "@/shared/constants/data";
 import { getBaseTrackRecordStats } from "./lib/get-track-record-stats";
+import { TrackRecordClients } from "./track-record-clients";
 import { TrackRecordStats } from "./track-record-stats";
-import styles from "./track-record.module.scss";
 
 export const TrackRecord = async () => {
   const youtubeStats = await getYouTubeStats();
@@ -29,39 +28,7 @@ export const TrackRecord = async () => {
     <>
       <TrackRecordStats stats={stats} emptyCellsCount={emptyCellsCount} />
 
-      <div className={styles.clients}>
-        <div className={styles.clientsHeader}>
-          <h3 className={styles.clientsTitle}>Selected Clients & Studios</h3>
-          <p className={styles.clientsDescription}>
-            {HOME_PAGE_TEXTS.trackRecord.clientsDescription}
-          </p>
-        </div>
-        <div className={styles.clientRow}>
-          {HOME_CLIENT_STUDIOS.map((client) => {
-            return (
-              <a
-                key={client.name}
-                href={client.href}
-                className={styles.client}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={client.name}
-              >
-                {client.logoSrc && (
-                  <Image
-                    src={client.logoSrc}
-                    alt=""
-                    width={client.logoWidth ?? 160}
-                    height={client.logoHeight ?? 48}
-                    sizes="(max-width: 768px) 40vw, 160px"
-                    className={styles.clientLogo}
-                  />
-                )}
-              </a>
-            );
-          })}
-        </div>
-      </div>
+      <TrackRecordClients clients={HOME_CLIENT_STUDIOS} />
     </>
   );
 };

@@ -27,8 +27,8 @@ export function getBaseTrackRecordStats(): TrackRecordStat[] {
 
   return [
     { value: getYearsOfExperience(CAREER_START_DATE), label: "Years Experience" },
-    { value: "2M+", label: "Project Downloads" },
+    { value: "2M+", label: "Personal Project Downloads" },
     { value: String(commissionCount), label: "Client Commissions" },
-    { value: String(PROJECTS.length), label: "Portfolio Projects" },
+    { value: String(PROJECTS.length), label: "Total Projects" },
   ];
 }

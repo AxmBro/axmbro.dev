@@ -11,12 +11,43 @@ interface TrackRecordStatsProps {
   emptyCellsCount: number;
 }
 
+interface TrackRecordStatCellProps {
+  value: string;
+  label: string;
+  replayKey: number;
+  onReplay: () => void;
+}
+
+function TrackRecordStatCell({
+  value,
+  label,
+  replayKey,
+  onReplay,
+}: TrackRecordStatCellProps) {
+  const ref = useRef<HTMLDivElement>(null);
+  const startWhen = useRevealInView(ref, { once: false, margin: "0px" });
+
+  return (
+    <div
+      ref={ref}
+      className={styles.stat}
+      onPointerEnter={onReplay}
+    >
+      <AnimatedStat
+        className={styles.value}
+        value={value}
+        replayKey={replayKey}
+        startWhen={startWhen}
+      />
+      <span className={styles.label}>{label}</span>
+    </div>
+  );
+}
+
 export function TrackRecordStats({
   stats,
   emptyCellsCount,
 }: TrackRecordStatsProps) {
-  const ref = useRef<HTMLDivElement>(null);
-  const startWhen = useRevealInView(ref);
   const [replayKeys, setReplayKeys] = useState<Record<number, number>>({});
 
   const replayStat = (index: number) => {
@@ -27,21 +58,15 @@ export function TrackRecordStats({
   };
 
   return (
-    <div ref={ref} className={styles.stats}>
+    <div className={styles.stats}>
       {stats.map(({ value, label }, index) => (
-        <div
+        <TrackRecordStatCell
           key={label}
-          className={styles.stat}
-          onPointerEnter={() => replayStat(index)}
-        >
-          <AnimatedStat
-            className={styles.value}
-            value={value}
-            replayKey={replayKeys[index]}
-            startWhen={startWhen}
-          />
-          <span className={styles.label}>{label}</span>
-        </div>
+          value={value}
+          label={label}
+          replayKey={replayKeys[index] ?? 0}
+          onReplay={() => replayStat(index)}
+        />
       ))}
 
       {Array.from({ length: emptyCellsCount }).map((_, index) => (
