@@ -1,5 +1,5 @@
 import { SECTION_IDS } from "@/shared/constants/anchors";
-import { HOME_PAGE_TEXTS } from "@/shared/constants/data";
+import { HOME_PAGE_TEXTS, SITE_ROLE } from "@/shared/constants/data";
 import { ROUTES } from "@/shared/constants/routes";
 import { Button, buttonVariantForIndex } from "@/shared/ui/button";
 import { ButtonGroup } from "@/shared/ui/button-group";
@@ -15,15 +15,14 @@ export const HeroSection = () => (
     id={SECTION_IDS.profile}
     withChildrenPadding={false}
     className={styles.heroSection}
+    grid="bottom"
   >
     <HeroWaveTimer />
     <div className={styles.waveLayer} data-pixel-wave-behind />
     <div className={styles.heroGrid}>
       <HeroContentReveal className={styles.heroContent}>
-        <SectionEyebrow>Profile</SectionEyebrow>
-        <h1 className={`${styles.title} ${styles.titleAccent}`}>
-          Minecraft Bedrock UI Engineer & Frontend Developer
-        </h1>
+        <SectionEyebrow>About</SectionEyebrow>
+        <h1 className={`${styles.title} ${styles.titleAccent}`}>{SITE_ROLE.headline}</h1>
         <p className={styles.description}>{HOME_PAGE_TEXTS.hero.description}</p>
         <ButtonGroup marginTop>
           <Button
@@ -32,9 +31,9 @@ export const HeroSection = () => (
             href={ROUTES.projects}
           />
           <Button
-            text={HOME_PAGE_TEXTS.hero.ctaCommissions}
+            text={HOME_PAGE_TEXTS.hero.ctaContact}
             variant={buttonVariantForIndex(1)}
-            href={ROUTES.commissions}
+            href={ROUTES.contact}
           />
         </ButtonGroup>
       </HeroContentReveal>

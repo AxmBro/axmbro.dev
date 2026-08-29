@@ -8,7 +8,7 @@ import { NavRouteLink } from "@/shared/ui/nav-route-link";
 import { ProjectsTagLink, ProjectsBoardLink } from "@/shared/ui/projects-tag-link";
 import { GridBackdrop } from "@/shared/ui/grid-backdrop";
 import { getFooterSocialLinks, HOME_PAGE_TEXTS, NAV_LINKS, SOCIAL_LINK_BUTTONS, CTA_LABELS } from "@/shared/constants/data";
-import { contactSectionHref, SECTION_IDS } from "@/shared/constants/anchors";
+import { contactFormHref, contactSectionHref, SECTION_IDS } from "@/shared/constants/anchors";
 import { ROUTES } from "@/shared/constants/routes";
 import { FooterSocialRow } from "./footer-social-row";
 import { LocalTime } from "./local-time";
@@ -17,7 +17,7 @@ import styles from "./footer.module.scss";
 
 const CATEGORY_LINKS: { label: string; tag?: string }[] = [
   { label: CTA_LABELS.browseAllProjects },
-  { tag: "JsonUI", label: "JsonUI & HUDs" },
+  { tag: "JsonUI", label: "JsonUI" },
   { tag: "Server Form", label: "Server Forms" },
   { tag: "Web", label: "Web Development" },
 ];
@@ -34,7 +34,7 @@ export const Footer = () => {
   const footerSocialLinks = getFooterSocialLinks();
 
   return (
-    <footer className={styles.footerWrapper}>
+    <footer className={styles.footerWrapper} data-site-footer>
       <GridBackdrop variant="footer" />
       <div className={styles.footerScreenContainer} data-grid-column>
         <div className={styles.footerGrid}>
@@ -92,9 +92,7 @@ export const Footer = () => {
           <div className={styles.footerColumn}>
             <h2 className={styles.columnTitle}>Contact</h2>
             <nav className={`${styles.columnLinks} ${styles.contactLinks}`}>
-              <HashLink href={contactSectionHref(SECTION_IDS.startProject)}>
-                {CTA_LABELS.startProject}
-              </HashLink>
+              <Link href={contactFormHref()}>{CTA_LABELS.contactForm}</Link>
               <HashLink href={contactSectionHref(SECTION_IDS.contactOptions)}>
                 {CTA_LABELS.contactOptions}
               </HashLink>

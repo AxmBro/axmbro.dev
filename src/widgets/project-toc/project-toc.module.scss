@@ -72,6 +72,7 @@
 
 .scrollBtn {
   @include focus-ring;
+  @include edge-scroll-button-chrome;
   position: absolute;
   top: 0;
   bottom: 0;
@@ -83,15 +84,6 @@
   width: auto;
   aspect-ratio: 1;
   padding: 0;
-  border: 1px solid var(--color-border);
-  background-color: var(--color-bg-primary);
-  color: var(--color-neutral-100);
-  cursor: pointer;
-  font: inherit;
-
-  &:hover {
-    background-color: color-mix(in srgb, var(--color-bg-primary) 88%, var(--color-neutral-100));
-  }
 }
 
 .scrollBtnLeft {
@@ -121,11 +113,10 @@
 
 .link {
   @include link-plain;
-  @include text-body-sm;
+  @include header-control-row(var(--color-neutral-400));
   @include focus-ring;
   flex: 0 0 auto;
-  padding: 0.8rem 1.2rem;
-  line-height: var(--line-height-body);
+  justify-content: center;
   border: 1px solid var(--color-border);
   border-right: none;
   color: var(--color-neutral-400);
