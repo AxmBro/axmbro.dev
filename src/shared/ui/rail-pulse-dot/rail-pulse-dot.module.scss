@@ -1,0 +1,80 @@
+.dot {
+  position: relative;
+  display: block;
+  width: 8px;
+  height: 8px;
+  background-color: var(--color-neutral-100);
+  transform-origin: center center;
+}
+
+.pulse {
+  position: absolute;
+  inset: 0;
+  background-color: var(--color-accent);
+  opacity: 0;
+  transform: scale(1);
+  transform-origin: center center;
+  pointer-events: none;
+}
+
+.dot[data-rail-dot-flash] {
+  animation: experience-rail-dot 1.6s ease-out;
+}
+
+.pulse[data-rail-pulse-flash] {
+  animation: experience-rail-pulse 1.6s ease-out forwards;
+}
+
+@keyframes experience-rail-dot {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  18% {
+    transform: scale(1.4);
+  }
+
+  42% {
+    transform: scale(1.18);
+  }
+
+  72% {
+    transform: scale(1.04);
+  }
+}
+
+@keyframes experience-rail-pulse {
+  0% {
+    opacity: 0;
+    box-shadow: 0 0 0 0 transparent;
+  }
+
+  12% {
+    opacity: 1;
+    box-shadow:
+      0 0 0 3px color-mix(in srgb, var(--color-accent) 30%, transparent),
+      0 0 19px 5px color-mix(in srgb, var(--color-accent) 55%, transparent);
+  }
+
+  18% {
+    opacity: 1;
+    box-shadow:
+      0 0 0 5px color-mix(in srgb, var(--color-accent) 35%, transparent),
+      0 0 26px 7px color-mix(in srgb, var(--color-accent) 65%, transparent);
+  }
+
+  100% {
+    opacity: 0;
+    box-shadow:
+      0 0 0 17px color-mix(in srgb, var(--color-accent) 0%, transparent),
+      0 0 34px 12px color-mix(in srgb, var(--color-accent) 0%, transparent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dot[data-rail-dot-flash],
+  .pulse[data-rail-pulse-flash] {
+    animation: none;
+  }
+}
