@@ -45,6 +45,7 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
     title,
     description,
     path: projectDetailPath(projectId),
+    openGraphType: "article",
     images: thumbnail
       ? [{ url: thumbnail, width: 1280, height: 720, alt: `${title} project preview` }]
       : undefined,
@@ -62,9 +63,10 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   if (!project) notFound();
 
   const pageData = await getProjectData(projectId);
+  const title = pageData?.title || project.title;
+  const metaDescription = pageData?.description || project.description;
   const description = pageData?.content?.trim() || pageData?.description?.trim() || project.description;
   const buttonsToRender = buildProjectActions(project, pageData);
-  const title = pageData?.title || project.title;
   const heroSrc = getProjectHeroSrc(project);
   const [heroAction, ...sectionButtons] = buttonsToRender;
   const { overviewId, creditsId, videoIds, galleryIds, tocItems } =
@@ -75,7 +77,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       <JsonLd
         data={buildProjectJsonLd({
           title,
-          description: project.description,
+          description: metaDescription,
           path: projectDetailPath(projectId),
           image: heroSrc ?? getProjectThumbnailSrc(project),
         })}
@@ -91,6 +93,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         title={title}
         description={project.description}
         imageSrc={heroSrc}
+        accentColor={project.accentColor}
         action={heroAction}
       />
       <ScreenContainer withGridBackdrop={false}>
@@ -139,7 +142,6 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               titleDescription={
                 pageData.creditsDescription ?? "People involved in creating this project."
               }
-              tightChildrenGap
               variant="default"
             >
               <ScreenSectionList

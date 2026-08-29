@@ -4,7 +4,7 @@ import { ScreenSection } from "@/shared/ui/screen-section";
 import { Button, buttonVariantForIndex } from "@/shared/ui/button";
 import { ButtonGroup } from "@/shared/ui/button-group";
 import { PROJECTS, HOME_PAGE_TEXTS, SITE_METADATA, CTA_LABELS } from "@/shared/constants/data";
-import { contactSectionHref, SECTION_IDS } from "@/shared/constants/anchors";
+import { commissionSectionHref, contactFormHref, SECTION_IDS } from "@/shared/constants/anchors";
 import { ROUTES } from "@/shared/constants/routes";
 import { createPageMetadata } from "@/shared/lib/page-metadata";
 import { ConversionCloser } from "@/shared/ui/conversion-closer";
@@ -36,18 +36,18 @@ export default function ProjectsPage() {
       <ConversionCloser
         eyebrow="Services"
         title="Want Something Similar?"
-        titleDescription="Tell me about your project, or review the commission scope, workflow, pricing details, and support terms before you get in touch."
+        titleDescription={HOME_PAGE_TEXTS.projectsPage.closerDescription}
       >
-        <ButtonGroup padInline marginBottom>
-          <Button
-            text={CTA_LABELS.startProject}
-            variant={buttonVariantForIndex(0)}
-            href={contactSectionHref(SECTION_IDS.startProject)}
-          />
+        <ButtonGroup>
           <Button
             text={CTA_LABELS.commissionDetails}
+            variant={buttonVariantForIndex(0)}
+            href={commissionSectionHref(SECTION_IDS.commissionServices)}
+          />
+          <Button
+            text={CTA_LABELS.contactMe}
             variant={buttonVariantForIndex(1)}
-            href={ROUTES.commissions}
+            href={contactFormHref()}
           />
         </ButtonGroup>
       </ConversionCloser>

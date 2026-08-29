@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { SITE_METADATA } from "@/shared/constants/data";
+import { SITEMAP_PAGE_TEXTS, SITE_METADATA } from "@/shared/constants/data";
 import { ROUTES } from "@/shared/constants/routes";
 import { createPageMetadata } from "@/shared/lib/page-metadata";
 import { Reveal } from "@/shared/ui/motion";
@@ -22,7 +21,7 @@ export default function SitemapPage() {
           eyebrow="Directory"
           title="Sitemap"
           headingLevel="h1"
-          titleDescription="Browse every main area of AxmBro.dev, including portfolio work, Minecraft Bedrock UI commissions, project filters, contact options, and legal pages."
+          titleDescription={SITEMAP_PAGE_TEXTS.intro}
           withChildrenPadding={false}
         >
           <SitemapGrid />
@@ -33,14 +32,7 @@ export default function SitemapPage() {
         <ScreenSection
           eyebrow="Portfolio"
           title="All Projects"
-          titleDescription={
-            <>
-              A complete index of the client commissions, personal releases, and
-              technical projects currently listed on AxmBro.dev.{" "}
-              <Link href={ROUTES.projects}>Filter on the Projects page</Link> to
-              narrow by featured work, personal releases, or client commissions.
-            </>
-          }
+          titleDescription={SITEMAP_PAGE_TEXTS.allProjects}
           withChildrenPadding={false}
         >
           <SitemapProjectList />

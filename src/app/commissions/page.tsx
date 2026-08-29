@@ -6,10 +6,11 @@ import {
   COMMISSION_REQUIREMENTS,
   COMMISSION_SERVICES,
   COMMISSIONS_PAGE_TEXTS,
+  HOME_CLIENT_STUDIOS,
   PROCESS_STEPS,
   SITE_METADATA,
 } from "@/shared/constants/data";
-import { contactSectionHref, homeSectionHref, SECTION_IDS } from "@/shared/constants/anchors";
+import { contactFormHref, SECTION_IDS } from "@/shared/constants/anchors";
 import { ROUTES } from "@/shared/constants/routes";
 import { createPageMetadata } from "@/shared/lib/page-metadata";
 import { buildFaqPageJsonLd, JsonLd } from "@/shared/lib/json-ld";
@@ -20,6 +21,7 @@ import { InfoCardsGrid } from "@/shared/ui/info-cards-grid";
 import { Reveal } from "@/shared/ui/motion";
 import { ScreenContainer } from "@/shared/ui/screen-container";
 import { ScreenSection } from "@/shared/ui/screen-section";
+import { TrackRecordClients } from "@/widgets/track-record";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Commissions",
@@ -37,19 +39,33 @@ export default function CommissionsPage() {
           title="Minecraft Bedrock UI Commissions"
           headingLevel="h1"
           titleDescription={COMMISSIONS_PAGE_TEXTS.intro}
+          grid="bottom"
         >
           <ButtonGroup>
             <Button
               text={COMMISSIONS_PAGE_TEXTS.ctaContact}
               variant={buttonVariantForIndex(0)}
-              href={contactSectionHref(SECTION_IDS.startProject)}
+              href={contactFormHref()}
             />
             <Button
-              text={COMMISSIONS_PAGE_TEXTS.ctaProof}
+              text={COMMISSIONS_PAGE_TEXTS.ctaProjects}
               variant={buttonVariantForIndex(1)}
-              href={homeSectionHref(SECTION_IDS.selectedWork)}
+              href={ROUTES.projects}
             />
           </ButtonGroup>
+        </ScreenSection>
+      </Reveal>
+
+      <Reveal>
+        <ScreenSection
+          id={SECTION_IDS.commissionClients}
+          eyebrow="Proof"
+          title={COMMISSIONS_PAGE_TEXTS.clientsTitle}
+          titleDescription={COMMISSIONS_PAGE_TEXTS.clientsDescription}
+          withChildrenPadding={false}
+          grid="top"
+        >
+          <TrackRecordClients clients={HOME_CLIENT_STUDIOS} showHeader={false} />
         </ScreenSection>
       </Reveal>
 
@@ -63,7 +79,7 @@ export default function CommissionsPage() {
           variant="accent"
           grid="top"
         >
-          <InfoCardsGrid items={COMMISSION_SERVICES} />
+          <InfoCardsGrid items={COMMISSION_SERVICES} columns={2} />
         </ScreenSection>
       </Reveal>
 
@@ -86,6 +102,7 @@ export default function CommissionsPage() {
           title="Commission Process"
           titleDescription={COMMISSIONS_PAGE_TEXTS.process}
           withChildrenPadding={false}
+          grid="bottom"
         >
           <InfoCardsGrid items={PROCESS_STEPS} />
         </ScreenSection>
@@ -122,16 +139,11 @@ export default function CommissionsPage() {
         title="Ready to Discuss Your Project?"
         titleDescription={COMMISSIONS_PAGE_TEXTS.cta}
       >
-        <ButtonGroup padInline marginBottom>
+        <ButtonGroup>
           <Button
             text={COMMISSIONS_PAGE_TEXTS.ctaContact}
             variant={buttonVariantForIndex(0)}
-            href={contactSectionHref(SECTION_IDS.startProject)}
-          />
-          <Button
-            text={COMMISSIONS_PAGE_TEXTS.ctaSecondary}
-            variant={buttonVariantForIndex(1)}
-            href={contactSectionHref(SECTION_IDS.contactOptions)}
+            href={contactFormHref()}
           />
         </ButtonGroup>
       </ConversionCloser>
