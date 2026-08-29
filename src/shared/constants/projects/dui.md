@@ -1,7 +1,7 @@
 ---
 title: DUI
 credits:
-  - role: UI Engineer
+  - role: UI Developer
     name: AxmBro
     href: https://github.com/AxmBro
 imageSections:

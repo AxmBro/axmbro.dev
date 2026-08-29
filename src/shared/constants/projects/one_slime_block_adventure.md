@@ -5,7 +5,7 @@ extraButtons:
     href: https://www.mushco.games/games
     external: true
 credits:
-  - role: UI Engineer
+  - role: UI Developer
     name: AxmBro
     href: https://github.com/AxmBro
   - role: Studio

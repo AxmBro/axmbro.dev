@@ -5,7 +5,7 @@ extraButtons:
     href: https://www.youtube.com/@Radium-Ra-88
     external: true
 credits:
-  - role: UI Engineer
+  - role: UI Developer
     name: AxmBro
     href: https://github.com/AxmBro
   - role: Project Lead

@@ -3,64 +3,47 @@ export interface LegalItem {
   text: string;
 }
 
+export const PRIVACY_POLICY_LAST_UPDATED = "30.08.2026";
+
 export const PRIVACY_POLICY_ITEMS: LegalItem[] = [
   {
-    title: "Introduction",
-    text: "This Privacy Policy explains how axmbro.dev processes personal data when you use the website and its contact form. We respect your privacy and process all data transparently and in compliance with current legal regulations (GDPR)."
+    title: "Who is responsible",
+    text: "AxmBro (axmbro.dev), based in Poland, is the data controller. Privacy contact: axmbro@gmail.com. This policy covers personal data processed when you use the site or contact me, under the GDPR and Polish law.",
   },
   {
-    title: "Data Controller",
-    text: "The sole administrator of your personal data collected via this website is AxmBro (owner of the axmbro.dev portfolio website)."
+    title: "What we process and why",
+    text: "Contact form: your email, optional Discord username, and message - used only to read and reply (consent when you send, GDPR Art. 6(1)(a)). Providing this is voluntary, but an email is required to respond. Analytics: basic traffic via Vercel Analytics; Google Analytics 4 only if you accept cookies in the banner. Legal basis for analytics: consent where required, otherwise legitimate interest in running the site (Art. 6(1)(f)). The site is hosted on Vercel; messages go to our inbox via SMTP. Some providers may process data outside the EU/EEA with appropriate safeguards. Data is not sold. Messages are kept only as long as needed for the conversation or until you ask for deletion.",
   },
   {
-    title: "Data Collected via Contact Form",
-    text: "When you submit a message using our contact form, we collect your email address and any personal information you choose to include in the message body. We do not use marketing newsletters."
+    title: "Your rights",
+    text: "You may request access, correction, deletion, restriction, or object to processing, and withdraw consent at any time. You may lodge a complaint with a supervisory authority - in Poland, UODO (President of the Personal Data Protection Office).",
   },
-  {
-    title: "Website Analytics",
-    text: "We use Vercel Analytics for basic page views (no cookies). Google Analytics 4 runs only if you accept analytics cookies in the banner."
-  },
-  {
-    title: "Cookies",
-    text: "You can accept or reject analytics cookies on your first visit. Rejecting disables GA4. Clear site data to choose again."
-  },
-  {
-    title: "Purpose & Legal Basis",
-    text: "Contact form data is processed to respond to your message (consent when sending). Analytics helps measure site usage. GA4 requires your cookie consent."
-  },
-  {
-    title: "Data Retention",
-    text: "Your personal data is stored only for as long as necessary to carry out the communication, answer your queries, or until you explicitly request its complete removal."
-  },
-  {
-    title: "Your Rights",
-    text: "You have the right to access your personal data, request rectification, request restriction of processing, or demand complete deletion of your records from our inbox at any time."
-  }
 ];
+
+/** DD.MM.YYYY display dates from legal copy - for sitemap and JSON-LD. */
+export function parseLegalLastUpdated(dateStr: string): Date | undefined {
+  const match = dateStr.match(/^(\d{2})\.(\d{2})\.(\d{4})$/);
+  if (!match) return undefined;
+
+  const day = Number(match[1]);
+  const month = Number(match[2]);
+  const year = Number(match[3]);
+  return new Date(Date.UTC(year, month - 1, day));
+}
+
+export const TERMS_OF_USE_LAST_UPDATED = "30.08.2026";
 
 export const TERMS_OF_USE_ITEMS: LegalItem[] = [
   {
-    title: "Use of the Site",
-    text: "This site is a personal portfolio showcasing my work. You may view the content for personal purposes only."
+    title: "Using this site",
+    text: "axmbro.dev is my portfolio and commission information site. By using it, you agree to these Terms. Browse for personal, non-commercial use only. Do not scrape, overload, or misuse the site.",
   },
   {
-    title: "Intellectual Property",
-    text: "All content (text, images, code) is the property of AxmBro - owner of the axmbro.dev website. Do not copy, modify, or redistribute it without written permission."
+    title: "Content and commissions",
+    text: "Unless stated otherwise, text, images, code, and project work here belong to AxmBro - no copying or reuse without my written permission. Commission details are general information; a project starts only after we agree terms separately. The site is provided \"as is\". External links are for convenience - I am not responsible for third-party sites.",
   },
   {
-    title: "No Warranty",
-    text: "The site is provided \"as is\". I am not liable for any errors, omissions, or damages arising from its use."
+    title: "Changes and law",
+    text: "I may update these Terms; the date above is the current version. Polish law applies.",
   },
-  {
-    title: "External Links",
-    text: "I am not responsible for content on third-party websites linked here."
-  },
-  {
-    title: "Changes to Terms",
-    text: "I may update these Terms at any time. Continued use after changes constitutes acceptance."
-  },
-  {
-    title: "Governing Law",
-    text: "These Terms are governed by the laws of Poland."
-  }
 ];
