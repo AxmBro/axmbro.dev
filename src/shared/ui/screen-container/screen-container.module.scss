@@ -6,6 +6,9 @@
   isolation: isolate;
   width: 100%;
   padding: 0 var(--layout-gutter-outer);
+  /* Measured by GridBackdrop; fallback matches backdrop defaults until mount */
+  --grid-cell-x: 2rem;
+  --grid-cell-y: 2rem;
 }
 
 .screenContent {
