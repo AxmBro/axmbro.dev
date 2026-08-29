@@ -6,22 +6,17 @@
   flex-direction: column;
   flex: 1;
   height: 100%;
-  min-height: 100%;
   @include link-plain;
   @include focus-ring;
   color: inherit;
   cursor: pointer;
   min-width: 0;
   max-width: 100%;
-  transition: transform var(--motion-duration-hover) var(--motion-ease-hover);
 
-  @media (hover: hover) {
-    &:hover {
-      transform: translateY(var(--motion-lift-hover));
-    }
-  }
-
-  &:hover .title {
+  &:hover .title,
+  &:focus-visible .title,
+  &:hover .accentTitle,
+  &:focus-visible .accentTitle {
     text-decoration: underline;
   }
 }
@@ -32,6 +27,28 @@
   height: 100%;
   min-width: 0;
   max-width: 100%;
+}
+
+.featuredReveal {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
+
+.featuredRevealMedia {
+  flex-shrink: 0;
+}
+
+.featuredRevealBody {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+
+  .body {
+    flex: 1;
+  }
 }
 
 .imageWrapper {
@@ -53,7 +70,6 @@
   padding: var(--spacing-section);
   display: flex;
   flex-direction: column;
-  flex: 1;
   gap: calc(var(--spacing-xs) * 2);
   min-height: 0;
 }
@@ -69,7 +85,7 @@
 .titleGroup {
   display: flex;
   align-items: center;
-  gap: var(--spacing-xs);
+  gap: calc(var(--spacing-xs) * 2);
   min-width: 0;
 }
 
@@ -94,22 +110,17 @@
   @include text-h2;
 }
 
+.cardTitle {
+  font-size: var(--font-h2);
+  line-height: var(--line-height-heading);
+  font-weight: var(--font-weight-heading);
+}
+
 .description {
   @include text-body-sm;
-  // Full copy stays in the DOM for SEO; only the card preview is trimmed
   display: -webkit-box;
   overflow: hidden;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   line-clamp: 2;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .link {
-    transition: none;
-
-    &:hover {
-      transform: none;
-    }
-  }
 }
