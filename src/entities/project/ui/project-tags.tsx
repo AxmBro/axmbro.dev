@@ -54,7 +54,7 @@ const FeaturedTag = () => (
   </span>
 );
 
-const TypeTag = ({ type }: { type: ProjectType }) => {
+export const ProjectTypeTag = ({ type }: { type: ProjectType }) => {
   if (type === "personal") {
     return (
       <span className={`${styles.tag} ${styles.tagType} ${styles.tagPersonal}`}>
@@ -103,7 +103,7 @@ export const ProjectTags = ({ project, className }: ProjectTagsProps) => {
       className={className ? `${styles.tags} ${className}` : styles.tags}
       aria-label="Project tags"
     >
-      {project.type && <TypeTag type={project.type} />}
+      {project.type && <ProjectTypeTag type={project.type} />}
       {project.star && <FeaturedTag />}
       {project.tags?.map((tag) => (
         <span key={tag} className={styles.tag}>

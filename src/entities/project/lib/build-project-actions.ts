@@ -1,6 +1,6 @@
 import { CTA_LABELS, type ProjectItem } from "@/shared/constants/data";
 import type { ProjectMarkdownData } from "./get-project-data";
-import { contactSectionHref, SECTION_IDS } from "@/shared/constants/anchors";
+import { contactFormHref } from "@/shared/constants/anchors";
 
 export interface ProjectAction {
   text: string;
@@ -36,7 +36,7 @@ export function buildProjectActions(
 
   actions.push({
     text: showCommissionCta ? CTA_LABELS.requestSimilarWork : CTA_LABELS.startProject,
-    href: contactSectionHref(SECTION_IDS.startProject),
+    href: contactFormHref(),
   });
 
   return actions;
