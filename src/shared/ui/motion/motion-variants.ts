@@ -7,6 +7,17 @@ export const HERO_MEDIA_DURATION = 0.75;
 export const REVEAL_EASE = [0.25, 0.1, 0.25, 1] as const;
 export const STAGGER_CHILDREN = 0.07;
 
+export const PROJECT_CONTENT_DELAY = 0.12;
+export const PROJECT_FEATURED_CARD_STEP = 0.06;
+
+export function projectAccentDelayHeroTitle(): number {
+  return PROJECT_CONTENT_DELAY;
+}
+
+export function projectAccentDelayCardBody(staggerDelay: number): number {
+  return staggerDelay + STAGGER_CHILDREN;
+}
+
 export const REVEAL_VIEWPORT_MARGIN = "0px 0px -12% 0px";
 
 export const revealViewport = {
