@@ -14,7 +14,9 @@
 }
 
 .skillGroupItem {
-  @include stack-xs;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
   border-right: 1px solid var(--color-border);
 
   &:not(:last-child) {
@@ -46,9 +48,17 @@
   padding: var(--spacing-block) var(--spacing-block) 0 var(--spacing-block);
 }
 
+.skillHeaderMain {
+  min-width: 0;
+}
+
 .skillTitle {
   @include text-h2;
   letter-spacing: 0.5px;
+}
+
+.skillTitleNote {
+  @include text-body;
 }
 
 .skillTextContent {
@@ -63,4 +73,48 @@
 
 .skillValue {
   color: var(--color-neutral-100);
+}
+
+.tierPeak {
+  --skill-tier-color: var(--color-accent);
+  font-weight: var(--font-weight-heading);
+  text-transform: uppercase;
+}
+
+.tierStrong {
+  --skill-tier-color: var(--color-accent-tier-strong);
+  font-weight: var(--font-weight-heading);
+  text-transform: uppercase;
+}
+
+.tierSolid {
+  --skill-tier-color: var(--color-accent-tier-solid);
+}
+
+.tierBuilding {
+  --skill-tier-color: var(--color-neutral-100);
+}
+
+.skillValueReveal {
+  animation: skill-value-color 0.55s ease-out forwards;
+}
+
+.skillValueRevealed {
+  color: var(--skill-tier-color);
+}
+
+@keyframes skill-value-color {
+  from {
+    color: var(--color-neutral-100);
+  }
+
+  to {
+    color: var(--skill-tier-color);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skillValueReveal {
+    animation: none;
+  }
 }
