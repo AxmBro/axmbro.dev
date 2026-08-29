@@ -11,7 +11,12 @@ import { usePathname, useRouter } from "next/navigation";
 import { hasHash } from "@/shared/lib/has-hash";
 import { normalizePathname } from "@/shared/lib/nav-active";
 import { storePendingHash } from "@/shared/lib/pending-hash";
-import { normalizePageHash, scrollToHash } from "@/shared/lib/scroll-to-hash";
+import {
+  normalizePageHash,
+  notifyPageHashChange,
+  parseHashId,
+  scrollToHash,
+} from "@/shared/lib/scroll-to-hash";
 
 interface HashLinkProps {
   href: string;
@@ -59,7 +64,12 @@ export const HashLink = ({
 
     e.preventDefault();
     history.replaceState(null, "", `${path}${hash}`);
-    scrollToHash(hash);
+    notifyPageHashChange();
+
+    const targetId = parseHashId(hash);
+    if (!targetId.startsWith("faq-")) {
+      scrollToHash(hash);
+    }
   };
 
   return (
