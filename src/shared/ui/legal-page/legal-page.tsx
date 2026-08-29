@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Reveal } from "@/shared/ui/motion";
 import { ScreenContainer } from "@/shared/ui/screen-container";
 import { ScreenSection } from "@/shared/ui/screen-section";
-import { ROUTES } from "@/shared/constants/routes";
+import { contactFormHref } from "@/shared/constants/anchors";
 import type { LegalItem } from "@/shared/constants/legal";
 import styles from "./legal-page.module.scss";
 
@@ -51,9 +51,10 @@ export const LegalPage = ({
               <h2 className={styles.itemTitle}>Contact</h2>
               <p className={styles.itemText}>
                 {contactBlurb}{" "}
-                <Link href={ROUTES.contact} className={styles.link}>
-                  {ROUTES.contact}
+                <Link href={contactFormHref()} className={styles.link}>
+                  contact page
                 </Link>
+                .
               </p>
             </li>
           </ul>

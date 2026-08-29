@@ -30,13 +30,21 @@ export function GridBackdrop({ variant = "page" }: GridBackdropProps) {
       const origin = backdrop.getBoundingClientRect();
       const bounds = column.getBoundingClientRect();
       const spanX = bounds.width - 1;
-      const spanY = variant === "footer" ? spanX : bounds.top - origin.top;
+      const spanY =
+        variant === "footer" ? bounds.height : bounds.top - origin.top;
       if (spanX <= 0 || spanY <= 0) return;
 
-      backdrop.style.setProperty("--grid-cell-x", `${spanX / cellsFor(spanX)}px`);
-      backdrop.style.setProperty("--grid-cell-y", `${spanY / cellsFor(spanY)}px`);
-      backdrop.style.setProperty("--grid-offset-x", `${bounds.left - origin.left}px`);
+      const cellX = spanX / cellsFor(spanX);
+      const cellY = variant === "footer" ? cellX : spanY / cellsFor(spanY);
+      const offsetX = bounds.left - origin.left;
+
+      backdrop.style.setProperty("--grid-cell-x", `${cellX}px`);
+      backdrop.style.setProperty("--grid-cell-y", `${cellY}px`);
+      backdrop.style.setProperty("--grid-offset-x", `${offsetX}px`);
       backdrop.style.setProperty("--grid-band", `${bounds.bottom - origin.top}px`);
+
+      parent.style.setProperty("--grid-cell-x", `${cellX}px`);
+      parent.style.setProperty("--grid-cell-y", `${cellY}px`);
     };
 
     update();
@@ -56,6 +64,7 @@ export function GridBackdrop({ variant = "page" }: GridBackdropProps) {
     <div
       ref={ref}
       className={`${styles.backdrop} ${variant === "footer" ? styles.footerBand : ""}`}
+      data-footer-grid-backdrop={variant === "footer" ? "" : undefined}
       aria-hidden
     />
   );

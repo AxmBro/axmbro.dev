@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { Reveal } from "@/shared/ui/motion";
 import { ScreenSection } from "@/shared/ui/screen-section";
+import styles from "./conversion-closer.module.scss";
 
 interface ConversionCloserProps {
   id?: string;
@@ -26,8 +27,9 @@ export function ConversionCloser({
         titleDescription={titleDescription}
         variant="accent"
         withChildrenPadding={false}
+        grid="bottom"
       >
-        {children}
+        <div className={styles.actions}>{children}</div>
       </ScreenSection>
     </Reveal>
   );

@@ -3,10 +3,34 @@
 
 .grid {
   @include connected-three-column-grid;
+
+  &[data-columns='2'] {
+    grid-template-columns: repeat(2, 1fr);
+
+    .card:nth-child(2n) {
+      border-right: none;
+    }
+
+    .card:nth-child(n + 3) {
+      border-top: 1px solid var(--color-border);
+    }
+
+    @media (max-width: $breakpoint-md) {
+      grid-template-columns: 1fr;
+
+      .card:nth-child(2n) {
+        border-right: none;
+      }
+
+      .card:nth-child(n + 2) {
+        border-top: 1px solid var(--color-border);
+      }
+    }
+  }
 }
 
 .card {
-  @include section-padding;
+  @include connected-cell-padding;
   @include stack-xs;
   min-width: 0;
   border-right: 1px solid var(--color-border);
