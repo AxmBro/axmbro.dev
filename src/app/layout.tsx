@@ -9,7 +9,8 @@ import { Footer } from "@/widgets/footer";
 import { HashScroll, HashScrollInit } from "@/shared/ui/hash-scroll";
 import { AmbientPixels } from "@/shared/ui/ambient-pixels";
 import { PixelClickWave } from "@/shared/ui/pixel-click-wave";
-import { SITE_METADATA } from "@/shared/constants/data";
+import { SurfaceIgniteObserver } from "@/shared/ui/surface-ignite";
+import { SITE_METADATA, SITE_ROLE } from "@/shared/constants/data";
 import { SITE_ORIGIN } from "@/shared/constants/site";
 import "./globals.scss";
 
@@ -22,7 +23,7 @@ const lexend = Lexend({
 
 export const metadata: Metadata = {
   title: {
-    default: "AxmBro.dev | Minecraft Bedrock UI Engineer",
+    default: `AxmBro.dev | ${SITE_ROLE.headline}`,
     template: "AxmBro.dev | %s",
   },
   description: SITE_METADATA.homeDescription,
@@ -31,7 +32,7 @@ export const metadata: Metadata = {
   creator: "AxmBro",
   metadataBase: new URL(SITE_ORIGIN),
   openGraph: {
-    title: "AxmBro.dev | Minecraft Bedrock UI Engineer",
+    title: `AxmBro.dev | ${SITE_ROLE.headline}`,
     description: SITE_METADATA.homeDescription,
     url: SITE_ORIGIN,
     siteName: "AxmBro",
@@ -48,9 +49,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "AxmBro.dev | Minecraft Bedrock UI Engineer",
+    title: `AxmBro.dev | ${SITE_ROLE.headline}`,
     description: SITE_METADATA.homeDescription,
     images: ["/images/ui/og-image.png"],
+    site: "@AxmBro",
     creator: "@AxmBro",
   },
   robots: {
@@ -71,6 +73,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <CookieConsent />
         <HashScroll />
         <PixelClickWave />
+        <SurfaceIgniteObserver />
         <Header />
         <div className="main-layout">
           <AmbientPixels />

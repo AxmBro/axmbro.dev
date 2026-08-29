@@ -1,4 +1,5 @@
 import { SITE_ORIGIN } from "@/shared/constants/site";
+import { SITE_ROLE } from "@/shared/constants/data";
 
 export function JsonLd({ data }: { data: Record<string, unknown> }) {
   return (
@@ -41,7 +42,7 @@ export function buildPersonJsonLd({ description, sameAs }: PersonJsonLdOptions) 
     name: "AxmBro",
     url: SITE_ORIGIN,
     image: `${SITE_ORIGIN}/icon192.png`,
-    jobTitle: "Minecraft Bedrock UI Engineer",
+    jobTitle: SITE_ROLE.headline,
     description,
     address: {
       "@type": "PostalAddress",
@@ -89,5 +90,33 @@ export function buildBreadcrumbJsonLd(items: BreadcrumbItem[]) {
       name: item.name,
       item: `${SITE_ORIGIN}${item.path}`,
     })),
+  };
+}
+
+type WebPageJsonLdOptions = {
+  title: string;
+  description: string;
+  path: string;
+  dateModified: Date;
+};
+
+export function buildWebPageJsonLd({
+  title,
+  description,
+  path,
+  dateModified,
+}: WebPageJsonLdOptions) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: title,
+    description,
+    url: `${SITE_ORIGIN}${path}`,
+    dateModified: dateModified.toISOString().split("T")[0],
+    isPartOf: {
+      "@type": "WebSite",
+      name: "AxmBro.dev",
+      url: SITE_ORIGIN,
+    },
   };
 }

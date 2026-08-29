@@ -1,0 +1,37 @@
+.title {
+  color: var(--color-neutral-100);
+  transition: color 0.4s ease;
+
+  &.hovered {
+    color: var(--project-accent-color);
+  }
+
+  &.reveal {
+    animation: project-accent-reveal 1.2s ease-in-out forwards;
+    transition: none;
+  }
+}
+
+@keyframes project-accent-reveal {
+  0% {
+    color: var(--color-neutral-100);
+  }
+
+  32% {
+    color: var(--project-accent-color);
+  }
+
+  52% {
+    color: var(--project-accent-color);
+  }
+
+  100% {
+    color: var(--color-neutral-100);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .title.reveal {
+    animation: none;
+  }
+}

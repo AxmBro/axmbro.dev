@@ -13,8 +13,8 @@ const DEATH_FADE_MS = 900;
 const MIN_LIFESPAN_MS = 2_000;
 const MIN_SPEED_PX_PER_S = 10;
 const MAX_SPEED_PX_PER_S = 20;
-const MAX_PARTICLES = 16;
-const MIN_PARTICLES = 8;
+const MAX_PARTICLES = 20;
+const MIN_PARTICLES = 15;
 const WHITE = { red: 247, green: 247, blue: 247 };
 
 interface Particle {
@@ -26,6 +26,7 @@ interface Particle {
   ageMs: number;
   lifespanMs: number;
   dyingMs: number;
+  slot: number;
 }
 
 const getHeaderBottom = () => {
@@ -71,10 +72,28 @@ const lifespanFor = (
   return Math.max(MIN_LIFESPAN_MS, fullTravelMs * 1.05 + extraMs);
 };
 
+const xForSlot = (
+  slot: number,
+  slotCount: number,
+  width: number,
+  size: number,
+) => {
+  const bandWidth = width / slotCount;
+  const center = bandWidth * slot + bandWidth / 2;
+  const jitter = (Math.random() - 0.5) * bandWidth * 0.45;
+
+  return Math.min(
+    Math.max(0, width - size),
+    Math.max(0, center + jitter - size / 2),
+  );
+};
+
 const spawnParticle = (
   width: number,
   height: number,
   headerBottom: number,
+  slot: number,
+  slotCount: number,
   options: { atBottom?: boolean; staggerAge?: boolean } = {},
 ): Particle => {
   const size = randomSize();
@@ -86,7 +105,7 @@ const spawnParticle = (
   const lifespanMs = lifespanFor(height, headerBottom, speed, y);
 
   return {
-    x: Math.random() * Math.max(1, width - size),
+    x: xForSlot(slot, slotCount, width, size),
     y,
     size,
     speed,
@@ -94,6 +113,7 @@ const spawnParticle = (
     ageMs: options.staggerAge ? Math.random() * lifespanMs : 0,
     lifespanMs,
     dyingMs: 0,
+    slot,
   };
 };
 
@@ -109,8 +129,10 @@ const seedParticles = (
   headerBottom: number,
   count: number,
 ) =>
-  Array.from({ length: count }, () =>
-    spawnParticle(width, height, headerBottom, { staggerAge: true }),
+  Array.from({ length: count }, (_, index) =>
+    spawnParticle(width, height, headerBottom, index, count, {
+      staggerAge: true,
+    }),
   );
 
 const respawnParticle = (
@@ -118,10 +140,18 @@ const respawnParticle = (
   width: number,
   height: number,
   headerBottom: number,
+  slotCount: number,
 ) => {
   Object.assign(
     particle,
-    spawnParticle(width, height, headerBottom, { atBottom: true }),
+    spawnParticle(
+      width,
+      height,
+      headerBottom,
+      particle.slot,
+      slotCount,
+      { atBottom: true },
+    ),
   );
 };
 
@@ -165,18 +195,21 @@ export function AmbientPixels() {
       if (particles.length > nextCount) {
         particles.length = nextCount;
       } else if (particles.length < nextCount) {
-        particles.push(
-          ...seedParticles(
-            width,
-            height,
-            headerBottom,
-            nextCount - particles.length,
-          ),
-        );
+        const start = particles.length;
+        for (let index = start; index < nextCount; index += 1) {
+          particles.push(
+            spawnParticle(width, height, headerBottom, index, nextCount, {
+              staggerAge: true,
+            }),
+          );
+        }
       }
 
-      for (const particle of particles) {
-        particle.x = Math.min(particle.x, Math.max(0, width - particle.size));
+      const slotCount = particles.length;
+      for (let index = 0; index < slotCount; index += 1) {
+        const particle = particles[index];
+        particle.slot = index;
+        particle.x = xForSlot(index, slotCount, width, particle.size);
         particle.y = Math.min(particle.y, Math.max(0, height - particle.size));
       }
     };
@@ -203,7 +236,13 @@ export function AmbientPixels() {
           if (particle.dyingMs > 0) {
             particle.dyingMs += deltaMs;
             if (particle.dyingMs >= DEATH_FADE_MS) {
-              respawnParticle(particle, width, height, headerBottom);
+              respawnParticle(
+                particle,
+                width,
+                height,
+                headerBottom,
+                particles.length,
+              );
             }
           }
         }

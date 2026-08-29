@@ -25,20 +25,17 @@
     width: 1px;
     background-color: var(--color-border);
   }
+}
 
-  &::after {
-    content: '';
-    position: absolute;
-    left: calc(var(--exp-rail-x) - 3.25px);
-    top: calc(var(--spacing-section) + 0.65em);
-    width: 8px;
-    height: 8px;
-    background-color: var(--color-neutral-100);
-  }
+.expRailDot {
+  position: absolute;
+  left: calc(var(--exp-rail-x) - 3.25px);
+  top: calc(var(--spacing-block) + 0.65em);
+  z-index: 1;
+}
 
-  &:first-child::after {
-    top: calc(var(--spacing-block) + 0.65em);
-  }
+.expRailDotFirst {
+  top: calc(var(--spacing-block) + 0.65em);
 }
 
 .expHeader {
@@ -50,7 +47,7 @@
   padding: var(--spacing-block) var(--spacing-block) 0 var(--exp-content-inset);
 
   .expVerticalItem:not(:first-child) & {
-    padding-top: var(--spacing-section);
+    padding-top: var(--spacing-block);
   }
 }
 
@@ -61,6 +58,7 @@
 
 .expRole {
   @include text-h2;
+  margin: 0;
 }
 
 .expCompany {
@@ -74,17 +72,9 @@
 }
 
 .expTextContent {
-  padding: 0 var(--spacing-block) calc(var(--spacing-section) / 2) var(--exp-content-inset);
+  padding: 0 var(--spacing-block) var(--spacing-block) var(--exp-content-inset);
   display: flex;
   flex-direction: column;
-
-  .expVerticalItem:last-child & {
-    padding-bottom: var(--spacing-block);
-  }
-}
-
-.expActions {
-  padding-top: calc(var(--spacing-section) / 1.5);
 }
 
 .expListMinimal {

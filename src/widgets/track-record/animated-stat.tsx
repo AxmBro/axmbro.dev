@@ -19,9 +19,7 @@ export function AnimatedStat({
   const [displayValue, setDisplayValue] = useState("0");
 
   useEffect(() => {
-    if (!startWhen) {
-      return;
-    }
+    if (!startWhen) return;
 
     const match = value.match(/^([\d.]+)(.*)$/);
 
@@ -59,5 +57,5 @@ export function AnimatedStat({
     return () => window.cancelAnimationFrame(animationId);
   }, [replayKey, startWhen, value]);
 
-  return <span className={className}>{displayValue}</span>;
+  return <span className={className}>{startWhen ? displayValue : "0"}</span>;
 }

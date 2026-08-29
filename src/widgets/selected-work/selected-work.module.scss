@@ -7,12 +7,17 @@
   width: auto;
   min-width: 0;
   margin-inline: var(--spacing-block);
+  margin-bottom: var(--spacing-block);
   border: 1px solid var(--color-border);
   align-items: stretch;
 
   @media (max-width: $breakpoint-tablet) {
     grid-template-columns: 1fr;
   }
+}
+
+:global([data-has-dots='true']) + .grid {
+  margin-top: var(--spacing-block);
 }
 
 .gridItem {
@@ -50,9 +55,9 @@
 }
 
 .footer {
-  margin-top: var(--spacing-section);
-  padding: var(--spacing-section) var(--spacing-block) var(--spacing-block);
+  width: 100%;
   border-top: 1px solid var(--color-border);
+  padding: var(--spacing-block);
 }
 
 .footerHeader {

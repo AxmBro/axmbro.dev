@@ -2,27 +2,14 @@
 @use '../../shared/styles/mixins' as *;
 
 .grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1px;
-  width: 100%;
-  background-color: var(--color-border);
-  border-top: 1px solid var(--color-border);
-
-  @media (max-width: $breakpoint-wide) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @media (max-width: $breakpoint-md) {
-    grid-template-columns: 1fr;
-  }
+  @include connected-gap-grid(3);
 }
 
 .column {
   @include section-padding;
   @include stack-xs;
+  @include connected-gap-cell;
   min-width: 0;
-  background-color: var(--color-bg-primary);
 }
 
 .title {
@@ -46,38 +33,17 @@
   }
 }
 
-.divider {
-  width: calc(100% + var(--spacing-block) + var(--spacing-block));
-  height: 1px;
-  margin-block: var(--spacing-xs);
-  margin-inline: calc(0px - var(--spacing-block));
-  background-color: var(--color-border);
-}
-
 .projectList {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1px;
-  width: 100%;
-  background-color: var(--color-border);
-  border-top: 1px solid var(--color-border);
-
-  @media (max-width: $breakpoint-wide) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @media (max-width: $breakpoint-md) {
-    grid-template-columns: 1fr;
-  }
+  @include connected-gap-grid(3);
 }
 
 .projectItem {
   @include link-plain;
   @include stack-xs;
+  @include connected-gap-cell;
   min-width: 0;
   padding: var(--spacing-block);
   color: inherit;
-  background-color: var(--color-bg-primary);
 
   @media (min-width: ($breakpoint-wide + 1px)) {
     &:last-child:nth-child(3n + 1) {

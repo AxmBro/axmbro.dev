@@ -147,20 +147,25 @@
   gap: calc(var(--spacing-xs) * 1.5);
 
   a {
-    @include text-caption;
+    @include text-body-sm(var(--color-neutral-400));
     @include focus-ring;
+    font-weight: var(--font-weight-body);
     text-decoration: none;
     width: fit-content;
     max-width: 100%;
     word-break: break-word;
     hyphens: auto;
     border-radius: 4px;
+
+    &:hover {
+      color: var(--color-neutral-100);
+    }
   }
 }
 
 .contactLinks {
   a {
-    font-weight: var(--font-weight-heading);
+    font-weight: var(--font-weight-body);
   }
 }
 

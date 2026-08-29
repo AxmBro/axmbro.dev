@@ -12,8 +12,8 @@ interface ScreenSectionProps {
   children?: ReactNode;
   className?: string;
   withChildrenPadding?: boolean;
-  tightChildrenGap?: boolean;
   grid?: "top" | "bottom" | "none";
+  gridMesh?: "grid" | "lines";
   headingLevel?: "h1" | "h2" | "h3";
   variant?: ScreenSectionVariant;
 }
@@ -31,8 +31,8 @@ export const ScreenSection = ({
   children,
   className,
   withChildrenPadding = true,
-  tightChildrenGap = false,
   grid,
+  gridMesh = "grid",
   headingLevel = "h2",
   variant,
 }: ScreenSectionProps) => {
@@ -45,6 +45,9 @@ export const ScreenSection = ({
       id={id}
       data-plain={variant === "default" ? "" : undefined}
       data-grid={grid}
+      data-grid-mesh={gridMesh}
+      data-grid-surface={grid === "top" || grid === "bottom" ? "" : undefined}
+      data-accent-surface={variant === "accent" ? "" : undefined}
     >
       {hasHeader && (
         <div
@@ -61,7 +64,7 @@ export const ScreenSection = ({
       )}
       {children && (
         <div
-          className={`${styles.childrenContainer} ${withChildrenPadding ? styles.hasPadding : ""} ${hasHeader ? styles.belowTitle : ""} ${tightChildrenGap ? styles.tightGap : ""}`}
+          className={`${styles.childrenContainer} ${withChildrenPadding ? styles.hasPadding : ""} ${hasHeader ? styles.belowTitle : ""}`}
         >
           {children}
         </div>

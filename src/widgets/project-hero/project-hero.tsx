@@ -1,19 +1,33 @@
 import Image from "next/image";
 import type { ProjectAction } from "@/entities/project";
-import { RevealHeroMedia } from "@/shared/ui/motion";
+import {
+  ProjectAccentTitle,
+  ProjectContentReveal,
+} from "@/entities/project";
+import {
+  PROJECT_CONTENT_DELAY,
+  projectAccentDelayHeroTitle,
+  RevealHeroMedia,
+} from "@/shared/ui/motion";
 import { Button } from "@/shared/ui/button";
 import { ButtonGroup } from "@/shared/ui/button-group";
-import { ProjectHeroContentReveal } from "./project-hero-content-reveal";
 import styles from "./project-hero.module.scss";
 
 interface ProjectHeroProps {
   title: string;
   description: string;
   imageSrc: string | null;
+  accentColor?: string;
   action?: ProjectAction;
 }
 
-export function ProjectHero({ title, description, imageSrc, action }: ProjectHeroProps) {
+export function ProjectHero({
+  title,
+  description,
+  imageSrc,
+  accentColor,
+  action,
+}: ProjectHeroProps) {
   return (
     <header className={styles.hero}>
       {imageSrc && (
@@ -29,8 +43,20 @@ export function ProjectHero({ title, description, imageSrc, action }: ProjectHer
           <div className={styles.scrim} />
         </RevealHeroMedia>
       )}
-      <ProjectHeroContentReveal className={styles.inner}>
-        <h1 className={styles.title}>{title}</h1>
+      <ProjectContentReveal className={styles.inner} trigger="mount" delay={PROJECT_CONTENT_DELAY}>
+        {accentColor ? (
+          <ProjectAccentTitle
+            as="h1"
+            accentColor={accentColor}
+            className={styles.title}
+            startWhen="delay"
+            delay={projectAccentDelayHeroTitle()}
+          >
+            {title}
+          </ProjectAccentTitle>
+        ) : (
+          <h1 className={styles.title}>{title}</h1>
+        )}
         <p className={styles.description}>{description}</p>
         {action && (
           <ButtonGroup marginTop className={styles.cta}>
@@ -42,7 +68,7 @@ export function ProjectHero({ title, description, imageSrc, action }: ProjectHer
             />
           </ButtonGroup>
         )}
-      </ProjectHeroContentReveal>
+      </ProjectContentReveal>
     </header>
   );
 }

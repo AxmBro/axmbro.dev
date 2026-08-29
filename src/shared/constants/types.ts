@@ -18,22 +18,19 @@ export interface ProjectItem {
   type?: ProjectType;
   date?: string;
   isPresent?: boolean;
+  accentColor?: string;
 }
-
-export type ExperienceButton =
-  | { text: string; href: string; projectsTab?: never }
-  | { text: string; projectsTab: ProjectsBoardTab; href?: never };
 
 export interface ExperienceItem {
   role: string;
   date: string;
   company: string;
   items: { name: ReactNode }[];
-  buttons?: ExperienceButton[];
 }
 
 export interface SkillCard {
   title: string;
+  titleNote?: string;
   items: { name: string; value: string }[];
 }
 

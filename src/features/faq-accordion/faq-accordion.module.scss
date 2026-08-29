@@ -13,6 +13,7 @@
   flex-direction: column;
   width: 100%;
   border-bottom: 1px solid var(--color-border);
+  scroll-margin-top: calc(var(--header-sticky-height) + var(--project-toc-height) - 2px);
 
   &:last-child {
     border-bottom: none;

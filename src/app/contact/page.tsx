@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { ScreenContainer } from "@/shared/ui/screen-container";
 import { ScreenSection } from "@/shared/ui/screen-section";
 import { SocialLinkButton } from "@/shared/ui/social-link-button";
@@ -34,9 +33,9 @@ export default function ContactPage() {
 
       <Reveal>
         <ScreenSection
-          id={SECTION_IDS.startProject}
+          id={SECTION_IDS.contactForm}
           eyebrow="Contact"
-          title="Start a Project"
+          title="Contact"
           headingLevel="h1"
           withChildrenPadding={false}
           variant="accent"
@@ -71,12 +70,8 @@ export default function ContactPage() {
           eyebrow="Answers"
           title="Quick Questions"
           withChildrenPadding={false}
-          titleDescription={
-            <>
-              Short answers on availability and fit. Pricing, process, and delivery details are on the{" "}
-              <Link href={ROUTES.commissions}>Commissions page</Link>.
-            </>
-          }
+          grid="bottom"
+          titleDescription={HOME_PAGE_TEXTS.contactPage.quickQuestions}
         >
           <FAQAccordion items={CONTACT_FAQ_ITEMS} />
         </ScreenSection>

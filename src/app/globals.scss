@@ -13,16 +13,25 @@
 //   Accent frames (Work With Me, announcement bar) - color-border-accent
 //   Text fields, search - surface-input, surface-input-focus on focus
 //   Nav, tabs, outline - surface-hover
-//   Header menu toggle - color-secondary, color-secondary-hover
-//   Primary CTA, success - color-accent (accent-subtle for tinted bg)
-//   Secondary accent copy - color-accent-soft (icy, near white)
+//   Header menu toggle - color-secondary, color-secondary-hover; row size via header-control-row mixin + --header-control-height
+//   Primary CTA, success, eyebrows, accent text - color-accent
+//   Accent blends - accent-subtle, accent-soft, accent-tier-strong, accent-tier-solid
 //   Text on accent buttons - color-on-accent
-//   Section eyebrows - color-eyebrow
+//   Motion mint (pixel waves only) - pixel-click-wave.tsx constants, not a CSS token
+//   CSS press / UI motion - motion-duration-press, motion-duration-ui, motion-ease-standard, motion-scale-press
+//   Text on media (hero, gallery) - text-on-media-title-shadow, text-on-media-body-shadow
+//   Eyebrow typography - text-eyebrow mixin in shared/styles/_mixins.scss
 //   Hero / prose line length - measure-hero, measure-prose
 //   Body / heading weight - font-weight-body, font-weight-heading (mixins + h2-h4)
 //   Tight stacks - spacing-xs (4px); stack-xs mixin
 //   Commissioned / minecoin - color-gold (gold-subtle for tinted bg)
-//   Form errors - color-error
+//   Form errors - color-error (alias of color-danger)
+@property --grid-line-strength {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 7%;
+}
+
 :root {
   --color-neutral-100: oklch(97% 0 0);
   --color-neutral-400: oklch(70.8% 0 0);
@@ -34,15 +43,16 @@
 
   --color-accent: rgb(0, 143, 252);
   --color-accent-subtle: color-mix(in srgb, var(--color-accent) 10%, transparent);
-  /* Secondary accent copy - icy, close to white. Title stays --color-eyebrow */
   --color-accent-soft: color-mix(in srgb, var(--color-accent) 15%, var(--color-neutral-100));
+  /* Skills tier text (strong / solid) - blends from accent toward white */
+  --color-accent-tier-strong: color-mix(in srgb, var(--color-accent) 82%, var(--color-neutral-100));
+  --color-accent-tier-solid: color-mix(in srgb, var(--color-accent) 38%, var(--color-neutral-100));
   --color-on-accent: #000000;
-  /* Section eyebrow ("01 - Proof") - same blue as the Track Record stat values */
-  --color-eyebrow: var(--color-accent);
   /* Minecoin / commission gold - amber from /images/ui/minecoin.png */
   --color-gold: #e6b422;
   --color-gold-subtle: color-mix(in srgb, var(--color-gold) 14%, transparent);
   --color-danger: #ff3b50;
+  --color-error: var(--color-danger);
 
   --color-secondary: rgb(20, 20, 20);
   --color-secondary-hover: var(--color-border);
@@ -80,22 +90,40 @@
 
   --header-pad-block: 1.25rem;
   --header-logo-size: 32px;
+  --header-control-pad-block: 0.5rem;
+  --header-control-pad-inline: 0.875rem;
+  --header-control-height: calc(
+    (var(--header-control-pad-block) * 2) +
+    (var(--font-p2) * var(--line-height-body)) +
+    2px
+  );
   --header-offset: calc(var(--header-pad-block) * 2 + var(--header-logo-size));
   /* Real sticky header height - Header sets at runtime; fallback = --header-offset */
   --header-sticky-height: var(--header-offset);
   /* Under header; -1px shares one border line */
   --sticky-below-header: calc(var(--header-sticky-height) - 1px);
-
-  --scroll-anchor-gap: var(--spacing-section);
-  --scroll-anchor-offset: calc(var(--header-sticky-height) + var(--scroll-anchor-gap));
   /* Sticky project TOC height - set at runtime by ProjectToc, else 0 */
   --project-toc-height: 0px;
   /* Project TOC edge chevrons / fades */
   --toc-control-pad: calc(var(--spacing-section) + var(--spacing-xs));
 
-  --motion-duration-hover: 0.2s;
-  --motion-ease-hover: ease-out;
-  --motion-lift-hover: -2px;
+  /* CSS micro-interactions - match Framer REVEAL_EASE in motion-variants.ts */
+  --motion-duration-press: 0.1s;
+  --motion-duration-press-in: 0.06s;
+  --motion-duration-ui: 0.18s;
+  --motion-ease-standard: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --motion-scale-press: 0.97;
+
+  /* Gallery auto-advance - keep AUTO_ADVANCE_MS in project-gallery.tsx in sync (ms) */
+  --gallery-auto-advance: 5s;
+
+  /* Text on hero / gallery media - soft glow (no hard offset) */
+  --text-on-media-title-shadow:
+    0 1px 2px color-mix(in srgb, var(--color-bg-primary) 80%, transparent),
+    0 0 18px color-mix(in srgb, var(--color-bg-primary) 55%, transparent);
+  --text-on-media-body-shadow:
+    0 1px 2px color-mix(in srgb, var(--color-bg-primary) 85%, transparent),
+    0 0 14px color-mix(in srgb, var(--color-bg-primary) 50%, transparent);
 }
 
 /* Mobile - $breakpoint-tablet */
@@ -138,10 +166,6 @@ html {
 /* section[id]: under header (+ sticky project TOC when present) */
 section[id] {
   scroll-margin-top: calc(var(--header-sticky-height) + var(--project-toc-height) - 2px);
-}
-
-[data-scroll-anchor] {
-  scroll-margin-top: calc(var(--scroll-anchor-offset) + var(--project-toc-height) - 2px);
 }
 
 input,

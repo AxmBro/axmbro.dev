@@ -29,10 +29,7 @@
 }
 
 .eyebrow {
-  @include text-caption;
-  color: var(--color-eyebrow);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+  @include text-eyebrow;
   margin: 0;
 
   [data-section-num] {
@@ -76,14 +73,6 @@
     padding-top: var(--spacing-section);
   }
 
-  &.belowTitle.tightGap:not(.hasPadding) {
-    padding-top: var(--spacing-xs);
-  }
-
-  &.belowTitle.tightGap.hasPadding {
-    padding: var(--spacing-xs) var(--spacing-block) var(--spacing-block) var(--spacing-block);
-  }
-
   &.hasPadding:not(.belowTitle) {
     padding: 0 var(--spacing-block) var(--spacing-block) var(--spacing-block);
   }
@@ -92,6 +81,21 @@
 .accent {
   @include accent-surface;
   background-color: var(--color-bg-primary);
+}
+
+.accent[data-accent-ignite]::after {
+  animation: accent-surface-ignite 1.1s ease-out;
+}
+
+.section[data-grid-ignite]::before {
+  animation: grid-line-ignite 1.1s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .accent[data-accent-ignite]::after,
+  .section[data-grid-ignite]::before {
+    animation: none;
+  }
 }
 
 /* Grid only on the first and last section (or an explicit grid= override).
@@ -110,11 +114,19 @@
 .section:not([data-plain]):not([data-grid]):first-of-type:not(:last-of-type),
 .section[data-grid="bottom"] {
   --grid-lines-mask: linear-gradient(to top, #000 0%, transparent 55%);
+  --grid-position-y: bottom;
 }
 
 .section:not([data-plain]):not([data-grid]):last-of-type:not(:first-of-type),
 .section[data-grid="top"] {
   --grid-lines-mask: linear-gradient(to bottom, #000 0%, transparent 55%);
+  --grid-position-y: top;
+}
+
+.section[data-grid][data-grid-mesh="lines"]::before {
+  background-size:
+    calc(100% / var(--grid-lines-cols))
+    calc(var(--spacing-block) * 2);
 }
 
 .listContainer {

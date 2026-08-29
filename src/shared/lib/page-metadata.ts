@@ -40,6 +40,7 @@ type CreatePageMetadataOptions = {
   robots?: Metadata["robots"];
   images?: OgImages;
   imageAlt?: string;
+  openGraphType?: "website" | "article";
 };
 
 export function createPageMetadata({
@@ -50,6 +51,7 @@ export function createPageMetadata({
   robots,
   images,
   imageAlt,
+  openGraphType = "website",
 }: CreatePageMetadataOptions): Metadata {
   const ogTitle = absoluteTitle ?? `AxmBro.dev | ${title}`;
   const ogImages = toImageList(images);
@@ -70,13 +72,14 @@ export function createPageMetadata({
       siteName: "AxmBro",
       images: ogImages,
       locale: "en_US",
-      type: "website",
+      type: openGraphType,
     },
     twitter: {
       card: "summary_large_image",
       title: ogTitle,
       description,
       images: twitterImageUrls(ogImages),
+      site: "@AxmBro",
       creator: "@AxmBro",
     },
   };

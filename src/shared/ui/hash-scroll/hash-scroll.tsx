@@ -2,24 +2,41 @@
 
 import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
-import { repairBrokenHash, scrollToHash } from "@/shared/lib/scroll-to-hash";
+import {
+  FAQ_HASH_SCROLL_DELAY_MS,
+  notifyPageHashChange,
+  parseHashId,
+  repairBrokenHash,
+  scrollToHash,
+} from "@/shared/lib/scroll-to-hash";
 import { clearPendingHash, restorePendingHash } from "@/shared/lib/pending-hash";
 
 const scrollFromTop = () => {
   if (!window.location.hash) return;
 
-  window.scrollTo(0, 0);
+  const id = parseHashId(window.location.hash);
+  const isFaqHash = id.startsWith("faq-");
+
+  if (!isFaqHash) {
+    window.scrollTo(0, 0);
+  }
+
+  const runScroll = () => scrollToHash(undefined, "smooth");
 
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
-      scrollToHash(undefined, "smooth");
+      if (isFaqHash) {
+        window.setTimeout(runScroll, FAQ_HASH_SCROLL_DELAY_MS);
+        return;
+      }
+
+      runScroll();
     });
   });
 };
 
 export const HashScroll = () => {
   const pathname = usePathname();
-  // Init effect already handles first mount; skip duplicate scroll on first pathname tick.
   const skipInitialPathname = useRef(true);
 
   useEffect(() => {
@@ -31,6 +48,7 @@ export const HashScroll = () => {
     repairBrokenHash();
     const hadPendingHash = restorePendingHash();
     if (hadPendingHash || window.location.hash) {
+      notifyPageHashChange();
       scrollFromTop();
     } else {
       clearPendingHash();
@@ -47,6 +65,7 @@ export const HashScroll = () => {
 
     const hadPendingHash = restorePendingHash();
     if (hadPendingHash || window.location.hash) {
+      notifyPageHashChange();
       scrollFromTop();
       return;
     }

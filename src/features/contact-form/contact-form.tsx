@@ -4,11 +4,11 @@ import { useState, useRef, useEffect, type FormEvent, type ChangeEvent } from "r
 import { JoinedTabs } from "@/shared/ui/joined-tabs";
 import {
   clearContactFormDraft,
-  getSavedContactFormDraft,
+  getInitialContactFormDraft,
   saveContactFormDraft,
 } from "@/shared/lib/contact-form-draft";
 import { sendEmailAction } from "./api/send-email";
-import { CONTACT_FORM_INTENTS } from "@/shared/constants/data";
+import { CONTACT_FORM_INTENTS, CONTACT_FORM_TEXTS } from "@/shared/constants/data";
 import styles from "./contact-form.module.scss";
 
 const SUCCESS_STATUS_RESET_MS = 15000;
@@ -47,49 +47,64 @@ const applyIntentTemplate = (currentMessage: string, template: string) => {
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-const getSubmitHint = (email: string, message: string) => {
+type ContactFormField = "email" | "message";
+
+type ContactFormValidation = {
+  hint: string;
+  fields: ContactFormField[];
+};
+
+const getFormValidation = (email: string, message: string): ContactFormValidation | null => {
+  const invalidFields: ContactFormField[] = [];
+
   if (!emailRegex.test(email.trim())) {
-    return "Enter a valid email address to send your brief.";
+    invalidFields.push("email");
+  }
+
+  if (message.trim() === "" || isMessageOnlyPreset(message)) {
+    invalidFields.push("message");
+  }
+
+  if (invalidFields.length === 0) {
+    return null;
+  }
+
+  if (invalidFields.includes("email")) {
+    return {
+      hint: CONTACT_FORM_TEXTS.validation.email,
+      fields: invalidFields,
+    };
   }
 
   if (message.trim() === "") {
-    return "Add your project brief in the message field.";
+    return {
+      hint: CONTACT_FORM_TEXTS.validation.emptyMessage,
+      fields: invalidFields,
+    };
   }
 
-  if (isMessageOnlyPreset(message)) {
-    return "Add your project scope and details below the preset.";
-  }
-
-  return null;
+  return {
+    hint: CONTACT_FORM_TEXTS.validation.presetOnly,
+    fields: invalidFields,
+  };
 };
 
 export const ContactForm = () => {
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
+  const [email, setEmail] = useState(() => getInitialContactFormDraft().email);
+  const [discord, setDiscord] = useState(() => getInitialContactFormDraft().discord);
+  const [message, setMessage] = useState(() => getInitialContactFormDraft().message);
+  const [activeIntent, setActiveIntent] = useState(
+    () => getInitialContactFormDraft().activeIntent,
+  );
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
-  const [activeIntent, setActiveIntent] = useState<string | null>(null);
-  const [hasInteracted, setHasInteracted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string>(CONTACT_FORM_TEXTS.error);
+  const [showValidation, setShowValidation] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  const isReady =
-    emailRegex.test(email.trim()) &&
-    !isMessageOnlyPreset(message) &&
-    status === "idle";
-  const submitHint = getSubmitHint(email, message);
+  const validation = getFormValidation(email, message);
+  const isReady = validation === null && status === "idle";
   const showSubmitHint =
-    hasInteracted && !isReady && status === "idle" && submitHint !== null;
-
-  useEffect(() => {
-    const draft = getSavedContactFormDraft();
-    if (draft) {
-      setEmail(draft.email);
-      setMessage(draft.message);
-      setActiveIntent(draft.activeIntent);
-      if (draft.email || draft.message || draft.activeIntent) {
-        setHasInteracted(true);
-      }
-    }
-  }, []);
+    showValidation && !isReady && status === "idle" && validation !== null;
 
   useEffect(() => {
     if (status === "success") {
@@ -97,8 +112,8 @@ export const ContactForm = () => {
       return;
     }
 
-    saveContactFormDraft({ email, message, activeIntent });
-  }, [email, message, activeIntent, status]);
+    saveContactFormDraft({ email, discord, message, activeIntent });
+  }, [email, discord, message, activeIntent, status]);
 
   useEffect(() => {
     return () => {
@@ -110,25 +125,36 @@ export const ContactForm = () => {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setShowValidation(true);
+
     if (!isReady) return;
 
     setStatus("submitting");
 
     try {
-      const response = await sendEmailAction(email, message);
+      const formData = new FormData(e.currentTarget);
+      const honeypot = String(formData.get("company") ?? "");
+      const response = await sendEmailAction(email, discord, message, honeypot);
 
       if (response.success) {
         setStatus("success");
         setEmail("");
+        setDiscord("");
         setMessage("");
         setActiveIntent(null);
-        setHasInteracted(false);
+        setShowValidation(false);
         clearContactFormDraft();
+        e.currentTarget.reset();
 
         timeoutRef.current = setTimeout(() => {
           setStatus("idle");
         }, SUCCESS_STATUS_RESET_MS);
       } else {
+        setErrorMessage(
+          response.reason === "unavailable"
+            ? CONTACT_FORM_TEXTS.errorUnavailable
+            : CONTACT_FORM_TEXTS.error,
+        );
         setStatus("error");
 
         timeoutRef.current = setTimeout(() => {
@@ -137,6 +163,7 @@ export const ContactForm = () => {
       }
     } catch (error) {
       console.error(error);
+      setErrorMessage(CONTACT_FORM_TEXTS.error);
       setStatus("error");
 
       timeoutRef.current = setTimeout(() => {
@@ -154,18 +181,17 @@ export const ContactForm = () => {
     }
   };
 
-  const markInteracted = () => {
-    setHasInteracted(true);
-  };
-
   const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
-    markInteracted();
     setEmail(e.target.value);
     resetStatusIfNeeded();
   };
 
+  const handleDiscordChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setDiscord(e.target.value);
+    resetStatusIfNeeded();
+  };
+
   const handleMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    markInteracted();
     const nextMessage = e.target.value;
     setMessage(nextMessage);
 
@@ -177,64 +203,100 @@ export const ContactForm = () => {
   };
 
   const handleIntentClick = (intentId: string, template: string) => {
-    markInteracted();
     setActiveIntent(intentId);
     setMessage((currentMessage) => applyIntentTemplate(currentMessage, template));
     resetStatusIfNeeded();
   };
 
+  const handleIntentTabChange = (id: string) => {
+    const intent = CONTACT_FORM_INTENTS.find((item) => item.id === id);
+    if (intent) {
+      handleIntentClick(intent.id, intent.template);
+    }
+  };
+
+  const invalidFields = showValidation && validation ? validation.fields : [];
+
   return (
     <div className={styles.formWrapper}>
-      <form className={styles.form} onSubmit={handleSubmit}>
-        <div className={styles.fieldGroup}>
-          <label className={styles.label} htmlFor="contact-email">Email</label>
+      <form className={styles.form} onSubmit={handleSubmit} noValidate>
+        <div className={styles.honeypot} aria-hidden="true">
+          <label htmlFor="contact-company">Company</label>
           <input
-            id="contact-email"
-            className={styles.input}
-            type="email"
-            placeholder="Enter your email"
-            value={email}
-            onChange={handleEmailChange}
-            required
-            disabled={status === "submitting"}
+            id="contact-company"
+            name="company"
+            type="text"
+            tabIndex={-1}
+            autoComplete="off"
+            defaultValue=""
           />
+        </div>
+
+        <div className={styles.fieldRow}>
+          <div className={styles.fieldGroup}>
+            <label className={styles.label} htmlFor="contact-email">
+              {CONTACT_FORM_TEXTS.emailLabel}
+            </label>
+            <input
+              id="contact-email"
+              className={styles.input}
+              type="email"
+              name="email"
+              autoComplete="email"
+              placeholder={CONTACT_FORM_TEXTS.emailPlaceholder}
+              value={email}
+              onChange={handleEmailChange}
+              data-invalid={invalidFields.includes("email") ? "true" : undefined}
+              disabled={status === "submitting"}
+            />
+          </div>
+          <div className={styles.fieldGroup}>
+            <label className={styles.label} htmlFor="contact-discord">
+              {CONTACT_FORM_TEXTS.discordLabel}
+            </label>
+            <input
+              id="contact-discord"
+              className={styles.input}
+              type="text"
+              name="discord"
+              autoComplete="off"
+              placeholder={CONTACT_FORM_TEXTS.discordPlaceholder}
+              value={discord}
+              onChange={handleDiscordChange}
+              disabled={status === "submitting"}
+            />
+          </div>
         </div>
 
         <div className={styles.intentWrapper}>
           <span className={styles.label} id="contact-project-type">
-            Project Type (Optional)
+            {CONTACT_FORM_TEXTS.topicLabel}
           </span>
           <JoinedTabs
             options={CONTACT_FORM_INTENTS}
             activeId={activeIntent}
             aria-labelledby="contact-project-type"
-            onChange={(id) => {
-              const intent = CONTACT_FORM_INTENTS.find((item) => item.id === id);
-              if (intent) {
-                handleIntentClick(intent.id, intent.template);
-              }
-            }}
+            onChange={handleIntentTabChange}
             size="small"
             disabled={status === "submitting"}
           />
         </div>
 
-        <div className={styles.fieldGroup}>
-          <label className={styles.label} htmlFor="contact-message">Message</label>
-          <textarea
-            id="contact-message"
-            className={styles.textarea}
-            placeholder="Include the project scope, required screens, target Minecraft version, preferred timeline, and any mockups or textures you already have."
-            value={message}
-            onChange={handleMessageChange}
-            required
-            disabled={status === "submitting"}
-          />
-        </div>
+        <textarea
+          id="contact-message"
+          className={styles.textarea}
+          name="message"
+          aria-label="Message"
+          placeholder={CONTACT_FORM_TEXTS.messagePlaceholder}
+          value={message}
+          onChange={handleMessageChange}
+          data-invalid={invalidFields.includes("message") ? "true" : undefined}
+          disabled={status === "submitting"}
+        />
 
         {showSubmitHint && (
           <p className={styles.submitHint} id="contact-submit-hint" role="status">
-            {submitHint}
+            {validation?.hint}
           </p>
         )}
 
@@ -242,10 +304,10 @@ export const ContactForm = () => {
           type="submit"
           className={styles.submitButton}
           data-active={isReady ? "true" : "false"}
-          disabled={!isReady}
+          disabled={status === "submitting"}
           aria-describedby={showSubmitHint ? "contact-submit-hint" : undefined}
         >
-          {status === "submitting" ? "Sending..." : "Send Message"}
+          {status === "submitting" ? CONTACT_FORM_TEXTS.submitting : CONTACT_FORM_TEXTS.submit}
         </button>
         {(status === "success" || status === "error") && (
           <p
@@ -255,8 +317,8 @@ export const ContactForm = () => {
             aria-live="polite"
           >
             {status === "success"
-              ? "Message sent. I will reply as soon as possible."
-              : "Message could not be sent. Please try again or use email."}
+              ? CONTACT_FORM_TEXTS.success
+              : errorMessage}
           </p>
         )}
       </form>

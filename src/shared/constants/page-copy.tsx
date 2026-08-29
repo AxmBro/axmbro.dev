@@ -1,7 +1,11 @@
 import Link from "next/link";
 import { HashLink } from "@/shared/ui/hash-link";
+import { ProjectsBoardLink } from "@/shared/ui/projects-tag-link";
 import {
-  contactSectionHref,
+  commissionFaqItemHref,
+  commissionSectionHref,
+  contactFormHref,
+  homeSectionHref,
   SECTION_IDS,
 } from "./anchors";
 import { projectDetailPath, ROUTES } from "./routes";
@@ -14,23 +18,28 @@ import type {
   CommissionInfoItem,
 } from "./types";
 
+/** Canonical site role - H1, metadata, JSON-LD, experience. Use Developer, not Engineer. */
+export const SITE_ROLE = {
+  headline: "Minecraft Bedrock UI & Web Developer",
+  projectCredit: "UI Developer",
+} as const;
+
 export const EXPERIENCE_TREE: ExperienceItem[] = [
   {
-    role: "Freelance Minecraft Bedrock UI Engineer & Web Developer",
+    role: `Freelance ${SITE_ROLE.headline}`,
     date: "Present",
     company: "Self-Employed",
     items: [
       {
-        name: "Deliver commercial Minecraft Bedrock JsonUI for Marketplace studios and private servers, including custom HUDs, server forms, and menu systems.",
+        name: "Ship custom Bedrock JsonUI for studios, servers, and creators - from single screens to full UI systems.",
       },
       {
-        name: "Build responsive websites and landing pages with React, Next.js, TypeScript, and SCSS for commission and freelance clients.",
+        name: "Build React and Next.js websites and landing pages for commission and freelance clients.",
       },
       {
-        name: "Handle JsonUI-focused technical planning, project scope, client communication, delivery, contracts, and invoicing for freelance and B2B work.",
+        name: "Handle scoping, client communication, delivery, contracts, and invoicing on JsonUI work end to end.",
       },
     ],
-    buttons: [{ text: "Browse Client Work", projectsTab: "commissions" }],
   },
   {
     role: "Founder & Lead Developer",
@@ -42,22 +51,24 @@ export const EXPERIENCE_TREE: ExperienceItem[] = [
           <>
             Founded{" "}
             <Link href={projectDetailPath("better_bedrock")}>Better Bedrock</Link>{" "}
-            and grew it into a long-running Minecraft Bedrock UI and texture
-            project with more than 2M downloads.
+            and grew it past 2M downloads as a Bedrock UI and texture pack. Now
+            building a{" "}
+            <a
+              href="https://betterbedrock.com/monetization"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              creator monetization platform
+            </a>{" "}
+            where Bedrock creators publish projects and earn ad revenue.
           </>
         ),
       },
       {
-        name: "Lead product direction, release planning, community communication, and promotional content across video and graphics.",
+        name: "Lead releases, community, and promotional content across video and graphics.",
       },
       {
-        name: "Designed the interface system and co-developed the open-source project website with a technical partner.",
-      },
-    ],
-    buttons: [
-      {
-        text: "View Better Bedrock",
-        href: projectDetailPath("better_bedrock"),
+        name: "Designed the JsonUI system and co-built the project website with a technical partner.",
       },
     ],
   },
@@ -67,10 +78,10 @@ export const EXPERIENCE_TREE: ExperienceItem[] = [
     company: "University of Silesia",
     items: [
       {
-        name: "Building a formal foundation in software engineering and computer systems.",
+        name: "Building a foundation in software engineering and computer systems.",
       },
       {
-        name: "Current coursework includes algorithms, databases, object-oriented programming, computer networks, and digital logic.",
+        name: "Coursework includes algorithms, programming, databases, computer networks, operating systems, and digital logic.",
       },
     ],
   },
@@ -78,54 +89,42 @@ export const EXPERIENCE_TREE: ExperienceItem[] = [
 
 export const SKILLS_CARDS: SkillCard[] = [
   {
-    title: "Minecraft Bedrock Edition (Core Expertise)",
+    title: "Minecraft Bedrock JsonUI",
     items: [
-      { name: "JsonUI (Custom UI, HUDs, Server Forms)", value: "Expert" },
+      { name: "JsonUI", value: "Expert" },
       { name: "Resource Packs", value: "Advanced" },
       { name: "Entities & Molang", value: "Intermediate" },
-      { name: "ScriptAPI & Regolith", value: "Beginner" },
+      { name: "ScriptAPI", value: "Beginner" },
     ],
   },
   {
-    title: "Frontend & Web Development (Active Learning)",
+    title: "Web Development",
     items: [
       { name: "JavaScript & TypeScript", value: "Intermediate" },
       { name: "React & Next.js", value: "Intermediate" },
-      { name: "HTML, SCSS & Responsive UI", value: "Intermediate" },
-      { name: "Vercel Deployment", value: "Beginner" },
+      { name: "HTML & SCSS", value: "Intermediate" },
+      { name: "Vercel", value: "Beginner" },
     ],
   },
   {
-    title: "Computer Science Fundamentals",
-    items: [
-      { name: "Algorithms & Data Structures", value: "Intermediate" },
-      { name: "Object-Oriented Programming", value: "Intermediate" },
-      { name: "Databases & SQL", value: "Beginner" },
-      { name: "Computer Networks & Digital Logic", value: "Beginner" },
-    ],
-  },
-  {
-    title: "Development Tools & Languages",
+    title: "Computer Science & Tools",
     items: [
       { name: "Git & GitHub", value: "Intermediate" },
+      { name: "Algorithms & OOP", value: "Intermediate" },
+      { name: "Databases & SQL", value: "Beginner" },
       { name: "C++, Java & Python", value: "Beginner" },
       { name: "Linux", value: "Beginner" },
     ],
   },
   {
-    title: "Management & Professional Skills",
+    title: "Professional",
     items: [
       { name: "Community Management", value: "Advanced" },
-      { name: "Project Scoping & Roadmapping", value: "Intermediate" },
-      { name: "Client Communication (B2B)", value: "Intermediate" },
+      { name: "Project Scoping", value: "Intermediate" },
+      { name: "Client Communication", value: "Intermediate" },
       { name: "Contracts & Invoicing", value: "Intermediate" },
-    ],
-  },
-  {
-    title: "Languages",
-    items: [
       { name: "Polish", value: "Native" },
-      { name: "English", value: "B2 (Learning)" },
+      { name: "English", value: "B2" },
     ],
   },
 ];
@@ -219,36 +218,70 @@ export const getFooterSocialLinks = (): SocialLink[] =>
     return link ? [link] : [];
   });
 
+export const GALLERY_TEXTS = {
+  typeLabel: {
+    commissions: "Commissioned",
+    personal: "Personal Project",
+  },
+  imageAlt: (title: string, imageNumber: number) =>
+    `${title} interface screenshot ${imageNumber}`,
+  aria: {
+    region: "Project showcase gallery",
+    prevProject: "Previous project",
+    nextProject: "Next project",
+    chooseProject: "Choose project",
+  },
+} as const;
+
+export const CONTACT_FORM_TEXTS = {
+  emailLabel: "Email",
+  emailPlaceholder: "Your email",
+  discordLabel: "Discord (optional)",
+  discordPlaceholder: "Username or ID",
+  topicLabel: "Topic (optional)",
+  messagePlaceholder: "Your ideas, sketches, scope, or questions...",
+  submit: "Send Message",
+  submitting: "Sending...",
+  success: "Message sent. I will reply as soon as possible.",
+  error: "Could not send. Try again or use email.",
+  errorUnavailable:
+    "The contact form is temporarily unavailable. Email axmbro@gmail.com directly.",
+  validation: {
+    email: "Enter a valid email address.",
+    emptyMessage: "Write your message.",
+    presetOnly: "Add your details below the preset line.",
+  },
+} as const;
+
 export const CONTACT_FORM_INTENTS = [
   {
     id: "complete-ui",
     label: "Complete UI System",
     template:
-      "Hello AxmBro! I'd like to discuss a complete UI system for my Minecraft Bedrock project. Here are the details: ",
+      "Hello AxmBro! I want to discuss a full Bedrock JsonUI system. ",
   },
   {
     id: "hud-overlay",
     label: "HUD or Overlay",
     template:
-      "Hello AxmBro! I'd like to discuss a custom HUD or overlay for my Minecraft Bedrock project. Here are the details: ",
+      "Hello AxmBro! I want to discuss a custom HUD or overlay. ",
   },
   {
     id: "forms-menus",
     label: "Server Forms or Menus",
     template:
-      "Hello AxmBro! I'd like to discuss server forms or menus for my Minecraft Bedrock project. Here are the details: ",
+      "Hello AxmBro! I want to discuss server forms or menus. ",
   },
   {
     id: "web-project",
     label: "Web Project",
     template:
-      "Hello AxmBro! I'd like to discuss a responsive web project. Here are the details: ",
+      "Hello AxmBro! I want to discuss a web project - happy to continue on Discord DM. ",
   },
   {
     id: "other",
     label: "Other",
-    template:
-      "Hello AxmBro! I'd like to discuss a custom project. Here are the details: ",
+    template: "Hello AxmBro! I have a project idea. ",
   },
 ];
 
@@ -292,164 +325,281 @@ export const NAV_LINKS = [
 
 export const SITE_METADATA = {
   homeDescription:
-    "20-year-old Computer Science student and Minecraft Bedrock UI Engineer from Poland. Custom JsonUI, HUDs, server forms, and React and Next.js websites for Marketplace studios and creators.",
+    `20-year-old Computer Science student and ${SITE_ROLE.headline} from Poland. Mainly custom Bedrock JsonUI, HUDs, and server forms for studios, servers, and creators - plus React and Next.js web work.`,
   footerDescription:
-    "Computer Science student and Minecraft Bedrock UI Engineer from Poland. Custom JsonUI, HUDs, server forms, and React websites for studios and creators.",
+    `Computer Science student and ${SITE_ROLE.headline} from Poland. Mainly custom Bedrock JsonUI for studios and creators - plus React sites.`,
   projectsDescription:
-    "Portfolio of Minecraft Bedrock UI commissions, personal JsonUI releases, and web projects, including Better Bedrock, client HUDs, server forms, and featured studio work.",
+    "Portfolio of mainly Bedrock JsonUI commissions and personal releases for studios and creators, plus web work - including Better Bedrock and studio client work.",
   commissionsDescription:
-    "Commission custom Minecraft Bedrock JsonUI, HUDs, server forms, and menu systems for studios, servers, and creators. Review scope, process, delivery, and FAQ before starting a project.",
+    "Commission custom Bedrock JsonUI for studios, servers, and creators. Scope, process, FAQ, and how to start.",
   contactDescription:
-    "Contact AxmBro for Minecraft Bedrock UI commissions and web projects. Send a project brief or reach out via email, Discord, or GitHub.",
+    "Contact AxmBro for custom Bedrock JsonUI commissions via the form, email, Discord, or GitHub. Web work - reach out on Discord DM first.",
   sitemapDescription:
-    "Browse AxmBro.dev pages, portfolio sections, project views, commission information, contact options, and legal pages.",
+    "Sitemap for AxmBro.dev - main pages, home sections, commissions, contact, projects, and legal.",
   privacyPolicyDescription:
-    "Privacy Policy for AxmBro.dev - how personal data is collected and processed through the portfolio site and contact form.",
+    "Privacy Policy for AxmBro.dev - what data is collected, legal basis, retention, and your GDPR rights.",
   termsOfUseDescription:
-    "Terms of Use for AxmBro.dev - rules for using this portfolio website and related services.",
+    "Terms of Use for AxmBro.dev - permitted use, intellectual property, disclaimers, and governing law.",
   notFoundDescription:
-    "This page does not exist on AxmBro.dev. Check the URL or return to the homepage.",
+    "This page is not on AxmBro.dev. Browse projects for recent work or see Commissions for Bedrock JsonUI scope and process.",
   keywords: [
     "AxmBro",
     "Minecraft Bedrock",
-    "Minecraft Bedrock UI Engineer",
+    SITE_ROLE.headline,
     "JsonUI",
     "MCBE UI",
     "custom HUD",
     "server forms",
     "Marketplace studio",
-    "UI Engineer",
+    SITE_ROLE.projectCredit,
     "web developer",
     "React",
     "Next.js",
     "Better Bedrock",
     "Poland",
   ],
-  ogImageAlt:
-    "AxmBro - Minecraft Bedrock UI Engineer portfolio and commission work",
+  ogImageAlt: `AxmBro - ${SITE_ROLE.headline} portfolio and commission work`,
 };
 
 export const CTA_LABELS = {
   startProject: "Start a Project",
-  browseAllProjects: "Browse All Projects",
-  viewSelectedWork: "View Selected Work",
+  contactMe: "Contact Me",
+  contactForm: "Contact",
+  myWork: "My Work",
+  getInTouch: "Get in Touch",
+  browseAllProjects: "All Projects",
+  viewSelectedWork: "View Selected Projects",
   browseClientWork: "Browse Client Work",
   commissionDetails: "Commission Details",
   minecraftBedrockCommissions: "Minecraft Bedrock Commissions",
   contactOptions: "Contact Options",
   requestSimilarWork: "Request Similar Work",
-  viewFeaturedProjects: "View Featured Projects",
+  viewFeaturedProjects: "Featured Projects",
+  nextPhoto: "Next photo",
 } as const;
 
 export const HOME_ANNOUNCEMENT = {
-  label: "Commissions open",
-  text: "Taking new Minecraft Bedrock UI work (JsonUI, HUDs, and server forms)",
+  title: "Commissions open",
+  text: "Mainly custom Bedrock JsonUI commissions",
+  contactHref: contactFormHref(),
+  contactLabel: CTA_LABELS.getInTouch,
 } as const;
 
 export const HOME_PAGE_TEXTS = {
   hero: {
     description:
-      "I am a 20-year-old Computer Science student from Poland, specializing in Minecraft Bedrock Edition development. I engineer advanced interfaces for Marketplace studios, private servers, and independent creators, including custom JsonUI, HUDs, and server forms.\n\nI also build responsive websites with React and Next.js, explore AI tools to grow my software engineering skills, and keep pushing personal projects. I focus on pixel-perfect layouts, scalable code, and seamless user experience",
-    ctaWork: CTA_LABELS.browseAllProjects,
-    ctaCommissions: CTA_LABELS.minecraftBedrockCommissions,
+      "I am a 20-year-old Computer Science student from Poland, specializing in Minecraft Bedrock Edition development - mainly custom JsonUI for studios, servers, and creators.\n\nI also build React and Next.js sites, explore new tools and use AI in a smart way. I take time on every project and focus on clean design, reliable code, and getting the small details right.",
+    ctaWork: CTA_LABELS.myWork,
+    ctaContact: CTA_LABELS.getInTouch,
   },
   trackRecord: {
     description: (
       <>
-        Paid commissions, independent releases, and technical content that show
-        the scope of my Minecraft Bedrock UI work, project reach, and audience
-        growth, including work for studios such as{" "}
-        <Link href={projectDetailPath("zeqa_ui")}>InPvP (Zeqa UI)</Link>.
+        Numbers from paid JsonUI work, personal releases, and content - for
+        example, <Link href={projectDetailPath("zeqa_ui")}>Zeqa UI</Link> for
+        InPvP.
       </>
     ),
+    clientsTitle: "Selected Clients & Studios",
     clientsDescription:
-      "Studios and creators I have worked with on commercial Minecraft Bedrock projects, including custom game UIs, HUDs, and server forms.",
+      "Commercial Bedrock JsonUI clients and studio partners.",
   },
   selectedWork: {
     description:
-      "Selected studio commissions and independent projects that show technical scope, interface quality, and real player reach.",
-    exploreMore:
-      "Browse the full portfolio across client commissions, personal releases, and featured JsonUI work. Filter by all projects, featured work, personal releases, or client commissions.",
+      "Recent JsonUI for studios and creators, plus my own projects.",
+    footerTitle: "Explore More Projects",
+    footerDescription:
+      "More client JsonUI projects, personal releases, and featured work.",
   },
   skills: {
     description:
-      "A focused view of the tools I use in real projects, the skills I apply through practical work, and the areas I am still learning.",
+      "Bedrock JsonUI first. Web and CS fundamentals in active use. Honest levels - based on what I ship in real projects.",
   },
   experience: {
-    description:
-      "My background combines commercial Minecraft Bedrock UI work, freelance web development, leading a project with more than 2M downloads, and ongoing Computer Science studies.",
+    description: (
+      <>
+        Bedrock & Web freelancer. Better Bedrock founder. CS student. Check{" "}
+        <ProjectsBoardLink tab="commissions">Client Work</ProjectsBoardLink> for
+        real shipped JsonUI projects.
+      </>
+    ),
+  },
+  workWithMe: {
+    description: (
+      <>
+        I am open to hearing from you anytime. Mainly custom Bedrock JsonUI
+        commissions for studios, servers, and creators. Review{" "}
+        <HashLink href={homeSectionHref(SECTION_IDS.selectedWork)}>
+          Selected Projects
+        </HashLink>{" "}
+        for recent work, or see{" "}
+        <Link href={ROUTES.commissions}>Commissions</Link> for scope and how to
+        start.
+      </>
+    ),
+    ctaPrimary: CTA_LABELS.contactMe,
   },
   footer: {
     description: SITE_METADATA.footerDescription,
   },
   contactPage: {
     socials:
-      "Prefer direct contact? Use email, Discord, or GitHub. Additional profiles and community links are available below.",
+      "Email, Discord, and GitHub if you prefer a direct channel. Extra profiles and community links here.",
     form: (
       <>
-        Send your project brief through the form below. For scope, pricing context, and
-        process, see{" "}
-        <Link href={ROUTES.commissions}>Commissions</Link>
-        . Include the target version, required screens, and any existing mockups or
-        textures. I usually respond within 24 hours.
+        Mainly custom Bedrock JsonUI commissions - use the form below for ideas,
+        sketches, or scope. For web development, message me on Discord DM first -
+        we arrange that there. For what I take on and limits, see the{" "}
+        <HashLink href={commissionFaqItemHref("scope")}>scope FAQ</HashLink> on
+        Commissions. Review{" "}
+        <HashLink href={commissionSectionHref(SECTION_IDS.commissionServices)}>
+          scope
+        </HashLink>{" "}
+        and{" "}
+        <HashLink href={commissionSectionHref(SECTION_IDS.commissionProcess)}>
+          workflow
+        </HashLink>{" "}
+        there when you are ready.
+      </>
+    ),
+    quickQuestions: (
+      <>
+        Availability in brief below. For fit and service scope, see the{" "}
+        <HashLink href={commissionFaqItemHref("scope")}>scope FAQ</HashLink>. For
+        pricing, process, delivery, and the rest, see{" "}
+        <HashLink href={commissionSectionHref(SECTION_IDS.commissionFaq)}>
+          Commissions FAQ
+        </HashLink>
+        .
       </>
     ),
   },
   projectsPage: {
     description: (count: number) =>
-      `A collection of ${count} projects, from custom Minecraft Bedrock interfaces (JsonUI) for marketplace studios and private clients to web development. Each one reflects a real problem solved and skills applied.`,
+      `${count} projects - mainly Bedrock JsonUI commissions and personal releases for studios and creators, plus web work.`,
+    closerDescription: (
+      <>
+        Want something similar? Review{" "}
+        <HashLink href={commissionSectionHref(SECTION_IDS.commissionServices)}>
+          what I build
+        </HashLink>{" "}
+        and the{" "}
+        <HashLink href={commissionSectionHref(SECTION_IDS.commissionProcess)}>
+          commission workflow
+        </HashLink>{" "}
+        before you get in touch.
+      </>
+    ),
   },
+};
+
+export const SITEMAP_PAGE_TEXTS = {
+  intro:
+    "Every main section of AxmBro.dev in one place - portfolio, commissions, contact, and legal pages.",
+  allProjects: (
+    <>
+      The full project list - mainly client JsonUI and personal releases, plus web work.{" "}
+      <Link href={ROUTES.projects}>Filter on the Projects page</Link> by featured,
+      personal, or client work.
+    </>
+  ),
+};
+
+export const NOT_FOUND_PAGE_TEXTS = {
+  description: (
+    <>
+      This page is not on axmbro.dev - the link may be old or mistyped. Browse{" "}
+      <Link href={ROUTES.projects}>{CTA_LABELS.browseAllProjects}</Link> for
+      recent JsonUI work, or open{" "}
+      <Link href={ROUTES.commissions}>Commissions</Link> if you want scope,
+      process, and how to start before reaching out.
+    </>
+  ),
 };
 
 export const COMMISSIONS_PAGE_TEXTS = {
   intro: (
     <>
-      Custom Minecraft Bedrock JsonUI for studios, servers, and creators who need
-      more than a simple reskin. I build HUDs, server forms, menus, and connected
-      UI systems around your designs and technical requirements. Currently
-      accepting new Minecraft Bedrock UI commissions.{" "}
-      <Link href={ROUTES.projects}>{CTA_LABELS.browseAllProjects}</Link> for
-      recent examples.
-    </>
-  ),
-  services:
-    "Focused Minecraft Bedrock interface work, from individual screens to complete UI systems.",
-  requirements: (
-    <>
-      A clear starting point keeps the project faster, easier to estimate, and
-      closer to the result you expect. When you are ready,{" "}
-      <HashLink href={contactSectionHref(SECTION_IDS.startProject)}>
-        send the brief through the contact form
+      Custom Bedrock JsonUI for studios, servers, and creators.{" "}
+      <ProjectsBoardLink tab="commissions">
+        {CTA_LABELS.browseClientWork}
+      </ProjectsBoardLink>
+      . I am currently{" "}
+      <HashLink href={commissionFaqItemHref("availability")}>
+        accepting commissions
       </HashLink>
       .
     </>
   ),
+  clientsTitle: "Selected Clients & Studios",
+  clientsDescription:
+    "Commercial Bedrock JsonUI clients and studio partners.",
+  services: (
+    <>
+      Single screens up to full connected UI sets. JsonUI and resource pack
+      integration only - not full Behavior Pack backend or complex server logic.
+      For what fits and what does not, see the{" "}
+      <HashLink href={commissionFaqItemHref("scope")}>scope FAQ</HashLink> or
+      the cards below.
+    </>
+  ),
+  requirements: (
+    <>
+      The more context you share up front, the closer the result.{" "}
+      <Link href={contactFormHref()}>Contact me</Link> with scope, references,
+      or a short brief when you are ready.
+    </>
+  ),
   process:
-    "A simple three-step workflow from the first technical review to final delivery and support.",
-  delivery:
-    "You receive organized project files, a clear handoff, and support after release.",
-  faq: "Answers about scope, design files, pricing, timelines, ownership, and support.",
-  cta: "Send the project scope, required screens, target Minecraft version, and any mockups or textures you already have. I will review the details and reply with the next steps.",
-  ctaContact: CTA_LABELS.startProject,
-  ctaProof: CTA_LABELS.viewSelectedWork,
-  ctaSecondary: CTA_LABELS.contactOptions,
+    "We agree on scope, pricing, and timeline first, then I build the UI, and finish with delivery and support.",
+  delivery: (
+    <>
+      Production-ready JsonUI files and a clear handoff for your team.
+      Post-delivery support is included - see the cards below and the{" "}
+      <HashLink href={commissionFaqItemHref("support")}>support FAQ</HashLink>.
+    </>
+  ),
+  faq: (
+    <>
+      Common questions on scope, design files,{" "}
+      <HashLink href={commissionFaqItemHref("pricing")}>pricing</HashLink>,{" "}
+      <HashLink href={commissionFaqItemHref("turnaround")}>timelines</HashLink>,{" "}
+      <HashLink href={commissionFaqItemHref("revisions")}>revisions</HashLink>,{" "}
+      <HashLink href={commissionFaqItemHref("payments")}>payments</HashLink>,{" "}
+      <HashLink href={commissionFaqItemHref("ownership")}>ownership</HashLink>,{" "}
+      <HashLink href={commissionFaqItemHref("nda")}>confidentiality</HashLink>,
+      and{" "}
+      <HashLink href={commissionFaqItemHref("support")}>
+        post-delivery support
+      </HashLink>
+      .
+    </>
+  ),
+  cta: "Share your ideas, sketches, or scope - or describe what you need in plain words. I will review and reply with next steps.",
+  ctaContact: CTA_LABELS.contactMe,
+  ctaProjects: CTA_LABELS.browseAllProjects,
 };
 
 export const COMMISSION_SERVICES: CommissionInfoItem[] = [
   {
-    title: "Custom HUDs & Overlays",
-    description:
-      "Gameplay HUDs, status displays, trackers, overlays, and interface elements built around your visual direction.",
-  },
-  {
     title: "Server Forms & Menu Systems",
     description:
-      "Custom server forms, navigation menus, chest screens, shops, and connected interfaces for Bedrock projects.",
+      "Custom server forms and complete menu layouts - bespoke designs, chest-style screens, shops, and connected form flows. UI animation and polish when the scope needs it.",
   },
   {
-    title: "Resource Pack UI Integration",
+    title: "Custom HUDs & Overlays",
     description:
-      "JsonUI structure, textures, animations, and layouts prepared to work cleanly with your resource pack and ScriptAPI flow.",
+      "Custom HUDs and everything tied to them - overlays, trackers, status UI, popups, custom layouts, and related UI animation.",
+  },
+  {
+    title: "Custom UI",
+    description:
+      "Other screen work - chat, pause menu, settings, and similar interfaces - plus JsonUI, textures, and layouts wired into your pack and ScriptAPI flow.",
+  },
+  {
+    title: "Other JsonUI Work",
+    description:
+      "Anything else Bedrock UI related that does not fit the categories above. Not sure if your idea fits? Ask - I usually handle the full JsonUI side of a project.",
   },
 ];
 
@@ -457,17 +607,17 @@ export const COMMISSION_REQUIREMENTS: CommissionInfoItem[] = [
   {
     title: "Project Scope",
     description:
-      "A list of required screens, expected interactions, target platforms, and the Minecraft version you support.",
+      "Which screens you need - server forms, HUDs, menus, or other JsonUI - how they connect, and what the UI should do in-game.",
   },
   {
     title: "Visual Direction",
     description:
-      "Ready textures and mockups are ideal. Clear sketches, references, or a structured text brief can also work.",
+      "Mockups from you, an artist, or your studio team are ideal. Sketches, screenshots, or a clear text outline work too. Full interface design from scratch can be quoted separately.",
   },
   {
     title: "Technical Context",
     description:
-      "Share the existing resource pack, ScriptAPI requirements, file constraints, and any systems the UI must connect to.",
+      "Your resource pack, ScriptAPI hooks, file limits, and systems the UI must plug into - including when your team handles scripts on their side.",
   },
 ];
 
@@ -475,17 +625,17 @@ export const COMMISSION_DELIVERABLES: CommissionInfoItem[] = [
   {
     title: "Production Files",
     description:
-      "Organized JsonUI, texture, and resource pack files prepared for testing and deployment in your project.",
+      "Organized JsonUI and resource pack files ready for your project.",
   },
   {
     title: "Project Handoff",
     description:
-      "A clear explanation of the delivered structure, important integration details, and any agreed usage terms.",
+      "How the files are structured and what matters for integration.",
   },
   {
     title: "30 Days of Support",
     description:
-      "Technical support after delivery for agreed fixes and Minecraft updates that affect the commissioned interface.",
+      "Layout fixes for issues caused by official Bedrock updates during the 30 days after delivery. Further maintenance can be arranged after that.",
   },
 ];
 
@@ -493,16 +643,16 @@ export const PROCESS_STEPS = [
   {
     title: "1. Scope & Planning",
     description:
-      "We review the required screens, technical constraints, existing files, mockups, and textures. You receive a clear scope and timeline before development starts.",
+      "We align on screens, mockups, constraints, scope, timeline, and payment. You get a firm estimate before build starts.",
   },
   {
     title: "2. JsonUI Development",
     description:
-      "I build the interface, connect the required screens, test the layouts, and prepare the UI for your resource pack and ScriptAPI workflow.",
+      "I build and connect the UI, test layouts, and prepare files for your pack and scripts. I share progress at agreed checkpoints so layout and flow stay on track before final delivery.",
   },
   {
     title: "3. Delivery & Support",
     description:
-      "You receive the agreed project files and a clear handoff, followed by 30 days of technical support for the delivered interface.",
+      "You receive the agreed files and handoff notes, plus the post-delivery support period agreed in scope.",
   },
 ];

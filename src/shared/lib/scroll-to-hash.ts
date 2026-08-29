@@ -1,15 +1,14 @@
-/**
- * Hash navigation. Offsets: globals.scss
- * (`--header-sticky-height`, `--project-toc-height`, scroll-margin).
- *
- * Flow:
- *   HashScrollInit - stash hash before first paint (useServerInsertedHTML)
- *   HashLink - cross-page pending hash; same-page replaceState + scrollToHash on every click
- *   HashScroll - restore pending hash after route / hashchange
- *
- * Section: <ScreenSection id="..." /> + Link/HashLink href="#..."
- * Extra gap under header: id + data-scroll-anchor (see hash-navigation.mdc)
- */
+/** Hash scroll + `PAGE_HASH_CHANGE` for cross-page / FAQ targets. Offsets: `globals.scss`. */
+export const PAGE_HASH_CHANGE = "pagehashchange";
+
+/** FAQ accordion open delay before `#faq-*` scroll */
+export const FAQ_HASH_SCROLL_DELAY_MS = 280;
+
+export const notifyPageHashChange = () => {
+  if (typeof window === "undefined") return;
+  window.dispatchEvent(new Event(PAGE_HASH_CHANGE));
+};
+
 export const parseHashId = (hash: string) =>
   decodeURIComponent(hash.replace(/^#/, "").split("#")[0]);
 
