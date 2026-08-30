@@ -52,17 +52,19 @@ export default function HomePage() {
           <TrackRecord />
         </ScreenSection>
 
-        <ScreenSection
-          id={SECTION_IDS.selectedWork}
-          eyebrow="Work"
-          title="Selected Projects"
-          titleDescription={HOME_PAGE_TEXTS.selectedWork.description}
-          withChildrenPadding={false}
-          variant="accent"
-          grid="top"
-        >
-          <SelectedWork />
-        </ScreenSection>
+        <Reveal>
+          <ScreenSection
+            id={SECTION_IDS.selectedWork}
+            eyebrow="Work"
+            title="Selected Projects"
+            titleDescription={HOME_PAGE_TEXTS.selectedWork.description}
+            withChildrenPadding={false}
+            variant="accent"
+            grid="top"
+          >
+            <SelectedWork />
+          </ScreenSection>
+        </Reveal>
 
         <Reveal>
           <ScreenSection
