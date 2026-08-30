@@ -6,7 +6,8 @@ import {
   PROJECT_FEATURED_CARD_STEP,
 } from "@/shared/ui/motion";
 import { CTA_LABELS, getHomeSelectedProjects, HOME_PAGE_TEXTS } from "@/shared/constants/data";
-import { ProjectGallery, type GalleryProjectMeta } from "@/widgets/project-gallery";
+import type { GalleryProjectMeta } from "@/widgets/project-gallery";
+import { SelectedWorkGallery } from "./selected-work-gallery";
 import styles from "./selected-work.module.scss";
 
 export function SelectedWork() {
@@ -20,7 +21,7 @@ export function SelectedWork() {
 
   return (
     <>
-      <ProjectGallery projects={galleryProjects} />
+      <SelectedWorkGallery projects={galleryProjects} />
       <div className={styles.grid}>
         {selectedProjects.map((project, index) => (
           <div key={project.url} className={styles.gridItem}>
