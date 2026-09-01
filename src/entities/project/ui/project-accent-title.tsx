@@ -90,10 +90,11 @@ export function ProjectAccentTitle({
   }, [startWhen, delay, beginReveal]);
 
   useEffect(() => {
+    if (!hoverUsesAccent) return;
     if (linkActive && isRevealing) {
       handoffRevealToHover();
     }
-  }, [linkActive, isRevealing, handoffRevealToHover]);
+  }, [hoverUsesAccent, linkActive, isRevealing, handoffRevealToHover]);
 
   const showHovered = linkActive && !isRevealing;
 
