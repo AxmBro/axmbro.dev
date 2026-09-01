@@ -10,8 +10,11 @@ import {
   type CSSProperties,
   type ReactNode,
 } from "react";
-import { useReducedMotion } from "motion/react";
-import { useRevealInView } from "@/shared/ui/motion";
+import {
+  REVEAL_ACCENT_TITLE_VIEWPORT_MARGIN,
+  useReducedMotion,
+  useRevealInView,
+} from "@/shared/ui/motion";
 import styles from "./project-accent-title.module.scss";
 
 interface ProjectAccentTitleProps {
@@ -33,8 +36,12 @@ export function ProjectAccentTitle({
   delay = 0,
   linkActive = false,
 }: ProjectAccentTitleProps) {
-  const ref = useRef<HTMLHeadingElement>(null);
-  const inView = useRevealInView(ref, { once: true });
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  // Cards: own -12% on the heading; hero uses startWhen="delay" (mount), not this margin.
+  const inView = useRevealInView(titleRef, {
+    once: true,
+    margin: REVEAL_ACCENT_TITLE_VIEWPORT_MARGIN,
+  });
   const reduceMotion = useReducedMotion();
   const hasStarted = useRef(false);
   const handoffPendingRef = useRef(false);
@@ -50,19 +57,20 @@ export function ProjectAccentTitle({
   }, [reduceMotion]);
 
   const handoffRevealToHover = useCallback(() => {
-    const el = ref.current;
+    const el = titleRef.current;
     if (!el) return;
 
+    // Freeze current animated color so hover handoff does not flash white.
     el.style.color = getComputedStyle(el).color;
     handoffPendingRef.current = true;
     setIsRevealing(false);
   }, []);
 
   useLayoutEffect(() => {
-    if (!handoffPendingRef.current || !ref.current) return;
+    if (!handoffPendingRef.current || !titleRef.current) return;
 
     handoffPendingRef.current = false;
-    ref.current.style.color = "";
+    titleRef.current.style.color = "";
   }, [linkActive, isRevealing]);
 
   useEffect(() => {
@@ -94,7 +102,7 @@ export function ProjectAccentTitle({
 
   return (
     <Tag
-      ref={ref}
+      ref={titleRef}
       style={{ "--project-accent-color": accentColor } as CSSProperties}
       className={[
         styles.title,

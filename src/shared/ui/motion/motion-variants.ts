@@ -14,11 +14,10 @@ export function projectAccentDelayHeroTitle(): number {
   return PROJECT_CONTENT_DELAY;
 }
 
-export function projectAccentDelayCardBody(staggerDelay: number): number {
-  return staggerDelay + STAGGER_CHILDREN;
-}
+export const REVEAL_VIEWPORT_MARGIN = "0px 0px -15% 0px";
 
-export const REVEAL_VIEWPORT_MARGIN = "0px 0px -12% 0px";
+// Card accent title only: earlier inView than default entry reveal (see motion-and-polish.mdc).
+export const REVEAL_ACCENT_TITLE_VIEWPORT_MARGIN = "0px 0px -12% 0px";
 
 export const revealViewport = {
   once: true,

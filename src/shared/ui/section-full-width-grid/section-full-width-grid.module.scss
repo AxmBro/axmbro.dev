@@ -1,0 +1,52 @@
+@use '../../styles/mixins' as *;
+
+.fullWidthGrid {
+  --grid-cell-x: 2rem;
+  --grid-cell-y: 2rem;
+  --grid-offset-x: 0px;
+  --grid-offset-y: 0px;
+  --grid-line-strength: 7%;
+  position: absolute;
+  top: 50%;
+  z-index: 1;
+  transform: translateY(-50%);
+  height: calc(100% + (var(--page-section-gap) * 3));
+  pointer-events: none;
+  background-image:
+    linear-gradient(
+      to right,
+      color-mix(in srgb, var(--color-neutral-100) var(--grid-line-strength), transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--color-neutral-100) var(--grid-line-strength), transparent) 1px,
+      transparent 1px
+    );
+  background-size: var(--grid-cell-x) var(--grid-cell-y);
+  background-position: var(--grid-offset-x) var(--grid-offset-y);
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    #000 35%,
+    #000 65%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    #000 35%,
+    #000 65%,
+    transparent 100%
+  );
+}
+
+.fullWidthGrid[data-grid-ignite] {
+  animation: grid-line-ignite 1.1s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fullWidthGrid[data-grid-ignite] {
+    animation: none;
+  }
+}

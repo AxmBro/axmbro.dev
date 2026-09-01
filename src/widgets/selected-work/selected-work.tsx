@@ -29,6 +29,7 @@ export function SelectedWork() {
               project={project}
               showTags={false}
               featuredReveal
+              headingLevel="h3"
               staggerDelay={PROJECT_CONTENT_DELAY + index * PROJECT_FEATURED_CARD_STEP}
             />
           </div>

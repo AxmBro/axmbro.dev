@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect, type FormEvent, type ChangeEvent } from "react";
+import { useEffect, useMemo, useRef, useState, type FormEvent, type ChangeEvent } from "react";
 import { JoinedTabs } from "@/shared/ui/joined-tabs";
 import {
   clearContactFormDraft,
@@ -90,12 +90,11 @@ const getFormValidation = (email: string, message: string): ContactFormValidatio
 };
 
 export const ContactForm = () => {
-  const [email, setEmail] = useState(() => getInitialContactFormDraft().email);
-  const [discord, setDiscord] = useState(() => getInitialContactFormDraft().discord);
-  const [message, setMessage] = useState(() => getInitialContactFormDraft().message);
-  const [activeIntent, setActiveIntent] = useState(
-    () => getInitialContactFormDraft().activeIntent,
-  );
+  const initialDraft = useMemo(() => getInitialContactFormDraft(), []);
+  const [email, setEmail] = useState(initialDraft.email);
+  const [discord, setDiscord] = useState(initialDraft.discord);
+  const [message, setMessage] = useState(initialDraft.message);
+  const [activeIntent, setActiveIntent] = useState(initialDraft.activeIntent);
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState<string>(CONTACT_FORM_TEXTS.error);
   const [showValidation, setShowValidation] = useState(false);
@@ -282,11 +281,13 @@ export const ContactForm = () => {
           />
         </div>
 
+        <label className={styles.label} htmlFor="contact-message">
+          {CONTACT_FORM_TEXTS.messageLabel}
+        </label>
         <textarea
           id="contact-message"
           className={styles.textarea}
           name="message"
-          aria-label="Message"
           placeholder={CONTACT_FORM_TEXTS.messagePlaceholder}
           value={message}
           onChange={handleMessageChange}

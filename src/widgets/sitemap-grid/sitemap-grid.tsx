@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { Children, type ReactElement, type ReactNode } from "react";
 import Link from "next/link";
 import { getFeaturedProjects, getProjectTypeLabel, PROJECTS, CTA_LABELS } from "@/shared/constants/data";
 import {
@@ -21,12 +21,16 @@ const SitemapColumn = ({
   title: string;
   children: ReactNode;
 }) => (
-  <section className={styles.column}>
+  <div className={styles.column}>
     <h2 className={styles.title}>{title}</h2>
-    <nav className={styles.links} aria-label={title}>
-      {children}
+    <nav className={styles.linksNav} aria-label={title}>
+      <ul className={styles.links}>
+        {Children.toArray(children).map((child) => (
+          <li key={(child as ReactElement).key ?? String(child)}>{child}</li>
+        ))}
+      </ul>
     </nav>
-  </section>
+  </div>
 );
 
 export const SitemapGrid = () => (
@@ -107,7 +111,7 @@ export const SitemapGrid = () => (
 );
 
 export const SitemapProjectList = () => (
-  <div className={styles.projectList}>
+  <ul className={styles.projectList}>
     {PROJECTS.map((project) => {
       const projectType = getProjectTypeLabel(project);
       const href = project.url
@@ -115,15 +119,13 @@ export const SitemapProjectList = () => (
         : ROUTES.home;
 
       return (
-        <Link
-          key={project.url ?? project.title}
-          href={href}
-          className={styles.projectItem}
-        >
-          <span className={styles.projectName}>{project.title}</span>
-          <span className={styles.projectType}>{projectType}</span>
-        </Link>
+        <li key={project.url ?? project.title}>
+          <Link href={href} className={styles.projectItem}>
+            <span className={styles.projectName}>{project.title}</span>
+            <span className={styles.projectType}>{projectType}</span>
+          </Link>
+        </li>
       );
     })}
-  </div>
+  </ul>
 );

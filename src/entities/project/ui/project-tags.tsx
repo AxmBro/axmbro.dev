@@ -54,7 +54,7 @@ const FeaturedTag = () => (
   </span>
 );
 
-export const ProjectTypeTag = ({ type }: { type: ProjectType }) => {
+function ProjectTypeTag({ type }: { type: ProjectType }) {
   if (type === "personal") {
     return (
       <span className={`${styles.tag} ${styles.tagType} ${styles.tagPersonal}`}>
@@ -85,7 +85,7 @@ export const ProjectTypeTag = ({ type }: { type: ProjectType }) => {
       <span>{TYPE_TAG_LABEL.commissions}</span>
     </span>
   );
-};
+}
 
 interface ProjectTagsProps {
   project: ProjectItem;

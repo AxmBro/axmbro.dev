@@ -20,6 +20,11 @@
   }
 }
 
+.faqHeading {
+  margin: 0;
+  font: inherit;
+}
+
 .faqHeader {
   @include focus-ring;
   display: flex;
@@ -31,6 +36,8 @@
   border: none;
   cursor: pointer;
   text-align: left;
+  font: inherit;
+  color: inherit;
 
   &:hover {
     .faqQuestion {
@@ -41,10 +48,9 @@
 
 .faqQuestion {
   @include text-h3;
-  font-family: inherit;
-  font-weight: inherit;
   padding-right: 2rem;
   margin: 0;
+  text-align: left;
 }
 
 .faqAnswerContainer {

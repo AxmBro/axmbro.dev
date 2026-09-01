@@ -4,7 +4,6 @@ import { ScreenSection } from "@/shared/ui/screen-section";
 import { Button, buttonVariantForIndex } from "@/shared/ui/button";
 import { ButtonGroup } from "@/shared/ui/button-group";
 import { ConversionCloser } from "@/shared/ui/conversion-closer";
-import { Reveal } from "@/shared/ui/motion";
 import { AnnouncementBar } from "@/widgets/announcement-bar";
 import { SkillsGrid } from "@/widgets/skills-grid";
 import { ExperienceGrid } from "@/widgets/experience-grid";
@@ -52,44 +51,39 @@ export default function HomePage() {
           <TrackRecord />
         </ScreenSection>
 
-        <Reveal>
-          <ScreenSection
-            id={SECTION_IDS.selectedWork}
-            eyebrow="Work"
-            title="Selected Projects"
-            titleDescription={HOME_PAGE_TEXTS.selectedWork.description}
-            withChildrenPadding={false}
-            variant="accent"
-            grid="top"
-          >
-            <SelectedWork />
-          </ScreenSection>
-        </Reveal>
+        <ScreenSection
+          id={SECTION_IDS.selectedWork}
+          eyebrow="Work"
+          title="Selected Projects"
+          titleDescription={HOME_PAGE_TEXTS.selectedWork.description}
+          withChildrenPadding={false}
+          variant="accent"
+          grid="top"
+        >
+          <SelectedWork />
+        </ScreenSection>
 
-        <Reveal>
-          <ScreenSection
-            id={SECTION_IDS.experience}
-            eyebrow="Background"
-            title="Experience"
-            titleDescription={HOME_PAGE_TEXTS.experience.description}
-            withChildrenPadding={false}
-          >
-            <ExperienceGrid />
-          </ScreenSection>
-        </Reveal>
+        <ScreenSection
+          id={SECTION_IDS.experience}
+          eyebrow="Background"
+          title="Experience"
+          titleDescription={HOME_PAGE_TEXTS.experience.description}
+          withChildrenPadding={false}
+          fullWidthGrid
+        >
+          <ExperienceGrid />
+        </ScreenSection>
 
-        <Reveal>
-          <ScreenSection
-            id={SECTION_IDS.skills}
-            eyebrow="Capabilities"
-            title="Skills"
-            titleDescription={HOME_PAGE_TEXTS.skills.description}
-            withChildrenPadding={false}
-            grid="top"
-          >
-            <SkillsGrid />
-          </ScreenSection>
-        </Reveal>
+        <ScreenSection
+          id={SECTION_IDS.skills}
+          eyebrow="Capabilities"
+          title="Skills"
+          titleDescription={HOME_PAGE_TEXTS.skills.description}
+          withChildrenPadding={false}
+          grid="top"
+        >
+          <SkillsGrid />
+        </ScreenSection>
 
         <ConversionCloser
           id={SECTION_IDS.workWithMe}

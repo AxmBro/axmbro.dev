@@ -32,13 +32,17 @@ import {
   prevProjectPosition,
 } from "./lib/gallery-navigation";
 import type { GalleryImage, GalleryPosition, GalleryProjectMeta } from "./lib/gallery-types";
+import { preloadGalleryImage } from "./lib/preload-gallery-image";
 import styles from "./project-gallery.module.scss";
 
 // Keep in sync with --gallery-auto-advance in globals.scss
 const AUTO_ADVANCE_MS = 5000;
 
+type SlideDirection = "next" | "prev";
+
 interface ProjectGalleryProps {
   projects: GalleryProjectMeta[];
+  captionHeadingLevel?: "h2" | "h3";
 }
 
 function getProjectImages(
@@ -49,7 +53,11 @@ function getProjectImages(
   return imagesByProject[projectId];
 }
 
-export function ProjectGallery({ projects }: ProjectGalleryProps) {
+export function ProjectGallery({
+  projects,
+  captionHeadingLevel = "h2",
+}: ProjectGalleryProps) {
+  const CaptionHeading = captionHeadingLevel;
   const projectCount = projects.length;
   const [position, setPosition] = useState<GalleryPosition>({ projectIndex: 0, imageIndex: 0 });
   const [imagesByProject, setImagesByProject] = useState<Record<string, GalleryImage[]>>({});
@@ -57,7 +65,19 @@ export function ProjectGallery({ projects }: ProjectGalleryProps) {
   const pendingProjectIdsRef = useRef(new Set<string>());
   const [cycleKey, setCycleKey] = useState(0);
   const [loadedBySrc, setLoadedBySrc] = useState<Record<string, true>>({});
+  const [slideDirection, setSlideDirection] = useState<SlideDirection>("next");
   const reduceMotion = useReducedMotion();
+
+  const markImageLoaded = useCallback((src: string) => {
+    setLoadedBySrc((current) => (current[src] ? current : { ...current, [src]: true }));
+  }, []);
+
+  const preloadImage = useCallback(
+    (src: string | null | undefined) => {
+      preloadGalleryImage(src, markImageLoaded);
+    },
+    [markImageLoaded],
+  );
 
   useEffect(() => {
     imagesByProjectRef.current = imagesByProject;
@@ -66,6 +86,15 @@ export function ProjectGallery({ projects }: ProjectGalleryProps) {
   const bumpCycle = useCallback(() => {
     setCycleKey((key) => key + 1);
   }, []);
+
+  const navigate = useCallback(
+    (direction: SlideDirection, update: () => void) => {
+      setSlideDirection(direction);
+      update();
+      bumpCycle();
+    },
+    [bumpCycle],
+  );
 
   const currentProject = projects[position.projectIndex];
   const currentProjectId = currentProject?.url;
@@ -127,6 +156,7 @@ export function ProjectGallery({ projects }: ProjectGalleryProps) {
     if (reduceMotion || projectCount === 0) return;
 
     const timer = window.setTimeout(() => {
+      setSlideDirection("next");
       setPosition((prev) => {
         const project = projects[prev.projectIndex];
         const images = project?.url ? imagesByProjectRef.current[project.url] ?? [] : [];
@@ -139,32 +169,59 @@ export function ProjectGallery({ projects }: ProjectGalleryProps) {
     return () => window.clearTimeout(timer);
   }, [cycleKey, position.imageIndex, position.projectIndex, projectCount, projects, reduceMotion]);
 
+  useEffect(() => {
+    if (!currentProjectId) return;
+
+    if (currentImages.length > 1) {
+      const nextIndex = (position.imageIndex + 1) % currentImages.length;
+      const prevIndex =
+        (position.imageIndex - 1 + currentImages.length) % currentImages.length;
+      preloadImage(currentImages[nextIndex]?.src);
+      preloadImage(currentImages[prevIndex]?.src);
+    }
+
+    if (projectCount < 2) return;
+
+    const nextProject = projects[(position.projectIndex + 1) % projectCount];
+    const prevProject = projects[(position.projectIndex - 1 + projectCount) % projectCount];
+
+    for (const project of [nextProject, prevProject]) {
+      if (!project?.url) continue;
+      const images = imagesByProject[project.url];
+      preloadImage(images?.[0]?.src ?? project.fallbackSrc);
+    }
+  }, [
+    currentImages,
+    currentProjectId,
+    imagesByProject,
+    position.imageIndex,
+    position.projectIndex,
+    preloadImage,
+    projectCount,
+    projects,
+  ]);
+
   const goNextProject = useCallback(() => {
-    setPosition((prev) => nextProjectPosition(prev, projectCount));
-    bumpCycle();
-  }, [bumpCycle, projectCount]);
+    navigate("next", () => {
+      setPosition((prev) => nextProjectPosition(prev, projectCount));
+    });
+  }, [navigate, projectCount]);
 
   const goPrevProject = useCallback(() => {
-    setPosition((prev) => prevProjectPosition(prev, projectCount));
-    bumpCycle();
-  }, [bumpCycle, projectCount]);
-
-  const goToProject = useCallback(
-    (projectIndex: number) => {
-      setPosition({ projectIndex, imageIndex: 0 });
-      bumpCycle();
-    },
-    [bumpCycle],
-  );
+    navigate("prev", () => {
+      setPosition((prev) => prevProjectPosition(prev, projectCount));
+    });
+  }, [navigate, projectCount]);
 
   const goNextPhoto = useCallback(() => {
-    setPosition((prev) => {
-      const project = projects[prev.projectIndex];
-      const images = project?.url ? imagesByProject[project.url] ?? [] : [];
-      return nextPhotoInProject(prev, images.length);
+    navigate("next", () => {
+      setPosition((prev) => {
+        const project = projects[prev.projectIndex];
+        const images = project?.url ? imagesByProject[project.url] ?? [] : [];
+        return nextPhotoInProject(prev, images.length);
+      });
     });
-    bumpCycle();
-  }, [bumpCycle, imagesByProject, projects]);
+  }, [navigate, imagesByProject, projects]);
 
   const handleNextPhotoClick = useCallback(
     (event: MouseEvent<HTMLButtonElement>) => {
@@ -205,10 +262,21 @@ export function ProjectGallery({ projects }: ProjectGalleryProps) {
   const reserveNextPhotoSlot = showNextPhoto || !isGalleryLoaded;
   const photoTotal = Math.max(currentImages.length, 1);
   const nextPhotoLabel = `${CTA_LABELS.nextPhoto} (${position.imageIndex + 1}/${photoTotal})`;
+  const projectCounter = GALLERY_TEXTS.projectCounter(
+    position.projectIndex + 1,
+    projectCount,
+  );
+  const slideStatus = GALLERY_TEXTS.slideStatus(
+    currentProject.title,
+    position.imageIndex + 1,
+    photoTotal,
+  );
+  const slideKey = `${position.projectIndex}-${position.imageIndex}`;
   const progressKey = `${position.projectIndex}-${position.imageIndex}-${cycleKey}`;
+  const showNavBar = showProjectNav || reserveNextPhotoSlot;
 
   return (
-    <div data-has-dots={showProjectNav ? "true" : undefined}>
+    <div>
       <RevealStagger className={styles.gallery} trigger="inView" delay={PROJECT_CONTENT_DELAY}>
       <RevealItem className={styles.revealBlock}>
         <div
@@ -219,84 +287,50 @@ export function ProjectGallery({ projects }: ProjectGalleryProps) {
           tabIndex={showProjectNav ? 0 : undefined}
           onKeyDown={handleKeyDown}
         >
-          {showProjectNav ? (
-            <>
-              <button
-                type="button"
-                className={styles.navButton}
-                data-direction="prev"
-                onClick={goPrevProject}
-                aria-label={GALLERY_TEXTS.aria.prevProject}
-              >
-                <FaChevronLeft size={12} aria-hidden />
-              </button>
-              <button
-                type="button"
-                className={styles.navButton}
-                data-direction="next"
-                onClick={goNextProject}
-                aria-label={GALLERY_TEXTS.aria.nextProject}
-              >
-                <FaChevronRight size={12} aria-hidden />
-              </button>
-            </>
-          ) : null}
-
           <div className={styles.stage}>
             <div className={styles.media}>
+              <span className={styles.slideStatus} aria-live="polite">
+                {slideStatus}
+              </span>
               <div className={styles.placeholder} aria-hidden />
               {displaySrc ? (
-                <Image
-                  key={displaySrc}
-                  src={displaySrc}
-                  alt={GALLERY_TEXTS.imageAlt(
-                    currentProject.title,
-                    position.imageIndex + 1,
-                  )}
-                  fill
-                  className={styles.image}
-                  data-loaded={isImageReady ? "true" : "false"}
-                  sizes={imageSizes}
-                  quality={GALLERY_IMAGE_QUALITY}
-                  priority={position.projectIndex === 0 && position.imageIndex === 0}
-                  onLoad={() => {
-                    if (!displaySrc) return;
-                    setLoadedBySrc((current) =>
-                      current[displaySrc] ? current : { ...current, [displaySrc]: true },
-                    );
-                  }}
-                />
+                <div
+                  key={slideKey}
+                  className={styles.slideLayer}
+                  data-direction={reduceMotion ? undefined : slideDirection}
+                >
+                  <Image
+                    src={displaySrc}
+                    alt={GALLERY_TEXTS.imageAlt(
+                      currentProject.title,
+                      position.imageIndex + 1,
+                    )}
+                    fill
+                    className={styles.image}
+                    data-loaded={isImageReady ? "true" : "false"}
+                    sizes={imageSizes}
+                    quality={GALLERY_IMAGE_QUALITY}
+                    priority={position.projectIndex === 0 && position.imageIndex === 0}
+                    onLoad={() => {
+                      if (!displaySrc) return;
+                      markImageLoaded(displaySrc);
+                    }}
+                  />
+                </div>
               ) : null}
               <div className={styles.scrim} aria-hidden />
               <div className={styles.overlay}>
-                <div className={styles.captionRow}>
-                  <Link
-                    href={projectDetailPath(currentProject.url)}
-                    className={styles.caption}
-                    aria-label={currentProject.title}
-                  >
-                    <h2 className={styles.title}>{currentProject.title}</h2>
-                    {currentProject.type ? (
-                      <p className={styles.typeLabel}>
-                        {GALLERY_TEXTS.typeLabel[currentProject.type]}
-                      </p>
-                    ) : null}
-                  </Link>
-                  {reserveNextPhotoSlot ? (
-                    <button
-                      type="button"
-                      className={styles.nextPhoto}
-                      data-visible={showNextPhoto ? "true" : "false"}
-                      onClick={showNextPhoto ? handleNextPhotoClick : undefined}
-                      aria-label={showNextPhoto ? nextPhotoLabel : undefined}
-                      aria-hidden={showNextPhoto ? undefined : true}
-                      tabIndex={showNextPhoto ? 0 : -1}
-                      disabled={!showNextPhoto}
-                    >
-                      {nextPhotoLabel}
-                    </button>
+                <Link
+                  href={projectDetailPath(currentProject.url)}
+                  className={styles.caption}
+                >
+                  <CaptionHeading className={styles.title}>{currentProject.title}</CaptionHeading>
+                  {currentProject.type ? (
+                    <p className={styles.typeLabel}>
+                      {GALLERY_TEXTS.typeLabel[currentProject.type]}
+                    </p>
                   ) : null}
-                </div>
+                </Link>
               </div>
               {!reduceMotion && canAutoAdvance ? (
                 <div className={styles.advanceTrack} aria-hidden>
@@ -308,26 +342,48 @@ export function ProjectGallery({ projects }: ProjectGalleryProps) {
         </div>
       </RevealItem>
 
-      {hasMultipleProjects ? (
+      {showNavBar ? (
         <RevealItem className={styles.revealBlock}>
-          <div className={styles.dotsPanel}>
-            <div className={styles.dotsBar}>
-              <div className={styles.dots} role="tablist" aria-label={GALLERY_TEXTS.aria.chooseProject}>
-                {projects.map((project, index) => (
-                  <button
-                    key={project.url}
-                    type="button"
-                    role="tab"
-                    className={styles.dot}
-                    data-active={index === position.projectIndex ? "true" : "false"}
-                    aria-label={`Show ${project.title}`}
-                    aria-selected={index === position.projectIndex}
-                    onClick={() => goToProject(index)}
-                  />
-                ))}
+          <div className={styles.navBar}>
+            {showProjectNav ? (
+              <div className={styles.projectNav}>
+                <button
+                  type="button"
+                  className={styles.navBarButton}
+                  data-direction="prev"
+                  onClick={goPrevProject}
+                  aria-label={GALLERY_TEXTS.aria.prevProject}
+                >
+                  <FaChevronLeft size={12} aria-hidden />
+                </button>
+                <span className={styles.projectCounter}>{projectCounter}</span>
+                <button
+                  type="button"
+                  className={styles.navBarButton}
+                  data-direction="next"
+                  onClick={goNextProject}
+                  aria-label={GALLERY_TEXTS.aria.nextProject}
+                >
+                  <FaChevronRight size={12} aria-hidden />
+                </button>
               </div>
-            </div>
-            <div className={styles.galleryDivider} aria-hidden />
+            ) : (
+              <div className={styles.projectNavSpacer} aria-hidden />
+            )}
+            {reserveNextPhotoSlot ? (
+              <button
+                type="button"
+                className={styles.nextPhotoButton}
+                data-visible={showNextPhoto ? "true" : "false"}
+                onClick={showNextPhoto ? handleNextPhotoClick : undefined}
+                aria-label={showNextPhoto ? nextPhotoLabel : undefined}
+                aria-hidden={showNextPhoto ? undefined : true}
+                tabIndex={showNextPhoto ? 0 : -1}
+                disabled={!showNextPhoto}
+              >
+                {nextPhotoLabel}
+              </button>
+            ) : null}
           </div>
         </RevealItem>
       ) : null}

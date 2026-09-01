@@ -28,7 +28,6 @@
       transparent 1px
     );
   background-size: var(--grid-cell-x) var(--grid-cell-y);
-  /* Column left edge on page; footer + bottom-fade bands anchor mesh on full bottom row */
   background-position: var(--grid-offset-x) var(--grid-position-y, 0);
   -webkit-mask-image: linear-gradient(
     to bottom,

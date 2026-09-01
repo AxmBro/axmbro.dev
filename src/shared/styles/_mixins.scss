@@ -212,8 +212,8 @@
       );
     background-size:
       var(--grid-cell-x, calc(100% / var(--grid-lines-cols)))
-      var(--grid-cell-y, calc(var(--spacing-block) * 2));
-    /* --grid-position-y: top | bottom - set per section so mesh ends on full cells */
+      var(--grid-cell-y, var(--grid-cell-x, calc(var(--spacing-block) * 2)));
+    /* --grid-position-y: top | bottom - fade edge gets full cells; cell size is global square */
     background-position: var(--grid-offset-x, 0) var(--grid-position-y, top);
     -webkit-mask-image: var(--grid-lines-mask, none);
     mask-image: var(--grid-lines-mask, none);

@@ -53,7 +53,7 @@ export default function ContactPage() {
           withChildrenPadding
           title="Contact Options"
           titleDescription={HOME_PAGE_TEXTS.contactPage.socials}
-          grid="bottom"
+          grid="top"
         >
           <div className={styles.socialList}>
             {directChannels.map((button) => (

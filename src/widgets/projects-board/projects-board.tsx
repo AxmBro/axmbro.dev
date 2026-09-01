@@ -4,7 +4,10 @@ import { useState, useEffect, useRef } from "react";
 import { FaChevronDown } from "react-icons/fa6";
 import { PROJECTS } from "@/shared/constants/data";
 import { ProjectCard, formatProjectDate, parseProjectDateTimestamp } from "@/entities/project";
-import { Reveal } from "@/shared/ui/motion";
+import {
+  PROJECT_CONTENT_DELAY,
+  PROJECT_FEATURED_CARD_STEP,
+} from "@/shared/ui/motion";
 import { JoinedTabs } from "@/shared/ui/joined-tabs";
 import {
   isProjectsBoardTab,
@@ -232,13 +235,13 @@ export const ProjectsBoard = () => {
       {sortedAndFiltered.length > 0 ? (
         <div className={styles.grid}>
           {sortedAndFiltered.map((project, index) => (
-            <Reveal
-              key={project.title}
-              className={styles.gridItem}
-              delay={Math.min(index * 0.04, 0.36)}
-            >
-              <ProjectCard project={project} />
-            </Reveal>
+            <div key={project.title} className={styles.gridItem}>
+              <ProjectCard
+                project={project}
+                featuredReveal
+                staggerDelay={PROJECT_CONTENT_DELAY + index * PROJECT_FEATURED_CARD_STEP}
+              />
+            </div>
           ))}
         </div>
       ) : (

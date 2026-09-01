@@ -3,29 +3,11 @@
 import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
 import type { GalleryProjectMeta } from "@/widgets/project-gallery";
-import styles from "./selected-work-gallery.module.scss";
+import { GalleryStaticFallback } from "./gallery-static-fallback";
 
-const ProjectGallery = dynamic(
+const LazyProjectGallery = dynamic(
   () => import("@/widgets/project-gallery").then((mod) => mod.ProjectGallery),
-  {
-    ssr: false,
-    loading: () => <GalleryPlaceholder />,
-  },
 );
-
-function GalleryPlaceholder() {
-  return (
-    <div className={styles.placeholder} aria-hidden>
-      <div className={styles.stage} />
-      <div className={styles.captionRow}>
-        <div className={styles.captionSkeleton}>
-          <span className={styles.line} />
-          <span className={`${styles.line} ${styles.lineShort}`} />
-        </div>
-      </div>
-    </div>
-  );
-}
 
 interface SelectedWorkGalleryProps {
   projects: GalleryProjectMeta[];
@@ -34,6 +16,8 @@ interface SelectedWorkGalleryProps {
 export function SelectedWorkGallery({ projects }: SelectedWorkGalleryProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [shouldLoad, setShouldLoad] = useState(false);
+  const [chunkReady, setChunkReady] = useState(false);
+  const firstProject = projects[0];
 
   useEffect(() => {
     const node = ref.current;
@@ -53,9 +37,22 @@ export function SelectedWorkGallery({ projects }: SelectedWorkGalleryProps) {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    if (!shouldLoad) return;
+    void import("@/widgets/project-gallery").then(() => setChunkReady(true));
+  }, [shouldLoad]);
+
+  if (!firstProject) return null;
+
+  const showCarousel = shouldLoad && chunkReady;
+
   return (
     <div ref={ref}>
-      {shouldLoad ? <ProjectGallery projects={projects} /> : <GalleryPlaceholder />}
+      {showCarousel ? (
+        <LazyProjectGallery projects={projects} captionHeadingLevel="h3" />
+      ) : (
+        <GalleryStaticFallback project={firstProject} />
+      )}
     </div>
   );
 }

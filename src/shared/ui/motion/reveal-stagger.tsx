@@ -1,6 +1,6 @@
 "use client";
 
-import type { ReactNode } from "react";
+import { forwardRef, type ReactNode } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import {
   revealViewport,
@@ -22,32 +22,37 @@ interface RevealItemProps {
   className?: string;
 }
 
-export function RevealStagger({
-  children,
-  className,
-  trigger = "inView",
-  delay,
-}: RevealStaggerProps) {
-  const reduceMotion = useReducedMotion();
+export const RevealStagger = forwardRef<HTMLDivElement, RevealStaggerProps>(
+  function RevealStagger(
+    { children, className, trigger = "inView", delay },
+    ref,
+  ) {
+    const reduceMotion = useReducedMotion();
 
-  if (reduceMotion) {
-    return <div className={className}>{children}</div>;
-  }
+    if (reduceMotion) {
+      return (
+        <div ref={ref} className={className}>
+          {children}
+        </div>
+      );
+    }
 
-  return (
-    <motion.div
-      className={className}
-      initial="hidden"
-      animate={trigger === "mount" ? "visible" : undefined}
-      whileInView={trigger === "inView" ? "visible" : undefined}
-      viewport={trigger === "inView" ? revealViewport : undefined}
-      variants={staggerContainerVariants}
-      transition={delay ? { delayChildren: delay } : undefined}
-    >
-      {children}
-    </motion.div>
-  );
-}
+    return (
+      <motion.div
+        ref={ref}
+        className={className}
+        initial="hidden"
+        animate={trigger === "mount" ? "visible" : undefined}
+        whileInView={trigger === "inView" ? "visible" : undefined}
+        viewport={trigger === "inView" ? revealViewport : undefined}
+        variants={staggerContainerVariants}
+        transition={delay ? { delayChildren: delay } : undefined}
+      >
+        {children}
+      </motion.div>
+    );
+  },
+);
 
 export function RevealItem({ children, className }: RevealItemProps) {
   const reduceMotion = useReducedMotion();

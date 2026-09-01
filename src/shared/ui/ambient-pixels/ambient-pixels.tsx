@@ -6,15 +6,16 @@ import styles from "./ambient-pixels.module.scss";
 
 const FADE_IN_PX = 120;
 const FADE_OUT_PX = 140;
-const MIN_PIXEL_SIZE = 3;
-const MAX_PIXEL_SIZE = 10;
+const MIN_PIXEL_SIZE = 4;
+const MAX_PIXEL_SIZE = 12;
 const PIXEL_SIZE_SKEW = 1.6;
 const DEATH_FADE_MS = 900;
 const MIN_LIFESPAN_MS = 2_000;
-const MIN_SPEED_PX_PER_S = 10;
+const MIN_SPEED_PX_PER_S = 14;
 const MAX_SPEED_PX_PER_S = 20;
 const MAX_PARTICLES = 20;
 const MIN_PARTICLES = 15;
+const MAX_FRAME_DELTA_MS = 48;
 const WHITE = { red: 247, green: 247, blue: 247 };
 
 interface Particle {
@@ -26,7 +27,6 @@ interface Particle {
   ageMs: number;
   lifespanMs: number;
   dyingMs: number;
-  slot: number;
 }
 
 const getHeaderBottom = () => {
@@ -72,48 +72,53 @@ const lifespanFor = (
   return Math.max(MIN_LIFESPAN_MS, fullTravelMs * 1.05 + extraMs);
 };
 
-const xForSlot = (
-  slot: number,
-  slotCount: number,
-  width: number,
-  size: number,
-) => {
-  const bandWidth = width / slotCount;
-  const center = bandWidth * slot + bandWidth / 2;
-  const jitter = (Math.random() - 0.5) * bandWidth * 0.45;
-
-  return Math.min(
-    Math.max(0, width - size),
-    Math.max(0, center + jitter - size / 2),
-  );
-};
+const randomX = (width: number, size: number) =>
+  Math.random() * Math.max(1, width - size);
 
 const spawnParticle = (
   width: number,
   height: number,
   headerBottom: number,
-  slot: number,
-  slotCount: number,
-  options: { atBottom?: boolean; staggerAge?: boolean } = {},
+  options: { staggerAge?: boolean; fromBelow?: boolean } = {},
 ): Particle => {
   const size = randomSize();
   const speed = randomSpeed();
-  const atBottom = options.atBottom ?? false;
-  const y = atBottom
-    ? height - size - Math.random() * 48
-    : Math.random() * Math.max(1, height - size);
-  const lifespanMs = lifespanFor(height, headerBottom, speed, y);
+  const fromBelow = options.fromBelow ?? false;
+  const playableTop = headerBottom - size;
+  const playableBottom = height - size;
+
+  let y: number;
+  if (fromBelow) {
+    y = height + Math.random() * (FADE_IN_PX + 72);
+  } else {
+    y =
+      playableTop +
+      Math.random() * Math.max(1, playableBottom - playableTop);
+  }
+
+  const lifespanMs = lifespanFor(
+    height,
+    headerBottom,
+    speed,
+    Math.min(y, playableBottom),
+  );
+  const ageMs = options.staggerAge ? Math.random() * lifespanMs : 0;
+
+  if (ageMs > 0) {
+    y -= (speed * ageMs) / 1000;
+  }
+
+  y = Math.max(playableTop - size, Math.min(height + FADE_IN_PX, y));
 
   return {
-    x: xForSlot(slot, slotCount, width, size),
+    x: randomX(width, size),
     y,
     size,
     speed,
     opacity: randomOpacity(),
-    ageMs: options.staggerAge ? Math.random() * lifespanMs : 0,
+    ageMs,
     lifespanMs,
     dyingMs: 0,
-    slot,
   };
 };
 
@@ -129,10 +134,8 @@ const seedParticles = (
   headerBottom: number,
   count: number,
 ) =>
-  Array.from({ length: count }, (_, index) =>
-    spawnParticle(width, height, headerBottom, index, count, {
-      staggerAge: true,
-    }),
+  Array.from({ length: count }, () =>
+    spawnParticle(width, height, headerBottom, { staggerAge: true }),
   );
 
 const respawnParticle = (
@@ -140,18 +143,10 @@ const respawnParticle = (
   width: number,
   height: number,
   headerBottom: number,
-  slotCount: number,
 ) => {
   Object.assign(
     particle,
-    spawnParticle(
-      width,
-      height,
-      headerBottom,
-      particle.slot,
-      slotCount,
-      { atBottom: true },
-    ),
+    spawnParticle(width, height, headerBottom, { fromBelow: true }),
   );
 };
 
@@ -198,24 +193,29 @@ export function AmbientPixels() {
         const start = particles.length;
         for (let index = start; index < nextCount; index += 1) {
           particles.push(
-            spawnParticle(width, height, headerBottom, index, nextCount, {
-              staggerAge: true,
-            }),
+            spawnParticle(width, height, headerBottom, { staggerAge: true }),
           );
         }
       }
 
-      const slotCount = particles.length;
-      for (let index = 0; index < slotCount; index += 1) {
-        const particle = particles[index];
-        particle.slot = index;
-        particle.x = xForSlot(index, slotCount, width, particle.size);
-        particle.y = Math.min(particle.y, Math.max(0, height - particle.size));
+      for (const particle of particles) {
+        particle.x = Math.min(particle.x, Math.max(0, width - particle.size));
+        particle.y = Math.min(
+          particle.y,
+          Math.max(0, height - particle.size),
+        );
+      }
+    };
+
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "visible") {
+        lastTimestamp = 0;
       }
     };
 
     const draw = (timestamp: number) => {
-      const deltaMs = lastTimestamp ? timestamp - lastTimestamp : 16;
+      const rawDeltaMs = lastTimestamp ? timestamp - lastTimestamp : 16;
+      const deltaMs = Math.min(rawDeltaMs, MAX_FRAME_DELTA_MS);
       lastTimestamp = timestamp;
 
       context.clearRect(0, 0, width, height);
@@ -236,13 +236,7 @@ export function AmbientPixels() {
           if (particle.dyingMs > 0) {
             particle.dyingMs += deltaMs;
             if (particle.dyingMs >= DEATH_FADE_MS) {
-              respawnParticle(
-                particle,
-                width,
-                height,
-                headerBottom,
-                particles.length,
-              );
+              respawnParticle(particle, width, height, headerBottom);
             }
           }
         }
@@ -271,10 +265,12 @@ export function AmbientPixels() {
     draw(performance.now());
 
     window.addEventListener("resize", resize);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
 
     return () => {
       window.cancelAnimationFrame(animationFrameId);
       window.removeEventListener("resize", resize);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
   }, []);
 

@@ -16,10 +16,6 @@
   }
 }
 
-:global([data-has-dots='true']) + .grid {
-  margin-top: var(--spacing-block);
-}
-
 .gridItem {
   display: flex;
   flex-direction: column;

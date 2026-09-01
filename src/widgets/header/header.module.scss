@@ -65,13 +65,18 @@
 }
 
 .desktopNav {
-  display: flex;
-  align-items: center;
-  gap: calc(var(--spacing-xs) * 2);
-
   @media (max-width: $breakpoint-tablet) {
     display: none;
   }
+}
+
+.navList {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--spacing-xs) * 2);
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .navItem {
@@ -109,7 +114,6 @@
   background-color: var(--color-secondary);
   border: 1px solid var(--color-border);
   border-radius: 8px;
-  color: inherit;
   @include focus-ring;
 
   &:hover,
@@ -122,12 +126,11 @@
   display: none;
 
   @media (max-width: $breakpoint-tablet) {
-    display: flex;
+    display: block;
     position: absolute;
     top: 100%;
     left: 0;
     right: 0;
-    flex-direction: column;
     background-color: var(--surface-header);
     backdrop-filter: blur(15px);
     border: 1px solid var(--color-border);
@@ -135,17 +138,30 @@
   }
 }
 
+.mobileNavList {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  > li {
+    border-bottom: 1px solid var(--color-border);
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}
+
 .mobileNavItem {
+  display: block;
+  width: 100%;
   padding: 0.875rem var(--spacing-block);
   @include text-body;
   @include link-plain;
   @include focus-ring;
-  border-bottom: 1px solid var(--color-border);
   background-color: transparent;
-
-  &:last-child {
-    border-bottom: none;
-  }
 
   &:active,
   &:hover {

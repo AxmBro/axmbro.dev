@@ -70,7 +70,7 @@ function scrollChildIntoViewX(root: HTMLElement, child: HTMLElement) {
 
 export const ProjectToc = ({ items }: ProjectTocProps) => {
   const navRef = useRef<HTMLElement>(null);
-  const linksRef = useRef<HTMLDivElement>(null);
+  const linksRef = useRef<HTMLUListElement>(null);
   const clickLockIdRef = useRef<string | null>(null);
   const scrollSettleTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [activeId, setActiveId] = useState(items[0]?.id ?? "");
@@ -255,18 +255,19 @@ export const ProjectToc = ({ items }: ProjectTocProps) => {
               <FaChevronLeft size={12} aria-hidden />
             </button>
           )}
-          <div ref={linksRef} className={styles.links}>
+          <ul ref={linksRef} className={styles.links}>
             {items.map((item) => (
-              <HashLink
-                key={item.id}
-                href={`#${item.id}`}
-                className={`${styles.link}${activeId === item.id ? ` ${styles.linkActive}` : ""}`}
-                onClick={() => lockClick(item.id)}
-              >
-                {item.label}
-              </HashLink>
+              <li key={item.id}>
+                <HashLink
+                  href={`#${item.id}`}
+                  className={`${styles.link}${activeId === item.id ? ` ${styles.linkActive}` : ""}`}
+                  onClick={() => lockClick(item.id)}
+                >
+                  {item.label}
+                </HashLink>
+              </li>
             ))}
-          </div>
+          </ul>
           {canScrollRight && (
             <button
               type="button"
