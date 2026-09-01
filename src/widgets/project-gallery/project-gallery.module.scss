@@ -36,8 +36,23 @@
   flex-direction: column;
   gap: 0;
   min-width: 0;
+}
+
+.mediaLink {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
   @include link-plain;
   @include focus-ring;
+
+  &:hover .title,
+  &:focus-visible .title {
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+  }
 }
 
 .title {
@@ -45,12 +60,6 @@
   margin: 0;
   text-decoration: none;
   text-shadow: var(--text-on-media-title-shadow);
-}
-
-.caption:hover .title,
-.caption:focus-visible .title {
-  text-decoration: underline;
-  text-underline-offset: 0.15em;
 }
 
 .media {
@@ -155,17 +164,12 @@
 }
 
 .overlay {
-  position: absolute;
-  inset: 0;
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   padding: var(--spacing-block);
   pointer-events: none;
-
-  .caption {
-    pointer-events: auto;
-  }
 }
 
 .typeLabel {

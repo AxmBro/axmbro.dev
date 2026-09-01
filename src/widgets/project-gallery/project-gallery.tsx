@@ -11,6 +11,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
+import { ProjectAccentTitle } from "@/entities/project";
 import {
   PROJECT_CONTENT_DELAY,
   RevealItem,
@@ -57,7 +58,6 @@ export function ProjectGallery({
   projects,
   captionHeadingLevel = "h2",
 }: ProjectGalleryProps) {
-  const CaptionHeading = captionHeadingLevel;
   const projectCount = projects.length;
   const [position, setPosition] = useState<GalleryPosition>({ projectIndex: 0, imageIndex: 0 });
   const [imagesByProject, setImagesByProject] = useState<Record<string, GalleryImage[]>>({});
@@ -66,6 +66,7 @@ export function ProjectGallery({
   const [cycleKey, setCycleKey] = useState(0);
   const [loadedBySrc, setLoadedBySrc] = useState<Record<string, true>>({});
   const [slideDirection, setSlideDirection] = useState<SlideDirection>("next");
+  const [linkActive, setLinkActive] = useState(false);
   const reduceMotion = useReducedMotion();
 
   const markImageLoaded = useCallback((src: string) => {
@@ -274,6 +275,11 @@ export function ProjectGallery({
   const slideKey = `${position.projectIndex}-${position.imageIndex}`;
   const progressKey = `${position.projectIndex}-${position.imageIndex}-${cycleKey}`;
   const showNavBar = showProjectNav || reserveNextPhotoSlot;
+  const projectDetailHref = projectDetailPath(currentProject.url);
+  const projectAccentColor = currentProject.accentColor ?? "var(--color-accent)";
+
+  const handleMediaLinkActivate = () => setLinkActive(true);
+  const handleMediaLinkDeactivate = () => setLinkActive(false);
 
   return (
     <div>
@@ -292,46 +298,62 @@ export function ProjectGallery({
               <span className={styles.slideStatus} aria-live="polite">
                 {slideStatus}
               </span>
-              <div className={styles.placeholder} aria-hidden />
-              {displaySrc ? (
-                <div
-                  key={slideKey}
-                  className={styles.slideLayer}
-                  data-direction={reduceMotion ? undefined : slideDirection}
-                >
-                  <Image
-                    src={displaySrc}
-                    alt={GALLERY_TEXTS.imageAlt(
-                      currentProject.title,
-                      position.imageIndex + 1,
-                    )}
-                    fill
-                    className={styles.image}
-                    data-loaded={isImageReady ? "true" : "false"}
-                    sizes={imageSizes}
-                    quality={GALLERY_IMAGE_QUALITY}
-                    priority={position.projectIndex === 0 && position.imageIndex === 0}
-                    onLoad={() => {
-                      if (!displaySrc) return;
-                      markImageLoaded(displaySrc);
-                    }}
-                  />
+              <Link
+                href={projectDetailHref}
+                className={styles.mediaLink}
+                onPointerEnter={handleMediaLinkActivate}
+                onPointerLeave={handleMediaLinkDeactivate}
+                onFocus={handleMediaLinkActivate}
+                onBlur={handleMediaLinkDeactivate}
+              >
+                <div className={styles.placeholder} aria-hidden />
+                {displaySrc ? (
+                  <div
+                    key={slideKey}
+                    className={styles.slideLayer}
+                    data-direction={reduceMotion ? undefined : slideDirection}
+                  >
+                    <Image
+                      src={displaySrc}
+                      alt={GALLERY_TEXTS.imageAlt(
+                        currentProject.title,
+                        position.imageIndex + 1,
+                      )}
+                      fill
+                      className={styles.image}
+                      data-loaded={isImageReady ? "true" : "false"}
+                      sizes={imageSizes}
+                      quality={GALLERY_IMAGE_QUALITY}
+                      priority={position.projectIndex === 0 && position.imageIndex === 0}
+                      onLoad={() => {
+                        if (!displaySrc) return;
+                        markImageLoaded(displaySrc);
+                      }}
+                    />
+                  </div>
+                ) : null}
+                <div className={styles.scrim} aria-hidden />
+                <div className={styles.overlay}>
+                  <div className={styles.caption}>
+                    <ProjectAccentTitle
+                      key={currentProject.url}
+                      as={captionHeadingLevel}
+                      accentColor={projectAccentColor}
+                      className={styles.title}
+                      startWhen="delay"
+                      hoverUsesAccent={false}
+                      linkActive={linkActive}
+                    >
+                      {currentProject.title}
+                    </ProjectAccentTitle>
+                    {currentProject.type ? (
+                      <p className={styles.typeLabel}>
+                        {GALLERY_TEXTS.typeLabel[currentProject.type]}
+                      </p>
+                    ) : null}
+                  </div>
                 </div>
-              ) : null}
-              <div className={styles.scrim} aria-hidden />
-              <div className={styles.overlay}>
-                <Link
-                  href={projectDetailPath(currentProject.url)}
-                  className={styles.caption}
-                >
-                  <CaptionHeading className={styles.title}>{currentProject.title}</CaptionHeading>
-                  {currentProject.type ? (
-                    <p className={styles.typeLabel}>
-                      {GALLERY_TEXTS.typeLabel[currentProject.type]}
-                    </p>
-                  ) : null}
-                </Link>
-              </div>
+              </Link>
               {!reduceMotion && canAutoAdvance ? (
                 <div className={styles.advanceTrack} aria-hidden>
                   <div key={progressKey} className={styles.advanceFill} />

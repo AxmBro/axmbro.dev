@@ -20,26 +20,31 @@ export function GalleryStaticFallback({ project }: GalleryStaticFallbackProps) {
     >
       <div className={galleryStyles.stage}>
         <div className={galleryStyles.media}>
-          <Image
-            src={project.fallbackSrc}
-            alt={GALLERY_TEXTS.imageAlt(project.title, 1)}
-            fill
-            className={galleryStyles.image}
-            data-loaded="true"
-            sizes="(max-width: 992px) 100vw, min(100vw, 1280px)"
-            priority
-          />
-          <div className={galleryStyles.scrim} aria-hidden />
-          <div className={galleryStyles.overlay}>
-            <Link href={projectDetailPath(project.url)} className={galleryStyles.caption}>
-              <h3 className={galleryStyles.title}>{project.title}</h3>
-              {project.type ? (
-                <p className={galleryStyles.typeLabel}>
-                  {GALLERY_TEXTS.typeLabel[project.type]}
-                </p>
-              ) : null}
-            </Link>
-          </div>
+          <Link
+            href={projectDetailPath(project.url)}
+            className={galleryStyles.mediaLink}
+          >
+            <Image
+              src={project.fallbackSrc}
+              alt={GALLERY_TEXTS.imageAlt(project.title, 1)}
+              fill
+              className={galleryStyles.image}
+              data-loaded="true"
+              sizes="(max-width: 992px) 100vw, min(100vw, 1280px)"
+              priority
+            />
+            <div className={galleryStyles.scrim} aria-hidden />
+            <div className={galleryStyles.overlay}>
+              <div className={galleryStyles.caption}>
+                <h3 className={galleryStyles.title}>{project.title}</h3>
+                {project.type ? (
+                  <p className={galleryStyles.typeLabel}>
+                    {GALLERY_TEXTS.typeLabel[project.type]}
+                  </p>
+                ) : null}
+              </div>
+            </div>
+          </Link>
         </div>
       </div>
     </article>

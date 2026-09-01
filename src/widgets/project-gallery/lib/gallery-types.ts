@@ -11,6 +11,7 @@ export type GalleryProjectMeta = {
   title: string;
   type?: ProjectType;
   fallbackSrc?: string | null;
+  accentColor?: string;
 };
 
 export type GalleryPosition = {

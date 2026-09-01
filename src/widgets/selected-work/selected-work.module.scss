@@ -1,69 +1,49 @@
 @use '../../shared/styles/variables' as *;
 @use '../../shared/styles/mixins' as *;
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  width: auto;
-  min-width: 0;
-  margin-inline: var(--spacing-block);
-  margin-bottom: var(--spacing-block);
-  border: 1px solid var(--color-border);
-  align-items: stretch;
-
-  @media (max-width: $breakpoint-tablet) {
-    grid-template-columns: 1fr;
-  }
-}
-
-.gridItem {
-  display: flex;
-  flex-direction: column;
-  min-height: 100%;
-  min-width: 0;
-  border-right: 1px solid var(--color-border);
-  border-bottom: 1px solid var(--color-border);
-
-  > * {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    min-height: 0;
-    width: 100%;
-  }
-
-  &:nth-child(2n) {
-    border-right: none;
-  }
-
-  &:nth-last-child(-n + 2) {
-    border-bottom: none;
-  }
-
-  @media (max-width: $breakpoint-tablet) {
-    border-right: none;
-    border-bottom: 1px solid var(--color-border);
-
-    &:last-child {
-      border-bottom: none;
-    }
+.gallerySlot {
+  > :first-child {
+    margin-bottom: 0;
   }
 }
 
 .footer {
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-section);
   border-top: 1px solid var(--color-border);
-  padding: var(--spacing-block);
+  padding: var(--spacing-section) var(--spacing-block);
+
+  @media (min-width: ($breakpoint-md + 1px)) {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--spacing-block);
+  }
 }
 
 .footerHeader {
   @include stack-xs;
+  min-width: 0;
+  flex: 1;
 }
 
 .footerTitle {
-  @include text-h2;
+  @include text-h3;
+  margin: 0;
 }
 
 .footerDescription {
   @include text-body;
+  margin: 0;
+}
+
+.footerActions {
+  width: 100%;
+  flex-shrink: 0;
+
+  @media (min-width: ($breakpoint-md + 1px)) {
+    width: auto;
+    justify-content: flex-end;
+  }
 }
