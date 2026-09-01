@@ -7,12 +7,12 @@ import type { ProjectItem } from "@/shared/constants/data";
 import { projectDetailPath } from "@/shared/constants/routes";
 import {
   PROJECT_CONTENT_DELAY,
-  projectAccentDelayCardBody,
+  RevealItem,
+  RevealStagger,
 } from "@/shared/ui/motion";
 import { getProjectThumbnailSrc } from "../lib/get-project-thumbnail";
 import { formatProjectDate } from "../lib/format-project-date";
 import { ProjectAccentTitle } from "./project-accent-title";
-import { ProjectContentReveal } from "./project-content-reveal";
 import { ProjectTags } from "./project-tags";
 import styles from "./project-card.module.scss";
 
@@ -21,28 +21,29 @@ interface ProjectCardProps {
   showTags?: boolean;
   featuredReveal?: boolean;
   staggerDelay?: number;
+  headingLevel?: "h2" | "h3";
 }
 
 function ProjectCardTitle({
   project,
-  accentDelay,
   linkActive,
+  headingLevel = "h2",
 }: {
   project: ProjectItem;
-  accentDelay?: number;
   linkActive: boolean;
+  headingLevel?: "h2" | "h3";
 }) {
   if (!project.accentColor) {
-    return <h2 className={styles.title}>{project.title}</h2>;
+    const HeadingTag = headingLevel;
+    return <HeadingTag className={styles.title}>{project.title}</HeadingTag>;
   }
 
   return (
     <ProjectAccentTitle
-      as="h2"
+      as={headingLevel}
       accentColor={project.accentColor}
       className={`${styles.cardTitle} ${styles.accentTitle}`}
       startWhen="inView"
-      delay={accentDelay ?? 0}
       linkActive={linkActive}
     >
       {project.title}
@@ -53,13 +54,13 @@ function ProjectCardTitle({
 function ProjectCardBody({
   project,
   showTags,
-  accentDelay,
   linkActive,
+  headingLevel = "h2",
 }: {
   project: ProjectItem;
   showTags: boolean;
-  accentDelay?: number;
   linkActive: boolean;
+  headingLevel?: "h2" | "h3";
 }) {
   const formattedDate = formatProjectDate(project);
 
@@ -79,8 +80,8 @@ function ProjectCardBody({
           )}
           <ProjectCardTitle
             project={project}
-            accentDelay={accentDelay}
             linkActive={linkActive}
+            headingLevel={headingLevel}
           />
         </div>
         {formattedDate && <span className={styles.date}>{formattedDate}</span>}
@@ -96,11 +97,11 @@ export function ProjectCard({
   showTags = true,
   featuredReveal = false,
   staggerDelay = PROJECT_CONTENT_DELAY,
+  headingLevel = "h2",
 }: ProjectCardProps) {
   const [linkActive, setLinkActive] = useState(false);
   const thumbnailSrc = getProjectThumbnailSrc(project);
   const thumbnailAlt = `${project.title} project preview`;
-  const accentDelay = featuredReveal ? projectAccentDelayCardBody(staggerDelay) : undefined;
 
   const handleLinkActivate = () => setLinkActive(true);
   const handleLinkDeactivate = () => setLinkActive(false);
@@ -129,22 +130,23 @@ export function ProjectCard({
     <ProjectCardBody
       project={project}
       showTags={showTags}
-      accentDelay={accentDelay}
       linkActive={linkActive}
+      headingLevel={headingLevel}
     />
   );
 
   const inner = (
     <div className={styles.card}>
       {featuredReveal ? (
-        <ProjectContentReveal
-          className={styles.featuredReveal}
-          trigger="inView"
-          delay={staggerDelay}
-        >
-          {media ? <div className={styles.featuredRevealMedia}>{media}</div> : null}
+        // Media: fade-up on -15% inView. Body static. Accent color flash is separate on h2 (-12%).
+        <div className={styles.featuredReveal}>
+          {media ? (
+            <RevealStagger trigger="inView" delay={staggerDelay}>
+              <RevealItem className={styles.featuredRevealMedia}>{media}</RevealItem>
+            </RevealStagger>
+          ) : null}
           <div className={styles.featuredRevealBody}>{body}</div>
-        </ProjectContentReveal>
+        </div>
       ) : (
         <>
           {media}
@@ -159,7 +161,6 @@ export function ProjectCard({
       <Link
         href={projectDetailPath(project.url)}
         className={styles.link}
-        aria-label={project.title}
         {...linkHandlers}
       >
         {inner}
