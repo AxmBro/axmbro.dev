@@ -43,6 +43,7 @@ next-env.d.ts
 
 # other
 /todo.md
+/notes/
 
 # cursor (local IDE rules)
 .cursor/
