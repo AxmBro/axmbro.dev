@@ -24,6 +24,7 @@ export const AnnouncementBar = () => {
           inViewRef={innerRef}
           hoverTargetRef={innerRef}
           pulseOnMount
+          pulseIntervalMs={3000}
         />
         <p className={styles.message}>
           <span className={styles.title}>{HOME_ANNOUNCEMENT.title}</span>
