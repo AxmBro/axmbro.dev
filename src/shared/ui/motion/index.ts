@@ -7,6 +7,6 @@ export { useReducedMotion } from "motion/react";
 export {
   PROJECT_CONTENT_DELAY,
   PROJECT_FEATURED_CARD_STEP,
-  projectAccentDelayCardBody,
   projectAccentDelayHeroTitle,
+  REVEAL_ACCENT_TITLE_VIEWPORT_MARGIN,
 } from "./motion-variants";

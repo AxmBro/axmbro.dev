@@ -1,17 +1,19 @@
 "use client";
 
 import { useCallback, useEffect, useRef, type RefObject } from "react";
-import { useReducedMotion } from "motion/react";
+import { useReducedMotion } from "@/shared/ui/motion";
 import { useRevealInView } from "@/shared/ui/motion";
 
 export type UseRailPulseFlashOptions = {
   pulseOnMount?: boolean;
+  pulseIntervalMs?: number;
   inViewRef?: RefObject<Element | null>;
   hoverTargetRef?: RefObject<Element | null>;
 };
 
 export function useRailPulseFlash({
   pulseOnMount = false,
+  pulseIntervalMs,
   inViewRef,
   hoverTargetRef,
 }: UseRailPulseFlashOptions = {}) {
@@ -129,6 +131,17 @@ export function useRailPulseFlash({
 
     return () => window.clearTimeout(timeoutId);
   }, [pulseOnMount, reduceMotion, tryFlashRailDot]);
+
+  useEffect(() => {
+    if (!pulseIntervalMs || reduceMotion) return;
+
+    const intervalId = window.setInterval(() => {
+      if (inViewRef && !inView) return;
+      tryFlashRailDot();
+    }, pulseIntervalMs);
+
+    return () => window.clearInterval(intervalId);
+  }, [pulseIntervalMs, reduceMotion, inView, inViewRef, tryFlashRailDot]);
 
   return { dotRef, pulseRef };
 }

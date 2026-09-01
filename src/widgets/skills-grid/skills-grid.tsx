@@ -1,9 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useReducedMotion } from "motion/react";
+import { useReducedMotion, useRevealInView } from "@/shared/ui/motion";
 import { SKILLS_CARDS } from "@/shared/constants/data";
-import { useRevealInView } from "@/shared/ui/motion";
 import { getSkillLevel, type SkillStrengthTier } from "./lib/get-skill-level";
 import styles from "./skills-grid.module.scss";
 
