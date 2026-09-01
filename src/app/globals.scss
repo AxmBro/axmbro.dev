@@ -41,7 +41,7 @@
   --max-website-width: 64rem;
 
   --color-accent: rgb(0, 143, 252);
-  --color-bg-primary: color-mix(in srgb, var(--color-accent) 7%, #000000);
+  --color-bg-primary: color-mix(in srgb, var(--color-accent) 3%, #000000);
   --color-accent-subtle: color-mix(in srgb, var(--color-accent) 10%, transparent);
   --color-accent-soft: color-mix(in srgb, var(--color-accent) 15%, var(--color-neutral-100));
   /* Skills tier text (strong / solid) - blends from accent toward white */
