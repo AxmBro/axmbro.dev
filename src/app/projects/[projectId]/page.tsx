@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { PROJECTS, CTA_LABELS } from "@/shared/constants/data";
+import { PROJECTS, CTA_LABELS, PROJECT_PAGE_TEXTS } from "@/shared/constants/data";
 import { projectDetailPath, ROUTES } from "@/shared/constants/routes";
 import {
   buildProjectActions,
@@ -101,11 +101,11 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           <ScreenSection
             id={overviewId}
             eyebrow="Project"
-            title={
-              <div className={styles.overviewTitleRow}>
-                <div>Overview</div>
-                {project.date && <div className={styles.overviewDate}>{formatProjectDate(project)}</div>}
-              </div>
+            title="Overview"
+            titleMeta={
+              project.date ? (
+                <span className={styles.overviewDate}>{formatProjectDate(project)}</span>
+              ) : undefined
             }
             titleDescription={
               <div>
@@ -140,7 +140,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               eyebrow="Credits"
               title="Credits"
               titleDescription={
-                pageData.creditsDescription ?? "People involved in creating this project."
+                pageData.creditsDescription ?? PROJECT_PAGE_TEXTS.creditsDefaultDescription
               }
               variant="default"
             >
@@ -202,7 +202,12 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
         {!pageData && (
           <Reveal>
-            <ScreenSection eyebrow="Status" titleDescription="Full project showcase coming soon." variant="default" />
+            <ScreenSection
+              eyebrow={PROJECT_PAGE_TEXTS.comingSoon.eyebrow}
+              title={PROJECT_PAGE_TEXTS.comingSoon.title}
+              titleDescription={PROJECT_PAGE_TEXTS.comingSoon.description}
+              variant="default"
+            />
           </Reveal>
         )}
       </ScreenContainer>

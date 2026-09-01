@@ -21,31 +21,8 @@
   }
 }
 
-.overviewTitleRow {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--spacing-xs);
-  width: 100%;
-
-  >div:first-child {
-    flex: 1;
-    min-width: 0;
-  }
-
-  @media (max-width: $breakpoint-md) {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--spacing-xs);
-  }
-}
-
 .overviewDate {
-  font-size: var(--font-p2);
-  line-height: var(--line-height-body);
-  color: var(--color-neutral-400);
-  font-weight: 400;
-  letter-spacing: normal;
+  @include text-body-sm;
   white-space: nowrap;
   flex-shrink: 0;
 }
