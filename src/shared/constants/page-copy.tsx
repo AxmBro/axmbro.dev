@@ -26,7 +26,7 @@ export const SITE_ROLE = {
 
 export const EXPERIENCE_TREE: ExperienceItem[] = [
   {
-    role: `Freelance ${SITE_ROLE.headline}`,
+    role: "Freelance JsonUI & Web Developer",
     date: "Present",
     company: "Self-Employed",
     items: [
@@ -223,13 +223,24 @@ export const GALLERY_TEXTS = {
     commissions: "Commissioned",
     personal: "Personal Project",
   },
+  projectCounter: (current: number, total: number) => `Project ${current}/${total}`,
+  slideStatus: (title: string, photo: number, photoTotal: number) =>
+    `${title}, photo ${photo} of ${photoTotal}`,
   imageAlt: (title: string, imageNumber: number) =>
     `${title} interface screenshot ${imageNumber}`,
   aria: {
     region: "Project showcase gallery",
     prevProject: "Previous project",
     nextProject: "Next project",
-    chooseProject: "Choose project",
+  },
+} as const;
+
+export const PROJECT_PAGE_TEXTS = {
+  creditsDefaultDescription: "People involved in creating this project.",
+  comingSoon: {
+    eyebrow: "Status",
+    title: "Coming soon",
+    description: "Full project showcase coming soon.",
   },
 } as const;
 
@@ -239,6 +250,7 @@ export const CONTACT_FORM_TEXTS = {
   discordLabel: "Discord (optional)",
   discordPlaceholder: "Username or ID",
   topicLabel: "Topic (optional)",
+  messageLabel: "Message",
   messagePlaceholder: "Your ideas, sketches, scope, or questions...",
   submit: "Send Message",
   submitting: "Sending...",
@@ -327,7 +339,7 @@ export const SITE_METADATA = {
   homeDescription:
     `20-year-old Computer Science student and ${SITE_ROLE.headline} from Poland. Mainly custom Bedrock JsonUI, HUDs, and server forms for studios, servers, and creators - plus React and Next.js web work.`,
   footerDescription:
-    `Computer Science student and ${SITE_ROLE.headline} from Poland. Mainly custom Bedrock JsonUI for studios and creators - plus React sites.`,
+    `Computer Science student and ${SITE_ROLE.headline} from Poland. Custom Bedrock JsonUI for studios and creators, with the same care on React and Next.js web work.`,
   projectsDescription:
     "Portfolio of mainly Bedrock JsonUI commissions and personal releases for studios and creators, plus web work - including Better Bedrock and studio client work.",
   commissionsDescription:
@@ -380,7 +392,7 @@ export const CTA_LABELS = {
 
 export const HOME_ANNOUNCEMENT = {
   title: "Commissions open",
-  text: "Mainly custom Bedrock JsonUI commissions",
+  text: "Taking on mainly new Minecraft Bedrock UI work (JsonUI, HUDs, server forms, and more)",
   contactHref: contactFormHref(),
   contactLabel: CTA_LABELS.getInTouch,
 } as const;
@@ -518,6 +530,7 @@ export const NOT_FOUND_PAGE_TEXTS = {
 };
 
 export const COMMISSIONS_PAGE_TEXTS = {
+  title: "Minecraft Bedrock UI Commissions",
   intro: (
     <>
       Custom Bedrock JsonUI for studios, servers, and creators.{" "}
