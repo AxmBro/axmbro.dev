@@ -17,8 +17,12 @@ function ExperienceGridItem({ exp, isFirst }: ExperienceGridItemProps) {
     <div ref={itemRef} className={styles.expVerticalItem}>
       <RailPulseDot
         className={`${styles.expRailDot} ${isFirst ? styles.expRailDotFirst : ""}`}
+        variant={isFirst ? "accent" : "default"}
+        size={isFirst ? "large" : "default"}
         inViewRef={itemRef}
         hoverTargetRef={itemRef}
+        pulseOnMount={isFirst}
+        pulseIntervalMs={isFirst ? 3000 : undefined}
       />
       <div className={styles.expHeader}>
         <div className={styles.expHeaderMain}>

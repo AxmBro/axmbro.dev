@@ -21,6 +21,7 @@ export const AnnouncementBar = () => {
       <div ref={innerRef} className={styles.inner}>
         <RailPulseDot
           className={styles.leadDot}
+          variant="accent"
           inViewRef={innerRef}
           hoverTargetRef={innerRef}
           pulseOnMount

@@ -8,6 +8,12 @@
   border-top: 1px solid var(--color-border);
   --exp-rail-x: var(--spacing-block);
   --exp-content-inset: calc(var(--spacing-block) + var(--spacing-section));
+  --exp-rail-dot-size-default: 8px;
+  --exp-rail-dot-size-large: 11px;
+  --exp-rail-dot-y: calc(var(--spacing-block) + 0.65em);
+  --exp-rail-blue-bottom: 1rem;
+  --exp-rail-blue-fade-start: 35%;
+  --exp-rail-gray-fade-start: 30%;
 }
 
 .expVerticalItem {
@@ -20,22 +26,71 @@
     content: '';
     position: absolute;
     left: var(--exp-rail-x);
-    top: 0;
-    bottom: 0;
     width: 1px;
     background-color: var(--color-border);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  &:first-child::before {
+    top: calc(var(--exp-rail-dot-y) + var(--exp-rail-dot-size-large) / 2);
+    bottom: 0;
+  }
+
+  &:not(:first-child)::before {
+    top: 0;
+    bottom: 0;
+  }
+
+  &:last-child::before {
+    mask-image: linear-gradient(
+      to bottom,
+      #000 0%,
+      #000 var(--exp-rail-gray-fade-start),
+      transparent 95%
+    );
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      #000 0%,
+      #000 var(--exp-rail-gray-fade-start),
+      transparent 95%
+    );
+  }
+
+  &:first-child::after {
+    content: '';
+    position: absolute;
+    left: var(--exp-rail-x);
+    top: calc(var(--exp-rail-dot-y) + var(--exp-rail-dot-size-large) / 2);
+    bottom: var(--exp-rail-blue-bottom);
+    width: 1px;
+    background-color: var(--color-accent);
+    mask-image: linear-gradient(
+      to bottom,
+      #000 0%,
+      #000 var(--exp-rail-blue-fade-start),
+      transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      #000 0%,
+      #000 var(--exp-rail-blue-fade-start),
+      transparent 100%
+    );
+    pointer-events: none;
+    z-index: 1;
   }
 }
 
 .expRailDot {
   position: absolute;
-  left: calc(var(--exp-rail-x) - 3.25px);
-  top: calc(var(--spacing-block) + 0.65em);
-  z-index: 1;
+  left: calc(var(--exp-rail-x) - (var(--rail-dot-size, 8px) - 1px) / 2);
+  top: var(--exp-rail-dot-y);
+  z-index: 2;
 }
 
 .expRailDotFirst {
-  top: calc(var(--spacing-block) + 0.65em);
+  top: var(--exp-rail-dot-y);
 }
 
 .expHeader {
