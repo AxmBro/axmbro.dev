@@ -69,7 +69,6 @@ export default function HomePage() {
           title="Experience"
           titleDescription={HOME_PAGE_TEXTS.experience.description}
           withChildrenPadding={false}
-          fullWidthGrid
         >
           <ExperienceGrid />
         </ScreenSection>
@@ -80,7 +79,7 @@ export default function HomePage() {
           title="Skills"
           titleDescription={HOME_PAGE_TEXTS.skills.description}
           withChildrenPadding={false}
-          grid="top"
+          fullWidthGrid
         >
           <SkillsGrid />
         </ScreenSection>
