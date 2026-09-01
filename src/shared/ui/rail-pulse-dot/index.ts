@@ -1,1 +1,1 @@
-export { RailPulseDot } from "./rail-pulse-dot";
+export { RailPulseDot, type RailPulseDotSize, type RailPulseDotVariant } from "./rail-pulse-dot";

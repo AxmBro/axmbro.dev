@@ -1,10 +1,19 @@
 .dot {
+  --rail-dot-size: 8px;
   position: relative;
   display: block;
-  width: 8px;
-  height: 8px;
+  width: var(--rail-dot-size);
+  height: var(--rail-dot-size);
   background-color: var(--color-neutral-100);
   transform-origin: center center;
+
+  &[data-size='large'] {
+    --rail-dot-size: 11px;
+  }
+
+  &[data-variant='accent'] {
+    background-color: var(--color-accent);
+  }
 }
 
 .pulse {
