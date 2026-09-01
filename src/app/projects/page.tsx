@@ -8,7 +8,6 @@ import { commissionSectionHref, contactFormHref, SECTION_IDS } from "@/shared/co
 import { ROUTES } from "@/shared/constants/routes";
 import { createPageMetadata } from "@/shared/lib/page-metadata";
 import { ConversionCloser } from "@/shared/ui/conversion-closer";
-import { Reveal } from "@/shared/ui/motion";
 import { ProjectsBoard } from "@/widgets/projects-board";
 
 export const metadata: Metadata = createPageMetadata({
@@ -20,18 +19,16 @@ export const metadata: Metadata = createPageMetadata({
 export default function ProjectsPage() {
   return (
     <ScreenContainer>
-      <Reveal>
-        <ScreenSection
-          eyebrow="Portfolio"
-          title="Projects"
-          headingLevel="h1"
-          titleDescription={HOME_PAGE_TEXTS.projectsPage.description(PROJECTS.length)}
-          withChildrenPadding={false}
-          variant="default"
-        >
-          <ProjectsBoard />
-        </ScreenSection>
-      </Reveal>
+      <ScreenSection
+        eyebrow="Portfolio"
+        title="Projects"
+        headingLevel="h1"
+        titleDescription={HOME_PAGE_TEXTS.projectsPage.description(PROJECTS.length)}
+        withChildrenPadding={false}
+        variant="default"
+      >
+        <ProjectsBoard />
+      </ScreenSection>
 
       <ConversionCloser
         eyebrow="Services"
