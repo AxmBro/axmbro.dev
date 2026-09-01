@@ -77,7 +77,7 @@ export default function CommissionsPage() {
           titleDescription={COMMISSIONS_PAGE_TEXTS.services}
           withChildrenPadding={false}
           variant="accent"
-          grid="top"
+          fullWidthGrid
         >
           <InfoCardsGrid items={COMMISSION_SERVICES} columns={2} />
         </ScreenSection>
@@ -116,7 +116,7 @@ export default function CommissionsPage() {
           titleDescription={COMMISSIONS_PAGE_TEXTS.delivery}
           withChildrenPadding={false}
           variant="accent"
-          grid="top"
+          fullWidthGrid
         >
           <InfoCardsGrid items={COMMISSION_DELIVERABLES} />
         </ScreenSection>

@@ -1,8 +1,10 @@
 import type { ReactNode } from "react";
+import { SectionFullWidthGrid } from "@/shared/ui/section-full-width-grid";
 import { SectionEyebrow } from "./section-eyebrow";
 import styles from "./screen-section.module.scss";
 
 type ScreenSectionVariant = "default" | "accent";
+type SectionGridFade = "top" | "bottom";
 
 interface ScreenSectionProps {
   id?: string;
@@ -13,7 +15,9 @@ interface ScreenSectionProps {
   children?: ReactNode;
   className?: string;
   withChildrenPadding?: boolean;
-  grid?: "top" | "bottom" | "none";
+  grid?: SectionGridFade | "none";
+  /** Viewport-wide grid behind the section; center fade, extends past section height. */
+  fullWidthGrid?: boolean;
   gridMesh?: "grid" | "lines";
   headingLevel?: "h1" | "h2" | "h3";
   variant?: ScreenSectionVariant;
@@ -34,6 +38,7 @@ export const ScreenSection = ({
   className,
   withChildrenPadding = true,
   grid,
+  fullWidthGrid,
   gridMesh = "grid",
   headingLevel = "h2",
   variant,
@@ -41,16 +46,27 @@ export const ScreenSection = ({
   const HeadingTag = headingLevel;
   const hasHeader = Boolean(eyebrow || title || titleDescription);
 
-  return (
+  const sectionClassName = [
+    styles.section,
+    variantClass(variant),
+    fullWidthGrid ? styles.withFullWidthGrid : "",
+    className,
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+  const section = (
     <section
-      className={`${styles.section} ${variantClass(variant)} ${className || ""}`}
+      className={sectionClassName}
       id={id}
       data-plain={variant === "default" ? "" : undefined}
       data-grid={grid}
       data-grid-mesh={gridMesh}
+      data-full-width-grid={fullWidthGrid ? "" : undefined}
       data-grid-surface={grid === "top" || grid === "bottom" ? "" : undefined}
       data-accent-surface={variant === "accent" ? "" : undefined}
     >
+      {fullWidthGrid && <SectionFullWidthGrid />}
       {hasHeader && (
         <div
           className={`${styles.titleBlock} ${styles.hasPadding} ${!children ? styles.noChildren : ""}`}
@@ -81,6 +97,8 @@ export const ScreenSection = ({
       )}
     </section>
   );
+
+  return section;
 };
 
 interface ScreenSectionListProps {

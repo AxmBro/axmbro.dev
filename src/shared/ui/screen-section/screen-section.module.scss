@@ -13,6 +13,10 @@
   overflow: hidden;
 }
 
+.withFullWidthGrid {
+  overflow: visible;
+}
+
 .titleBlock {
   @include stack-xs;
   position: relative;
@@ -114,10 +118,10 @@
 
 /* Grid only on the first and last section (or an explicit grid= override).
    First = fade from the bottom. Last = fade from the top. Middle = no grid. */
-.section:not([data-plain]):not([data-grid]):first-of-type:not(:last-of-type),
-.section:not([data-plain]):not([data-grid]):last-of-type:not(:first-of-type),
-.section[data-grid="top"],
-.section[data-grid="bottom"] {
+.section:not([data-plain]):not([data-grid]):not([data-full-width-grid]):first-of-type:not(:last-of-type),
+.section:not([data-plain]):not([data-grid]):not([data-full-width-grid]):last-of-type:not(:first-of-type),
+.section[data-grid="top"]:not([data-full-width-grid]),
+.section[data-grid="bottom"]:not([data-full-width-grid]) {
   @include grid-lines;
 
   @media (max-width: $breakpoint-md) {
@@ -125,14 +129,14 @@
   }
 }
 
-.section:not([data-plain]):not([data-grid]):first-of-type:not(:last-of-type),
-.section[data-grid="bottom"] {
+.section:not([data-plain]):not([data-grid]):not([data-full-width-grid]):first-of-type:not(:last-of-type),
+.section[data-grid="bottom"]:not([data-full-width-grid]) {
   --grid-lines-mask: linear-gradient(to top, #000 0%, transparent 55%);
   --grid-position-y: bottom;
 }
 
-.section:not([data-plain]):not([data-grid]):last-of-type:not(:first-of-type),
-.section[data-grid="top"] {
+.section:not([data-plain]):not([data-grid]):not([data-full-width-grid]):last-of-type:not(:first-of-type),
+.section[data-grid="top"]:not([data-full-width-grid]) {
   --grid-lines-mask: linear-gradient(to bottom, #000 0%, transparent 55%);
   --grid-position-y: top;
 }
