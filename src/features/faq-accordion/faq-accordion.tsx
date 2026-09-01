@@ -133,17 +133,19 @@ export const FAQAccordion = ({ items }: FAQAccordionProps) => {
             id={item.slug ? faqItemId(item.slug) : undefined}
             className={styles.faqItem}
           >
-            <button
-              id={triggerId}
-              type="button"
-              className={styles.faqHeader}
-              onClick={() => toggleFAQ(item.slug, index)}
-              aria-expanded={isOpen}
-              aria-controls={panelId}
-            >
-              <h3 className={styles.faqQuestion}>{item.question}</h3>
-              <ChevronIcon isOpen={isOpen} />
-            </button>
+            <h3 className={styles.faqHeading}>
+              <button
+                id={triggerId}
+                type="button"
+                className={styles.faqHeader}
+                onClick={() => toggleFAQ(item.slug, index)}
+                aria-expanded={isOpen}
+                aria-controls={panelId}
+              >
+                <span className={styles.faqQuestion}>{item.question}</span>
+                <ChevronIcon isOpen={isOpen} />
+              </button>
+            </h3>
             <div
               id={panelId}
               role="region"
