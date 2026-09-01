@@ -24,7 +24,7 @@ import { ScreenSection } from "@/shared/ui/screen-section";
 import { TrackRecordClients } from "@/widgets/track-record";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Commissions",
+  title: COMMISSIONS_PAGE_TEXTS.title,
   description: SITE_METADATA.commissionsDescription,
   path: ROUTES.commissions,
 });
@@ -36,7 +36,7 @@ export default function CommissionsPage() {
       <Reveal>
         <ScreenSection
           eyebrow="Services"
-          title="Minecraft Bedrock UI Commissions"
+          title={COMMISSIONS_PAGE_TEXTS.title}
           headingLevel="h1"
           titleDescription={COMMISSIONS_PAGE_TEXTS.intro}
           grid="bottom"
