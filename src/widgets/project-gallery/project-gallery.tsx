@@ -66,7 +66,6 @@ export function ProjectGallery({
   const [cycleKey, setCycleKey] = useState(0);
   const [loadedBySrc, setLoadedBySrc] = useState<Record<string, true>>({});
   const [slideDirection, setSlideDirection] = useState<SlideDirection>("next");
-  const [linkActive, setLinkActive] = useState(false);
   const reduceMotion = useReducedMotion();
 
   const markImageLoaded = useCallback((src: string) => {
@@ -278,9 +277,6 @@ export function ProjectGallery({
   const projectDetailHref = projectDetailPath(currentProject.url);
   const projectAccentColor = currentProject.accentColor ?? "var(--color-accent)";
 
-  const handleMediaLinkActivate = () => setLinkActive(true);
-  const handleMediaLinkDeactivate = () => setLinkActive(false);
-
   return (
     <div>
       <RevealStagger className={styles.gallery} trigger="inView" delay={PROJECT_CONTENT_DELAY}>
@@ -298,14 +294,7 @@ export function ProjectGallery({
               <span className={styles.slideStatus} aria-live="polite">
                 {slideStatus}
               </span>
-              <Link
-                href={projectDetailHref}
-                className={styles.mediaLink}
-                onPointerEnter={handleMediaLinkActivate}
-                onPointerLeave={handleMediaLinkDeactivate}
-                onFocus={handleMediaLinkActivate}
-                onBlur={handleMediaLinkDeactivate}
-              >
+              <Link href={projectDetailHref} className={styles.mediaLink}>
                 <div className={styles.placeholder} aria-hidden />
                 {displaySrc ? (
                   <div
@@ -339,10 +328,8 @@ export function ProjectGallery({
                       key={currentProject.url}
                       as={captionHeadingLevel}
                       accentColor={projectAccentColor}
-                      className={styles.title}
+                      className={styles.captionTitle}
                       startWhen="delay"
-                      hoverUsesAccent={false}
-                      linkActive={linkActive}
                     >
                       {currentProject.title}
                     </ProjectAccentTitle>

@@ -36,7 +36,7 @@ export function GalleryStaticFallback({ project }: GalleryStaticFallbackProps) {
             <div className={galleryStyles.scrim} aria-hidden />
             <div className={galleryStyles.overlay}>
               <div className={galleryStyles.caption}>
-                <h3 className={galleryStyles.title}>{project.title}</h3>
+                <h3 className={galleryStyles.captionTitle}>{project.title}</h3>
                 {project.type ? (
                   <p className={galleryStyles.typeLabel}>
                     {GALLERY_TEXTS.typeLabel[project.type]}

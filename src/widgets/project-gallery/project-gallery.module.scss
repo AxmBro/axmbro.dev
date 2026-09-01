@@ -48,15 +48,17 @@
   @include link-plain;
   @include focus-ring;
 
-  &:hover .title,
-  &:focus-visible .title {
+  &:hover .captionTitle,
+  &:focus-visible .captionTitle {
     text-decoration: underline;
-    text-underline-offset: 0.15em;
   }
 }
 
-.title {
+.captionTitle {
   @include text-h2;
+  display: inline-block;
+  width: fit-content;
+  max-width: 100%;
   margin: 0;
   text-decoration: none;
   text-shadow: var(--text-on-media-title-shadow);
