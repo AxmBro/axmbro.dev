@@ -142,9 +142,14 @@
 }
 
 .columnLinks {
-  display: flex;
-  flex-direction: column;
-  gap: calc(var(--spacing-xs) * 1.5);
+  .linkList {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--spacing-xs) * 1.5);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
 
   a {
     @include text-body-sm(var(--color-neutral-400));

@@ -59,46 +59,58 @@ export const Footer = () => {
           </div>
 
           <div className={styles.footerColumn}>
-            <h2 className={styles.columnTitle}>Navigation</h2>
-            <nav className={styles.columnLinks}>
-              {NAV_LINKS.map((link) => (
-                <NavRouteLink key={link.href} href={link.href}>
-                  {link.text}
-                </NavRouteLink>
-              ))}
-              {LEGAL_LINKS.map((link) => (
-                <Link key={link.href} href={link.href}>{link.label}</Link>
-              ))}
+            <p id="footer-navigation" className={styles.columnTitle}>Navigation</p>
+            <nav className={styles.columnLinks} aria-labelledby="footer-navigation">
+              <ul className={styles.linkList}>
+                {NAV_LINKS.map((link) => (
+                  <li key={link.href}>
+                    <NavRouteLink href={link.href}>{link.text}</NavRouteLink>
+                  </li>
+                ))}
+                {LEGAL_LINKS.map((link) => (
+                  <li key={link.href}>
+                    <Link href={link.href}>{link.label}</Link>
+                  </li>
+                ))}
+              </ul>
             </nav>
           </div>
 
           <div className={styles.footerColumn}>
-            <h2 className={styles.columnTitle}>Categories</h2>
-            <nav className={styles.columnLinks}>
-              {CATEGORY_LINKS.map((link) =>
-                link.tag ? (
-                  <ProjectsTagLink key={link.label} tag={link.tag}>
-                    {link.label}
-                  </ProjectsTagLink>
-                ) : (
-                  <ProjectsBoardLink key={link.label} tab="all">
-                    {link.label}
-                  </ProjectsBoardLink>
-                )
-              )}
+            <p id="footer-categories" className={styles.columnTitle}>Categories</p>
+            <nav className={styles.columnLinks} aria-labelledby="footer-categories">
+              <ul className={styles.linkList}>
+                {CATEGORY_LINKS.map((link) => (
+                  <li key={link.label}>
+                    {link.tag ? (
+                      <ProjectsTagLink tag={link.tag}>{link.label}</ProjectsTagLink>
+                    ) : (
+                      <ProjectsBoardLink tab="all">{link.label}</ProjectsBoardLink>
+                    )}
+                  </li>
+                ))}
+              </ul>
             </nav>
           </div>
 
           <div className={styles.footerColumn}>
-            <h2 className={styles.columnTitle}>Contact</h2>
-            <nav className={`${styles.columnLinks} ${styles.contactLinks}`}>
-              <Link href={contactFormHref()}>{CTA_LABELS.contactForm}</Link>
-              <HashLink href={contactSectionHref(SECTION_IDS.contactOptions)}>
-                {CTA_LABELS.contactOptions}
-              </HashLink>
-              {MAIL_LINK && (
-                <a href={MAIL_LINK.href}>{MAIL_LINK.text}</a>
-              )}
+            <p id="footer-contact" className={styles.columnTitle}>Contact</p>
+            <nav className={`${styles.columnLinks} ${styles.contactLinks}`} aria-labelledby="footer-contact">
+              <ul className={styles.linkList}>
+                <li>
+                  <Link href={contactFormHref()}>{CTA_LABELS.contactForm}</Link>
+                </li>
+                <li>
+                  <HashLink href={contactSectionHref(SECTION_IDS.contactOptions)}>
+                    {CTA_LABELS.contactOptions}
+                  </HashLink>
+                </li>
+                {MAIL_LINK ? (
+                  <li>
+                    <a href={MAIL_LINK.href}>{MAIL_LINK.text}</a>
+                  </li>
+                ) : null}
+              </ul>
             </nav>
           </div>
         </div>

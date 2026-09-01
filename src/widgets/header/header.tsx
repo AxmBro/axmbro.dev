@@ -86,8 +86,12 @@ export const Header = () => {
               <span className={styles.logoText}>AxmBro</span>
             </HomeLink>
 
-            <nav className={styles.desktopNav}>
-              {NAV_LINKS.map((link) => renderNavLink(link, styles.navItem))}
+            <nav className={styles.desktopNav} aria-label="Main navigation">
+              <ul className={styles.navList}>
+                {NAV_LINKS.map((link) => (
+                  <li key={link.href}>{renderNavLink(link, styles.navItem)}</li>
+                ))}
+              </ul>
             </nav>
 
             {isTablet && (
@@ -112,7 +116,11 @@ export const Header = () => {
               className={styles.mobileMenu}
               aria-label="Mobile navigation"
             >
-              {NAV_LINKS.map((link) => renderNavLink(link, styles.mobileNavItem))}
+              <ul className={styles.mobileNavList}>
+                {NAV_LINKS.map((link) => (
+                  <li key={link.href}>{renderNavLink(link, styles.mobileNavItem)}</li>
+                ))}
+              </ul>
             </nav>
           )}
         </div>
