@@ -2,13 +2,8 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { useReducedMotion } from "motion/react";
+import { useReducedMotion, useRevealInView, PROJECT_CONTENT_DELAY, PROJECT_FEATURED_CARD_STEP } from "@/shared/ui/motion";
 import { HOME_PAGE_TEXTS, type ClientStudio } from "@/shared/constants/data";
-import { useRevealInView } from "@/shared/ui/motion";
-import {
-  PROJECT_CONTENT_DELAY,
-  PROJECT_FEATURED_CARD_STEP,
-} from "@/shared/ui/motion";
 import styles from "./track-record.module.scss";
 
 interface ClientLogoCellProps {
@@ -120,15 +115,18 @@ export function TrackRecordClients({
           <p className={styles.clientsDescription}>{description}</p>
         </div>
       ) : null}
-      <div className={styles.clientRow}>
-        {clients.map((client, index) => (
-          <ClientLogoCell
-            key={client.name}
-            client={client}
-            staggerDelay={PROJECT_CONTENT_DELAY + index * PROJECT_FEATURED_CARD_STEP}
-          />
+      <ul className={styles.clientRow}>
+        {clients
+          .filter((client) => Boolean(client.logoSrc))
+          .map((client, index) => (
+          <li key={client.name}>
+            <ClientLogoCell
+              client={client}
+              staggerDelay={PROJECT_CONTENT_DELAY + index * PROJECT_FEATURED_CARD_STEP}
+            />
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
   );
 }

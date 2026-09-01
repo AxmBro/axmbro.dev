@@ -7,16 +7,39 @@
 
 .stat {
   @include stack-xs;
+  position: relative;
   align-items: center;
   justify-content: center;
   min-width: 0;
   @include connected-cell-padding;
   text-align: center;
   border-right: 1px solid var(--color-border);
-  transition: background-color 180ms ease;
+  overflow: hidden;
 
-  &:not(.empty):hover {
-    background-color: var(--surface-hover);
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0;
+    background:
+      radial-gradient(
+        ellipse 75% 65% at 50% 110%,
+        color-mix(in srgb, var(--color-accent) 16%, transparent) 0%,
+        transparent 62%
+      );
+    transition: opacity var(--motion-duration-ui) var(--motion-ease-standard);
+  }
+
+  &[data-hovered='true']::before {
+    opacity: 1;
+    animation: stat-cell-wash-pulse 1.1s ease-out;
+  }
+
+  > * {
+    position: relative;
+    z-index: 1;
   }
 
   &:nth-child(3n) {
@@ -44,7 +67,32 @@
 .value {
   @include text-display(var(--color-accent));
   display: inline-block;
-  transition: transform 180ms ease;
+}
+
+.valueColorReveal {
+  animation: stat-value-color var(--stat-color-duration, 0.5s) ease-out forwards;
+}
+
+@keyframes stat-value-color {
+  0%,
+  100% {
+    color: var(--color-accent);
+  }
+
+  45% {
+    color: color-mix(in srgb, var(--color-accent) 28%, rgb(0 229 176));
+  }
+}
+
+@keyframes stat-cell-wash-pulse {
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+
+  35% {
+    filter: brightness(1.35);
+  }
 }
 
 .label {
@@ -72,12 +120,29 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   border-top: 1px solid var(--color-border);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.clientRow > li {
+  display: flex;
+  min-width: 0;
+
+  &:nth-child(2n) .client {
+    border-right: none;
+  }
+
+  &:nth-last-child(-n + 2) .client {
+    border-bottom: none;
+  }
 }
 
 .client {
   @include link-plain;
   @include focus-ring;
   display: flex;
+  flex: 1;
   align-items: center;
   justify-content: center;
   min-height: 5rem;
@@ -87,14 +152,6 @@
   text-align: center;
   border-right: 1px solid var(--color-border);
   border-bottom: 1px solid var(--color-border);
-
-  &:nth-child(2n) {
-    border-right: none;
-  }
-
-  &:nth-last-child(-n + 2) {
-    border-bottom: none;
-  }
 
   &:hover,
   &:focus-visible {
@@ -128,18 +185,25 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
   width: 100%;
-  height: 100%;
+  max-width: 11rem;
+  height: 3rem;
+
+  @media (max-width: $breakpoint-md) {
+    max-width: 9rem;
+    height: 2.5rem;
+  }
 }
 
 .clientLogo {
+  display: block;
   width: auto;
-  height: 100%;
-  max-width: 78%;
-  max-height: 3rem;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
   object-fit: contain;
   transform: scale(1);
-  transition: transform 180ms ease;
 }
 
 .clientLogoPop {
@@ -147,13 +211,29 @@
 }
 
 .clientName {
-  @include text-caption;
-  color: var(--color-neutral-400);
+  @include text-stat-label;
+  max-width: 100%;
+  text-align: center;
+  text-decoration: underline;
+  text-decoration-color: currentColor;
+  text-underline-offset: 4px;
+  white-space: nowrap;
+
+  @media (max-width: $breakpoint-tablet) {
+    white-space: normal;
+  }
+}
+
+.client:hover .clientName,
+.client:focus-visible .clientName {
+  color: var(--color-neutral-100);
+  text-decoration-color: var(--color-neutral-100);
 }
 
 .client:hover .clientLogo,
 .client:focus-visible .clientLogo {
   transform: scale(1.06);
+  transition: transform 180ms ease;
 }
 
 @keyframes client-logo-pop {
@@ -171,10 +251,12 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .stat::before {
+    display: none;
+  }
 
-  .stat,
-  .value {
-    transition: none;
+  .valueColorReveal {
+    animation: none;
   }
 
   .clientContent {

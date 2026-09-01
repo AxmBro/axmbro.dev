@@ -1,9 +1,14 @@
 "use client";
 
-import { useRef, useState } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  type CSSProperties,
+} from "react";
 import type { TrackRecordStat } from "./lib/get-track-record-stats";
-import { useRevealInView } from "@/shared/ui/motion";
-import { AnimatedStat } from "./animated-stat";
+import { useReducedMotion, useRevealInView } from "@/shared/ui/motion";
+import { STAT_COLOR_REVEAL_MS, AnimatedStat } from "./animated-stat";
 import styles from "./track-record.module.scss";
 
 interface TrackRecordStatsProps {
@@ -26,15 +31,66 @@ function TrackRecordStatCell({
 }: TrackRecordStatCellProps) {
   const ref = useRef<HTMLDivElement>(null);
   const startWhen = useRevealInView(ref, { once: false, margin: "0px" });
+  const reduceMotion = useReducedMotion();
+  const [isHovered, setIsHovered] = useState(false);
+  const [isSweeping, setIsSweeping] = useState(false);
+  const wasActiveRef = useRef(false);
+
+  const triggerSweep = () => {
+    if (reduceMotion) return;
+
+    setIsSweeping(false);
+    requestAnimationFrame(() => setIsSweeping(true));
+  };
+
+  useEffect(() => {
+    if (!startWhen) {
+      wasActiveRef.current = false;
+      return;
+    }
+
+    if (!wasActiveRef.current) {
+      wasActiveRef.current = true;
+      triggerSweep();
+    }
+  }, [reduceMotion, startWhen]);
+
+  useEffect(() => {
+    if (replayKey > 0) triggerSweep();
+  }, [reduceMotion, replayKey]);
+
+  useEffect(() => {
+    if (!isSweeping || reduceMotion) return;
+
+    const timeoutId = window.setTimeout(() => {
+      setIsSweeping(false);
+    }, STAT_COLOR_REVEAL_MS);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [isSweeping, reduceMotion]);
+
+  const handlePointerEnter = () => {
+    onReplay();
+    setIsHovered(true);
+  };
+
+  const valueClassName = [
+    styles.value,
+    !reduceMotion && isSweeping ? styles.valueColorReveal : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   return (
     <div
       ref={ref}
       className={styles.stat}
-      onPointerEnter={onReplay}
+      data-hovered={isHovered ? "true" : "false"}
+      onPointerEnter={handlePointerEnter}
+      onPointerLeave={() => setIsHovered(false)}
     >
       <AnimatedStat
-        className={styles.value}
+        className={valueClassName}
         value={value}
         replayKey={replayKey}
         startWhen={startWhen}
@@ -58,7 +114,14 @@ export function TrackRecordStats({
   };
 
   return (
-    <div className={styles.stats}>
+    <div
+      className={styles.stats}
+      style={
+        {
+          "--stat-color-duration": `${STAT_COLOR_REVEAL_MS}ms`,
+        } as CSSProperties
+      }
+    >
       {stats.map(({ value, label }, index) => (
         <TrackRecordStatCell
           key={label}
