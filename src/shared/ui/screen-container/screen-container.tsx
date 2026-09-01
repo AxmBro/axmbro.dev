@@ -13,7 +13,7 @@ export const ScreenContainer = ({
   children,
   withGridBackdrop = true,
 }: ScreenContainerProps) => (
-  <div className={styles.screenContainer}>
+  <div className={styles.screenContainer} data-screen-container>
     {withGridBackdrop && <GridBackdrop />}
     <ScreenContent>{children}</ScreenContent>
   </div>

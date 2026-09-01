@@ -2,14 +2,21 @@
 
 import { useLayoutEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
+import {
+  clearSiteGridCellSize,
+  computeSquareCellSize,
+  publishSiteGridCellSize,
+  readPageColumnLeft,
+  readSiteGridCellSize,
+} from "@/shared/lib/grid-mesh";
 import styles from "./grid-backdrop.module.scss";
-
-const TARGET_CELL_PX = 32;
-
-const cellsFor = (span: number) => Math.max(1, Math.round(span / TARGET_CELL_PX));
 
 interface GridBackdropProps {
   variant?: "page" | "footer";
+}
+
+function readPageColumnLeftFromDom(): number | null {
+  return readPageColumnLeft();
 }
 
 export function GridBackdrop({ variant = "page" }: GridBackdropProps) {
@@ -27,24 +34,38 @@ export function GridBackdrop({ variant = "page" }: GridBackdropProps) {
     if (!column) return;
 
     const update = () => {
-      const origin = backdrop.getBoundingClientRect();
-      const bounds = column.getBoundingClientRect();
-      const spanX = bounds.width - 1;
-      const spanY =
-        variant === "footer" ? bounds.height : bounds.top - origin.top;
-      if (spanX <= 0 || spanY <= 0) return;
+      const originRect = backdrop.getBoundingClientRect();
+      const columnRect = column.getBoundingClientRect();
+      const spanX = columnRect.width - 1;
+      if (spanX <= 0) return;
 
-      const cellX = spanX / cellsFor(spanX);
-      const cellY = variant === "footer" ? cellX : spanY / cellsFor(spanY);
-      const offsetX = bounds.left - origin.left;
+      const cellSize =
+        variant === "footer"
+          ? (readSiteGridCellSize() ?? computeSquareCellSize(spanX))
+          : computeSquareCellSize(spanX);
 
-      backdrop.style.setProperty("--grid-cell-x", `${cellX}px`);
-      backdrop.style.setProperty("--grid-cell-y", `${cellY}px`);
-      backdrop.style.setProperty("--grid-offset-x", `${offsetX}px`);
-      backdrop.style.setProperty("--grid-band", `${bounds.bottom - origin.top}px`);
+      const pageColumnLeft = readPageColumnLeftFromDom();
+      const meshLeft = pageColumnLeft ?? columnRect.left;
+      const columnOffsetX = meshLeft - originRect.left;
 
-      parent.style.setProperty("--grid-cell-x", `${cellX}px`);
-      parent.style.setProperty("--grid-cell-y", `${cellY}px`);
+      backdrop.style.setProperty("--grid-cell-x", `${cellSize}px`);
+      backdrop.style.setProperty("--grid-cell-y", `${cellSize}px`);
+      backdrop.style.setProperty("--grid-offset-x", `${columnOffsetX}px`);
+
+      if (variant === "page") {
+        const band = columnRect.bottom - originRect.top;
+        if (band > 0) {
+          backdrop.style.setProperty("--grid-band", `${band}px`);
+        }
+
+        publishSiteGridCellSize(cellSize);
+        parent.style.setProperty("--grid-cell-x", `${cellSize}px`);
+        parent.style.setProperty("--grid-cell-y", `${cellSize}px`);
+        return;
+      }
+
+      parent.style.setProperty("--grid-cell-x", `${cellSize}px`);
+      parent.style.setProperty("--grid-cell-y", `${cellSize}px`);
     };
 
     update();
@@ -52,11 +73,17 @@ export function GridBackdrop({ variant = "page" }: GridBackdropProps) {
     const observer = new ResizeObserver(update);
     observer.observe(column);
     observer.observe(parent);
+    if (variant === "page") {
+      parent.querySelectorAll("section").forEach((section) => observer.observe(section));
+    }
     window.addEventListener("resize", update);
 
     return () => {
       observer.disconnect();
       window.removeEventListener("resize", update);
+      if (variant === "page") {
+        clearSiteGridCellSize();
+      }
     };
   }, [variant, pathname]);
 
@@ -64,6 +91,7 @@ export function GridBackdrop({ variant = "page" }: GridBackdropProps) {
     <div
       ref={ref}
       className={`${styles.backdrop} ${variant === "footer" ? styles.footerBand : ""}`}
+      data-grid-backdrop=""
       data-footer-grid-backdrop={variant === "footer" ? "" : undefined}
       aria-hidden
     />
