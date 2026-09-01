@@ -6,6 +6,10 @@
     color: var(--project-accent-color);
   }
 
+  &.hoverPlain.hovered {
+    color: var(--color-neutral-100);
+  }
+
   &.reveal {
     animation: project-accent-reveal 1.2s ease-in-out forwards;
     transition: none;

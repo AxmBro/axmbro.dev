@@ -25,6 +25,7 @@ interface ProjectAccentTitleProps {
   startWhen?: "inView" | "delay";
   delay?: number;
   linkActive?: boolean;
+  hoverUsesAccent?: boolean;
 }
 
 export function ProjectAccentTitle({
@@ -35,6 +36,7 @@ export function ProjectAccentTitle({
   startWhen = "inView",
   delay = 0,
   linkActive = false,
+  hoverUsesAccent = true,
 }: ProjectAccentTitleProps) {
   const titleRef = useRef<HTMLHeadingElement>(null);
   // Cards: own -12% on the heading; hero uses startWhen="delay" (mount), not this margin.
@@ -109,6 +111,7 @@ export function ProjectAccentTitle({
         className,
         isRevealing ? styles.reveal : "",
         showHovered ? styles.hovered : "",
+        !hoverUsesAccent ? styles.hoverPlain : "",
       ]
         .filter(Boolean)
         .join(" ")}
