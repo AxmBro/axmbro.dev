@@ -80,7 +80,7 @@
   }
 
   45% {
-    color: color-mix(in srgb, var(--color-accent) 28%, rgb(0 229 176));
+    color: color-mix(in srgb, var(--color-accent) 28%, var(--color-accent-secondary));
   }
 }
 

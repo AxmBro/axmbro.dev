@@ -6,7 +6,6 @@
   --grid-cell-y: 2rem;
   --grid-offset-x: 0px;
   --grid-position-y: 0;
-  --grid-line-strength: 7%;
   position: absolute;
   /* Flush with the container top. Do not use -1px: that paints the grid onto
      the announcement bar (and header) border-bottom. */
@@ -62,7 +61,7 @@
 
 .backdrop[data-grid-ignite],
 .footerBand[data-grid-ignite] {
-  animation: grid-line-ignite 1.1s ease-out;
+  @include grid-line-ignite-animation;
 }
 
 @media (prefers-reduced-motion: reduce) {

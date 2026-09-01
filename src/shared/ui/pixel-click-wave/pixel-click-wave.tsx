@@ -11,6 +11,7 @@ import {
   type PixelWaveSpawnDetail,
 } from "@/shared/lib/pixel-wave";
 import { ROUTES } from "@/shared/constants/routes";
+import { COLOR_ACCENT_SECONDARY } from "@/shared/constants/brand-colors";
 import { isReducedMotion } from "@/shared/lib/motion";
 import styles from "./pixel-click-wave.module.scss";
 
@@ -116,7 +117,6 @@ interface PixelWave {
 }
 
 const BLUE: RgbColor = { red: 0, green: 169, blue: 244 };
-const MINT: RgbColor = { red: 0, green: 229, blue: 176 };
 const WHITE: RgbColor = { red: 247, green: 247, blue: 247 };
 
 const MONO_SILVER: RgbColor = { red: 168, green: 172, blue: 182 };
@@ -142,7 +142,7 @@ const getRippleColor = (
     return colorToCss(mixColor(tinted, WHITE, whiteHeat * 0.92));
   }
 
-  return colorToCss(mixColor(mixColor(BLUE, MINT, colorMix), WHITE, whiteHeat));
+  return colorToCss(mixColor(mixColor(BLUE, COLOR_ACCENT_SECONDARY, colorMix), WHITE, whiteHeat));
 };
 
 const getWaveAlphaScale = (wave: PixelWave) => {

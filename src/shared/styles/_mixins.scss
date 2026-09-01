@@ -166,25 +166,26 @@
 // Blueprint line texture. Mask via `--grid-lines-mask` (top or bottom fade).
 // Column count is `--grid-lines-cols`.
 @keyframes grid-line-ignite {
-  0% {
-    --grid-line-strength: 7%;
+  0%,
+  100% {
+    --grid-line-strength: initial;
   }
 
   22% {
-    --grid-line-strength: 16%;
+    --grid-line-strength: var(--grid-line-strength-ignite-peak);
   }
 
   38% {
-    --grid-line-strength: 15%;
+    --grid-line-strength: var(--grid-line-strength-ignite-hold);
   }
 
   52% {
-    --grid-line-strength: 15%;
+    --grid-line-strength: var(--grid-line-strength-ignite-hold);
   }
+}
 
-  100% {
-    --grid-line-strength: 7%;
-  }
+@mixin grid-line-ignite-animation {
+  animation: grid-line-ignite var(--grid-line-ignite-duration) ease-out;
 }
 
 @mixin grid-lines {
@@ -198,7 +199,6 @@
     inset: 0;
     z-index: 1;
     pointer-events: none;
-    --grid-line-strength: 7%;
     background-image:
       linear-gradient(
         to right,

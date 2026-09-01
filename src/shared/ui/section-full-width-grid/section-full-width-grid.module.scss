@@ -5,12 +5,11 @@
   --grid-cell-y: 2rem;
   --grid-offset-x: 0px;
   --grid-offset-y: 0px;
-  --grid-line-strength: 7%;
   position: absolute;
   top: 50%;
   z-index: 1;
   transform: translateY(-50%);
-  height: calc(100% + (var(--page-section-gap) * 3));
+  height: calc(100% + (var(--page-section-gap) * 5));
   pointer-events: none;
   background-image:
     linear-gradient(
@@ -28,21 +27,19 @@
   -webkit-mask-image: linear-gradient(
     to bottom,
     transparent 0%,
-    #000 35%,
-    #000 65%,
-    transparent 100%
+    #000 50%,
+    transparent 90%
   );
   mask-image: linear-gradient(
     to bottom,
     transparent 0%,
-    #000 35%,
-    #000 65%,
-    transparent 100%
+    #000 50%,
+    transparent 90%
   );
 }
 
 .fullWidthGrid[data-grid-ignite] {
-  animation: grid-line-ignite 1.1s ease-out;
+  @include grid-line-ignite-animation;
 }
 
 @media (prefers-reduced-motion: reduce) {
