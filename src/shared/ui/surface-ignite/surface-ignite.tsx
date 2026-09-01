@@ -36,6 +36,7 @@ export function SurfaceIgniteObserver() {
 
     const intersecting = new Set<HTMLElement>();
     const pointerInside = new Set<HTMLElement>();
+    const gridIgnitedOnce = new Set<HTMLElement>();
     const igniteLockedUntil = new Map<HTMLElement, number>();
 
     const isIgniteLocked = (target: HTMLElement) =>
@@ -45,54 +46,45 @@ export function SurfaceIgniteObserver() {
       igniteLockedUntil.set(target, Date.now() + SURFACE_IGNITE_ANIMATION_MS);
     };
 
-    const canManualIgnite = (target: HTMLElement) => !isIgniteLocked(target);
+    const canManualAccentIgnite = (target: HTMLElement) =>
+      !isIgniteLocked(target);
 
-    const canAmbientIgnite = (target: HTMLElement) =>
+    const canAmbientAccentIgnite = (target: HTMLElement) =>
       !pointerInside.has(target) && !isIgniteLocked(target);
 
-    const isTopGridSection = (section: HTMLElement) =>
-      section.dataset.grid === "top";
+    const igniteGridSection = (section: HTMLElement) => {
+      if (!gridSections.has(section) || gridIgnitedOnce.has(section)) {
+        return;
+      }
 
-    const igniteSectionSurfaces = (
+      triggerSurfaceIgnite(section, "grid");
+      gridIgnitedOnce.add(section);
+    };
+
+    const igniteAccentSection = (
       section: HTMLElement,
       mode: "manual" | "ambient" = "manual",
     ) => {
+      if (!accentSections.has(section)) return;
+
       const allowed =
-        mode === "ambient" ? canAmbientIgnite(section) : canManualIgnite(section);
+        mode === "ambient"
+          ? canAmbientAccentIgnite(section)
+          : canManualAccentIgnite(section);
       if (!allowed) return;
 
-      let ignited = false;
-
-      if (
-        gridSections.has(section) &&
-        !(mode === "ambient" && isTopGridSection(section))
-      ) {
-        triggerSurfaceIgnite(section, "grid");
-        ignited = true;
-      }
-      if (accentSections.has(section)) {
-        triggerSurfaceIgnite(section, "accent");
-        ignited = true;
-      }
-
-      if (ignited) {
-        lockIgnite(section);
-      }
+      triggerSurfaceIgnite(section, "accent");
+      lockIgnite(section);
     };
 
-    const igniteFooterGrid = (
-      footer: HTMLElement,
-      mode: "manual" | "ambient" = "manual",
-    ) => {
-      const allowed =
-        mode === "ambient" ? canAmbientIgnite(footer) : canManualIgnite(footer);
-      if (!allowed) return;
+    const igniteFooterGrid = (footer: HTMLElement) => {
+      if (gridIgnitedOnce.has(footer)) return;
 
       const backdrop = getFooterGridBackdrop(footer);
       if (!backdrop) return;
 
       triggerSurfaceIgnite(backdrop, "grid");
-      lockIgnite(footer);
+      gridIgnitedOnce.add(footer);
     };
 
     const onPointerEnter = (event: PointerEvent) => {
@@ -106,13 +98,14 @@ export function SurfaceIgniteObserver() {
         return;
       }
 
-      igniteSectionSurfaces(target);
+      igniteGridSection(target);
+      igniteAccentSection(target);
     };
 
     const onPointerLeave = (event: PointerEvent) => {
-      if (event.currentTarget instanceof HTMLElement) {
-        pointerInside.delete(event.currentTarget);
-      }
+      if (!(event.currentTarget instanceof HTMLElement)) return;
+
+      pointerInside.delete(event.currentTarget);
     };
 
     const observer = new IntersectionObserver(
@@ -122,13 +115,7 @@ export function SurfaceIgniteObserver() {
 
           if (entry.isIntersecting) {
             intersecting.add(target);
-
-            if (footers.has(target)) {
-              igniteFooterGrid(target);
-              return;
-            }
-
-            igniteSectionSurfaces(target);
+            igniteAccentSection(target);
             return;
           }
 
@@ -139,11 +126,9 @@ export function SurfaceIgniteObserver() {
     );
 
     const ambientTick = () => {
-      const ambientSections = new Set([...gridSections, ...accentSections]);
-
-      ambientSections.forEach((section) => {
+      accentSections.forEach((section) => {
         if (!intersecting.has(section)) return;
-        igniteSectionSurfaces(section, "ambient");
+        igniteAccentSection(section, "ambient");
       });
     };
 
