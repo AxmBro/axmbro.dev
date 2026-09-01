@@ -8,6 +8,7 @@ interface ScreenSectionProps {
   id?: string;
   eyebrow?: ReactNode;
   title?: ReactNode;
+  titleMeta?: ReactNode;
   titleDescription?: ReactNode;
   children?: ReactNode;
   className?: string;
@@ -27,6 +28,7 @@ export const ScreenSection = ({
   id,
   eyebrow,
   title,
+  titleMeta,
   titleDescription,
   children,
   className,
@@ -56,7 +58,15 @@ export const ScreenSection = ({
           {eyebrow != null && eyebrow !== "" && (
             <SectionEyebrow>{eyebrow}</SectionEyebrow>
           )}
-          {title && <HeadingTag className={styles.title}>{title}</HeadingTag>}
+          {title &&
+            (titleMeta ? (
+              <div className={styles.titleRow}>
+                <HeadingTag className={styles.title}>{title}</HeadingTag>
+                {titleMeta}
+              </div>
+            ) : (
+              <HeadingTag className={styles.title}>{title}</HeadingTag>
+            ))}
           {titleDescription && (
             <div className={styles.description}>{titleDescription}</div>
           )}

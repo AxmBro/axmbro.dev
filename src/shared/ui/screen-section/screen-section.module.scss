@@ -44,6 +44,20 @@
   word-break: normal;
 }
 
+.titleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-xs);
+  width: 100%;
+  min-width: 0;
+
+  @media (max-width: $breakpoint-md) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
 .description {
   @include text-body;
   max-width: var(--measure-prose);
