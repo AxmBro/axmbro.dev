@@ -5,7 +5,7 @@ const CONTACT_FORM_DISCORD_KEY = "contactFormDiscord";
 const CONTACT_FORM_MESSAGE_KEY = "contactFormMessage";
 const CONTACT_FORM_INTENT_KEY = "contactFormIntent";
 
-export type ContactFormDraft = {
+type ContactFormDraft = {
   email: string;
   discord: string;
   message: string;
@@ -15,7 +15,7 @@ export type ContactFormDraft = {
 const isContactFormIntentId = (value: string) =>
   CONTACT_FORM_INTENTS.some((intent) => intent.id === value);
 
-export const getSavedContactFormDraft = (): ContactFormDraft | null => {
+const getSavedContactFormDraft = (): ContactFormDraft | null => {
   try {
     const email = sessionStorage.getItem(CONTACT_FORM_EMAIL_KEY) ?? "";
     const discord = sessionStorage.getItem(CONTACT_FORM_DISCORD_KEY) ?? "";
