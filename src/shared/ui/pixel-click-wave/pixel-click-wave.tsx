@@ -221,6 +221,33 @@ interface WaveRuntime {
 const INTRO_RETRY_LIMIT = 24;
 const INTRO_RETRY_MS = 32;
 
+// Colored intro is a once-per-session flourish. One beat per route: first time
+// a pathname is visited this session. Client nav and returning to a route skip it.
+const COLORED_INTRO_SESSION_KEY = "pixel-wave-colored-intro-paths";
+
+const getSeenColoredIntroPaths = (): string[] => {
+  try {
+    const raw = sessionStorage.getItem(COLORED_INTRO_SESSION_KEY);
+    const parsed: unknown = raw ? JSON.parse(raw) : [];
+    return Array.isArray(parsed) ? parsed.filter((path) => typeof path === "string") : [];
+  } catch {
+    return [];
+  }
+};
+
+const hasSeenColoredIntro = (pathname: string) =>
+  getSeenColoredIntroPaths().includes(pathname);
+
+const markColoredIntroSeen = (pathname: string) => {
+  try {
+    const seen = getSeenColoredIntroPaths();
+    sessionStorage.setItem(
+      COLORED_INTRO_SESSION_KEY,
+      JSON.stringify(seen.includes(pathname) ? seen : [...seen, pathname]),
+    );
+  } catch {}
+};
+
 export function PixelClickWave() {
   const aboveCanvasRef = useRef<HTMLCanvasElement>(null);
   const behindCanvasRef = useRef<HTMLCanvasElement>(null);
@@ -682,16 +709,14 @@ export function PixelClickWave() {
 
         introPathRef.current = pathname;
 
-        if (pathname === ROUTES.home) {
-          dispatchPixelWaveSpawn({
-            clipSelector,
-            palette: "default",
-          });
-          return;
-        }
+        // Colored intro: first visit to this route this session. Home also gets
+        // its monochrome hero wave on every visit (HeroWaveTimer).
+        if (hasSeenColoredIntro(pathname)) return;
 
+        markColoredIntroSeen(pathname);
         dispatchPixelWaveSpawn({
           clipSelector,
+          palette: "default",
         });
       });
     };
