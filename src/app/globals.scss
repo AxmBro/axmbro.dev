@@ -116,10 +116,11 @@
   --motion-ease-standard: cubic-bezier(0.25, 0.1, 0.25, 1);
   --motion-scale-press: 0.97;
 
-  /* Blueprint grid lines - rest strength + hover ignite (grid-line-ignite keyframes) */
+  /* Blueprint grid lines - rest strength + hover ignite.
+     Ignite peak/hold live as literal percentages in the grid-line-ignite
+     keyframes (_mixins.scss): Firefox mishandles both `initial` and `var()`
+     keyframe values for an animated registered custom property (discrete jump). */
   --grid-line-strength: 6%;
-  --grid-line-strength-ignite-peak: 13%;
-  --grid-line-strength-ignite-hold: 12%;
   --grid-line-ignite-duration: 1.1s;
 
   /* Gallery auto-advance - keep AUTO_ADVANCE_MS in project-gallery.tsx in sync (ms) */

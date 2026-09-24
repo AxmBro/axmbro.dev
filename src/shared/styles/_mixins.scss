@@ -165,22 +165,24 @@
 
 // Blueprint line texture. Mask via `--grid-lines-mask` (top or bottom fade).
 // Column count is `--grid-lines-cols`.
+// Literal percentages, not `initial` / `var()`: Firefox mishandles both in
+// keyframes of an animated registered custom property (ignite jumps).
 @keyframes grid-line-ignite {
   0%,
   100% {
-    --grid-line-strength: initial;
+    --grid-line-strength: 6%;
   }
 
   22% {
-    --grid-line-strength: var(--grid-line-strength-ignite-peak);
+    --grid-line-strength: 13%;
   }
 
   38% {
-    --grid-line-strength: var(--grid-line-strength-ignite-hold);
+    --grid-line-strength: 12%;
   }
 
   52% {
-    --grid-line-strength: var(--grid-line-strength-ignite-hold);
+    --grid-line-strength: 12%;
   }
 }
 
