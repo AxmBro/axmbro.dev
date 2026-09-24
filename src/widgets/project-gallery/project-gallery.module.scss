@@ -1,5 +1,12 @@
-@use '../../shared/styles/variables' as *;
 @use '../../shared/styles/mixins' as *;
+
+// Frame width where the nav drops to stacked rows. Must be a literal: container
+// query conditions do not resolve custom properties, so `calc(var(--spacing-*))`
+// parses but never matches. Derived from tokens by hand - frame padding 2x2rem,
+// both arrows 2x2.25rem, six gaps (--spacing-xs), ~16rem for the counter and the
+// next-photo label - and set slightly generous so the stack wins before the row
+// would overflow and flex-wrap strands the button at its natural width.
+$gallery-nav-stack-max: 25rem;
 
 .gallery {
   display: flex;
@@ -9,6 +16,9 @@
   margin-inline: var(--spacing-block);
   margin-bottom: var(--spacing-block);
   border: 1px solid var(--color-border);
+  // Layout reacts to the gallery's own width, not the viewport breakpoint,
+  // so wide side-by-side nav stays until the frame is actually too narrow.
+  container-type: inline-size;
 }
 
 .revealBlock {
@@ -95,37 +105,70 @@
 .slideLayer {
   position: absolute;
   inset: 0;
+  z-index: 1;
 
   &[data-direction='next'] {
-    animation: gallerySlideNext var(--gallery-slide-duration) var(--motion-ease-standard) both;
+    animation: gallerySlideInNext var(--gallery-slide-duration) var(--motion-ease-standard) both;
   }
 
   &[data-direction='prev'] {
-    animation: gallerySlidePrev var(--gallery-slide-duration) var(--motion-ease-standard) both;
+    animation: gallerySlideInPrev var(--gallery-slide-duration) var(--motion-ease-standard) both;
   }
 }
 
-@keyframes gallerySlideNext {
+// Outgoing slide sits under the incoming one and slides clear of the frame, so
+// the movement reads as one push instead of a cross-fade.
+.slideOutLayer {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+
+  &[data-direction='next'] {
+    animation: gallerySlideOutNext var(--gallery-slide-duration) var(--motion-ease-standard) both;
+  }
+
+  &[data-direction='prev'] {
+    animation: gallerySlideOutPrev var(--gallery-slide-duration) var(--motion-ease-standard) both;
+  }
+}
+
+@keyframes gallerySlideInNext {
   from {
-    transform: translateX(8%);
-    opacity: 0.45;
+    transform: translateX(100%);
   }
 
   to {
     transform: translateX(0);
-    opacity: 1;
   }
 }
 
-@keyframes gallerySlidePrev {
+@keyframes gallerySlideInPrev {
   from {
-    transform: translateX(-8%);
-    opacity: 0.45;
+    transform: translateX(-100%);
   }
 
   to {
     transform: translateX(0);
-    opacity: 1;
+  }
+}
+
+@keyframes gallerySlideOutNext {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes gallerySlideOutPrev {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(100%);
   }
 }
 
@@ -153,9 +196,12 @@
   }
 }
 
+// Scrim and caption sit above both slide layers (z-index 0 and 1 on the image
+// layers), otherwise the incoming image paints over the text.
 .scrim {
   position: absolute;
   inset: 0;
+  z-index: 2;
   background: linear-gradient(
     180deg,
     color-mix(in srgb, var(--color-bg-primary) 18%, transparent) 0%,
@@ -167,6 +213,7 @@
 
 .overlay {
   position: relative;
+  z-index: 3;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -179,6 +226,13 @@
   margin: 0;
   color: var(--color-neutral-400);
   text-shadow: var(--text-on-media-body-shadow);
+}
+
+// Counter appended to the existing type line on narrow frames (no new node, no
+// extra row). Hidden while the bar still shows `.projectCounter`.
+.typeCounter {
+  display: none;
+  white-space: nowrap;
 }
 
 .advanceTrack {
@@ -235,12 +289,15 @@
   }
 }
 
+// Flat bar: both arrows, the counter, then the next-photo control. The counter
+// owns the free space (`flex: 1`) and centers itself, which keeps the arrows at
+// their own edges and pins next-photo right - no wrapper or spacer element.
+// Narrow frames drop the counter and re-order next-photo into its place.
 .navBar {
   display: flex;
-  flex-wrap: nowrap;
   align-items: center;
-  justify-content: space-between;
   gap: calc(var(--spacing-xs) * 2);
+  min-width: 0;
   padding: var(--spacing-block);
   border-top: 1px solid var(--color-border);
 }
@@ -253,18 +310,6 @@
   flex-shrink: 0;
   width: 2.25rem;
   height: 2.25rem;
-}
-
-.projectNav {
-  display: flex;
-  align-items: center;
-  gap: calc(var(--spacing-xs) * 2);
-  min-width: 0;
-}
-
-.projectNavSpacer {
-  flex: 1;
-  min-width: 0;
 }
 
 .projectCounter {
@@ -281,9 +326,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 1;
-  min-width: 0;
-  max-width: 100%;
+  flex-shrink: 0;
   height: 2.25rem;
   margin-left: auto;
   padding-inline: calc(var(--spacing-xs) * 4);
@@ -302,30 +345,40 @@
   }
 }
 
-@media (max-width: $breakpoint-tablet) {
-  .navBar {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .projectNav {
-    justify-content: center;
-    width: 100%;
-  }
-
-  .projectNavSpacer {
+// Narrow frame: the counter moves onto the type line, and `order` drops
+// next-photo between the two arrows - they stay pinned to the edges by their own
+// margins. Reordering is visual only; DOM order keeps prev, next, counter, then
+// next photo.
+@container (max-width: #{$gallery-nav-stack-max}) {
+  .projectCounter {
     display: none;
   }
 
+  .typeCounter {
+    display: inline;
+  }
+
+  .navBarButton[data-direction='prev'] {
+    order: 1;
+  }
+
   .nextPhotoButton {
-    width: 100%;
+    order: 2;
+    flex: 1;
+    max-width: none;
     margin-left: 0;
-    flex-shrink: 0;
+    padding-inline: var(--spacing-xs);
+  }
+
+  .navBarButton[data-direction='next'] {
+    order: 3;
+    margin-left: auto;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .slideLayer {
+  .slideLayer,
+  .slideOutLayer {
     animation: none !important;
   }
 

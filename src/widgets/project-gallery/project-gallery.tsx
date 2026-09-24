@@ -41,6 +41,17 @@ const AUTO_ADVANCE_MS = 5000;
 
 type SlideDirection = "next" | "prev";
 
+interface SlideSnapshot {
+  src: string;
+  alt: string;
+  sizes: string;
+}
+
+interface SlideTransition extends SlideSnapshot {
+  id: number;
+  direction: SlideDirection;
+}
+
 interface ProjectGalleryProps {
   projects: GalleryProjectMeta[];
   captionHeadingLevel?: "h2" | "h3";
@@ -66,6 +77,8 @@ export function ProjectGallery({
   const [cycleKey, setCycleKey] = useState(0);
   const [loadedBySrc, setLoadedBySrc] = useState<Record<string, true>>({});
   const [slideDirection, setSlideDirection] = useState<SlideDirection>("next");
+  const [transition, setTransition] = useState<SlideTransition | null>(null);
+  const transitionIdRef = useRef(0);
   const reduceMotion = useReducedMotion();
 
   const markImageLoaded = useCallback((src: string) => {
@@ -74,7 +87,19 @@ export function ProjectGallery({
 
   const preloadImage = useCallback(
     (src: string | null | undefined) => {
-      preloadGalleryImage(src, markImageLoaded);
+      if (!src) return;
+
+      // Same sizes string the rendered <Image> computes for this image, so the
+      // optimizer URL (and therefore the cache key) matches exactly.
+      const image = Object.values(imagesByProjectRef.current)
+        .flat()
+        .find((candidate) => candidate.src === src);
+      const sizes =
+        image?.width && image?.height
+          ? getGalleryImageSizes(image.width, image.height)
+          : GALLERY_IMAGE_SIZES_FALLBACK;
+
+      preloadGalleryImage(src, sizes, markImageLoaded);
     },
     [markImageLoaded],
   );
@@ -87,15 +112,6 @@ export function ProjectGallery({
     setCycleKey((key) => key + 1);
   }, []);
 
-  const navigate = useCallback(
-    (direction: SlideDirection, update: () => void) => {
-      setSlideDirection(direction);
-      update();
-      bumpCycle();
-    },
-    [bumpCycle],
-  );
-
   const currentProject = projects[position.projectIndex];
   const currentProjectId = currentProject?.url;
   const currentImages = getProjectImages(imagesByProject, currentProjectId);
@@ -106,6 +122,26 @@ export function ProjectGallery({
       ? getGalleryImageSizes(currentImage.width, currentImage.height)
       : GALLERY_IMAGE_SIZES_FALLBACK;
   const isImageReady = Boolean(displaySrc && loadedBySrc[displaySrc]);
+
+  // Previous slide snapshot, kept only while an outgoing layer is on screen.
+  const snapshotSlide = useCallback(
+    (src: string | null | undefined, alt: string, sizes: string): SlideSnapshot | null =>
+      src ? { src, alt, sizes } : null,
+    [],
+  );
+
+  const navigate = useCallback(
+    (direction: SlideDirection, update: () => void, outgoing: SlideSnapshot | null) => {
+      setSlideDirection(direction);
+      if (outgoing && !reduceMotion) {
+        transitionIdRef.current += 1;
+        setTransition({ ...outgoing, id: transitionIdRef.current, direction });
+      }
+      update();
+      bumpCycle();
+    },
+    [bumpCycle, reduceMotion],
+  );
 
   const syncPositionAfterFetch = useCallback(
     (projectId: string, images: GalleryImage[]) => {
@@ -202,26 +238,81 @@ export function ProjectGallery({
   ]);
 
   const goNextProject = useCallback(() => {
-    navigate("next", () => {
-      setPosition((prev) => nextProjectPosition(prev, projectCount));
-    });
-  }, [navigate, projectCount]);
+    const outgoing = snapshotSlide(
+      displaySrc,
+      GALLERY_TEXTS.imageAlt(currentProject.title, position.imageIndex + 1),
+      imageSizes,
+    );
+
+    navigate(
+      "next",
+      () => {
+        setPosition((prev) => nextProjectPosition(prev, projectCount));
+      },
+      outgoing,
+    );
+  }, [
+    currentProject.title,
+    displaySrc,
+    imageSizes,
+    navigate,
+    position.imageIndex,
+    projectCount,
+    snapshotSlide,
+  ]);
 
   const goPrevProject = useCallback(() => {
-    navigate("prev", () => {
-      setPosition((prev) => prevProjectPosition(prev, projectCount));
-    });
-  }, [navigate, projectCount]);
+    const outgoing = snapshotSlide(
+      displaySrc,
+      GALLERY_TEXTS.imageAlt(currentProject.title, position.imageIndex + 1),
+      imageSizes,
+    );
+
+    navigate(
+      "prev",
+      () => {
+        setPosition((prev) => prevProjectPosition(prev, projectCount));
+      },
+      outgoing,
+    );
+  }, [
+    currentProject.title,
+    displaySrc,
+    imageSizes,
+    navigate,
+    position.imageIndex,
+    projectCount,
+    snapshotSlide,
+  ]);
 
   const goNextPhoto = useCallback(() => {
-    navigate("next", () => {
-      setPosition((prev) => {
-        const project = projects[prev.projectIndex];
-        const images = project?.url ? imagesByProject[project.url] ?? [] : [];
-        return nextPhotoInProject(prev, images.length);
-      });
-    });
-  }, [navigate, imagesByProject, projects]);
+    const outgoing = snapshotSlide(
+      displaySrc,
+      GALLERY_TEXTS.imageAlt(currentProject.title, position.imageIndex + 1),
+      imageSizes,
+    );
+
+    navigate(
+      "next",
+      () => {
+        setPosition((prev) => {
+          const project = projects[prev.projectIndex];
+          const images = project?.url ? imagesByProject[project.url] ?? [] : [];
+          return nextPhotoInProject(prev, images.length);
+        });
+      },
+      outgoing,
+    );
+  }, [
+    currentProject.title,
+    displaySrc,
+    imageSizes,
+    imagesByProject,
+    navigate,
+    position.imageIndex,
+    projects,
+    snapshotSlide,
+  ]);
 
   const handleNextPhotoClick = useCallback(
     (event: MouseEvent<HTMLButtonElement>) => {
@@ -251,6 +342,13 @@ export function ProjectGallery({
     },
     [goNextProject, goPrevProject, hasMultipleProjects],
   );
+
+  // Drop the outgoing layer once its own exit animation has played. The nested
+  // image has its own fade animation, so ignore events that bubble from it.
+  const handleSlideEnd = useCallback((event: React.AnimationEvent<HTMLDivElement>) => {
+    if (event.target !== event.currentTarget) return;
+    setTransition(null);
+  }, []);
 
   if (projectCount === 0 || !currentProject) return null;
 
@@ -296,6 +394,26 @@ export function ProjectGallery({
               </span>
               <Link href={projectDetailHref} className={styles.mediaLink}>
                 <div className={styles.placeholder} aria-hidden />
+                {/* Outgoing slide: slides away while the incoming one slides in. */}
+                {transition && !reduceMotion ? (
+                  <div
+                    key={`out-${transition.id}`}
+                    className={styles.slideOutLayer}
+                    data-direction={transition.direction}
+                    onAnimationEnd={handleSlideEnd}
+                    aria-hidden
+                  >
+                    <Image
+                      src={transition.src}
+                      alt=""
+                      fill
+                      className={styles.image}
+                      data-loaded="true"
+                      sizes={transition.sizes}
+                      quality={GALLERY_IMAGE_QUALITY}
+                    />
+                  </div>
+                ) : null}
                 {displaySrc ? (
                   <div
                     key={slideKey}
@@ -325,7 +443,6 @@ export function ProjectGallery({
                 <div className={styles.overlay}>
                   <div className={styles.caption}>
                     <ProjectAccentTitle
-                      key={currentProject.url}
                       as={captionHeadingLevel}
                       accentColor={projectAccentColor}
                       className={styles.captionTitle}
@@ -336,6 +453,17 @@ export function ProjectGallery({
                     {currentProject.type ? (
                       <p className={styles.typeLabel}>
                         {GALLERY_TEXTS.typeLabel[currentProject.type]}
+                        {showProjectNav ? (
+                          <>
+                            {" "}
+                            <span className={styles.typeCounter}>
+                              {GALLERY_TEXTS.projectCounterCompact(
+                                position.projectIndex + 1,
+                                projectCount,
+                              )}
+                            </span>
+                          </>
+                        ) : null}
                       </p>
                     ) : null}
                   </div>
@@ -355,7 +483,7 @@ export function ProjectGallery({
         <RevealItem className={styles.revealBlock}>
           <div className={styles.navBar}>
             {showProjectNav ? (
-              <div className={styles.projectNav}>
+              <>
                 <button
                   type="button"
                   className={styles.navBarButton}
@@ -375,10 +503,8 @@ export function ProjectGallery({
                 >
                   <FaChevronRight size={12} aria-hidden />
                 </button>
-              </div>
-            ) : (
-              <div className={styles.projectNavSpacer} aria-hidden />
-            )}
+              </>
+            ) : null}
             {reserveNextPhotoSlot ? (
               <button
                 type="button"

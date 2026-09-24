@@ -224,6 +224,7 @@ export const GALLERY_TEXTS = {
     personal: "Personal Project",
   },
   projectCounter: (current: number, total: number) => `Project ${current}/${total}`,
+  projectCounterCompact: (current: number, total: number) => `(${current}/${total})`,
   slideStatus: (title: string, photo: number, photoTotal: number) =>
     `${title}, photo ${photo} of ${photoTotal}`,
   imageAlt: (title: string, imageNumber: number) =>

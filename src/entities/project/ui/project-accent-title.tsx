@@ -99,7 +99,8 @@ export function ProjectAccentTitle({
   const showHovered = linkActive && !isRevealing;
 
   const handleAnimationEnd = (event: AnimationEvent<HTMLHeadingElement>) => {
-    if (event.animationName !== "project-accent-reveal") return;
+    // CSS Modules prefixes the authored keyframe name, so match on the suffix.
+    if (!event.animationName.endsWith("project-accent-reveal")) return;
     setIsRevealing(false);
   };
 
