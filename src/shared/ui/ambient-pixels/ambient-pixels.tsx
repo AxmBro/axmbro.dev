@@ -9,14 +9,15 @@ const FADE_OUT_PX = 140;
 const MIN_PIXEL_SIZE = 4;
 const MAX_PIXEL_SIZE = 12;
 const PIXEL_SIZE_SKEW = 1.6;
-const DEATH_FADE_MS = 900;
-const MIN_LIFESPAN_MS = 2_000;
 const MIN_SPEED_PX_PER_S = 14;
-const MAX_SPEED_PX_PER_S = 20;
-const MAX_PARTICLES = 20;
+const MAX_SPEED_PX_PER_S = 22;
+const MIN_OPACITY = 0.16;
+const MAX_OPACITY = 0.42;
+const PARTICLES_PER_AREA = 40_000;
 const MIN_PARTICLES = 15;
+const MAX_PARTICLES = 25;
 const MAX_FRAME_DELTA_MS = 48;
-const WHITE = { red: 247, green: 247, blue: 247 };
+const WHITE = "247 247 247";
 
 interface Particle {
   x: number;
@@ -24,10 +25,20 @@ interface Particle {
   size: number;
   speed: number;
   opacity: number;
-  ageMs: number;
-  lifespanMs: number;
-  dyingMs: number;
 }
+
+const randomBetween = (min: number, max: number) =>
+  min + Math.random() * (max - min);
+
+const randomSize = () => {
+  const t = 1 - Math.random() ** PIXEL_SIZE_SKEW;
+  return Math.round(MIN_PIXEL_SIZE + t * (MAX_PIXEL_SIZE - MIN_PIXEL_SIZE));
+};
+
+const randomSpeed = () =>
+  randomBetween(MIN_SPEED_PX_PER_S, MAX_SPEED_PX_PER_S);
+
+const randomOpacity = () => randomBetween(MIN_OPACITY, MAX_OPACITY);
 
 const getHeaderBottom = () => {
   const raw = getComputedStyle(document.documentElement)
@@ -37,117 +48,20 @@ const getHeaderBottom = () => {
   return Number.isFinite(parsed) ? parsed : 64;
 };
 
+// Fade in just above the bottom edge, fade out just below the header - the
+// only place particles vanish is the top, so the field reads as one upward drift.
 const edgeAlpha = (y: number, height: number, headerBottom: number) => {
-  const rise = height - y;
-  const fadeIn = rise < FADE_IN_PX ? Math.max(0, rise / FADE_IN_PX) : 1;
-  const fadeOut =
-    y < headerBottom + FADE_OUT_PX
-      ? Math.max(0, (y - headerBottom) / FADE_OUT_PX)
-      : 1;
+  const riseFromBottom = (height - y) / FADE_IN_PX;
+  const fadeIn = riseFromBottom < 1 ? Math.max(0, riseFromBottom) : 1;
+  const underHeader = (y - headerBottom) / FADE_OUT_PX;
+  const fadeOut = underHeader < 1 ? Math.max(0, underHeader) : 1;
 
   return Math.min(fadeIn, fadeOut);
 };
 
-const randomSpeed = () =>
-  MIN_SPEED_PX_PER_S + Math.random() * (MAX_SPEED_PX_PER_S - MIN_SPEED_PX_PER_S);
-
-const randomOpacity = () => 0.18 + Math.random() * 0.28;
-
-const randomSize = () => {
-  const t = 1 - Math.random() ** PIXEL_SIZE_SKEW;
-  return Math.round(
-    MIN_PIXEL_SIZE + t * (MAX_PIXEL_SIZE - MIN_PIXEL_SIZE),
-  );
-};
-
-const lifespanFor = (
-  height: number,
-  headerBottom: number,
-  speed: number,
-  spawnY: number,
-) => {
-  const travelPx = Math.max(1, spawnY - headerBottom + FADE_IN_PX);
-  const fullTravelMs = (travelPx / speed) * 1000;
-  const extraMs = Math.random() ** 0.42 * fullTravelMs * 1.4;
-  return Math.max(MIN_LIFESPAN_MS, fullTravelMs * 1.05 + extraMs);
-};
-
-const randomX = (width: number, size: number) =>
-  Math.random() * Math.max(1, width - size);
-
-const spawnParticle = (
-  width: number,
-  height: number,
-  headerBottom: number,
-  options: { staggerAge?: boolean; fromBelow?: boolean } = {},
-): Particle => {
-  const size = randomSize();
-  const speed = randomSpeed();
-  const fromBelow = options.fromBelow ?? false;
-  const playableTop = headerBottom - size;
-  const playableBottom = height - size;
-
-  let y: number;
-  if (fromBelow) {
-    y = height + Math.random() * (FADE_IN_PX + 72);
-  } else {
-    y =
-      playableTop +
-      Math.random() * Math.max(1, playableBottom - playableTop);
-  }
-
-  const lifespanMs = lifespanFor(
-    height,
-    headerBottom,
-    speed,
-    Math.min(y, playableBottom),
-  );
-  const ageMs = options.staggerAge ? Math.random() * lifespanMs : 0;
-
-  if (ageMs > 0) {
-    y -= (speed * ageMs) / 1000;
-  }
-
-  y = Math.max(playableTop - size, Math.min(height + FADE_IN_PX, y));
-
-  return {
-    x: randomX(width, size),
-    y,
-    size,
-    speed,
-    opacity: randomOpacity(),
-    ageMs,
-    lifespanMs,
-    dyingMs: 0,
-  };
-};
-
 const targetParticleCount = (width: number, height: number) => {
-  const area = width * height;
-  const scaled = Math.round(area / 93_000);
+  const scaled = Math.round((width * height) / PARTICLES_PER_AREA);
   return Math.min(MAX_PARTICLES, Math.max(MIN_PARTICLES, scaled));
-};
-
-const seedParticles = (
-  width: number,
-  height: number,
-  headerBottom: number,
-  count: number,
-) =>
-  Array.from({ length: count }, () =>
-    spawnParticle(width, height, headerBottom, { staggerAge: true }),
-  );
-
-const respawnParticle = (
-  particle: Particle,
-  width: number,
-  height: number,
-  headerBottom: number,
-) => {
-  Object.assign(
-    particle,
-    spawnParticle(width, height, headerBottom, { fromBelow: true }),
-  );
 };
 
 export function AmbientPixels() {
@@ -163,10 +77,39 @@ export function AmbientPixels() {
     const reducedMotion = isReducedMotion();
     let width = 0;
     let height = 0;
+    let headerBottom = getHeaderBottom();
     let particles: Particle[] = [];
     let animationFrameId = 0;
     let lastTimestamp = 0;
-    let headerBottom = getHeaderBottom();
+
+    // Resets a particle in place. `spread` seeds it somewhere in the visible
+    // column (full field on first paint); otherwise it enters from below.
+    const resetParticle = (particle: Particle, spread: boolean) => {
+      particle.size = randomSize();
+      particle.speed = randomSpeed();
+      particle.opacity = randomOpacity();
+      particle.x = Math.random() * Math.max(1, width - particle.size);
+
+      if (spread) {
+        const top = headerBottom + particle.size;
+        const bottom = height - particle.size;
+        particle.y = top + Math.random() * Math.max(1, bottom - top);
+      } else {
+        particle.y = height + Math.random() * FADE_IN_PX;
+      }
+    };
+
+    const createParticle = (spread: boolean): Particle => {
+      const particle: Particle = {
+        x: 0,
+        y: 0,
+        size: MIN_PIXEL_SIZE,
+        speed: MIN_SPEED_PX_PER_S,
+        opacity: MIN_OPACITY,
+      };
+      resetParticle(particle, spread);
+      return particle;
+    };
 
     const resize = () => {
       const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
@@ -183,76 +126,49 @@ export function AmbientPixels() {
       const nextCount = targetParticleCount(width, height);
 
       if (particles.length === 0) {
-        particles = seedParticles(width, height, headerBottom, nextCount);
+        particles = Array.from({ length: nextCount }, () => createParticle(true));
         return;
       }
 
       if (particles.length > nextCount) {
         particles.length = nextCount;
-      } else if (particles.length < nextCount) {
-        const start = particles.length;
-        for (let index = start; index < nextCount; index += 1) {
-          particles.push(
-            spawnParticle(width, height, headerBottom, { staggerAge: true }),
-          );
+      } else {
+        for (let index = particles.length; index < nextCount; index += 1) {
+          particles.push(createParticle(true));
         }
       }
 
       for (const particle of particles) {
         particle.x = Math.min(particle.x, Math.max(0, width - particle.size));
-        particle.y = Math.min(
-          particle.y,
-          Math.max(0, height - particle.size),
-        );
       }
     };
 
     const handleVisibilityChange = () => {
-      if (document.visibilityState === "visible") {
-        lastTimestamp = 0;
-      }
+      // Drop the stale timestamp so the next frame uses a small delta instead of
+      // launching particles across the screen after a backgrounded tab.
+      if (document.visibilityState === "visible") lastTimestamp = 0;
     };
 
     const draw = (timestamp: number) => {
-      const rawDeltaMs = lastTimestamp ? timestamp - lastTimestamp : 16;
-      const deltaMs = Math.min(rawDeltaMs, MAX_FRAME_DELTA_MS);
+      const elapsed = lastTimestamp ? timestamp - lastTimestamp : 16;
       lastTimestamp = timestamp;
+      const deltaMs = Math.min(elapsed, MAX_FRAME_DELTA_MS);
 
       context.clearRect(0, 0, width, height);
-      headerBottom = getHeaderBottom();
 
       for (const particle of particles) {
         if (!reducedMotion) {
-          particle.ageMs += deltaMs;
           particle.y -= (particle.speed * deltaMs) / 1000;
 
-          const reachedTop = particle.y < headerBottom - particle.size;
-          const lifespanOver = particle.ageMs >= particle.lifespanMs;
-
-          if (particle.dyingMs === 0 && (reachedTop || lifespanOver)) {
-            particle.dyingMs = 1;
-          }
-
-          if (particle.dyingMs > 0) {
-            particle.dyingMs += deltaMs;
-            if (particle.dyingMs >= DEATH_FADE_MS) {
-              respawnParticle(particle, width, height, headerBottom);
-            }
+          if (particle.y < headerBottom - particle.size) {
+            resetParticle(particle, false);
           }
         }
 
-        const deathFade =
-          particle.dyingMs > 0
-            ? Math.max(0, 1 - particle.dyingMs / DEATH_FADE_MS)
-            : 1;
-        const alpha =
-          edgeAlpha(particle.y, height, headerBottom) *
-          particle.opacity *
-          deathFade;
-
+        const alpha = edgeAlpha(particle.y, height, headerBottom) * particle.opacity;
         if (alpha <= 0.02) continue;
 
-        context.fillStyle = `rgba(${WHITE.red} ${WHITE.green} ${WHITE.blue} / ${alpha})`;
+        context.fillStyle = `rgba(${WHITE} / ${alpha})`;
         context.fillRect(particle.x, particle.y, particle.size, particle.size);
       }
 
