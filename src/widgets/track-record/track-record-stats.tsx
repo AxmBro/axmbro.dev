@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  useCallback,
   useEffect,
   useRef,
   useState,
@@ -36,12 +37,12 @@ function TrackRecordStatCell({
   const [isSweeping, setIsSweeping] = useState(false);
   const wasActiveRef = useRef(false);
 
-  const triggerSweep = () => {
+  const triggerSweep = useCallback(() => {
     if (reduceMotion) return;
 
     setIsSweeping(false);
     requestAnimationFrame(() => setIsSweeping(true));
-  };
+  }, [reduceMotion]);
 
   useEffect(() => {
     if (!startWhen) {
@@ -53,11 +54,15 @@ function TrackRecordStatCell({
       wasActiveRef.current = true;
       triggerSweep();
     }
-  }, [reduceMotion, startWhen]);
+  }, [startWhen, triggerSweep]);
 
   useEffect(() => {
-    if (replayKey > 0) triggerSweep();
-  }, [reduceMotion, replayKey]);
+    if (replayKey > 0) {
+      // Defer past the effect body: the rAF reset-then-set needs a frame between writes.
+      const frame = requestAnimationFrame(triggerSweep);
+      return () => cancelAnimationFrame(frame);
+    }
+  }, [reduceMotion, replayKey, triggerSweep]);
 
   useEffect(() => {
     if (!isSweeping || reduceMotion) return;
