@@ -29,7 +29,7 @@ export const ImageSection = ({ title, sectionDescription, items, rowStyle, proje
     >
       <ul className={rowStyle ? styles.gridList : styles.stackList}>
         {items.map((item, index) => (
-          <li key={index} className={styles.item}>
+          <li key={index} className={styles.item} data-image-section-item>
             {item.imageSrc && (
               <div className={styles.imgWrapper}>
                 <Image

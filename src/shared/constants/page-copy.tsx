@@ -243,6 +243,11 @@ export const PROJECT_PAGE_TEXTS = {
     title: "Coming soon",
     description: "Full project showcase coming soon.",
   },
+  imageSection: {
+    stepCounter: (current: number, total: number) => `${current}/${total}`,
+    stepPosition: (current: number, total: number) =>
+      `Item ${current} of ${total}`,
+  },
 } as const;
 
 export const CONTACT_FORM_TEXTS = {
