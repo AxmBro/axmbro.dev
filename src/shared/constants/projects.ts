@@ -215,18 +215,6 @@ export const PROJECTS: ProjectItem[] = [
   },
 ];
 
-const HOME_SELECTED_PROJECT_URLS = [
-  "better_bedrock",
-  "one_slime_block_adventure",
-  "ra_survival",
-  "zeqa_ui",
-];
-
-export const getHomeSelectedProjects = () =>
-  HOME_SELECTED_PROJECT_URLS.map((url) =>
-    PROJECTS.find((p) => p.url === url),
-  ).filter((p): p is ProjectItem => Boolean(p));
-
 export function getFeaturedProjects(): ProjectItem[] {
   return PROJECTS.filter((project) => Boolean(project.star));
 }

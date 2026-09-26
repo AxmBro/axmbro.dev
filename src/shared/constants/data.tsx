@@ -14,7 +14,6 @@ export type {
 export {
   CAREER_START_DATE,
   PROJECTS,
-  getHomeSelectedProjects,
   getFeaturedProjects,
   getProjectTypeLabel,
 } from "./projects";
