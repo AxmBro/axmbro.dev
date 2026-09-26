@@ -73,6 +73,8 @@ export function buildProjectPageSections(
       tocItems.push({
         id,
         label: section.title.trim() || `Section ${i + 1}`,
+        // Long showcase sections report "6/24" in the sticky bar.
+        itemCount: section.items.length,
       });
       return id;
     }) ?? [];

@@ -142,3 +142,24 @@
     color: var(--color-neutral-100);
   }
 }
+
+// Position inside a long showcase section ("6/24"), next to the active tab
+// label. Muted and tabular so it reads as chrome, not a second title.
+.linkCounter {
+  @include text-body-sm;
+  margin-left: var(--spacing-xs);
+  color: var(--color-neutral-400);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.linkCounterSrOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}

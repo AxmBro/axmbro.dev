@@ -2,8 +2,11 @@
 
 import { useEffect, useRef, useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
+import { PROJECT_PAGE_TEXTS } from "@/shared/constants/data";
+import { resolveCssLengthPx } from "@/shared/lib/sticky-scroll-offset";
 import { HashLink } from "@/shared/ui/hash-link";
 import type { ProjectTocItem } from "./types";
+import { useSectionItemPosition } from "./lib/use-section-item-position";
 import styles from "./project-toc.module.scss";
 
 interface ProjectTocProps {
@@ -17,25 +20,6 @@ const SETTLE_MS = 120;
 
 function clamp(n: number, min: number, max: number) {
   return Math.min(max, Math.max(min, n));
-}
-
-function resolveCssLengthPx(varName: string): number {
-  const raw = getComputedStyle(document.documentElement)
-    .getPropertyValue(varName)
-    .trim();
-  if (!raw) return 0;
-
-  if (raw.endsWith("px")) {
-    const px = Number.parseFloat(raw);
-    return Number.isFinite(px) ? px : 0;
-  }
-
-  const probe = document.createElement("div");
-  probe.style.cssText = `position:absolute;visibility:hidden;pointer-events:none;height:var(${varName});`;
-  document.documentElement.appendChild(probe);
-  const px = probe.offsetHeight;
-  probe.remove();
-  return px;
 }
 
 function isPageAtBottom() {
@@ -66,6 +50,41 @@ function scrollChildIntoViewX(root: HTMLElement, child: HTMLElement) {
     left: clamp(root.scrollLeft + (childCenter - rootCenter), 0, max),
     behavior: "smooth",
   });
+}
+
+// One tab plus its "6/24" position counter. Own component so the scroll spy
+// hook stays per item instead of running in the parent's map.
+function TocLink({
+  item,
+  isActive,
+  onSelect,
+}: {
+  item: ProjectTocItem;
+  isActive: boolean;
+  onSelect: (id: string) => void;
+}) {
+  const itemCount = item.itemCount ?? 0;
+  const position = useSectionItemPosition(isActive ? item.id : null, itemCount);
+
+  return (
+    <HashLink
+      href={`#${item.id}`}
+      className={`${styles.link}${isActive ? ` ${styles.linkActive}` : ""}`}
+      onClick={() => onSelect(item.id)}
+    >
+      {item.label}
+      {position > 0 && (
+        <>
+          <span className={styles.linkCounter} aria-hidden>
+            {PROJECT_PAGE_TEXTS.imageSection.stepCounter(position, itemCount)}
+          </span>
+          <span className={styles.linkCounterSrOnly}>
+            {`, ${PROJECT_PAGE_TEXTS.imageSection.stepPosition(position, itemCount)}`}
+          </span>
+        </>
+      )}
+    </HashLink>
+  );
 }
 
 export const ProjectToc = ({ items }: ProjectTocProps) => {
@@ -258,13 +277,11 @@ export const ProjectToc = ({ items }: ProjectTocProps) => {
           <ul ref={linksRef} className={styles.links}>
             {items.map((item) => (
               <li key={item.id}>
-                <HashLink
-                  href={`#${item.id}`}
-                  className={`${styles.link}${activeId === item.id ? ` ${styles.linkActive}` : ""}`}
-                  onClick={() => lockClick(item.id)}
-                >
-                  {item.label}
-                </HashLink>
+                <TocLink
+                  item={item}
+                  isActive={activeId === item.id}
+                  onSelect={lockClick}
+                />
               </li>
             ))}
           </ul>
