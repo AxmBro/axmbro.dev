@@ -9,6 +9,7 @@ import {
 } from "@/shared/lib/contact-form-draft";
 import { sendEmailAction } from "./api/send-email";
 import { CONTACT_FORM_INTENTS, CONTACT_FORM_TEXTS } from "@/shared/constants/data";
+import { CONTACT_FORM_LIMITS, CONTACT_EMAIL_REGEX } from "@/shared/constants/contact-form-limits";
 import styles from "./contact-form.module.scss";
 
 const SUCCESS_STATUS_RESET_MS = 15000;
@@ -45,8 +46,6 @@ const applyIntentTemplate = (currentMessage: string, template: string) => {
   return template;
 };
 
-const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
 type ContactFormField = "email" | "message";
 
 type ContactFormValidation = {
@@ -56,17 +55,34 @@ type ContactFormValidation = {
 
 const getFormValidation = (email: string, message: string): ContactFormValidation | null => {
   const invalidFields: ContactFormField[] = [];
+  const cleanEmail = email.trim();
 
-  if (!emailRegex.test(email.trim())) {
+  if (
+    cleanEmail.length === 0 ||
+    cleanEmail.length > CONTACT_FORM_LIMITS.email ||
+    !CONTACT_EMAIL_REGEX.test(cleanEmail)
+  ) {
     invalidFields.push("email");
   }
 
-  if (message.trim() === "" || isMessageOnlyPreset(message)) {
+  const isMessageTooLong = message.length > CONTACT_FORM_LIMITS.message;
+  if (
+    message.trim() === "" ||
+    isMessageTooLong ||
+    isMessageOnlyPreset(message)
+  ) {
     invalidFields.push("message");
   }
 
   if (invalidFields.length === 0) {
     return null;
+  }
+
+  if (isMessageTooLong) {
+    return {
+      hint: CONTACT_FORM_TEXTS.validation.messageTooLong,
+      fields: invalidFields,
+    };
   }
 
   if (invalidFields.includes("email")) {
@@ -152,7 +168,9 @@ export const ContactForm = () => {
         setErrorMessage(
           response.reason === "unavailable"
             ? CONTACT_FORM_TEXTS.errorUnavailable
-            : CONTACT_FORM_TEXTS.error,
+            : response.reason === "rate_limited"
+              ? CONTACT_FORM_TEXTS.errorTooMany
+              : CONTACT_FORM_TEXTS.error,
         );
         setStatus("error");
 
@@ -160,8 +178,7 @@ export const ContactForm = () => {
           setStatus("idle");
         }, ERROR_STATUS_RESET_MS);
       }
-    } catch (error) {
-      console.error(error);
+    } catch {
       setErrorMessage(CONTACT_FORM_TEXTS.error);
       setStatus("error");
 
@@ -242,6 +259,7 @@ export const ContactForm = () => {
               type="email"
               name="email"
               autoComplete="email"
+              maxLength={CONTACT_FORM_LIMITS.email}
               placeholder={CONTACT_FORM_TEXTS.emailPlaceholder}
               value={email}
               onChange={handleEmailChange}
@@ -259,6 +277,7 @@ export const ContactForm = () => {
               type="text"
               name="discord"
               autoComplete="off"
+              maxLength={CONTACT_FORM_LIMITS.discord}
               placeholder={CONTACT_FORM_TEXTS.discordPlaceholder}
               value={discord}
               onChange={handleDiscordChange}
@@ -288,6 +307,7 @@ export const ContactForm = () => {
           id="contact-message"
           className={styles.textarea}
           name="message"
+          maxLength={CONTACT_FORM_LIMITS.message}
           placeholder={CONTACT_FORM_TEXTS.messagePlaceholder}
           value={message}
           onChange={handleMessageChange}
