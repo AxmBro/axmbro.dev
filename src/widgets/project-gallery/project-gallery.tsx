@@ -3,6 +3,7 @@
 import {
   useCallback,
   useEffect,
+  useMemo,
   useRef,
   useState,
   type KeyboardEvent,
@@ -43,7 +44,6 @@ type SlideDirection = "next" | "prev";
 
 interface SlideSnapshot {
   src: string;
-  alt: string;
   sizes: string;
 }
 
@@ -123,11 +123,12 @@ export function ProjectGallery({
       : GALLERY_IMAGE_SIZES_FALLBACK;
   const isImageReady = Boolean(displaySrc && loadedBySrc[displaySrc]);
 
-  // Previous slide snapshot, kept only while an outgoing layer is on screen.
-  const snapshotSlide = useCallback(
-    (src: string | null | undefined, alt: string, sizes: string): SlideSnapshot | null =>
-      src ? { src, alt, sizes } : null,
-    [],
+  // Snapshot of the slide leaving the frame, held only while its outgoing layer
+  // is on screen. Shared by the nav handlers and the auto-advance timer so every
+  // position change gets the same push transition.
+  const outgoingSnapshot = useMemo<SlideSnapshot | null>(
+    () => (displaySrc ? { src: displaySrc, sizes: imageSizes } : null),
+    [displaySrc, imageSizes],
   );
 
   const navigate = useCallback(
@@ -192,18 +193,28 @@ export function ProjectGallery({
     if (reduceMotion || projectCount === 0) return;
 
     const timer = window.setTimeout(() => {
-      setSlideDirection("next");
-      setPosition((prev) => {
-        const project = projects[prev.projectIndex];
-        const images = project?.url ? imagesByProjectRef.current[project.url] ?? [] : [];
-        // Thumbnail fallback counts as one slide until the API response arrives.
-        const imageCount = images.length > 0 ? images.length : 1;
-        return advanceImagePosition(prev, projectCount, imageCount);
-      });
+      navigate("next", () => {
+        setPosition((prev) => {
+          const project = projects[prev.projectIndex];
+          const images = project?.url ? imagesByProjectRef.current[project.url] ?? [] : [];
+          // Thumbnail fallback counts as one slide until the API response arrives.
+          const imageCount = images.length > 0 ? images.length : 1;
+          return advanceImagePosition(prev, projectCount, imageCount);
+        });
+      }, outgoingSnapshot);
     }, AUTO_ADVANCE_MS);
 
     return () => window.clearTimeout(timer);
-  }, [cycleKey, position.imageIndex, position.projectIndex, projectCount, projects, reduceMotion]);
+  }, [
+    cycleKey,
+    navigate,
+    outgoingSnapshot,
+    position.imageIndex,
+    position.projectIndex,
+    projectCount,
+    projects,
+    reduceMotion,
+  ]);
 
   useEffect(() => {
     if (!currentProjectId) return;
@@ -238,60 +249,26 @@ export function ProjectGallery({
   ]);
 
   const goNextProject = useCallback(() => {
-    const outgoing = snapshotSlide(
-      displaySrc,
-      GALLERY_TEXTS.imageAlt(currentProject.title, position.imageIndex + 1),
-      imageSizes,
-    );
-
     navigate(
       "next",
       () => {
         setPosition((prev) => nextProjectPosition(prev, projectCount));
       },
-      outgoing,
+      outgoingSnapshot,
     );
-  }, [
-    currentProject.title,
-    displaySrc,
-    imageSizes,
-    navigate,
-    position.imageIndex,
-    projectCount,
-    snapshotSlide,
-  ]);
+  }, [navigate, outgoingSnapshot, projectCount]);
 
   const goPrevProject = useCallback(() => {
-    const outgoing = snapshotSlide(
-      displaySrc,
-      GALLERY_TEXTS.imageAlt(currentProject.title, position.imageIndex + 1),
-      imageSizes,
-    );
-
     navigate(
       "prev",
       () => {
         setPosition((prev) => prevProjectPosition(prev, projectCount));
       },
-      outgoing,
+      outgoingSnapshot,
     );
-  }, [
-    currentProject.title,
-    displaySrc,
-    imageSizes,
-    navigate,
-    position.imageIndex,
-    projectCount,
-    snapshotSlide,
-  ]);
+  }, [navigate, outgoingSnapshot, projectCount]);
 
   const goNextPhoto = useCallback(() => {
-    const outgoing = snapshotSlide(
-      displaySrc,
-      GALLERY_TEXTS.imageAlt(currentProject.title, position.imageIndex + 1),
-      imageSizes,
-    );
-
     navigate(
       "next",
       () => {
@@ -301,17 +278,13 @@ export function ProjectGallery({
           return nextPhotoInProject(prev, images.length);
         });
       },
-      outgoing,
+      outgoingSnapshot,
     );
   }, [
-    currentProject.title,
-    displaySrc,
-    imageSizes,
     imagesByProject,
     navigate,
-    position.imageIndex,
+    outgoingSnapshot,
     projects,
-    snapshotSlide,
   ]);
 
   const handleNextPhotoClick = useCallback(

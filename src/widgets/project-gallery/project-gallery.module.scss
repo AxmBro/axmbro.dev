@@ -358,6 +358,9 @@ $gallery-nav-stack-max: 25rem;
     display: inline;
   }
 
+  // DOM order is prev, next, counter, next photo. Every element that stays
+  // visible needs an explicit order, otherwise the hidden counter (order 0)
+  // would jump back in front of the arrows if it is ever shown again.
   .navBarButton[data-direction='prev'] {
     order: 1;
   }
@@ -370,8 +373,12 @@ $gallery-nav-stack-max: 25rem;
     padding-inline: var(--spacing-xs);
   }
 
-  .navBarButton[data-direction='next'] {
+  .projectCounter {
     order: 3;
+  }
+
+  .navBarButton[data-direction='next'] {
+    order: 4;
     margin-left: auto;
   }
 }
