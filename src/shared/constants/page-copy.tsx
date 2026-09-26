@@ -9,6 +9,7 @@ import {
   SECTION_IDS,
 } from "./anchors";
 import { projectDetailPath, ROUTES } from "./routes";
+import { CONTACT_FORM_LIMITS } from "./contact-form-limits";
 import type {
   ClientStudio,
   ExperienceItem,
@@ -264,10 +265,13 @@ export const CONTACT_FORM_TEXTS = {
   error: "Could not send. Try again or use email.",
   errorUnavailable:
     "The contact form is temporarily unavailable. Email axmbro@gmail.com directly.",
+  errorTooMany:
+    "Too many messages from your connection. Please email axmbro@gmail.com directly.",
   validation: {
     email: "Enter a valid email address.",
     emptyMessage: "Write your message.",
     presetOnly: "Add your details below the preset line.",
+    messageTooLong: `Keep the message under ${CONTACT_FORM_LIMITS.message} characters.`,
   },
 } as const;
 

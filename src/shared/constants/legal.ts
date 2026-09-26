@@ -3,7 +3,7 @@ export interface LegalItem {
   text: string;
 }
 
-export const PRIVACY_POLICY_LAST_UPDATED = "30.08.2026";
+export const PRIVACY_POLICY_LAST_UPDATED = "26.09.2026";
 
 export const PRIVACY_POLICY_ITEMS: LegalItem[] = [
   {
@@ -12,7 +12,7 @@ export const PRIVACY_POLICY_ITEMS: LegalItem[] = [
   },
   {
     title: "What we process and why",
-    text: "Contact form: your email, optional Discord username, and message - used only to read and reply (consent when you send, GDPR Art. 6(1)(a)). Providing this is voluntary, but an email is required to respond. Analytics: basic traffic via Vercel Analytics; Google Analytics 4 only if you accept cookies in the banner. Legal basis for analytics: consent where required, otherwise legitimate interest in running the site (Art. 6(1)(f)). The site is hosted on Vercel; messages go to our inbox via SMTP. Some providers may process data outside the EU/EEA with appropriate safeguards. Data is not sold. Messages are kept only as long as needed for the conversation or until you ask for deletion.",
+    text: "Contact form: your email, optional Discord username, and message - used only to read and reply (consent when you send, GDPR Art. 6(1)(a)). Providing this is voluntary, but an email is required to respond. Submissions are limited per connection to reduce spam, and your IP address is processed briefly for that limit only. Analytics: basic traffic via Vercel Analytics; Google Analytics 4 only if you accept cookies in the banner. Legal basis for analytics: consent where required, otherwise legitimate interest in running the site (Art. 6(1)(f)). The site is hosted on Vercel; messages go to our inbox via SMTP. Some providers may process data outside the EU/EEA with appropriate safeguards. Data is not sold. Messages are kept only as long as needed for the conversation or until you ask for deletion.",
   },
   {
     title: "Your rights",
