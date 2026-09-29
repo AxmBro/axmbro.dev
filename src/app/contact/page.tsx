@@ -8,6 +8,7 @@ import {
   SOCIAL_LINK_BUTTONS,
   HOME_PAGE_TEXTS,
   SITE_METADATA,
+  CTA_LABELS,
 } from "@/shared/constants/data";
 import { SECTION_IDS } from "@/shared/constants/anchors";
 import { ROUTES } from "@/shared/constants/routes";
@@ -35,7 +36,7 @@ export default function ContactPage() {
         <ScreenSection
           id={SECTION_IDS.contactForm}
           eyebrow="Contact"
-          title="Contact"
+          title={HOME_PAGE_TEXTS.contactPage.title}
           headingLevel="h1"
           withChildrenPadding={false}
           variant="accent"
@@ -49,9 +50,9 @@ export default function ContactPage() {
       <Reveal>
         <ScreenSection
           id={SECTION_IDS.contactOptions}
-          eyebrow="Direct Contact"
+          eyebrow="Channels"
           withChildrenPadding
-          title="Contact Options"
+          title={CTA_LABELS.contactOptions}
           titleDescription={HOME_PAGE_TEXTS.contactPage.socials}
           grid="top"
         >

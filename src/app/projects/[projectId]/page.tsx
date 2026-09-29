@@ -137,7 +137,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           <Reveal>
             <ScreenSection
               id={creditsId}
-              eyebrow="Credits"
+              eyebrow="Team"
               title="Credits"
               titleDescription={
                 pageData.creditsDescription ?? PROJECT_PAGE_TEXTS.creditsDefaultDescription

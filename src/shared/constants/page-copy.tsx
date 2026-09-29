@@ -465,6 +465,7 @@ export const HOME_PAGE_TEXTS = {
     description: SITE_METADATA.footerDescription,
   },
   contactPage: {
+    title: CTA_LABELS.startProject,
     socials:
       "Email, Discord, and GitHub if you prefer a direct channel. Extra profiles and community links here.",
     form: (
