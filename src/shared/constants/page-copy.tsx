@@ -796,10 +796,10 @@ export const PROJECT_TAG_TEXTS = {
 } as const;
 
 export const COOKIE_CONSENT_TEXTS = {
-  title: "We use cookies",
-  text: "Optional analytics helps us improve the site. Accept if you are OK with that.",
-  accept: "Accept cookies",
-  reject: "Reject cookies",
+  title: "Analytics cookies",
+  text: "Optional Google Analytics cookies measure site traffic and are set only if you accept. You can change this anytime in Cookie Settings in the footer.",
+  accept: "Accept",
+  reject: "Reject",
   settings: "Cookie Settings",
 } as const;
 

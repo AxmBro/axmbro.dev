@@ -255,8 +255,11 @@
   text-decoration: none;
   border-radius: 4px;
 
+  // Explicit, not left to the global `a:hover`: this class also styles the
+  // Cookie Settings `<button>`, which that rule never reaches.
   &:hover {
     color: var(--color-neutral-100);
+    text-decoration: underline;
   }
 }
 
@@ -289,7 +292,9 @@
   font-family: inherit;
   border-radius: 4px;
 
+  // Same hover as the legal-row links on the left (a `<button>` gets no global `a:hover`).
   &:hover {
     color: var(--color-neutral-100);
+    text-decoration: underline;
   }
 }
