@@ -3,7 +3,8 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { useReducedMotion, useRevealInView, PROJECT_CONTENT_DELAY, PROJECT_FEATURED_CARD_STEP } from "@/shared/ui/motion";
-import { HOME_PAGE_TEXTS, type ClientStudio } from "@/shared/constants/data";
+import type { ClientStudio } from "@/shared/constants/data";
+import { getClientLogoStyle } from "./lib/get-client-logo-style";
 import styles from "./track-record.module.scss";
 
 interface ClientLogoCellProps {
@@ -56,6 +57,8 @@ function ClientLogoCell({ client, staggerDelay }: ClientLogoCellProps) {
 
   if (!client.logoSrc) return null;
 
+  const logo = getClientLogoStyle(client);
+
   return (
     <a
       ref={ref}
@@ -72,13 +75,13 @@ function ClientLogoCell({ client, staggerDelay }: ClientLogoCellProps) {
           .filter(Boolean)
           .join(" ")}
       >
-        <span className={styles.clientLogoMotion}>
+        <span className={styles.clientLogoMotion} style={logo.style}>
           <Image
             src={client.logoSrc}
             alt=""
-            width={client.logoWidth ?? 160}
-            height={client.logoHeight ?? 48}
-            sizes="(max-width: 768px) 40vw, 160px"
+            width={logo.width}
+            height={logo.height}
+            sizes="128px"
             className={[
               styles.clientLogo,
               isPopping ? styles.clientLogoPop : "",
@@ -96,29 +99,15 @@ function ClientLogoCell({ client, staggerDelay }: ClientLogoCellProps) {
 
 interface TrackRecordClientsProps {
   clients: ClientStudio[];
-  showHeader?: boolean;
-  title?: string;
-  description?: string;
 }
 
-export function TrackRecordClients({
-  clients,
-  showHeader = true,
-  title = HOME_PAGE_TEXTS.trackRecord.clientsTitle,
-  description = HOME_PAGE_TEXTS.trackRecord.clientsDescription,
-}: TrackRecordClientsProps) {
+/** Commissions proof section: connected 2x2 logo grid with names (home uses `ClientLogoStrip`). */
+export function TrackRecordClients({ clients }: TrackRecordClientsProps) {
   return (
-    <div className={styles.clients}>
-      {showHeader ? (
-        <div className={styles.clientsHeader}>
-          <h3 className={styles.clientsTitle}>{title}</h3>
-          <p className={styles.clientsDescription}>{description}</p>
-        </div>
-      ) : null}
-      <ul className={styles.clientRow}>
-        {clients
-          .filter((client) => Boolean(client.logoSrc))
-          .map((client, index) => (
+    <ul className={styles.clientRow}>
+      {clients
+        .filter((client) => Boolean(client.logoSrc))
+        .map((client, index) => (
           <li key={client.name}>
             <ClientLogoCell
               client={client}
@@ -126,7 +115,6 @@ export function TrackRecordClients({
             />
           </li>
         ))}
-      </ul>
-    </div>
+    </ul>
   );
 }

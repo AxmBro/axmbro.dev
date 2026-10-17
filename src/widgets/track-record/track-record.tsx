@@ -1,7 +1,6 @@
-import { formatStatValue, getYouTubeStats } from "@/entities/youtube";
-import { HOME_CLIENT_STUDIOS } from "@/shared/constants/data";
+import { formatStatValue, getYouTubeStats } from "@/entities/youtube/server";
+import { HOME_PAGE_TEXTS } from "@/shared/constants/data";
 import { getBaseTrackRecordStats } from "./lib/get-track-record-stats";
-import { TrackRecordClients } from "./track-record-clients";
 import { TrackRecordStats } from "./track-record-stats";
 
 export const TrackRecord = async () => {
@@ -11,24 +10,18 @@ export const TrackRecord = async () => {
   if (youtubeStats.subscribers > 0) {
     stats.push({
       value: formatStatValue(youtubeStats.subscribers),
-      label: "YouTube Subscribers",
+      label: HOME_PAGE_TEXTS.trackRecord.stats.youtubeSubscribers,
     });
   }
 
   if (youtubeStats.views > 0) {
     stats.push({
       value: formatStatValue(youtubeStats.views),
-      label: "YouTube Views",
+      label: HOME_PAGE_TEXTS.trackRecord.stats.youtubeViews,
     });
   }
 
   const emptyCellsCount = stats.length % 3 === 0 ? 0 : 3 - (stats.length % 3);
 
-  return (
-    <>
-      <TrackRecordStats stats={stats} emptyCellsCount={emptyCellsCount} />
-
-      <TrackRecordClients clients={HOME_CLIENT_STUDIOS} />
-    </>
-  );
+  return <TrackRecordStats stats={stats} emptyCellsCount={emptyCellsCount} />;
 };

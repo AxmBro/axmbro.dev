@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { SECTION_IDS } from "@/shared/constants/anchors";
 import { HOME_PAGE_TEXTS, SITE_ROLE } from "@/shared/constants/data";
 import { ROUTES } from "@/shared/constants/routes";
@@ -10,7 +11,12 @@ import { HeroPortraitReveal } from "./hero-portrait-reveal";
 import { HeroWaveTimer } from "./hero-wave-timer";
 import styles from "./hero-section.module.scss";
 
-export const HeroSection = () => (
+interface HeroSectionProps {
+  /** Full-width band under the hero grid, inside the same frame (home: client logo strip). */
+  footer?: ReactNode;
+}
+
+export const HeroSection = ({ footer }: HeroSectionProps) => (
   <ScreenSection
     id={SECTION_IDS.profile}
     withChildrenPadding={false}
@@ -21,7 +27,7 @@ export const HeroSection = () => (
     <div className={styles.waveLayer} data-pixel-wave-behind />
     <div className={styles.heroGrid}>
       <HeroContentReveal className={styles.heroContent}>
-        <SectionEyebrow>About</SectionEyebrow>
+        <SectionEyebrow>{HOME_PAGE_TEXTS.hero.eyebrow}</SectionEyebrow>
         <h1 className={`${styles.title} ${styles.titleAccent}`}>{SITE_ROLE.headline}</h1>
         <p className={styles.description}>{HOME_PAGE_TEXTS.hero.description}</p>
         <ButtonGroup marginTop>
@@ -41,5 +47,6 @@ export const HeroSection = () => (
         <HeroPortrait />
       </HeroPortraitReveal>
     </div>
+    {footer ? <div className={styles.heroFooter}>{footer}</div> : null}
   </ScreenSection>
 );
