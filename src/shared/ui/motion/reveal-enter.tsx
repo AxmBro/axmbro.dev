@@ -1,69 +1,43 @@
-"use client";
+import type { CSSProperties, ReactNode } from "react";
+import { ENTER_FROM, HERO_MEDIA_DURATION, REVEAL_DURATION, type EnterFrom } from "./motion-variants";
+import styles from "./reveal-enter.module.scss";
 
-import type { ReactNode } from "react";
-import { motion, useReducedMotion } from "motion/react";
-import {
-  fadeFromRightVariants,
-  fadeFromTopVariants,
-  fadeUpVariants,
-} from "./motion-variants";
-
-type RevealEnterDirection = "up" | "right" | "top";
 type RevealEnterElement = "div" | "aside";
 
 interface RevealEnterProps {
   children: ReactNode;
   className?: string;
-  direction?: RevealEnterDirection;
+  direction?: EnterFrom;
   delay?: number;
   as?: RevealEnterElement;
   "aria-label"?: string;
   "data-announcement-bar"?: boolean;
 }
 
-const enterVariants = {
-  up: fadeUpVariants,
-  right: fadeFromRightVariants,
-  top: fadeFromTopVariants,
-} as const;
-
+/** Mount entrance in pure CSS (no JS, server-safe); reduced motion is handled in the module. */
 export function RevealEnter({
   children,
   className,
   direction = "up",
   delay,
-  as = "div",
+  as: Tag = "div",
   "aria-label": ariaLabel,
   "data-announcement-bar": dataAnnouncementBar,
 }: RevealEnterProps) {
-  const reduceMotion = useReducedMotion();
-
-  if (reduceMotion) {
-    const Tag = as;
-    return (
-      <Tag
-        className={className}
-        aria-label={ariaLabel}
-        data-announcement-bar={dataAnnouncementBar ? true : undefined}
-      >
-        {children}
-      </Tag>
-    );
-  }
-
-  const MotionTag = as === "aside" ? motion.aside : motion.div;
+  const style = {
+    "--reveal-from": ENTER_FROM[direction],
+    "--reveal-duration": `${direction === "scale" ? HERO_MEDIA_DURATION : REVEAL_DURATION}s`,
+    "--reveal-delay": `${delay ?? 0}s`,
+  } as CSSProperties;
 
   return (
-    <MotionTag
-      className={className}
+    <Tag
+      className={className ? `${styles.enter} ${className}` : styles.enter}
+      style={style}
       aria-label={ariaLabel}
       data-announcement-bar={dataAnnouncementBar ? true : undefined}
-      initial="hidden"
-      animate="visible"
-      variants={enterVariants[direction]}
-      transition={delay ? { delay } : undefined}
     >
       {children}
-    </MotionTag>
+    </Tag>
   );
 }

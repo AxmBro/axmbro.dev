@@ -1,7 +1,8 @@
 "use client";
 
 import { forwardRef, type ReactNode } from "react";
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
+import { useReducedMotion } from "./use-reduced-motion";
 import {
   revealViewport,
   staggerContainerVariants,
