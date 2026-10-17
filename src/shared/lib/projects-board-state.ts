@@ -1,6 +1,6 @@
-import type { ProjectsBoardTab } from "@/shared/constants/data";
+import type { ProjectsBoardSort, ProjectsBoardTab } from "@/shared/constants/data";
 
-export type { ProjectsBoardTab };
+export type { ProjectsBoardSort, ProjectsBoardTab };
 
 const PROJECTS_ACTIVE_TAB_KEY = "projectsActiveTab";
 const PROJECTS_SORT_KEY = "projectsSort";
@@ -14,19 +14,10 @@ export const PROJECTS_BOARD_TABS: ProjectsBoardTab[] = [
   "commissions",
 ];
 
-export const PROJECTS_BOARD_TAB_LABELS: Record<ProjectsBoardTab, string> = {
-  all: "All",
-  featured: "Featured",
-  personal: "Personal",
-  commissions: "Client Work",
-};
-
 export const isProjectsBoardTab = (value: string): value is ProjectsBoardTab =>
   (PROJECTS_BOARD_TABS as readonly string[]).includes(value);
 
-export type ProjectsBoardSort = "newest" | "oldest" | "alphabetical";
-
-const PROJECTS_BOARD_SORTS: ProjectsBoardSort[] = [
+export const PROJECTS_BOARD_SORTS: ProjectsBoardSort[] = [
   "newest",
   "oldest",
   "alphabetical",
