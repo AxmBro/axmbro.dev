@@ -2,6 +2,14 @@ import type { ProjectItem } from "./types";
 
 export const CAREER_START_DATE = new Date(2022, 0, 1);
 
+/** Home Selected Work, in display order (project `url` ids). Owner-curated - 4 fills the 2x2 card mesh. */
+export const HOME_SELECTED_PROJECT_IDS = [
+  "better_bedrock",
+  "one_slime_block_adventure",
+  "zeqa_ui",
+  "ra_survival",
+];
+
 export const PROJECTS: ProjectItem[] = [
   {
     title: "Better Bedrock",
@@ -217,6 +225,11 @@ export const PROJECTS: ProjectItem[] = [
 
 export function getFeaturedProjects(): ProjectItem[] {
   return PROJECTS.filter((project) => Boolean(project.star));
+}
+
+/** Client work - the one source for the "client commissions" count (home stat, Selected Work summary). */
+export function getCommissionedProjects(): ProjectItem[] {
+  return PROJECTS.filter((project) => project.type === "commissions");
 }
 
 export function getProjectTypeLabel(project: ProjectItem): string {
