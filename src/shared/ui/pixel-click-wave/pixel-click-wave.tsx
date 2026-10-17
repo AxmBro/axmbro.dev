@@ -53,7 +53,6 @@ const CONTENT_SURFACE_SELECTOR = [
 ].join(",");
 const GRID_SIZE = 12;
 const PIXEL_SIZE = 10;
-const PIXEL_INSET = (GRID_SIZE - PIXEL_SIZE) / 2;
 const IMPACT_DURATION_MS = 180;
 const WAVE_DELAY_MS = 40;
 const WAVE_SPEED_PX_PER_MS = 0.72;
@@ -61,6 +60,7 @@ const CELL_GLOW_DURATION_MS = 600;
 const CLICK_COOLDOWN_MS = 1250;
 const MAX_ACTIVE_WAVES = 3;
 const SECTION_CLIP_INSET_PX = 1;
+const HIGHLIGHT_SIZE = 3;
 
 interface ViewportState {
   width: number;
@@ -132,17 +132,112 @@ const mixColor = (start: RgbColor, end: RgbColor, amount: number): RgbColor => (
 const colorToCss = ({ red, green, blue }: RgbColor) =>
   `rgb(${red} ${green} ${blue})`;
 
+const HIGHLIGHT_COLOR = colorToCss(WHITE);
+
+// Mix and heat snap to COLOR_STEPS levels (invisible at ripple alphas), so a frame
+// reuses a few dozen cached fillStyle strings instead of building and parsing one
+// per cell - that parse was ~75% of a full-screen wave frame.
+const COLOR_STEPS = 32;
+const rippleColorCache = new Map<number, string>();
+
 const getRippleColor = (
   colorMix: number,
   whiteHeat: number,
   palette: PixelWavePalette = "default",
 ) => {
-  if (palette === "monochrome") {
-    const tinted = mixColor(MONO_SILVER, MONO_PEAK, colorMix);
-    return colorToCss(mixColor(tinted, WHITE, whiteHeat * 0.92));
-  }
+  const mixStep = Math.round(colorMix * COLOR_STEPS);
+  const heatStep = Math.round(whiteHeat * COLOR_STEPS);
+  const paletteIndex = palette === "monochrome" ? 1 : 0;
+  const key = (paletteIndex * (COLOR_STEPS + 1) + mixStep) * (COLOR_STEPS + 1) + heatStep;
+  const cached = rippleColorCache.get(key);
+  if (cached) return cached;
 
-  return colorToCss(mixColor(mixColor(BLUE, COLOR_ACCENT_SECONDARY, colorMix), WHITE, whiteHeat));
+  const mix = mixStep / COLOR_STEPS;
+  const heat = heatStep / COLOR_STEPS;
+  const color =
+    palette === "monochrome"
+      ? colorToCss(mixColor(mixColor(MONO_SILVER, MONO_PEAK, mix), WHITE, heat * 0.92))
+      : colorToCss(mixColor(mixColor(BLUE, COLOR_ACCENT_SECONDARY, mix), WHITE, heat));
+  rippleColorCache.set(key, color);
+  return color;
+};
+
+/** Cells grouped by fillStyle: `x, y, width, height, alpha` per cell. */
+type CellBatch = Map<string, number[]>;
+
+const queueCell = (
+  batch: CellBatch,
+  color: string,
+  x: number,
+  y: number,
+  cellWidth: number,
+  cellHeight: number,
+  alpha: number,
+) => {
+  const cells = batch.get(color);
+  if (cells) cells.push(x, y, cellWidth, cellHeight, alpha);
+  else batch.set(color, [x, y, cellWidth, cellHeight, alpha]);
+};
+
+// One fillStyle switch per color; alpha stays exact per cell. Cells inside one
+// flush never overlap, so grouping does not change the composited result.
+const flushCells = (context: CanvasRenderingContext2D, batch: CellBatch) => {
+  for (const [color, cells] of batch) {
+    context.fillStyle = color;
+    for (let index = 0; index < cells.length; index += 5) {
+      context.globalAlpha = cells[index + 4];
+      context.fillRect(cells[index], cells[index + 1], cells[index + 2], cells[index + 3]);
+    }
+  }
+  batch.clear();
+};
+
+/** Square cell lattice centered in a box; all sizes in CSS px, aligned to device pixels. */
+interface WaveGrid {
+  /** First cell's left / top edge. */
+  left: number;
+  top: number;
+  columns: number;
+  rows: number;
+  /** Distance between cell origins (same on both axes). */
+  pitch: number;
+  /** Edge of one square. */
+  cell: number;
+  highlight: number;
+  highlightOffset: number;
+}
+
+// Pitch, cell, and highlight are whole device pixels, so every square and every
+// gap is identical on any DPR (a stretched fractional pitch snapped cells to
+// mixed 10/11px sizes and 2/3px gaps - the grid read as crooked). As many cells
+// as fit with at least one gap to each edge; the leftover is split evenly, so the
+// margins are symmetric in every section and on the full screen.
+const fitGrid = (box: PixelWaveClip, ratio: number): WaveGrid => {
+  const pitch = Math.max(2, Math.round(GRID_SIZE * ratio));
+  const cell = Math.max(1, Math.round(PIXEL_SIZE * ratio));
+  const highlight = Math.max(1, Math.round(HIGHLIGHT_SIZE * ratio));
+  const gap = pitch - cell;
+
+  const fitAxis = (start: number, size: number) => {
+    const sizePx = size * ratio;
+    const count = Math.max(1, Math.floor((sizePx - gap) / pitch));
+    const span = count * pitch - gap;
+    return { count, origin: Math.round(start * ratio + (sizePx - span) / 2) / ratio };
+  };
+
+  const x = fitAxis(box.left, box.width);
+  const y = fitAxis(box.top, box.height);
+
+  return {
+    left: x.origin,
+    top: y.origin,
+    columns: x.count,
+    rows: y.count,
+    pitch: pitch / ratio,
+    cell: cell / ratio,
+    highlight: highlight / ratio,
+    highlightOffset: Math.floor((cell - highlight) / 2) / ratio,
+  };
 };
 
 const getWaveAlphaScale = (wave: PixelWave) => {
@@ -165,11 +260,13 @@ const getElementClip = (
   element: HTMLElement,
   viewport: ViewportState,
 ): PixelWaveClip | null => {
+  // Fractional on purpose: cells snap to device pixels themselves, and rounding
+  // the box inward made the gap to the border 1px wider on the right / bottom.
   const rect = element.getBoundingClientRect();
-  const left = Math.ceil(rect.left - viewport.offsetX) + SECTION_CLIP_INSET_PX;
-  const top = Math.ceil(rect.top - viewport.offsetY) + SECTION_CLIP_INSET_PX;
-  const right = Math.floor(rect.right - viewport.offsetX) - SECTION_CLIP_INSET_PX;
-  const bottom = Math.floor(rect.bottom - viewport.offsetY) - SECTION_CLIP_INSET_PX;
+  const left = rect.left - viewport.offsetX + SECTION_CLIP_INSET_PX;
+  const top = rect.top - viewport.offsetY + SECTION_CLIP_INSET_PX;
+  const right = rect.right - viewport.offsetX - SECTION_CLIP_INSET_PX;
+  const bottom = rect.bottom - viewport.offsetY - SECTION_CLIP_INSET_PX;
   const width = right - left;
   const height = bottom - top;
 
@@ -294,17 +391,47 @@ export function PixelClickWave() {
     let viewport: ViewportState = getViewportState();
     let width = viewport.width;
     let height = viewport.height;
+    let pixelRatio = 1;
     let lastClickWaveStartedAt = Number.NEGATIVE_INFINITY;
+    const squares: CellBatch = new Map();
+    const highlights: CellBatch = new Map();
 
+    // Device-pixel edges for the clip rect, so a header cut is as crisp as the cells.
+    const snap = (value: number) => Math.round(value * pixelRatio) / pixelRatio;
+
+    const getWaveGrid = (wave: PixelWave) =>
+      fitGrid(wave.gridClip ?? wave.clip ?? { left: 0, top: 0, width, height }, pixelRatio);
+
+    const queueGridCell = (
+      grid: WaveGrid,
+      column: number,
+      row: number,
+      color: string,
+      alpha: number,
+    ) => {
+      queueCell(
+        squares,
+        color,
+        grid.left + column * grid.pitch,
+        grid.top + row * grid.pitch,
+        grid.cell,
+        grid.cell,
+        alpha,
+      );
+    };
+
+    // CSS size is the rounded backing store divided back by the ratio, so one
+    // backing pixel is exactly one device pixel - a 1391.5 -> 1392px rounding
+    // otherwise rescales the whole bitmap and blurs every cell edge.
     const applyCanvasLayout = (layer: LayerRuntime) => {
       layer.canvas.style.left = `${viewport.offsetX}px`;
       layer.canvas.style.top = `${viewport.offsetY}px`;
-      layer.canvas.style.width = `${width}px`;
-      layer.canvas.style.height = `${height}px`;
+      layer.canvas.style.width = `${layer.canvas.width / pixelRatio}px`;
+      layer.canvas.style.height = `${layer.canvas.height / pixelRatio}px`;
     };
 
     const resizeCanvas = () => {
-      const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+      pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
       viewport = getViewportState();
       width = viewport.width;
       height = viewport.height;
@@ -336,26 +463,30 @@ export function PixelClickWave() {
       const palette = wave.palette ?? "default";
 
       const radius = GRID_SIZE * (1.5 + progress * 5);
-      const gridOriginX = wave.gridClip?.left ?? wave.clip?.left ?? 0;
-      const gridOriginY = wave.gridClip?.top ?? wave.clip?.top ?? 0;
-      const startX =
-        gridOriginX +
-        Math.floor((wave.x - radius - gridOriginX) / GRID_SIZE) * GRID_SIZE;
-      const endX =
-        gridOriginX +
-        Math.ceil((wave.x + radius - gridOriginX) / GRID_SIZE) * GRID_SIZE;
-      const startY =
-        gridOriginY +
-        Math.floor((wave.y - radius - gridOriginY) / GRID_SIZE) * GRID_SIZE;
-      const endY =
-        gridOriginY +
-        Math.ceil((wave.y + radius - gridOriginY) / GRID_SIZE) * GRID_SIZE;
+      const grid = getWaveGrid(wave);
+      const centerOffset = grid.cell / 2;
+      const firstColumn = Math.max(
+        0,
+        Math.floor((wave.x - radius - grid.left - centerOffset) / grid.pitch),
+      );
+      const lastColumn = Math.min(
+        grid.columns - 1,
+        Math.ceil((wave.x + radius - grid.left - centerOffset) / grid.pitch),
+      );
+      const firstRow = Math.max(
+        0,
+        Math.floor((wave.y - radius - grid.top - centerOffset) / grid.pitch),
+      );
+      const lastRow = Math.min(
+        grid.rows - 1,
+        Math.ceil((wave.y + radius - grid.top - centerOffset) / grid.pitch),
+      );
 
-      for (let y = startY; y <= endY; y += GRID_SIZE) {
-        for (let x = startX; x <= endX; x += GRID_SIZE) {
+      for (let row = firstRow; row <= lastRow; row += 1) {
+        for (let column = firstColumn; column <= lastColumn; column += 1) {
           const distance = Math.hypot(
-            x + GRID_SIZE / 2 - wave.x,
-            y + GRID_SIZE / 2 - wave.y,
+            grid.left + column * grid.pitch + centerOffset - wave.x,
+            grid.top + row * grid.pitch + centerOffset - wave.y,
           );
           if (distance > radius) continue;
 
@@ -363,16 +494,17 @@ export function PixelClickWave() {
             (Math.sin(distance * 0.08 + wave.seed * Math.PI) + 1) / 2;
           const whiteHeat = 1 - progress;
 
-          context.globalAlpha = whiteHeat * 0.72 * alphaScale;
-          context.fillStyle = getRippleColor(colorMix, whiteHeat * 0.72, palette);
-          context.fillRect(
-            x + PIXEL_INSET,
-            y + PIXEL_INSET,
-            PIXEL_SIZE,
-            PIXEL_SIZE,
+          queueGridCell(
+            grid,
+            column,
+            row,
+            getRippleColor(colorMix, whiteHeat * 0.72, palette),
+            whiteHeat * 0.72 * alphaScale,
           );
         }
       }
+
+      flushCells(context, squares);
     };
 
     const drawWave = (
@@ -388,20 +520,59 @@ export function PixelClickWave() {
       drawImpact(context, wave, elapsed);
 
       if (elapsed >= WAVE_DELAY_MS) {
-        const gridClip = wave.gridClip ?? wave.clip;
-        const startX = gridClip?.left ?? 0;
-        const startY = gridClip?.top ?? 0;
-        const endX = gridClip
-          ? startX + Math.floor(gridClip.width / GRID_SIZE) * GRID_SIZE
-          : width;
-        const endY = gridClip
-          ? startY + Math.floor(gridClip.height / GRID_SIZE) * GRID_SIZE
-          : height;
+        const grid = getWaveGrid(wave);
+        const centerOffset = grid.cell / 2;
+        // Column / row whose pitch span contains a coordinate.
+        const columnAt = (x: number) => Math.floor((x - grid.left) / grid.pitch);
+        const rowAt = (y: number) => Math.floor((y - grid.top) / grid.pitch);
+        // Column whose center is the last at or before / first at or after `x`.
+        const columnCenteredBefore = (x: number) =>
+          Math.floor((x - grid.left - centerOffset) / grid.pitch);
+        const columnCenteredAfter = (x: number) =>
+          Math.ceil((x - grid.left - centerOffset) / grid.pitch);
 
-        for (let y = startY; y < endY; y += GRID_SIZE) {
-          for (let x = startX; x < endX; x += GRID_SIZE) {
-            const cellCenterX = x + GRID_SIZE / 2;
-            const cellCenterY = y + GRID_SIZE / 2;
+        // Only a ring of cells glows at once (arrival within the last
+        // CELL_GLOW_DURATION_MS) and only the visible part of the grid matters, so
+        // the loop walks that ring inside the viewport instead of every cell of a
+        // full-screen or page-tall grid. The cellAge check below stays exact.
+        const radiusPerMs = wave.maxRadius / wave.travelDurationMs;
+        const outerRadius = waveElapsed * radiusPerMs;
+        const innerRadius = (waveElapsed - CELL_GLOW_DURATION_MS) * radiusPerMs;
+        const firstColumn = Math.max(0, columnAt(Math.max(wave.clip?.left ?? 0, 0)));
+        const lastColumn = Math.min(
+          grid.columns - 1,
+          columnAt(Math.min(wave.clip ? wave.clip.left + wave.clip.width : width, width)),
+        );
+        const firstRow = Math.max(0, rowAt(Math.max(wave.clip?.top ?? 0, 0)));
+        const lastRow = Math.min(
+          grid.rows - 1,
+          rowAt(Math.min(wave.clip ? wave.clip.top + wave.clip.height : height, height)),
+        );
+
+        for (let row = firstRow; row <= lastRow; row += 1) {
+          const cellCenterY = grid.top + row * grid.pitch + centerOffset;
+          const rowOffset = Math.abs(cellCenterY - wave.y);
+          if (rowOffset > outerRadius) continue;
+
+          // Row span inside the outer circle, minus the already faded inner disc
+          // (one pitch of margin so rounding never skips a lit cell).
+          const outerHalf = Math.sqrt(outerRadius ** 2 - rowOffset ** 2);
+          const innerHalf =
+            innerRadius > rowOffset
+              ? Math.sqrt(innerRadius ** 2 - rowOffset ** 2) - grid.pitch
+              : 0;
+          const rowFirstColumn = Math.max(firstColumn, columnCenteredBefore(wave.x - outerHalf));
+          const rowLastColumn = Math.min(lastColumn, columnCenteredAfter(wave.x + outerHalf));
+          const gapFirstColumn = columnCenteredAfter(wave.x - innerHalf);
+          const gapLastColumn = columnCenteredBefore(wave.x + innerHalf);
+
+          for (let column = rowFirstColumn; column <= rowLastColumn; column += 1) {
+            if (innerHalf > 0 && column >= gapFirstColumn && column <= gapLastColumn) {
+              column = gapLastColumn;
+              continue;
+            }
+
+            const cellCenterX = grid.left + column * grid.pitch + centerOffset;
             const distance = Math.hypot(cellCenterX - wave.x, cellCenterY - wave.y);
             const arrivalTime =
               (distance / wave.maxRadius) * wave.travelDurationMs;
@@ -418,28 +589,31 @@ export function PixelClickWave() {
             const colorMix = (Math.sin(colorCycle) + 1) / 2;
             const whiteHeat = Math.max(0, 1 - lifeProgress * 5);
 
-            context.globalAlpha = intensity * 0.72 * alphaScale;
-            context.fillStyle = getRippleColor(colorMix, whiteHeat * 0.78, palette);
-            context.fillRect(
-              x + PIXEL_INSET,
-              y + PIXEL_INSET,
-              PIXEL_SIZE,
-              PIXEL_SIZE,
+            queueGridCell(
+              grid,
+              column,
+              row,
+              getRippleColor(colorMix, whiteHeat * 0.78, palette),
+              intensity * 0.72 * alphaScale,
             );
 
             if (whiteHeat > 0.45) {
-              const highlightSize = 3;
-              context.globalAlpha = intensity * whiteHeat * 0.5 * alphaScale;
-              context.fillStyle = colorToCss(WHITE);
-              context.fillRect(
-                x + (GRID_SIZE - highlightSize) / 2,
-                y + (GRID_SIZE - highlightSize) / 2,
-                highlightSize,
-                highlightSize,
+              queueCell(
+                highlights,
+                HIGHLIGHT_COLOR,
+                grid.left + column * grid.pitch + grid.highlightOffset,
+                grid.top + row * grid.pitch + grid.highlightOffset,
+                grid.highlight,
+                grid.highlight,
+                intensity * whiteHeat * 0.5 * alphaScale,
               );
             }
           }
         }
+
+        // Highlights sit on top of their own cell, so they go after every square.
+        flushCells(context, squares);
+        flushCells(context, highlights);
       }
 
       return (
@@ -477,8 +651,9 @@ export function PixelClickWave() {
 
           wave.clip = visibleClip;
           wave.gridClip = sectionClip;
-          wave.x = sectionClip.left + GRID_SIZE / 2;
-          wave.y = sectionClip.top + GRID_SIZE / 2;
+          const origin = fitGrid(sectionClip, pixelRatio);
+          wave.x = origin.left + origin.cell / 2;
+          wave.y = origin.top + origin.cell / 2;
           wave.maxRadius = Math.hypot(sectionClip.width, sectionClip.height);
           wave.travelDurationMs = getTravelDuration(wave.maxRadius);
         }
@@ -487,11 +662,13 @@ export function PixelClickWave() {
 
         if (wave.clip) {
           context.beginPath();
+          const clipLeft = snap(wave.clip.left);
+          const clipTop = snap(wave.clip.top);
           context.rect(
-            wave.clip.left,
-            wave.clip.top,
-            wave.clip.width,
-            wave.clip.height,
+            clipLeft,
+            clipTop,
+            snap(wave.clip.left + wave.clip.width) - clipLeft,
+            snap(wave.clip.top + wave.clip.height) - clipTop,
           );
           context.clip();
         }
@@ -508,9 +685,11 @@ export function PixelClickWave() {
       layer.animationFrameId = waves.length
         ? window.requestAnimationFrame(animateLayer(layer))
         : 0;
+      if (!waves.length) delete layer.canvas.dataset.active;
     };
 
     const startLayerAnimation = (layer: LayerRuntime) => {
+      layer.canvas.dataset.active = "";
       if (!layer.animationFrameId) {
         layer.animationFrameId = window.requestAnimationFrame(animateLayer(layer));
       }
@@ -536,12 +715,13 @@ export function PixelClickWave() {
 
       const startedAt = performance.now();
       const maxRadius = Math.hypot(sectionClip.width, sectionClip.height);
+      const origin = fitGrid(sectionClip, pixelRatio);
       const layer = resolveLayer(options?.palette);
       if (!layer) return;
 
       pushWave(layer, {
-        x: sectionClip.left + GRID_SIZE / 2,
-        y: sectionClip.top + GRID_SIZE / 2,
+        x: origin.left + origin.cell / 2,
+        y: origin.top + origin.cell / 2,
         startedAt,
         maxRadius,
         travelDurationMs: getTravelDuration(maxRadius),

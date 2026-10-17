@@ -1,9 +1,16 @@
+// Hidden while no wave runs: an empty full-viewport blend layer would still be
+// composited over the whole page on every scroll frame.
 .canvas {
   position: fixed;
   top: 0;
   left: 0;
+  visibility: hidden;
   pointer-events: none;
   mix-blend-mode: screen;
+
+  &[data-active] {
+    visibility: visible;
+  }
 }
 
 .canvasBehind {
