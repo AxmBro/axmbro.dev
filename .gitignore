@@ -32,7 +32,6 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
-!.env.example
 
 # vercel
 .vercel
@@ -45,5 +44,23 @@ next-env.d.ts
 /todo.md
 /notes/
 
-# cursor (local IDE rules)
+# AI agents - local only, never pushed (GitHub gets source code only).
+# Canon: AGENTS.md (single entry) + docs/agents/ + docs/AGENT_CONTEXT.md.
+/AGENTS.md
+/CLAUDE.md
+/CLAUDE.local.md
+/GEMINI.md
+/docs/
 .cursor/
+.cursorignore
+.cursorindexingignore
+.claude/
+.gemini/
+.codex/
+.agents/
+.windsurf/
+.windsurfrules
+.aider*
+.mcp.json
+.github/copilot-instructions.md
+.github/instructions/

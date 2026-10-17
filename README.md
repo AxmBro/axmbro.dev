@@ -14,7 +14,7 @@ This repository contains the source code for my portfolio, crafted to deliver a 
 
 ## 🔐 Environment Variables
 
-All optional - the site builds and runs without them. Copy `.env.example` to `.env` when you need a feature below. Field notes live in `.env.example`.
+All optional - the site builds and runs without them. Set them in `.env` when you need a feature below.
 
 - **SMTP_USER, SMTP_PASSWORD** - contact form email
 - **YOUTUBE_API_KEY** - live subscriber and view counts on the home page
@@ -22,13 +22,12 @@ All optional - the site builds and runs without them. Copy `.env.example` to `.e
 
 ## 🛠️ Quick Start
 
-Clone the repository and install dependencies. **Requires Node 20+ and Yarn.**
+Clone the repository and install dependencies. **Requires Node 22+ and Yarn.**
 
 ```bash
 git clone https://github.com/AxmBro/axmbro.dev.git
 cd axmbro.dev
 yarn install
-cp .env.example .env   # optional
 yarn dev
 ```
 
