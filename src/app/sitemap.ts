@@ -29,11 +29,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ROUTES.projects,
   ] as const;
 
+  // Only url + lastModified: Google ignores priority and changeFrequency.
   const baseRoutes: MetadataRoute.Sitemap = staticPaths.map((route) => ({
     url: `${SITE_ORIGIN}${route}`,
     ...(STATIC_LAST_MODIFIED[route] ? { lastModified: STATIC_LAST_MODIFIED[route] } : {}),
-    changeFrequency: route === ROUTES.home ? "weekly" : "monthly",
-    priority: route === ROUTES.home ? 1.0 : 0.8,
   }));
 
   const projectRoutes: MetadataRoute.Sitemap = getProjectsWithPage().map((project) => {
@@ -42,8 +41,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     return {
       url: `${SITE_ORIGIN}${projectDetailPath(project.url)}`,
       ...(lastModified ? { lastModified } : {}),
-      changeFrequency: "weekly" as const,
-      priority: 0.7,
     };
   });
 
