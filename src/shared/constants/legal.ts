@@ -1,9 +1,30 @@
+/** Shared chrome of `LegalPage` (both legal routes). */
+export const LEGAL_PAGE_TEXTS = {
+  eyebrow: "Legal",
+  lastUpdated: (date: string) => `Last updated: ${date}.`,
+  contactTitle: "Contact",
+  contactLink: "contact page",
+} as const;
+
+export const PRIVACY_POLICY_PAGE = {
+  title: "Privacy Policy",
+  intro: "Personal data on axmbro.dev - what is processed and your GDPR rights.",
+  contactBlurb:
+    "For privacy questions or to exercise your rights, email axmbro@gmail.com or use the",
+} as const;
+
+export const TERMS_OF_USE_PAGE = {
+  title: "Terms of Use",
+  intro: "Rules for using axmbro.dev.",
+  contactBlurb: "Questions about these Terms? Email axmbro@gmail.com or use the",
+} as const;
+
 export interface LegalItem {
   title: string;
   text: string;
 }
 
-export const PRIVACY_POLICY_LAST_UPDATED = "26.09.2026";
+export const PRIVACY_POLICY_LAST_UPDATED = "17.10.2026";
 
 export const PRIVACY_POLICY_ITEMS: LegalItem[] = [
   {
@@ -16,7 +37,7 @@ export const PRIVACY_POLICY_ITEMS: LegalItem[] = [
   },
   {
     title: "Your rights",
-    text: "You may request access, correction, deletion, restriction, or object to processing, and withdraw consent at any time. You may lodge a complaint with a supervisory authority - in Poland, UODO (President of the Personal Data Protection Office).",
+    text: "You may request access, correction, deletion, restriction, or object to processing, and withdraw consent at any time (analytics: Cookie Settings in the footer). You may lodge a complaint with a supervisory authority - in Poland, UODO (President of the Personal Data Protection Office).",
   },
 ];
 
