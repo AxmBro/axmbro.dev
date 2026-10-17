@@ -1,10 +1,13 @@
 @use '../../shared/styles/variables' as *;
 @use '../../shared/styles/mixins' as *;
 
-.gallerySlot {
-  > :first-child {
-    margin-bottom: 0;
-  }
+.grid {
+  @include connected-card-grid;
+  border-top: 1px solid var(--color-border);
+}
+
+.gridItem {
+  @include connected-card-grid-item;
 }
 
 .footer {
@@ -12,29 +15,20 @@
   flex-direction: column;
   gap: var(--spacing-section);
   border-top: 1px solid var(--color-border);
-  padding: var(--spacing-section) var(--spacing-block);
+  padding: var(--spacing-block);
 
   @media (min-width: ($breakpoint-md + 1px)) {
     flex-direction: row;
-    align-items: flex-end;
+    align-items: center;
     justify-content: space-between;
     gap: var(--spacing-block);
   }
 }
 
-.footerHeader {
-  @include stack-xs;
+.footerSummary {
+  @include text-h3;
   min-width: 0;
   flex: 1;
-}
-
-.footerTitle {
-  @include text-h3;
-  margin: 0;
-}
-
-.footerDescription {
-  @include text-body;
   margin: 0;
 }
 

@@ -1,7 +1,5 @@
-"use client";
-
 import { Children, type ReactNode } from "react";
-import { RevealItem, RevealStagger } from "@/shared/ui/motion";
+import { RevealEnter, STAGGER_CHILDREN } from "@/shared/ui/motion";
 
 interface HeroContentRevealProps {
   className?: string;
@@ -10,10 +8,12 @@ interface HeroContentRevealProps {
 
 export function HeroContentReveal({ className, children }: HeroContentRevealProps) {
   return (
-    <RevealStagger className={className} trigger="mount">
+    <div className={className}>
       {Children.toArray(children).map((child, index) => (
-        <RevealItem key={index}>{child}</RevealItem>
+        <RevealEnter key={index} delay={index * STAGGER_CHILDREN}>
+          {child}
+        </RevealEnter>
       ))}
-    </RevealStagger>
+    </div>
   );
 }

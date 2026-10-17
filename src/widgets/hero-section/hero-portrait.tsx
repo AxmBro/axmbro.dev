@@ -3,28 +3,8 @@
 import Image from "next/image";
 import { usePortraitFlip } from "./use-portrait-flip";
 import { HERO_PORTRAIT_IMAGE_SIZES } from "@/shared/constants/breakpoints";
+import { HERO_PORTRAITS, HOME_PAGE_TEXTS } from "@/shared/constants/data";
 import styles from "./hero-section.module.scss";
-
-const PORTRAITS = [
-  {
-    src: "/images/brand/axmbro-logo-irl.png",
-    alt: "AxmBro portrait",
-    kind: "photo",
-    label: "Computer Science Student",
-  },
-  {
-    src: "/images/brand/axmbro-logo-design.png",
-    alt: "AxmBro illustrated logo",
-    kind: "design",
-    label: "Content Creator",
-  },
-  {
-    src: "/images/brand/axmbro-logo-mc.png",
-    alt: "AxmBro Minecraft character",
-    kind: "minecraft",
-    label: "Minecraft Bedrock Player",
-  },
-] as const;
 
 export const HeroPortrait = () => {
   const {
@@ -34,13 +14,13 @@ export const HeroPortrait = () => {
     backPortrait,
     currentLabel,
     interactionHandlers,
-  } = usePortraitFlip(PORTRAITS);
+  } = usePortraitFlip(HERO_PORTRAITS);
 
   return (
     <button
       type="button"
       className={styles.portraitButton}
-      aria-label={`Switch AxmBro portrait - ${currentLabel}`}
+      aria-label={HOME_PAGE_TEXTS.hero.portraitAria(currentLabel)}
       {...interactionHandlers}
     >
       <span className={styles.portraitScene}>
@@ -52,7 +32,7 @@ export const HeroPortrait = () => {
               src={frontPortrait.src}
               alt={frontPortrait.alt}
               fill
-              priority
+              preload
               sizes={HERO_PORTRAIT_IMAGE_SIZES}
               className={`${styles.portraitImage} ${frontPortrait.kind === "design" ? styles.portraitImageDesign : ""}`}
             />

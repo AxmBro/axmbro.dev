@@ -1,5 +1,6 @@
 import type { MouseEvent } from "react";
 import { hasHash } from "@/shared/lib/has-hash";
+import { getScrollBehavior } from "@/shared/lib/motion";
 import { isNavLinkActive, normalizePathname } from "@/shared/lib/nav-active";
 import { ROUTES } from "@/shared/constants/routes";
 
@@ -28,5 +29,5 @@ export const scrollToTopOnSameRoute = (
   if (normalizePathname(pathname) !== normalizePathname(href)) return;
 
   event.preventDefault();
-  window.scrollTo({ top: 0, behavior: "smooth" });
+  window.scrollTo({ top: 0, behavior: getScrollBehavior() });
 };

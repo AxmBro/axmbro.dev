@@ -2,20 +2,26 @@
 
 import { useState, useEffect, useRef } from "react";
 import { FaChevronDown } from "react-icons/fa6";
-import { PROJECTS } from "@/shared/constants/data";
-import { ProjectCard, formatProjectDate, parseProjectDateTimestamp } from "@/entities/project";
+import { PROJECTS, PROJECTS_BOARD_TEXTS } from "@/shared/constants/data";
+import {
+  ProjectCard,
+  compareFeaturedFirst,
+  formatProjectDate,
+  parseProjectDateTimestamp,
+} from "@/entities/project";
 import {
   PROJECT_CONTENT_DELAY,
   PROJECT_FEATURED_CARD_STEP,
 } from "@/shared/ui/motion";
 import { JoinedTabs } from "@/shared/ui/joined-tabs";
+import { getScrollBehavior } from "@/shared/lib/motion";
 import {
   isProjectsBoardTab,
   saveProjectsSearch,
   saveProjectsSort,
   saveProjectsTab,
+  PROJECTS_BOARD_SORTS,
   PROJECTS_BOARD_TABS,
-  PROJECTS_BOARD_TAB_LABELS,
   type ProjectsBoardSort,
   type ProjectsBoardTab,
 } from "@/shared/lib/projects-board-state";
@@ -24,11 +30,15 @@ import styles from "./projects-board.module.scss";
 
 type SortOption = "" | ProjectsBoardSort;
 
-const SORT_OPTIONS: { value: ProjectsBoardSort; label: string }[] = [
-  { value: "newest", label: "Newest" },
-  { value: "oldest", label: "Oldest" },
-  { value: "alphabetical", label: "Alphabetical (A-Z)" },
-];
+// A query equal to a tag name (footer tag presets, or typed) filters by tag, not by description text.
+const ALL_TAGS = new Set(
+  PROJECTS.flatMap((item) => item.tags ?? []).map((tag) => tag.toLowerCase()),
+);
+
+const TAB_OPTIONS = PROJECTS_BOARD_TABS.map((tab) => ({
+  id: tab,
+  label: PROJECTS_BOARD_TEXTS.tabs[tab],
+}));
 
 export const ProjectsBoard = () => {
   const [search, setSearch] = useState("");
@@ -37,6 +47,7 @@ export const ProjectsBoard = () => {
   const [isSortOpen, setIsSortOpen] = useState(false);
 
   const sortRef = useRef<HTMLDivElement>(null);
+  const sortButtonRef = useRef<HTMLButtonElement>(null);
   const restoredRef = useRef(false);
 
   useEffect(() => {
@@ -48,7 +59,7 @@ export const ProjectsBoard = () => {
     setActiveTab(saved.activeTab);
     setSortOption(saved.sortOption);
     if (saved.scrollTop) {
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      window.scrollTo({ top: 0, behavior: getScrollBehavior() });
     }
   }, []);
 
@@ -85,43 +96,39 @@ export const ProjectsBoard = () => {
     setSortOption(option);
     saveProjectsSort(option);
     setIsSortOpen(false);
+    // The focused option unmounts with the list - keep keyboard focus on the trigger.
+    sortButtonRef.current?.focus();
   };
 
-  const filtered = PROJECTS.filter((item) => {
+  const query = search.trim().toLowerCase();
+  const isTagQuery = ALL_TAGS.has(query);
+  const sortedAndFiltered = PROJECTS.filter((item) => {
     if (activeTab === "featured" && !item.star) {
       return false;
     }
     if (activeTab !== "all" && activeTab !== "featured" && item.type !== activeTab) {
       return false;
     }
-    const q = search.toLowerCase();
-    const formattedDate = formatProjectDate(item).toLowerCase();
+    if (isTagQuery) {
+      return item.tags?.some((tag) => tag.toLowerCase() === query) ?? false;
+    }
     return (
-      item.title.toLowerCase().includes(q) ||
-      item.description.toLowerCase().includes(q) ||
-      item.tags?.join(" ").toLowerCase().includes(q) ||
-      formattedDate.includes(q)
+      item.title.toLowerCase().includes(query) ||
+      item.description.toLowerCase().includes(query) ||
+      item.tags?.join(" ").toLowerCase().includes(query) ||
+      formatProjectDate(item).toLowerCase().includes(query)
     );
-  });
-
-  const sortedAndFiltered = [...filtered].sort((a, b) => {
+  }).sort((a, b) => {
     if (sortOption === "newest") {
-      const timeA = parseProjectDateTimestamp(a.date);
-      const timeB = parseProjectDateTimestamp(b.date);
-      return timeB - timeA;
+      return parseProjectDateTimestamp(b.date) - parseProjectDateTimestamp(a.date);
     }
     if (sortOption === "oldest") {
-      const timeA = parseProjectDateTimestamp(a.date);
-      const timeB = parseProjectDateTimestamp(b.date);
-      return timeA - timeB;
+      return parseProjectDateTimestamp(a.date) - parseProjectDateTimestamp(b.date);
     }
     if (sortOption === "alphabetical") {
       return a.title.localeCompare(b.title);
     }
-
-    if (a.star && !b.star) return -1;
-    if (!a.star && b.star) return 1;
-    return 0;
+    return compareFeaturedFirst(a, b);
   });
 
   return (
@@ -131,8 +138,8 @@ export const ProjectsBoard = () => {
           <input
             type="search"
             className={`${styles.searchInput} ${search ? styles.hasValue : ""}`}
-            placeholder="Search..."
-            aria-label="Search projects"
+            placeholder={PROJECTS_BOARD_TEXTS.searchPlaceholder}
+            aria-label={PROJECTS_BOARD_TEXTS.searchAria}
             value={search}
             onChange={(e) => handleSearchChange(e.target.value)}
           />
@@ -141,7 +148,7 @@ export const ProjectsBoard = () => {
               type="button"
               className={styles.clearButton}
               onClick={() => handleSearchChange("")}
-              aria-label="Clear search"
+              aria-label={PROJECTS_BOARD_TEXTS.clearSearch}
             >
               ✕
             </button>
@@ -150,17 +157,18 @@ export const ProjectsBoard = () => {
 
         <div className={styles.sortWrapper} ref={sortRef}>
           <button
+            ref={sortButtonRef}
             type="button"
             className={`${styles.sortButton} ${isSortOpen ? styles.isOpen : ""}`}
             onClick={() => setIsSortOpen((prev) => !prev)}
-            aria-label="Sort projects"
+            aria-label={PROJECTS_BOARD_TEXTS.sortAria}
             aria-expanded={isSortOpen}
             aria-haspopup="listbox"
           >
             <span className={styles.sortButtonText}>
               {sortOption
-                ? SORT_OPTIONS.find((o) => o.value === sortOption)?.label
-                : "Sort by..."}
+                ? PROJECTS_BOARD_TEXTS.sortOptions[sortOption]
+                : PROJECTS_BOARD_TEXTS.sortPlaceholder}
             </span>
             <FaChevronDown
               className={`${styles.chevronIcon} ${isSortOpen ? styles.chevronOpen : ""}`}
@@ -185,29 +193,29 @@ export const ProjectsBoard = () => {
                       }
                     }}
                   >
-                    ✕ Clear sort
+                    {PROJECTS_BOARD_TEXTS.clearSort}
                   </li>
                   <li className={styles.dropdownDivider} role="separator" />
                 </>
               )}
-              {SORT_OPTIONS.map((option) => (
+              {PROJECTS_BOARD_SORTS.map((option) => (
                 <li
-                  key={option.value}
+                  key={option}
                   role="option"
                   tabIndex={0}
-                  aria-selected={sortOption === option.value}
+                  aria-selected={sortOption === option}
                   className={`${styles.sortDropdownItem} ${
-                    sortOption === option.value ? styles.selectedItem : ""
+                    sortOption === option ? styles.selectedItem : ""
                   }`}
-                  onClick={() => handleSortChange(option.value)}
+                  onClick={() => handleSortChange(option)}
                   onKeyDown={(e) => {
                     if (e.key === "Enter" || e.key === " ") {
                       e.preventDefault();
-                      handleSortChange(option.value);
+                      handleSortChange(option);
                     }
                   }}
                 >
-                  {option.label}
+                  {PROJECTS_BOARD_TEXTS.sortOptions[option]}
                 </li>
               ))}
             </ul>
@@ -217,12 +225,9 @@ export const ProjectsBoard = () => {
 
       <div className={styles.tabsWrapper}>
         <JoinedTabs
-          options={PROJECTS_BOARD_TABS.map((tab) => ({
-            id: tab,
-            label: PROJECTS_BOARD_TAB_LABELS[tab],
-          }))}
+          options={TAB_OPTIONS}
           activeId={activeTab}
-          aria-label="Filter projects"
+          aria-label={PROJECTS_BOARD_TEXTS.tabsAria}
           onChange={(id) => {
             if (isProjectsBoardTab(id)) {
               handleTabChange(id);
@@ -249,7 +254,7 @@ export const ProjectsBoard = () => {
           {search ? (
             <>
               <p className={styles.noResultsMessage}>
-                No results for: <strong>{search}</strong>.
+                {PROJECTS_BOARD_TEXTS.noResultsFor} <strong>{search}</strong>.
               </p>
               <p className={styles.noResultsActions}>
                 <button
@@ -257,9 +262,9 @@ export const ProjectsBoard = () => {
                   className={styles.emptyAction}
                   onClick={() => handleSearchChange("")}
                 >
-                  Clear search
+                  {PROJECTS_BOARD_TEXTS.clearSearch}
                 </button>
-                {" or switch to "}
+                {PROJECTS_BOARD_TEXTS.orSwitchTo}
                 <button
                   type="button"
                   className={styles.emptyAction}
@@ -268,28 +273,28 @@ export const ProjectsBoard = () => {
                     handleTabChange("commissions");
                   }}
                 >
-                  {PROJECTS_BOARD_TAB_LABELS.commissions}
+                  {PROJECTS_BOARD_TEXTS.tabs.commissions}
                 </button>
                 .
               </p>
             </>
           ) : (
             <p className={styles.noResultsMessage}>
-              No projects in this filter. Switch to{" "}
+              {PROJECTS_BOARD_TEXTS.emptyFilter}{" "}
               <button
                 type="button"
                 className={styles.emptyAction}
                 onClick={() => handleTabChange("all")}
               >
-                {PROJECTS_BOARD_TAB_LABELS.all}
+                {PROJECTS_BOARD_TEXTS.tabs.all}
               </button>
-              {" or "}
+              {PROJECTS_BOARD_TEXTS.or}
               <button
                 type="button"
                 className={styles.emptyAction}
                 onClick={() => handleTabChange("commissions")}
               >
-                {PROJECTS_BOARD_TAB_LABELS.commissions}
+                {PROJECTS_BOARD_TEXTS.tabs.commissions}
               </button>
               .
             </p>

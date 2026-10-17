@@ -19,7 +19,7 @@ import { FAQAccordion } from "@/features/faq-accordion";
 import styles from "./page.module.scss";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Contact",
+  title: CTA_LABELS.contactForm,
   description: SITE_METADATA.contactDescription,
   path: ROUTES.contact,
 });
@@ -35,7 +35,7 @@ export default function ContactPage() {
       <Reveal>
         <ScreenSection
           id={SECTION_IDS.contactForm}
-          eyebrow="Contact"
+          eyebrow={HOME_PAGE_TEXTS.contactPage.eyebrow}
           title={HOME_PAGE_TEXTS.contactPage.title}
           headingLevel="h1"
           withChildrenPadding={false}
@@ -50,7 +50,7 @@ export default function ContactPage() {
       <Reveal>
         <ScreenSection
           id={SECTION_IDS.contactOptions}
-          eyebrow="Channels"
+          eyebrow={HOME_PAGE_TEXTS.contactPage.socialsEyebrow}
           withChildrenPadding
           title={CTA_LABELS.contactOptions}
           titleDescription={HOME_PAGE_TEXTS.contactPage.socials}
@@ -68,8 +68,8 @@ export default function ContactPage() {
       <Reveal>
         <ScreenSection
           id={SECTION_IDS.quickQuestions}
-          eyebrow="Answers"
-          title="Quick Questions"
+          eyebrow={HOME_PAGE_TEXTS.contactPage.quickQuestionsEyebrow}
+          title={HOME_PAGE_TEXTS.contactPage.quickQuestionsTitle}
           withChildrenPadding={false}
           grid="bottom"
           titleDescription={HOME_PAGE_TEXTS.contactPage.quickQuestions}

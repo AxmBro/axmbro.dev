@@ -15,10 +15,6 @@ interface GridBackdropProps {
   variant?: "page" | "footer";
 }
 
-function readPageColumnLeftFromDom(): number | null {
-  return readPageColumnLeft();
-}
-
 export function GridBackdrop({ variant = "page" }: GridBackdropProps) {
   const ref = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
@@ -44,8 +40,7 @@ export function GridBackdrop({ variant = "page" }: GridBackdropProps) {
           ? (readSiteGridCellSize() ?? computeSquareCellSize(spanX))
           : computeSquareCellSize(spanX);
 
-      const pageColumnLeft = readPageColumnLeftFromDom();
-      const meshLeft = pageColumnLeft ?? columnRect.left;
+      const meshLeft = readPageColumnLeft() ?? columnRect.left;
       const columnOffsetX = meshLeft - originRect.left;
 
       backdrop.style.setProperty("--grid-cell-x", `${cellSize}px`);

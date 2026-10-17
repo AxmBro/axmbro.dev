@@ -1,8 +1,9 @@
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import { LegalPage } from "@/shared/ui/legal-page";
 import {
   TERMS_OF_USE_ITEMS,
   TERMS_OF_USE_LAST_UPDATED,
+  TERMS_OF_USE_PAGE,
   parseLegalLastUpdated,
 } from "@/shared/constants/legal";
 import { SECTION_IDS } from "@/shared/constants/anchors";
@@ -12,7 +13,7 @@ import { createPageMetadata } from "@/shared/lib/page-metadata";
 import { buildWebPageJsonLd, JsonLd } from "@/shared/lib/json-ld";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Terms of Use",
+  title: TERMS_OF_USE_PAGE.title,
   description: SITE_METADATA.termsOfUseDescription,
   path: ROUTES.termsOfUse,
 });
@@ -25,7 +26,7 @@ export default function TermsOfUsePage() {
       {dateModified ? (
         <JsonLd
           data={buildWebPageJsonLd({
-            title: "Terms of Use",
+            title: TERMS_OF_USE_PAGE.title,
             description: SITE_METADATA.termsOfUseDescription,
             path: ROUTES.termsOfUse,
             dateModified,
@@ -34,11 +35,11 @@ export default function TermsOfUsePage() {
       ) : null}
       <LegalPage
         id={SECTION_IDS.termsOfUse}
-        title="Terms of Use"
-        intro="Rules for using axmbro.dev."
+        title={TERMS_OF_USE_PAGE.title}
+        intro={TERMS_OF_USE_PAGE.intro}
         lastUpdated={TERMS_OF_USE_LAST_UPDATED}
         items={TERMS_OF_USE_ITEMS}
-        contactBlurb="Questions about these Terms? Email axmbro@gmail.com or use the"
+        contactBlurb={TERMS_OF_USE_PAGE.contactBlurb}
       />
     </>
   );

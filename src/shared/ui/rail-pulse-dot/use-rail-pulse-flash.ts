@@ -1,8 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, type RefObject } from "react";
-import { useReducedMotion } from "@/shared/ui/motion";
-import { useRevealInView } from "@/shared/ui/motion";
+import { useReducedMotion, useRevealInView } from "@/shared/ui/motion";
 
 export type UseRailPulseFlashOptions = {
   pulseOnMount?: boolean;

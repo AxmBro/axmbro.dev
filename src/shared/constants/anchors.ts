@@ -24,19 +24,16 @@ export const SECTION_IDS = {
   projectCredits: "credits",
 };
 
-export const homeSectionHref = (id: string) => `/#${id}`;
+export const homeSectionHref = (id: string) => `${ROUTES.home}#${id}`;
 
-export const contactSectionHref = (id: string) => `/contact#${id}`;
+export const contactSectionHref = (id: string) => `${ROUTES.contact}#${id}`;
 
 /** Primary contact page - no hash jump */
 export const contactFormHref = () => ROUTES.contact;
 
-export const commissionSectionHref = (id: string) => `/commissions#${id}`;
+export const commissionSectionHref = (id: string) => `${ROUTES.commissions}#${id}`;
 
 export const faqItemId = (slug: string) => `faq-${slug}`;
-
-export const faqItemHref = (slug: string) =>
-  contactSectionHref(faqItemId(slug));
 
 export const commissionFaqItemHref = (slug: string) =>
   commissionSectionHref(faqItemId(slug));

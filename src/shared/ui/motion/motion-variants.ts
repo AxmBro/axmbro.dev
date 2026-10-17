@@ -16,7 +16,7 @@ export function projectAccentDelayHeroTitle(): number {
 
 export const REVEAL_VIEWPORT_MARGIN = "0px 0px -15% 0px";
 
-// Card accent title only: earlier inView than default entry reveal (see motion-and-polish.mdc).
+// Card accent title only: earlier inView than the default entry reveal.
 export const REVEAL_ACCENT_TITLE_VIEWPORT_MARGIN = "0px 0px -12% 0px";
 
 export const revealViewport = {
@@ -34,32 +34,16 @@ export const fadeUpVariants: Variants = {
   },
 };
 
-export const fadeFromRightVariants: Variants = {
-  hidden: { opacity: 0, x: REVEAL_X },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: { duration: REVEAL_DURATION, ease: REVEAL_EASE },
-  },
-};
+// Mount entrances (`RevealEnter`, `RevealHeroMedia`) run as CSS keyframes so they start at first
+// paint instead of after hydration - an `opacity:0` hero is not an LCP candidate until it fades in.
+export const ENTER_FROM = {
+  up: `translateY(${REVEAL_Y}px)`,
+  right: `translateX(${REVEAL_X}px)`,
+  top: "translateY(-12px)",
+  scale: "scale(1.04)",
+} as const;
 
-export const fadeFromTopVariants: Variants = {
-  hidden: { opacity: 0, y: -12 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: REVEAL_DURATION, ease: REVEAL_EASE },
-  },
-};
-
-export const heroMediaRevealVariants: Variants = {
-  hidden: { opacity: 0, scale: 1.04 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: { duration: HERO_MEDIA_DURATION, ease: REVEAL_EASE },
-  },
-};
+export type EnterFrom = keyof typeof ENTER_FROM;
 
 export const staggerContainerVariants: Variants = {
   hidden: {},

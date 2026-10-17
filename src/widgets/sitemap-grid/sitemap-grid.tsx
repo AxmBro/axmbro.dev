@@ -1,6 +1,16 @@
 import { Children, type ReactElement, type ReactNode } from "react";
 import Link from "next/link";
-import { getFeaturedProjects, getProjectTypeLabel, PROJECTS, CTA_LABELS } from "@/shared/constants/data";
+import {
+  COMMISSIONS_PAGE_TEXTS,
+  CTA_LABELS,
+  HOME_PAGE_TEXTS,
+  NAV_LINKS,
+  PROJECTS,
+  SITEMAP_PAGE_TEXTS,
+  getFeaturedProjects,
+  getProjectTypeLabel,
+} from "@/shared/constants/data";
+import { PRIVACY_POLICY_PAGE, TERMS_OF_USE_PAGE } from "@/shared/constants/legal";
 import {
   commissionFaqItemHref,
   commissionSectionHref,
@@ -10,9 +20,31 @@ import {
   SECTION_IDS,
 } from "@/shared/constants/anchors";
 import { projectDetailPath, ROUTES } from "@/shared/constants/routes";
+import { PROJECTS_BOARD_TABS } from "@/shared/lib/projects-board-state";
 import { HashLink } from "@/shared/ui/hash-link";
+import { NavRouteLink } from "@/shared/ui/nav-route-link";
 import { ProjectsBoardLink } from "@/shared/ui/projects-tag-link";
 import styles from "./sitemap-grid.module.scss";
+
+const { columns } = SITEMAP_PAGE_TEXTS;
+
+const HOME_SECTION_LINKS = [
+  { id: SECTION_IDS.profile, label: HOME_PAGE_TEXTS.hero.eyebrow },
+  { id: SECTION_IDS.selectedWork, label: HOME_PAGE_TEXTS.selectedWork.title },
+  { id: SECTION_IDS.trackRecord, label: HOME_PAGE_TEXTS.trackRecord.title },
+  { id: SECTION_IDS.experience, label: HOME_PAGE_TEXTS.experience.title },
+  { id: SECTION_IDS.skills, label: HOME_PAGE_TEXTS.skills.title },
+  { id: SECTION_IDS.workWithMe, label: HOME_PAGE_TEXTS.workWithMe.title },
+];
+
+const COMMISSION_SECTION_LINKS = [
+  { id: SECTION_IDS.commissionClients, label: SITEMAP_PAGE_TEXTS.selectedClients },
+  { id: SECTION_IDS.commissionServices, label: COMMISSIONS_PAGE_TEXTS.servicesTitle },
+  { id: SECTION_IDS.commissionRequirements, label: COMMISSIONS_PAGE_TEXTS.requirementsTitle },
+  { id: SECTION_IDS.commissionProcess, label: COMMISSIONS_PAGE_TEXTS.processTitle },
+  { id: SECTION_IDS.commissionDelivery, label: COMMISSIONS_PAGE_TEXTS.deliveryTitle },
+  { id: SECTION_IDS.commissionFaq, label: COMMISSIONS_PAGE_TEXTS.faqTitle },
+];
 
 const SitemapColumn = ({
   title,
@@ -35,31 +67,32 @@ const SitemapColumn = ({
 
 export const SitemapGrid = () => (
   <div className={styles.grid}>
-    <SitemapColumn title="Main Pages">
-      <Link href={ROUTES.home}>Home</Link>
-      <ProjectsBoardLink tab="all">Projects</ProjectsBoardLink>
-      <Link href={ROUTES.commissions}>Commissions</Link>
-      <Link href={ROUTES.contact}>Contact</Link>
-      <Link href={ROUTES.sitemap}>Sitemap</Link>
+    <SitemapColumn title={columns.mainPages}>
+      {NAV_LINKS.map((link) => (
+        <NavRouteLink key={link.href} href={link.href}>
+          {link.text}
+        </NavRouteLink>
+      ))}
+      <Link href={ROUTES.sitemap}>{SITEMAP_PAGE_TEXTS.title}</Link>
     </SitemapColumn>
 
-    <SitemapColumn title="Homepage Sections">
-      <HashLink href={homeSectionHref(SECTION_IDS.profile)}>About</HashLink>
-      <HashLink href={homeSectionHref(SECTION_IDS.trackRecord)}>Track Record</HashLink>
-      <HashLink href={homeSectionHref(SECTION_IDS.selectedWork)}>Selected Projects</HashLink>
-      <HashLink href={homeSectionHref(SECTION_IDS.experience)}>Experience</HashLink>
-      <HashLink href={homeSectionHref(SECTION_IDS.skills)}>Skills</HashLink>
-      <HashLink href={homeSectionHref(SECTION_IDS.workWithMe)}>Work With Me</HashLink>
+    <SitemapColumn title={columns.homeSections}>
+      {HOME_SECTION_LINKS.map((link) => (
+        <HashLink key={link.id} href={homeSectionHref(link.id)}>
+          {link.label}
+        </HashLink>
+      ))}
     </SitemapColumn>
 
-    <SitemapColumn title="Project Views">
-      <ProjectsBoardLink tab="all">All Projects</ProjectsBoardLink>
-      <ProjectsBoardLink tab="featured">Featured Projects</ProjectsBoardLink>
-      <ProjectsBoardLink tab="personal">Personal Projects</ProjectsBoardLink>
-      <ProjectsBoardLink tab="commissions">Client Work</ProjectsBoardLink>
+    <SitemapColumn title={columns.projectViews}>
+      {PROJECTS_BOARD_TABS.map((tab) => (
+        <ProjectsBoardLink key={tab} tab={tab}>
+          {SITEMAP_PAGE_TEXTS.projectViews[tab]}
+        </ProjectsBoardLink>
+      ))}
     </SitemapColumn>
 
-    <SitemapColumn title="Featured Projects">
+    <SitemapColumn title={columns.featuredProjects}>
       {getFeaturedProjects().map((project) =>
         project.url ? (
           <Link key={project.url} href={projectDetailPath(project.url)}>
@@ -69,43 +102,30 @@ export const SitemapGrid = () => (
       )}
     </SitemapColumn>
 
-    <SitemapColumn title="Commission Guide">
-      <Link href={ROUTES.commissions}>Commissions</Link>
-      <HashLink href={commissionSectionHref(SECTION_IDS.commissionClients)}>
-        Selected Clients
-      </HashLink>
-      <HashLink href={commissionSectionHref(SECTION_IDS.commissionServices)}>
-        What I Build
-      </HashLink>
-      <HashLink href={commissionSectionHref(SECTION_IDS.commissionRequirements)}>
-        What I Need From You
-      </HashLink>
-      <HashLink href={commissionSectionHref(SECTION_IDS.commissionProcess)}>
-        Commission Process
-      </HashLink>
-      <HashLink href={commissionSectionHref(SECTION_IDS.commissionDelivery)}>
-        Delivery & Support
-      </HashLink>
-      <HashLink href={commissionSectionHref(SECTION_IDS.commissionFaq)}>
-        Commission FAQ
-      </HashLink>
-      <HashLink href={commissionFaqItemHref("pricing")}>Pricing FAQ</HashLink>
-      <HashLink href={commissionFaqItemHref("revisions")}>Revisions FAQ</HashLink>
-      <HashLink href={commissionFaqItemHref("payments")}>Payments FAQ</HashLink>
-      <HashLink href={commissionFaqItemHref("nda")}>NDA FAQ</HashLink>
-      <HashLink href={commissionFaqItemHref("turnaround")}>Turnaround FAQ</HashLink>
-      <HashLink href={commissionFaqItemHref("support")}>Support FAQ</HashLink>
-      <HashLink href={commissionFaqItemHref("availability")}>Availability FAQ</HashLink>
+    <SitemapColumn title={columns.commissionGuide}>
+      <Link href={ROUTES.commissions}>{CTA_LABELS.commissions}</Link>
+      {COMMISSION_SECTION_LINKS.map((link) => (
+        <HashLink key={link.id} href={commissionSectionHref(link.id)}>
+          {link.label}
+        </HashLink>
+      ))}
+      {SITEMAP_PAGE_TEXTS.commissionFaqLinks.map((link) => (
+        <HashLink key={link.slug} href={commissionFaqItemHref(link.slug)}>
+          {link.label}
+        </HashLink>
+      ))}
     </SitemapColumn>
 
-    <SitemapColumn title="Contact & Legal">
+    <SitemapColumn title={columns.contactLegal}>
       <Link href={contactFormHref()}>{CTA_LABELS.contactForm}</Link>
       <HashLink href={contactSectionHref(SECTION_IDS.contactOptions)}>
         {CTA_LABELS.contactOptions}
       </HashLink>
-      <HashLink href={contactSectionHref(SECTION_IDS.quickQuestions)}>Quick Questions</HashLink>
-      <Link href={ROUTES.privacyPolicy}>Privacy Policy</Link>
-      <Link href={ROUTES.termsOfUse}>Terms of Use</Link>
+      <HashLink href={contactSectionHref(SECTION_IDS.quickQuestions)}>
+        {HOME_PAGE_TEXTS.contactPage.quickQuestionsTitle}
+      </HashLink>
+      <Link href={ROUTES.privacyPolicy}>{PRIVACY_POLICY_PAGE.title}</Link>
+      <Link href={ROUTES.termsOfUse}>{TERMS_OF_USE_PAGE.title}</Link>
     </SitemapColumn>
   </div>
 );

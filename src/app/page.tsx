@@ -8,9 +8,16 @@ import { AnnouncementBar } from "@/widgets/announcement-bar";
 import { SkillsGrid } from "@/widgets/skills-grid";
 import { ExperienceGrid } from "@/widgets/experience-grid";
 import { HeroSection } from "@/widgets/hero-section";
-import { TrackRecord } from "@/widgets/track-record";
+import { ClientLogoStrip, TrackRecord } from "@/widgets/track-record";
 import { SelectedWork } from "@/widgets/selected-work";
-import { HOME_PAGE_TEXTS, SITE_METADATA, SITE_ROLE, CTA_LABELS, SOCIAL_LINK_BUTTONS } from "@/shared/constants/data";
+import {
+  HOME_CLIENT_STUDIOS,
+  HOME_PAGE_TEXTS,
+  SITE_METADATA,
+  SITE_ROLE,
+  SOCIAL_LINK_BUTTONS,
+  pageTitle,
+} from "@/shared/constants/data";
 import { contactFormHref, SECTION_IDS } from "@/shared/constants/anchors";
 import { ROUTES } from "@/shared/constants/routes";
 import { createPageMetadata } from "@/shared/lib/page-metadata";
@@ -18,7 +25,7 @@ import { buildPersonJsonLd, JsonLd } from "@/shared/lib/json-ld";
 
 export const metadata: Metadata = createPageMetadata({
   title: SITE_ROLE.headline,
-  absoluteTitle: `AxmBro.dev | ${SITE_ROLE.headline}`,
+  absoluteTitle: pageTitle(SITE_ROLE.headline),
   description: SITE_METADATA.homeDescription,
   path: ROUTES.home,
 });
@@ -38,35 +45,35 @@ export default function HomePage() {
             sameAs,
           })}
         />
-        <HeroSection />
-
-        <ScreenSection
-          id={SECTION_IDS.trackRecord}
-          eyebrow="Proof"
-          title="Track Record"
-          titleDescription={HOME_PAGE_TEXTS.trackRecord.description}
-          withChildrenPadding={false}
-          grid="top"
-        >
-          <TrackRecord />
-        </ScreenSection>
+        <HeroSection footer={<ClientLogoStrip clients={HOME_CLIENT_STUDIOS} />} />
 
         <ScreenSection
           id={SECTION_IDS.selectedWork}
-          eyebrow="Work"
-          title="Selected Projects"
+          eyebrow={HOME_PAGE_TEXTS.selectedWork.eyebrow}
+          title={HOME_PAGE_TEXTS.selectedWork.title}
           titleDescription={HOME_PAGE_TEXTS.selectedWork.description}
           withChildrenPadding={false}
-          variant="accent"
           grid="top"
         >
           <SelectedWork />
         </ScreenSection>
 
         <ScreenSection
+          id={SECTION_IDS.trackRecord}
+          eyebrow={HOME_PAGE_TEXTS.trackRecord.eyebrow}
+          title={HOME_PAGE_TEXTS.trackRecord.title}
+          titleDescription={HOME_PAGE_TEXTS.trackRecord.description}
+          withChildrenPadding={false}
+          variant="accent"
+          grid="top"
+        >
+          <TrackRecord />
+        </ScreenSection>
+
+        <ScreenSection
           id={SECTION_IDS.experience}
-          eyebrow="Background"
-          title="Experience"
+          eyebrow={HOME_PAGE_TEXTS.experience.eyebrow}
+          title={HOME_PAGE_TEXTS.experience.title}
           titleDescription={HOME_PAGE_TEXTS.experience.description}
           withChildrenPadding={false}
         >
@@ -75,8 +82,8 @@ export default function HomePage() {
 
         <ScreenSection
           id={SECTION_IDS.skills}
-          eyebrow="Capabilities"
-          title="Skills"
+          eyebrow={HOME_PAGE_TEXTS.skills.eyebrow}
+          title={HOME_PAGE_TEXTS.skills.title}
           titleDescription={HOME_PAGE_TEXTS.skills.description}
           withChildrenPadding={false}
           fullWidthGrid
@@ -86,8 +93,8 @@ export default function HomePage() {
 
         <ConversionCloser
           id={SECTION_IDS.workWithMe}
-          eyebrow="Services"
-          title="Work With Me"
+          eyebrow={HOME_PAGE_TEXTS.workWithMe.eyebrow}
+          title={HOME_PAGE_TEXTS.workWithMe.title}
           titleDescription={HOME_PAGE_TEXTS.workWithMe.description}
         >
           <ButtonGroup>
@@ -97,7 +104,7 @@ export default function HomePage() {
               href={contactFormHref()}
             />
             <Button
-              text={CTA_LABELS.commissionDetails}
+              text={HOME_PAGE_TEXTS.workWithMe.ctaSecondary}
               variant={buttonVariantForIndex(1)}
               href={ROUTES.commissions}
             />

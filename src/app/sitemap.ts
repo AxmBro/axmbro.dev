@@ -1,6 +1,5 @@
 import type { MetadataRoute } from "next";
-import { parseProjectDateTimestamp } from "@/entities/project";
-import { PROJECTS } from "@/shared/constants/data";
+import { getProjectsWithPage, parseProjectDateTimestamp } from "@/entities/project";
 import {
   PRIVACY_POLICY_LAST_UPDATED,
   TERMS_OF_USE_LAST_UPDATED,
@@ -19,7 +18,7 @@ function projectLastModified(dateStr?: string): Date | undefined {
   return timestamp > 0 ? new Date(timestamp) : undefined;
 }
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+export default function sitemap(): MetadataRoute.Sitemap {
   const staticPaths = [
     ROUTES.home,
     ROUTES.commissions,
@@ -37,11 +36,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: route === ROUTES.home ? 1.0 : 0.8,
   }));
 
-  const projectRoutes: MetadataRoute.Sitemap = PROJECTS.filter((p) => p.url).map((project) => {
+  const projectRoutes: MetadataRoute.Sitemap = getProjectsWithPage().map((project) => {
     const lastModified = projectLastModified(project.date);
 
     return {
-      url: `${SITE_ORIGIN}${projectDetailPath(project.url!)}`,
+      url: `${SITE_ORIGIN}${projectDetailPath(project.url)}`,
       ...(lastModified ? { lastModified } : {}),
       changeFrequency: "weekly" as const,
       priority: 0.7,

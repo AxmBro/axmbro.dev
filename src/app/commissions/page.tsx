@@ -35,7 +35,7 @@ export default function CommissionsPage() {
       <JsonLd data={buildFaqPageJsonLd(COMMISSION_FAQ_ITEMS)} />
       <Reveal>
         <ScreenSection
-          eyebrow="Services"
+          eyebrow={COMMISSIONS_PAGE_TEXTS.eyebrow}
           title={COMMISSIONS_PAGE_TEXTS.title}
           headingLevel="h1"
           titleDescription={COMMISSIONS_PAGE_TEXTS.intro}
@@ -59,21 +59,21 @@ export default function CommissionsPage() {
       <Reveal>
         <ScreenSection
           id={SECTION_IDS.commissionClients}
-          eyebrow="Proof"
+          eyebrow={COMMISSIONS_PAGE_TEXTS.clientsEyebrow}
           title={COMMISSIONS_PAGE_TEXTS.clientsTitle}
           titleDescription={COMMISSIONS_PAGE_TEXTS.clientsDescription}
           withChildrenPadding={false}
           grid="top"
         >
-          <TrackRecordClients clients={HOME_CLIENT_STUDIOS} showHeader={false} />
+          <TrackRecordClients clients={HOME_CLIENT_STUDIOS} />
         </ScreenSection>
       </Reveal>
 
       <Reveal>
         <ScreenSection
           id={SECTION_IDS.commissionServices}
-          eyebrow="Scope"
-          title="What I Build"
+          eyebrow={COMMISSIONS_PAGE_TEXTS.servicesEyebrow}
+          title={COMMISSIONS_PAGE_TEXTS.servicesTitle}
           titleDescription={COMMISSIONS_PAGE_TEXTS.services}
           withChildrenPadding={false}
           variant="accent"
@@ -86,8 +86,8 @@ export default function CommissionsPage() {
       <Reveal>
         <ScreenSection
           id={SECTION_IDS.commissionRequirements}
-          eyebrow="Preparation"
-          title="What I Need From You"
+          eyebrow={COMMISSIONS_PAGE_TEXTS.requirementsEyebrow}
+          title={COMMISSIONS_PAGE_TEXTS.requirementsTitle}
           titleDescription={COMMISSIONS_PAGE_TEXTS.requirements}
           withChildrenPadding={false}
         >
@@ -98,8 +98,8 @@ export default function CommissionsPage() {
       <Reveal>
         <ScreenSection
           id={SECTION_IDS.commissionProcess}
-          eyebrow="Workflow"
-          title="Commission Process"
+          eyebrow={COMMISSIONS_PAGE_TEXTS.processEyebrow}
+          title={COMMISSIONS_PAGE_TEXTS.processTitle}
           titleDescription={COMMISSIONS_PAGE_TEXTS.process}
           withChildrenPadding={false}
           grid="bottom"
@@ -111,8 +111,8 @@ export default function CommissionsPage() {
       <Reveal>
         <ScreenSection
           id={SECTION_IDS.commissionDelivery}
-          eyebrow="Handoff"
-          title="Delivery & Support"
+          eyebrow={COMMISSIONS_PAGE_TEXTS.deliveryEyebrow}
+          title={COMMISSIONS_PAGE_TEXTS.deliveryTitle}
           titleDescription={COMMISSIONS_PAGE_TEXTS.delivery}
           withChildrenPadding={false}
           variant="accent"
@@ -125,8 +125,8 @@ export default function CommissionsPage() {
       <Reveal>
         <ScreenSection
           id={SECTION_IDS.commissionFaq}
-          eyebrow="Answers"
-          title="Commission FAQ"
+          eyebrow={COMMISSIONS_PAGE_TEXTS.faqEyebrow}
+          title={COMMISSIONS_PAGE_TEXTS.faqTitle}
           titleDescription={COMMISSIONS_PAGE_TEXTS.faq}
           withChildrenPadding={false}
         >
@@ -135,8 +135,8 @@ export default function CommissionsPage() {
       </Reveal>
 
       <ConversionCloser
-        eyebrow="Contact"
-        title="Ready to Discuss Your Project?"
+        eyebrow={COMMISSIONS_PAGE_TEXTS.ctaEyebrow}
+        title={COMMISSIONS_PAGE_TEXTS.ctaTitle}
         titleDescription={COMMISSIONS_PAGE_TEXTS.cta}
       >
         <ButtonGroup>

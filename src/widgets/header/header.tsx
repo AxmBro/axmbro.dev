@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { HomeLink } from "@/shared/ui/home-link";
 import { NavRouteLink } from "@/shared/ui/nav-route-link";
-import { NAV_LINKS } from "@/shared/constants/data";
+import { HEADER_TEXTS, NAV_LINKS, SITE_BRAND } from "@/shared/constants/data";
 import { ROUTES } from "@/shared/constants/routes";
 import { normalizePathname } from "@/shared/lib/nav-active";
 import {
@@ -83,10 +83,10 @@ export const Header = () => {
                 width={32}
                 height={32}
               />
-              <span className={styles.logoText}>AxmBro</span>
+              <span className={styles.logoText}>{SITE_BRAND.name}</span>
             </HomeLink>
 
-            <nav className={styles.desktopNav} aria-label="Main navigation">
+            <nav className={styles.desktopNav} aria-label={HEADER_TEXTS.mainNavAria}>
               <ul className={styles.navList}>
                 {NAV_LINKS.map((link) => (
                   <li key={link.href}>{renderNavLink(link, styles.navItem)}</li>
@@ -102,9 +102,11 @@ export const Header = () => {
                 className={styles.menuToggle}
                 aria-expanded={menuOpen}
                 aria-controls={MOBILE_NAV_ID}
-                aria-label={menuOpen ? "Close menu" : "Open menu"}
+                aria-label={menuOpen ? HEADER_TEXTS.closeMenuAria : HEADER_TEXTS.openMenuAria}
               >
-                <span className={styles.toggleText}>{menuOpen ? "Close" : "Menu"}</span>
+                <span className={styles.toggleText}>
+                  {menuOpen ? HEADER_TEXTS.close : HEADER_TEXTS.menu}
+                </span>
               </button>
             )}
           </div>
@@ -114,7 +116,7 @@ export const Header = () => {
               ref={mobileNavRef}
               id={MOBILE_NAV_ID}
               className={styles.mobileMenu}
-              aria-label="Mobile navigation"
+              aria-label={HEADER_TEXTS.mobileNavAria}
             >
               <ul className={styles.mobileNavList}>
                 {NAV_LINKS.map((link) => (

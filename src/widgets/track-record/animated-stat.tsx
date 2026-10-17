@@ -2,6 +2,7 @@
 
 import { useEffect, useState, type AnimationEvent } from "react";
 import { isReducedMotion } from "@/shared/lib/motion";
+import styles from "./animated-stat.module.scss";
 
 export const ANIMATED_STAT_DURATION_MS = 1600;
 export const STAT_COLOR_REVEAL_MS = 1100;
@@ -64,7 +65,9 @@ export function AnimatedStat({
 
   return (
     <span className={className} onAnimationEnd={onAnimationEnd}>
-      {startWhen ? displayValue : "0"}
+      {/* Real value in SSR HTML for crawlers and screen readers; the counter is visual only. */}
+      <span className={styles.srValue}>{value}</span>
+      <span aria-hidden>{startWhen ? displayValue : "0"}</span>
     </span>
   );
 }

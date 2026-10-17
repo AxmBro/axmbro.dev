@@ -16,7 +16,7 @@ export function buildProjectActions(
 
   if (project.downloadLink) {
     actions.push({
-      text: "Download",
+      text: CTA_LABELS.download,
       href: project.downloadLink,
       external: true,
     });

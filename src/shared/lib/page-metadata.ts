@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SITE_METADATA } from "@/shared/constants/data";
+import { SITE_BRAND, SITE_METADATA, pageTitle } from "@/shared/constants/data";
 
 const DEFAULT_OG_IMAGE = {
   url: "/images/ui/og-image.png",
@@ -53,7 +53,7 @@ export function createPageMetadata({
   imageAlt,
   openGraphType = "website",
 }: CreatePageMetadataOptions): Metadata {
-  const ogTitle = absoluteTitle ?? `AxmBro.dev | ${title}`;
+  const ogTitle = absoluteTitle ?? pageTitle(title);
   const ogImages = toImageList(images);
 
   if (imageAlt && ogImages[0]) {
@@ -69,7 +69,7 @@ export function createPageMetadata({
       title: ogTitle,
       description,
       ...(path ? { url: path } : {}),
-      siteName: "AxmBro",
+      siteName: SITE_BRAND.name,
       images: ogImages,
       locale: "en_US",
       type: openGraphType,
@@ -79,8 +79,8 @@ export function createPageMetadata({
       title: ogTitle,
       description,
       images: twitterImageUrls(ogImages),
-      site: "@AxmBro",
-      creator: "@AxmBro",
+      site: SITE_BRAND.socialHandle,
+      creator: SITE_BRAND.socialHandle,
     },
   };
 }

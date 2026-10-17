@@ -3,10 +3,11 @@ export { RevealEnter } from "./reveal-enter";
 export { RevealHeroMedia } from "./reveal-hero-media";
 export { RevealItem, RevealStagger } from "./reveal-stagger";
 export { useRevealInView } from "./use-reveal-in-view";
-export { useReducedMotion } from "motion/react";
+export { useReducedMotion } from "./use-reduced-motion";
 export {
   PROJECT_CONTENT_DELAY,
   PROJECT_FEATURED_CARD_STEP,
   projectAccentDelayHeroTitle,
   REVEAL_ACCENT_TITLE_VIEWPORT_MARGIN,
+  STAGGER_CHILDREN,
 } from "./motion-variants";

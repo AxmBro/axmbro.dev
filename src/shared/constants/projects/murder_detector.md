@@ -7,45 +7,42 @@ credits:
 videos:
   - title: Trailer
     description: >-
-      Showcase trailer for Murder Detector+, demonstrating how the detection
-      indicators work in-game.
+      A trailer for Murder Detector+ that shows how the icons work in-game.
     youtubeId: CijS2JXf7BI
 imageSections:
   - title: Texture Pack
     description: >-
-      A breakdown of the main features, each with a short description and the
-      actual in-game view.
+      The main features, each with a short description and an in-game
+      screenshot.
     items:
-      - title: Visible Sheriffs
+      - title: Sheriff Icon
         description: >-
-          Once player in game is going to take bow or arrow to hand, bow icon
-          will be instantly visible above his name.
+          When a player holds a bow or an arrow, a bow icon appears above their
+          name right away.
         imageSrc: mm4
-      - title: Murderers are visible too!
+      - title: Murderer Icon
         description: >-
-          You are able to see sword icon above murderer, by same logic like
-          above, but detection list is larger than just bow or arrow: all types
-          of swords, mace and nether_star.
+          A sword icon appears above the murderer in the same way. The item list
+          is longer than for the sheriff: all types of swords, the mace, and the
+          nether star.
         imageSrc: mm5
-      - title: Witness a murder!
+      - title: Both Roles In-Game
         description: >-
-          See how exactly you are able to see these both roles of game! Take a
-          look on overlay effect once you are close enough.
+          Shows how both roles look during a game. When you get close enough,
+          an overlay effect appears.
         imageSrc: mm6
-      - title: Toggleable options
+      - title: Subpack Options
         description: >-
-          If you don't like current options you can change them in subpacks and
-          use: 1. Only Icon 2. Default without colors 3. Default (icon + color)
+          You can change the look in the subpacks. There are 3 options: 1. Only
+          Icon 2. Default without colors 3. Default (icon + color)
         imageSrc: mm7
-      - title: Reliable Detection
+      - title: Double Check
         description: >-
-          What sets this pack apart is a double-check system with a cooldown
-          that confirms whether a player is actually a murderer or sheriff. It
-          avoids a common countermeasure where servers hand every player a sword
-          at the start, which would otherwise mark everyone with an icon. The
-          pack resolves that issue and works on every platform that supports
-          texture packs.
+          The pack uses a double check with a cooldown before it shows an icon.
+          Some servers give every player a sword at the start. The double check
+          ignores this, so not every player gets an icon. The pack works on
+          every platform that supports texture packs.
         imageSrc: mm8
 ---
 
-A texture pack for Minecraft Bedrock Edition designed for Murder Mystery minigame servers. Displays visible indicators above sheriffs and murderers based on held items, with a double-check system to avoid false positives. Available on all platforms that support texture packs.
+Murder Detector+ is a Minecraft Bedrock texture pack for Murder Mystery minigames that works on every platform with texture pack support. It shows an icon above the sheriff and the murderer, based on the item each one holds. A double check with a cooldown stops it from marking every player when a server gives everyone a sword. I made it as a personal experiment with entity models and texture pack logic.

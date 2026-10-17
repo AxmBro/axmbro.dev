@@ -2,6 +2,8 @@ import type { ReactNode } from "react";
 
 export type ProjectsBoardTab = "all" | "featured" | "personal" | "commissions";
 
+export type ProjectsBoardSort = "newest" | "oldest" | "alphabetical";
+
 export type ProjectType = "personal" | "commissions";
 
 export interface ProjectItem {
@@ -19,6 +21,13 @@ export interface ProjectItem {
   date?: string;
   isPresent?: boolean;
   accentColor?: string;
+}
+
+export interface HeroPortrait {
+  src: string;
+  alt: string;
+  kind: "photo" | "design" | "minecraft";
+  label: string;
 }
 
 export interface ExperienceItem {

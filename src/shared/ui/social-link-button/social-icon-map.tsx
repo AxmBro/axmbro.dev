@@ -1,5 +1,3 @@
-"use client";
-
 import type { ComponentType } from "react";
 import { FaGithub, FaDiscord, FaYoutube, FaXTwitter, FaInstagram, FaEnvelope } from "react-icons/fa6";
 import { BetterBedrockIcon } from "@/shared/ui/better-bedrock-icon";

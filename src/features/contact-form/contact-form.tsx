@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState, type FormEvent, type ChangeEvent } from "react";
+import { useEffect, useRef, useState, type ChangeEvent, type FormEvent } from "react";
 import { JoinedTabs } from "@/shared/ui/joined-tabs";
 import {
   clearContactFormDraft,
-  getInitialContactFormDraft,
+  getSavedContactFormDraft,
   saveContactFormDraft,
 } from "@/shared/lib/contact-form-draft";
 import { sendEmailAction } from "./api/send-email";
@@ -106,11 +106,11 @@ const getFormValidation = (email: string, message: string): ContactFormValidatio
 };
 
 export const ContactForm = () => {
-  const initialDraft = useMemo(() => getInitialContactFormDraft(), []);
-  const [email, setEmail] = useState(initialDraft.email);
-  const [discord, setDiscord] = useState(initialDraft.discord);
-  const [message, setMessage] = useState(initialDraft.message);
-  const [activeIntent, setActiveIntent] = useState(initialDraft.activeIntent);
+  const [email, setEmail] = useState("");
+  const [discord, setDiscord] = useState("");
+  const [message, setMessage] = useState("");
+  const [activeIntent, setActiveIntent] = useState<string | null>(null);
+  const [isDraftRestored, setIsDraftRestored] = useState(false);
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState<string>(CONTACT_FORM_TEXTS.error);
   const [showValidation, setShowValidation] = useState(false);
@@ -121,14 +121,32 @@ export const ContactForm = () => {
   const showSubmitHint =
     showValidation && !isReady && status === "idle" && validation !== null;
 
+  // Draft restores after mount: the server HTML cannot see sessionStorage, so reading
+  // it during render would mismatch hydration. Saving waits until the restore landed.
   useEffect(() => {
+    const frame = requestAnimationFrame(() => {
+      const draft = getSavedContactFormDraft();
+      if (draft) {
+        setEmail(draft.email);
+        setDiscord(draft.discord);
+        setMessage(draft.message);
+        setActiveIntent(draft.activeIntent);
+      }
+      setIsDraftRestored(true);
+    });
+    return () => cancelAnimationFrame(frame);
+  }, []);
+
+  useEffect(() => {
+    if (!isDraftRestored) return;
+
     if (status === "success") {
       clearContactFormDraft();
       return;
     }
 
     saveContactFormDraft({ email, discord, message, activeIntent });
-  }, [email, discord, message, activeIntent, status]);
+  }, [email, discord, message, activeIntent, status, isDraftRestored]);
 
   useEffect(() => {
     return () => {
@@ -144,10 +162,12 @@ export const ContactForm = () => {
 
     if (!isReady) return;
 
+    // React clears `e.currentTarget` once dispatch ends - read it before the await.
+    const form = e.currentTarget;
     setStatus("submitting");
 
     try {
-      const formData = new FormData(e.currentTarget);
+      const formData = new FormData(form);
       const honeypot = String(formData.get("company") ?? "");
       const response = await sendEmailAction(email, discord, message, honeypot);
 
@@ -159,7 +179,7 @@ export const ContactForm = () => {
         setActiveIntent(null);
         setShowValidation(false);
         clearContactFormDraft();
-        e.currentTarget.reset();
+        form.reset();
 
         timeoutRef.current = setTimeout(() => {
           setStatus("idle");

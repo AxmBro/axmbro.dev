@@ -6,11 +6,17 @@ import { GoogleAnalytics } from "@/shared/ui/google-analytics";
 import { CookieConsent } from "@/shared/ui/cookie-consent";
 import { Header } from "@/widgets/header";
 import { Footer } from "@/widgets/footer";
-import { HashScroll, HashScrollInit } from "@/shared/ui/hash-scroll";
+import { HashScroll } from "@/shared/ui/hash-scroll";
 import { AmbientPixels } from "@/shared/ui/ambient-pixels";
 import { PixelClickWave } from "@/shared/ui/pixel-click-wave";
 import { SurfaceIgniteObserver } from "@/shared/ui/surface-ignite";
-import { SITE_METADATA, SITE_ROLE } from "@/shared/constants/data";
+import {
+  HEADER_TEXTS,
+  SITE_BRAND,
+  SITE_METADATA,
+  SITE_ROLE,
+  pageTitle,
+} from "@/shared/constants/data";
 import { SITE_ORIGIN } from "@/shared/constants/site";
 import "./globals.scss";
 
@@ -21,21 +27,23 @@ const lexend = Lexend({
   display: "swap",
 });
 
+const HOME_TITLE = pageTitle(SITE_ROLE.headline);
+
 export const metadata: Metadata = {
   title: {
-    default: `AxmBro.dev | ${SITE_ROLE.headline}`,
-    template: "AxmBro.dev | %s",
+    default: HOME_TITLE,
+    template: pageTitle("%s"),
   },
   description: SITE_METADATA.homeDescription,
   keywords: SITE_METADATA.keywords,
-  authors: [{ name: "AxmBro", url: SITE_ORIGIN }],
-  creator: "AxmBro",
+  authors: [{ name: SITE_BRAND.name, url: SITE_ORIGIN }],
+  creator: SITE_BRAND.name,
   metadataBase: new URL(SITE_ORIGIN),
   openGraph: {
-    title: `AxmBro.dev | ${SITE_ROLE.headline}`,
+    title: HOME_TITLE,
     description: SITE_METADATA.homeDescription,
     url: SITE_ORIGIN,
-    siteName: "AxmBro",
+    siteName: SITE_BRAND.name,
     images: [
       {
         url: "/images/ui/og-image.png",
@@ -49,11 +57,11 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `AxmBro.dev | ${SITE_ROLE.headline}`,
+    title: HOME_TITLE,
     description: SITE_METADATA.homeDescription,
     images: ["/images/ui/og-image.png"],
-    site: "@AxmBro",
-    creator: "@AxmBro",
+    site: SITE_BRAND.socialHandle,
+    creator: SITE_BRAND.socialHandle,
   },
   robots: {
     index: true,
@@ -65,9 +73,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={lexend.variable} suppressHydrationWarning>
       <body suppressHydrationWarning>
-        <HashScrollInit />
         <a href="#main" className="skip-link">
-          Skip to main content
+          {HEADER_TEXTS.skipToContent}
         </a>
         <GoogleAnalytics />
         <CookieConsent />

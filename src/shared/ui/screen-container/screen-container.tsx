@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 import { GridBackdrop } from "@/shared/ui/grid-backdrop";
 import { ScreenContent } from "./screen-content";
 import styles from "./screen-container.module.scss";

@@ -6,29 +6,29 @@ credits:
     href: https://github.com/AxmBro
 imageSections:
   - title: In-game Screenshots
-    description: Experimental red-themed layouts and custom component styling.
+    description: Experimental red-themed layouts with custom component styling.
     items:
       - title: General Appearance
         description: Red-themed UI with a custom overall layout.
         imageSrc: redui1
       - title: Server Form UI
         description: >-
-          Slightly different layout than usual. One or two buttons stay
-          centered; more buttons switch to a grid.
+          A slightly different layout from a usual server form. One or two
+          buttons stay centered, and more buttons switch to a grid.
         imageSrc: redui2
       - title: UI with 2 Buttons
         description: >-
-          Centered pair of buttons, plus custom previous/next controls in the
-          top-right next to the header.
+          Two centered buttons, plus custom previous and next controls in the
+          top-right corner next to the header.
         imageSrc: redui3
-      - title: Unlimited Buttons & Scrolling
+      - title: Unlimited Buttons and Scrolling
         description: >-
-          Larger button set with scrolling. Custom HD gradient textures show up
-          across most of the UI.
+          A larger set of buttons with scrolling. Custom HD gradient textures
+          are used across most of the UI.
         imageSrc: redui4
       - title: UI with 3 Buttons
         description: Grid layout with three buttons and custom hover text.
         imageSrc: redui5
 ---
 
-Ongoing experimental project focused on aggressive, red-themed in-game UI layouts and custom component styling. Not a finished release.
+Red UI is an ongoing personal experiment with red-themed server form layouts for Minecraft Bedrock, not a finished release. I build it in JsonUI, with custom component styling and HD gradient textures. One or two buttons stay centered, and more buttons switch to a scrollable grid.

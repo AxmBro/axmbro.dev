@@ -15,7 +15,7 @@ type ContactFormDraft = {
 const isContactFormIntentId = (value: string) =>
   CONTACT_FORM_INTENTS.some((intent) => intent.id === value);
 
-const getSavedContactFormDraft = (): ContactFormDraft | null => {
+export const getSavedContactFormDraft = (): ContactFormDraft | null => {
   try {
     const email = sessionStorage.getItem(CONTACT_FORM_EMAIL_KEY) ?? "";
     const discord = sessionStorage.getItem(CONTACT_FORM_DISCORD_KEY) ?? "";
@@ -70,13 +70,3 @@ export const clearContactFormDraft = () => {
     sessionStorage.removeItem(CONTACT_FORM_INTENT_KEY);
   } catch {}
 };
-
-const emptyContactFormDraft = (): ContactFormDraft => ({
-  email: "",
-  discord: "",
-  message: "",
-  activeIntent: null,
-});
-
-export const getInitialContactFormDraft = (): ContactFormDraft =>
-  getSavedContactFormDraft() ?? emptyContactFormDraft();

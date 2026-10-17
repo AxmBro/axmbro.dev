@@ -1,11 +1,12 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 import { PROJECT_PAGE_TEXTS } from "@/shared/constants/data";
+import { getScrollBehavior } from "@/shared/lib/motion";
 import { resolveCssLengthPx } from "@/shared/lib/sticky-scroll-offset";
 import { HashLink } from "@/shared/ui/hash-link";
-import type { ProjectTocItem } from "./types";
+import type { ProjectTocItem } from "./lib/toc-types";
 import { useSectionItemPosition } from "./lib/use-section-item-position";
 import styles from "./project-toc.module.scss";
 
@@ -48,7 +49,7 @@ function scrollChildIntoViewX(root: HTMLElement, child: HTMLElement) {
   const max = Math.max(0, root.scrollWidth - root.clientWidth);
   root.scrollTo({
     left: clamp(root.scrollLeft + (childCenter - rootCenter), 0, max),
-    behavior: "smooth",
+    behavior: getScrollBehavior(),
   });
 }
 
@@ -100,7 +101,7 @@ export const ProjectToc = ({ items }: ProjectTocProps) => {
     const el = linksRef.current;
     if (!el) return;
     const step = clamp(el.clientWidth * 0.7, SCROLL_STEP_MIN, SCROLL_STEP_MAX);
-    el.scrollBy({ left: dir * step, behavior: "smooth" });
+    el.scrollBy({ left: dir * step, behavior: getScrollBehavior() });
   };
 
   const lockClick = (id: string) => {
@@ -112,7 +113,8 @@ export const ProjectToc = ({ items }: ProjectTocProps) => {
     setActiveId(id);
   };
 
-  useEffect(() => {
+  // Layout effect: set before Next scrolls to a `#hash` on navigation (its handler is a parent layout effect).
+  useLayoutEffect(() => {
     const nav = navRef.current;
     if (!nav || items.length < MIN_ITEMS) return;
 
@@ -149,7 +151,12 @@ export const ProjectToc = ({ items }: ProjectTocProps) => {
         Math.abs(event.deltaX) > Math.abs(event.deltaY)
           ? event.deltaX
           : event.deltaY;
-      if (delta === 0) return;
+      // At either end, let the wheel scroll the page instead of trapping it on the sticky strip.
+      const atEdge =
+        delta < 0
+          ? el.scrollLeft <= 0
+          : el.scrollLeft >= el.scrollWidth - el.clientWidth - 1;
+      if (delta === 0 || atEdge) return;
       event.preventDefault();
       el.scrollLeft += delta;
     };
@@ -159,13 +166,11 @@ export const ProjectToc = ({ items }: ProjectTocProps) => {
     el.addEventListener("wheel", onWheel, { passive: false });
     const resizeObserver = new ResizeObserver(syncOverflow);
     resizeObserver.observe(el);
-    window.addEventListener("resize", syncOverflow);
 
     return () => {
       el.removeEventListener("scroll", syncOverflow);
       el.removeEventListener("wheel", onWheel);
       resizeObserver.disconnect();
-      window.removeEventListener("resize", syncOverflow);
     };
   }, [items]);
 
@@ -260,15 +265,15 @@ export const ProjectToc = ({ items }: ProjectTocProps) => {
     .join(" ");
 
   return (
-    <nav ref={navRef} className={styles.toc} aria-label="On this page">
+    <nav ref={navRef} className={styles.toc} aria-label={PROJECT_PAGE_TEXTS.toc.label}>
       <div className={styles.inner}>
-        <span className={styles.label}>On this page</span>
+        <span className={styles.label}>{PROJECT_PAGE_TEXTS.toc.label}</span>
         <div className={wrapClass}>
           {canScrollLeft && (
             <button
               type="button"
               className={`${styles.scrollBtn} ${styles.scrollBtnLeft}`}
-              aria-label="Scroll tabs left"
+              aria-label={PROJECT_PAGE_TEXTS.toc.scrollLeft}
               onClick={() => scrollByPage(-1)}
             >
               <FaChevronLeft size={12} aria-hidden />
@@ -289,7 +294,7 @@ export const ProjectToc = ({ items }: ProjectTocProps) => {
             <button
               type="button"
               className={`${styles.scrollBtn} ${styles.scrollBtnRight}`}
-              aria-label="Scroll tabs right"
+              aria-label={PROJECT_PAGE_TEXTS.toc.scrollRight}
               onClick={() => scrollByPage(1)}
             >
               <FaChevronRight size={12} aria-hidden />

@@ -1,10 +1,10 @@
 import type { MetadataRoute } from "next";
-import { SITE_METADATA } from "@/shared/constants/data";
+import { SITE_BRAND, SITE_METADATA } from "@/shared/constants/data";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "AxmBro.dev",
-    short_name: "AxmBro",
+    name: SITE_BRAND.siteName,
+    short_name: SITE_BRAND.name,
     description: SITE_METADATA.homeDescription,
     start_url: "/",
     display: "standalone",

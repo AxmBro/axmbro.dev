@@ -26,6 +26,12 @@
   }
 }
 
+// Above .waveLayer like .heroGrid; the band draws its own top border.
+.heroFooter {
+  position: relative;
+  z-index: 2;
+}
+
 .heroContent {
   display: flex;
   flex-direction: column;

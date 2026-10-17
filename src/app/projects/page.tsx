@@ -11,7 +11,7 @@ import { ConversionCloser } from "@/shared/ui/conversion-closer";
 import { ProjectsBoard } from "@/widgets/projects-board";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Projects",
+  title: HOME_PAGE_TEXTS.projectsPage.title,
   description: SITE_METADATA.projectsDescription,
   path: ROUTES.projects,
 });
@@ -20,8 +20,8 @@ export default function ProjectsPage() {
   return (
     <ScreenContainer>
       <ScreenSection
-        eyebrow="Portfolio"
-        title="Projects"
+        eyebrow={HOME_PAGE_TEXTS.projectsPage.eyebrow}
+        title={HOME_PAGE_TEXTS.projectsPage.title}
         headingLevel="h1"
         titleDescription={HOME_PAGE_TEXTS.projectsPage.description(PROJECTS.length)}
         withChildrenPadding={false}
@@ -31,8 +31,8 @@ export default function ProjectsPage() {
       </ScreenSection>
 
       <ConversionCloser
-        eyebrow="Services"
-        title="Want Something Similar?"
+        eyebrow={HOME_PAGE_TEXTS.projectsPage.closerEyebrow}
+        title={HOME_PAGE_TEXTS.projectsPage.closerTitle}
         titleDescription={HOME_PAGE_TEXTS.projectsPage.closerDescription}
       >
         <ButtonGroup>

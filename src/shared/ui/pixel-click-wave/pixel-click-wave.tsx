@@ -309,11 +309,17 @@ export function PixelClickWave() {
       width = viewport.width;
       height = viewport.height;
 
+      const backingWidth = Math.round(width * pixelRatio);
+      const backingHeight = Math.round(height * pixelRatio);
+
       for (const layer of Object.values(layers)) {
         if (!layer) continue;
-        layer.canvas.width = Math.round(width * pixelRatio);
-        layer.canvas.height = Math.round(height * pixelRatio);
-        layer.context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+        // visualViewport scroll fires constantly on mobile; reallocating clears the canvas, so only do it on a real size change.
+        if (layer.canvas.width !== backingWidth || layer.canvas.height !== backingHeight) {
+          layer.canvas.width = backingWidth;
+          layer.canvas.height = backingHeight;
+          layer.context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+        }
         applyCanvasLayout(layer);
       }
     };

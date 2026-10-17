@@ -36,7 +36,7 @@ export function ProjectHero({
             src={imageSrc}
             alt=""
             fill
-            priority
+            preload
             sizes="100vw"
             className={styles.image}
           />

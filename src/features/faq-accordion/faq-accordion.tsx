@@ -4,16 +4,11 @@ import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import type { FAQItem } from "@/shared/constants/data";
 import { faqItemId } from "@/shared/constants/anchors";
-import {
-  FAQ_HASH_SCROLL_DELAY_MS,
-  notifyPageHashChange,
-  PAGE_HASH_CHANGE,
-  parseHashId,
-  scrollToHash,
-} from "@/shared/lib/scroll-to-hash";
+import { parseHashId, scrollToHash } from "@/shared/lib/scroll-to-hash";
 import styles from "./faq-accordion.module.scss";
 
-const FAQ_PANEL_OPEN_MS = FAQ_HASH_SCROLL_DELAY_MS;
+/** Just over the 0.25s `grid-template-rows` transition in the module; a `#faq-*` jump re-scrolls after it, once items above have collapsed. */
+const FAQ_PANEL_OPEN_MS = 280;
 
 const ChevronIcon = ({ isOpen }: { isOpen: boolean }) => (
   <svg
@@ -56,7 +51,7 @@ export const FAQAccordion = ({ items }: FAQAccordionProps) => {
       }
 
       scrollTimerRef.current = window.setTimeout(() => {
-        scrollToHash(undefined, "smooth");
+        scrollToHash();
         scrollTimerRef.current = null;
       }, FAQ_PANEL_OPEN_MS);
     };
@@ -69,13 +64,17 @@ export const FAQAccordion = ({ items }: FAQAccordionProps) => {
       scheduleScrollToFaq();
     };
 
-    syncFromHash();
+    // Entry with `#faq-*` (direct or from another page): only open - nothing above the
+    // item is open yet, so the jump already landed. In-page links fire `hashchange`.
+    const openFrame = requestAnimationFrame(() => {
+      const slug = findSlugFromHash(items);
+      if (slug) setOpenSlug(slug);
+    });
     window.addEventListener("hashchange", syncFromHash);
-    window.addEventListener(PAGE_HASH_CHANGE, syncFromHash);
 
     return () => {
+      cancelAnimationFrame(openFrame);
       window.removeEventListener("hashchange", syncFromHash);
-      window.removeEventListener(PAGE_HASH_CHANGE, syncFromHash);
       if (scrollTimerRef.current !== null) {
         window.clearTimeout(scrollTimerRef.current);
       }
@@ -90,21 +89,12 @@ export const FAQAccordion = ({ items }: FAQAccordionProps) => {
     history.replaceState(null, "", path);
   };
 
-  const setFaqHash = (slug: string, options?: { notify?: boolean }) => {
-    const path = `${pathname}${window.location.search}`;
+  // Accordion clicks keep the URL shareable but never scroll.
+  const setFaqHash = (slug: string) => {
     const nextId = faqItemId(slug);
+    if (parseHashId(window.location.hash) === nextId) return;
 
-    if (parseHashId(window.location.hash) === nextId) {
-      if (options?.notify !== false) {
-        notifyPageHashChange();
-      }
-      return;
-    }
-
-    history.replaceState(null, "", `${path}#${nextId}`);
-    if (options?.notify !== false) {
-      notifyPageHashChange();
-    }
+    history.replaceState(null, "", `${pathname}${window.location.search}#${nextId}`);
   };
 
   const toggleFAQ = (slug: string | undefined, index: number) => {
@@ -117,7 +107,7 @@ export const FAQAccordion = ({ items }: FAQAccordionProps) => {
     }
 
     setOpenSlug(key);
-    if (slug) setFaqHash(slug, { notify: false });
+    if (slug) setFaqHash(slug);
   };
 
   return (

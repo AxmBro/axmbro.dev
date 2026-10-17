@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useId, useRef } from "react";
-import { useSyncExternalStore } from "react";
+import { useEffect, useId, useRef, useSyncExternalStore } from "react";
+import { COOKIE_CONSENT_TEXTS } from "@/shared/constants/data";
+import { PRIVACY_POLICY_PAGE } from "@/shared/constants/legal";
 import { ROUTES } from "@/shared/constants/routes";
 import {
   getAnalyticsConsent,
@@ -91,17 +92,21 @@ export const CookieConsent = () => {
       aria-describedby={descId}
     >
       <h2 id={titleId} className={styles.title}>
-        We use cookies
+        {COOKIE_CONSENT_TEXTS.title}
       </h2>
       <p id={descId} className={styles.text}>
-        Optional analytics helps us improve the site. Accept if you are OK with that.
+        {COOKIE_CONSENT_TEXTS.text}
       </p>
       <div className={styles.actions}>
-        <Button text="Accept cookies" variant="primary" onClick={() => handleChoice("accepted")} />
-        <Button text="Reject cookies" onClick={() => handleChoice("rejected")} />
+        <Button
+          text={COOKIE_CONSENT_TEXTS.accept}
+          variant="primary"
+          onClick={() => handleChoice("accepted")}
+        />
+        <Button text={COOKIE_CONSENT_TEXTS.reject} onClick={() => handleChoice("rejected")} />
       </div>
       <Link href={ROUTES.privacyPolicy} className={styles.policyLink}>
-        Privacy Policy
+        {PRIVACY_POLICY_PAGE.title}
       </Link>
     </div>
   );

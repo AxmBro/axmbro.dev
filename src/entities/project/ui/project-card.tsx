@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import type { ProjectItem } from "@/shared/constants/data";
+import { PROJECT_PAGE_TEXTS, type ProjectItem } from "@/shared/constants/data";
 import { projectDetailPath } from "@/shared/constants/routes";
 import {
   PROJECT_CONTENT_DELAY,
@@ -101,7 +101,7 @@ export function ProjectCard({
 }: ProjectCardProps) {
   const [linkActive, setLinkActive] = useState(false);
   const thumbnailSrc = getProjectThumbnailSrc(project);
-  const thumbnailAlt = `${project.title} project preview`;
+  const thumbnailAlt = PROJECT_PAGE_TEXTS.previewAlt(project.title);
 
   const handleLinkActivate = () => setLinkActive(true);
   const handleLinkDeactivate = () => setLinkActive(false);

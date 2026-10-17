@@ -2,10 +2,10 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ReactNode, type MouseEvent } from "react";
+import type { MouseEvent, ReactNode } from "react";
 import { ROUTES } from "@/shared/constants/routes";
+import { getScrollBehavior } from "@/shared/lib/motion";
 import { normalizePathname } from "@/shared/lib/nav-active";
-import { notifyPageHashChange } from "@/shared/lib/scroll-to-hash";
 
 interface HomeLinkProps {
   className?: string;
@@ -23,13 +23,11 @@ export const HomeLink = ({ className, children, onClick }: HomeLinkProps) => {
 
     e.preventDefault();
 
-    const path = window.location.pathname + window.location.search;
     if (window.location.hash) {
-      history.replaceState(null, "", path);
-      notifyPageHashChange();
+      history.replaceState(null, "", window.location.pathname + window.location.search);
     }
 
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({ top: 0, behavior: getScrollBehavior() });
   };
 
   return (

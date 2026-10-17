@@ -1,5 +1,5 @@
 import { SITE_ORIGIN } from "@/shared/constants/site";
-import { SITE_ROLE } from "@/shared/constants/data";
+import { SITE_BRAND, SITE_ROLE } from "@/shared/constants/data";
 
 export function JsonLd({ data }: { data: Record<string, unknown> }) {
   return (
@@ -39,7 +39,7 @@ export function buildPersonJsonLd({ description, sameAs }: PersonJsonLdOptions) 
   return {
     "@context": "https://schema.org",
     "@type": "Person",
-    name: "AxmBro",
+    name: SITE_BRAND.name,
     url: SITE_ORIGIN,
     image: `${SITE_ORIGIN}/icon192.png`,
     jobTitle: SITE_ROLE.headline,
@@ -69,7 +69,7 @@ export function buildProjectJsonLd({ title, description, path, image }: ProjectJ
     ...(image ? { image: `${SITE_ORIGIN}${image}` } : {}),
     author: {
       "@type": "Person",
-      name: "AxmBro",
+      name: SITE_BRAND.name,
       url: SITE_ORIGIN,
     },
   };
@@ -115,7 +115,7 @@ export function buildWebPageJsonLd({
     dateModified: dateModified.toISOString().split("T")[0],
     isPartOf: {
       "@type": "WebSite",
-      name: "AxmBro.dev",
+      name: SITE_BRAND.siteName,
       url: SITE_ORIGIN,
     },
   };

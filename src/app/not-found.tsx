@@ -1,4 +1,4 @@
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import { Reveal } from "@/shared/ui/motion";
 import { ScreenContainer } from "@/shared/ui/screen-container";
 import { ScreenSection } from "@/shared/ui/screen-section";
@@ -10,7 +10,7 @@ import { ROUTES } from "@/shared/constants/routes";
 import { createPageMetadata } from "@/shared/lib/page-metadata";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Page not found",
+  title: NOT_FOUND_PAGE_TEXTS.title,
   description: SITE_METADATA.notFoundDescription,
   robots: { index: false, follow: true },
 });
@@ -20,14 +20,14 @@ export default function NotFound() {
     <ScreenContainer>
       <Reveal>
         <ScreenSection
-          eyebrow="404"
-          title="Page not found"
+          eyebrow={NOT_FOUND_PAGE_TEXTS.eyebrow}
+          title={NOT_FOUND_PAGE_TEXTS.title}
           headingLevel="h1"
           titleDescription={NOT_FOUND_PAGE_TEXTS.description}
         >
           <ButtonGroup>
             <Button
-              text="Back to Home"
+              text={CTA_LABELS.backToHome}
               variant={buttonVariantForIndex(0)}
               href={ROUTES.home}
             />

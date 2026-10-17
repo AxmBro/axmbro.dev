@@ -210,15 +210,15 @@
   opacity: 0.5;
 }
 
-.techStack {
-  display: flex;
-  align-items: center;
-  gap: 0.35rem;
-  color: var(--color-neutral-400);
-  text-decoration: none;
+// Narrow: copyright gets its own line, so its trailing separator would dangle at the line end.
+@media (max-width: $breakpoint-sm) {
+  .copyrightLink {
+    flex-basis: 100%;
+    justify-content: center;
+  }
 
-  &:hover {
-    color: var(--color-neutral-100);
+  .copyrightLink + .separator {
+    display: none;
   }
 }
 
@@ -258,6 +258,14 @@
   &:hover {
     color: var(--color-neutral-100);
   }
+}
+
+.cookieSettings {
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
 }
 
 .localTime {

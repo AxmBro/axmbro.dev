@@ -104,7 +104,7 @@
 }
 
 .sortDropdownItem {
-  @include text-body(var(--color-neutral-300));
+  @include text-body;
   padding: 0.65rem 1rem;
   cursor: pointer;
   transition: none;
@@ -237,54 +237,13 @@
   }
 }
 
+// Same card mesh as home Selected Work.
 .grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  align-items: start;
-  width: 100%;
-  min-width: 0;
-
-  @media (max-width: $breakpoint-wide) {
-    grid-template-columns: 1fr;
-  }
+  @include connected-card-grid;
 }
 
 .gridItem {
-  border-right: 1px solid var(--color-border);
-  border-bottom: 1px solid var(--color-border);
-  min-width: 0;
-  max-width: 100%;
-
-  > :is(a, div) {
-    height: auto;
-    min-height: 0;
-    flex: none;
-  }
-
-  > :is(a, div) > div {
-    height: auto;
-  }
-
-  &:nth-child(2n) {
-    border-right: none;
-  }
-
-  &:last-child,
-  &:nth-last-child(2):nth-child(odd) {
-    border-bottom: none;
-  }
-
-  @media (max-width: $breakpoint-wide) {
-    border-right: none;
-
-    &:nth-last-child(2):nth-child(odd) {
-      border-bottom: 1px solid var(--color-border);
-    }
-
-    &:last-child {
-      border-bottom: none;
-    }
-  }
+  @include connected-card-grid-item;
 }
 
 .noResults {

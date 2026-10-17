@@ -1,25 +1,25 @@
 import Image from "next/image";
 import { FaStar, FaGlobe } from "react-icons/fa6";
 import { SiReact, SiJavascript, SiTypescript, SiCss } from "react-icons/si";
-import type { ProjectItem, ProjectType } from "@/shared/constants/data";
+import {
+  PROJECT_TAG_TEXTS,
+  type ProjectItem,
+  type ProjectType,
+} from "@/shared/constants/data";
 import styles from "./project-tags.module.scss";
 
-const TYPE_TAG_LABEL: Record<ProjectType, string> = {
-  personal: "Personal",
-  commissions: "Commissioned",
-};
+const MCBE_TAGS = [
+  "JsonUI",
+  "Server Form",
+  "HUD",
+  "Models",
+  "Textures",
+  "Entities",
+  "Inventory",
+];
 
 const getTagIcon = (tag: string) => {
-  const mcbeTags = [
-    "JsonUI",
-    "Server Form",
-    "HUD",
-    "Models",
-    "Textures",
-    "Entities",
-    "Inventory",
-  ];
-  if (mcbeTags.includes(tag)) {
+  if (MCBE_TAGS.includes(tag)) {
     return (
       <Image
         src="/images/ui/mcbe-logo.png"
@@ -50,7 +50,7 @@ const getTagIcon = (tag: string) => {
 const FeaturedTag = () => (
   <span className={`${styles.tag} ${styles.tagType}`}>
     <FaStar className={styles.featuredTagIcon} size={12} aria-hidden />
-    <span>Featured</span>
+    <span>{PROJECT_TAG_TEXTS.featured}</span>
   </span>
 );
 
@@ -65,7 +65,7 @@ function ProjectTypeTag({ type }: { type: ProjectType }) {
           height={14}
           className={styles.personalTagLogo}
         />
-        <span>{TYPE_TAG_LABEL.personal}</span>
+        <span>{PROJECT_TAG_TEXTS.personal}</span>
       </span>
     );
   }
@@ -82,7 +82,7 @@ function ProjectTypeTag({ type }: { type: ProjectType }) {
           unoptimized
         />
       </span>
-      <span>{TYPE_TAG_LABEL.commissions}</span>
+      <span>{PROJECT_TAG_TEXTS.commissions}</span>
     </span>
   );
 }
@@ -101,7 +101,7 @@ export const ProjectTags = ({ project, className }: ProjectTagsProps) => {
   return (
     <div
       className={className ? `${styles.tags} ${className}` : styles.tags}
-      aria-label="Project tags"
+      aria-label={PROJECT_TAG_TEXTS.aria}
     >
       {project.type && <ProjectTypeTag type={project.type} />}
       {project.star && <FeaturedTag />}

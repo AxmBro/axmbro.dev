@@ -1,12 +1,12 @@
 "use client";
 
 import { useRef } from "react";
-import { EXPERIENCE_TREE } from "@/shared/constants/data";
+import { EXPERIENCE_TREE, type ExperienceItem } from "@/shared/constants/data";
 import { RailPulseDot } from "@/shared/ui/rail-pulse-dot";
 import styles from "./experience-grid.module.scss";
 
 interface ExperienceGridItemProps {
-  exp: (typeof EXPERIENCE_TREE)[number];
+  exp: ExperienceItem;
   isFirst: boolean;
 }
 

@@ -1,4 +1,11 @@
-import { CAREER_START_DATE, PROJECTS } from "@/shared/constants/data";
+import {
+  CAREER_START_DATE,
+  HOME_PAGE_TEXTS,
+  PROJECTS,
+  getCommissionedProjects,
+} from "@/shared/constants/data";
+
+const STAT_LABELS = HOME_PAGE_TEXTS.trackRecord.stats;
 
 export interface TrackRecordStat {
   value: string;
@@ -23,12 +30,12 @@ function getYearsOfExperience(
 }
 
 export function getBaseTrackRecordStats(): TrackRecordStat[] {
-  const commissionCount = PROJECTS.filter((project) => project.type === "commissions").length;
+  const commissionCount = getCommissionedProjects().length;
 
   return [
-    { value: getYearsOfExperience(CAREER_START_DATE), label: "Years Experience" },
-    { value: "2M+", label: "Personal Project Downloads" },
-    { value: String(commissionCount), label: "Client Commissions" },
-    { value: String(PROJECTS.length), label: "Total Projects" },
+    { value: getYearsOfExperience(CAREER_START_DATE), label: STAT_LABELS.years },
+    { value: STAT_LABELS.downloadsValue, label: STAT_LABELS.downloads },
+    { value: String(commissionCount), label: STAT_LABELS.commissions },
+    { value: String(PROJECTS.length), label: STAT_LABELS.totalProjects },
   ];
 }

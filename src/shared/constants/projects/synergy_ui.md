@@ -6,26 +6,26 @@ credits:
     href: https://github.com/AxmBro
 imageSections:
   - title: In-game Screenshots
-    description: In-game screenshots, each with a short description.
+    description: In-game screenshots of the element and its options.
     items:
-      - title: Whole Element
+      - title: Full Element
         description: >-
-          Positioned on the left side of the screen. Fully customizable: you can
-          set the index, title, description, image, and extra synergies at the
-          bottom.
+          Sits on the left side of the screen. You can set the index, title,
+          description, image, and extra synergies at the bottom.
         imageSrc: synergy_ui1
       - title: Adjustable Length
         description: >-
-          You can set how many elements are displayed, and hide the index when
-          it is not needed.
+          You can set how many elements are shown, and hide the index when you
+          do not need it.
         imageSrc: synergy_ui2
-      - title: Just One Element
+      - title: Single Element
         description: >-
-          Use a single element and set its index if needed. The background
-          automatically adjusts to the element's size.
+          You can show just one element and set its index if needed. The
+          background adjusts to the element's size automatically.
         imageSrc: synergy_ui3
       - title: Example Usage
         description: A simple example of the element in use.
         imageSrc: synergy_ui4
 ---
 
+Synergy UI is a TFT-inspired HUD element for Minecraft Bedrock, commissioned by a private client. I built it in JsonUI as a list on the left side of the screen. Each entry can show an index, title, description, image, and extra synergies, and the background adjusts to the content.

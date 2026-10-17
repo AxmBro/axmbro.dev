@@ -1,8 +1,5 @@
-"use client";
-
 import type { ReactNode } from "react";
-import { motion, useReducedMotion } from "motion/react";
-import { heroMediaRevealVariants } from "./motion-variants";
+import { RevealEnter } from "./reveal-enter";
 
 interface RevealHeroMediaProps {
   children: ReactNode;
@@ -10,20 +7,9 @@ interface RevealHeroMediaProps {
 }
 
 export function RevealHeroMedia({ children, className }: RevealHeroMediaProps) {
-  const reduceMotion = useReducedMotion();
-
-  if (reduceMotion) {
-    return <div className={className}>{children}</div>;
-  }
-
   return (
-    <motion.div
-      className={className}
-      initial="hidden"
-      animate="visible"
-      variants={heroMediaRevealVariants}
-    >
+    <RevealEnter className={className} direction="scale">
       {children}
-    </motion.div>
+    </RevealEnter>
   );
 }

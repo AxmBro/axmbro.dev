@@ -1,35 +1,27 @@
 import Link from "next/link";
 import { HashLink } from "@/shared/ui/hash-link";
+import { ProjectsBoardLink } from "@/shared/ui/projects-tag-link";
 
-import {
-  commissionFaqItemHref,
-  commissionSectionHref,
-  contactFormHref,
-  contactSectionHref,
-  homeSectionHref,
-  SECTION_IDS,
-} from "./anchors";
+import { commissionSectionHref, contactFormHref, SECTION_IDS } from "./anchors";
 
 import type { FAQItem } from "./types";
 
+// One link per answer at most, and only when it leads somewhere the reader needs next.
 export const FAQ_ITEMS: FAQItem[] = [
   {
-    question: "What value do you bring to my project?",
+    question: "Who have you worked with?",
 
-    slug: "value",
+    slug: "clients",
 
     answerText:
-      "I specialize in custom Bedrock JsonUI built around real constraints, player flow, and clean integration with your pack and scripts - work shipped for studios and server teams. See Selected Projects for recent examples.",
+      "Servers and studios such as InPvP (Zeqa), Mush Co, A30x1, and Radium Studio, plus private server owners and creators. My own texture pack, Better Bedrock, has passed 2 million downloads.",
 
     answer: (
       <>
-        I specialize in custom Bedrock JsonUI built around real constraints,
-        player flow, and clean integration with your pack and scripts - work
-        shipped for studios and server teams.{" "}
-        <HashLink href={homeSectionHref(SECTION_IDS.selectedWork)}>
-          See Selected Projects
-        </HashLink>{" "}
-        for recent examples.
+        Servers and studios such as InPvP (Zeqa), Mush Co, A30x1, and Radium
+        Studio, plus private server owners and creators. My own texture pack,
+        Better Bedrock, has passed 2 million downloads.{" "}
+        <ProjectsBoardLink tab="commissions">See client work</ProjectsBoardLink>.
       </>
     ),
   },
@@ -40,40 +32,33 @@ export const FAQ_ITEMS: FAQItem[] = [
     slug: "availability",
 
     answerText:
-      "Yes. I am accepting custom Bedrock JsonUI commissions. Share your ideas, sketches, mockups, or a short scope outline when you reach out - the more context, the faster I can reply with sensible next steps. Send a message on the contact page and I will review your project. For what I take on and what I do not, see the scope FAQ.",
+      "Yes. I am accepting new Bedrock JsonUI commissions. Send your idea, sketches, or a short scope through the contact form, and I will reply with next steps.",
 
     answer: (
       <>
-        Yes. I am accepting custom Bedrock JsonUI commissions. Share your ideas,
-        sketches, mockups, or a short scope outline when you reach out - the more
-        context, the faster I can reply with sensible next steps. Send a message
-        on the{" "}
-        <Link href={contactFormHref()}>contact page</Link> and I will review your
-        project. For what I take on and what I do not, see the{" "}
-        <HashLink href={commissionFaqItemHref("scope")}>scope FAQ</HashLink>.
+        Yes. I am accepting new Bedrock JsonUI commissions. Send your idea,
+        sketches, or a short scope through the{" "}
+        <Link href={contactFormHref()}>contact form</Link>, and I will reply with
+        next steps.
       </>
     ),
   },
 
   {
-    question:
-      "Do you focus on frontend UI or backend development in Minecraft Bedrock?",
+    question: "Do you build only the UI, or backend logic too?",
 
     slug: "scope",
 
     answerText:
-      "Bedrock JsonUI is my main commission work - especially server forms and custom HUDs, plus chest UIs, connected menus, chat or pause screen work, and other interface screens. I also handle resource packs, entities, Molang, and UI animation where the project needs it. I do not write complex Behavior Pack backend logic, but I structure UI for ScriptAPI integration. Web development is separate - reach out on Discord DM first. Not sure your idea fits? Message me on the contact page anyway.",
+      "I build the UI side: JsonUI screens such as server forms, HUDs, chest UIs, menus, chat, and pause screens, plus resource packs, entities, Molang, and UI animation when needed. I do not write complex Behavior Pack logic, but I structure the UI so your ScriptAPI code can connect to it. For web projects, message me on Discord first.",
 
     answer: (
       <>
-        Bedrock JsonUI is my main commission work - especially server forms and
-        custom HUDs, plus chest UIs, connected menus, chat or pause screen work,
-        and other interface screens. I also handle resource packs, entities,
-        Molang, and UI animation where the project needs it. I do not write
-        complex Behavior Pack backend logic, but I structure UI for ScriptAPI
-        integration. Web development is separate - reach out on Discord DM first.
-        Not sure your idea fits?{" "}
-        <Link href={contactFormHref()}>Message me</Link> anyway.{" "}
+        I build the UI side: JsonUI screens such as server forms, HUDs, chest
+        UIs, menus, chat, and pause screens, plus resource packs, entities,
+        Molang, and UI animation when needed. I do not write complex Behavior
+        Pack logic, but I structure the UI so your ScriptAPI code can connect to
+        it. For web projects, message me on Discord first.{" "}
         <HashLink href={commissionSectionHref(SECTION_IDS.commissionServices)}>
           See what I build
         </HashLink>
@@ -83,76 +68,30 @@ export const FAQ_ITEMS: FAQItem[] = [
   },
 
   {
-    question:
-      "Do I need to provide complete UI designs, or do you handle the styling?",
+    question: "Do I need to provide complete UI designs?",
 
     slug: "mockups",
 
     answerText:
-      "A clear plan or visual reference helps a lot. I strongly recommend mockups before we start - from you, an artist, or your studio team. I can handle interface design and styling, but building visuals from scratch takes longer and costs more. A rough sketch, screenshot, or text outline still works when the direction is clear.",
-
-    answer: (
-      <>
-        A clear plan or visual reference helps a lot. I strongly recommend
-        mockups before we start - from you, an artist, or your studio team. I
-        can handle interface design and styling, but building visuals from
-        scratch takes longer and costs more. A rough sketch, screenshot, or text
-        outline still works when the direction is clear.{" "}
-        <HashLink
-          href={commissionSectionHref(SECTION_IDS.commissionRequirements)}
-        >
-          Review what I need from you
-        </HashLink>
-        .
-      </>
-    ),
+      "Not complete ones, but a clear reference helps a lot. Mockups from you or your artist work best. I can design the interface too, but designing from scratch takes longer and costs more. A sketch, a screenshot, or a text outline works when the direction is clear.",
   },
 
   {
-    question: "What is your typical turnaround time for commissions?",
+    question: "How long does a commission take?",
 
     slug: "turnaround",
 
     answerText:
-      "Timelines depend on scope, complexity, and my current schedule. Simple UI work is often about 3 to 7 days; larger custom UI sets often need a few weeks. I give a clear estimate after we review your requirements.",
-
-    answer: (
-      <>
-        Timelines depend on scope, complexity, and my current schedule. Simple UI
-        work is often about 3 to 7 days; larger custom UI sets often need a few
-        weeks. I give a clear estimate after we review your requirements.{" "}
-        <HashLink href={commissionSectionHref(SECTION_IDS.commissionProcess)}>
-          See the commission process
-        </HashLink>{" "}
-        or{" "}
-        <Link href={contactFormHref()}>get in touch</Link>
-        .
-      </>
-    ),
+      "It depends on scope, complexity, and my schedule. Simple UI work often takes 3 to 7 days; larger UI sets can take a few weeks. You get a clear estimate after we review your requirements.",
   },
 
   {
-    question: "How do you handle project pricing and payments?",
+    question: "How do you price commissions?",
 
     slug: "pricing",
 
     answerText:
-      "Pricing is based on scope after we review the project, so it can vary. For straightforward commissions, 50% upfront and 50% on delivery is common. Studios usually negotiate a separate contract; for other clients we agree terms professionally case by case.",
-
-    answer: (
-      <>
-        Pricing is based on scope after we review the project, so it can vary.
-        For straightforward commissions, 50% upfront and 50% on delivery is
-        common. Studios usually negotiate a separate contract; for other clients
-        we agree terms professionally case by case.{" "}
-        <HashLink href={commissionSectionHref(SECTION_IDS.commissionDelivery)}>
-          See delivery and support
-        </HashLink>{" "}
-        or{" "}
-        <Link href={contactFormHref()}>get in touch</Link>
-        .
-      </>
-    ),
+      "Every project is priced on its scope after we review it, so there is no fixed price list. For simple commissions, 50% upfront and 50% on delivery is common. Studios usually sign a separate contract.",
   },
 
   {
@@ -161,20 +100,7 @@ export const FAQ_ITEMS: FAQItem[] = [
     slug: "revisions",
 
     answerText:
-      "We agree on revision rounds when we lock scope. I share work at checkpoints; reasonable layout and flow fixes within that scope are part of the build. Bigger changes or extra screens are quoted before I continue.",
-
-    answer: (
-      <>
-        We agree on revision rounds when we lock scope. I share work at
-        checkpoints; reasonable layout and flow fixes within that scope are part
-        of the build. Bigger changes or extra screens are quoted before I
-        continue.{" "}
-        <HashLink href={commissionSectionHref(SECTION_IDS.commissionProcess)}>
-          See the commission process
-        </HashLink>
-        .
-      </>
-    ),
+      "We agree on revision rounds when we set the scope. I share work at checkpoints, and reasonable layout and flow fixes within that scope are part of the build. Bigger changes or extra screens get a quote before I continue.",
   },
 
   {
@@ -183,63 +109,25 @@ export const FAQ_ITEMS: FAQItem[] = [
     slug: "payments",
 
     answerText:
-      "PayPal, bank transfer, or card payment are standard options. I am also open to other payment methods - we agree the details in the contract before work starts.",
-
-    answer: (
-      <>
-        PayPal, bank transfer, or card payment are standard options. I am also
-        open to other payment methods - we agree the details in the contract
-        before work starts.{" "}
-        <HashLink href={commissionFaqItemHref("pricing")}>
-          See pricing and payment terms
-        </HashLink>
-        .
-      </>
-    ),
+      "PayPal, bank transfer, or card. Other methods are possible - we agree on the details before work starts.",
   },
 
   {
-    question: "What happens if a future Minecraft update breaks the UI?",
+    question: "What happens if a Minecraft update breaks the UI?",
 
     slug: "support",
 
     answerText:
-      "Minecraft Bedrock updates frequently change UI files, which can affect custom screens - though major breakage is uncommon in practice. For commissioned work, I include 30 days of support after delivery for layout issues caused by official game updates. After that, maintenance can be arranged as needed.",
-
-    answer: (
-      <>
-        Minecraft Bedrock updates frequently change UI files, which can affect
-        custom screens - though major breakage is uncommon in practice. For
-        commissioned work, I include 30 days of support after delivery for layout
-        issues caused by official game updates. After that, maintenance can be
-        arranged as needed.{" "}
-        <HashLink href={commissionSectionHref(SECTION_IDS.commissionDelivery)}>
-          See delivery and support
-        </HashLink>
-        .
-      </>
-    ),
+      "Bedrock updates sometimes change UI files, which can affect custom screens, though serious breakage is rare. Commissioned work includes 30 days of support after delivery for layout issues caused by official game updates. Longer maintenance can be arranged.",
   },
 
   {
-    question: "Do I receive full ownership and raw source files of the UI?",
+    question: "Do I get full ownership and the source files?",
 
     slug: "ownership",
 
     answerText:
-      "Yes for standard commissions - you receive the production files we agreed on. Large commercial or studio work may need custom licensing or IP terms.",
-
-    answer: (
-      <>
-        Yes for standard commissions - you receive the production files we
-        agreed on. Large commercial or studio work may need custom licensing or
-        IP terms.{" "}
-        <HashLink href={commissionFaqItemHref("pricing")}>
-          See pricing and payment terms
-        </HashLink>
-        .
-      </>
-    ),
+      "Yes. For standard commissions you receive the production files we agreed on. Large commercial or studio projects may need custom license or IP terms.",
   },
 
   {
@@ -248,19 +136,7 @@ export const FAQ_ITEMS: FAQItem[] = [
     slug: "nda",
 
     answerText:
-      "Yes. Studios often need NDAs or confidentiality terms - we can agree that before the scope review. File ownership still follows the agreed commission terms.",
-
-    answer: (
-      <>
-        Yes. Studios often need NDAs or confidentiality terms - we can agree that
-        before the scope review. File ownership still follows the agreed
-        commission terms.{" "}
-        <HashLink href={commissionFaqItemHref("ownership")}>
-          See ownership and source files
-        </HashLink>
-        .
-      </>
-    ),
+      "Yes. Studios often need an NDA or confidentiality terms, and we can sign them before the scope review. File ownership still follows the agreed terms.",
   },
 ];
 
@@ -290,28 +166,15 @@ export const COMMISSION_FAQ_ITEMS = FAQ_ITEMS.filter(
   (item) => item.slug && COMMISSION_FAQ_SLUGS.includes(item.slug),
 );
 
-const contactAvailabilityFaq = FAQ_ITEMS.find((item) => item.slug === "availability");
+const faqBySlug = (slug: string) => FAQ_ITEMS.find((item) => item.slug === slug)!;
 
-export const CONTACT_FAQ_ITEMS = [
-  FAQ_ITEMS.find((item) => item.slug === "value")!,
-  contactAvailabilityFaq
-    ? {
-        ...contactAvailabilityFaq,
-        answerText:
-          "Yes. I am accepting custom Bedrock JsonUI commissions. Share your ideas, sketches, mockups, or a short scope outline in the form below - the more context, the faster I can reply with sensible next steps. For what I take on, limits, and web work, see the scope FAQ on the commissions page.",
-        answer: (
-          <>
-            Yes. I am accepting custom Bedrock JsonUI commissions. Share your
-            ideas, sketches, mockups, or a short scope outline in the{" "}
-            <HashLink href={contactSectionHref(SECTION_IDS.contactForm)}>
-              form above
-            </HashLink>{" "}
-            - the more context, the faster I can reply with sensible next steps.
-            For what I take on, limits, and web work, see the{" "}
-            <HashLink href={commissionFaqItemHref("scope")}>scope FAQ</HashLink>{" "}
-            on the commissions page.
-          </>
-        ),
-      }
-    : contactAvailabilityFaq!,
+// On /contact the form sits right above, so the availability answer drops its link.
+export const CONTACT_FAQ_ITEMS: FAQItem[] = [
+  faqBySlug("clients"),
+  {
+    ...faqBySlug("availability"),
+    answerText:
+      "Yes. I am accepting new Bedrock JsonUI commissions. Send your idea, sketches, or a short scope through the form above, and I will reply with next steps.",
+    answer: undefined,
+  },
 ];

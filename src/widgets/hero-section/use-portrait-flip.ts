@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState, type MouseEvent, type PointerEvent } from "react";
+import type { HeroPortrait } from "@/shared/constants/data";
 import { isReducedMotion } from "@/shared/lib/motion";
 import {
   HERO_FIRST_SYNCED_BEAT_MS,
@@ -12,13 +13,6 @@ import {
   useHeroAlignedLoop,
   type AlignedLoopHandle,
 } from "./use-hero-aligned-loop";
-
-type HeroPortraitItem = {
-  src: string;
-  alt: string;
-  kind: "photo" | "design" | "minecraft";
-  label: string;
-};
 
 type PortraitState = {
   currentIndex: number;
@@ -34,7 +28,7 @@ const getNextPortraitIndex = (currentIndex: number, portraitCount: number) => {
   return (currentIndex + offset) % portraitCount;
 };
 
-export const usePortraitFlip = (portraits: readonly HeroPortraitItem[]) => {
+export const usePortraitFlip = (portraits: readonly HeroPortrait[]) => {
   const [portraitState, setPortraitState] = useState<PortraitState>({
     currentIndex: 0,
     frontIndex: 0,

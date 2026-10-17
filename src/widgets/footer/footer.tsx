@@ -1,13 +1,22 @@
 import Link from "next/link";
 import Image from "next/image";
 import { FaGithub } from "react-icons/fa6";
-import { SiNextdotjs } from "react-icons/si";
 import { HomeLink } from "@/shared/ui/home-link";
 import { HashLink } from "@/shared/ui/hash-link";
 import { NavRouteLink } from "@/shared/ui/nav-route-link";
 import { ProjectsTagLink, ProjectsBoardLink } from "@/shared/ui/projects-tag-link";
 import { GridBackdrop } from "@/shared/ui/grid-backdrop";
-import { getFooterSocialLinks, HOME_PAGE_TEXTS, NAV_LINKS, SOCIAL_LINK_BUTTONS, CTA_LABELS } from "@/shared/constants/data";
+import { CookieSettingsButton } from "@/shared/ui/cookie-consent";
+import {
+  CTA_LABELS,
+  FOOTER_TEXTS,
+  NAV_LINKS,
+  SITE_BRAND,
+  SITEMAP_PAGE_TEXTS,
+  SOCIAL_LINK_BUTTONS,
+  getFooterSocialLinks,
+} from "@/shared/constants/data";
+import { PRIVACY_POLICY_PAGE, TERMS_OF_USE_PAGE } from "@/shared/constants/legal";
 import { contactFormHref, contactSectionHref, SECTION_IDS } from "@/shared/constants/anchors";
 import { ROUTES } from "@/shared/constants/routes";
 import { FooterSocialRow } from "./footer-social-row";
@@ -15,19 +24,12 @@ import { LocalTime } from "./local-time";
 import { BackToTop } from "./back-to-top";
 import styles from "./footer.module.scss";
 
-const CATEGORY_LINKS: { label: string; tag?: string }[] = [
-  { label: CTA_LABELS.browseAllProjects },
-  { tag: "JsonUI", label: "JsonUI" },
-  { tag: "Server Form", label: "Server Forms" },
-  { tag: "Web", label: "Web Development" },
-];
-
 const MAIL_LINK = SOCIAL_LINK_BUTTONS.find((link) => link.iconId === "mail");
 
 const LEGAL_LINKS = [
-  { href: ROUTES.sitemap, label: "Sitemap" },
-  { href: ROUTES.privacyPolicy, label: "Privacy Policy" },
-  { href: ROUTES.termsOfUse, label: "Terms of Use" },
+  { href: ROUTES.sitemap, label: SITEMAP_PAGE_TEXTS.title },
+  { href: ROUTES.privacyPolicy, label: PRIVACY_POLICY_PAGE.title },
+  { href: ROUTES.termsOfUse, label: TERMS_OF_USE_PAGE.title },
 ];
 
 export const Footer = () => {
@@ -48,18 +50,18 @@ export const Footer = () => {
                   height={32}
                   className={styles.footerLogo}
                 />
-                <span className={styles.brandName}>AxmBro</span>
+                <span className={styles.brandName}>{SITE_BRAND.name}</span>
               </HomeLink>
-              <p className={styles.brandDesc}>
-                {HOME_PAGE_TEXTS.footer.description}
-              </p>
+              <p className={styles.brandDesc}>{FOOTER_TEXTS.description}</p>
               <LocalTime />
             </div>
             <FooterSocialRow links={footerSocialLinks} />
           </div>
 
           <div className={styles.footerColumn}>
-            <p id="footer-navigation" className={styles.columnTitle}>Navigation</p>
+            <p id="footer-navigation" className={styles.columnTitle}>
+              {FOOTER_TEXTS.columns.navigation}
+            </p>
             <nav className={styles.columnLinks} aria-labelledby="footer-navigation">
               <ul className={styles.linkList}>
                 {NAV_LINKS.map((link) => (
@@ -77,12 +79,14 @@ export const Footer = () => {
           </div>
 
           <div className={styles.footerColumn}>
-            <p id="footer-categories" className={styles.columnTitle}>Categories</p>
+            <p id="footer-categories" className={styles.columnTitle}>
+              {FOOTER_TEXTS.columns.categories}
+            </p>
             <nav className={styles.columnLinks} aria-labelledby="footer-categories">
               <ul className={styles.linkList}>
-                {CATEGORY_LINKS.map((link) => (
+                {FOOTER_TEXTS.categoryLinks.map((link) => (
                   <li key={link.label}>
-                    {link.tag ? (
+                    {"tag" in link ? (
                       <ProjectsTagLink tag={link.tag}>{link.label}</ProjectsTagLink>
                     ) : (
                       <ProjectsBoardLink tab="all">{link.label}</ProjectsBoardLink>
@@ -94,7 +98,9 @@ export const Footer = () => {
           </div>
 
           <div className={styles.footerColumn}>
-            <p id="footer-contact" className={styles.columnTitle}>Contact</p>
+            <p id="footer-contact" className={styles.columnTitle}>
+              {FOOTER_TEXTS.columns.contact}
+            </p>
             <nav className={`${styles.columnLinks} ${styles.contactLinks}`} aria-labelledby="footer-contact">
               <ul className={styles.linkList}>
                 <li>
@@ -126,28 +132,20 @@ export const Footer = () => {
                   height={14}
                   className={styles.footerLogoIcon}
                 />
-                <span>© {new Date().getFullYear()} AxmBro | All rights reserved</span>
+                <span>{FOOTER_TEXTS.copyright(new Date().getFullYear())}</span>
               </HomeLink>
               <span className={styles.separator}>•</span>
               <a
-                href="https://nextjs.org"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.techStack}
-              >
-                <SiNextdotjs size={14} aria-hidden />
-                <span>Built with Next.js</span>
-              </a>
-              <span className={styles.separator}>•</span>
-              <a
-                href="https://github.com/AxmBro/axmbro.dev"
+                href={FOOTER_TEXTS.sourceCode.href}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={styles.sourceLink}
               >
                 <FaGithub size={14} aria-hidden />
-                <span>Source Code</span>
+                <span>{FOOTER_TEXTS.sourceCode.label}</span>
               </a>
+              <span className={styles.separator}>•</span>
+              <CookieSettingsButton className={`${styles.sourceLink} ${styles.cookieSettings}`} />
             </div>
 
             <BackToTop />

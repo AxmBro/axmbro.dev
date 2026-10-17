@@ -8,7 +8,7 @@ import { ScreenSection } from "@/shared/ui/screen-section";
 import { SitemapGrid, SitemapProjectList } from "@/widgets/sitemap-grid";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Sitemap",
+  title: SITEMAP_PAGE_TEXTS.title,
   description: SITE_METADATA.sitemapDescription,
   path: ROUTES.sitemap,
 });
@@ -18,8 +18,8 @@ export default function SitemapPage() {
     <ScreenContainer>
       <Reveal>
         <ScreenSection
-          eyebrow="Directory"
-          title="Sitemap"
+          eyebrow={SITEMAP_PAGE_TEXTS.eyebrow}
+          title={SITEMAP_PAGE_TEXTS.title}
           headingLevel="h1"
           titleDescription={SITEMAP_PAGE_TEXTS.intro}
           withChildrenPadding={false}
@@ -30,8 +30,8 @@ export default function SitemapPage() {
 
       <Reveal>
         <ScreenSection
-          eyebrow="Portfolio"
-          title="All Projects"
+          eyebrow={SITEMAP_PAGE_TEXTS.allProjectsEyebrow}
+          title={SITEMAP_PAGE_TEXTS.allProjectsTitle}
           titleDescription={SITEMAP_PAGE_TEXTS.allProjects}
           withChildrenPadding={false}
         >

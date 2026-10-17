@@ -1,0 +1,14 @@
+// Values come from motion-variants.ts via inline vars; ease = REVEAL_EASE (--motion-ease-standard).
+@media (prefers-reduced-motion: no-preference) {
+  .enter {
+    animation: reveal-enter var(--reveal-duration) var(--motion-ease-standard)
+      var(--reveal-delay) both;
+  }
+}
+
+@keyframes reveal-enter {
+  from {
+    opacity: 0;
+    transform: var(--reveal-from);
+  }
+}
