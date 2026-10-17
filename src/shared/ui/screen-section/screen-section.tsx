@@ -55,7 +55,7 @@ export const ScreenSection = ({
     .filter(Boolean)
     .join(" ");
 
-  const section = (
+  return (
     <section
       className={sectionClassName}
       id={id}
@@ -97,8 +97,6 @@ export const ScreenSection = ({
       )}
     </section>
   );
-
-  return section;
 };
 
 interface ScreenSectionListProps {
