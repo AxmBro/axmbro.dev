@@ -1,23 +1,28 @@
-/** Hash scroll + `PAGE_HASH_CHANGE` for cross-page / FAQ targets. Offsets: `globals.scss`. */
-export const PAGE_HASH_CHANGE = "pagehashchange";
+import { getScrollBehavior } from "./motion";
 
-/** FAQ accordion open delay before `#faq-*` scroll */
-export const FAQ_HASH_SCROLL_DELAY_MS = 280;
-
-export const notifyPageHashChange = () => {
-  if (typeof window === "undefined") return;
-  window.dispatchEvent(new Event(PAGE_HASH_CHANGE));
+export const parseHashId = (hash: string) => {
+  const raw = hash.replace(/^#/, "").split("#")[0];
+  try {
+    return decodeURIComponent(raw);
+  } catch {
+    // Malformed escape in a pasted URL (`#%E0`) - no target instead of a thrown URIError.
+    return "";
+  }
 };
 
-export const parseHashId = (hash: string) =>
-  decodeURIComponent(hash.replace(/^#/, "").split("#")[0]);
-
-export const normalizePageHash = (hash: string) => {
-  const id = parseHashId(hash);
-  return id ? `#${id}` : "";
+// Reveal wrappers start at `translateY(REVEAL_Y)`; `scrollIntoView` and rects include it,
+// so a target still mid-reveal would land that many px under the sticky stack.
+const translateYOf = (element: Element) => {
+  let y = 0;
+  for (let node: Element | null = element; node; node = node.parentElement) {
+    const transform = getComputedStyle(node).transform;
+    if (transform !== "none") y += new DOMMatrixReadOnly(transform).m42;
+  }
+  return y;
 };
 
-export function scrollToHash(hash?: string, behavior: ScrollBehavior = "smooth") {
+/** Scrolls to the `id` in `hash` (default: current URL), under the `html` scroll-padding (`globals.scss`). */
+export function scrollToHash(hash?: string, behavior: ScrollBehavior = getScrollBehavior()) {
   const raw = hash ?? (typeof window !== "undefined" ? window.location.hash : "");
   const id = parseHashId(raw);
   if (!id) return false;
@@ -25,21 +30,8 @@ export function scrollToHash(hash?: string, behavior: ScrollBehavior = "smooth")
   const target = document.getElementById(id);
   if (!target) return false;
 
-  const scrollMarginTop = parseFloat(getComputedStyle(target).scrollMarginTop) || 0;
-  const top = target.getBoundingClientRect().top + window.scrollY - scrollMarginTop;
+  const padding = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
+  const top = target.getBoundingClientRect().top - translateYOf(target) + window.scrollY - padding;
   window.scrollTo({ top, behavior });
   return true;
 }
-
-export const repairBrokenHash = () => {
-  if (typeof window === "undefined") return;
-
-  const raw = window.location.hash;
-  if (!raw || !raw.includes("#", 1)) return;
-
-  const path = window.location.pathname + window.location.search;
-  const hash = normalizePageHash(raw);
-  if (!hash) return;
-
-  history.replaceState(null, "", `${path}${hash}`);
-};

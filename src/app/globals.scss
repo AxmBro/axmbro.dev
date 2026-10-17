@@ -16,17 +16,16 @@
 //   Header menu toggle - color-secondary, color-secondary-hover; row size via header-control-row mixin + --header-control-height
 //   Primary CTA, success, eyebrows, accent text - color-accent
 //   Secondary accent (mint) - color-accent-secondary; timeline current dot, stat pulse, pixel waves
-//   Accent blends - accent-subtle, accent-soft, accent-tier-strong, accent-tier-solid
+//   Accent blends - accent-subtle, accent-tier-strong, accent-tier-solid
 //   Text on accent buttons - color-on-accent
-//   CSS press / UI motion - motion-duration-press, motion-duration-ui, motion-ease-standard, motion-scale-press
+//   CSS UI motion - motion-duration-ui, motion-ease-standard
 //   Blueprint grid lines - grid-line-strength, ignite peak/hold, grid-line-ignite-duration
-//   Text on media (hero, gallery) - text-on-media-title-shadow, text-on-media-body-shadow
+//   Text on media (project hero) - text-on-media-title-shadow, text-on-media-body-shadow
 //   Eyebrow typography - text-eyebrow mixin in shared/styles/_mixins.scss
 //   Hero / prose line length - measure-hero, measure-prose
 //   Body / heading weight - font-weight-body, font-weight-heading (mixins + h2-h4)
 //   Tight stacks - spacing-xs (4px); stack-xs mixin
 //   Commissioned / minecoin - color-gold (gold-subtle for tinted bg)
-//   Form errors - color-error (alias of color-danger)
 @property --grid-line-strength {
   syntax: '<percentage>';
   inherits: false;
@@ -45,7 +44,6 @@
   --color-accent-secondary: rgb(0, 229, 176);
   --color-bg-primary: color-mix(in srgb, var(--color-accent) 3%, #000000);
   --color-accent-subtle: color-mix(in srgb, var(--color-accent) 10%, transparent);
-  --color-accent-soft: color-mix(in srgb, var(--color-accent) 15%, var(--color-neutral-100));
   /* Skills tier text (strong / solid) - blends from accent toward white */
   --color-accent-tier-strong: color-mix(in srgb, var(--color-accent) 82%, var(--color-neutral-100));
   --color-accent-tier-solid: color-mix(in srgb, var(--color-accent) 38%, var(--color-neutral-100));
@@ -54,7 +52,6 @@
   --color-gold: #e6b422;
   --color-gold-subtle: color-mix(in srgb, var(--color-gold) 14%, transparent);
   --color-danger: #ff3b50;
-  --color-error: var(--color-danger);
 
   --color-secondary: rgb(20, 20, 20);
   --color-secondary-hover: var(--color-border);
@@ -106,15 +103,10 @@
   --sticky-below-header: calc(var(--header-sticky-height) - 1px);
   /* Sticky project TOC height - set at runtime by ProjectToc, else 0 */
   --project-toc-height: 0px;
-  /* Project TOC edge chevrons / fades */
-  --toc-control-pad: calc(var(--spacing-section) + var(--spacing-xs));
 
   /* CSS micro-interactions - match Framer REVEAL_EASE in motion-variants.ts */
-  --motion-duration-press: 0.1s;
-  --motion-duration-press-in: 0.06s;
   --motion-duration-ui: 0.18s;
   --motion-ease-standard: cubic-bezier(0.25, 0.1, 0.25, 1);
-  --motion-scale-press: 0.97;
 
   /* Blueprint grid lines - rest strength + hover ignite.
      Ignite peak/hold live as literal percentages in the grid-line-ignite
@@ -123,11 +115,7 @@
   --grid-line-strength: 6%;
   --grid-line-ignite-duration: 1.1s;
 
-  /* Gallery auto-advance - keep AUTO_ADVANCE_MS in project-gallery.tsx in sync (ms) */
-  --gallery-auto-advance: 5s;
-  --gallery-slide-duration: 0.28s;
-
-  /* Text on hero / gallery media - soft glow (no hard offset) */
+  /* Text on hero media - soft glow (no hard offset) */
   --text-on-media-title-shadow:
     0 1px 2px color-mix(in srgb, var(--color-bg-primary) 80%, transparent),
     0 0 18px color-mix(in srgb, var(--color-bg-primary) 55%, transparent);
@@ -169,13 +157,9 @@
 }
 
 html {
-  /* -2px: sticky-below-header overlap + section top border share */
+  /* Every #id jump (native, Next, scrollIntoView) lands under header + sticky project TOC.
+     Only here - an element scroll-margin would add to it. -2px: shared border line. */
   scroll-padding-top: calc(var(--header-sticky-height) + var(--project-toc-height) - 2px);
-}
-
-/* section[id]: under header (+ sticky project TOC when present) */
-section[id] {
-  scroll-margin-top: calc(var(--header-sticky-height) + var(--project-toc-height) - 2px);
 }
 
 input,
