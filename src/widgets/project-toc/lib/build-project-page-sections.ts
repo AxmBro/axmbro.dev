@@ -1,6 +1,7 @@
 import { SECTION_IDS } from "@/shared/constants/anchors";
+import { PROJECT_PAGE_TEXTS } from "@/shared/constants/data";
 import type { ProjectMarkdownData } from "@/entities/project/server";
-import type { ProjectTocItem } from "../types";
+import type { ProjectTocItem } from "./toc-types";
 
 function slugifySectionId(text: string): string {
   return text
@@ -42,13 +43,13 @@ export function buildProjectPageSections(
   const tocItems: ProjectTocItem[] = [];
 
   const overviewId = uniqueSectionId(SECTION_IDS.projectOverview, usedIds);
-  tocItems.push({ id: overviewId, label: "Overview" });
+  tocItems.push({ id: overviewId, label: PROJECT_PAGE_TEXTS.overview.title });
 
   const creditsId = pageData?.credits?.length
     ? uniqueSectionId(SECTION_IDS.projectCredits, usedIds)
     : null;
   if (creditsId) {
-    tocItems.push({ id: creditsId, label: "Credits" });
+    tocItems.push({ id: creditsId, label: PROJECT_PAGE_TEXTS.credits.title });
   }
 
   const videoIds =
@@ -62,7 +63,7 @@ export function buildProjectPageSections(
   if (videoIds.length > 0) {
     tocItems.push({
       id: videoIds[0],
-      label: "Videos",
+      label: PROJECT_PAGE_TEXTS.videos.tocLabel,
       watchIds: videoIds,
     });
   }
@@ -72,7 +73,7 @@ export function buildProjectPageSections(
       const id = uniqueSectionId(slugifySectionId(section.title), usedIds);
       tocItems.push({
         id,
-        label: section.title.trim() || `Section ${i + 1}`,
+        label: section.title.trim() || PROJECT_PAGE_TEXTS.untitledSection(i + 1),
         // Long showcase sections report "6/24" in the sticky bar.
         itemCount: section.items.length,
       });
