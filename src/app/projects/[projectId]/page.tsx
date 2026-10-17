@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { PROJECTS, CTA_LABELS, PROJECT_PAGE_TEXTS } from "@/shared/constants/data";
+import { CTA_LABELS, PROJECT_PAGE_TEXTS } from "@/shared/constants/data";
 import { projectDetailPath, ROUTES } from "@/shared/constants/routes";
 import {
   buildProjectActions,
   formatProjectDate,
+  getProjectById,
   getProjectHeroSrc,
+  getProjectsWithPage,
   getProjectThumbnailSrc,
   ImageSection,
   ProjectDescription,
@@ -25,15 +27,13 @@ import { ProjectHero } from "@/widgets/project-hero";
 import { ProjectToc, buildProjectPageSections } from "@/widgets/project-toc";
 import styles from "./page.module.scss";
 
-interface ProjectPageProps {
-  params: Promise<{ projectId: string }>;
-}
-
 export const dynamicParams = false;
 
-export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PageProps<"/projects/[projectId]">): Promise<Metadata> {
   const { projectId } = await params;
-  const project = PROJECTS.find((p) => p.url === projectId);
+  const project = getProjectById(projectId);
   if (!project) notFound();
 
   const pageData = await getProjectData(projectId);
@@ -47,19 +47,19 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
     path: projectDetailPath(projectId),
     openGraphType: "article",
     images: thumbnail
-      ? [{ url: thumbnail, width: 1280, height: 720, alt: `${title} project preview` }]
+      ? [{ url: thumbnail, width: 1280, height: 720, alt: PROJECT_PAGE_TEXTS.previewAlt(title) }]
       : undefined,
-    imageAlt: `${title} project preview`,
+    imageAlt: PROJECT_PAGE_TEXTS.previewAlt(title),
   });
 }
 
 export function generateStaticParams() {
-  return PROJECTS.filter((p) => p.url).map((p) => ({ projectId: p.url! }));
+  return getProjectsWithPage().map((project) => ({ projectId: project.url }));
 }
 
-export default async function ProjectPage({ params }: ProjectPageProps) {
+export default async function ProjectPage({ params }: PageProps<"/projects/[projectId]">) {
   const { projectId } = await params;
-  const project = PROJECTS.find((p) => p.url === projectId);
+  const project = getProjectById(projectId);
   if (!project) notFound();
 
   const pageData = await getProjectData(projectId);
@@ -84,8 +84,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       />
       <JsonLd
         data={buildBreadcrumbJsonLd([
-          { name: "Home", path: ROUTES.home },
-          { name: "Projects", path: ROUTES.projects },
+          { name: PROJECT_PAGE_TEXTS.breadcrumbs.home, path: ROUTES.home },
+          { name: PROJECT_PAGE_TEXTS.breadcrumbs.projects, path: ROUTES.projects },
           { name: title, path: projectDetailPath(projectId) },
         ])}
       />
@@ -100,8 +100,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         <Reveal>
           <ScreenSection
             id={overviewId}
-            eyebrow="Project"
-            title="Overview"
+            eyebrow={PROJECT_PAGE_TEXTS.overview.eyebrow}
+            title={PROJECT_PAGE_TEXTS.overview.title}
             titleMeta={
               project.date ? (
                 <span className={styles.overviewDate}>{formatProjectDate(project)}</span>
@@ -137,8 +137,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           <Reveal>
             <ScreenSection
               id={creditsId}
-              eyebrow="Team"
-              title="Credits"
+              eyebrow={PROJECT_PAGE_TEXTS.credits.eyebrow}
+              title={PROJECT_PAGE_TEXTS.credits.title}
               titleDescription={
                 pageData.creditsDescription ?? PROJECT_PAGE_TEXTS.creditsDefaultDescription
               }
@@ -166,7 +166,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                   <ProjectsBoardLink tab="commissions">
                     {CTA_LABELS.browseClientWork}
                   </ProjectsBoardLink>
-                  {" for more commissioned JsonUI."}
+                  {PROJECT_PAGE_TEXTS.relatedWorkSuffix}
                 </p>
               )}
             </ScreenSection>
@@ -177,7 +177,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           <Reveal key={`video-${i}`}>
             <ScreenSection
               id={videoIds[i]}
-              eyebrow="Media"
+              eyebrow={PROJECT_PAGE_TEXTS.videos.eyebrow}
               title={video.title}
               titleDescription={video.description}
               variant="default"

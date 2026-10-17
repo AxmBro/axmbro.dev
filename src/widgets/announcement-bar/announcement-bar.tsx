@@ -15,7 +15,7 @@ export const AnnouncementBar = () => {
       as="aside"
       className={styles.bar}
       direction="top"
-      aria-label="Availability"
+      aria-label={HOME_ANNOUNCEMENT.ariaLabel}
       data-announcement-bar
     >
       <div ref={innerRef} className={styles.inner}>
