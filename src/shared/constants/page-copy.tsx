@@ -457,8 +457,9 @@ export const HOME_PAGE_TEXTS = {
     title: "Selected Projects",
     description:
       "Recent JsonUI for studios and creators, plus my own projects.",
-    footerSummary: (totalCount: number, clientCount: number) =>
-      `${totalCount} projects shipped, ${clientCount} of them for clients.`,
+    footerTitle: (totalCount: number) => `Explore All ${totalCount} Projects`,
+    footerDescription: (clientCount: number) =>
+      `${clientCount} are client commissions for studios, servers, and creators. The rest are my own packs, add-ons, and websites.`,
   },
   skills: {
     eyebrow: "Capabilities",

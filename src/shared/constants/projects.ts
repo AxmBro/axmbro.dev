@@ -10,6 +10,9 @@ export const HOME_SELECTED_PROJECT_IDS = [
   "ra_survival",
 ];
 
+/** Faded teaser cards under the Selected Work closer (2 = one mesh row). */
+export const HOME_TEASER_PROJECT_IDS = ["shop_ui", "bedrock_portal_ui"];
+
 export const PROJECTS: ProjectItem[] = [
   {
     title: "Better Bedrock",

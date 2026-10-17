@@ -10,34 +10,61 @@
   @include connected-card-grid-item;
 }
 
+// Closer copy sets the height; the teaser row is a backdrop cropped from the top and faded out.
 .footer {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-section);
+  position: relative;
   border-top: 1px solid var(--color-border);
-  padding: var(--spacing-block);
+  overflow: hidden;
+}
 
-  @media (min-width: ($breakpoint-md + 1px)) {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--spacing-block);
+// Reveal wrapper: its transform makes it the containing block of `.teaser`, so it
+// carries the full-footer box itself.
+.teaserLayer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.teaser {
+  @include connected-card-grid;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  user-select: none;
+  --teaser-fade-start: 0.5;
+  -webkit-mask-image: linear-gradient(to bottom, rgb(0 0 0 / var(--teaser-fade-start)), rgb(0 0 0 / 0.125) 40%, transparent 95%);
+  mask-image: linear-gradient(to bottom, rgb(0 0 0 / var(--teaser-fade-start)), rgb(0 0 0 / 0.125) 40%, transparent 95%);
+
+  @media (max-width: $breakpoint-md) {
+    --teaser-fade-start: 0.45;
   }
 }
 
-.footerSummary {
-  @include text-h3;
-  min-width: 0;
-  flex: 1;
+.teaserItem {
+  @include connected-card-grid-item;
+
+  @media (max-width: $breakpoint-wide) {
+    &:nth-child(n + 2) {
+      display: none;
+    }
+  }
+}
+
+.footerContent {
+  @include stack-xs;
+  position: relative;
+  align-items: center;
+  padding: calc(var(--spacing-block) * 3) var(--spacing-block);
+  text-align: center;
+}
+
+.footerTitle {
+  @include text-h2;
   margin: 0;
 }
 
-.footerActions {
-  width: 100%;
-  flex-shrink: 0;
-
-  @media (min-width: ($breakpoint-md + 1px)) {
-    width: auto;
-    justify-content: flex-end;
-  }
+.footerDescription {
+  @include text-body;
+  max-width: var(--measure-hero);
+  margin: 0;
 }

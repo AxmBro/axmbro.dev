@@ -4,7 +4,7 @@ export { ProjectAccentTitle } from "./ui/project-accent-title";
 export { ProjectContentReveal } from "./ui/project-content-reveal";
 export { ProjectTags } from "./ui/project-tags";
 export { ProjectDescription } from "./ui/project-description";
-export { getHomeSelectedProjects } from "./lib/get-home-selected-projects";
+export { getHomeSelectedProjects, getHomeTeaserProjects } from "./lib/get-home-selected-projects";
 export {
   compareFeaturedFirst,
   getProjectById,
