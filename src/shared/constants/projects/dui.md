@@ -6,23 +6,27 @@ credits:
     href: https://github.com/AxmBro
 imageSections:
   - title: Interface Showcase
-    description: A showcase of perfectly aligned UI elements, smooth dark theme layouts, and interactive tooltips.
+    description: Dark theme screens with aligned UI elements and interactive tooltips.
     items:
       - title: Navigation Hub
-        description: Minimalist in-game dashboard for quick access to core features, gamemodes, and settings.
+        description: >-
+          Simple in-game dashboard that gives quick access to core features,
+          gamemodes, and settings.
         imageSrc: dui1
       - title: Dynamic Tooltips
-        description: Context-aware overlay tooltips providing instant, smooth visual feedback upon hovering.
+        description: >-
+          Tooltips appear over the screen when the player hovers an element.
+          They change with the context and react instantly.
         imageSrc: dui2
       - title: Lobby Selector
-        description: Clean, scrollable game lobby selector for seamless server navigation.
+        description: Scrollable list that lets players pick a game lobby on the server.
         imageSrc: dui3
       - title: Leaderboard Tooltip
-        description: Advanced multi-line tooltips designed for dynamic data rendering.
+        description: Multi-line tooltip that shows changing data, such as a leaderboard.
         imageSrc: dui4
       - title: Custom Modal Form
-        description: Refined modal dialogues prioritizing visual clarity and an improved user experience.
+        description: Modal dialog with a clear layout that is easy to read and use.
         imageSrc: dui5
 ---
 
-DUI (Dark User Interface) is a sleek, minimalist in-game dashboard and interface suite crafted for Minecraft Bedrock Edition. Focusing on a clean, modern aesthetic with smooth dark theme layouts, it provides players with an intuitive navigation hub for gamemodes, settings, and player stats. The project highlights expertise in precision UI alignment, dynamic hover tooltips, and creating scalable, user-centric interface modules.
+DUI (Dark User Interface) is a commissioned dashboard and interface set for Minecraft Bedrock with a minimal dark theme. I built the screens in JsonUI as the UI developer. Players get one navigation hub for gamemodes and settings, Minecraft-style hover tooltips that show player stats, a scrollable lobby selector, and a custom modal form.

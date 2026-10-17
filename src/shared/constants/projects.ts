@@ -6,7 +6,7 @@ export const PROJECTS: ProjectItem[] = [
   {
     title: "Better Bedrock",
     description:
-      "A comprehensive, highly customizable UI and texture modification for MCBE. Enhances gameplay functionality with nearly 300 configuration options, fully supported across all platforms.",
+      "A free texture pack for Minecraft Bedrock with HUD mods, a mod menu, and nearly 300 settings. Works on PC, mobile, and console. 2M+ downloads.",
     tags: ["JsonUI", "Models", "React", "Web"],
     imgSrc: "bbReleaseThumbnail",
     logoSrc: "better_bedrock",
@@ -21,7 +21,7 @@ export const PROJECTS: ProjectItem[] = [
   {
     title: "One Slime Block Adventure",
     description:
-      "A large-scale adventure map commissioned by YouTuber Slime Block. Engineered and developed advanced custom interfaces, including specialized HUDs and interactive server forms.",
+      "A large adventure map for YouTuber Slime Block, released on the Minecraft Marketplace by Mush Co. I built its custom HUDs and server forms in JsonUI.",
     tags: ["JsonUI", "Server Form"],
     imgSrc: "obsba",
     heroImgSrc: "osba27",
@@ -37,7 +37,7 @@ export const PROJECTS: ProjectItem[] = [
   {
     title: "Ra Survival",
     description:
-      "A Call of Duty Zombies-inspired survival map for MCBE. Commissioned to design and implement immersive custom UI systems that match the game's dark aesthetic.",
+      "A zombies survival map for Minecraft Bedrock, inspired by Call of Duty Zombies. I built its custom HUD, hotbar, round counter, and inventory screen in a dark style.",
     tags: ["JsonUI", "HUD", "Inventory"],
     imgSrc: "raThumbnail",
     heroImgSrc: "ra15",
@@ -51,7 +51,7 @@ export const PROJECTS: ProjectItem[] = [
   {
     title: "Zeqa UI",
     description:
-      "Custom JsonUI commissioned by InPvP for Zeqa, the largest Minecraft Bedrock PvP server. Clean layouts, smooth animations, and optimized server forms with selective HUD work.",
+      "Custom JsonUI for Zeqa, one of the largest Minecraft Bedrock PvP servers, made for InPvP: profile, cosmetics, levels, ranks, and other server forms, plus selected HUD work.",
     tags: ["JsonUI", "Server Form", "HUD"],
     imgSrc: "zeqa_ui0",
     logoSrc: "zeqa_ui",
@@ -64,7 +64,7 @@ export const PROJECTS: ProjectItem[] = [
   {
     title: "Mineville UI",
     description:
-      "A complex, clean, and animated custom user interface suite. Featuring highly optimized client-side minimaps, modular trade UIs, armor HUD trackers, and custom server forms.",
+      "Animated JsonUI for Mineville: a client-side minimap, trade screens, an armor HUD tracker, and custom server forms.",
     tags: ["JsonUI", "Server Form", "HUD"],
     imgSrc: "main",
     logoSrc: "mineville_ui",
@@ -77,7 +77,7 @@ export const PROJECTS: ProjectItem[] = [
   {
     title: "Murder Detector+",
     description:
-      "An experimental utility pack designed to test the limits of JsonUI capabilities and model modifications. Created as a diagnostic tool to demonstrate server-side vulnerability mechanics.",
+      "A texture pack for Murder Mystery minigames. It shows an icon above the sheriff and the murderer based on the item they hold, with a double check against false matches.",
     tags: ["Entities", "Models"],
     imgSrc: "murder_detector",
     logoSrc: "murder_detector",
@@ -92,7 +92,7 @@ export const PROJECTS: ProjectItem[] = [
   {
     title: "Bedrock Portal UI",
     description:
-      "A sophisticated, OreUI-themed interface. Features a dark-mode layout with scalable elements, subtle animations, and highly optimized rendering controllers.",
+      "A dark JsonUI set in the OreUI style, with scalable layouts, short animations, and server forms.",
     tags: ["JsonUI", "Server Form"],
     imgSrc: "bpui1",
     accentColor: "#7c4dff",
@@ -103,7 +103,7 @@ export const PROJECTS: ProjectItem[] = [
   {
     title: "Shop UI",
     description:
-      "A vanilla-styled commercial interface designed from scratch. Initially an experimental layout, later acquired by a private client for a custom server economy.",
+      "A vanilla-style shop interface built from scratch. It started as an experiment and was later bought by a private client for their server economy.",
     tags: ["JsonUI", "Server Form"],
     imgSrc: "shop_form1",
     accentColor: "#969696",
@@ -114,7 +114,7 @@ export const PROJECTS: ProjectItem[] = [
   {
     title: "DUI",
     description:
-      "A sleek, modern and highly optimized custom user interface. Featuring clean, premium dark themed UI.",
+      "A dark-theme JsonUI set: navigation hub, lobby selector, hover tooltips with player stats, and modal forms.",
     tags: ["JsonUI", "Server Form"],
     imgSrc: "dui1",
     accentColor: "#42a5f5",
@@ -126,7 +126,7 @@ export const PROJECTS: ProjectItem[] = [
   {
     title: "Synergy UI",
     description:
-      "A clean, TFT-inspired responsive interface commissioned by a private client. Focuses on clear data presentation and seamless user interactions.",
+      "A JsonUI interface inspired by TFT, made for a private client. It focuses on clear data and simple interactions.",
     tags: ["JsonUI", "HUD"],
     imgSrc: "synergy_ui0",
     accentColor: "#899AB3",
@@ -137,7 +137,7 @@ export const PROJECTS: ProjectItem[] = [
   {
     title: "OS UI",
     description:
-      "A personal R&D project exploring full-screen operating system aesthetics within the MCBE engine. Showcases advanced layout structuring.",
+      "A personal experiment: a full-screen operating system look built inside Minecraft Bedrock with JsonUI.",
     tags: ["JsonUI", "Server Form"],
     imgSrc: "osui1",
     accentColor: "#42a5f5",
@@ -148,7 +148,7 @@ export const PROJECTS: ProjectItem[] = [
   {
     title: "Hugo SMP UI",
     description:
-      "A Java Edition-styled Pause Menu commissioned for a cross-play bedrock-java server. Includes a custom scoreboard integration to ensure cross-platform visual consistency.",
+      "A Java Edition-style pause menu and scoreboard for a Bedrock and Java cross-play server, so both editions look the same.",
     tags: ["JsonUI", "HUD"],
     imgSrc: "hugo_smp_ui1",
     accentColor: "#9839D3",
@@ -159,7 +159,7 @@ export const PROJECTS: ProjectItem[] = [
   {
     title: "Hometree UI",
     description:
-      "A minimalist, colorful server form interface tailored to client specifications.",
+      "A simple, colorful server form design, built to the client's specification.",
     tags: ["JsonUI", "Server Form"],
     imgSrc: "hometree1",
     accentColor: "#1AAD54",
@@ -170,7 +170,7 @@ export const PROJECTS: ProjectItem[] = [
   {
     title: "Simple UI",
     description:
-      "An experimental server form layout created to test responsive JsonUI bindings.",
+      "An experimental server form layout, made to test responsive JsonUI bindings.",
     tags: ["JsonUI", "Server Form"],
     imgSrc: "simple_server_form1",
     accentColor: "#899AB3",
@@ -181,7 +181,7 @@ export const PROJECTS: ProjectItem[] = [
   {
     title: "Red UI",
     description:
-      "An ongoing experimental project focusing on aggressive, red-themed in-game UI layouts and custom component styling.",
+      "An ongoing experiment with red-themed in-game UI layouts and custom component styles.",
     tags: ["JsonUI", "Server Form"],
     imgSrc: "redui1",
     accentColor: "#C30606",
@@ -192,7 +192,7 @@ export const PROJECTS: ProjectItem[] = [
   {
     title: "Custom Sky Overlay",
     description:
-      "A comprehensive collection of 16 custom skyboxes for MCBE. Engineered with subpack support for seamless user customization without modifying core files.",
+      "A pack of 16 custom skyboxes for Minecraft Bedrock. Players switch skies with subpacks, without editing any files.",
     tags: ["Textures"],
     imgSrc: "custom_sky_overlay1",
     accentColor: "#B094D3",
@@ -205,7 +205,7 @@ export const PROJECTS: ProjectItem[] = [
   {
     title: "This Website",
     description:
-      "My personal portfolio and technical sandbox. Developed from the ground up with React and Next.js to showcase my Minecraft Bedrock UI work and frontend development.",
+      "My portfolio, built from scratch with React, Next.js, and TypeScript. It shows my Minecraft Bedrock UI work and my web development.",
     tags: ["React", "JavaScript", "TypeScript", "CSS", "Web"],
     imgSrc: "thisweb",
     accentColor: "var(--color-accent)",

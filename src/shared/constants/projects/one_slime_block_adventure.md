@@ -14,153 +14,149 @@ credits:
 videos:
   - title: Trailer
     description: >-
-      Official trailer - showcasing the custom UI elements and the unique
-      gameplay experience!
+      The official trailer, showing the custom UI and the gameplay of the map.
     youtubeId: xznuwBypHg4
   - title: HUD elements
     description: >-
-      Take a look at this development video, which shows in details all HUD
-      elements. This is raw footage without finished system that manages all
-      these elements in same time.
+      A development video that shows every HUD element in detail. This is raw
+      footage, recorded before the system that runs all these elements
+      together was finished.
     youtubeId: 6s0IVXjuDXE
   - title: Map Form
-    description: Take a look at this development video, which shows in details Map Form.
+    description: A development video that shows the map form in detail.
     youtubeId: kg8VKkPnY6g
 imageSections:
   - title: In-game HUD Screenshots
-    description: A collection of in-game screenshots showcasing all custom HUD elements implemented for this project.
+    description: In-game screenshots of all the custom HUD elements built for this map.
     items:
       - title: Locations
         description: >-
-          Styled location labels on a subtle leaf graphic in the top left
-          corner, indicating the player's current area.
+          Location names on a small leaf graphic in the top-left corner. They
+          show the player's current area.
         imageSrc: osba1
-      - title: Closer look at Locations
-        description: Text updates instantly, without any transition animations.
+      - title: Locations Close-Up
+        description: The text changes instantly, with no transition animation.
         imageSrc: osba2
       - title: Coin Counter
         description: >-
-          Sits in the top right corner with the other counters. The number
-          updates instantly, and the coin animates based on the situation.
+          Sits in the top-right corner with the other counters. The number
+          changes instantly, and the coin plays different animations for
+          different events.
         imageSrc: osba3
-      - title: Closer look at Coin Counter
+      - title: Coin Counter Close-Up
         description: >-
-          Coin has some action animations, but it's also always rotating as
-          default animation.
+          The coin always spins by default and plays extra animations on
+          certain actions.
         imageSrc: osba4
       - title: Enemy Counter
         description: >-
-          Has same logic like coin, it has updatable numbers and update
+          Works like the coin counter - the number updates and plays an update
           animation.
         imageSrc: osba5
       - title: Death Counter
-        description: Same as enemy counter.
+        description: Works the same way as the enemy counter.
         imageSrc: osba6
       - title: Objectives
         description: >-
-          Are elements located under content in top right corner. They have
-          updatable text and texture.
+          Shown below the other elements in the top-right corner. Their text and
+          texture can change.
         imageSrc: osba7
-      - title: Closer look at Objectives
-        description: They also have some entry and exit animations.
+      - title: Objectives Close-Up
+        description: Objectives also have entry and exit animations.
         imageSrc: osba8
       - title: Firework Indicator
-        description: Simple animation that is visible whenever player uses firework.
+        description: A simple animation that shows each time the player uses a firework.
         imageSrc: osba9
       - title: Elytra Flight Animation
-        description: Is visible when player is flying with elytra.
+        description: Shows when the player is flying with an elytra.
         imageSrc: osba10
-      - title: Chibi Character Element
+      - title: Chibi Character
         description: >-
-          Is located near hotbars, it has many animations based on what you are
-          currently doing!
+          Sits near the hotbar and plays many animations based on what the
+          player is doing.
         imageSrc: osba11
-      - title: Closer look at Chibi Character Element
-        description: And to be more clear, they are totally 23 actions that are shown here.
+      - title: Chibi Character Close-Up
+        description: This view shows all 23 actions the character can play.
         imageSrc: osba12
-      - title: Mecha Display Element
+      - title: Mecha Display
         description: >-
-          Is visible when player is in mecha. It has normal stand-by animations,
-          but also they are updated with other animations everytime player is
-          shooting.
+          Shows when the player is in a mecha. It plays idle animations, and
+          extra animations each time the player shoots.
         imageSrc: osba13
       - title: Custom Title
         description: >-
-          Built because the default title was used heavily and its fixed
-          behaviour did not allow the control the project needed.
+          Built because the map used the default title a lot, and its fixed
+          behavior did not give the control the project needed.
         imageSrc: osba14
-      - title: Custom Title with Icons
+      - title: Custom Title With Icons
         description: >-
-          However with custom title, I added icons to indicate player progress -
-          how many bosses were defeated and how many are left.
+          The custom title also shows icons for player progress - how many
+          bosses are defeated and how many are left.
         imageSrc: osba16
       - title: Custom Actionbar
         description: >-
-          Same like custom title - there was need for it because of high usage
-          of default element.
+          Built for the same reason as the custom title - the map used the
+          default action bar a lot.
         imageSrc: osba15
       - title: Custom Boss Bars
-        description: Fully custom boss bars built from scratch to match the map's style.
+        description: Custom boss bars built from scratch to match the map's style.
         imageSrc: osba21
-      - title: Closer look at Custom Boss Bars
+      - title: Custom Boss Bars Close-Up
         description: >-
-          Everything is fully customizable and it's capable of displaying either
-          dazed text and icon which are fully animated.
+          Every part can be customized. The bar can also show a dazed text and
+          icon, both fully animated.
         imageSrc: osba22
       - title: Custom Hotbar Slots
         description: >-
-          Which is just one image - from technical side it was much better
-          solution.
+          Made as a single image, which was the better solution on the technical
+          side.
         imageSrc: osba24
       - title: Custom Inventory Look
         description: >-
-          From technical side it's just one single image which wasn't really
-          easy to put here.
+          On the technical side this is also a single image, and it was not easy
+          to fit into the UI.
         imageSrc: osba23
       - title: Black Bars
         description: >-
-          Which on single image aren't that impressive. They have special entry
-          and exit animations.
+          They do not look like much in a still image, but they have special
+          entry and exit animations.
         imageSrc: osba17
       - title: First Loading Screen
-        description: Simple loading texture which fill whole screen.
+        description: A simple loading texture that fills the whole screen.
         imageSrc: osba18
       - title: Second Loading Screen
         description: >-
-          They are even visible through all screens - so players cannot really
-          see what's going on in game!
+          It shows on top of all screens, so players cannot see what is
+          happening in the game.
         imageSrc: osba19
-      - title: UI visibility (technical)
+      - title: UI Visibility Toggle
         description: >-
-          There is completely special and custom function that allows to toggle
-          HUD visibility by commands.
+          A custom function that shows or hides the HUD with commands.
         imageSrc: osba20
   - title: In-game Map Form Screenshots
-    description: A custom map form with animated entry, locked regions and progressive unlock mechanics as players defeat bosses.
+    description: >-
+      A custom map form with an entry animation and locked regions that unlock
+      as players defeat bosses. It was the most complex part of the project.
     items:
       - title: Map Entry
         description: >-
-          During first open of map form, there is special animation played at
-          the bottom and all elements or actions are locked due not unlocked
-          dimensions.
+          The first time the map form opens, an animation plays at the bottom.
+          All elements and actions are locked, because no dimensions are
+          unlocked yet.
         imageSrc: osba25
-      - title: Some Map Phase
-        description: During phase after start, you are able to teleport wherever you want.
+      - title: Early Map Phase
+        description: A phase after the start. Players can teleport to any region they have unlocked.
         imageSrc: osba26
-      - title: Ending Map Phase
+      - title: Late Map Phase
         description: >-
-          As you progress over time, map regions and killed bosses appears on
-          display.
+          As players progress, more map regions and defeated bosses appear on
+          the map.
         imageSrc: osba27
-      - title: Final Look
-        description: This is view when you open map and already have all bosses defeated!
+      - title: Final Map
+        description: The map when all bosses are defeated.
         imageSrc: osba28
 ---
 
-A large-scale adventure map built with YouTuber Slime Block and [Mush Co](https://www.mushco.games/). I was commissioned to design and implement the entire custom UI, covering both the in-game HUD and the server forms. It remains one of the most complex projects I have worked on.
+One Slime Block Adventure is a large Minecraft Bedrock adventure map made with the YouTuber Slime Block and [Mush Co](https://www.mushco.games/). It was my first large commission and one of my most complex projects. I built the full custom UI in JsonUI - the in-game HUD, the forms, and a custom map form. The artist vemigvan made the textures, and I turned them into a working UI system.
 
-My responsibility was the full UI layer. I did not create the textures myself; instead, I took the provided assets and built them into a working JsonUI system. Collaborating with the team on a project of this scale taught me a lot about teamwork and how seemingly simple tasks can become surprisingly difficult. It was my first large commission and a valuable opportunity to test my skills in a real production environment.
-
-The scope was significant: there were many custom HUD elements to build (full credit to the artist, vemigvan, whose assets were perfectly prepared), along with the most complex piece, the custom map form, which took considerable time to get right. The final result across all of these interfaces is something I am genuinely proud of.
-
-The map is now complete and available on the [Minecraft Marketplace](https://www.minecraft.net/en-us/marketplace/pdp/mush-co/one-slime-block-adventure/ade4af56-a677-445d-a6ed-628e28eb7d88). You can visit the Mush Co website or download the pack using the buttons below.
+The map is out now on the [Minecraft Marketplace](https://www.minecraft.net/en-us/marketplace/pdp/mush-co/one-slime-block-adventure/ade4af56-a677-445d-a6ed-628e28eb7d88).
