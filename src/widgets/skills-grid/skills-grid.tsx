@@ -1,60 +1,29 @@
-"use client";
-
-import { useEffect, useRef, useState } from "react";
-import { useReducedMotion, useRevealInView } from "@/shared/ui/motion";
-import { SKILLS_CARDS } from "@/shared/constants/data";
-import { getSkillLevel, type SkillStrengthTier } from "./lib/get-skill-level";
+import { HOME_PAGE_TEXTS, SKILLS_CARDS, type SkillCard } from "@/shared/constants/data";
+import { getSkillLevel } from "./lib/get-skill-level";
+import { SkillValue } from "./skill-value";
 import styles from "./skills-grid.module.scss";
 
-const TIER_CLASS: Record<SkillStrengthTier, string> = {
-  peak: styles.tierPeak,
-  strong: styles.tierStrong,
-  solid: styles.tierSolid,
-  building: styles.tierBuilding,
-};
+// Learning-stage skills collapse into one "Familiar with" row: a "Beginner" tier per line reads junior to a buyer.
+const FAMILIAR_SKILL_VALUE = "Beginner";
+// "A, B, and C" - plain prose list; skill names may contain "&" but never commas.
+const FAMILIAR_LIST_FORMAT = new Intl.ListFormat("en", { type: "conjunction" });
 
-interface SkillValueProps {
-  label: string;
-  tier: SkillStrengthTier;
-}
+function FamiliarSkillsRow({ items }: { items: SkillCard["items"] }) {
+  const names = items
+    .filter((item) => item.value === FAMILIAR_SKILL_VALUE)
+    .map((item) => item.name);
 
-function SkillValue({ label, tier }: SkillValueProps) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const inView = useRevealInView(ref, { once: true });
-  const reduceMotion = useReducedMotion();
-  const hasStarted = useRef(false);
-  const [isRevealing, setIsRevealing] = useState(false);
-  const [isRevealed, setIsRevealed] = useState(false);
+  if (names.length === 0) return null;
 
-  useEffect(() => {
-    if (!inView || hasStarted.current || reduceMotion) return;
-
-    hasStarted.current = true;
-    requestAnimationFrame(() => setIsRevealing(true));
-  }, [inView, reduceMotion]);
-
-  const showRevealed = reduceMotion === true || isRevealed;
-
-  const handleAnimationEnd = () => {
-    setIsRevealing(false);
-    setIsRevealed(true);
-  };
+  const { tier } = getSkillLevel(FAMILIAR_SKILL_VALUE);
 
   return (
-    <span
-      ref={ref}
-      className={[
-        styles.skillValue,
-        TIER_CLASS[tier],
-        isRevealing ? styles.skillValueReveal : "",
-        showRevealed ? styles.skillValueRevealed : "",
-      ]
-        .filter(Boolean)
-        .join(" ")}
-      onAnimationEnd={handleAnimationEnd}
-    >
-      {label}
-    </span>
+    <li>
+      <span>
+        {HOME_PAGE_TEXTS.skills.familiarLabel}:{" "}
+        <SkillValue label={FAMILIAR_LIST_FORMAT.format(names)} tier={tier} />
+      </span>
+    </li>
   );
 }
 
@@ -78,17 +47,20 @@ export const SkillsGrid = () => {
           </div>
           <div className={styles.skillTextContent}>
             <ul className={styles.skillListMinimal}>
-              {group.items.map((item) => {
-                const { tier, label } = getSkillLevel(item.value);
+              {group.items
+                .filter((item) => item.value !== FAMILIAR_SKILL_VALUE)
+                .map((item) => {
+                  const { tier, label } = getSkillLevel(item.value);
 
-                return (
-                  <li key={item.name}>
-                    <span>
-                      {item.name}: <SkillValue label={label} tier={tier} />
-                    </span>
-                  </li>
-                );
-              })}
+                  return (
+                    <li key={item.name}>
+                      <span>
+                        {item.name}: <SkillValue label={label} tier={tier} />
+                      </span>
+                    </li>
+                  );
+                })}
+              <FamiliarSkillsRow items={group.items} />
             </ul>
           </div>
         </div>
