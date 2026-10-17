@@ -425,7 +425,7 @@ export const HOME_ANNOUNCEMENT = {
 export const HOME_PAGE_TEXTS = {
   hero: {
     description:
-      "I am a 20-year-old Computer Science student from Poland. I build custom Minecraft Bedrock UI in JsonUI - HUDs, server forms, and full UI systems - for studios, servers, and creators.\n\nMy work includes JsonUI for the Zeqa PvP server by InPvP and Better Bedrock, my own texture pack with over 2 million downloads. I also build websites with React and Next.js.",
+      "I am a 20-year-old Computer Science student from Poland. I build custom Minecraft Bedrock UI in JsonUI - HUDs, server forms, and full UI systems - for studios, servers, and creators.\n\nI made Better Bedrock, a texture pack with over 2 million downloads, and built JsonUI for InPvP used by hundreds of thousands of players. I also build websites with React and Next.js.",
     ctaWork: CTA_LABELS.myWork,
     ctaContact: CTA_LABELS.getInTouch,
     eyebrow: "About",
@@ -457,8 +457,9 @@ export const HOME_PAGE_TEXTS = {
     title: "Selected Projects",
     description:
       "Recent JsonUI for studios and creators, plus my own projects.",
-    footerSummary: (totalCount: number, clientCount: number) =>
-      `${totalCount} projects shipped, ${clientCount} of them for clients.`,
+    footerTitle: (totalCount: number) => `Explore All ${totalCount} Projects`,
+    footerDescription: (clientCount: number) =>
+      `${clientCount} are client commissions for studios, servers, and creators. The rest are my own packs, add-ons, and websites.`,
   },
   skills: {
     eyebrow: "Capabilities",
@@ -795,10 +796,10 @@ export const PROJECT_TAG_TEXTS = {
 } as const;
 
 export const COOKIE_CONSENT_TEXTS = {
-  title: "We use cookies",
-  text: "Optional analytics helps us improve the site. Accept if you are OK with that.",
-  accept: "Accept cookies",
-  reject: "Reject cookies",
+  title: "Analytics cookies",
+  text: "Optional Google Analytics cookies measure site traffic and are set only if you accept. You can change this anytime in Cookie Settings in the footer.",
+  accept: "Accept",
+  reject: "Reject",
   settings: "Cookie Settings",
 } as const;
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import { useReducedMotion, useRevealInView } from "@/shared/ui/motion";
 import type { SkillStrengthTier } from "./lib/get-skill-level";
 import styles from "./skills-grid.module.scss";
@@ -19,39 +19,23 @@ interface SkillValueProps {
 
 export function SkillValue({ label, tier }: SkillValueProps) {
   const ref = useRef<HTMLSpanElement>(null);
-  const inView = useRevealInView(ref, { once: true });
+  // Edge replay (`0px`): the value only resets to white once fully off screen,
+  // so every new view replays the color fade without a visible snap.
+  const inView = useRevealInView(ref, { once: false, margin: "0px" });
   const reduceMotion = useReducedMotion();
-  const hasStarted = useRef(false);
-  const [isRevealing, setIsRevealing] = useState(false);
-  const [isRevealed, setIsRevealed] = useState(false);
 
-  useEffect(() => {
-    if (!inView || hasStarted.current || reduceMotion) return;
-
-    hasStarted.current = true;
-    const frame = requestAnimationFrame(() => setIsRevealing(true));
-    return () => cancelAnimationFrame(frame);
-  }, [inView, reduceMotion]);
-
-  const showRevealed = reduceMotion || isRevealed;
-
-  const handleAnimationEnd = () => {
-    setIsRevealing(false);
-    setIsRevealed(true);
-  };
+  // The fade class lives while in view (`forwards` holds the tier color);
+  // re-adding it restarts the keyframes.
+  const stateClass = reduceMotion
+    ? styles.skillValueRevealed
+    : inView
+      ? styles.skillValueReveal
+      : "";
 
   return (
     <span
       ref={ref}
-      className={[
-        styles.skillValue,
-        TIER_CLASS[tier],
-        isRevealing ? styles.skillValueReveal : "",
-        showRevealed ? styles.skillValueRevealed : "",
-      ]
-        .filter(Boolean)
-        .join(" ")}
-      onAnimationEnd={handleAnimationEnd}
+      className={[styles.skillValue, TIER_CLASS[tier], stateClass].filter(Boolean).join(" ")}
     >
       {label}
     </span>

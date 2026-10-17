@@ -66,7 +66,7 @@ No `.md` file → detail route still works if `url` is set; page shows card desc
 
 | Goal                 | Where                                            |
 | -------------------- | ------------------------------------------------ |
-| Home "Selected Work" | curated - `HOME_SELECTED_PROJECT_IDS` in `projects.ts` (order = display order), resolved by `getHomeSelectedProjects()` |
+| Home "Selected Work" | curated - `HOME_SELECTED_PROJECT_IDS` in `projects.ts` (order = display order), resolved by `getHomeSelectedProjects()`; faded teaser row under its closer = `HOME_TEASER_PROJECT_IDS` / `getHomeTeaserProjects()` |
 | Featured tab / sitemap featured | `star: true` on the project (`getFeaturedProjects()`) |
 | Sitemap “All Projects” | automatic from `PROJECTS` |
 | Sitemap              | automatic when `url` is set                      |

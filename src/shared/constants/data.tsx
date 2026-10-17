@@ -16,6 +16,7 @@ export type {
 export {
   CAREER_START_DATE,
   HOME_SELECTED_PROJECT_IDS,
+  HOME_TEASER_PROJECT_IDS,
   PROJECTS,
   getCommissionedProjects,
   getFeaturedProjects,
