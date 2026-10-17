@@ -177,15 +177,21 @@ export function AmbientPixels() {
       }
     };
 
+    // Resizing clears the canvas; the static reduced-motion frame has no loop to repaint it.
+    const handleResize = () => {
+      resize();
+      if (reducedMotion) draw(performance.now());
+    };
+
     resize();
     draw(performance.now());
 
-    window.addEventListener("resize", resize);
+    window.addEventListener("resize", handleResize);
     document.addEventListener("visibilitychange", handleVisibilityChange);
 
     return () => {
       window.cancelAnimationFrame(animationFrameId);
-      window.removeEventListener("resize", resize);
+      window.removeEventListener("resize", handleResize);
       document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
   }, []);
