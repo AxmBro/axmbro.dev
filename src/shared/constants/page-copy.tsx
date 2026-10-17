@@ -425,7 +425,7 @@ export const HOME_ANNOUNCEMENT = {
 export const HOME_PAGE_TEXTS = {
   hero: {
     description:
-      "I am a 20-year-old Computer Science student from Poland. I build custom Minecraft Bedrock UI in JsonUI - HUDs, server forms, and full UI systems - for studios, servers, and creators.\n\nMy work includes JsonUI for the Zeqa PvP server by InPvP and Better Bedrock, my own texture pack with over 2 million downloads. I also build websites with React and Next.js.",
+      "I am a 20-year-old Computer Science student from Poland. I build custom Minecraft Bedrock UI in JsonUI - HUDs, server forms, and full UI systems - for studios, servers, and creators.\n\nI made Better Bedrock, a texture pack with over 2 million downloads, and built JsonUI for InPvP used by hundreds of thousands of players. I also build websites with React and Next.js.",
     ctaWork: CTA_LABELS.myWork,
     ctaContact: CTA_LABELS.getInTouch,
     eyebrow: "About",
